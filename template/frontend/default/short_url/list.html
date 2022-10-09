@@ -1,0 +1,107 @@
+{{Extend "user/base"}}
+{{Block "body"}}
+{{Super}}
+
+<div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
+  <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的短链接"|T}}</h5>
+    <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|T}}</a>
+      <span class="breadcrumb-item active">{{"我的短链接"|T}}</span>
+    </nav>
+  </div>
+
+  <div class="main-body pd-20">
+<div class="row">
+  <div class="col-lg-12 mg-t-0">
+    <div class="card card-table">
+      <div class="card-header">
+        <a class="btn btn-inverse pull-right tx-white" href="{{FrontendURL}}/user/short_url/create">{{"添加短链接"|T}}</a>
+        <h6 class="card-title">{{"我的短链接"|T}}</h6>
+      </div><!-- card-header -->
+      <div class="table-responsive">
+      <table class="table table-hover">
+        <thead sort-current="{{Form "sort"}}">
+          <tr>
+            <th>{{"短链接"|T}}</th>
+            <th style="width:90px" sort="-visited">{{"最近访问"|T}}</th>
+            <th style="width:90px" sort="-visits">{{"访问次数"|T}}</th>
+            <th class="tx-right" style="width:50px">{{"状态"|T}}</th>
+            <th style="width:90px">{{"过期时间"|T}}</th>
+            <th style="width:80px">{{"密码验证"|T}}</th>
+            <th style="width:90px">{{"创建时间"|T}}</th>
+            <th style="width:65px">{{"二维码"|T}}</th>
+            <th class="tx-center" style="width:160px">{{"操作"|T}}</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-showurls">
+          {{range $k, $v := Stored.list}}
+          <tr>
+            <td>
+              <a href="{{FrontendURL}}/r/{{$v.ShortUrl}}" target="_blank" class="tx-inverse tx-size-14 tx-medium d-block">
+                {{- if eq $v.Available "Y" -}}
+                <span class="square-8 bg-success mg-r-5 rounded-circle" data-toggle="tooltip" title="{{`有效`|T}}"></span>
+                {{- else -}}
+                <span class="square-8 bg-danger mg-r-5 rounded-circle" data-toggle="tooltip" title="{{`无效`|T}}"></span>
+                {{- end -}}
+                {{$v.ShortUrl}}
+              </a>
+              <small>{{$v.LongUrl}}</small>
+            </td>
+            <td class="valign-middle">{{if gt $v.Visited 0}}{{(Date $v.Visited).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</td>
+            <td class="valign-middle">{{$v.Visits}}</td>
+            <td class="valign-middle tx-right">{{if eq $v.Available "Y"}}<span class="tx-success">{{"有效"|T}}</span>{{else}}<span class="tx-danger">{{"无效"|T}}</span>{{end}}</td>
+            <td class="valign-middle">{{if gt $v.Expired 0}}{{(Date $v.Expired).Format "2006-01-02"}}{{else}}{{"永久有效"|T}}{{end}}</td>
+            <td class="valign-middle">{{if $v.Password}}{{"需要密码"|T}}{{else}}{{"无需密码"|T}}{{end}}</td>
+            <td class="valign-middle">{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
+            <td class="valign-middle">{{$shortURL := printf `%v/r/%v` Config.base.siteURL $v.ShortUrl}}
+              <a href="javascript:;" rel="{{FrontendURL}}/qrcode?data={{$shortURL}}" data-short-url="{{$shortURL}}" class="previewable"><i class="fa fa-qrcode text-lg"></i></a>
+            </td>
+            <td class="valign-middle tx-center">
+              <div class="btn-group">
+              <a href="{{FrontendURL}}/user/short_url/edit/{{$v.Id}}" class="btn btn-outline-primary btn-xs">
+                <i class="fa fa-edit"></i>
+                {{"修改"|T}}
+              </a>
+              <a href="{{FrontendURL}}/user/short_url/delete/{{$v.Id}}" class="btn btn-outline-danger btn-xs" onclick="return confirm('{{`确定要删除吗？`|T}}');">
+                <i class="fa fa-trash"></i>
+                {{"删除"|T}}
+              </a>
+              </div><!-- /.btn-group -->
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+      </div><!-- table-responsive -->
+      <div class="card-footer auto-bottom-float">
+        {{Stored.pagination.Render `#default#pagination`}}
+      </div><!-- card-footer -->
+      
+    </div><!-- card -->
+  </div><!-- col-6 -->
+</div><!-- row -->
+    </div><!-- main-body -->
+</div><!-- main -->
+{{/Block}}
+
+{{Block "footer"}}
+{{Super}}
+<script>
+$(function(){
+  App.tableSorting();
+  $('#tbody-showurls a.previewable').off().on('click',function(){
+  App.dialog().show({
+    title:App.t('短网址二维码'),
+    message:'<img src="'+$(this).attr('rel')+'" /><br /><div>'+$(this).data('short-url')+'</div>',
+    nl2br:false,
+    closeByBackdrop:false,
+    onshow: function(d){
+      d.$modal.children('.modal-dialog').css('max-width',330);
+    },
+    buttons: []
+  });
+  });
+});
+</script>
+{{/Block}}

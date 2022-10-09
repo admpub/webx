@@ -1,0 +1,95 @@
+{{Strip}}{{Extend "base"}}
+{{Block "title"}}
+{{Config.base.siteName}}
+{{/Block}}
+{{Block "keywords"}}{{Config.base.siteName}}{{/Block}}
+{{Block "description"}}{{Config.base.siteName}}{{/Block}}
+{{Block "bodyAttr"}} class="landing-7 pos-relative tx-size-14"{{/Block}}
+{{Block "body"}}
+{{Include "header"}}
+<div class="bb-mainpanel pd-t-90">
+    <div class="container-wrapper pd-y-40 pd-lg-y-60">
+        <div class="container">
+            <div class="d-sm-flex justify-content-between align-items-center">
+                <div>
+                    <h3 class="tx-inverse tx-size-30 tx-bold mg-b-5">{{"推荐产品"|T}}</h3>
+                    <p class="mg-b-0"></p>
+                </div>
+                <a href="{{FrontendURL}}/product/list" class="btn btn-gray-light bd-0 tx-uppercase tx-size-11 tx-spacing-2 pd-y-15 mg-t-20 mg-sm-t-0">{{"浏览更多产品"|T}} <i class="fa fa-angle-right mg-l-5"></i></a>
+            </div><!-- d-flex -->
+        </div><!-- container -->
+    </div><!-- container-wrapper -->
+
+    <div class="container pd-b-80 tx-size-sm">
+
+        <div class="row row-md">
+            {{range $k,$v := Stored.productList}}
+            <div class="col-lg-4{{if gt $k 0}} mg-t-30 mg-lg-t-0{{end}}">
+                <div class="card bd-0 bg-transparent">
+                    <div class="overlay">
+                        <img src="{{$v.Image}}" class="img-fluid wd-100p" alt="{{$v.Name}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
+                        <div class="pos-absolute-bottom pd-25 bg-opacity-black-7">
+                            <!-- <span class="tx-white tx-uppercase tx-size-11 op-2">Groceries</span> -->
+                            <h5 class="tx-white mg-b-15 tx-normal tx-shadow">{{$v.Name}}</h5>
+                            <p class="mg-b-20 tx-white tx-light op-3 lh-7">{{$v.Summary}}</p>
+                            <a href="{{FrontendURL}}/product/detail/{{$v.Ident}}" class="btn btn-outline-white tx-size-11 tx-uppercase tx-semibold" target="_blank">{{"查看详情"|T}}</a>
+                        </div><!-- pos-absolute-bottom -->
+                    </div><!-- overlay -->
+                </div>
+            </div><!-- col-4 -->
+            {{end}}
+        </div><!-- row -->
+
+    </div><!-- container -->
+
+
+    <div class="container-wrapper bg-gray-lightest pd-y-40 pd-lg-y-60">
+        <div class="container pd-x-20">
+            <h5 class="tx-size-30 tx-bold tx-inverse mg-b-40 mg-lg-b-60 bd-l bd-5 bd-color-pink pd-l-10">
+                {{"产品动态"|T}}
+            </h5>
+            <div class="card-columns">
+                {{range $k,$v:=Stored.articles}}
+                <div class="card bd-0 rounded-0 mg-b-30">
+                    {{if $v.Image}}
+                    <a href="{{FrontendURL}}/article/{{$v.Id}}" target="_blank">
+                        <figure class="effect-shine">
+                            <img class="img-fluid wd-100p" src="{{$v.Image}}" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
+                            <figcaption></figcaption>
+                        </figure>
+                    </a>
+                    {{end}}
+                    <div class="card-block pd-25">
+                        <div class="d-flex justify-content-between align-items-center tx-uppercase tx-size-11 mg-b-5">
+                            <span class="d-inline-block tx-pink tx-medium">Food</span>
+                            <span class="d-inline-block">{{(Date $v.Created).Format (T "2006年1月2日")}}</span>
+                        </div><!-- d-flex -->
+                        <h6 class="lh-5 mg-b-15 tx-merriweather"><a href="{{FrontendURL}}/article/{{$v.Id}}" class="tx-inverse">{{$v.Title}}</a></h6>
+                        <p class="mg-b-20">{{$v.Summary}}</p>
+
+                        <div class="tx-size-sm d-flex justify-content-start align-items-center">
+                            <a class="tx-gray-light hover-info d-inline-block mg-r-10">
+                                <i class="fa fa-thumbs-up"></i>
+                                <span class="tx-size-12">{{$v.Likes}}</span>
+                            </a>
+                            <a class="tx-gray-light hover-info d-inline-block mg-r-auto">
+                                <i class="fa fa-comment"></i>
+                                <span class="tx-size-12">{{$v.Comments}}</span>
+                            </a>
+                        </div><!-- card-footer -->
+                    </div><!-- card-block -->
+                </div><!-- card -->
+                {{end}}
+            </div><!-- card-columns -->
+
+            <div class="pd-y-12 rounded tx-center bd bd-color-gray-lighter bg-white mg-t-40">
+                <a href="{{FrontendURL}}/articles" class="tx-gray tx-uppercase tx-medium">{{"浏览更多"|T}} <i class="fa fa-angle-right mg-l-5"></i></a>
+            </div>
+        </div><!-- container -->
+    </div><!-- container-wrapper -->
+    {{Include "footer_dark"}}
+</div><!-- bb-mainpanel -->
+{{/Block}}
+{{Block "footer"}}
+{{/Block}}
+{{/Strip}}

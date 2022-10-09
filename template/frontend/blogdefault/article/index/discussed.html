@@ -1,0 +1,109 @@
+<!-- ============= DISCUSSED POST ============= -->
+<section class="discussed-post-wrapper section-padding">
+    <div class="container">
+        <div class="section-head">
+            <h2 class="heading-primary">{{`热评文章`|T}}</h2>
+            <a href="{{FrontendURL}}/articles" class="button button-minimal">
+                {{`查看全部`|T}}
+                <span class="icon">
+                    <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
+                </span>
+            </a>
+        </div>
+        <div class="row gy-5">
+            <div class="col-lg-9 left-content">
+                {{- $hotCommentArticles := hotCommentArticles `` 6 0 -}}
+                {{- if gt (len $hotCommentArticles) 0 -}}
+                {{- $article := index $hotCommentArticles 0 -}}
+                <div class="discussed-post bg-cover" style="background-image:url('{{if $article.ImageOriginal}}{{$article.ImageOriginal}}{{else}}{{AssetsXURL}}/blogdefault/img/blog/discussed-post-bg.png{{end}}')">
+                    <div class="post-card">
+                        {{- if $article.Category -}}
+                        <span class="category"> {{$article.Category.Name}} </span>
+                        {{- end -}}
+                        <a href="{{FrontendURL}}/article/{{$article.Id}}{{Ext}}">
+                            <h3 class="heading-secondary">{{$article.Title}}</h3>
+                        </a>
+                        <div class="post-meta-wrapper">
+                            <div class="meta-left">
+                                <p class="author meta-item">by 
+                                    {{if $article.Customer -}}
+                                    <a href="{{FrontendURL}}/u/{{$article.Customer.Id}}" class="author-name">{{$article.Customer.Name}}</a>
+                                    {{- else if $article.User -}}
+                                    <span>{{$article.User.Username}}</span>
+                                    {{- else -}}
+                                    <span>{{`未知`|T}}</span>
+                                    {{- end -}}
+                                </p>
+                                <span class="post-date meta-item"> {{(Date $article.Created).Format `2006-01-02`}} </span>
+                                <span class="meta-item comment">
+                                    <i class="fal fa-comment"></i>
+                                    {{$article.Comments}}
+                                </span>
+                            </div>
+                            <a href="{{FrontendURL}}/article/{{$article.Id}}{{Ext}}" class="button post-button">
+                                <span class="icon">
+                                    <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {{- else -}}
+                <div class="discussed-post bg-cover" style="background-image: url('{{AssetsXURL}}/blogdefault/img/blog/discussed-post-bg.png')">
+                    <div class="post-card">
+                        <span class="category"> Lifestyle </span>
+                        <a href="{{FrontendURL}}/articles">
+                            <h3 class="heading-secondary">
+                                Backpacking Essentials for a <br />
+                                Weekend Hiking Trip
+                            </h3>
+                        </a>
+                        <div class="post-meta-wrapper">
+                            <div class="meta-left">
+                                <p class="author meta-item">by <span>Julius Kenny</span></p>
+                                <span class="post-date meta-item"> Feb 06, 2022 </span>
+                                <span class="meta-item comment">
+                                    <i class="fal fa-comment"></i>
+                                    13
+                                </span>
+                            </div>
+                            <a href="{{FrontendURL}}/articles" class="button post-button">
+                                <span class="icon">
+                                    <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {{- end -}}
+            </div>
+            <div class="col-lg-3">
+                <div class="sidebar-widget">
+                    <div class="gradient-bar mb-30"></div>
+                    {{- range $k, $v := $hotCommentArticles -}}
+                    {{- if gt $k 0 -}}
+                    <div class="widget-category">
+                        {{- if $v.Image -}}
+                        <a class="cat-thumb bg-cover" href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}"><img class="card-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
+                        {{- end -}}
+                        <div class="cat-content">
+                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                                <h4 class="cat-title">{{$v.Title}}</h4></a
+                            >
+                            <div class="cat-meta">
+                                <span class="post-date meta-item"> {{(Date $v.Created).Format `2006-01-02`}} </span>
+                                <span class="meta-item comment">
+                                    <i class="fal fa-comment"></i>
+                                    {{$v.Comments}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    {{- end -}}
+                    {{- end -}}
+                    {{/*Include "follow_us/index_right"*/}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

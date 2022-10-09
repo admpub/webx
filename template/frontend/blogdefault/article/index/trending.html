@@ -1,0 +1,51 @@
+<!-- ============= TRENDING TOPICS ============= -->
+<section class="trending-wrapper section-padding">
+    <div class="container">
+        <div class="section-head">
+            <h2 class="heading-primary">{{`热门话题`|T}}</h2>
+            <a href="{{FrontendURL}}/articles" class="button button-minimal">
+                {{`查看全部`|T}}
+                <span class="icon">
+                    <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row gy-3">
+            {{- $list := queryList `` 3 0 `-likes` -}}
+            {{- range $k, $v := $list -}}
+            <div class="col-lg-{{if eq $k 0}}5{{else if eq $k 1}}4{{else}}3{{end}}">
+                <div class="trending-card bg-cover" style="background-image: url('{{if $v.ImageOriginal}}{{$v.ImageOriginal}}{{else}}{{AssetsXURL}}/blogdefault/img/blog/trending-post1.png{{end}}')">
+                    <div class="card-content">
+                        {{- if $v.Category -}}
+                        <span class="category"> {{$v.Category.Name}} </span>
+                        {{- end -}}
+                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                            <h3 class="heading-primary">
+                                {{$v.Title}}
+                            </h3>
+                        </a>
+
+                        <p class="author"> by 
+                            {{if $v.Customer -}}
+                            <a href="{{FrontendURL}}/u/{{$v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
+                            {{- else if $v.User -}}
+                            <span>{{$v.User.Username}}</span>
+                            {{- else -}}
+                            <span>{{`未知`|T}}</span>
+                            {{- end -}}
+                        </p>
+
+                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="button icon-button">
+                            <span class="icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{- end -}}
+        </div>
+    </div>
+</section>

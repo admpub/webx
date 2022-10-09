@@ -1,0 +1,30 @@
+<div class="leftpanel pos-fixed-left l-neg-240 l-lg-0 wd-240 bg-white pd-y-10 pd-x-20 d-flex align-items-start flex-column">
+    <div class="logopanel pd-x-10 pd-y-5">
+      <a href="{{FrontendURL}}/user/index" class="tx-size-24 tx-poppins tx-inverse">
+        <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="wd-50 ht-50" alt="{{Config.base.siteName}}" title="{{Config.base.siteName}}">
+        <strong class="tx-spacing-neg-4" title="{{Config.base.siteName}}{{`用户中心`|T}}">{{"用户中心"|T}}</strong>
+        <small class="tx-small" style="position:absolute;">beta</small>
+      </a>
+    </div><!--logopanel -->
+
+    <ul class="nav nav-gray nav-pills nav-hover-bg-gray-lightest flex-column mg-t-20 lh-10 tx-size-13 wd-100p mg-lg-b-auto">
+      {{- $activeURL := Stored.String "activeURL" "-" -}}
+      {{- range $k,$nav := LeftNavigate -}}
+      {{- if $nav.Display -}}
+      {{- range $nav.Children -}}
+      {{- if .Display -}}
+      <li class="nav-item">{{$route := printf "/user/%s/%s" $nav.Action .Action}}
+        <a href="{{FrontendURL}}/user/{{$nav.Action}}/{{.Action}}" class="nav-link{{if or (eq Path $route) (HasPrefix $route $activeURL)}} active{{end}}"><i class="fa fa-{{$nav.Icon}} tx-center wd-16 mg-r-5"></i> {{.Name}}</a>
+      </li>
+      {{- end -}}
+      {{- else -}}
+      <li class="nav-item">{{$route := printf "/user/%s" $nav.Action}}
+        <a href="{{FrontendURL}}/user/{{$nav.Action}}" class="nav-link{{if or (eq Path $route) (HasPrefix $route $activeURL)}} active{{end}}"><i class="fa fa-{{$nav.Icon}} tx-center wd-16 mg-r-5"></i> {{$nav.Name}}</a>
+      </li>
+      {{- end -}}
+      {{- end -}}
+      {{- end -}}
+    </ul>
+
+    <a href="{{FrontendURL}}/" class="btn btn-inverse tx-size-10 tx-uppercase btn-block mg-b-5 mg-t-20"><i class="fa fa-angle-left mg-r-5"></i> {{"回到首页"|T}}</a>
+  </div><!-- leftpanel -->

@@ -1,0 +1,20 @@
+{{Strip}}{{Extend "#blogdefault#base"}}
+{{Block "title"}}
+{{Config.base.siteName}}
+{{/Block}}
+{{Block "keywords"}}{{Config.base.siteName}}{{/Block}}
+{{Block "description"}}{{Config.base.siteName}}{{/Block}}
+{{Block "body"}}
+        <!-- ============= NOT FOUND ============= -->
+        <div class="not-found-wrapper section-padding" style="background-image: url('{{AssetsXURL}}/blogdefault/img/404.png')">
+            <div class="container">
+                <div class="content text-center">
+                    <h2 class="heading-primary">Opps!</h2>
+                    <h3 class="heading-secondary">Something went wrong</h3>
+                    <p class="body-text">Error 404. Page not found!</p>
+                    <a href="/" class="button button-primary">Go to homepage</a>
+                </div>
+            </div>
+        </div>
+{{/Block}}
+{{/Strip}}

@@ -1,0 +1,17 @@
+<ul class="submenu">{{$v := .}}
+{{- range $key,$sub := $v.FetchChildren Context -}}
+    <li class="submenu-item {{- if $sub.HasChildren Context}} submenu-wrapper{{- end -}}">
+        <a href="{{$sub.Url}}" class="submenu-link{{if $sub.IsActive Context}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
+            {{$sub.Title}}
+            {{if $sub.HasChildren Context -}}
+            <span class="icon">
+                <i class="fal fa-chevron-right"></i>
+            </span>
+            {{- end -}}
+        </a>
+        {{- if $sub.HasChildren Context -}}
+        {{Include "header_nav_children" $sub}}
+        {{- end -}}
+    </li>
+{{- end -}}
+</ul>

@@ -1,0 +1,88 @@
+{{Strip}}{{Extend "base"}}
+{{Block "title"}}
+{{- "资讯列表"|T}} {{if Stored.sourceInfo.V}}- {{Stored.sourceInfo.V}}{{end}} - {{Super}}{{/Block}}
+{{Block "keywords"}}{{if Stored.sourceInfo.V}},{{Stored.sourceInfo.V}}{{end}}{{/Block}}
+{{Block "description"}}{{Stored.sourceInfo.V}}{{/Block}}
+{{Block "bodyAttr"}} class="pd-t-70"{{/Block}}
+{{Block "body"}}
+{{Include "header"}}
+
+<div class="bb-mainpanel">
+    {{Include "#default#article/_list_top"}}
+
+    <div class="container pd-b-40">{{$sourceInfo := Stored.sourceInfo}}
+      {{- if and $sourceInfo $sourceInfo.X -}}
+      <div class="row mg-b-20">
+        <div class="tx-bold">
+          <a href="{{$sourceInfo.H.detailURL}}">{{$sourceInfo.V}}</a>
+          {{Include "#default#article/list_cardhead"}}
+        </div>
+      </div>
+      {{- end -}}
+      <div class="row">
+        {{$end := Sub (len Stored.articles) 1}}
+        {{range $k, $v := Stored.articles}}
+        {{- $mod := Eq (Math "mod" $k 2) 0 -}}
+        {{if $mod}}
+          {{if gt $k 0}}</div><!-- card-deck -->{{end}}
+          <div class="card-deck{{if ge $k 2}} mg-t-20{{end}}">
+        {{end}}
+          <div class="card rounded-0 pd-15">
+            <div class="row flex-sm-row-reverse">
+              <div class="col-sm-4">
+                <figure class="effect-shine">
+                  <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}"><img src="{{$v.Image|Default (AssetsXURL `/images/placeholder/default-sm.png`)}}" class="img-fluid wd-100p" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';"></a>
+                  <figcaption></figcaption>
+                </figure>
+              </div>
+              <div class="col-sm-8 mg-t-20 mg-sm-t-0 d-sm-flex align-items-start flex-column">
+                <div class="wd-100p d-flex justify-content-between align-items-center tx-gray-light tx-size-12">
+                  {{if $v.Tags}}
+                  <span class="d-inline-block">
+                  <i class="fa fa-tags"></i>
+                  {{range $tagK,$tagV := Split $v.Tags ","}}
+                  {{if gt $tagK 0}}/{{end}}
+                  <span class="tx-info"><a href="{{FrontendURL}}/articlesBy/{{Stored.sourceTable}}/{{Stored.sourceId}}{{Ext}}?tag={{$tagV}}">{{$tagV}}</a></span>
+                  {{end}}
+                  </span>
+                  {{end}}
+                  <span class="d-inline-block">{{(Date $v.Created).Format (T "2006年1月2日")}}</span>
+                </div><!-- d-flex -->
+                <h5 class="lh-3 mg-t-5"><a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="tx-inverse">{{$v.Title}}</a></h5>
+                <p class="tx-size-xs lh-7 mg-b-20 mg-sm-b-auto">{{$v.Summary}}</p>
+
+                <div class="tx-size-12 d-flex align-items-center">
+                  <span class="tx-gray-light hover-info d-inline-block mg-r-20">
+                    <i class="fa fa-eye"></i>
+                    <span class="tx-size-12">{{$v.Views}}<span class="hidden-xs-down"> Views</span></span>
+                  </span>
+                  <span class="tx-gray-light hover-info d-inline-block mg-r-20">
+                    <i class="fa fa-thumbs-up"></i>
+                    <span class="tx-size-12">{{$v.Likes}}<span class="hidden-xs-down"> Likes</span></span>
+                  </span>
+                  <span class="tx-gray-light hover-info d-inline-block mg-r-40">
+                    <i class="fa fa-comment"></i>
+                    <span class="tx-size-12">{{$v.Comments}}<span class="hidden-xs-down"> Comments</span></span>
+                  </span>
+                  <a href="javascript:;" class="tx-gray-light hover-primary d-inline-block mg-r-10"><i class="fa fa-facebook-official"></i></a>
+                  <a href="javascript:;" class="tx-gray-light hover-info d-inline-block mg-r-10"><i class="fa fa-twitter"></i></a>
+                  <a href="javascript:;" class="tx-gray-light hover-danger d-inline-block"><i class="fa fa-pinterest"></i></a>
+                </div><!--  -->
+              </div><!-- col-8 -->
+            </div><!-- row -->
+          </div><!-- card -->
+          {{- if eq $k $end -}}
+          </div><!-- card-deck -->
+          {{- end -}}
+        {{end}}
+      </div><!-- row -->
+
+      <nav class="mg-t-60 d-flex justify-content-center">
+          {{Stored.pagination.Render "#default#pagination_circle"}}
+      </nav>
+
+    </div><!-- container -->
+</div><!-- bb-mainpanel -->
+{{Include "#default#article/_footer"}}
+{{/Block}}
+{{/Strip}}

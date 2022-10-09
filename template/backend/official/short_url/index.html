@@ -1,0 +1,70 @@
+{{Extend "layout"}}
+{{Block "title"}}{{"短链接管理"|T}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li class="active">{{"短链接管理"|T}}</li>
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+	<div class="col-md-12">
+		<div class="block-flat">
+			<div class="header">
+				<a href="{{BackendURL}}/official/short_url/add" class="btn btn-success pull-right">
+					<i class="fa fa-plus"></i>
+					{{"添加短链接"|T}}
+				</a>							
+				<h3>{{"短链接列表"|T}}</h3>
+			</div>
+			<div class="content">
+				<div class="table-responsive">
+				<table class="table no-border hover">
+					<thead class="no-border" sort-current="{{Form "sort" "-id"}}">
+						<tr>
+							<th style="width:50px" sort="-id"><strong>ID</strong></th>
+							<th><strong>{{"短链接"|T}}</strong></th>
+							<th style="width:90px" sort="-visited"><strong>{{"最近访问"|T}}</strong></th>
+							<th style="width:70px" sort="-visits"><strong>{{"访问量"|T}}</strong></th>
+							<th style="width:50px"><strong>{{"状态"|T}}</strong></th>
+							<th style="width:90px"><strong>{{"过期时间"|T}}</strong></th>
+							<th style="width:80px"><strong>{{"密码验证"|T}}</strong></th>
+							<th style="width:90px"><strong>{{"创建时间"|T}}</strong></th>
+							<th style="width:120px" class="text-center"><strong>{{"操作"|T}}</strong></th>
+						</tr>
+					</thead>
+					<tbody class="no-border-y">
+                        {{range $k,$v := Stored.listData}}
+						<tr>
+							<td>{{$v.Id}}</td>
+							<td>
+								<a href="{{FrontendURL}}/r/{{$v.ShortUrl}}" target="_blank" class="text-bold x-block">{{$v.ShortUrl}}</a>
+								<small>{{$v.LongUrl}}</small>
+							</td>
+							<td>{{if gt $v.Visited 0}}{{(Date $v.Visited).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</td>
+							<td>{{$v.Visits}}</td>
+							<td>{{if eq $v.Available "Y"}}<span class="text-success">{{"有效"|T}}</span>{{else}}<span class="text-danger">{{"无效"|T}}</span>{{end}}</td>
+							<td>{{if gt $v.Expired 0}}{{(Date $v.Expired).Format "2006-01-02"}}{{else}}{{"永久有效"|T}}{{end}}</td>
+							<td>{{if $v.Password}}{{"需要密码"|T}}{{else}}{{"无需密码"|T}}{{end}}</td>
+							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
+							<td class="text-center">
+							<a class="label label-default" href="{{BackendURL}}/official/short_url/add?copyId={{$v.Id}}" title="{{"复制"|T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
+							<a class="label label-success" href="{{BackendURL}}/official/short_url/edit/{{$v.Id}}" title="{{"编辑"|T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
+							<a class="label label-danger" href="{{BackendURL}}/official/short_url/delete/{{$v.Id}}" onclick="return confirm('{{"真的要删除吗？"|T}}');" title="{{"删除"|T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+                        {{end}}
+					</tbody>
+				</table>		
+				</div>
+				{{Stored.pagination.Render}}
+			</div>
+		</div>				
+	</div>
+</div>
+{{/Block}}
+{{Block "footer"}}
+<script>
+$(function(){
+  App.tableSorting();
+});
+</script>
+{{/Block}}

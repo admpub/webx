@@ -1,0 +1,179 @@
+{{Extend "layout"}}
+{{Block "title"}}{{"访问统计"|T}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li class="active">{{"访问统计"|T}}</li>
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+	<div class="col-md-6">
+		<div class="block-flat">
+			<div class="header">
+				<h3>{{"热门网络"|T}}</h3>
+			</div>
+			<div class="content">
+				<div class="table-responsive">
+				<table class="table no-border hover">
+					<thead class="no-border">
+						<tr>
+							<td>{{"网络"|T}}</td>
+							<th style="width:60px"><strong>{{"访问量"|T}}</strong></th>
+						</tr>
+					</thead>
+					<tbody class="no-border-y">
+                        {{range $k,$v := Stored.ispTopList}}
+						<tr>
+							<td>{{$v.Isp}}</td>
+							<td>{{$v.Num}}</td>
+						</tr>
+                        {{end}}
+					</tbody>
+				</table>		
+				</div>
+			</div>
+		</div>				
+	</div>
+	<div class="col-md-6">
+		<div class="block-flat">
+			<div class="header">
+				<h3>{{"热门省份"|T}}</h3>
+			</div>
+			<div class="content">
+				<div class="table-responsive">
+				<table class="table no-border hover">
+					<thead class="no-border">
+						<tr>
+							<th><strong>{{"访客地区"|T}}</strong></th>
+							<th style="width:60px"><strong>{{"访问量"|T}}</strong></th>
+						</tr>
+					</thead>
+					<tbody class="no-border-y">
+                        {{range $k,$v := Stored.provinceTopList}}
+						<tr>
+							<td>
+								{{$v.Country}}
+								{{if $v.Region}} - {{$v.Region}}{{end}}
+								{{if $v.Province}} - {{$v.Province}}{{end}}
+								{{if $v.City}} - {{$v.City}}{{end}}
+								{{if $v.Isp}} - {{$v.Isp}}{{end}}
+							</td>
+							<td>{{$v.Num}}</td>
+						</tr>
+                        {{end}}
+					</tbody>
+				</table>		
+				</div>
+			</div>
+		</div>				
+	</div>
+	<div class="col-md-6">
+		<div class="block-flat">
+			<div class="header">
+				<h3>{{"热门操作系统"|T}}</h3>
+			</div>
+			<div class="content">
+				<div class="table-responsive">
+				<table class="table no-border hover">
+					<thead class="no-border">
+						<tr>
+							<th><strong>{{"操作系统"|T}}</strong></th>
+							<th style="width:60px"><strong>{{"访问量"|T}}</strong></th>
+						</tr>
+					</thead>
+					<tbody class="no-border-y">
+                        {{range $k,$v := Stored.osTopList}}
+						<tr>
+							<td>{{$v.Os}}</td>
+							<td>{{$v.Num}}</td>
+						</tr>
+                        {{end}}
+					</tbody>
+				</table>		
+				</div>
+			</div>
+		</div>				
+	</div>
+	<div class="col-md-6">
+		<div class="block-flat">
+			<div class="header">
+				<h3>{{"热门浏览器"|T}}</h3>
+			</div>
+			<div class="content">
+				<div class="table-responsive">
+				<table class="table no-border hover">
+					<thead class="no-border">
+						<tr>
+							<th><strong>{{"浏览器"|T}}</strong></th>
+							<th style="width:60px"><strong>{{"访问量"|T}}</strong></th>
+						</tr>
+					</thead>
+					<tbody class="no-border-y">
+                        {{range $k,$v := Stored.browserTopList}}
+						<tr>
+							<td>{{$v.Browser}}</td>
+							<td>{{$v.Num}}</td>
+						</tr>
+                        {{end}}
+					</tbody>
+				</table>		
+				</div>
+			</div>
+		</div>				
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="block-flat">
+			<div class="header">
+				<h3>{{"最新访问"|T}}</h3>
+			</div>
+			<div class="content">
+				<div class="table-responsive">
+				<table class="table no-border hover">
+					<thead class="no-border">
+						<tr>
+							<th><strong>{{"短链接"|T}}</strong></th>
+							<th style="width:90px"><strong>{{"访客IP"|T}}</strong></th>
+							<th style="width:60px"><strong>{{"来源"|T}}</strong></th>
+							<th style="width:50px"><strong>{{"语言"|T}}</strong></th>
+							<th style="width:90px"><strong>{{"访客地区"|T}}</strong></th>
+							<th style="width:80px"><strong>{{"访客系统"|T}}</strong></th>
+							<th style="width:80px"><strong>{{"浏览器"|T}}</strong></th>
+							<th style="width:90px"><strong>{{"访问时间"|T}}</strong></th>
+						</tr>
+					</thead>
+					<tbody class="no-border-y">
+                        {{range $k,$v := Stored.lastList}}
+						<tr>
+							<td>
+								<a href="{{FrontendURL}}/r/{{$v.URL.ShortUrl}}" target="_blank" class="x-block">{{$v.URL.ShortUrl}}</a>
+								<small>{{$v.URL.LongUrl}}</small>
+							</td>
+							<td>{{$v.Ip}}</td>
+							<td>{{$v.Referer}}</td>
+							<td>{{$v.Language}}</td>
+							<td>
+								{{$v.Country}}
+								{{if $v.Region}} - {{$v.Region}}{{end}}
+								{{if $v.Province}} - {{$v.Province}}{{end}}
+								{{if $v.City}} - {{$v.City}}{{end}}
+								{{if $v.Isp}} - {{$v.Isp}}{{end}}
+							</td>
+							<td>{{$v.Os}}{{if $v.OsVersion}}{{$v.OsVersion}}{{end}}</td>
+							<td>{{$v.Browser}}{{if $v.BrowserVersion}}{{$v.BrowserVersion}}{{end}}</td>
+							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
+						</tr>
+                        {{end}}
+					</tbody>
+				</table>		
+				</div>
+				<!-- {{Stored.pagination.Render}} -->
+			</div>
+		</div>				
+	</div>
+</div>
+
+
+{{/Block}}

@@ -1,0 +1,157 @@
+{{Extend "user/base"}}
+{{Block "body"}}
+{{Super}}
+
+<div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
+  {{/* Include "user/profile/_index" */}}
+  <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+    <h5 class="tx-inverse tx-bold mg-b-0">Dashboard</h5>
+    <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+      <a class="breadcrumb-item" href="#">Home</a>
+      <span class="breadcrumb-item active">Dashboard</span>
+    </nav>
+  </div>
+
+  <div class="main-body pd-20">
+<div class="row">
+  <div class="col-lg-12 mg-t-0">
+    <div class="card card-table">
+      <div class="card-header">
+        <h6 class="card-title">Product Purchases</h6>
+      </div><!-- card-header -->
+      <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="wd-10p">&nbsp;</th>
+            <th>Item Details</th>
+            <th class="tx-right">Sold</th>
+            <th>Gain</th>
+            <th class="tx-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pd-l-20">
+              <img src="http://via.placeholder.com/800x533" class="wd-55" alt="Image">
+            </td>
+            <td>
+              <a href="" class="tx-inverse tx-size-14 tx-medium d-block">The Dothraki Shoes</a>
+              <span class="tx-size-11 d-block"><span class="square-8 bg-danger mg-r-5 rounded-circle"></span> 20 remaining</span>
+            </td>
+            <td class="valign-middle tx-right">3,345</td>
+            <td class="valign-middle"><span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i>33.34%</span> from last week</td>
+            <td class="valign-middle tx-center">
+              <div class="dropdown">  
+                <a href="javascript:;" class="tx-gray-light tx-size-24 d-block" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon ion-android-more-horizontal"></i></a>
+                <div class="dropdown-menu dropdown-menu-right tx-size-13 rounded-top-0 shadow-base" aria-labelledby="dropdownMenuLink2">
+                  <a class="dropdown-item" href="#">Account Settings</a>
+                  <a class="dropdown-item" href="#">Privacy Settings</a>
+                  <a class="dropdown-item" href="#">Sign Out</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="pd-l-20">
+              <img src="http://via.placeholder.com/800x533" class="wd-55" alt="Image">
+            </td>
+            <td>
+              <a href="" class="tx-inverse tx-size-14 tx-medium d-block">Westeros Sneaker</a>
+              <span class="tx-size-11 d-block"><span class="square-8 bg-success mg-r-5 rounded-circle"></span> In stock</span>
+            </td>
+            <td class="valign-middle tx-right">720</td>
+            <td class="valign-middle"><span class="tx-danger"><i class="icon ion-android-arrow-down mg-r-5"></i>21.20%</span> from last week</td>
+            <td class="valign-middle tx-center">
+              <a href="" class="tx-gray-light tx-size-24"><i class="icon ion-android-more-horizontal"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="pd-l-20">
+              <img src="http://via.placeholder.com/800x533" class="wd-55" alt="Image">
+            </td>
+            <td>
+              <a href="" class="tx-inverse tx-size-14 tx-medium d-block">Selonian Hand Bag</a>
+              <span class="tx-size-11 d-block"><span class="square-8 bg-success mg-r-5 rounded-circle"></span> In stock</span>
+            </td>
+            <td class="valign-middle tx-right">1,445</td>
+            <td class="valign-middle"><span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i>23.34%</span> from last week</td>
+            <td class="valign-middle tx-center">
+              <a href="" class="tx-gray-light tx-size-24"><i class="icon ion-android-more-horizontal"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="pd-l-20">
+              <img src="http://via.placeholder.com/800x533" class="wd-55" alt="Image">
+            </td>
+            <td>
+              <a href="" class="tx-inverse tx-size-14 tx-medium d-block">Kel Dor Sunglass</a>
+              <span class="tx-size-11 d-block"><span class="square-8 bg-warning mg-r-5 rounded-circle"></span> 45 remaining</span>
+            </td>
+            <td class="valign-middle tx-right">2,500</td>
+            <td class="valign-middle"><span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i>28.78%</span> from last week</td>
+            <td class="valign-middle tx-center">
+              <a href="" class="tx-gray-light tx-size-24"><i class="icon ion-android-more-horizontal"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="pd-l-20">
+              <img src="http://via.placeholder.com/800x533" class="wd-55" alt="Image">
+            </td>
+            <td>
+              <a href="" class="tx-inverse tx-size-14 tx-medium d-block">Kubaz Sunglass</a>
+              <span class="tx-size-11 d-block"><span class="square-8 bg-success mg-r-5 rounded-circle"></span> In stock</span>
+            </td>
+            <td class="valign-middle tx-size-14 tx-right">223</td>
+            <td class="valign-middle"><span class="tx-danger"><i class="icon ion-android-arrow-down mg-r-5"></i>18.18%</span> from last week</td>
+            <td class="valign-middle tx-center">
+              <a href="" class="tx-gray-light tx-size-24"><i class="icon ion-android-more-horizontal"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div><!-- table-responsive -->
+      <div class="card-footer">
+        <!-- <a href=""><i class="fa fa-angle-down mg-r-5"></i>View All Products</a> -->
+        <nav aria-label="Page navigation">
+          <ul class="pagination mg-0">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="First">
+                <i class="fa fa-angle-double-left"></i>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <i class="fa fa-angle-left"></i>
+              </a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item"><a class="page-link" href="#">10</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Last">
+                <i class="fa fa-angle-double-right"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div><!-- card-footer -->
+      
+    </div><!-- card -->
+  </div><!-- col-6 -->
+</div><!-- row -->
+    </div><!-- main-body -->
+</div><!-- main -->
+{{/Block}}
+
+{{Block "footer"}}
+{{Super}}
+{{/Block}}

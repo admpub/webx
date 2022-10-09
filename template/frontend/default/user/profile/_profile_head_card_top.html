@@ -1,0 +1,40 @@
+{{$customer := CustomerDetail}}
+<div class="card-header pd-y-30 d-flex justify-content-between align-items-center bg-transparent">
+    <div class="tx-size-xs tx-size-xs-14">
+      <a href="{{FrontendURL}}/user/profile/followers" class="tx-gray mg-r-10"><span class="tx-inverse tx-semibold">{{$customer.Followers}}</span> Followers</a>
+      <a href="{{FrontendURL}}/user/profile/following" class="tx-gray"><span class="tx-inverse tx-semibold">{{$customer.Following}}</span> Following</a>
+    </div>
+    <div class="hidden-xss-down">
+      <a href="{{FrontendURL}}/u/{{$customer.Id}}" target="_blank" class="tx-gray mg-r-15 lh-1 d-inline-block" data-toggle="tooltip" title="{{"打开我的主页"|T}}"><i class="fa fa-home lh-1"></i></a>
+      <div class="dropdown d-inline-block">  
+          <a href="javascript:;" class="tx-gray lh-1" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h lh-1"></i></a>
+          <div class="dropdown-menu dropdown-menu-right tx-size-13 rounded-top-0 shadow-base" aria-labelledby="dropdownMenuLink2">
+              <a class="dropdown-item" href="{{FrontendURL}}/user/profile/settings">{{"账号设置"|T}}</a>
+              <!-- <a class="dropdown-item" href="{{FrontendURL}}/user/privacysettings">{{"隐私设置"|T}}</a> -->
+              <a class="dropdown-item" href="{{FrontendURL}}/sign_out">{{"注销登录"|T}}</a>
+          </div><!-- /.dropdown-menu -->
+      </div><!-- /.dropdown -->
+    </div>
+  </div><!-- card-header -->
+  <div class="card-block tx-center">
+    <div class="pos-relative tx-center">
+      <div class="wd-100p pos-md-absolute t-neg-60">
+        <img src="{{if $customer.Avatar}}{{AddSuffix $customer.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="bg-info wd-72 ht-72 rounded-circle" alt="{{T `%s头像` $customer.Name}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_128.png';">
+      </div>
+    </div><!-- pos-relative -->
+    <h5 class="tx-size-xs-26 tx-size-md-32 mg-t-20 mg-md-t-40 mg-b-2 tx-inverse tx-bold">
+      {{$customer.Name}}
+    </h5>
+    <p class="mg-b-10">
+      {{if $customer.Group}}
+      <span class="badge badge-info">{{$customer.Group.Name}}</span>
+      {{end}}
+      {{if $customer.Level}}
+      <span class="badge badge-primary">{{$customer.Level.Name}}</span>
+      {{end}}
+      {{if $customer.Agent}}
+      <span class="badge badge-danger">{{$customer.Agent.Name}}</span>
+      {{end}}
+    </p>
+    <p class="wd-md-500 mg-md-x-auto">{{$customer.Description|Nl2br}}</p>
+  </div><!-- card-block -->

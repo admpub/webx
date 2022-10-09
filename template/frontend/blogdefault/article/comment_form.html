@@ -1,0 +1,70 @@
+<!-- Comments box -->{{- $data := Stored.data -}}
+{{- $inModal := Get "comment_form.in_modal" -}}
+{{- $disabledCommentMessage := Stored.disabledCommentMessage -}}    
+<div class="comment-box">
+   {{- if not $inModal -}}
+   <h3 class="heading-secondary">{{`发表评论`|T}}</h3>
+   {{- end -}}
+   {{- if $disabledCommentMessage -}}
+   <div class="alert alert-warning alert-bordered pd-y-20" role="alert">
+       <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">×</span>
+       </button> -->
+       <div class="d-flex align-items-center justify-content-start">
+         <i class="icon ion-alert-circled alert-icon tx-size-52 tx-warning mg-r-20"></i>
+         <div class="ml50">
+           <h5 class="mg-b-2 tx-warning">{{"您没有权限发布评论"|T}}</h5>
+           <p class="mg-b-0 tx-gray">{{$disabledCommentMessage}}</p>
+         </div>
+       </div><!-- d-flex -->
+     </div>
+   {{- else -}}
+  <form class="comment-form" action="/article/comment_add" method="POST" id="{{if $inModal}}modal-{{end}}comment-post-form">
+      <div class="row">
+        {{- if Customer -}}{{$customer := Customer}}
+        <div class="col-md-7">
+            <div class="input-group comment-author">
+            <span class="input-group-addon"><a href="javascript:;"><img src="{{if $customer.Avatar}}{{AddSuffix $customer.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="rounded-circle bg-info avatar" alt="{{$customer.Name}}"></a></span>
+            <p class="form-control author-name">{{$customer.Name}}</p>
+            </div>
+        </div>
+        <div class="col-md-5">
+          <div class="input-group">
+            <input type="text" name="code" placeholder="{{`请输入验证码`|T}}" required="required" class="form-control" />
+            <span class="input-group-addon" style="padding:0">{{CaptchaForm}}</span>
+          </div>
+        </div>
+        {{- else -}}
+          <div class="col-md-4">
+              <input type="text" name="name" placeholder="{{`请输入您的用户名`|T}}" required="required" class="form-control" />
+          </div>
+          <div class="col-md-4">
+              <input type="password" name="password" placeholder="{{`请输入您的密码`|T}}" required="required" class="form-control" />
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input type="text" name="code" placeholder="{{`请输入验证码`|T}}" required="required" class="form-control" />
+              <span class="input-group-addon" style="padding:0">{{CaptchaForm}}</span>
+            </div>
+          </div>
+          {{- end -}}
+          <div class="col-12">
+              <textarea name="content" placeholder="{{`请输入您的评论`|T}}" required="required" class="form-control"></textarea>
+              <input type="hidden" name="id" id="target-id" value="{{if $data}}{{$data.Id}}{{end}}">
+              {{- if Stored.commentAddonParams -}}
+              {{- range $key, $value := Stored.commentAddonParams -}}
+              <input type="hidden" name="{{$key}}" value="{{$value}}">
+              {{- end -}}
+              {{- end -}}
+              <input type="hidden" name="replyId" id="reply-id" value="0">
+              <input type="hidden" name="subtype" id="target-subtype" value="{{Stored.targetSubtype}}">
+              <input type="hidden" name="type" id="target-type" value="{{Stored.targetType}}">
+          </div>
+      </div>
+      <button type="button" class="button button-primary" data-form="#{{if $inModal}}modal-{{end}}comment-post-form">
+        {{"发表评论"|T}}
+        {{if Stored.needReviewComment}}<small class="text-normal">({{"需要审核"|T}})</small>{{end}}
+      </button>
+  </form>
+  {{- end -}}
+</div>

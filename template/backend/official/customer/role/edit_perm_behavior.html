@@ -1,0 +1,33 @@
+{{Strip}}
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th><strong>{{`行为`|T}}</strong></th>
+      <th><strong>{{`配置`|T}}</strong></th>
+      <th style="width:50px"><strong>{{`授权`|T}}</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $k, $c := Stored.behaviorList -}}
+    <tr>{{$checkedBehavior := Stored.permission.CheckByType Context `behavior` $c.K}}
+      <td>
+        {{$c.V}}<br />
+        <span class="text text-success">{{$c.K}}</span>
+      </td>
+      <td>
+        <textarea name="permBehaviorConfig[{{$c.K}}]" class="form-control">{{if not $checkedBehavior.Value}}{{$c.X}}{{else}}{{$c.X.AsString $checkedBehavior.Value}}{{end}}</textarea>
+        {{- if $c.X.FormHelpBlock -}}
+        <div class="help-block">{{$c.X.FormHelpBlock}}</div>
+        {{- end -}}
+      </td>
+      <td>
+        <span class="checkbox checkbox-success">
+          <input type="checkbox" name="permBehavior[]" value="{{$c.K}}"{{if $checkedBehavior.Checked}} checked{{end}} id="permBehavior-{{$c.K}}" /> 
+        <label for="permBehavior-{{$c.K}}">&nbsp;</label>
+        </span>
+      </td>
+    </tr>
+    {{- end -}}
+  </tbody>
+</table>
+{{/Strip}}

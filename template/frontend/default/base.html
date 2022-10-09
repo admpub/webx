@@ -1,0 +1,77 @@
+{{Strip}}<!DOCTYPE html>
+<html lang="{{Lang}}">
+<head>
+  <meta charset="utf-8">
+  <!-- device-setting:start -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+  <meta name="applicable-device" content="pc, mobile">
+  <link rel="canonical" href="{{Config.base.siteURL}}">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <!-- device-setting:end -->
+  <meta name="keywords" content="{{Block "keywords"}}{{Config.base.siteName}}{{/Block}}">
+  <meta name="description" content="{{Block "description"}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{/Block}}">
+  <meta name="author" content="admpub.com">
+<!-- og-tag:start -->
+<meta property="og:type" content="{{Block "type"}}article{{/Block}}" /><!-- 常用值:article、news、book、movie、product… -->
+<meta property="og:site_name" content="{{Config.base.siteName}}" />
+<meta property="og:title" content="{{Block "title"}}{{Config.base.siteName}}{{/Block}}" />
+<meta property="og:description" content="{{Block "description"}}{{Config.base.siteName}}{{/Block}}" />
+<meta property="og:image" content="{{Block "image"}}{{/Block}}" />
+<meta property="og:url" content="{{FrontendURL}}{{URL.Path}}" />
+<meta property="og:release_date" content="{{Now.Format `2006-01-02`}}" />
+<!-- og-tag:end -->
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  <title>{{Block "title"}}{{Config.base.siteName}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan}}{{end}}{{/Block}}</title>
+	<link href="{{AssetsURL}}/css/font-awesome.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link href="{{AssetsXURL}}/css/Ionicons/css/ionicons.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link href="{{AssetsXURL}}/js/superfish/superfish.min.css" rel="stylesheet" charset="utf-8">
+  {{Block "link"}}{{/Block}}
+	<link href="{{AssetsURL}}/js/jquery.gritter/css/jquery.gritter.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8" />
+	<link href="{{AssetsURL}}/js/jquery.gritter/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8" />
+  <link href="{{AssetsURL}}/js/nprogress/nprogress.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link href="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  {{Include "#default#global_js"}}
+  {{Block "head"}}{{/Block}}
+  <link id="css-lazyload-end" href="{{AssetsXURL}}/css/frontend.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <!-- <link href="{{AssetsXURL}}/css/color-orange.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8"> -->
+  <link href="{{AssetsURL}}/css/form/input-webx/webx.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link href="{{AssetsXURL}}/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  {{Block "headEnd"}}{{/Block}}
+</head>
+<body {{Block "bodyAttr"}}{{/Block}}>
+{{Block "body"}}{{/Block}}
+<script src="{{AssetsURL}}/js/jquery.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/compatible.min.js?t={{BuildTime}}" type="text/javascript"></script>
+<script src="{{AssetsURL}}/js/jquery.form.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsXURL}}/js/tether/tether.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsXURL}}/js/bootstrap/bootstrap.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/modernizr.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/jquery.gritter/js/jquery.gritter.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/jquery.pjax.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/nprogress/nprogress.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsXURL}}/js/superfish/hoverIntent.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsXURL}}/js/superfish/superfish.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsXURL}}/js/_page/nav.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/behaviour/sprintf.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsXURL}}/js/app.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{FrontendURL}}/i18n.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/scrollLoading.min.js?t={{BuildTime}}"></script>
+<script>
+window.activeURL={{if Stored.Get "activeURL"}}'{{FrontendURL}}{{Stored.Get "activeURL"}}'{{else}}null{{end}};window.errorMSG=null;window.successMSG=null;App.lang='{{Lang}}';
+{{- if . -}}
+  {{- if IsError . -}}
+window.errorMSG="{{.}}";
+  {{- else if IsOk . -}}
+window.successMSG="{{.}}";
+  {{- end -}}
+{{- end -}}
+</script>
+<script src="{{AssetsXURL}}/js/common.min.js?t={{BuildTime}}" charset="utf-8"></script>
+{{Block "tmpl"}}{{/Block}}
+{{Block "footer"}}{{/Block}}
+</body>
+</html>
+{{/Strip}}

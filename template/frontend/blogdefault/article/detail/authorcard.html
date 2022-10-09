@@ -1,0 +1,15 @@
+<!-- Author card -->
+{{- $author := Stored.author -}}
+<div class="author-card">
+    <div
+        class="card-img bg-cover"
+        style="background-image: url('{{AssetsXURL}}/blogdefault/img/single-post/author-card-img.png')"
+    ></div>
+    <div class="card-text">
+        <h3 class="heading-secondary">{{- $author.Name -}}</h3>
+        <p class="body-text light">
+            Web developer since 2006. Create hundreds of websites, HTML and CSS3 expert, who
+            started to learn web design on a world-class level.
+        </p>
+    </div>
+</div>

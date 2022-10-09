@@ -1,0 +1,10 @@
+<ul class="sub-menu">{{$v := .}}
+{{- range $key,$sub := $v.FetchChildren Context -}}
+    <li>
+        <a href="{{$sub.Url}}" class="{{- if $sub.HasChildren Context -}}has-arrow{{- end -}}{{if $sub.IsActive Context}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}</a>
+        {{- if $sub.HasChildren Context -}}
+        {{Include "header_nav_mobile_children" $sub}}
+        {{- end -}}
+    </li>
+{{- end -}}
+</ul>

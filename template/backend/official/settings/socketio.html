@@ -1,0 +1,14 @@
+{{$config := Stored.socketio}}
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{"开关"|T}}</label>
+    <div class="col-sm-8">{{$v := $config.enabled.Value | Default `0`}}
+        <div class="radio radio-success radio-inline">
+            <input type="radio" value="1" name="socketio[enabled][value]" id="socketio-enabled-1"{{if eq `1` $v}} checked{{end}}> 
+            <label for="socketio-enabled-1">{{`开启`|T}}</label>
+        </div>
+        <div class="radio radio-danger radio-inline">
+            <input type="radio" value="0" name="socketio[enabled][value]" id="socketio-enabled-0"{{if eq `0` $v}} checked{{end}}> 
+            <label for="socketio-enabled-0">{{`关闭`|T}}</label>
+        </div>
+    </div><!-- col-sm-8 -->
+</div>

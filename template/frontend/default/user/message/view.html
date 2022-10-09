@@ -1,0 +1,100 @@
+{{Extend "user/base"}}
+{{Block "body"}}{{Super}}
+ <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
+  <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"消息详情"|T}}</h5>
+    <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|T}}</a>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/message/{{Stored.boxType}}">{{Stored.boxTypeName}}</a>
+      <span class="breadcrumb-item active">{{"消息详情"|T}}</span>
+    </nav>
+  </div>
+  <div class="main-body pd-20">
+<div class="row">
+  <div class="col-lg-12 mg-t-0">
+{{$data := Stored.data}}
+{{$replyList := Stored.replyList}}
+{{$msgUser := Stored.msgUser}}
+{{$customer := Customer}}
+<!-- {{AssetsURL}}/images/logo.png -->
+<div class="card card-block pd-0 bd-0 rounded-0 tx-size-sm">
+  <div class="card-header pd-25 d-flex justify-content-between align-items-center">
+    <h2>{{$data.Title|Default (T "无标题")}}</h2>
+    <div class="media tx-size-sm align-items-center">
+        {{if eq $msgUser.Type "user"}}
+        <a class="d-flex mg-r-10 align-self-center"><img src="{{if $msgUser.Avatar}}{{AddSuffix $msgUser.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-48 ht-48 rounded-circle" alt=""></a>
+        <div class="media-body pd-t-7">
+          <p class="tx-bold mg-b-0 lh-1">
+            <a class="tx-gray-dark">{{$msgUser.Name}}</a>
+            <span class="badge badge-warning tx-normal">{{"管理员"|T}}</span>
+          </p>
+          <span class="tx-size-12">{{(Ts2time $data.Created).Format "2006-01-02 15:04:05"}}</span>
+        </div><!-- media-body -->
+        {{else}}
+        <a href="{{FrontendURL}}/u/{{$msgUser.Id}}" target="_blank" class="d-flex mg-r-10 align-self-center"><img src="{{$msgUser.Avatar|Default (AssetsURL "/images/user_50.png")}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-48 ht-48 rounded-circle" alt=""></a>
+        <div class="media-body pd-t-7">
+          <p class="tx-bold mg-b-0 lh-1">
+            <a href="{{FrontendURL}}/u/{{$msgUser.Id}}" target="_blank" class="tx-gray-dark">{{$msgUser.Name}}</a>
+          </p>
+          <span class="tx-size-12">{{(Ts2time $data.Created).Format "2006-01-02 15:04:05"}}</span>
+        </div><!-- media-body -->
+        {{end}}
+    </div><!-- media -->
+    <!-- <a href="" class="btn btn-outline-secondary rounded-circle btn-icon-sm"><i class="icon ion-android-more-horizontal"></i></a> -->
+  </div>
+  <div class="card-block tx-size-sm pd-25">
+  <div id="message-content">
+    {{- if eq $data.Contype "markdown" -}}
+    <div class="markdown-code">{{- OutputContent $data.Content $data.Contype -}}</div>
+    {{- else -}}
+    {{- OutputContent $data.Content $data.Contype -}}
+    {{- end -}}
+  </div><!-- #message-content -->
+  <h6 class="tx-size-xs tx-uppercase tx-semibold mg-t-20 mg-b-0">{{"消息回复"|T}}</h6>
+  <hr class="mg-t-10 bd-color-gray-lightest">
+  <div class="media-list lh-3">
+    <div id="reply-list-box">
+    {{range $k, $v := $replyList}}
+    <div class="media{{if gt $k 0}} bd-t pd-t-20{{end}}">
+      <a href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank" class="d-flex mg-r-10"><img src="{{if $v.MsgUser.Avatar}}{{AddSuffix $v.MsgUser.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-32 ht-32 rounded-circle" alt=""></a>
+      <div class="media-body pd-t-3 tx-size-12">
+        <p class="tx-bold mg-b-0 lh-1"><a href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank" class="tx-gray-dark">{{$v.MsgUser.Name}}</a></p>
+        <span class="tx-size-11">{{(Ts2time $v.Created).Format "2006-01-02 15:04:05"}}</span>
+        <div class="mg-y-10">
+  {{if eq $v.Contype "text"}}
+  {{$v.Content|Nl2br}}
+  {{else if eq $v.Contype "html"}}
+  {{$v.Content|ToHTML}}
+  {{else if eq $v.Contype "markdown"}}
+  <div class="markdown-code">{{$v.Content}}</div>
+  {{else}}
+  {{$v.Content}}
+  {{end}}
+        </div>
+      </div><!-- media-body -->
+    </div><!-- media -->
+    {{end}}
+    </div><!-- #reply-list-box -->
+    {{Stored.pagination.Render}}
+  </div><!-- media-list -->
+  <div class="form-group mg-t-20">
+    <input type="text" id="input-reply-content" data-reply-id="{{$data.Id}}" class="form-control tx-size-xs" placeholder="{{"请输入回复内容"|T}},{{"按回车键提交"|T}}">
+  </div><!-- form-group -->
+
+  </div><!-- card-block -->
+</div>
+
+
+  </div><!-- col-lg-12 -->
+</div><!-- row -->
+    </div><!-- main-body -->
+</div><!-- main -->
+{{/Block}}
+{{Block "footer"}}
+{{Super}}
+<!-- markdown support -->
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script type="text/javascript" src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<!-- /markdown support -->
+<script type="text/javascript" src="{{AssetsXURL}}/js/_page/user/message_view.js?t={{BuildTime}}"></script>
+{{/Block}}

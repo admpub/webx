@@ -1,0 +1,39 @@
+{{Strip}}{{Extend "#default#base"}}
+{{Block "description"}}{{.title}}{{/Block}}
+{{Block "title"}}{{- if .panic -}}{{`系统异常`|T}}{{else}}{{.title|Default `错误`|T}}{{- end -}}{{/Block}}
+{{Block "bodyAttr"}} class="bg-superlight tx-size-sm ht-100p pos-relative"{{/Block}}
+{{Block "body"}}
+{{Include "#default#headsimple"}}
+<div class="ht-100v wd-100p d-flex align-items-center justify-content-center pd-x-20">
+	<div class="col-lg-6">
+		<div class="card">
+			<div class="card-status bg-{{if and (gt .code 400) (lt .code 500)}}warning{{else}}danger{{end}}"></div>
+			<div class="card-header bg-superlight-x">
+				<h3 class="card-title mg-b-0 mg-t-5">{{- if .panic -}}{{`系统异常`|T}}{{else}}{{`系统提示`|T}}{{- end -}}</h3>
+				<div class="card-options btn-group pull-right">
+					<a href="{{FrontendURL}}/" class="btn btn-success btn-xs">
+						<i class="fa fa-home"></i>
+						{{`回首页`|T}}
+					</a>
+					<a class="btn btn-info btn-xs" href="javascript:history.back()">
+						<i class="fa fa-arrow-left"></i>
+						{{`上一页`|T}}
+					</a>
+					<!-- <a href="#" class="btn btn-secondary btn-xs">Action 2</a> -->
+				</div>
+            </div>
+            {{Block "main"/}}
+		</div>
+	</div>
+</div><!-- container -->
+{{Include "#default#footer"}}
+{{/Block}}
+{{Block "footer"}}
+<script type="text/javascript" src="{{AssetsURL}}/js/behaviour/general.min.js"></script>
+{{- if .panic -}}
+<script type="text/javascript">
+$(function () { App.reportBug('{{TrackerURL}}'); });
+</script>
+{{- end -}}
+{{/Block}}
+{{/Strip}}

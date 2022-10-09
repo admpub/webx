@@ -1,0 +1,792 @@
+# This code-samples file is used by the Meilisearch documentation
+# Every example written here will be automatically fetched by
+# the documentation on build
+# You can read more on https://github.com/meilisearch/documentation/tree/master/.vuepress/code-samples
+---
+get_one_index_1: |-
+  client.GetIndex("movies")
+list_all_indexes_1: |-
+  client.GetAllIndexes(&meilisearch.IndexesQuery{
+    Limit: 3,
+  })
+create_an_index_1: |-
+  client.CreateIndex(&meilisearch.IndexConfig{
+    Uid: "movies",
+    PrimaryKey: "id",
+  })
+update_an_index_1: |-
+  client.Index("movies").UpdateIndex("id")
+delete_an_index_1: |-
+  client.DeleteIndex("movies")
+  // OR
+  client.Index("movies").Delete()
+get_one_document_1: |-
+  var a interface{}
+  client.Index("movies").GetDocument("25684",&meilisearch.DocumentQuery{
+    Fields: []string{"id", "title", "poster", "release_date"},
+  }, &a)
+get_documents_1: |-
+  var a []interface{}
+  client.Index("movies").GetDocuments(nil, &meilisearch.DocumentsQuery{
+    Limit: 2,
+  }, &a)
+add_or_replace_documents_1: |-
+  documents := []map[string]interface{}{
+    {
+      "id":           287947,
+      "title":        "Shazam",
+      "poster":       "https://image.tmdb.org/t/p/w1280/xnopI5Xtky18MPhK40cZAGAOVeV.jpg",
+      "overview":     "A boy is given the ability to become an adult superhero in times of need with a single magic word.",
+      "release_date": "2019-03-23",
+    },
+  }
+  client.Index("movies").AddDocuments(documents)
+add_or_update_documents_1: |-
+  documents := []map[string]interface{}{
+    {
+      "id":     287947,
+      "title":  "Shazam ⚡️",
+      "genres": "comedy",
+    },
+  }
+  client.Index("movies").UpdateDocuments(documents)
+delete_all_documents_1: |-
+  client.Index("movies").DeleteAllDocuments()
+delete_one_document_1: |-
+  client.Index("movies").DeleteDocument("25684")
+delete_documents_1: |-
+  client.Index("movies").DeleteDocuments([]string{
+    "23488",
+    "153738",
+    "437035",
+    "363869",
+  })
+search_post_1: |-
+  client.Index("movies").Search("american ninja", &meilisearch.SearchRequest{})
+get_task_1: |-
+  client.GetTask(1);
+get_all_tasks_1: |-
+  client.GetTasks(nil);
+get_one_key_1: |-
+  client.GetKey("6062abda-a5aa-4414-ac91-ecd7944c0f8d")
+get_keys_1: |-
+  client.GetKeys(nil)
+create_a_key_1: |-
+  client.CreateKey(&meilisearch.Key{
+    Description: "Add documents: Products API key",
+    Actions: []string{"documents.add"},
+    Indexes: []string{"products"},
+    ExpiresAt: time.Date(2042, time.April, 02, 0, 42, 42, 0, time.UTC),
+  })
+update_a_key_1: |-
+  client.UpdateKey("6062abda-a5aa-4414-ac91-ecd7944c0f8d", &meilisearch.Key{
+    Description: "Manage documents: Products/Reviews API key",
+    Actions: []string{"documents.add", "document.delete"},
+    Indexes: []string{"products", "reviews"},
+    ExpiresAt: time.Date(2042, time.April, 02, 0, 42, 42, 0, time.UTC),
+  })
+delete_a_key_1: |-
+  client.DeleteKey("6062abda-a5aa-4414-ac91-ecd7944c0f8d")
+get_settings_1: |-
+  client.Index("movies").GetSettings()
+update_settings_1: |-
+  distinctAttribute := "movie_id"
+  settings := meilisearch.Settings{
+  	RankingRules: []string{
+  		"words",
+  		"typo",
+  		"proximity",
+  		"attribute",
+  		"sort",
+  		"exactness",
+  		"release_date:desc",
+  		"rank:desc",
+  	},
+  	DistinctAttribute: &distinctAttribute,
+  	SearchableAttributes: []string{
+  		"title",
+  		"overview",
+  		"genres",
+  	},
+  	DisplayedAttributes: []string{
+  		"title",
+  		"overview",
+  		"genres",
+  		"release_date",
+  	},
+  	StopWords: []string{
+  		"the",
+  		"a",
+  		"an",
+  	},
+  	SortableAttributes: []string{
+  		"title",
+  		"release_date",
+  	},
+  	Synonyms: map[string][]string{
+  		"wolverine": []string{"xmen", "logan"},
+  		"logan":     []string{"wolverine"},
+  	},
+  	TypoTolerance: &meilisearch.TypoTolerance{
+  		MinWordSizeForTypos: meilisearch.MinWordSizeForTypos{
+  			OneTypo:  8,
+  			TwoTypos: 10,
+  		},
+  		DisableOnAttributes: []string{"title"},
+  	},
+    Pagination: &meilisearch.Pagination{
+      MaxTotalHits: 5000,
+    },
+    Faceting: &meilisearch.Faceting{
+      MaxValuesPerFacet: 200,
+    },
+  }
+  client.Index("movies").UpdateSettings(&settings)
+reset_settings_1: |-
+  client.Index("movies").ResetSettings()
+get_synonyms_1: |-
+  client.Index("movies").GetSynonyms()
+update_synonyms_1: |-
+  synonyms := map[string][]string{
+    "wolverine": []string{"xmen", "logan"},
+    "logan":     []string{"wolverine", "xmen"},
+    "wow":       []string{"world of warcraft"},
+  }
+  client.Index("movies").UpdateSynonyms(&synonyms)
+reset_synonyms_1: |-
+  client.Index("movies").ResetSynonyms()
+get_stop_words_1: |-
+  client.Index("movies").GetStopWords()
+update_stop_words_1: |-
+  stopWords := []string{"of", "the", "to"}
+  client.Index("movies").UpdateStopWords(&stopWords)
+reset_stop_words_1: |-
+  client.Index("movies").ResetStopWords()
+get_ranking_rules_1: |-
+  client.Index("movies").GetRankingRules()
+update_ranking_rules_1: |-
+  rankingRules := []string{
+    "words",
+    "typo",
+    "proximity",
+    "attribute",
+    "sort",
+    "exactness",
+    "release_date:asc",
+    "rank:desc",
+  }
+  client.Index("movies").UpdateRankingRules(&rankingRules)
+reset_ranking_rules_1: |-
+  client.Index("movies").ResetRankingRules()
+get_distinct_attribute_1: |-
+  client.Index("shoes").GetDistinctAttribute()
+update_distinct_attribute_1: |-
+  client.Index("shoes").UpdateDistinctAttribute("skuid")
+reset_distinct_attribute_1: |-
+  client.Index("shoes").ResetDistinctAttribute()
+get_filterable_attributes_1: |-
+  client.Index("movies").GetFilterableAttributes()
+update_filterable_attributes_1: |-
+  filterableAttributes := []string{
+    "genres",
+    "director",
+  }
+  client.Index("movies").UpdateFilterableAttributes(&filterableAttributes)
+reset_filterable_attributes_1: |-
+  client.Index("movies").ResetFilterableAttributes()
+get_searchable_attributes_1: |-
+  client.Index("movies").GetSearchableAttributes()
+update_searchable_attributes_1: |-
+  searchableAttributes := []string{
+    "title",
+    "overview",
+    "genres",
+  }
+  client.Index("movies").UpdateSearchableAttributes(&searchableAttributes)
+reset_searchable_attributes_1: |-
+  client.Index("movies").ResetSearchableAttributes()
+get_displayed_attributes_1: |-
+  client.Index("movies").GetDisplayedAttributes()
+update_displayed_attributes_1: |-
+  displayedAttributes := []string{
+    "title",
+    "overview",
+    "genres",
+    "release_date",
+  }
+  client.Index("movies").UpdateDisplayedAttributes(&displayedAttributes)
+reset_displayed_attributes_1: |-
+  client.Index("movies").ResetDisplayedAttributes()
+get_sortable_attributes_1: |-
+  client.Index("books").GetSortableAttributes()
+update_sortable_attributes_1: |-
+  sortableAttributes := []string{
+    "price",
+    "author",
+  }
+  client.Index("books").UpdateSortableAttributes(&sortableAttributes)
+reset_sortable_attributes_1: |-
+  client.Index("books").ResetSortableAttributes()
+get_typo_tolerance_1:
+  client.Index("books").GetTypoTolerance()
+update_typo_tolerance_1: |-
+  client.Index("books").UpdateTypoTolerance(&meilisearch.TypoTolerance{
+    MinWordSizeForTypos: meilisearch.MinWordSizeForTypos{
+        OneTypo: 4,
+        TwoTypos: 10,
+      },
+      DisableOnAttributes: []string{"title"},
+  })
+reset_typo_tolerance_1: |-
+  client.Index("books").ResetTypoTolerance()
+get_pagination_settings_1:
+  client.Index("books").GetPagination()
+update_pagination_settings_1: |-
+  client.Index("books").UpdatePagination(&meilisearch.Pagination{
+      MaxTotalHits: 100,
+  })
+reset_pagination_settings_1: |-
+  client.Index("books").ResetPagination()
+get_faceting_settings_1:
+  client.Index("books").GetFaceting()
+update_faceting_settings_1: |-
+  client.Index("books").UpdateFaceting(&meilisearch.Faceting{
+      MaxValuesPerFacet: 2,
+  })
+reset_faceting_settings_1: |-
+  client.Index("books").ResetFaceting()
+get_index_stats_1: |-
+  client.Index("movies").GetStats()
+get_indexes_stats_1: |-
+  client.GetAllStats()
+get_health_1: |-
+  client.Health()
+get_version_1: |-
+  client.GetVersion()
+distinct_attribute_guide_1: |-
+  client.Index("jackets").UpdateDistinctAttribute("product_id")
+field_properties_guide_searchable_1: |-
+  searchableAttributes := []string{
+    "title",
+    "overview",
+    "genres",
+  }
+  client.Index("movies").UpdateSearchableAttributes(&searchableAttributes)
+field_properties_guide_displayed_1: |-
+  displayedAttributes := []string{
+    "title",
+    "overview",
+    "genres",
+    "release_date",
+  }
+  client.Index("movies").UpdateDisplayedAttributes(&displayedAttributes)
+filtering_guide_1: |-
+  resp, err := client.Index("movies").Search("Avengers", &meilisearch.SearchRequest{
+    Filter: "release_date > \"795484800\"",
+  })
+filtering_guide_2: |-
+  resp, err := client.Index("movies").Search("Batman", &meilisearch.SearchRequest{
+    Filter: "release_date > 795484800 AND (director = \"Tim Burton\" OR director = \"Christopher Nolan\")",
+  })
+filtering_guide_3: |-
+  resp, err := client.Index("movies").Search("Planet of the Apes", &meilisearch.SearchRequest{
+    Filter: "rating >= 3 AND (NOT director = \"Tim Burton\")",
+  })
+search_parameter_guide_query_1: |-
+  resp, err := client.Index("movies").Search("shifu", &meilisearch.SearchRequest{})
+search_parameter_guide_offset_1: |-
+  resp, err := client.Index("movies").Search("shifu", &meilisearch.SearchRequest{
+    Offset: 1,
+  })
+search_parameter_guide_limit_1: |-
+  resp, err := client.Index("movies").Search("shifu", &meilisearch.SearchRequest{
+    Limit: 2,
+  })
+search_parameter_guide_retrieve_1: |-
+  resp, err := client.Index("movies").Search("shifu", &meilisearch.SearchRequest{
+    AttributesToRetrieve: []string{"overview", "title"},
+  })
+search_parameter_guide_crop_1: |-
+  resp, err := client.Index("movies").Search("shifu", &meilisearch.SearchRequest{
+    AttributesToCrop: []string{"overview"},
+    CropLength:       5,
+  })
+search_parameter_guide_crop_marker_1: |-
+  resp, err := client.Index("movies").Search("shifu", &meilisearch.SearchRequest{
+    AttributesToCrop: []string{"overview"},
+    CropMarker:       "[…]",
+  })
+search_parameter_guide_highlight_1: |-
+  resp, err := client.Index("movies").Search("winter feast", &meilisearch.SearchRequest{
+    AttributesToHighlight: []string{"overview"},
+  })
+search_parameter_guide_highlight_tag_1: |-
+  resp, err := client.Index("movies").Search("winter feast", &meilisearch.SearchRequest{
+    AttributesToHighlight: []string{"overview"},
+    HighlightPreTag: "<span class=\"highlight\">",
+    HighlightPostTag: "</span>",
+  })
+search_parameter_guide_show_matches_position_1: |-
+  resp, err := client.Index("movies").Search("winter feast", &meilisearch.SearchRequest{
+    ShowMatchesPosition:    true,
+  })
+settings_guide_synonyms_1: |-
+  settings := meilisearch.Settings{
+    Synonyms: map[string][]string{
+      "sweater": []string{"jumper"},
+      "jumper":     []string{"sweater"},
+    },
+  }
+  client.Index("tops").UpdateSettings(&settings)
+settings_guide_stop_words_1: |-
+  settings := meilisearch.Settings{
+    StopWords: []string{
+      "the",
+      "a",
+      "an",
+    },
+  }
+  client.Index("movies").UpdateSettings(&settings)
+settings_guide_ranking_rules_1: |-
+  settings := meilisearch.Settings{
+    RankingRules: []string{
+      "words",
+      "typo",
+      "proximity",
+      "attribute",
+      "sort",
+      "exactness",
+      "release_date:asc",
+      "rank:desc",
+    },
+  }
+  client.Index("movies").UpdateSettings(&settings)
+settings_guide_distinct_1: |-
+  distinctAttribute := "product_id"
+  settings := meilisearch.Settings{
+    DistinctAttribute: &distinctAttribute,
+  }
+  client.Index("jackets").UpdateSettings(&settings)
+settings_guide_searchable_1: |-
+  settings := meilisearch.Settings{
+    SearchableAttributes: []string{
+      "title",
+      "overview",
+      "genres",
+    },
+  }
+  client.Index("movies").UpdateSettings(&settings)
+settings_guide_displayed_1: |-
+  settings := meilisearch.Settings{
+    DisplayedAttributes: []string{
+      "title",
+      "overview",
+      "genres",
+      "release_date",
+    },
+  }
+  client.Index("movies").UpdateSettings(&settings)
+settings_guide_sortable_1: |-
+  settings := meilisearch.Settings{
+    SortableAttributes: []string{
+      "price",
+      "author",
+    },
+  }
+  client.Index("books").UpdateSettings(&settings)
+settings_guide_pagination_1: |-
+  client.Index("movies").UpdatePagination(&meilisearch.Pagination{
+    MaxTotalHits: 50,
+  })
+settings_guide_faceting_1: |-
+  client.Index("movies").UpdateFaceting(&meilisearch.Faceting{
+    MaxValuesPerFacet: 5,
+  })
+settings_guide_typo_tolerance_1: |-
+  client.index("movies").UpdateTypoTolerance({
+    MinWordSizeForTypos: meilisearch.MinWordSizeForTypos{
+      TwoTypos: 12,
+    },
+    DisableOnAttributes: []string{"title"},
+  })
+typo_tolerance_guide_1: |-
+  client.index("movies").UpdateTypoTolerance({
+    Enabled: false,
+  })
+typo_tolerance_guide_2: |-
+  client.index("movies").UpdateTypoTolerance({
+    DisableOnAttributes: []string{"title"},
+  })
+typo_tolerance_guide_3: |-
+  client.index("movies").UpdateTypoTolerance({
+    DisableOnWords: []string{"shrek"},
+  })
+typo_tolerance_guide_4: |-
+  client.index("movies").UpdateTypoTolerance({
+    MinWordSizeForTypos: meilisearch.MinWordSizeForTypos{
+      OneTypo: 4,
+      TwoTypos: 10,
+    },
+  })
+add_movies_json_1: |-
+  import (
+    "encoding/json"
+    "io/ioutil"
+  )
+
+  file, _ := ioutil.ReadFile("movies.json")
+
+  var movies interface{}
+  json.Unmarshal([]byte(file), &movies)
+
+  client.Index("movies").AddDocuments(&movies)
+landing_getting_started_1: |-
+  client := meilisearch.NewClient(meilisearch.ClientConfig{
+    Host: "http://127.0.0.1:7700",
+    APIKey: "masterKey",
+  })
+
+  documents := []map[string]interface{}{
+    { "id": 1, "title": "Carol" },
+    { "id": 2, "title": "Wonder Woman" },
+    { "id": 3, "title": "Life of Pi" },
+    { "id": 4, "title": "Mad Max: Fury Road" },
+    { "id": 5, "title": "Moana" },
+    { "id": 6, "title": "Philadelphia" },
+  }
+  client.Index("movies").AddDocuments(documents)
+documents_guide_add_movie_1: |-
+  documents := []map[string]interface{}{
+    {
+      "movie_id": "123sq178",
+      "title":    "Amelie Poulain",
+    },
+  }
+  client.Index("movies").AddDocuments(documents)
+getting_started_check_task_status: |-
+  client.GetTask(0)
+getting_started_add_documents_md: |-
+  ```bash
+  go get -u github.com/meilisearch/meilisearch-go
+  ```
+
+  ```go
+  package main
+
+  import (
+    "os"
+    "encoding/json"
+    "io/ioutil"
+
+    "github.com/meilisearch/meilisearch-go"
+  )
+
+  func main() {
+    client := meilisearch.NewClient(meilisearch.ClientConfig{
+      Host: "http://127.0.0.1:7700",
+    })
+
+    jsonFile, _ := os.Open("movies.json")
+    defer jsonFile.Close()
+
+    byteValue, _ := ioutil.ReadAll(jsonFile)
+    var movies []map[string]interface{}
+    json.Unmarshal(byteValue, &movies)
+
+    _, err := client.Index("movies").AddDocuments(movies)
+    if err != nil {
+        panic(err)
+    }
+  }
+
+  ```
+
+  [About this SDK](https://github.com/meilisearch/meilisearch-go/)
+getting_started_search_md: |-
+  ```go
+  client.Index("movies").Search("botman", &meilisearch.SearchRequest{})
+  ```
+
+  [About this SDK](https://github.com/meilisearch/meilisearch-go/)
+getting_started_add_meteorites: |-
+    client := meilisearch.NewClient(meilisearch.ClientConfig{
+      Host: "http://127.0.0.1:7700",
+    })
+
+    jsonFile, _ := os.Open("meteorites.json")
+    defer jsonFile.Close()
+
+    byteValue, _ := ioutil.ReadAll(jsonFile)
+    var meteorites []map[string]interface{}
+    json.Unmarshal(byteValue, &meteorites)
+
+    client.Index("meteorites").AddDocuments(meteorites)
+getting_started_update_ranking_rules: |-
+  rankingRules := []string{
+    "exactness",
+    "words",
+    "typo",
+    "proximity",
+    "attribute",
+    "sort",
+    "release_date:asc",
+    "rank:desc",
+  }
+  client.Index("movies").UpdateRankingRules(&rankingRules)
+getting_started_update_displayed_attributes: |-
+  displayedAttributes := []string{
+    "title",
+    "overview",
+    "poster",
+  }
+  client.Index("movies").UpdateDisplayedAttributes(&displayedAttributes)
+getting_started_update_searchable_attributes: |-
+  searchableAttributes := []string{
+    "title",
+  }
+  client.Index("movies").UpdateSearchableAttributes(&searchableAttributes)
+getting_started_update_stop_words: |-
+  stopWords := []string{"the"}
+  client.Index("movies").UpdateStopWords(&stopWords)
+getting_started_synonyms: |-
+  synonyms := map[string][]string{
+    "winnie":  []string{"piglet"},
+    "piglet":  []string{"winnie"},
+  }
+  client.Index("movies").UpdateSynonyms(&synonyms)
+getting_started_filtering: |-
+  resp, err := client.Index("meteorites").Search("", &meilisearch.SearchRequest{
+    Filter: "mass < 200",
+  })
+getting_started_geo_radius: |-
+  resp, err := client.Index("meteorites").Search("", &meilisearch.SearchRequest{
+    Filter: "_geoRadius(46.9480, 7.4474, 210000)",
+  })
+getting_started_geo_point: |-
+  resp, err := client.Index("meteorites").Search("", &meilisearch.SearchRequest{
+    Sort: []string{
+      "_geoPoint(48.8583701,2.2922926):asc",
+    },
+  })
+getting_started_sorting: |-
+  resp, err := client.Index("meteorites").Search("", &meilisearch.SearchRequest{
+    Filter: "mass < 200",
+    Sort: []string{
+      "mass:asc",
+    },
+  })
+getting_started_configure_settings: |-
+  settings := meilisearch.Settings{
+    FilterableAttributes: []string{
+      "mass",
+      "_geo",
+    },
+    SortableAttributes: []string{
+      "mass",
+      "_geo",
+    },
+  }
+  client.Index("meteorites").UpdateSettings(&settings)
+getting_started_communicating_with_a_protected_instance: |-
+  client := meilisearch.NewClient(meilisearch.ClientConfig{
+    Host: "http://127.0.0.1:7700",
+    APIKey: "apiKey",
+  })
+
+  resp, err := client.Index("movies").Search("", &meilisearch.SearchRequest{})
+faceted_search_update_settings_1: |-
+  resp, err := client.Index("movies").UpdateFilterableAttributes(&[]string{
+    "director",
+    "genres",
+  })
+faceted_search_filter_1: |-
+  resp, err := client.Index("movies").Search("thriller", &meilisearch.SearchRequest{
+    Filter: [][]string{
+      []string{"genres = Horror", "genres = Mystery"},
+      []string{"director = \"Jordan Peele\""},
+    },
+  })
+faceted_search_facets_1: |-
+  resp, err := client.Index("movies").Search("Batman", &meilisearch.SearchRequest{
+    Facets: []string{
+      "genres",
+    },
+  })
+faceted_search_walkthrough_filter_1: |-
+  resp, err := client.Index("movies").Search("thriller", &meilisearch.SearchRequest{
+    Filter: [][]string{
+      []string{"genres = Horror", "genres = Mystery"},
+      []string{"director = \"Jordan Peele\""},
+    },
+  })
+post_dump_1: |-
+  resp, err := client.CreateDump()
+phrase_search_1: |-
+  resp, err := client.Index("movies").Search("\"african american\" horror", &meilisearch.SearchRequest{})
+sorting_guide_update_sortable_attributes_1: |-
+  sortableAttributes := []string{
+    "author",
+    "price",
+  }
+  client.Index("books").UpdateSortableAttributes(&sortableAttributes)
+sorting_guide_update_ranking_rules_1: |-
+  rankingRules := []string{
+    "words",
+    "sort",
+    "typo",
+    "proximity",
+    "attribute",
+    "exactness",
+  }
+  client.Index("books").UpdateRankingRules(&rankingRules)
+sorting_guide_sort_parameter_1: |-
+  resp, err := client.Index("books").Search("science fiction", &meilisearch.SearchRequest{
+    Sort: []string{
+      "price:asc",
+    },
+  })
+sorting_guide_sort_parameter_2: |-
+  resp, err := client.Index("books").Search("butler", &meilisearch.SearchRequest{
+    Sort: []string{
+      "author:desc",
+    },
+  })
+search_parameter_guide_sort_1: |-
+  resp, err := client.Index("books").Search("science fiction", &meilisearch.SearchRequest{
+    Sort: []string{
+      "price:asc",
+    },
+  })
+geosearch_guide_filter_settings_1: |-
+  filterableAttributes := []string{
+    "_geo",
+  }
+  client.Index("restaurants").UpdateFilterableAttributes(&filterableAttributes)
+geosearch_guide_filter_usage_1: |-
+  resp, err := client.Index("restaurants").Search("", &meilisearch.SearchRequest{
+    Filter: "_geoRadius(45.472735, 9.184019, 2000)",
+  })
+geosearch_guide_filter_usage_2: |-
+  resp, err := client.Index("restaurants").Search("", &meilisearch.SearchRequest{
+    Filter: "_geoRadius(45.472735, 9.184019, 2000) AND type = pizza",
+  })
+geosearch_guide_sort_settings_1: |-
+  sortableAttributes := []string{
+    "_geo",
+  }
+  client.Index("restaurants").UpdateSortableAttributes(&sortableAttributes)
+geosearch_guide_sort_usage_1: |-
+  resp, err := client.Index("restaurants").Search("", &meilisearch.SearchRequest{
+    Sort: []string{
+      "_geoPoint(48.8561446,2.2978204):asc",
+    },
+  })
+geosearch_guide_sort_usage_2: |-
+  resp, err := client.Index("restaurants").Search("", &meilisearch.SearchRequest{
+    Sort: []string{
+      "_geoPoint(48.8561446,2.2978204):asc",
+      "rating:desc",
+    },
+  })
+primary_field_guide_create_index_primary_key: |-
+  client.CreateIndex(&meilisearch.IndexConfig{
+    Uid: "books",
+    PrimaryKey: "reference_number",
+  })
+primary_field_guide_add_document_primary_key: |-
+  documents := []map[string]interface{}{
+    {
+      "reference_number": 287947,
+      "title":            "Diary of a Wimpy Kid",
+      "author":           "Jeff Kinney",
+      "genres":           []string{"comedy", "humor"},
+      "price":            5.00,
+    },
+  }
+  client.Index("books").AddDocuments(documents, "reference_number")
+primary_field_guide_update_document_primary_key: |-
+  client.Index("books").UpdateIndex("title")
+security_guide_search_key_1: |-
+  client := meilisearch.NewClient(meilisearch.ClientConfig{
+    Host: "http://127.0.0.1:7700",
+    APIKey: "apiKey",
+  })
+  client.Index("patient_medical_records").Search();
+security_guide_update_key_1: |-
+  client := meilisearch.NewClient(meilisearch.ClientConfig{
+    Host: "http://127.0.0.1:7700",
+    APIKey: "masterKey",
+  })
+
+  client.UpdateKey("74c9c733-3368-4738-bbe5-1d18a5fecb37", &meilisearch.Key{
+    Indexes: []string{"doctors"},
+  })
+security_guide_create_key_1: |-
+  client := meilisearch.NewClient(meilisearch.ClientConfig{
+    Host: "http://127.0.0.1:7700",
+    APIKey: "masterKey",
+  })
+
+  client.CreateKey(&meilisearch.Key{
+    Description: "Search patient records key",
+    Actions: []string{"search"},
+    Indexes: []string{"patient_medical_records"},
+    ExpiresAt: time.Date(2042, time.April, 02, 0, 42, 42, 0, time.UTC),
+  })
+security_guide_list_keys_1: |-
+  client := meilisearch.NewClient(meilisearch.ClientConfig{
+    Host: "http://127.0.0.1:7700",
+    APIKey: "masterKey",
+  })
+  client.GetKeys(nil);
+security_guide_delete_key_1: |-
+  client := meilisearch.NewClient(meilisearch.ClientConfig{
+    Host: "http://127.0.0.1:7700",
+    APIKey: "masterKey",
+  })
+  client.DeleteKey("74c9c733-3368-4738-bbe5-1d18a5fecb37");
+authorization_header_1: |-
+  client := meilisearch.NewClient(meilisearch.ClientConfig{
+    Host: "http://127.0.0.1:7700",
+    APIKey: "masterKey",
+  })
+  client.GetKeys(nil);
+tenant_token_guide_generate_sdk_1: |-
+  searchRules := map[string]interface{}{
+    "patient_medical_records": map[string]string{
+      "filter": "user_id = 1",
+    },
+  }
+  options := &meilisearch.TenantTokenOptions{
+    APIKey: "B5KdX2MY2jV6EXfUs6scSfmC...",
+    ExpiresAt: time.Date(2025, time.December, 20, 0, 0, 0, 0, time.UTC),
+  }
+
+  token, err := client.GenerateTenantToken(searchRules, options);
+tenant_token_guide_search_sdk_1: |-
+  frontEndClient := meilisearch.NewClient(meilisearch.ClientConfig{
+    Host: "http://127.0.0.1:7700",
+    APIKey: token,
+  })
+  frontEndClient.Index("patient_medical_records").Search("blood test", &meilisearch.SearchRequest{});
+get_all_tasks_filtering_1: |-
+  client.Index("movies").GetTasks(nil);
+  // OR
+  client.GetTasks(&TasksQuery{
+    IndexUID: []string{"movies"},
+  });
+get_all_tasks_filtering_2: |-
+  client.GetTasks(&meilisearch.TasksQuery{
+    Status: []string{"succeeded", "failed"},
+    Type: []string{"documentAdditionOrUpdate"},
+  });
+get_all_tasks_paginating_1: |-
+  client.GetTasks(&meilisearch.TasksQuery{
+    Limit: 2,
+    From: 10,
+  });
+get_all_tasks_paginating_2: |-
+  client.GetTasks(&meilisearch.TasksQuery{
+    Limit: 2,
+    From: 8,
+  });

@@ -1,0 +1,76 @@
+db {
+  type : "mysql"
+  user : "root"
+  password : "root"
+  host : "127.0.0.1:3306"
+  database : "caddyui"
+  prefix : ""
+  debug : true
+}
+sys {
+  accounts : {
+    admin : {
+      password : "admin"
+    }
+  }
+  sslHosts               : []
+  sslCertFile            : ""
+  sslKeyFile             : ""
+  editableFileExtensions : {  #允许在线编辑的文件扩展名(不含点号)
+    html      : "html"
+    htm       : "html"
+    js        : "javascript"
+    go        : "golang"
+    php       : "php"
+    css       : "css"
+    txt       : "txt"
+    xml       : "xml"
+    md        : "markdown"
+    markdown  : "markdown"
+    ini       : "ini"
+    bat       : "bat"
+    sh        : "sh"
+    pl        : "pl"
+    sql       : "sql"
+    yaml      : "yaml"
+    yml       : "yaml"
+    log       : "log"
+  }
+  editableFileMaxSize   : "1M" #允许在线编辑的最大文件尺寸
+  errorPages            : { #指定错误页面模板
+    "403" : "#default#error/403"
+    "404" : "#default#error/404"
+    "500" : "#default#error/500"
+    "0"   : "#default#error/500" #其它所有错误显示的模板
+  }
+  showExpirationTime    : 0 #显示过期时间：0为始终显示；大于0为距离剩余到期时间多少秒的时候显示(例如3153600表示有效期只剩1年的时候显示)；小于0为不显示
+  sessionName : "WEBXSID"
+}
+cookie {
+  path     : "/"
+  domain   : ""
+  maxAge   : 0
+  httpOnly : true
+  hashKey  : "123456789012345678901234567890aa" #32位
+  blockKey : "123456789012345678901234567890cc" #32位
+}
+ftp {
+  name           : ""
+  hostName       : ""
+  publicIP       : ""
+  passivePorts   : ""
+  port           : 233
+	tls            : false
+	certFile       : ""
+  keyFile        : ""
+	explicitFTPS   : false
+	welcomeMessage : ""
+}
+language {
+  Default      : "zh-cn"
+  Fallback     : ""
+  AllList      : ["zh-cn","en"]
+  RulesPath    : ["config/i18n/rules"]
+  MessagesPath : ["config/i18n/messages"]
+  Reload       : true
+}

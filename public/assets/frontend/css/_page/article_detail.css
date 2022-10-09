@@ -1,0 +1,12 @@
+.hide-block-content{
+  display: inline-block;
+  border: 2px dashed #f1f3fa;
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.hide-block-content.mission-uncompleted{
+  font-size: 16px;
+  text-align: center;
+  color: #F77;
+}

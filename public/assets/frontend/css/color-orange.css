@@ -1,0 +1,36 @@
+.nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active,
+.bg-info,a.bg-info:focus, a.bg-info:hover,
+.bootstrap-dialog.type-primary .modal-header{
+    background-color: #ff8d1b !important;
+}
+
+a, a:hover, a:not(.btn):focus,
+.page-link,.page-link:focus, .page-link:hover,
+.nav-outline .nav-link.active, .nav-outline .nav-link.active:focus, .nav-outline .nav-link.active:hover{
+    color:#f8820c;
+}
+
+a.tx-gray-dark:focus, a.tx-gray-dark:hover,
+.tx-info,a.tx-info:focus, a.tx-info:hover{
+    color:#f8820c !important;
+}
+
+.page-item.active .page-link,
+.btn-primary,.show > .btn-primary.dropdown-toggle{
+    background-color: #ff7606;
+    border-color: #ff8d1b;
+}
+
+.btn-primary.active, .btn-primary:active, .btn-primary:hover{
+    background-color: #e46803;
+    border-color: #e96106fd;
+}
+
+.nav-outline .nav-link.active::before,
+.form-control:focus{
+    border-color: #ff8d1b;
+}
+
+.badge-primary{
+    background-color: rgb(196, 13, 186) !important;
+}

@@ -1,0 +1,33 @@
+{{Strip}}
+
+<section class="friend-links-wrapper section-padding">
+    <div class="container">
+        <div class="section-head">
+            <h2 class="heading-primary">{{`友情链接`|T}}</h2>
+        </div>
+        <div class="row">
+            <div class="col-12 friend-links">
+                {{- $friendlinks := Friendlink -1 -}}
+                {{- range $k,$v := $friendlinks -}}
+                <a title="{{$v.Name}}" href="{{$v.Url}}" class="link-item {{- if $v.Logo}} no-padding{{end}}" target="_blank">
+                    {{- if $v.Logo -}}
+                    <span class="img-label">
+                        <span class="title">{{$v.Name}}</span>
+                        <span class="bg"></span>
+                    </span>
+                    <img src="{{$v.Logo}}" alt="{{$v.Name}}" />
+                    {{- else -}}
+                    {{- $v.Name -}}
+                    {{- end -}}
+                </a>
+                {{- else -}}
+                <a title="{{Config.base.siteName}}" href="{{Config.base.siteURL|Default `/`}}" class="link-item">
+                    {{- Config.base.siteName -}}
+                </a>
+                {{- end -}}
+            </div>
+        </div><!-- row -->
+
+    </div><!-- container -->
+</section>
+{{/Strip}}

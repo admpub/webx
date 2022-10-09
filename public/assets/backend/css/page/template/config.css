@@ -1,0 +1,20 @@
+.themecolor {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.themecolor .preview {
+    width: 80px;
+    height: 80px;
+    display: block;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px #ccc;
+    border-radius: 5px;
+    object-fit: cover;
+    background-size: cover;
+}
+
+.themecolor .radio {
+    text-align: center;
+    width: 100%
+}

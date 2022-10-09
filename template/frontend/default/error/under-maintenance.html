@@ -1,0 +1,26 @@
+{{Strip}}{{Extend "#default#base"}}
+{{Block "title"}}Website Under Maintenance{{/Block}}
+{{Block "bodyAttr"}} class="pd-t-70 bg-white tx-size-sm"{{/Block}}
+{{Block "body"}}
+     <div class="pos-absolute a-0 d-flex align-items-center">
+      <div class="container">
+        <div class="row flex-row-reverse">
+          <div class="col-lg-7">
+            <img src="{{AssetsXURL}}/images/under-maintenance.jpg" class="img-fluid" alt="Image">
+          </div><!-- col-8 -->
+          <div class="col-lg-5 mg-t-40 mg-lg-t-0">
+            <a href="javascript:;" class="d-block tx-inverse tx-size-28 tx-spacing-neg-2 tx-bold mg-b-20">
+                <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="wd-50 ht-50" alt="{{Config.base.siteName}}">
+                {{Config.base.siteName}}
+            </a>
+            <div>
+              <h4 class="tx-size-sm-36 tx-size-md-44 tx-size-lg-56 tx-inverse tx-bold tx-spacing-neg-2 mg-b-15">Website Under Maintenance</h4>
+              <h6 class="mg-b-40 tx-inverse tx-normal lh-5">This website is currently undergoing scheduled maintenance. We'll be back shortly. Thank you.</h6>
+              <p class="tx-size-xs">&copy; {{Now.Format "2006"}} <a href="{{Config.base.siteURL}}" class="tx-gray hover-warning">{{Config.base.siteName}}</a>. All Rights Reserved.</p>
+            </div>
+          </div><!-- col-4 -->
+        </div><!-- row -->
+      </div><!-- container -->
+    </div><!-- container -->
+{{/Block}}
+{{/Strip}}

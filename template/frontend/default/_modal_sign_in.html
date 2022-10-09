@@ -1,0 +1,64 @@
+{{Strip}}
+<div id="modal-sign-in" class="modal fade">
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content tx-size-sm bd-0">
+    <div class="modal-body pd-0">
+      <div class="row no-gutters">
+        <div class="col-lg-6 bg-primary rounded-left">
+          <div class="pd-30">
+            <h3 class="tx-semibold tx-white mg-b-20">Webx<span class="tx-normal op-3">.top</span></h3>
+            <div class="tx-white op-2 mg-b-60">
+                <p>{{"欢迎使用Webx软件产品。"|T}}</p>
+                <p>{{"打造："|T}}</p>
+                <ul>
+                    <li>快速</li>
+                    <li>稳定</li>
+                    <li>安全</li>
+                    <li>省心</li>
+                </ul>
+                <p>{{"的软件产品是我们的一贯目标和追求。"|T}}</p>
+                <p>{{"如果在登录的时候遇到问题，请联系我们"|T}}</p>
+            </div>
+            <p class="tx-white tx-size-xs">
+                <span class="tx-uppercase">{{"联系方式"|T}}:</span><br />
+                <span class="op-2">E-mail: {{Config.contact.siteEmail|Default "-"}}</span><br />
+                <span class="op-2">QQ: {{Config.contact.siteQQ|Default "-"}}</span><br />
+                <span class="op-2">{{"电话"|T}}: {{Config.contact.siteMobile|Default "-"}}</span><br />
+            </p>
+            </div>
+          </div><!-- col-6 -->
+          <div class="col-lg-6">
+            <div class="pd-t-20 pd-r-20">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="pd-x-30 pd-y-10">
+                <h3 class="tx-semibold tx-gray-dark  mg-b-5">{{"欢迎回来！"|T}}</h3>
+                <p>{{"请登录之后再继续操作"|T}}</p>
+                <br />
+                <form id="modal-sign-in-form" onsubmit="signIn(this,'{{GetNextURL | Default URI}}');return false;">
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control" placeholder="{{"登录名"|T}}" data-toggle="tooltip" title="{{"请输入登录名"|T}}" required>
+                </div><!-- form-group -->
+                <div class="form-group mg-b-20">
+                  <input type="password" name="password" class="form-control" placeholder="{{"登录密码"|T}}" data-toggle="tooltip" title="{{"请输入登录密码"|T}}" required>
+                  <a href="{{FrontendURL}}/forgot?next={{GetNextURL}}" class="tx-size-xs d-block mg-t-10" target="_blank">{{"忘记密码？"|T}}</a>
+                </div><!-- form-group -->
+                <div class="form-group mg-b-20">
+                <div class="input-group">
+                  <input type="text" placeholder="{{"验证码"|T}}" value="{{Form "code"}}" name="code" required="required" data-toggle="tooltip" title="{{"请输入验证码"|T}}" class="form-control">
+                  <span class="input-group-addon pd-0">{{CaptchaForm}}</span>
+                </div>
+                </div>
+                <button class="btn btn-inverse" type="submit">{{"登入"|T}}</button>
+                <div class="mg-t-30 mg-b-20">{{"如果您没有账号，请先"|T}} <a href="{{FrontendURL}}/sign_up?next={{GetNextURL}}" target="_blank">{{"创建账号"|T}}</a></div>
+               </form>
+              </div>
+            </div><!-- pd-20 -->
+          </div><!-- col-6 -->
+        </div><!-- row -->
+      </div><!-- modal-body -->
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+{{/Strip}}

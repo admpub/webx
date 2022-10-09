@@ -1,0 +1,61 @@
+<div class="page-aside email">
+    <div class="fixed nano nscroller">
+        <div class="content">
+            <div class="header no-padding-y">
+                <button class="navbar-toggle" data-target=".mail-nav" data-toggle="collapse" type="button">
+                    <span class="fa fa-chevron-down"></span>
+                </button>
+                <h2 class="page-title">
+                    <!-- <i class="fa fa-envelope"></i>  -->
+                    {{"站内信"|T}}
+                </h2>
+                <p class="description">{{"我的站内信"|T}}</p>
+            </div>
+            {{$boxType := Stored.boxType}}
+            <div class="mail-nav collapse">
+                <ul class="nav nav-pills nav-stacked ">
+                    <li{{if eq $boxType "inbox"}} class="active"{{end}}>
+                        <a href="{{BackendURL}}/user/message/inbox">
+                            <span class="label label-primary pull-right hidden" id="msg-inbox-count-label">0</span>
+                            <i class="fa fa-inbox"></i>
+                            {{"收件箱"|T}}
+                        </a>
+                    </li>
+                    <li{{if eq $boxType "outbox"}} class="active"{{end}}>
+                        <a href="{{BackendURL}}/user/message/outbox">
+                            <i class="fa fa-envelope"></i> 
+                            {{"发件箱"|T}}
+                        </a>
+                    </li>
+                    <li{{if eq $boxType "system"}} class="active"{{end}}>
+                        <a href="{{BackendURL}}/user/message/system">
+                            <span class="label label3 pull-right hidden" id="msg-sys-count-label">0</span>
+                            <i class="fa fa-bell"></i> 
+                            {{"系统消息"|T}}
+                        </a>
+                    </li>
+                    <!-- <li><a href="#"><i class="fa fa-suitcase"></i> {{"重要信件"|T}}</a></li>
+                    <li>
+                        <a href="#">
+                            <span class="label label-default pull-right">3</span>
+                            <i class="fa fa-file-o"></i>
+                            {{"草稿箱"|T}}
+                        </a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-star-o"></i> {{"星标邮件"|T}}</a></li>
+                    <li><a href="#"><i class="fa fa-trash-o"></i> {{"回收站"|T}}</a></li> -->
+                </ul>
+
+                <!-- <p class="title">{{"标签"|T}}</p>
+                <ul class="nav nav-pills nav-stacked ">
+                    <li><a href="#"><span class="label label1 pull-right">0</span> Inbox</a></li>
+                    <li><a href="#"><span class="label label2 pull-right">8</span>Sent Mail</a></li>
+                    <li><a href="#"><span class="label label3 pull-right">4</span>Important</a></li>
+                </ul> -->
+                <div class="compose">
+                    <a class="btn btn-flat btn-primary" href="{{BackendURL}}/user/message/send">{{"发消息"|T}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

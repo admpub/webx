@@ -1,0 +1,106 @@
+{{Extend "layout"}}
+{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li><a href="{{BackendURL}}/official/page/block_index">{{"区块列表"|T}}</a></li>
+<li class="active">{{Stored.title}}</li>
+{{/Block}}
+{{Block "head"}}
+<link rel="stylesheet" href="{{AssetsURL}}/js/jquery.uploadPreviewer/css/jquery.uploadPreviewer.min.css?t={{BuildTime}}" type="text/css" />
+<link rel="stylesheet" href="{{AssetsURL}}/js/float/powerFloat.min.css?t={{BuildTime}}" charset="utf-8" />
+<link rel="stylesheet" href="{{AssetsURL}}/js/colorpicker/colorpicker.css?t={{BuildTime}}" charset="utf-8" />
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+          <div class="header">							
+            <h3>{{Stored.title}}</h3>
+          </div>
+          <div class="content">
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"区块名称"|T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" required name="name" value="{{Form `name`}}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"区块样式"|T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="style" value="{{Form `style`}}" placeholder="">
+                    <div class="help-block">{{"区块样式"|T}}</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"模版"|T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="template" value="{{Form `template`}}" placeholder="">
+                    <div class="help-block">{{"模版文件"|T}}</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"包含项目"|T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="withItems" value="{{Form `withItems`}}" placeholder="">
+                    <div class="help-block">{{"包含项目"|T}}</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"项目配置"|T}}</label>
+                <div class="col-sm-8">
+                  <textarea class="form-control" name="itemConfigs" style="height:300px">{{Form "itemConfigs"}}</textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{`是否禁用`|T}}</label>
+                <div class="col-sm-8">{{$v := Form `disabled` `N`}}
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="Y" name="disabled" id="disabled-Y" {{- if eq $v "Y"}} checked="checked" {{end}}>
+                    <label for="disabled-Y">{{`禁用`|T}}</label>
+                  </div>
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="N" name="disabled" id="disabled-N" {{- if eq $v "N"}} checked="checked" {{end}}>
+                    <label for="disabled-N">{{`启用`|T}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-submit-group">
+									<div class="col-sm-9 col-sm-offset-2">
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									</div>
+							</div>
+            </form>
+          </div><!-- /.content -->
+        </div><!-- /.block-flat -->
+    </div>
+</div>
+{{/Block}}
+{{Block "footer"}}
+<script src="{{AssetsURL}}/js/float/powerFloat.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/jquery.uploadPreviewer/jquery.uploadPreviewer.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/colorpicker/colorpicker.min.js?t={{BuildTime}}"></script>
+<script type="text/javascript">
+$(function(){
+	App.uploadPreviewer("#iconImageFile",{"url":'{{BackendUploadURL ``}}'},function(r){
+    if(r.Code==1){
+		  var fileURL=r.Data.files[0];
+		  $('#inputImage').val(fileURL);
+      $('#imagePreviewBtn').removeClass('hidden').children('a').attr('href',fileURL).children('img').attr('src',fileURL);
+    }
+  });
+  $('#inputColor').colorpicker({format: "hex"}).on('changeColor', function(e) {
+    this.style.color = e.color.toString('rgba');
+    this.style.backgroundColor = $('#inputBgColor').val();
+    $('#inputBgColor').css({'color':e.color.toString('rgba'),'background-color':$('#inputBgColor').val()});
+  });
+  $('#inputBgColor').colorpicker({format: "hex"}).on('changeColor', function(e) {
+    this.style.backgroundColor = e.color.toString('rgba');
+    this.style.color = $('#inputColor').val();
+    $('#inputColor').css({'color':$('#inputColor').val(),'background-color':e.color.toString('rgba')});
+  });
+  App.float("#imagePreviewBtn a img");
+});
+</script>
+{{/Block}}

@@ -1,0 +1,12 @@
+package image
+
+import (
+	"github.com/admpub/webx/application/initialize/frontend"
+	"github.com/webx-top/echo"
+)
+
+func init() {
+	frontend.RegisterToGroup(`/image`, func(g echo.RouteRegister) {
+		g.Route(`GET`, `/proxy/:token`, Proxy)
+	})
+}

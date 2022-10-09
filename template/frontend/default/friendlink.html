@@ -1,0 +1,40 @@
+{{Strip}}
+<div class="container pd-b-20">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card bd-0 bg-transparent mg-t-20 bg-white">
+                <div class="card-header pd-x-0 bg-transparent bd-color-gray-lighter">
+                    <span class="tx-size-18 tx-bold tx-inverse pd-x-15">
+                        <span class="tx-uppercase">{{`友情链接`|T}}</span>
+                    </span>
+                </div><!-- card-header -->
+                <div class="card-body">
+                    <nav class="nav nav-gray-light tx-size-13 friend-links">
+                        {{- $friendlinks := Friendlink -1 -}}
+                        {{- range $k,$v := $friendlinks -}}
+                        <a title="{{$v.Name}}" href="{{$v.Url}}" class="nav-link" target="_blank">
+                            {{- if $v.Logo -}}
+                            <span class="img-label">
+                                <span class="title">{{$v.Name}}</span>
+                                <span class="bg"></span>
+                            </span>
+                            <img src="{{$v.Logo}}" alt="{{$v.Name}}" />
+                            {{- else -}}
+                            {{- $v.Name -}}
+                            {{- end -}}
+                        </a>
+                        {{- else -}}
+                        <a title="{{Config.base.siteName}}" href="{{Config.base.siteURL|Default `/`}}" class="nav-link">
+                            {{- Config.base.siteName -}}
+                        </a>
+                        {{- end -}}
+                    </nav>
+                </div>
+            </div><!-- card -->
+
+        </div>
+    </div><!-- row -->
+
+</div><!-- container -->
+{{/Strip}}

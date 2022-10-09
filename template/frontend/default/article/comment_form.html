@@ -1,0 +1,53 @@
+{{Strip}}{{- $data := Stored.data -}}
+{{- $inModal := Get "comment_form.in_modal" -}}
+{{- $containerClass := Get "comment_form.container_class" -}}
+{{- $disabledCommentMessage := Stored.disabledCommentMessage -}}    
+        <div class="card bd-0{{if not $inModal}} mg-t-20{{end}}{{if $containerClass}} {{$containerClass}}{{end}}">
+          {{- if not $inModal -}}
+          <div class="card-header pd-y-20 pd-x-0">
+            <h4 class="tx-inverse tx-bold tx-spacing-neg-2 mg-b-0">{{"发表评论"|T}}</h4>
+          </div><!-- card-header -->
+          {{- end -}}
+          <div class="card-block {{if not $inModal}}pd-y-20{{else}}pd-t-0{{end}} pd-x-0">
+            {{- if $disabledCommentMessage -}}
+            <div class="alert alert-warning alert-bordered pd-y-20" role="alert">
+                <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button> -->
+                <div class="d-flex align-items-center justify-content-start">
+                  <i class="icon ion-alert-circled alert-icon tx-size-52 tx-warning mg-r-20"></i>
+                  <div class="ml50">
+                    <h5 class="mg-b-2 tx-warning">{{"您没有权限发布评论"|T}}</h5>
+                    <p class="mg-b-0 tx-gray">{{$disabledCommentMessage}}</p>
+                  </div>
+                </div><!-- d-flex -->
+              </div>
+            {{- else -}}
+            <form action="/article/comment_add" method="POST" id="{{if $inModal}}modal-{{end}}comment-post-form">
+            <div class="form-group row row-sm">
+            {{- if Customer -}}
+            {{Include "#default#article/comment_form_customer"}}
+            {{- else -}}
+            {{Include "#default#article/comment_form_guest"}}
+            {{- end -}}
+            </div><!-- form-group row -->
+            <div class="form-group row row-sm">
+              <div class="col">
+              <textarea name="content" class="form-control tx-size-sm" rows="3" placeholder="{{`请输入您的评论`|T}}" required="required"></textarea>
+              <input type="hidden" name="id" id="target-id" value="{{if $data}}{{$data.Id}}{{end}}">
+              {{- if Stored.commentAddonParams -}}
+              {{- range $key, $value := Stored.commentAddonParams -}}
+              <input type="hidden" name="{{$key}}" value="{{$value}}">
+              {{- end -}}
+              {{- end -}}
+              <input type="hidden" name="replyId" id="reply-id" value="0">
+              <input type="hidden" name="subtype" id="target-subtype" value="{{Stored.targetSubtype}}">
+              <input type="hidden" name="type" id="target-type" value="{{Stored.targetType}}">
+              </div>
+              <button type="button" class="btn btn-inverse tx-size-sm" data-form="#{{if $inModal}}modal-{{end}}comment-post-form">{{"发表评论"|T}}{{if Stored.needReviewComment}}<br/>({{"需要审核"|T}}){{end}}</button>
+            </div><!-- form-group -->
+          </form>
+          {{- end -}}
+          </div><!-- card-block -->
+        </div><!-- card -->
+{{/Strip}}

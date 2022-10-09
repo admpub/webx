@@ -1,0 +1,418 @@
+package meilisearch
+
+import (
+	"bufio"
+	"bytes"
+	"encoding/csv"
+	"io"
+	"io/ioutil"
+	"math"
+	"net/http"
+	"reflect"
+	"strconv"
+	"strings"
+
+	"github.com/pkg/errors"
+)
+
+func (i Index) GetDocument(identifier string, request *DocumentQuery, documentPtr interface{}) error {
+	req := internalRequest{
+		endpoint:            "/indexes/" + i.UID + "/documents/" + identifier,
+		method:              http.MethodGet,
+		withRequest:         nil,
+		withResponse:        documentPtr,
+		withQueryParams:     map[string]string{},
+		acceptedStatusCodes: []int{http.StatusOK},
+		functionName:        "GetDocument",
+	}
+	if request != nil {
+		if len(request.Fields) != 0 {
+			req.withQueryParams["fields"] = strings.Join(request.Fields, ",")
+		}
+	}
+	if err := i.client.executeRequest(req); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (i Index) GetDocuments(request *DocumentsQuery, resp *DocumentsResult) error {
+	req := internalRequest{
+		endpoint:            "/indexes/" + i.UID + "/documents",
+		method:              http.MethodGet,
+		withRequest:         nil,
+		withResponse:        resp,
+		withQueryParams:     map[string]string{},
+		acceptedStatusCodes: []int{http.StatusOK},
+		functionName:        "GetDocuments",
+	}
+	if request != nil {
+		if request.Limit != 0 {
+			req.withQueryParams["limit"] = strconv.FormatInt(request.Limit, 10)
+		}
+		if request.Offset != 0 {
+			req.withQueryParams["offset"] = strconv.FormatInt(request.Offset, 10)
+		}
+		if len(request.Fields) != 0 {
+			req.withQueryParams["fields"] = strings.Join(request.Fields, ",")
+		}
+	}
+	if err := i.client.executeRequest(req); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (i Index) addDocuments(documentsPtr interface{}, contentType string, primaryKey ...string) (resp *TaskInfo, err error) {
+	resp = &TaskInfo{}
+	endpoint := ""
+	if primaryKey == nil {
+		endpoint = "/indexes/" + i.UID + "/documents"
+	} else {
+		i.PrimaryKey = primaryKey[0] //nolint:golint,staticcheck
+		endpoint = "/indexes/" + i.UID + "/documents?primaryKey=" + primaryKey[0]
+	}
+	req := internalRequest{
+		endpoint:            endpoint,
+		method:              http.MethodPost,
+		contentType:         contentType,
+		withRequest:         documentsPtr,
+		withResponse:        resp,
+		acceptedStatusCodes: []int{http.StatusAccepted},
+		functionName:        "AddDocuments",
+	}
+	if err = i.client.executeRequest(req); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (i Index) AddDocuments(documentsPtr interface{}, primaryKey ...string) (resp *TaskInfo, err error) {
+	return i.addDocuments(documentsPtr, contentTypeJSON, primaryKey...)
+}
+
+func (i Index) AddDocumentsInBatches(documentsPtr interface{}, batchSize int, primaryKey ...string) (resp []TaskInfo, err error) {
+	arr := reflect.ValueOf(documentsPtr)
+	lenDocs := arr.Len()
+	numBatches := int(math.Ceil(float64(lenDocs) / float64(batchSize)))
+	resp = make([]TaskInfo, numBatches)
+
+	for j := 0; j < numBatches; j++ {
+		end := (j + 1) * batchSize
+		if end > lenDocs {
+			end = lenDocs
+		}
+
+		batch := arr.Slice(j*batchSize, end).Interface()
+
+		if primaryKey != nil {
+			respID, err := i.AddDocuments(batch, primaryKey[0])
+			if err != nil {
+				return nil, err
+			}
+
+			resp[j] = *respID
+		} else {
+			respID, err := i.AddDocuments(batch)
+			if err != nil {
+				return nil, err
+			}
+
+			resp[j] = *respID
+		}
+	}
+
+	return resp, nil
+}
+
+func (i Index) AddDocumentsCsv(documents []byte, primaryKey ...string) (resp *TaskInfo, err error) {
+	// []byte avoids JSON conversion in Client.sendRequest()
+	return i.addDocuments(documents, contentTypeCSV, primaryKey...)
+}
+
+func (i Index) AddDocumentsCsvFromReader(documents io.Reader, primaryKey ...string) (resp *TaskInfo, err error) {
+	// Using io.Reader would avoid JSON conversion in Client.sendRequest(), but
+	// read content to memory anyway because of problems with streamed bodies
+	data, err := ioutil.ReadAll(documents)
+	if err != nil {
+		return nil, errors.Wrap(err, "could not read documents")
+	}
+	return i.addDocuments(data, contentTypeCSV, primaryKey...)
+}
+
+func (i Index) AddDocumentsCsvInBatches(documents []byte, batchSize int, primaryKey ...string) (resp []TaskInfo, err error) {
+	// Reuse io.Reader implementation
+	return i.AddDocumentsCsvFromReaderInBatches(bytes.NewReader(documents), batchSize, primaryKey...)
+}
+
+func (i Index) AddDocumentsCsvFromReaderInBatches(documents io.Reader, batchSize int, primaryKey ...string) (resp []TaskInfo, err error) {
+	// Because of the possibility of multiline fields it's not safe to split
+	// into batches by lines, we'll have to parse the file and reassemble it
+	// into smaller parts. RFC 4180 compliant input with a header row is
+	// expected.
+	// Records are read and sent continuously to avoid reading all content
+	// into memory. However, this means that only part of the documents might
+	// be added successfully.
+
+	var (
+		responses []TaskInfo
+		header    []string
+		records   [][]string
+	)
+
+	sendCsvRecords := func(records [][]string) (*TaskInfo, error) {
+		b := new(bytes.Buffer)
+		w := csv.NewWriter(b)
+		w.UseCRLF = true // Keep output RFC 4180 compliant
+		err := w.WriteAll(records)
+		if err != nil {
+			return nil, errors.Wrap(err, "could not write CSV records")
+		}
+
+		resp, err := i.AddDocumentsCsv(b.Bytes(), primaryKey...)
+		if err != nil {
+			return nil, err
+		}
+		return resp, nil
+	}
+
+	r := csv.NewReader(documents)
+	for {
+		// Read CSV record (empty lines and comments are already skipped by csv.Reader)
+		record, err := r.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return nil, errors.Wrap(err, "could not read CSV record")
+		}
+
+		// Store first record as header
+		if header == nil {
+			header = record
+			continue
+		}
+
+		// Add header record to every batch
+		if len(records) == 0 {
+			records = append(records, header)
+		}
+
+		records = append(records, record)
+
+		// After reaching batchSize (not counting the header record) assemble a CSV file and send records
+		if len(records) == batchSize+1 {
+			resp, err := sendCsvRecords(records)
+			if err != nil {
+				return nil, err
+			}
+			responses = append(responses, *resp)
+			records = nil
+		}
+	}
+
+	// Send remaining records as the last batch if there is any
+	if len(records) > 0 {
+		resp, err := sendCsvRecords(records)
+		if err != nil {
+			return nil, err
+		}
+		responses = append(responses, *resp)
+	}
+
+	return responses, nil
+}
+
+func (i Index) AddDocumentsNdjson(documents []byte, primaryKey ...string) (resp *TaskInfo, err error) {
+	// []byte avoids JSON conversion in Client.sendRequest()
+	return i.addDocuments([]byte(documents), contentTypeNDJSON, primaryKey...)
+}
+
+func (i Index) AddDocumentsNdjsonFromReader(documents io.Reader, primaryKey ...string) (resp *TaskInfo, err error) {
+	// Using io.Reader would avoid JSON conversion in Client.sendRequest(), but
+	// read content to memory anyway because of problems with streamed bodies
+	data, err := ioutil.ReadAll(documents)
+	if err != nil {
+		return nil, errors.Wrap(err, "could not read documents")
+	}
+	return i.addDocuments(data, contentTypeNDJSON, primaryKey...)
+}
+
+func (i Index) AddDocumentsNdjsonInBatches(documents []byte, batchSize int, primaryKey ...string) (resp []TaskInfo, err error) {
+	// Reuse io.Reader implementation
+	return i.AddDocumentsNdjsonFromReaderInBatches(bytes.NewReader(documents), batchSize, primaryKey...)
+}
+
+func (i Index) AddDocumentsNdjsonFromReaderInBatches(documents io.Reader, batchSize int, primaryKey ...string) (resp []TaskInfo, err error) {
+	// NDJSON files supposed to contain a valid JSON document in each line, so
+	// it's safe to split by lines.
+	// Lines are read and sent continuously to avoid reading all content into
+	// memory. However, this means that only part of the documents might be
+	// added successfully.
+
+	sendNdjsonLines := func(lines []string) (*TaskInfo, error) {
+		b := new(bytes.Buffer)
+		for _, line := range lines {
+			_, err := b.WriteString(line)
+			if err != nil {
+				return nil, errors.Wrap(err, "could not write NDJSON line")
+			}
+			err = b.WriteByte('\n')
+			if err != nil {
+				return nil, errors.Wrap(err, "could not write NDJSON line")
+			}
+		}
+
+		resp, err := i.AddDocumentsNdjson(b.Bytes(), primaryKey...)
+		if err != nil {
+			return nil, err
+		}
+		return resp, nil
+	}
+
+	var (
+		responses []TaskInfo
+		lines     []string
+	)
+
+	scanner := bufio.NewScanner(documents)
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+
+		// Skip empty lines (NDJSON might not allow this, but just to be sure)
+		if line == "" {
+			continue
+		}
+
+		lines = append(lines, line)
+		// After reaching batchSize send NDJSON lines
+		if len(lines) == batchSize {
+			resp, err := sendNdjsonLines(lines)
+			if err != nil {
+				return nil, err
+			}
+			responses = append(responses, *resp)
+			lines = nil
+		}
+	}
+	if err := scanner.Err(); err != nil {
+		return nil, errors.Wrap(err, "could not read NDJSON")
+	}
+
+	// Send remaining records as the last batch if there is any
+	if len(lines) > 0 {
+		resp, err := sendNdjsonLines(lines)
+		if err != nil {
+			return nil, err
+		}
+		responses = append(responses, *resp)
+	}
+
+	return responses, nil
+}
+
+func (i Index) UpdateDocuments(documentsPtr interface{}, primaryKey ...string) (resp *TaskInfo, err error) {
+	resp = &TaskInfo{}
+	endpoint := ""
+	if primaryKey == nil {
+		endpoint = "/indexes/" + i.UID + "/documents"
+	} else {
+		i.PrimaryKey = primaryKey[0] //nolint:golint,staticcheck
+		endpoint = "/indexes/" + i.UID + "/documents?primaryKey=" + primaryKey[0]
+	}
+	req := internalRequest{
+		endpoint:            endpoint,
+		method:              http.MethodPut,
+		contentType:         contentTypeJSON,
+		withRequest:         documentsPtr,
+		withResponse:        resp,
+		acceptedStatusCodes: []int{http.StatusAccepted},
+		functionName:        "UpdateDocuments",
+	}
+	if err = i.client.executeRequest(req); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (i Index) UpdateDocumentsInBatches(documentsPtr interface{}, batchSize int, primaryKey ...string) (resp []TaskInfo, err error) {
+	arr := reflect.ValueOf(documentsPtr)
+	lenDocs := arr.Len()
+	numBatches := int(math.Ceil(float64(lenDocs) / float64(batchSize)))
+	resp = make([]TaskInfo, numBatches)
+
+	for j := 0; j < numBatches; j++ {
+		end := (j + 1) * batchSize
+		if end > lenDocs {
+			end = lenDocs
+		}
+
+		batch := arr.Slice(j*batchSize, end).Interface()
+		if primaryKey != nil {
+			respID, err := i.UpdateDocuments(batch, primaryKey[0])
+			if err != nil {
+				return nil, err
+			}
+
+			resp[j] = *respID
+		} else {
+			respID, err := i.UpdateDocuments(batch)
+			if err != nil {
+				return nil, err
+			}
+
+			resp[j] = *respID
+		}
+	}
+
+	return resp, nil
+}
+
+func (i Index) DeleteDocument(identifier string) (resp *TaskInfo, err error) {
+	resp = &TaskInfo{}
+	req := internalRequest{
+		endpoint:            "/indexes/" + i.UID + "/documents/" + identifier,
+		method:              http.MethodDelete,
+		withRequest:         nil,
+		withResponse:        resp,
+		acceptedStatusCodes: []int{http.StatusAccepted},
+		functionName:        "DeleteDocument",
+	}
+	if err := i.client.executeRequest(req); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (i Index) DeleteDocuments(identifier []string) (resp *TaskInfo, err error) {
+	resp = &TaskInfo{}
+	req := internalRequest{
+		endpoint:            "/indexes/" + i.UID + "/documents/delete-batch",
+		method:              http.MethodPost,
+		contentType:         contentTypeJSON,
+		withRequest:         identifier,
+		withResponse:        resp,
+		acceptedStatusCodes: []int{http.StatusAccepted},
+		functionName:        "DeleteDocuments",
+	}
+	if err := i.client.executeRequest(req); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (i Index) DeleteAllDocuments() (resp *TaskInfo, err error) {
+	resp = &TaskInfo{}
+	req := internalRequest{
+		endpoint:            "/indexes/" + i.UID + "/documents",
+		method:              http.MethodDelete,
+		withRequest:         nil,
+		withResponse:        resp,
+		acceptedStatusCodes: []int{http.StatusAccepted},
+		functionName:        "DeleteAllDocuments",
+	}
+	if err = i.client.executeRequest(req); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}

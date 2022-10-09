@@ -1,0 +1,23 @@
+{{$rows := Stored.list}}
+<div class="card bd-0 rounded-0 mg-t-20">
+    <div class="card-body">
+    {{range $k, $v := $rows}}
+      <div class="pd-25 d-flex justify-content-between align-items-center{{if gt $k 0}} bd-t{{end}}">
+        <div class="media tx-size-sm align-items-center">
+          <a href="{{FrontendURL}}/u/{{$v.Id}}" class="mg-r-15" target="_blank"><img src="{{if $v.Avatar}}{{AddSuffix $v.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" class="wd-40 ht-40 rounded-circle" alt="{{$v.Name}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';"></a>
+          <div class="media-body">
+            <h6 class="tx-bold tx-size-sm mg-b-0"><a href="{{FrontendURL}}/u/{{$v.Id}}" class="tx-gray-dark" target="_blank">{{$v.Name}}</a></h6>
+            <span class="tx-gray-light tx-size-xs">{{$v.Description}}</span>
+          </div><!-- media-body -->
+        </div><!-- media -->
+      </div>
+    {{else}}
+    <p class="card-text pd-25">
+      {{"没有记录"|T}}
+    </p>
+    {{end}}
+    </div><!-- card-body -->
+    <div class="card-footer tx-size-xs pd-y-15 auto-bottom-float">
+      {{Stored.pagination.Render}}
+    </div><!-- card-footer -->
+</div><!-- card -->

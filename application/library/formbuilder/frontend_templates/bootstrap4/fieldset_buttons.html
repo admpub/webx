@@ -1,0 +1,8 @@
+<div class="form-group row form-submit-group">
+	<div class="offset-md-2 col-md-10{{if .classes }} {{.classes}}{{end}}"{{range .tags}} {{.}}{{end}}>
+		{{- range .fields }}
+		{{- .Render }}
+		&nbsp; &nbsp; &nbsp;
+		{{- end }}
+	</div>
+</div>

@@ -1,0 +1,48 @@
+author {
+  name : "coscms"
+  email : ""
+  url : "https://www.coscms.com/"
+  description : ""
+}
+colors : [
+  {
+    name : "light"
+    title : "默认"
+    color : "white"
+    isDefault : true
+    previewImage : "@preview.png"
+  },{
+    name : "dark"
+    title : "暗色"
+    color : "#222"
+    isDefault : false
+    previewImage : "@preview-dark.png"
+  }
+]
+version : "0.0.1"
+name : "blogdefault"
+title : "博客模板"
+updatedAt : "2022-09-11 13:22:21"
+description : "默认博客模板"
+previewImage : "@preview.png"
+previewURL : "https://www.coscms.com/"
+fallback : ["default"]
+formConfig : {
+  config : {
+    elements : [
+      {
+        type : "select"
+        name : "indexSliderItems"
+        label : "首页轮播文章"
+        value : ""
+        helpText : "设置首页轮播文章。请选择带封面图的文章"
+        class : ""
+        template : "selectpage"
+        attributes : [
+          ["data-multiple","1"],
+          ["data-limit","3"]
+        ]
+      }
+    ]
+  }
+}

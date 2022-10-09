@@ -1,0 +1,288 @@
+basePath: /
+definitions:
+  shorturl.ResponseAPICreate:
+    properties:
+      qrcodeURL:
+        type: string
+      shortURL:
+        type: string
+    type: object
+  top.ResponseData:
+    properties:
+      Code:
+        type: integer
+      Data:
+        type: object
+      Info:
+        type: string
+      State:
+        type: string
+      URL:
+        type: string
+      Zone:
+        type: string
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact: {}
+  title: 开放平台接口
+  version: "1.0"
+paths:
+  /open/v1/oauth/login/{provider}:
+    get:
+      description: 前往第三方登录
+      operationId: oauth-login
+      parameters:
+      - description: 登录成功后跳转网址
+        in: query
+        name: nextURL
+        required: true
+        type: string
+      - description: '同步登录方式(支持的值有: api, js)'
+        enum:
+        - api
+        - js
+        in: query
+        name: syncType
+        required: true
+        type: string
+      - description: 同步登录网址(syncType == js 时采用js方式应用此网址; syncType == api 时采用带加密参数后重定向跳转到此网址)
+        in: query
+        name: loginURL
+        required: true
+        type: string
+      - description: '第三方网站标识(例如: qq, wechat 等)'
+        in: path
+        name: provider
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+      summary: 前往第三方登录
+      tags:
+      - oauth
+  /open/v1/oauth/providers:
+    get:
+      description: 列出支持的所有第三方登录提供商
+      operationId: oauth-proviers
+      responses:
+        "200":
+          description: ""
+      summary: 第三方登录提供商列表
+      tags:
+      - oauth
+  /open/v1/payment/{provider}:
+    get:
+      description: 跳转到付款界面
+      operationId: payment
+      parameters:
+      - description: appID
+        in: query
+        name: appID
+        required: true
+        type: string
+      - description: 你的用户ID
+        in: query
+        name: appUID
+        type: string
+      - description: 支付放弃后返回地址
+        in: query
+        name: cancelURL
+        type: string
+      - description: 币种 支持的值：https://github.com/webx-top/payment/blob/master/config/constants.go
+        in: query
+        name: currency
+        type: string
+      - description: 客户IP
+        in: query
+        name: customerIP
+        type: string
+      - description: 设备 支持的值：https://github.com/webx-top/payment/blob/master/config/constants.go
+        in: query
+        name: device
+        type: string
+      - description: 过期时间戳
+        in: query
+        name: expiresTs
+        type: integer
+      - description: 扩展信息
+        in: query
+        name: extend
+        type: string
+      - description: 是否是虚拟商品
+        in: query
+        name: isVirtualProduct
+        type: boolean
+      - description: 支付回调
+        in: query
+        name: notifyURL
+        type: string
+      - description: 你的订单号
+        in: query
+        name: outOrderNo
+        required: true
+        type: string
+      - description: 价格
+        in: query
+        name: price
+        required: true
+        type: number
+      - description: 商品ID
+        in: query
+        name: productID
+        type: string
+      - description: 商品类型(自己定义)
+        in: query
+        name: productType
+        type: string
+      - description: 支付成功后返回地址
+        in: query
+        name: returnURL
+        type: string
+      - description: 订单主题(一般为商品名)
+        in: query
+        name: subject
+        required: true
+        type: string
+      - description: 用于第四方支付时选择支付方式
+        in: query
+        name: subtype
+        type: string
+      - description: 付款方式(alipay,wechat)
+        in: query
+        name: type
+        required: true
+        type: string
+      - description: '支付方式标识(例如: alipay, wechat 等)'
+        in: path
+        name: provider
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+      summary: 前往付款
+      tags:
+      - payment
+  /open/v1/payment/providers:
+    get:
+      description: 列出支持的所有支付网关提供商
+      operationId: payment-proviers
+      responses:
+        "200":
+          description: ""
+      summary: 支付网关提供商列表
+      tags:
+      - payment
+  /open/v1/query/payment:
+    get:
+      description: 查询付款状态 (“你的订单号”和“平台订单号”必须至少提供一个)
+      operationId: payment-query
+      parameters:
+      - description: 你的订单号
+        in: query
+        name: outOrderNo
+        type: string
+      - description: 平台订单号
+        in: query
+        name: orderNo
+        type: string
+      responses:
+        "200":
+          description: ""
+      summary: 付款结果查询
+      tags:
+      - payment
+  /open/v1/query/refund:
+    get:
+      description: 查询退款结果 (“你的退款单号”和“平台退款单号”必须至少提供一个)
+      operationId: payment-refund-query
+      parameters:
+      - description: 你的退款单号
+        in: query
+        name: outRefundNo
+        type: string
+      - description: 平台退款单号
+        in: query
+        name: refundNo
+        type: string
+      responses:
+        "200":
+          description: ""
+      summary: 查询退款结果
+      tags:
+      - payment
+  /open/v1/refund:
+    post:
+      description: 发起退款
+      operationId: payment-refund
+      parameters:
+      - description: appID
+        in: formData
+        name: appID
+        required: true
+        type: string
+      - description: 通知接口网址
+        in: formData
+        name: notifyURL
+        type: string
+      - description: 平台订单号
+        in: formData
+        name: orderNo
+        type: string
+      - description: 你的订单号
+        in: formData
+        name: outOrderNo
+        required: true
+        type: string
+      - description: 退款金额
+        in: formData
+        name: refundAmount
+        required: true
+        type: number
+      - description: 退款单号
+        in: formData
+        name: refundNo
+        type: string
+      - description: 退款原因
+        in: formData
+        name: refundReason
+        type: string
+      responses:
+        "200":
+          description: ""
+      summary: 发起退款
+      tags:
+      - payment
+  /open/v1/short_url/create:
+    get:
+      description: 创建短网址
+      operationId: short_url-create
+      parameters:
+      - description: 长网址
+        in: formData
+        name: url
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/top.ResponseData'
+            - properties:
+                Data:
+                  $ref: '#/definitions/shorturl.ResponseAPICreate'
+              type: object
+      summary: 创建短网址
+      tags:
+      - short_url
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+swagger: "2.0"

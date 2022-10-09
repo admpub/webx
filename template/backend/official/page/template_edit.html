@@ -1,0 +1,38 @@
+{{Extend "layout"}}
+{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "head"}}
+<link rel="stylesheet"type="text/css" href="{{AssetsURL}}/js/editor/markdown/lib/codemirror/theme/ambiance.css">
+<style>
+.cm-s-ambiance.CodeMirror{text-shadow: 1px 1px 1px #000;}
+.app-nav{margin-bottom:220px;}
+.app-nav > .always-bottom{width:280px;border-top:1px solid #eee;}
+.page-aside.app .app-nav > .always-bottom ul.nav-pills li a{padding-top:6px;padding-bottom:6px;}
+.color-grey{color:grey !important}
+.badge-embed,.badge-unsaved{position:absolute;margin:14px 0;margin-left:245px;border:1px solid #ccc;padding:2px;font-size:11px;line-height:12px;border-radius:3px;color:#ccc;z-index:9;min-width:20px;text-align:center}
+.badge-unsaved{color:white;border-color:red;background-color:red;}
+.tmpl-nav-responsive-collapse{display:block;}
+@media (max-width: 768px){
+  .app-nav > .always-bottom{width:100% !important;}
+  .app-nav{margin-bottom:0;}
+  #console{margin-bottom:170px;}
+  .tmpl-nav-responsive-collapse{display:none;}
+}
+</style>
+{{/Block}}
+{{Block "bodyNav"}}
+{{Include "official/page/template_edit.nav"}}
+{{/Block}}
+{{Block "main"}}
+<div class="main-app">
+    <div class="code-editor">
+        <div id="console"></div>
+    </div>
+</div>
+{{/Block}}
+{{Block "footer"}}
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/page/template/edit.js?t={{BuildTime}}"></script>
+<script>
+</script>
+{{/Block}}

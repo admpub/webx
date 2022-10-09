@@ -1,0 +1,46 @@
+<div class="page-aside app codeditor">
+    <button class="navbar-toggle no-margin wd-100p" data-target=".tmpl-nav-responsive-collapse" data-toggle="collapse" type="button">
+        <span class="fa fa-chevron-down"></span>
+    </button>
+    <div id="body-left-navigate" class="fixed nano nscroller responsive-nav">
+        <div class="content no-padding">
+            <div class="header no-padding-y collapse tmpl-nav-responsive-collapse">
+                <h2 class="page-title">{{`模板文件管理`|T}}</h2>
+                <p class="description">
+                    <a href="{{BackendURL}}/official/page/template_index">{{"模板列表"|T}}</a> / 
+                    <span id="templateDirBreadcrumb">
+                        {{- if gt (len Stored.dirPositions) 0 -}}
+                        <a href="{{BackendURL}}/official/page/template_edit?name={{Form `name`}}">{{Form `name`}}</a>
+                        {{- $maxIndex := Sub (len Stored.dirPositions) 1 -}}
+                        {{range $k, $v := Stored.dirPositions}}
+                        / {{if eq $k $maxIndex}}{{$v}}{{else}}<a href="{{index Stored.dirURLs $k}}">{{$v}}</a>{{end}}
+                        {{end}}
+                        {{- else -}}
+                        {{Form `name`}}
+                        {{- end -}}
+                    </span>
+                </p>
+            </div>
+            <div class="app-nav">
+              <ul class="nav nav-pills nav-stacked collapse tmpl-nav-responsive-collapse" id="templateDirs" data-name="{{Form `name`}}" data-dir="{{Form `dir`}}">
+                {{Include "official/page/template_edit.nav_list"}}
+              </ul>
+            <div class="always-bottom bg-white">
+              <p class="title">
+                <span class="pull-right" id="currentOperateFile"></span>
+                {{`操作`|T}}
+              </p>
+              <ul class="nav nav-pills">
+                <li style="width:50%"><a href="javascript:;" onclick="saveTemplateFile(this)">{{`保存文件`|T}}</a></li>
+                <li style="width:50%"><a href="javascript:;" onclick="saveAsTemplateFile(this)">{{`另存为...`|T}}</a></li>
+                <li style="width:50%"><a href="javascript:;" onclick="removeTemplateFile(this)">{{`删除文件`|T}}</a></li>
+                <li style="width:50%"><a href="javascript:;" onclick="renameTemplateFile(this)">{{`重命名...`|T}}</a></li>
+              </ul>
+              <div class="compose no-margin-top">
+                <a class="btn btn-flat btn-primary" href="javascript:;" onclick="newTemplateFile(this)">{{`新建文件`|T}}</a>
+              </div>      
+            </div><!-- .always-bottom -->
+            </div>
+        </div>
+    </div>
+</div>

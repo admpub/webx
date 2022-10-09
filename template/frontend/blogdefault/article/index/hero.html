@@ -1,0 +1,58 @@
+{{- $themeInfo := ThemeInfo -}}
+{{- $articleIds := $themeInfo.CustomConfig.String `indexSliderItems` -}}
+{{- if $articleIds -}}
+{{- $relationList := articleListByIds $articleIds -}}
+{{- Set `heroList` $relationList -}}
+{{- else -}}
+{{- $relationList := queryList `image_original <>=` 3 0 -}}
+{{- Set `heroList` $relationList -}}
+{{- end -}}
+<!-- ============= HERO ============= -->
+        <section class="hero-wrapper">
+            <div class="hero-slider-wrapper">
+                {{- range $k, $v := Get `heroList` -}}
+                <div class="slider-item bg-cover" style="background-image:url('{{if $v.ImageOriginal}}{{$v.ImageOriginal}}{{else}}{{AssetsXURL}}/blogdefault/img/hero-bg{{Sub $k 1}}.png{{end}}')">
+                    <div class="container">
+                        <div class="hero-content">
+                            <div>
+                                <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}"><h1 class="hero-heading">
+                                    {{$v.Title}}
+                                </h1></a>
+                                <div class="post-card">
+                                    {{- if $v.Category -}}
+                                    <span class="category"> {{$v.Category.Name}} </span>
+                                    {{- end -}}
+                                    <p class="body-text">
+                                        {{$v.Summary}}
+                                    </p>
+                                    <div class="post-meta-wrapper">
+                                        <div class="meta-left">
+                                            <p class="author meta-item">by 
+                                                {{if $v.Customer -}}
+                                                <a href="{{FrontendURL}}/u/{{$v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
+                                                {{- else if $v.User -}}
+                                                <span>{{$v.User.Username}}</span>
+                                                {{- else -}}
+                                                <span>{{`未知`|T}}</span>
+                                                {{- end -}}
+                                            </p>
+                                            <span class="post-date meta-item"> {{(Date $v.Created).Format `2006-01-02`}} </span>
+                                            <span class="meta-item comment">
+                                                <i class="fal fa-comment"></i>
+                                                {{$v.Comments}}
+                                            </span>
+                                        </div>
+                                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="button post-button">
+                                            <span class="icon">
+                                                <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{- end -}}
+            </div>
+        </section>

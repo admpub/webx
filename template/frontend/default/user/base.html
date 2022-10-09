@@ -1,0 +1,15 @@
+{{Extend "#default#base"}}
+{{Block "title"}}
+{{"用户中心"|T}}
+{{/Block}}
+{{Block "head"}}{{/Block}}
+{{Block "headEnd"}}{{/Block}}
+{{Block "bodyAttr"}}class="dashboard-1 bg-gray-lightest tx-size-14"{{/Block}}
+{{Block "body"}}
+{{/* Include "user/profile/_head" */}}
+{{Include "#default#user/profile/_top"}}
+{{Include "#default#user/profile/_left"}}
+{{/Block}}
+{{Block "footer"}}
+<script src="{{AssetsXURL}}/js/_page/user.min.js?t={{BuildTime}}"></script>
+{{/Block}}

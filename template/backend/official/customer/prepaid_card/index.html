@@ -1,0 +1,94 @@
+{{Extend "layout"}}
+{{Block "title"}}{{"充值卡管理"|T}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li class="active">{{"充值卡管理"|T}}</li>
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+				<div class="col-md-12">
+					<div class="block-flat">
+						<div class="header">
+							<div class="pull-right" style="margin-left:10px">
+								<form class="form-horizontal" action="" id="search-form" method="GET">
+									<div class="input-group">
+										<span class="input-group-addon">{{"状态"|T}}</span>
+										<select name="status" class="form-control" id="status" onchange="$('#search-form').submit()">
+											<option value=""> - {{"不限"|T}} - </option>
+											{{$status := Form "status"}} 
+											<option value="used" {{if eq $status `used`}} selected{{end}}>{{`已使用`|T}}</option>
+											<option value="unused" {{if eq $status `unused`}} selected{{end}}>{{`未使用`|T}}</option>
+										</select>
+										<span class="input-group-addon">{{"卡号"|T}}</span>
+										<input type="text" class="form-control" name="number" value="{{Form `number`}}">
+									</div>
+								</form>
+							</div>
+							<a href="{{BackendURL}}/official/customer/prepaid_card/add" class="btn btn-success pull-right">
+								<i class="fa fa-plus"></i>
+								{{"添加充值卡"|T}}
+							</a>
+							<h3>{{"充值卡列表"|T}}</h3>
+						</div>
+						<div class="content">
+							<div class="table-responsive">
+							<table class="table no-border hover">
+								<thead class="no-border">
+									<tr>
+										<th style="width:80px"><strong>ID</strong></th>
+										<th><strong>{{"卡号"|T}}</strong></th>
+										<th><strong>{{"面值"|T}}</strong></th>
+										<th><strong>{{"售价"|T}}</strong></th>
+										<th><strong>{{"有效期"|T}}</strong></th>
+										<th style="width:130px"><strong>{{"创建时间"|T}}</strong></th>
+										<th style="width:130px"><strong>{{"使用时间"|T}}</strong></th>
+										<th><strong>{{"使用者"|T}}</strong></th>
+										<th style="width:60px"><strong>{{"状态"|T}}</strong></th>
+										<th style="width:80px" class="text-center"><strong>{{"操作"|T}}</strong></th>
+									</tr>
+								</thead>
+								<tbody class="no-border-y">
+                                    {{range $k,$v := Stored.listData}}
+									<tr>
+										<td>{{$v.Id}}</td>
+										<td>{{$v.Number}}</td>
+										<td>{{$v.Amount}}</td>
+										<td>{{$v.SalePrice}}</td>
+										<td>
+											{{if and (gt $v.Start 0) (gt $v.End 0)}}
+											{{$v.Start|DateFormat "2006-01-02 15:04:05"}} ~ {{$v.End|DateFormat "2006-01-02 15:04:05"}}
+											{{else if gt $v.Start 0}}
+											{{$v.Start|DateFormat "2006-01-02 15:04:05"}}{{"以后"|T}}
+											{{else if gt $v.End 0}}
+											{{$v.End|DateFormat "2006-01-02 15:04:05"}}{{"以前"|T}}
+											{{else}}
+											{{"不限制"|T}}
+											{{end}}
+										</td>
+										<td>
+											{{$v.Created|DateFormat "2006-01-02 15:04:05"}}
+										</td>
+										<td>
+											{{if gt $v.Used 0}}
+											{{$v.Used|DateFormat "2006-01-02 15:04:05"}}
+											{{else}}
+											{{"未使用"|T}}
+											{{end}}
+										</td>
+										<td>{{$v.CustomerId}}</td>
+										<td>{{if eq $v.Disabled "Y"}}{{"禁用"|T}}{{else}}{{"启用"|T}}{{end}}</td>
+										<td class="text-center">
+										<a class="label label-success" href="{{BackendURL}}/official/customer/prepaid_card/edit?id={{$v.Id}}" data-toggle="tooltip" title="{{"修改"|T}}"><i class="fa fa-pencil"></i></a> 
+										<a class="label label-danger" href="{{BackendURL}}/official/customer/prepaid_card/delete?id={{$v.Id}}" onclick="return confirm('{{"真的要删除吗？"|T}}');" data-toggle="tooltip" title="{{"删除"|T}}"><i class="fa fa-times"></i></a>
+										</td>
+									</tr>
+                                    {{end}}
+								</tbody>
+							</table>		
+							</div>
+							{{Stored.pagination.Render}}
+						</div>
+					</div>				
+				</div>
+			</div>
+{{/Block}}

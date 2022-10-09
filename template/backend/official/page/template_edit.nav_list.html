@@ -1,0 +1,23 @@
+{{- $currentDir := Form `dir` -}}
+{{- range $k, $v := Stored.dirs -}}
+    <li class="primary-active"><!-- active -->
+        {{if $v.Embed}}<span class="badge-embed" title="{{`内置模板`|T}}">{{`内置`|T}}</span>{{end}}
+        {{- if $v.IsDir -}}
+        <a title="{{$v.Name}}" href="{{BackendURL}}/official/page/template_edit?name={{Form `name`}}&dir={{if $currentDir}}{{$currentDir}}/{{end}}{{$v.Name}}">
+            <i class="fa fa-folder"></i>
+            {{- $v.Name -}}
+        </a>
+        {{- else -}}
+        {{if canEdit $v.Name}}
+        <a class="editable" href="javascript:;" onclick="openTemplateFile(this)" data-file="{{$v.Name}}" title="{{$v.Name}}">
+            <!-- <span class="label label-primary pull-right unsaved">*</span> -->
+            <i class="fa fa-file"></i>
+            {{- $v.Name -}}
+        </a>
+        {{else}}
+        <a class="color-grey" title="{{$v.Name}}"><i class="fa fa-file"></i> {{- $v.Name -}}</a>
+        {{end}}
+        {{- end -}}
+    </li>
+{{- end -}}
+<div class="text-center" style="color:#ccc"> - {{`没有了`|T}} -</div>

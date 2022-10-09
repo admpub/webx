@@ -1,0 +1,31 @@
+{{Strip}}{{Extend "#default#base"}}
+{{Block "title"}}
+{{- Stored.operateName}} - {{T "%s主页" Stored.info.Name -}}
+{{/Block}}
+{{Block "keywords"}}{{"会员主页"|T}},{{Stored.info.Name}}{{/Block}}
+{{Block "description"}}{{Stored.info.Description}}{{/Block}}
+{{Block "bodyAttr"}} class="landing-3 pd-t-70 bg-gray-lightest"{{/Block}}
+{{Block "body"}}
+{{Include "#default#header"}}
+{{$operate := Stored.operate}}
+ <div class="bb-mainpanel">
+    <div class="container pd-t-20 pd-b-20">
+    {{Include "#default#user/homepage/_breadcrumb"}}
+    </div><!-- container -->
+    <div class="container pd-b-20">
+    {{Include "#default#user/homepage/_head"}}
+    {{/*Include "#default#user/homepage/_album"*/}}
+    {{/*Include "#default#user/homepage/_player"*/}}
+    {{/*Include "#default#user/homepage/_topic"*/}}
+    {{/*Include "#default#user/homepage/_card_with_tabs"*/}}
+    {{- $block := Stored.block -}}
+    {{- Fetch $block.Tmpl $ -}}
+    </div><!-- container -->
+    <div class="container pd-b-20">
+        &copy; {{Now.Format "2006"}} {{Config.base.siteName}}
+    </div><!-- container -->
+</div><!-- bb-mainpanel -->
+{{/Block}}
+{{Block "footer"}}
+{{/Block}}
+{{/Strip}}

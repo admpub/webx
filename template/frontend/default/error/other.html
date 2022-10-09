@@ -1,0 +1,29 @@
+{{Extend "#default#base"}}
+{{Block "description"}}{{.title}}{{/Block}}
+{{Block "title"}}{{.title}}{{/Block}}
+{{Block "bodyAttr"}} class="bg-gray"{{/Block}}
+{{Block "body"}}
+<div class="col-md-12 mg-y-50">
+	<div class="col-md-6 offset-md-3">
+	  <div class="card card-inverse bg-teal bd-0">
+		<div class="card-block">
+		  <h5 class="card-title"><i class="fa fa-error"></i> 
+			Error</h5>
+		  <h6 class="card-subtitle mb-2 tx-normal mg-b-20"></h6>
+		  <p class="card-text">{{.content}}</p>
+		  <a class="btn btn-primary btn-rad" href="javascript:;" onclick="backLastPage()">
+				<i class="fa fa-reply"></i>
+				{{"回到上一页"|T}}
+			</a>
+			<a class="btn btn-success btn-rad" href="/">
+				<i class="fa fa-home"></i>
+				{{"回到首页"|T}}
+			</a>
+		</div>
+		{{Include "#default#error/_copyright"}}
+	  </div><!-- card -->
+	</div><!-- col -->
+  </div>
+{{/Block}}
+{{Block "footer"}}
+{{/Block}}

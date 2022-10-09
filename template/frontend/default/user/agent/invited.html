@@ -1,0 +1,17 @@
+{{Extend "user/profile/_homepage"}}
+{{Block "body"}}
+{{Super}}
+{{$agentLevel := Stored.agentLevel}}
+{{$customerGroup := Stored.customerGroup}}
+ <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
+    {{Include "user/profile/_breadcrumb"}}
+  <div class="main-body pd-20">
+<div class="row">
+  <div class="col-lg-12 mg-t-0">
+    {{Include "user/profile/_profile_head"}}
+    {{Include "user/profile/_invited_list"}}
+  </div><!-- col-lg-12 -->
+</div><!-- row -->
+    </div><!-- main-body -->
+</div><!-- main -->
+{{/Block}}

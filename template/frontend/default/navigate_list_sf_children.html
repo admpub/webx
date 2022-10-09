@@ -1,0 +1,14 @@
+{{Strip}}
+<ul>{{$v := .}}
+  {{- range $key,$sub := $v.FetchChildren Context -}}
+  <li>
+      <a href="{{$sub.Url}}" class="{{if $sub.IsActive Context}}tx-white bg-info active{{else}}tx-info{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
+        {{$sub.Title}}
+        {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
+      </a>
+      {{- if $sub.HasChildren Context -}}
+      {{Include "#default#navigate_list_sf_children" $sub}}
+      {{- end -}}
+  </li>
+  {{- end -}}
+</ul>{{/Strip}}

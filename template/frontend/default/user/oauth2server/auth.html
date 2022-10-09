@@ -1,0 +1,27 @@
+{{Strip}}{{Extend "#default#base"}}
+{{Block "title"}}{{"账号授权"|T}}{{/Block}}
+{{Block "bodyAttr"}} class="bg-white tx-size-sm ht-100p pos-relative"{{/Block}}
+{{Block "body"}}
+    {{Include "#default#headsimple"}}
+    {{- $app := getOpenApp -}}
+    <div class="ht-100v wd-100p d-flex align-items-center justify-content-center pd-md-t-70 pd-x-20">
+      <div class="card pd-25 pd-md-40 rounded-0 wd-450">
+        <h5 class="tx-size-md-32 tx-gray-dark tx-center">{{"账号授权"|T}}</h5>
+        <p class="tx-size-12 tx-size-md-14 mg-b-30 tx-center">{{`授予应用`|T}} <strong>{{ $app.SiteName }}</strong> {{`对您账号信息的访问权限。`|T}}</p>
+        <form class="form" action="{{FrontendURL}}/oauth2/auth" method="POST">
+        <div class="scopes mg-b-30">
+          <p><strong>{{`该应用将会访问您的以下数据：`|T}}</strong></p>
+          <ul>
+            {{- range $key, $scope := Stored.scopes -}}
+            <li>{{ $scope.Description | Default $scope.Name }}</li>
+            {{- end -}}
+          </ul>
+        </div>
+        <button type="submit" name="accept" value="true" class="btn btn-info wd-60p">{{"同意授权"|T}}</button>
+        <a href="{{FrontendURL}}/oauth2/logout" class="btn btn-danger wd-35p">{{"拒绝授权"|T}}</a>
+        </form>
+      </div><!-- card -->
+    </div><!-- container -->
+    {{Include "#default#footer"}}
+{{/Block}}
+{{/Strip}}

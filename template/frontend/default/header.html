@@ -1,0 +1,33 @@
+{{Strip}}
+{{/*Include "header_style_blue"*/}}
+{{- $headPanelBg := "info" -}}
+{{- $textColor := "white" -}}
+{{- $logoColor := "white" -}}
+{{- $navbarColor := "white" -}}
+  <div id="headPanel" class="headpanel bg-{{$headPanelBg}} pos-fixed-top z-index-100 shadow-base">
+    <div class="container pd-x-0 pd-lg-x-10 ht-70 d-lg-flex align-items-center justify-content-between">
+      <div class="d-flex ht-70 align-items-center justify-content-between pd-x-20 pd-lg-x-0">
+        <h5 class="tx-size-sm-24 mg-b-0 tx-bold tx-spacing-neg-2">
+          <a href="{{FrontendURL}}/" class="tx-white">
+            <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="wd-50 ht-50" alt="{{Config.base.siteName}}">
+            {{Config.base.siteName}}
+          </a>
+        </h5>
+        <a id="showMenu" href="javascript:;" class="tx-{{$textColor}} hidden-lg-up"><i class="fa fa-navicon tx-size-18"></i></a>
+      </div>
+      <ul id="navbarMain" class="nav-superfish nav nav-{{$navbarColor}} bg-{{$headPanelBg}} sf-menu tx-uppercase tx-size-12 tx-bold tx-spacing-2 hidden-md-down sf-js-enabled sf-arrows shadow-1">
+        {{Include "#default#navigate_list_sf"}}
+      </ul>
+      
+      <div class="backward-md-down">
+        {{if Customer}}
+        <a href="{{FrontendURL}}/user/index" class="btn btn-secondary bd-2 tx-medium tx-size-12 tx-gray rounded-0" data-toggle="tooltip" data-placement="bottom" title="{{`进入会员中心`|T}}">{{Customer.Name}}</a>
+        <a href="{{FrontendURL}}/sign_out" class="btn btn-danger bd-2 tx-medium tx-size-12 tx-white rounded-0" data-toggle="tooltip" data-placement="bottom" title="{{`退出登录`|T}}" onclick="return confirm('{{`真的要退出登录吗？`|T}}');">{{"退出"|T}}</a>
+        {{else}}
+        <a href="{{FrontendURL}}/sign_in" class="btn btn-secondary bd-2 tx-medium tx-size-12 tx-gray rounded-0">{{"登录"|T}}</a>
+        <a href="{{FrontendURL}}/sign_up" class="btn btn-inverse bg-black-2 mg-l-10 tx-normal tx-size-12 rounded-0">{{"注册"|T}}</a>
+        {{end}}
+      </div>
+    </div><!-- container -->
+  </div><!-- headpanel -->
+{{/Strip}}

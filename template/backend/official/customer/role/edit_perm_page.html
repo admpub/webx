@@ -1,0 +1,6 @@
+{{- range $key, $nav := Stored.topNavigate -}}
+{{Include "official/customer/role/edit_perm_page_list" $nav}}
+{{- end -}}
+{{- range $key, $nav := Stored.leftNavigate -}}
+{{Include "official/customer/role/edit_perm_page_list" $nav}}
+{{- end -}}

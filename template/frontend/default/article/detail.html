@@ -1,0 +1,179 @@
+{{Strip}}{{Extend "base"}}
+{{Block "title"}}
+{{- Stored.data.Title}} - {{"文章详情"|T -}}{{/Block}}
+{{Block "keywords"}}{{- "文章详情"|T -}},{{Stored.data.Title}}{{/Block}}
+{{Block "description"}}{{Stored.data.Summary}}{{/Block}}
+{{Block "bodyAttr"}} class="landing-3 pd-t-70 bg-gray-lightest"{{/Block}}
+{{Block "head"}}
+<link rel="stylesheet" href="{{AssetsXURL}}/css/_page/article_detail.css?t={{BuildTime}}" />
+{{/Block}}
+{{Block "body"}}
+  {{Include "#default#header"}}
+  {{- $data := Stored.data -}}
+  {{- $clickFlow := Stored.clickFlow -}}
+  {{- $sourceInfo := Stored.sourceInfo -}}
+  {{- $hasSourceInfo := and $sourceInfo $sourceInfo.X -}}
+  <div class="bb-mainpanel">
+  <div class="container pd-b-40">
+    <div class="row row-lg">
+      <div class="col-lg-12">
+        <div class="card mg-t-20">
+          <div class="card-header bg-superlight-x">
+            <div class="d-sm-flex justify-content-between align-items-center pd-x-10">
+              <div>
+                <h1 class="tx-inverse tx-spacing-neg-2 tx-bold tx-size-30 mg-y-20">{{$data.Title}}</h1>
+                <div class="tx-gray-light">
+                  {{- if eq $data.Display `N` -}}
+                  <span class="badge badge-danger mg-r-10">{{`待审核`|T}}</span>
+                  {{- end -}}
+                  {{- $author := Stored.author -}}
+                  <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`作者`|T}}">
+                  <i class="fa fa-user tx-gray-lighter"></i>
+                  {{if $author.HomeURL -}}
+                  <a href="{{$author.HomeURL}}" target="_blank">{{$author.Name}}</a>
+                  {{- else -}}
+                  {{- $author.Name -}}
+                  {{- end -}}
+                  </span>
+
+                  {{- if gt (len Stored.categories) 0 -}}
+                  <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`分类`|T}}">
+                  <i class="fa fa-circle tx-size-8 tx-gray-lighter"></i>
+                  {{range $index, $category := Stored.categories -}}
+                  {{- if gt $index 0 -}}
+                  <i class="fa fa-angle-right wd-10 text-center"></i>
+                  {{- end -}}
+                  <a href="{{Stored.listURL}}?categoryId={{$category.Id}}">{{$category.Name}}</a>
+                  {{- end -}}
+                  {{- end -}}
+                  </span>
+
+                    {{- if $data.Tags -}}
+                    <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`标签`|T}}">
+                        <i class="fa fa-tags tx-gray-lighter"></i>
+                        {{range $tagK,$tagV := Split $data.Tags ","}}
+                        {{if gt $tagK 0}}/{{end}}
+                        <span class="tx-info"><a href="{{Stored.listURL}}?tag={{$tagV}}">{{$tagV}}</a></span>
+                        {{- end -}}
+                    </span>
+                    {{- end -}}
+
+                    <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`发布日期`|T}}">
+                    <i class="fa fa-clock-o tx-gray-lighter"></i>
+                    <span class="d-inline-block" title="{{(Date $data.Created).Format "2006-01-02"}}">{{(Date $data.Created).Format (T "2006年1月2日")}}</span>
+                    </span>
+
+                    <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`浏览次数`|T}}">
+                      <i class="fa fa-eye tx-gray-lighter"></i> 
+                      {{$data.Views}}
+                    </span>
+
+                    {{- if eq $data.CloseComment "N" -}}
+                    <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`评论数量`|T}}">
+                      <a href="#comment-list" class="tx-gray-light">
+                        <i class="fa fa-comment tx-gray-lighter"></i>
+                        <span class="comment-count-num">
+                          {{$data.Comments}}
+                        </span>
+                      </a>
+                    </span>
+                    {{- end -}}
+
+                    <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`点赞数量`|T}}">
+                      <a href="javascript:;" class="{{if and $clickFlow (eq $clickFlow.Type `like`)}}tx-success{{else}}tx-gray-light{{end}} hover-success d-inline-block mg-r-25" id="declare-like" data-article-id="{{$data.Id}}">
+                        <i class="fa fa-thumbs-up tx-gray-lighter"></i>
+                        <span class="tx-size-14" id="article-likes">{{$data.Likes}}</span>
+                      </a>
+                    </span>
+                  </div><!-- d-flex -->
+              </div>
+              <a href="{{Stored.listURL}}" class="btn btn-white bd-0 tx-uppercase tx-size-12 tx-spacing-2 pd-y-15 mg-t-20 mg-sm-t-0">
+                {{"查看更多"|T}}
+                <i class="fa fa-angle-right mg-l-5"></i>
+              </a>
+            </div><!-- d-flex -->
+  
+          </div>
+          <div class="card-block pd-10 tx-size-sm">
+            <!-- <h2 class="lh-3 mg-y-20 tx-inverse">{{$data.Title}}</h2> -->
+            {{if $data.Summary}}
+            <div class="lead pd-10 bg-indigo tx-white mg-b-20">{{$data.Summary}}</div>
+            <!-- <blockquote class="blockquote">
+              <p class="mb-0 tx-inverse">{{$data.Summary}}</p>
+              <footer class="blockquote-footer tx-size-sm">Author</footer>
+            </blockquote> -->
+            {{end}}
+            <div class="content" id="article-content">
+              {{- if eq $data.Contype "markdown" -}}
+              <div class="markdown-code pd-0-force">{{- OutputContent $data.Content $data.Contype -}}</div>
+              {{- else -}}
+              {{- OutputContent $data.Content $data.Contype -}}
+              {{- end -}}
+            </div>
+            {{Include "#default#article/detail_source_info"}}
+          </div><!-- card-block -->
+          <div class="card-footer pd-x-0">
+            <div class="col-md-12 d-sm-flex justify-content-between align-items-center">
+              <div class="col-md-5">
+                {{- $prevRow := Stored.prevRow -}}
+                {{- if and $prevRow (gt $prevRow.Id 0) -}}
+                <i class="fa fa-arrow-left"></i>
+                <a data-toggle="tooltip" title="{{`上一篇：`|T}}{{$prevRow.Title}}" href="{{FrontendURL}}/article/{{$prevRow.Id}}{{Ext}}">{{$prevRow.Title}}</a>
+                {{- end -}}
+              </div>
+              <div class="col-md-5 tx-right">
+                {{- $nextRow := Stored.nextRow -}}
+                {{- if and $nextRow (gt $nextRow.Id 0) -}}
+                <a data-toggle="tooltip" title="{{`下一篇：`|T}}{{$nextRow.Title}}" href="{{FrontendURL}}/article/{{$nextRow.Id}}{{Ext}}">{{$nextRow.Title}}</a>
+                <i class="fa fa-arrow-right"></i>
+                {{- end -}}
+              </div>
+            </div>
+          </div><!-- card-footer-->
+        </div><!-- card -->
+
+        <div class="card rounded-0 bg-superlight mg-t-20">
+          <div class="card-block pd-20 pd-xs-x-30 d-xs-flex justify-content-between align-items-center">
+            <h6 class="tx-size-14 tx-bold tx-uppercase tx-inverse mg-b-0">{{"分享这篇文章"|T}}</h6>
+            <div class="tx-size-20">
+            {{Include "#default#share_button"}}
+            </div>
+          </div><!-- card -->
+        </div><!-- card -->
+
+        {{if and (eq $data.CloseComment "N") (ne Config.base.comment "close")}}
+        <a name="comment-list"></a>
+        <div class="card mg-t-20 pd-x-10">
+          <div class="card-header pd-y-20 pd-x-0">
+            <a href="javascript:;" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-comment-form">{{"添加评论"|T}}</a>
+            <h4 class="tx-inverse tx-bold tx-spacing-neg-2 mg-b-0">{{T "评论"}} (<span class="comment-count-num">{{$data.Comments}}</span>)</h4>
+          </div><!-- card-header -->
+          <!-- <div id="comment-list-container" data-url="{{FrontendURL}}/article/comment_list?id={{$data.Id}}&flat=true"></div> -->
+          <div id="comment-list-container" data-replace-state="1">{{Include "#default#article/comment_list"}}</div>
+        </div><!-- card -->
+        {{Include "#default#article/comment_form_modal"}}
+        {{- Set "comment_form.container_class" `pd-x-10` -}}
+        {{Include "#default#article/comment_form"}}
+        {{end}}
+      </div><!-- col-12 -->
+    </div><!--  row -->
+  </div><!-- container -->
+  {{Include "#default#article/_footer"}}
+</div><!-- bb-mainpanel -->
+{{/Block}}
+{{Block "footer"}}
+<!-- markdown support -->
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script type="text/javascript" src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<!-- /markdown support -->
+<script type="text/javascript" src="{{AssetsXURL}}/js/_page/article_detail.js?t={{BuildTime}}"></script>
+<script>
+$(function(){
+  App.editor.markdownToHTML('#article-content');
+  bindCommentList($('#comment-list-container'), false, $('#headPanel').height()+90);
+  initPageAllCommentForm();
+});
+</script>
+<!-- <script type="text/javascript" src="{{AssetsXURL}}/js/_page/comment.js?t={{BuildTime}}"></script> -->
+{{/Block}}
+{{/Strip}}

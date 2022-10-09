@@ -1,0 +1,61 @@
+{{Extend "layout"}}
+{{Block "title"}}{{"消息详情"|T}}{{/Block}}
+{{Block "head"}}
+{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li><a href="{{BackendURL}}/manager/message/index">{{"消息管理"|T}}</a></li>
+<li class="active">{{"消息详情"|T}}</li>
+{{/Block}}
+{{Block "main"}}
+{{$data := Stored.data}}
+{{$replyList := Stored.replyList}}
+<div class="message">
+    <div class="head">
+        <h4>
+            {{$data.Title|Default (T "无标题")}}
+            <span>
+            <b data-toggle="tooltip" title="{{(Date $data.Created).Format "2006-01-02 15:04:05"}}">{{$data.Created|TsHumanize}}</b>
+            </span>
+        </h4>
+    </div>
+    <div class="mail" id="message-content">
+  {{- if eq $data.Contype "markdown" -}}
+  <div class="markdown-code">{{- OutputContent $data.Content $data.Contype -}}</div>
+  {{- else -}}
+  {{- OutputContent $data.Content $data.Contype -}}
+  {{- end -}}
+  <div class="foot">
+      <hr />
+      <a href="{{BackendURL}}/manager/message/index" class="btn btn-default pull-right">
+        <i class="fa fa-reply"></i>
+        {{"返回列表"|T}}
+      </a>
+      <a href="{{BackendURL}}/manager/message/delete?id={{$data.Id}}" class="btn btn-danger pull-right" onclick="return confirm('{{"真的要删除吗？"|T}}');">
+        <i class="fa fa-trash"></i>
+        {{"删除消息"|T}}
+     </a>
+    {{if eq $data.MsgFrom.Type "customer"}}<a href="{{FrontendURL}}/u/{{$data.MsgFrom.Id}}" target="_blank">{{end}}
+      <img src="{{if $data.MsgFrom.Avatar}}{{AddSuffix $data.MsgFrom.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" style="width:30px;height:30px">
+      <strong>{{$data.MsgFrom.Name|Default (T "【系统】")}}</strong>
+      {{if eq $data.MsgFrom.Type "customer"}}</a>{{end}}
+      <span class="badge badge-default md-margin-left md-margin-right"><i class="fa fa-arrow-right"></i> {{"发送给"|T}} <i class="fa fa-arrow-right"></i></span>
+      {{if eq $data.MsgTo.Type "customer"}}<a href="{{FrontendURL}}/u/{{$data.MsgTo.Id}}" target="_blank">{{end}}
+      <img src="{{if $data.MsgTo.Avatar}}{{AddSuffix $data.MsgTo.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" style="width:30px;height:30px">
+      <strong>{{$data.MsgTo.Name}}</strong>
+      {{if eq $data.MsgTo.Type "customer"}}</a>{{end}}
+  </div>
+    </div>
+</div>
+{{/Block}}
+{{Block "footer"}}
+<!-- markdown support -->
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script type="text/javascript" src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<!-- /markdown support -->
+<script>
+$(function () {
+  App.editor.markdownToHTML('#message-content');
+});
+</script>
+{{/Block}}

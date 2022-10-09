@@ -1,0 +1,64 @@
+{{Strip}}{{Extend "#blogdefault#base"}}
+{{Block "title"}}
+{{Config.base.siteName}}
+{{/Block}}
+{{Block "keywords"}}{{Config.base.siteName}}{{/Block}}
+{{Block "description"}}{{Config.base.siteName}}{{/Block}}
+{{Block "body"}}
+        {{Include "#blogdefault#article/index/hero"}}
+        {{Include "#blogdefault#article/index/featured"}}
+        
+        <!-- ============= AD CAMPAIGN ============= -->
+        <div class="container mt-2">
+            <div class="ad-campaign bg-cover" style="background-image: url('{{AssetsXURL}}/blogdefault/img/add-campaign-1.png')">
+                <div class="content-left">
+                    <span class="discount">20% off</span>
+                    <h3 class="heading-primary mt-10">Home Furniture</h3>
+                </div>
+                <div class="content-right">
+                    <h4>Best quality ever!</h4>
+                    <div class="content">
+                        <p class="body-text">
+                            Magna incididunt commodo aute cupidatat duis eiusmo magna elit aliqua nulla incididunt ex.
+                        </p>
+                        <a href="#" class="button icon-button active">
+                            <span class="icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{Include "#blogdefault#article/index/trending"}}
+        {{Include "#blogdefault#article/index/discussed"}}
+        
+        <!-- ============= AD CAMPAIGN ============= -->
+        <div class="container mt-1">
+            <div class="ad-campaign bg-cover" style="background-image: url('{{AssetsXURL}}/blogdefault/img/add-campaign-2.png')">
+                <div class="content-left">
+                    <span class="discount">20% off</span>
+                    <h3 class="heading-primary mt-10">Home Furniture</h3>
+                </div>
+                <div class="content-right">
+                    <h4>Best quality ever!</h4>
+                    <div class="content">
+                        <p class="body-text">
+                            Magna incididunt commodo aute cupidatat duis eiusmo magna elit aliqua nulla incididunt ex.
+                        </p>
+                        <a href="#" class="button icon-button active">
+                            <span class="icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{Include "#blogdefault#article/index/recent"}}
+
+        {{Include "#blogdefault#friendlink"}}
+{{/Block}}
+{{/Strip}}

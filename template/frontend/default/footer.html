@@ -1,0 +1,3 @@
+{{Strip}}{{- $footerClass := Get `footerClass` -}}
+<footer class="{{if not (Get `ignorePosAbsoluteBottom`)}}pos-absolute-bottom {{end}}pd-y-20"><div class="container {{if $footerClass}}{{$footerClass}}{{else}}tx-center{{end}} tx-size-xs">{{Include "#default#footer_text"}}</div><!-- container --></footer>
+{{/Strip}}

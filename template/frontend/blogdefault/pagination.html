@@ -1,0 +1,30 @@
+{{Strip}}{{$pjax := Form "_pjax"}}
+<ul class="pagination pagination-wrapper">
+    {{- $page := .Page -}}
+      <li>
+        <a href="{{$.URL 1}}"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+          <i class="fa fa-angle-double-left"></i>
+        </a>
+      </li>
+      <li{{if eq $page 1}} class="disabled"{{end}}>
+        <a href="{{.URL .PrevPage}}"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+          <i class="fa fa-angle-left"></i>
+        </a>
+      </li>
+      {{- range $k,$v := .List -}}
+      <li>
+          <a href="{{$.URL $v}}"{{if eq $v $page}} class="active"{{end}}{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>{{$v}}</a>
+      </li>
+      {{- end -}}
+      <li{{if ge $page .Pages}} class="disabled"{{end}}>
+        <a href="{{.URL .NextPage}}"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </li>
+      <li>
+        <a href="{{$.URL .Pages}}"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+          <i class="fa fa-angle-double-right"></i>
+        </a>
+      </li>
+</ul>
+{{/Strip}}

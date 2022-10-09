@@ -1,0 +1,24 @@
+{{Strip}}{{Extend "base"}}
+{{Block "title"}}{{"注册账号"|T}}{{/Block}}
+{{Block "bodyAttr"}} class="tx-size-14"{{/Block}}
+{{Block "body"}}
+<div class="wd-100p ht-md-100v d-md-flex">
+    <div class="wd-md-60p wd-lg-50p ht-100p bg-white d-flex align-items-center justify-content-center">
+      {{Include "_sign_up_form"}}
+    </div><!-- wd-50p -->
+    <div class="wd-md-40p wd-lg-50p ht-100p bg-white hidden-sm-down">
+      <img class="wd-100p ht-100p object-fit-cover" src="{{AssetsXURL}}/images/51.jpg" alt="Image">
+    </div><!-- wd-50p -->
+  </div><!-- ht-100v -->
+{{/Block}}
+{{Block "footer"}}
+{{- if . -}}
+{{Include "_modal"}}
+<script>
+$(function(){
+	showModal("{{.}}","{{if IsError .}}error{{else if IsOk .}}success{{else}}info{{end}}");
+});
+</script>
+{{- end -}}
+{{/Block}}
+{{/Strip}}

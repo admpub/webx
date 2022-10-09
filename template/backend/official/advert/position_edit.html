@@ -1,0 +1,100 @@
+{{Extend "layout"}}
+{{Block "title"}}{{if not Stored.isEdit}}{{"添加广告位"|T}}{{else}}{{"修改广告位"|T}}{{end}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li><a href="{{BackendURL}}/official/advert/index">{{"广告位管理"|T}}</a></li>
+<li class="active">{{if not Stored.isEdit}}{{"添加"|T}}{{else}}{{"修改"|T}}{{end}}</li>
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+          <div class="header">							
+            <h3>{{if not Stored.isEdit}}{{"添加广告位"|T}}{{else}}{{"修改广告位"|T}}{{end}}</h3>
+          </div>
+          <div class="content">
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"广告位名称"|T}}</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" required name="name" value="{{Form "name"}}">
+                </div>
+                <label class="col-sm-2 control-label">{{"唯一标识"|T}}</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" required name="ident" value="{{Form "ident"}}">
+                </div>
+              </div><div class="form-group">
+                <label class="col-sm-2 control-label">{{"宽度"|T}}</label>
+                <div class="col-sm-3">
+                  <div class="input-group">
+                    <input type="number" class="form-control" name="width" value="{{Form "width"}}" min="0">
+                    <span class="input-group-addon">{{`像素`|T}}</span>
+                  </div>
+                  <div class="help-block">{{`0代表不限制`|T}}</div>
+                </div>
+                <label class="col-sm-2 control-label">{{"高度"|T}}</label>
+                <div class="col-sm-3">
+                  <div class="input-group">
+                    <input type="number" class="form-control" name="height" value="{{Form "height"}}" min="0">
+                    <span class="input-group-addon">{{`像素`|T}}</span>
+                  </div>
+                  <div class="help-block">{{`0代表不限制`|T}}</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"默认广告"|T}}</label>
+                <div class="col-sm-8">
+                  <div class="fieldset bg-fc">
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"广告类型"|T}}</label>
+                <div class="col-sm-8">
+                  {{$contype := Form "contype" "text"}}
+                  <select name="contype" required id="contype" class="form-control">
+                    <option value=""> - {{`请选择`|T}} - </option>
+                    {{range $k, $v := Stored.contypes}}
+                    <option value="{{$v.K}}"{{if eq $v.K $contype}} selected="selected"{{end}}>{{$v.V}}</option>
+                    {{end}}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"广告内容"|T}}</label>
+                <div class="col-sm-8">
+                  <textarea class="form-control" name="content">{{Form "content"}}</textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"跳转网址"|T}}</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" name="url" value="{{Form "url"}}">
+                </div>
+              </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">{{"状态"|T}}</label>
+                  <div class="col-sm-8">
+                    {{$v := Form "disabled" "N"}}
+                    <div class="radio radio-success radio-inline">
+                        <input type="radio" value="N" name="disabled" id="disabled-N"{{if eq $v "N"}} checked{{end}}> <label for="disabled-N">{{"显示"|T}}</label>
+                    </div>
+                      <div class="radio radio-danger radio-inline">
+                        <input type="radio" value="Y" name="disabled" id="disabled-Y"{{if eq $v "Y"}} checked{{end}}> <label for="disabled-Y">{{"隐藏"|T}}</label>
+                      </div>
+                  </div>
+                </div>
+              <div class="form-group form-submit-group">
+									<div class="col-sm-9 col-sm-offset-2">
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									</div>
+							</div>
+            </form>
+          </div><!-- /.content -->
+        </div><!-- /.block-flat -->
+    </div>
+</div>
+{{/Block}}

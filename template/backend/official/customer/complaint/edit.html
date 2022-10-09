@@ -1,0 +1,93 @@
+{{Extend "layout"}}
+{{Block "title"}}{{"修改投诉"|T}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li><a href="{{BackendURL}}/official/customer/complaint/index">{{"投诉管理"|T}}</a></li>
+<li class="active">{{"修改投诉"|T}}</li>
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+          <div class="header">							
+            <h3>{{"修改投诉"|T}}</h3>
+          </div>
+          <div class="content">
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"投诉类型"|T}}</label>
+                <div class="col-sm-3">
+                  {{$v := Form "type"}}
+                  {{range $k, $t := Stored.types}}
+                  <div class="radio radio-success radio-inline">
+                    <input type="radio" value="{{$t.K}}" id="type-{{$t.K}}" name="type"{{if or (eq $v $t.K) (and (eq $v "") (eq $k 0))}} checked{{end}}> <label for="type-{{$t.K}}">{{$t.V}}</label>
+                  </div>
+                  {{end}}
+                </div>
+                <label class="col-sm-2 control-label">{{"投诉目标"|T}}</label>
+                <div class="col-sm-3">
+                  {{$v := Form "targetType"}}
+                  {{range $k, $t := Stored.targets}}
+                  <div class="radio radio-success radio-inline">
+                    <input type="radio" value="{{$t.K}}" id="target-{{$t.K}}" name="target"{{if or (eq $v $t.K) (and (eq $v "") (eq $k 0))}} checked{{end}}> <label for="target-{{$t.K}}">{{$t.V}}</label>
+                  </div>
+                  {{end}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"目标ID"|T}}</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="targetId" value="{{Form "targetId"}}" min="0">
+                </div>
+                <label class="col-sm-2 control-label">{{"目标标识"|T}}</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="targetIdent" value="{{Form "targetIdent"}}">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"投诉内容"|T}}</label>
+                <div class="col-sm-8">
+                  <textarea class="form-control" name="content">{{Form "content"}}</textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{`处理状态`|T}}</label>
+                <div class="col-sm-8">{{$v := Form `process` `idle`}}
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="idle" name="process" id="process-idle" {{- if eq $v "idle"}} checked="checked"{{end}}>
+                    <label for="process-idle">{{`空闲`|T}}</label>
+                  </div>
+                  <div class="radio radio-danger radio-inline">
+                    <input type="radio" value="reject" name="process" id="process-reject" {{- if eq $v "reject"}} checked="checked"{{end}}>
+                    <label for="process-reject">{{`驳回`|T}}</label>
+                  </div>
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="queue" name="process" id="process-queue" {{- if eq $v "queue"}} checked="checked"{{end}}>
+                    <label for="process-queue">{{`处理中`|T}}</label>
+                  </div>
+                  <div class="radio radio-success radio-inline">
+                    <input type="radio" value="done" name="process" id="process-done" {{- if eq $v "done"}} checked="checked"{{end}}>
+                    <label for="process-done">{{`已处理`|T}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"处理结果"|T}}</label>
+                <div class="col-sm-8">
+                  <textarea class="form-control" name="result">{{Form "result"}}</textarea>
+                </div>
+              </div>
+              
+              <div class="form-group form-submit-group">
+									<div class="col-sm-9 col-sm-offset-2">
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									</div>
+							</div>
+            </form>
+          </div><!-- /.content -->
+        </div><!-- /.block-flat -->
+    </div>
+</div>
+{{/Block}}

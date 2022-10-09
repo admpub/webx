@@ -1,0 +1,94 @@
+{{Extend "layout"}}
+{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li><a href="{{BackendURL}}/manager/frontend/route_page">{{"路由页面管理"|T}}</a></li>
+<li class="active">{{Stored.title}}</li>
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+          <div class="header">
+            <h3>{{Stored.title}}</h3>
+          </div>
+          <div class="content">
+            {{Include "official/manager/frontend/route_page_tips"}}
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"类型"|T}}</label>
+                <div class="col-sm-8">
+                  {{$pageType := Form `pageType` `text`}}
+                  {{range $k, $v := Stored.typeList}}
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="{{$v.K}}" id="page-type-{{$v.K}}" name="pageType"{{if eq $v.K $pageType}} checked="checked"{{end}}><label for="page-type-{{$v.K}}">{{$v.V}}</label> 
+                  </div>
+                  {{end}}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"页面名称"|T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="name" value="{{Form `name`}}">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"路由方法"|T}}</label>
+                <div class="col-sm-8">
+                  {{$methods := FormxValues "method[]"}}
+                  {{range $k, $method := Stored.methodList}}
+                  <div class="checkbox checkbox-primary checkbox-inline"> 
+                    <input type="checkbox" value="{{$method}}" id="method-{{$method}}" name="method[]"{{if methodChecked $method $methods}} checked{{end}}><label for="method-{{$method}}">{{$method}}</label>
+                  </div>
+                  {{end}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"页面路由"|T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="route" value="{{Form `route`}}">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"页面内容"|T}}</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" name="pageContent" style="resize:vertical" rows="20">{{Form "pageContent"}}</textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"页面变量"|T}}</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" name="pageVars" style="resize:vertical" rows="10">{{Form "pageVars"}}</textarea>
+                    <div class="help-block">{{`JSON格式，如果留空则不会解析页面内容中的模板标签`|T}}</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"状态"|T}}</label>
+                <div class="col-sm-3">
+                  {{$v := Form "disabled"}}
+                  <div class="radio radio-primary radio-inline"> 
+                    <input type="radio" value="N" id="disabled-N" name="disabled"{{if or (eq $v `N`) (eq $v ``)}} checked{{end}}><label for="disabled-N">{{"启用"|T}}</label>
+                  </div>
+                  <div class="radio radio-danger radio-inline"> 
+                    <input type="radio" value="Y" id="disabled-Y" name="disabled"{{if eq $v `Y`}} checked{{end}}><label for="disabled-Y">{{"禁用"|T}}</label> 
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group form-submit-group">
+									<div class="col-sm-9 col-sm-offset-2">
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									</div>
+							</div>
+            </form>
+          </div><!-- /.content -->
+        </div><!-- /.block-flat -->
+    </div>
+</div>
+{{/Block}}

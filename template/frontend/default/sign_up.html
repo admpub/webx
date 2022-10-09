@@ -1,0 +1,24 @@
+{{Strip}}{{Extend "#default#base"}}
+{{Block "title"}}{{"注册账号"|T}}{{/Block}}
+{{Block "bodyAttr"}} class="bg-superlight tx-size-sm"{{/Block}}
+{{Block "body"}}
+{{Include "#default#headsimple"}}
+<div class="wd-100p d-flex align-items-center justify-content-center pd-t-100 pd-x-20">
+    <div class="card rounded-0 wd-450">
+        {{Include "#default#_sign_up_form"}}
+    </div><!-- card -->
+</div><!-- container -->
+{{Set `ignorePosAbsoluteBottom` true}}
+{{Include "#default#footer"}}
+{{/Block}}
+{{Block "footer"}}
+{{- if . -}}
+{{Include "#default#_modal"}}
+<script>
+    $(function(){
+        showModal("{{.}}","{{if IsError .}}error{{else if IsOk .}}success{{else}}info{{end}}");
+    });
+</script>
+{{- end -}}
+{{/Block}}
+{{/Strip}}

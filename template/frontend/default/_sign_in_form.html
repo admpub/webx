@@ -1,0 +1,42 @@
+{{Strip}}
+            <div class="bg-white rounded wd-md-350 wd-lg-100p">
+              {{Include "#default#_oauth_binding_tips"}}
+              <div class="pd-y-30 pd-x-25 wd-100p">
+                {{if not Stored.oauth}}
+                <h2 class="tx-gray-dark tx-normal tx-center">{{"登录"|T}}</h2>
+                <p class="tx-size-sm mg-b-30 tx-center">{{"请输入您的账号进行登录"|T}}</p>
+                {{end}}
+              <form id="sign-in-form" onsubmit="signIn(this,'{{GetNextURL}}');return false;">
+                <div class="input-group mg-b-20">
+                  <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-person tx-gray-light"></i></span>
+                  <input type="text" name="name" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" placeholder="{{"登录名"|T}}" data-toggle="tooltip" title="{{"请输入登录名"|T}}" required autofocus="autofocus">
+                </div><!-- input-group -->
+                <div class="input-group mg-b-20">
+                  <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-locked tx-gray-light"></i></span>
+                  <input type="password" name="password" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" placeholder="{{"登录密码"|T}}" data-toggle="tooltip" title="{{"请输入登录密码"|T}}" required>
+                </div><!-- input-group -->
+                <div class="input-group mg-b-20">
+                  <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-eye tx-gray-light"></i></span>
+                  <input type="text" placeholder="{{"请输入验证码"|T}}" value="{{Form "code"}}" name="code" required="required" data-toggle="tooltip" title="{{"验证码"|T}}" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter">
+                  <span class="input-group-addon pd-0">{{CaptchaForm}}</span>
+                </div>
+                <div class="tx-size-xs mg-b-10">
+                  <span class="pull-right">
+                    <a href="{{WithNextURL Stored.forgotURL}}">{{"找回密码"|T}}</a> 
+                    |
+                    <a href="{{WithNextURL Stored.signUpURL}}">{{"创建账号"|T}}</a>
+                  </span>
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="remember-duration" value="forever" name="remember">
+                  <span class="custom-control-indicator"></span>
+                  <div class="custom-control-description">
+                    {{`记住登录`|T}}
+                  </div>
+                </label>
+                </div>
+                <button class="btn btn-inverse tx-size-sm btn-block"> {{"登入"|T}}</button>
+              </form>
+                {{Include "#default#_3rd_platform_login"}}
+              </div>
+            </div>
+{{/Strip}}

@@ -1,0 +1,34 @@
+{{Strip}}{{- range $k,$v := FrontendNav 0 -}}
+{{- $url := $v.URL -}}
+{{- $isValidURL := $url -}}
+    {{- if $v.HasChildren Context -}}
+        {{- if eq $v.Direction `X` -}}
+        {{- range $key,$sub := $v.FetchChildren Context -}}
+        <li>
+            <a href="{{$sub.Url}}" class="nav-link{{if $sub.IsActive Context}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
+                {{$sub.Title}}
+                {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
+            </a>
+            {{- if $sub.HasChildren Context -}}
+            {{Include "#default#navigate_list_sf_children" $sub}}
+            {{- end -}}
+        </li>
+        {{- end -}}
+        {{- else -}}
+        <li>
+          <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive Context}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
+              {{$v.Title}}
+              {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
+            </a>
+          {{Include "#default#navigate_list_sf_children" $v}}
+        </li>
+        {{- end -}}
+    {{- else -}}
+        <li><a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive Context}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
+            {{$v.Title}}
+            {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
+        </a></li>
+    {{- end -}}
+{{- else -}}
+        <li><a href="{{FrontendURL}}/" class="nav-link{{if eq URL.Path `/`}} active{{end}}">{{"首页"|T}}</a></li>
+{{- end -}}{{/Strip}}

@@ -1,0 +1,134 @@
+{{Extend "layout"}}
+{{Block "title"}}{{if HasSuffix URL.Path "_add"}}{{"添加分类"|T}}{{else}}{{"修改分类"|T}}{{end}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li><a href="{{BackendURL}}/official/article/category">{{"分类管理"|T}}</a></li>
+<li class="active">{{if HasSuffix URL.Path "_add"}}{{"添加"|T}}{{else}}{{"修改"|T}}{{end}}</li>
+{{/Block}}
+{{Block "head"}}
+<link rel="stylesheet" href="{{AssetsURL}}/js/jquery.uploadPreviewer/css/jquery.uploadPreviewer.min.css?t={{BuildTime}}" type="text/css" />
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+          <div class="header">							
+            <h3>{{if HasSuffix URL.Path "_add"}}{{"添加分类"|T}}{{else}}{{"修改分类"|T}}{{end}}</h3>
+          </div>
+          <div class="content">
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"类别"|T}}</label>
+                <div class="col-sm-8">
+                  {{$type := Stored.type}}
+                  {{$id := Form "id"}}
+                  {{if Stored.editableType}}
+                  {{range $k, $v := Stored.typeList}}
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="{{$v.K}}" id="type-{{$v.K}}" name="type"{{if eq $v.K $type}} checked="checked"{{end}} onclick="window.location.href='?type={{$v.K}}&id={{$id}}'"><label for="type-{{$v.K}}">{{$v.V}}</label> 
+                  </div>
+                  {{end}}
+                  {{else}}
+                  <span class="form-control no-border">{{getTypeName $type $type}}</span>
+                  {{end}}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"上级分类"|T}}</label>
+                <div class="col-sm-8">
+                  {{$v := (Formx "parentId").Uint}}
+                  <select name="parentId" class="form-control" id="parentId">
+                    <option value=""></option>
+                    {{range $k, $c := Stored.categoryList}}
+                    <option value="{{$c.Id}}"{{if eq $c.Id $v}} selected="selected"{{end}}>{{$c.Name}}</option>
+                    {{end}}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"分类图片"|T}}</label>
+                <div class="col-sm-8">
+                    {{Include "_common/file_input" (MakeMap `name` `cover` `value` (Form `cover`) `subdir` `category`)}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"分类名称"|T}}</label>
+                <div class="col-sm-8">
+                    {{- if HasSuffix URL.Path "_add" -}}
+                    <textarea class="form-control resize-y" placeholder='{{"分类名称"|T}}' name="name" rows="5">{{Form "name"}}</textarea>
+                    <div class="help-block">{{"如要一次添加多个同级分类，请一行一个"|T}}</div>
+                    {{- else -}}
+                    <input type="text" class="form-control" name="name" value="{{Form "name"}}">
+                    {{- end -}}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"分类说明"|T}}</label>
+                <div class="col-sm-8">
+                  <textarea class="form-control resize-y" name="description">{{Form "description"}}</textarea>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"模板文件"|T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="template" value="{{Form "template"}}">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"排序编号"|T}}</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="sort" value="{{Form `sort` `5000`}}">
+                    <div class="help-block">{{"排序编号(从小到大)"|T}}</div>
+                </div>
+                <label class="col-sm-2 control-label">{{"状态"|T}}</label>
+                <div class="col-sm-3">
+                  {{$v := Form "disabled"}}
+                  <div class="radio radio-primary radio-inline"> 
+                    <input type="radio" value="N" id="disabled-N" name="disabled"{{if or (eq $v "N") (eq $v "")}} checked{{end}}><label for="disabled-N">{{"启用"|T}}</label>
+                  </div>
+                  <div class="radio radio-danger radio-inline"> 
+                    <input type="radio" value="Y" id="disabled-Y" name="disabled"{{if eq $v "Y"}} checked{{end}}><label for="disabled-Y">{{"禁用"|T}}</label> 
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"显示在菜单"|T}}</label>
+                <div class="col-sm-3">
+                  {{$v := Form "showOnMenu" "Y"}}
+                  <div class="radio radio-primary radio-inline"> 
+                    <input type="radio" value="Y" id="showOnMenu-Y" name="showOnMenu"{{if eq $v "Y"}} checked{{end}}><label for="showOnMenu-Y">{{"显示"|T}}</label>
+                  </div>
+                  <div class="radio radio-danger radio-inline"> 
+                    <input type="radio" value="N" id="showOnMenu-N" name="showOnMenu"{{if eq $v "N"}} checked{{end}}><label for="showOnMenu-N">{{"不显示"|T}}</label> 
+                  </div>
+                  <div class="help-block">{{"是否显示在前台导航菜单上"|T}}</div>
+                </div>
+              </div>
+
+              <div class="form-group form-submit-group">
+									<div class="col-sm-9 col-sm-offset-2">
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									</div>
+							</div>
+            </form>
+          </div><!-- /.content -->
+        </div><!-- /.block-flat -->
+    </div>
+</div>
+{{/Block}}
+{{Block "footer"}}
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/jquery.uploadPreviewer/jquery.uploadPreviewer.min.js?t={{BuildTime}}"></script>
+<script>
+$(function(){
+  App.editor.fileInput();
+})
+</script>
+{{/Block}}

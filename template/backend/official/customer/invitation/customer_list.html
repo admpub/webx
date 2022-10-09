@@ -1,0 +1,64 @@
+{{Extend "layout"}}
+{{Block "title"}}{{"使用记录"|T}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li><a href="{{BackendURL}}/official/customer/invitation/index">{{"邀请码列表"|T}}</a></li>
+<li class="active">{{"使用记录"|T}}</li>
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+				<div class="col-md-12">
+					<div class="block-flat">
+						<div class="header">
+							<h3>{{"使用记录"|T}}</h3>
+						</div>
+						<div class="content">
+							<div class="table-responsive">
+							<table class="table no-border hover">
+								<thead class="no-border">
+									<tr>
+										<th style="width:80px"><strong>ID</strong></th>
+										<th><strong>{{"邀请码"|T}}</strong></th>
+										<th><strong>{{"使用者"|T}}</strong></th>
+										<th style="width:130px"><strong>{{"使用时间"|T}}</strong></th>
+										<th style="width:130px"><strong>{{"代理等级"|T}}</strong></th>
+										<th style="width:130px"><strong>{{"客户等级"|T}}</strong></th>
+										<th><strong>{{"客户角色"|T}}</strong></th>
+									</tr>
+								</thead>
+								<tbody class="no-border-y">
+                                    {{range $k,$v := Stored.listData}}
+									<tr>
+										<td>{{$v.Id}}</td>
+										<td>{{if $v.Invitation}}{{$v.Invitation.Code}}{{else}}-{{end}}</td>
+										<td>
+                                            {{if $v.Customer}}<a href="{{FrontendURL}}/u/{{$v.Customer.Id}}" target="_blank">{{$v.Customer.Name}}{{else}}-{{end}}
+										</td>
+										<td>
+											{{$v.Created|DateFormat "2006-01-02 15:04:05"}}
+										</td>
+										<td>
+											{{if $v.Agent}}{{$v.Agent.Name}}{{else}}-{{end}}
+										</td>
+										<td>
+                                            {{if $v.Level}}{{$v.Level.Name}}{{else}}-{{end}}
+                                        </td>
+										<td>
+                                            {{if $v.RoleList}}
+                                            {{range $key,$val:=$v.RoleList}}
+                                            {{if gt $key 0}}/{{end}}
+                                            {{$val.Name}}
+                                            {{end}}
+                                            {{end}}
+                                        </td>
+									</tr>
+                                    {{end}}
+								</tbody>
+							</table>		
+							</div>
+							{{Stored.pagination.Render}}
+						</div>
+					</div>				
+				</div>
+			</div>
+{{/Block}}

@@ -1,0 +1,48 @@
+{{Strip}}{{Extend "#default#base"}}
+{{Block "title"}}
+{{- if .title -}}
+{{- .title|StripTags -}}
+{{- else -}}
+Coming Soon
+{{- end -}}
+{{/Block}}
+{{Block "bodyAttr"}} class="bg-white tx-size-sm"{{/Block}}
+{{Block "body"}}
+    <div class="pos-absolute a-0 bg-img bg-img-3" style="background-image:url('{{AssetsXURL}}/images/83.jpg');"></div>
+    <div class="pos-absolute wd-100p ht-100p d-flex align-items-end align-items-sm-center">
+      <div class="container mg-b-60 mg-sm-b-0">
+        <div class="row wd-xs-80p wd-sm-100p">
+          <div class="col-sm-8 col-md-7 col-lg-5">
+            <a href="javascript:;" class="d-bloc tx-inverse tx-size-28 tx-spacing-neg-2 tx-bold">
+                <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="wd-50 ht-50" alt="{{Config.base.siteName}}">
+                {{Config.base.siteName}}
+            </a>
+            <h1 class="tx-size-sm-36 tx-size-md-44 tx-size-xl-60 tx-inverse tx-bold tx-spacing-neg-2 mg-b-15">
+                {{- if .title -}}
+                {{- .title|ToHTML -}}
+                {{- else -}}
+                Coming Soon
+                {{- end -}}
+            </h1>
+            <div id="announcement-content" class="tx-size-14 tx-size-xs-16 mg-b-40 tx-inverse tx-normal lh-5">
+                {{- .content|ToHTML -}}
+            </div>
+            {{if .enabledNotify}}
+            <h6 class="tx-size-14 tx-size-xs-16 mg-b-15 tx-inverse">{{"接收邮件通知"|T}}</h6>
+            <form>
+            <div class="input-group">
+              <input type="text" class="form-control lh-6 tx-size-12 tx-size-sm-14" placeholder="{{"输入E-mail地址"|T}}">
+              <div class="input-group-btn pd-l-1">
+                <button class="btn btn-inverse tx-size-12 tx-size-sm-14">{{"通知我"|T}}</button>
+              </div><!-- input-group-btn -->
+            </div><!-- input-group -->
+            </form>
+            {{end}}
+          </div><!-- col-4 -->
+        </div><!-- row -->
+      </div><!-- container -->
+    </div><!-- pos-absolute -->
+    {{- Set `footerClass` `tx-left` -}}
+    {{Include "#default#footer"}}
+{{/Block}}
+{{/Strip}}

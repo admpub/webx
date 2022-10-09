@@ -1,0 +1,68 @@
+        <!-- ============= FOOTER ============= -->
+        <footer class="footer-wrapper">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row gy-4">
+                        <div class="col-lg-4">
+                            <div class="widget-about">
+                                <h3 class="footer-heading">About</h3>
+                                <p class="body-text">
+                                    Consequat quis laboris excepteur sint. Culpa quis cillum qui sunt in ad sint eu est
+                                    consectetur. Do cupidatat pariatur nulla ad ad proident qui culpa duis velit
+                                    pariatur.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="widget-categories">
+                                <h3 class="footer-heading">{{`标签`|T}}</h3>
+                                <div class="categories-tags">
+                                    {{- range $k,$v := tagList -}}
+                                    <a href="{{FrontendURL}}/articles?tag={{$v.Name}}" class="active"> {{$v.Name}} <sup>{{$v.Num}}</sup> </a>
+                                    {{- end -}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 offset-xl-1">
+                            <div class="widget-search">
+                                <h3 class="footer-heading">Search</h3>
+                                <p class="body-text">A breakdown or a flat tire can happen</p>
+                                <div class="widget-search-box">
+                                    <form action="{{FrontendURL}}/search" method="GET">
+                                    <input type="text" placeholder="Search" name="q" />
+                                    <button type="submit" class="search-btn">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="bottom-content">
+                        <div class="bottom-left">
+                            <p>
+                                &copy; {{Now.Format "2006"}}. All rights By <a href="{{Config.base.siteURL|Default (FrontendURL `/`)}}">{{Config.base.siteName}}</a>.
+{{- if Config.base.statCode -}}<span style="display:none">{{Config.base.statCode|ToHTML}}</span>{{- end -}}
+{{- if Config.base.siteSlogan -}}
+<br />
+{{- Config.base.siteSlogan -}}
+{{- end -}}
+                            </p>
+                        </div>
+                        <div class="bottom-right">
+                            <div class="footer-bottom-links">
+                                {{- if Config.base.siteICPFiling -}}
+                                <a href="{{Config.base.siteICPURL|Default `https://beian.miit.gov.cn/`}}" target="_blank">{{Config.base.siteICPFiling}}</a>
+                                {{- end -}}
+                                <span>|</span>
+                                <a href="#">Terms and conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>

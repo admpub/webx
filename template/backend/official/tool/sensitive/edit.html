@@ -1,0 +1,63 @@
+{{Extend "layout"}}
+{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li><a href="{{BackendURL}}/tool/sensitive/index">{{"敏感词管理"|T}}</a></li>
+<li class="active">{{Stored.title}}</li>
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+          <div class="header">							
+            <h3>{{Stored.title}}</h3>
+          </div>
+          <div class="content">
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"关键词"|T}}</label>
+                <div class="col-sm-8">
+                  {{- if HasSuffix URL.Path "/add" -}}
+                  <textarea class="form-control resize-y" placeholder='{{"关键词"|T}}' name="words" rows="5">{{Form "words"}}</textarea>
+                  <div class="help-block">{{"如要一次添加多个类型，请一行一个"|T}}</div>
+                  {{- else -}}
+                  <input type="text" class="form-control" name="words" value="{{Form `words`}}" maxlength="30" />
+                  {{- end -}}
+                </div>
+              </div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">{{"类型"|T}}</label>
+                  <div class="col-sm-8">
+                    {{$v := Form "type"}}
+                    <div class="radio radio-success radio-inline">
+                        <input type="radio" value="bad" name="type" id="type-bad"{{if or (eq $v "bad") (eq $v "")}} checked{{end}}> <label for="type-bad">{{"敏感词"|T}}</label>
+                    </div>
+                      <div class="radio radio-danger radio-inline">
+                        <input type="radio" value="noise" name="type" id="type-noise"{{if eq $v "noise"}} checked{{end}}> <label for="type-noise">{{"噪音词"|T}}({{`正则表达式，例如`|T}}<code>[\|\s&%$@*]+</code>)</label>
+                      </div>
+                  </div>
+                </div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">{{"状态"|T}}</label>
+                  <div class="col-sm-8">
+                    {{$v := Form "disabled"}}
+                    <div class="radio radio-success radio-inline">
+                        <input type="radio" value="N" name="disabled" id="disabled-N"{{if or (eq $v "N") (eq $v "")}} checked{{end}}> <label for="disabled-N">{{"启用"|T}}</label>
+                    </div>
+                      <div class="radio radio-danger radio-inline">
+                        <input type="radio" value="Y" name="disabled" id="disabled-Y"{{if eq $v "Y"}} checked{{end}}> <label for="disabled-Y">{{"禁用"|T}}</label>
+                      </div>
+                  </div>
+                </div>
+              <div class="form-group form-submit-group">
+									<div class="col-sm-9 col-sm-offset-2">
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									</div>
+							</div>
+            </form>
+          </div><!-- /.content -->
+        </div><!-- /.block-flat -->
+    </div>
+</div>
+{{/Block}}

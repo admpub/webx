@@ -1,0 +1,8 @@
+{{Strip}}<div class="dropdown-menu rounded-top-0">{{$v := .}}
+{{- range $key,$sub := $v.FetchChildren Context -}}
+<a href="{{$sub.Url}}" class="dropdown-item{{if $sub.IsActive Context}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
+    {{$sub.Title}}
+    {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
+</a>
+{{- end -}}
+</div>{{/Strip}}

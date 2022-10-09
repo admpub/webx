@@ -1,0 +1,16 @@
+{{- $data := Stored.data -}}
+{{- $author := Stored.author -}}
+{{if $data.Summary}}
+<!-- Post quote -->
+<div class="post-quote">
+    <p class="body-text">
+        {{$data.Summary}}
+    </p>
+    <div class="quote-bottom">
+        <a href="#" class="author">{{- $author.Name -}}</a>
+        <span class="gradient-bar small"></span>
+    </div>
+
+    <img class="quote-icon" src="{{AssetsXURL}}/blogdefault/img/single-post/quote-icon.png" alt="" />
+</div>
+{{end}}

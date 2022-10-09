@@ -1,0 +1,37 @@
+{{Strip}}
+{{Extend "base"}}
+{{Block "title"}}{{"选择文件"|T}}{{/Block}}
+{{Block "head"}}
+{{Include "#@backend#manager/file/list.head"}}
+{{/Block}}
+{{Block "headEnd"}}
+<style type="text/css">
+.pagination{padding:0 10px;margin-bottom:1em;}
+</style>
+{{/Block}}
+{{Block "bodyAttr"}} class="tx-size-14 bg-gray-lightest"{{/Block}}
+{{Block "body"}}
+<div class="main">
+    <div class="main-body{{if not Stored.dialog}} pd-20{{end}}">
+        <div class="bg-white">
+            <div class="col-lg-12 mg-t-0" id="file-list-box">
+                <div class="card bd-0 rounded-0">
+                    <div class="card-header pd-10 bd-b-0">
+                        <span class="pull-right">
+                            <input type="file" multiple="true" id="input-file-upload" style="width:125px;line-height:40px;margin-top:-10px" />
+                        </span>
+                        <h6 class="card-title tx-uppercase tx-size-15 tx-poppins mg-t-10 mg-b-0">{{"选择附件"|T}}</h6>
+                    </div><!-- card-header -->
+                    <div id="table-container">
+                        {{Include "user/file/list_partial"}}
+                    </div><!-- #table-container -->
+                </div><!-- card -->
+            </div><!-- col-6 -->
+        </div><!-- row -->
+    </div><!-- main-body -->
+</div><!-- main -->
+{{/Block}}
+{{Block "footer"}}
+{{Include "#@backend#manager/file/list.footer"}}
+{{/Block}}
+{{/Strip}}

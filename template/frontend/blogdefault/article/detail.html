@@ -1,0 +1,194 @@
+{{Strip}}{{Extend "#blogdefault#base"}}
+{{Block "title"}}{{- Stored.data.Title}} - {{"文章详情"|T -}}{{/Block}}
+{{Block "keywords"}}{{- "文章详情"|T -}},{{Stored.data.Title}}{{/Block}}
+{{Block "description"}}{{Stored.data.Summary}}{{/Block}}
+{{Block "head"}}
+<link rel="stylesheet" href="{{AssetsXURL}}/css/_page/article_detail.css?t={{BuildTime}}" />
+{{/Block}}
+{{Block "body"}}
+{{- $data := Stored.data -}}
+{{- $clickFlow := Stored.clickFlow -}}
+{{- $sourceInfo := Stored.sourceInfo -}}
+{{- $hasSourceInfo := and $sourceInfo $sourceInfo.X -}}
+{{- $categoryEndIndex := Sub (len Stored.categories) 1 -}}
+        <!-- ============= SINGLE POST ============= -->
+        <section class="single-post-wrapper blog-list-wrapper section-padding">
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="heading-secondary">
+                        {{- if ge $categoryEndIndex 0 -}}
+                        {{- $category := index Stored.categories $categoryEndIndex -}}
+                        {{$category.Name}}
+                        {{- end -}}
+                    </h2>
+                    <ul class="c-bredcrumb">
+                        <li>
+                            <a href="{{FrontendURL}}/"> {{`首页`|T}} </a>
+                        </li>
+                        <li><a href="{{FrontendURL}}/articles">{{`文章列表`|T}}</a></li>
+                        {{range $index, $category := Stored.categories -}}
+                        <li><a href="{{Stored.listURL}}?categoryId={{$category.Id}}">{{$category.Name}}</a></li>
+                        {{- end -}}
+                    </ul>
+                </div>
+                <div class="row gy-5">
+                    <div class="col-lg-9">
+                        <div class="left-content">
+                            <!-- Post card -->
+                            <div class="post-card">
+                                {{- if $data.ImageOriginal -}}
+                                <div class="card-thumb bg-cover" style="background-image: url('{{$data.ImageOriginal}}')"></div>
+                                {{- end -}}
+                                <div class="card-content">
+                                    <div class="card-meta">
+                                        <div class="meta-item post-author">
+                                            {{- if ge $categoryEndIndex 0 -}}
+                                            {{- $category := index Stored.categories $categoryEndIndex -}}
+                                            <span class="category">{{$category.Name}}</span>
+                                            {{- end -}}
+                                            {{- $author := Stored.author -}}
+                                            {{if $author.HomeURL -}}
+                                            <a href="{{$author.HomeURL}}" class="author-name" target="_blank">{{$author.Name}}</a>
+                                            {{- else -}}
+                                            <span class="author-name">{{- $author.Name -}}</span>
+                                            {{- end -}}
+                                        </div>
+                                        <span class="meta-item"> {{(Date $data.Created).Format (T "2006年1月2日")}} </span>
+                                        {{- if eq $data.CloseComment "N" -}}
+                                        <a href="#comment-list" class="meta-item">
+                                            <i class="fal fa-comment"></i>
+                                            {{$data.Comments}}
+                                        </a>
+                                        {{- end -}}
+                                        <a href="javascript:;" class="meta-item {{if and $clickFlow (eq $clickFlow.Type `like`)}}tx-success{{else}}tx-gray-light{{end}}" id="declare-like" data-article-id="{{$data.Id}}">
+                                            <i class="fal fa-thumbs-up"></i>
+                                            <span id="article-likes">{{$data.Likes}}</span>
+                                        </a>
+                                    </div>
+                                    <div class="post-content">
+                                        <div class="row">
+                                            
+                                            <h3 class="heading-primary">
+                                                {{$data.Title}}
+                                            </h3>
+                                            
+                                            <div class="body-text" id="article-content">
+                {{- if eq $data.Contype "markdown" -}}
+                <div class="markdown-code">{{- OutputContent $data.Content $data.Contype -}}</div>
+                {{- else -}}
+                {{- OutputContent $data.Content $data.Contype -}}
+                {{- end -}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{Include "article/detail/summary"}}
+                            {{/*Include "article/detail/postpoint"*/}}
+                            
+                            {{- if $data.Tags -}}
+                            <!-- Tags -->
+                            <div class="tags">
+                                <h3 class="heading-secondary">Tags</h3>
+                                <div class="categories-tags">
+                                    {{range $tagK,$tagV := Split $data.Tags ","}}
+                                    <a href="{{Stored.listURL}}?tag={{$tagV}}"> {{$tagV}} </a>
+                                    {{- end -}}
+                                </div>
+                            </div>
+                            {{- end -}}
+
+                            {{/*Include "article/detail/authorcard"*/}}
+                            
+                            <!-- Post navigation -->
+                            <div class="post-navigation">
+                                <div class="nav-prev">
+                                    {{- $prevRow := Stored.prevRow -}}
+                                    {{- if and $prevRow (gt $prevRow.Id 0) -}}
+                                    <a href="{{FrontendURL}}/article/{{$prevRow.Id}}{{Ext}}" class="nav-button">
+                                        <span>
+                                            <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow-2.png" alt="arrow" />
+                                        </span>
+                                        prev post
+                                    </a>
+                                    <div class="nav-post">
+                                        <a href="{{FrontendURL}}/article/{{$prevRow.Id}}{{Ext}}">
+                                            <h3 class="heading-tertiary">{{$prevRow.Title}}</h3>
+                                        </a>
+                                        <span class="date body-text">{{(Date $prevRow.Created).Format (T "2006年1月2日")}}</span>
+                                    </div>
+                                    {{- end -}}
+                                </div>
+                                <div class="nav-next">
+                                    {{- $nextRow := Stored.nextRow -}}
+                                    {{- if and $nextRow (gt $nextRow.Id 0) -}}
+                                    <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{Ext}}" class="nav-button">
+                                        Next post
+                                        <span>
+                                            <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
+                                        </span>
+                                    </a>
+                                    <div class="nav-post">
+                                        <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{Ext}}">
+                                            <h3 class="heading-tertiary">{{$nextRow.Title}}</h3>
+                                        </a>
+                                        <span class="date body-text">{{(Date $nextRow.Created).Format (T "2006年1月2日")}}</span>
+                                    </div>
+                                    {{- end -}}
+                                </div>
+                            </div>
+                            {{- if and (eq $data.CloseComment "N") (ne Config.base.comment "close") -}}
+                            <div class="post-comments">
+                               <h3 class="heading-secondary">{{`评论`|T}} (<span class="comment-count-num">{{$data.Comments}}</span>)</h3>
+                                {{Include "article/comment_list"}}
+                                {{Include "article/comment_form"}}
+                            </div>
+                            {{- end -}}
+                            <!-- ============= AD CAMPAIGN-2 ============= -->
+                            <div
+                                class="ad-campaign-2 bg-cover mt-35"
+                                style="background-image: url('{{AssetsXURL}}/blogdefault/img/add-campign-3.png')"
+                            >
+                                <div class="row">
+                                    <div class="col-lg-6"></div>
+                                    <div class="col-lg-6">
+                                        <div class="right-content">
+                                            <div class="content">
+                                                <span class="discount">20% off</span>
+                                                <h2 class="heading-primary">Home furniture</h2>
+                                            </div>
+                                            <a href="#" class="button icon-button active">
+                                                <span class="icon">
+                                                    <i class="fas fa-chevron-right"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        {{Include "article/right/right"}}
+                    </div>
+                </div>
+            </div>
+        </section>
+{{/Block}}
+{{Block "footer"}}
+{{Include "article/comment_form_modal"}}
+<!-- markdown support -->
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script type="text/javascript" src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<!-- /markdown support -->
+<script type="text/javascript" src="{{AssetsXURL}}/js/_page/article_detail.js?t={{BuildTime}}"></script>
+<script>
+$(function(){
+    App.editor.markdownToHTML('#article-content');
+    bindCommentList($('#comment-list-container'), false, $('.header-content').height()+100);
+    initPageAllCommentForm();
+});
+</script>
+<!-- <script type="text/javascript" src="{{AssetsXURL}}/js/_page/comment.js?t={{BuildTime}}"></script> -->
+{{/Block}}
+{{/Strip}}

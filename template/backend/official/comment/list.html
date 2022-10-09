@@ -1,0 +1,165 @@
+{{Extend "layout"}}
+{{Block "title"}}{{"评论列表"|T}}{{if Stored.data}} - {{Stored.data.Title}}{{end}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+{{range $k, $r := Stored.breadcrumb}}
+<li><a href="{{BackendURL}}/{{$r.K}}">{{$r.V}}</a></li>
+{{end}}
+<li class="active">{{"评论列表"|T}}</li>
+{{/Block}}
+{{Block "head"}}
+{{/Block}}
+{{Block "main"}}
+<style>
+.padding-x-15{padding-left:15px;padding-right:15px;}
+</style>
+{{if Stored.data}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat no-margin-y">
+            <span class="label label-default">{{"评论对象"|T}}</span>
+            <a style="font-weight:bold;font-size:18px" href="{{FrontendURL}}/{{Stored.targetDetailURL}}" target="_blank" data-toggle="tooltip" title="{{"点击打开详情页面"|T}}">
+                {{Stored.data.Title|Default (T "无标题")}}
+            </a>
+            <i class="fa fa-share-square grey"></i>
+        </div>
+    </div>
+</div>
+{{end}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-transparent">
+          <div class="header" style="height:40px;line-height:30px;">
+            <span class="pull-right">
+                <form class="form-horizontal" action="" id="search-form" method="GET">
+                    <input type="hidden" name="targetId" value="{{Form "targetId"}}">
+                    <input type="hidden" name="targetType" value="{{Form "targetType"}}">
+					<div class="input-group">{{$display := Form "display"}}
+						<span class="input-group-addon">{{"状态"|T}}</span>
+						<select name="display" class="form-control" id="display" onchange="$('#search-form').submit()">
+							<option value=""> - {{"不限"|T}} - </option>
+							<option value="Y" {{if eq $display "Y"}} selected{{end}}>{{"显示"|T}}</option>
+							<option value="N" {{if eq $display "N"}} selected{{end}}>{{"隐藏"|T}}</option>
+						</select>
+					</div>
+				</form>
+            </span>
+            <h4>{{"评论列表"|T}}</h4>
+          </div>
+          <div id="comment-list-container">
+              {{Include "official/comment/list_partial"}}
+        </div><!-- #comment-list-container -->
+        </div>
+    </div>
+</div>
+<div class="row"{{if not Stored.data}} style="display:none;"{{end}}>
+    <div class="col-md-12">
+        <div class="block-flat">
+            <div class="header">
+                <h3>{{"发表评论"|T}}</h3>
+            </div>
+            <div class="content">
+                <form class="form-horizontal group-border-dashed" action="{{BackendURL}}/official/article/comment/add" id="comment-form" novalidate>{{$targetType := Form "targetType"}}
+                    {{Include "official/comment/form"}}
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                          <button type="submit" class="btn btn-primary">{{"发表评论"|T}}</button>
+                          <button class="btn btn-default">{{"取消"|T}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{/Block}}
+{{Block "footer"}}
+{{Modal "__TMPL__/official/comment/form.yaml"}}
+<script type="text/template" id="tmpl-modal-comment-form">
+    {{- Set `comment.form.prefix` `modal-` -}}
+    {{Include "official/comment/form"}}
+    {{- Set `comment.form.prefix` `` -}}
+</script>
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<script type="text/javascript">
+var LANG_REPLY_SUCCESS='{{"回复成功"|T}}';
+var LANG_OP_SUCCESS='{{"操作成功"|T}}';
+var LANG_RM_SUCCESS='{{"删除成功"|T}}';
+var LANG_COMMENT_SUCCESS='{{"评论成功"|T}}';
+var LANG_RM_CONFIRM='{{"确认要删除吗？一旦删除将会同时删除该评论下的所有回复，并且不可恢复。"|T}}';
+function showCommentFormModal(){
+    $('#modal-comment-form').niftyModal('show');
+}
+function attachPostReplyModal(){
+$('#modal-comment-form .modal-footer .btn-primary').on('click',function(e){
+    e.preventDefault();
+    var $form=$('#modal-comment-form-container');
+    $.post(BACKEND_URL+'/official/article/comment/add',$form.serializeArray(),function(r){
+        if(r.Code>0){
+            commentLoadList();
+        }
+        App.message({text:r.Code>0?LANG_REPLY_SUCCESS:r.Info,class_name:r.Code>0?'success':'error'});
+    },'json');
+});
+}
+function initCommentFormModal(){
+    var h=$(window).height();
+    $('#modal-comment-form').css({height:h,width:'100%','max-width':'100%',left:0,top:0,transform:'none'});
+    var modalBodyHeight = h-150;
+    $('#modal-comment-form').find('.modal-body').css({"height":modalBodyHeight});
+    $('#modal-comment-form-input-container').html($('#tmpl-modal-comment-form').html());
+    $('#modal-content-container').css({"height":modalBodyHeight-100});
+    App.editor.switcher("#modal-comment-form-input-container input[name='contype']", '#modal-comment-content','tinymce');
+    attachPostReplyModal();
+}
+function commentReply(a){
+    $('#modal-comment-reply-id').val($(a).data('comment-id'));
+    $('#modal-comment-target-id').val($(a).data('target-id'));
+    $('#modal-comment-target-type').val($(a).data('target-type'));
+    showCommentFormModal();
+}
+function commentRemove(a){
+    if(!confirm(LANG_RM_CONFIRM))return;
+    $.get(BACKEND_URL+'/official/article/comment/delete',{id:$(a).data('comment-id')},function(r){
+        App.message({text:r.Code>0?LANG_RM_SUCCESS:r.Info,class_name:r.Code>0?'success':'error'});
+        if(r.Code<1){
+            return;
+        }
+        commentLoadList();
+    },'json');
+}
+function commentDisplay(a){
+    $.get(BACKEND_URL+'/official/article/comment/edit',{id:$(a).data('comment-id'),display:$(a).is(':checked')?'Y':'N'},function(r){
+        App.message({text:r.Code>0?LANG_OP_SUCCESS:r.Info,class_name:r.Code>0?'success':'error'});
+        if(r.Code<1){
+            return;
+        }
+    },'json');
+}
+function commentLoadList(){
+    $.get(window.location.href,{partial:1},function(r){
+        var box=$('#comment-list-container');
+        box.html(r);
+        App.editor.markdownToHTML(box);
+        box.find('.switch:not(.has-switch)').bootstrapSwitch();
+    },'html');
+}
+$(function(){
+initCommentFormModal();
+App.editor.switcher("#comment-form-input-container input[name='contype']", '#comment-content','tinymce');
+$('#comment-form').on('submit',function(e){
+    e.preventDefault();
+    var $form=$(this);
+    $.post($(this).attr('action'),$(this).serializeArray(),function(r){
+        if(r.Code>0){
+            commentLoadList();
+        }
+        App.message({text:r.Code>0?LANG_COMMENT_SUCCESS:r.Info,class_name:r.Code>0?'success':'error'});
+    },'json');
+});
+    var box=$('#comment-list-container');
+    App.editor.markdownToHTML(box,true);
+});
+</script>
+{{/Block}}

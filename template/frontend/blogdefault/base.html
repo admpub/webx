@@ -1,0 +1,80 @@
+{{Strip}}<!DOCTYPE html>
+<html lang="{{Lang}}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- =============== PAGE TITLE =============== -->
+        <title>{{Block "title"}}{{Config.base.siteName}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan}}{{end}}{{/Block}}</title>
+        <!-- ============= FAVICON ICON ============= -->
+        <link rel="shortcut icon" href="{{AssetsXURL}}/blogdefault/img/favicon.ico" />
+        <!-- ============= VENDORS CSS ============= -->
+        <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/vendors/icons.min.css?t={{BuildTime}}" />
+        <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/vendors/slick.min.css?t={{BuildTime}}" />
+        <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/vendors/slick-theme.min.css?t={{BuildTime}}" />
+
+        <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/vendors/metismenu.min.css?t={{BuildTime}}" />
+        <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/vendors/bootstrap.min.css?t={{BuildTime}}" />
+        <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.gritter/css/jquery.gritter.min.css?t={{BuildTime}}" />
+        <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.gritter/css/custom.min.css?t={{BuildTime}}" />
+        <link rel="stylesheet" href="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.css?t={{BuildTime}}" />
+
+        <!-- ============= MAIN CSS ============= -->
+        <link id="css-lazyload-end" rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/style.min.css?t={{BuildTime}}" />
+        {{- $themeInfo := ThemeInfo -}}
+        {{- if eq ($themeInfo.CustomConfig.String `color`) `dark` -}}
+        <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/dark.min.css?t={{BuildTime}}" />
+        {{- end -}}
+        {{Include "#default#global_js"}}
+        {{Block "head"}}{{/Block}}
+        {{Block "headEnd"}}{{/Block}}
+    </head>
+
+    <body {{Block "bodyAttr"}}{{/Block}}>
+        <!-- SCROLL TO TOP -->
+        <div class="progress-wrap">
+            <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+            </svg>
+        </div>
+        {{Include "header"}}
+
+        {{Block "body"}}{{/Block}}
+
+        {{Include "footer"}}
+
+        <!-- ============= VENDORS JS ============= -->
+        <script src="{{AssetsURL}}/js/jquery.js?t={{BuildTime}}"></script>
+        <script src="{{AssetsURL}}/js/compatible.min.js?t={{BuildTime}}"></script>
+        <script src="{{AssetsXURL}}/js/bootstrap/bootstrap.min.js?t={{BuildTime}}"></script>
+        <!-- <script src="{{AssetsXURL}}/blogdefault/js/vendors/jquery-1.12.4.min.js"></script> -->
+        <!-- <script src="{{AssetsXURL}}/blogdefault/js/vendors/bootstrap.min.js"></script> -->
+        
+        <script src="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.js?t={{BuildTime}}"></script>
+        <script src="{{AssetsURL}}/js/jquery.gritter/js/jquery.gritter.min.js?t={{BuildTime}}"></script>
+
+        <script src="{{AssetsXURL}}/blogdefault/js/vendors/jquery.waypoints.min.js?t={{BuildTime}}"></script>
+        <script src="{{AssetsXURL}}/blogdefault/js/vendors/slick.min.js?t={{BuildTime}}"></script>
+        <script src="{{AssetsXURL}}/blogdefault/js/vendors/metismenu.min.js?t={{BuildTime}}"></script>
+        <script src="{{AssetsURL}}/js/behaviour/sprintf.min.js?t={{BuildTime}}"></script>
+        <script src="{{AssetsXURL}}/js/app.min.js?t={{BuildTime}}"></script>
+        <script src="{{FrontendURL}}/i18n.js?t={{BuildTime}}"></script>
+
+        <!-- ============= MAIN JS ============= -->
+        <script>
+        window.activeURL={{if Stored.Get "activeURL"}}'{{FrontendURL}}{{Stored.Get "activeURL"}}'{{else}}null{{end}};window.errorMSG=null;window.successMSG=null;App.lang='{{Lang}}';
+        {{- if . -}}
+          {{- if IsError . -}}
+        window.errorMSG="{{.}}";
+          {{- else if IsOk . -}}
+        window.successMSG="{{.}}";
+          {{- end -}}
+        {{- end -}}
+        </script>
+        <script src="{{AssetsXURL}}/js/common.min.js?t={{BuildTime}}"></script>
+        <script src="{{AssetsXURL}}/blogdefault/js/active.js?t={{BuildTime}}"></script>
+        {{Block "tmpl"}}{{/Block}}
+        {{Block "footer"}}{{/Block}}
+    </body>
+</html>
+{{/Strip}}

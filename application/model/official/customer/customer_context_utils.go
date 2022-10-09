@@ -1,0 +1,77 @@
+package customer
+
+import (
+	"fmt"
+
+	"github.com/admpub/cache/x"
+	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/webx/application/dbschema"
+	"github.com/admpub/webx/application/library/cache"
+	"github.com/admpub/webx/application/library/xrole"
+	"github.com/admpub/webx/application/middleware/sessdata"
+	"github.com/webx-top/db"
+	"github.com/webx-top/echo"
+)
+
+func CustomerPermTTL(c echo.Context) int64 {
+	cacheTTL, ok := c.Internal().Get(`customerPermCacheTTL`).(int64)
+	if ok {
+		return cacheTTL
+	}
+	cacheTTL = config.Setting(`base`).Int64(`customerPermCacheTTL`, x.Disabled)
+	if cacheTTL == 0 {
+		cacheTTL = x.Disabled
+	} else if cacheTTL < x.Disabled {
+		cacheTTL = x.Fresh
+	}
+	c.Internal().Set(`customerPermCacheTTL`, cacheTTL)
+	return cacheTTL
+}
+
+func CustomerPermission(c echo.Context, customers ...*dbschema.OfficialCustomer) *xrole.RolePermission {
+	permission, ok := c.Internal().Get(`customerPermission`).(*xrole.RolePermission)
+	if !ok || permission == nil {
+		var customer *dbschema.OfficialCustomer
+		if len(customers) > 0 && customers[0] != nil {
+			customer = customers[0]
+		} else {
+			customer = sessdata.Customer(c)
+		}
+		if customer == nil {
+			return nil
+		}
+		customerID := fmt.Sprint(customer.Id)
+		permission = xrole.NewRolePermission()
+		cache.XFunc(sessdata.PermissionCacheKey+customerID, permission, func() error {
+			permission.Init(CustomerRoles(c, customer))
+			return nil
+		}, x.TTL(CustomerPermTTL(c)))
+		c.Internal().Set(`customerPermission`, permission)
+	}
+	return permission
+}
+
+func CustomerRoles(c echo.Context, customers ...*dbschema.OfficialCustomer) (roleList []*xrole.CustomerRoleWithPermissions) {
+	roleList, ok := c.Internal().Get(`customerRoles`).([]*xrole.CustomerRoleWithPermissions)
+	if !ok {
+		var customer *dbschema.OfficialCustomer
+		if len(customers) > 0 && customers[0] != nil {
+			customer = customers[0]
+		} else {
+			customer = sessdata.Customer(c)
+		}
+		if customer == nil {
+			return nil
+		}
+		roleM := NewRole(c)
+		roleIDs := roleM.ListRoleIDsByCustomer(customer)
+		if len(roleIDs) > 0 {
+			roleM.ListByOffset(&roleList, nil, 0, -1, db.And(
+				db.Cond{`disabled`: `N`},
+				db.Cond{`id`: db.In(roleIDs)},
+			))
+		}
+		c.Internal().Set(`customerRoles`, roleList)
+	}
+	return roleList
+}

@@ -1,0 +1,92 @@
+<div class="header-content">
+    <div class="content-left">
+        <div class="logo-wrapper">
+            <div id="hamburger" class="left-hamburger">
+                <span><i class="fas fa-bars"></i></span>
+            </div>
+            <a href="{{FrontendURL}}/" class="main-logo">
+                <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" alt="{{Config.base.siteName}}" />
+                {{Config.base.siteName}}
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul class="navmenu-items">
+            {{- range $k,$v := FrontendNav 0 -}}
+            {{- $url := $v.URL -}}
+            {{- $isValidURL := $url -}}
+                {{- if $v.HasChildren Context -}}
+                    {{- if eq $v.Direction `X` -}}
+                        {{- range $key,$sub := $v.FetchChildren Context -}}
+                        <li class="navmenu-item {{- if $sub.HasChildren Context}} submenu-wrapper{{- end -}}">
+                            <a href="{{$sub.Url}}" class="navmenu-link{{if $sub.IsActive Context}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}
+                                {{if $sub.HasChildren Context -}}
+                                <span class="icon">
+                                    <i class="fal fa-chevron-down"></i>
+                                </span>
+                                {{- end -}}
+                            </a>
+                            {{- if $sub.HasChildren Context -}}
+                            {{Include "header_nav_children" $sub}}
+                            {{- end -}}
+                        </li>
+                        {{- end -}}
+                    {{- else -}}
+                    <li class="navmenu-item submenu-wrapper">
+                        <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="navmenu-link{{if $v.IsActive Context}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
+                            {{$v.Title}}
+                            <span class="icon">
+                                <i class="fal fa-chevron-down"></i>
+                            </span>
+                        </a>
+                        {{Include "header_nav_children" $v}}
+                    </li>
+                    {{- end -}}
+                {{- else -}}
+                <li class="navmenu-item">
+                    <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="navmenu-link{{if $v.IsActive Context}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>{{$v.Title}}</a>
+                </li>
+                {{- end -}}
+            {{- else -}}
+                <li class="navmenu-item"><a href="{{FrontendURL}}" class="navmenu-link">{{`首页`|T}}</a></li>
+            {{- end -}}
+                <!-- <li class="navmenu-item submenu-wrapper">
+                    <a href="#" class="navmenu-link">Pages
+                        <span class="icon">
+                            <i class="fal fa-chevron-down"></i>
+                        </span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="index.html" class="submenu-link"> Home </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="navmenu-item mega-menu-wrapper">
+                    <a href="blog-list.html" class="navmenu-link"
+                        >Technology
+                        <span class="icon">
+                            <i class="fal fa-chevron-down"></i>
+                        </span>
+                    </a>
+                    {{/*Include "header_nav_children_mega"*/}}
+                </li> -->
+                <!-- <li class="navmenu-item">
+                    <span class="gradient-bar small"></span>
+                </li> -->
+            </ul>
+        </nav>
+    </div>
+    <div class="content-right">
+        <span class="header-search-icon">
+            <i class="fas fa-search"></i>
+        </span>
+        <div class="search-box">
+            <form action="{{FrontendURL}}/search" method="GET" class="search-input-wrapper d-flex">
+                <input type="text" placeholder="Search here..." name="q" />
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

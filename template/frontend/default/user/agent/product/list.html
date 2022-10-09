@@ -1,0 +1,86 @@
+{{Extend "user/base"}}
+{{Block "body"}}
+{{Super}}
+
+<div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
+  <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"代理产品"|T}}</h5>
+    <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|T}}</a>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/agent">{{"代理中心"|T}}</a>
+      <span class="breadcrumb-item active">{{"代理产品"|T}}</span>
+    </nav>
+  </div>
+
+  <div class="main-body pd-20">
+<div class="row">
+  <div class="col-lg-12 mg-t-0">
+    <div class="card card-table">
+      <div class="card-header">
+        <h6 class="card-title">{{"代理产品"|T}}</h6>
+      </div><!-- card-header -->
+      <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th class="wd-10p">&nbsp;</th>
+            <th>{{"产品名称"|T}}</th>
+            <th>{{"产品版本"|T}}</th>
+            <th>{{"授权方案"|T}}</th>
+            <th class="tx-right">{{"状态"|T}}</th>
+            <th>{{"授权时间"|T}}</th>
+            <th class="tx-center">{{"操作"|T}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $k, $v := Stored.listData}}
+          <tr>
+            <td class="pd-l-20">
+                <a href="{{FrontendURL}}/product/detail/{{$v.Product.Ident}}" target="_blank"><img src="{{$v.Product.Image|Default "http://via.placeholder.com/800x533"}}" onerror="this.onerror=null;this.src='http://via.placeholder.com/800x533'" class="wd-55" alt="Image"></a>
+            </td>
+            <td>
+              <a href="{{FrontendURL}}/product/detail/{{$v.Product.Ident}}" target="_blank" class="tx-inverse tx-size-14 tx-medium d-block">{{$v.Product.Name}}</a>
+              <span class="tx-size-11 d-block">
+                {{if eq $v.Blocked 0}}
+                <span class="square-8 bg-success mg-r-5 rounded-circle"></span> {{"有效"|T}}
+                {{else}}
+                <span class="square-8 bg-danger mg-r-5 rounded-circle"></span> {{"无效"|T}}
+                {{end}}
+              </span>
+            </td>
+            <td class="valign-middle">{{$v.Version}}</td>
+            <td class="valign-middle">{{$v.Cert.Name}}</td>
+            <td class="valign-middle tx-right">{{if eq $v.Blocked 0}}<span class="tx-success">{{"有效"|T}}</span>{{else}}<span class="tx-danger">{{"无效"|T}}</span>{{end}}</td>
+            <td class="valign-middle">{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
+            <td class="valign-middle tx-center">
+              <div class="btn-group">
+              <a href="{{FrontendURL}}/user/license/view/{{$v.Id}}" class="btn btn-outline-primary btn-xs">
+                <i class="fa fa-eye"></i>
+                {{"查看"|T}}
+              </a>
+              <!-- <a href="{{FrontendURL}}/user/license/edit/{{$v.Id}}" class="btn btn-outline-primary btn-xs">
+                <i class="fa fa-edit"></i>
+                {{"修改"|T}}
+              </a> -->
+              </div><!-- /.btn-group -->
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+      </div><!-- table-responsive -->
+      <div class="card-footer auto-bottom-float">
+        <!-- <a href=""><i class="fa fa-angle-down mg-r-5"></i>View All Products</a> -->
+        {{Stored.pagination.Render `#default#pagination`}}
+      </div><!-- card-footer -->
+      
+    </div><!-- card -->
+  </div><!-- col-6 -->
+</div><!-- row -->
+    </div><!-- main-body -->
+</div><!-- main -->
+{{/Block}}
+
+{{Block "footer"}}
+{{Super}}
+{{/Block}}

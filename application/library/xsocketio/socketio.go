@@ -1,0 +1,85 @@
+package xsocketio
+
+import (
+	"net/http"
+
+	"github.com/admpub/log"
+	"github.com/admpub/nging/v4/application/library/common"
+	socketio "github.com/googollee/go-socket.io"
+	"github.com/googollee/go-socket.io/engineio"
+	"github.com/webx-top/echo"
+	esi "github.com/webx-top/echo-socket.io"
+	"github.com/webx-top/echo/middleware"
+)
+
+func RegisterRoute(e echo.RouteRegister) {
+	handle := socketIOWrapper()
+	e.Any(`/socket.io/`, func(ctx echo.Context) error {
+		if common.Setting(`socketio`).String(`enabled`) != `1` {
+			return echo.ErrNotFound
+		}
+		return handle(ctx)
+	}, middleware.CORS())
+}
+
+var events = []func(esi.IWrapper){}
+var onConnect = []func(ctx echo.Context, conn socketio.Conn) error{}
+var onError = []func(ctx echo.Context, conn socketio.Conn, e error){}
+var onDisconnect = []func(ctx echo.Context, conn socketio.Conn, msg string){}
+
+var RequestChecker engineio.CheckerFunc = func(*http.Request) (http.Header, error) {
+	return nil, nil
+}
+
+func OnEvent(fns ...func(esi.IWrapper)) {
+	events = append(events, fns...)
+}
+
+func OnConnect(fns ...func(ctx echo.Context, conn socketio.Conn) error) {
+	onConnect = append(onConnect, fns...)
+}
+
+func OnError(fns ...func(ctx echo.Context, conn socketio.Conn, e error)) {
+	onError = append(onError, fns...)
+}
+
+func OnDisconnect(fns ...func(ctx echo.Context, conn socketio.Conn, msg string)) {
+	onDisconnect = append(onDisconnect, fns...)
+}
+
+func socketIOWrapper() func(ctx echo.Context) error {
+	wrapper, _ := esi.NewWrapper(&engineio.Options{
+		RequestChecker: RequestChecker,
+	})
+
+	wrapper.OnConnect("", func(ctx echo.Context, conn socketio.Conn) error {
+		for _, fn := range onConnect {
+			if err := fn(ctx, conn); err != nil {
+				return err
+			}
+		}
+		return nil
+	})
+
+	wrapper.OnError("", func(ctx echo.Context, conn socketio.Conn, e error) {
+		log.Error("[socketIO] meet error: ", e)
+		for _, fn := range onError {
+			fn(ctx, conn, e)
+		}
+		conn.Close()
+	})
+
+	wrapper.OnDisconnect("", func(ctx echo.Context, conn socketio.Conn, msg string) {
+		log.Debug("[socketIO] closed", msg)
+		for _, fn := range onDisconnect {
+			fn(ctx, conn, msg)
+		}
+		conn.Close()
+	})
+
+	for _, fn := range events {
+		fn(wrapper)
+	}
+
+	return wrapper.HandlerFunc
+}

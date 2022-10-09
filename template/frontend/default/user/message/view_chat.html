@@ -1,0 +1,167 @@
+{{Extend "user/base"}}
+{{Block "body"}}{{Super}}
+ <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
+  <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"消息详情"|T}}</h5>
+    <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|T}}</a>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/user_message">{{"消息中心"|T}}</a>
+      <span class="breadcrumb-item active">{{"消息详情"|T}}</span>
+    </nav>
+  </div>
+  <div class="main-body pd-20">
+<div class="row">
+  <div class="col-lg-12 mg-t-0">
+{{$data := Stored.data}}
+{{$replyList := Stored.replyList}}
+{{$customer := Customer}}
+<div class="row">
+    <div class="col-lg-4">
+      <div class="card rounded-0 bd-0 tx-size-14">
+        <div class="card-header pd-y-5 bd-b-0 d-flex justify-content-between align-items-center ">
+          <span class="tx-uppercase tx-bold tx-inverse">Messages</span>
+          <a href="" class="iconwrap icon-20 tx-gray-light hover-primary"><i class="icon ion-compose"></i></a>
+        </div><!-- card-header -->
+        <div class="list-group list-group-flush">
+          <a href="" class="list-group-item list-group-item-action media">
+            <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle d-flex mg-r-5 mg-xs-r-15 align-self-start" alt="">
+            <div class="media-body">
+              <div class="d-flex justify-content-between align-items-center mg-b-2">
+                <span class="tx-semibold tx-inverse">Mienard B. Lumaad</span>
+                <span class="tx-size-11 tx-gray-light">4:09am</span>
+              </div>
+              <p class="tx-size-12 lh-5 mg-b-0">Many desktop publishing packages and web page editors now use...</p>
+            </div><!-- media-body -->
+          </a><!-- list-group-item -->
+          <a href="" class="list-group-item list-group-item-action media">
+            <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle d-flex mg-r-5 mg-xs-r-15 align-self-start" alt="">
+            <div class="media-body">
+              <div class="d-flex justify-content-between align-items-center mg-b-5">
+                <span class="tx-semibold tx-inverse">Isidore Dilao</span>
+                <span class="tx-size-11 tx-gray-light">Yesterday 3:00am</span>
+              </div>
+              <p class="tx-size-12 lh-5 mg-b-0">On the other hand, we denounce with righteous indignation and dislike...</p>
+            </div><!-- media-body -->
+          </a><!-- list-group-item -->
+          <a href="" class="list-group-item list-group-item-action media">
+            <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle d-flex mg-r-5 mg-xs-r-15 align-self-start" alt="">
+            <div class="media-body">
+              <div class="d-flex justify-content-between align-items-center mg-b-5">
+                <span class="tx-semibold tx-inverse">Kirby Avendula</span>
+                <span class="tx-size-11 tx-gray-light">Yesterday 3:00am</span>
+              </div>
+              <p class="tx-size-12 lh-5 mg-b-0">It is a long established fact that a reader will be distracted by the readable...</p>
+            </div><!-- media-body -->
+          </a><!-- list-group-item -->
+          <a href="" class="list-group-item list-group-item-action media bg-superlight">
+            <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle d-flex mg-r-5 mg-xs-r-15 align-self-start" alt="">
+            <div class="media-body">
+              <div class="d-flex justify-content-between align-items-center mg-b-5">
+                <span class="tx-semibold tx-inverse">Roven Galeon</span>
+                <span class="tx-size-11 tx-gray-light">Yesterday 3:00am</span>
+              </div>
+              <p class="tx-size-12 lh-5 mg-b-0">Than the fact that climate change may be causing it to rapidly disappear... </p>
+            </div><!-- media-body -->
+          </a><!-- list-group-item -->
+          <a href="" class="list-group-item list-group-item-action media bg-superlight">
+            <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle d-flex mg-r-5 mg-xs-r-15 align-self-start" alt="">
+            <div class="media-body">
+              <div class="d-flex justify-content-between align-items-center mg-b-5">
+                <span class="tx-semibold tx-inverse">Socrates Itumay</span>
+                <span class="tx-size-11 tx-gray-light">Yesterday 3:00am</span>
+              </div>
+              <p class="tx-size-12 lh-5 mg-b-0">Researchers are generally less concerned about what's in the snow...</p>
+            </div><!-- media-body -->
+          </a><!-- list-group-item -->
+        </div><!-- list-group -->
+        <div class="card-footer tx-center bd-t-0">
+          <a href="" class="tx-size-12 tx-medium"><i class="fa fa-angle-down mg-r-3"></i> Load more messages</a>
+        </div><!-- card-footer -->
+      </div><!-- card -->
+    </div><!-- col-4 -->
+    <div class="col-lg-8 mg-t-20 mg-lg-t-0">
+      <div class="card rounded-0 bd-0">
+        <div class="card-header pd-x-15 pd-xs-25">
+          <div class="media">
+            <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle d-flex mg-r-5 mg-xs-r-20 align-self-start" alt="">
+            <div class="media-body lh-3">
+              <div class="d-flex justify-content-between align-items-center mg-b-0">
+                <span class="tx-semibold tx-inverse">Socrates Itumay</span>
+                <span class="tx-size-12">
+                  <a href="" class="tx-gray mg-r-10">Chat History</a>
+                  <a href="" class="tx-gray mg-r-10">Report</a>
+                  <a href="" class="tx-gray"><i class="fa fa-angle-down tx-size-14"></i></a>
+                </span>
+              </div>
+              <p class="tx-size-11 lh-3 mg-b-0">
+                <span class="d-inline-block pd-4 rounded-circle bg-success valign-baseline"></span> Active now
+              </p>
+            </div><!-- media-body -->
+          </div><!-- media -->
+        </div><!-- card-header -->
+        <div class="card-block pd-25 bg-superlight">
+          <div class="media-list">
+            <div class="media">
+              <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle mg-r-20" alt="">
+              <div class="media-body tx-size-12">
+                <div class="pd-10 bg-gray-lightest d-inline-block">
+                  Hey, what's up?
+                </div>
+                <span class="tx-size-11 tx-gray-light mg-l-5">3:00pm</span>
+              </div><!-- media-body -->
+            </div><!-- media -->
+            <div class="media mg-t-20">
+              <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle mg-r-20" alt="">
+              <div class="media-body tx-size-12">
+                <div class="pd-10 bg-gray-lighter d-inline-block">
+                  So you want to eat snow? is it safe?
+                </div>
+                <span class="tx-size-11 tx-gray-light mg-l-5">3:10pm</span>
+                <hr class="invisible mg-y-2">
+
+                <div class="pd-10 bg-gray-lighter d-inline-block">
+                  Hahahaah!
+                </div>
+                <span class="tx-size-11 tx-gray-light mg-l-5">3:12pm</span>
+                <hr class="invisible mg-y-2">
+
+                <div class="pd-10 bg-gray-lighter d-inline-block mx-wd-90p">
+                  Researchers are generally less concerned about what's in the snow
+                  than the fact that climate change may be causing it to rapidly disappear.
+                </div>
+                <span class="tx-size-11 tx-gray-light mg-l-5">3:12pm</span>
+              </div><!-- media-body -->
+            </div><!-- media -->
+            <div class="media mg-t-20">
+              <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle mg-r-20" alt="">
+              <div class="media-body tx-size-12">
+                <div class="pd-10 bg-gray-lightest d-inline-block mx-wd-90p">
+                  When I come to your wedding or civil partnership I realise I am the least important person there and I will take the lead from you on the type of photos you want.
+                </div>
+                <span class="tx-size-11 tx-gray-light mg-l-5">3:20pm</span>
+                <hr class="invisible mg-y-2">
+
+                <div class="pd-10 bg-gray-lightest d-inline-block mx-wd-90p">
+                  It’s your day so I do what you say.</div>
+                  <span class="tx-size-11 tx-gray-light mg-l-5">3:21pm</span>
+                </div><!-- media-body -->
+              </div><!-- media -->
+            </div><!-- media-list -->
+          </div><!-- card-block -->
+          <div class="card-footer pd-x-25 pd-y-15">
+            <div class="media">
+              <img src="http://via.placeholder.com/600x600" class="wd-36 rounded-circle mg-r-20" alt="">
+              <div class="media-body">
+                <input type="text" class="form-control tx-size-12" placeholder="Type your message">
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- card-footer -->
+        </div><!-- card -->
+      </div><!-- col-8 -->
+    </div>
+
+  </div><!-- col-lg-12 -->
+</div><!-- row -->
+    </div><!-- main-body -->
+</div><!-- main -->
+{{/Block}}

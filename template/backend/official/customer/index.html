@@ -1,0 +1,125 @@
+{{Extend "layout"}}
+{{Block "title"}}{{"客户管理"|T}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li class="active">{{"客户管理"|T}}</li>
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+	<div class="col-md-12">
+		<div class="block-flat">
+			<div class="header">
+				<div class="pull-right" style="margin-left:10px">
+					<form class="form-horizontal" action="" id="search-form" method="GET">
+						<div class="input-group">
+							<span class="input-group-addon">{{"在线状态"|T}}</span>
+							<select name="online" class="form-control" id="online" onchange="$('#search-form').submit()">
+								<option value=""> - {{"不限"|T}} - </option>
+								{{$online := Form "online"}} 
+								<option value="Y" {{if eq $online "Y"}} selected{{end}}>{{"在线"|T}}</option>
+								<option value="N" {{if eq $online "N"}} selected{{end}}>{{"离线"|T}}</option>
+							</select>
+							<span class="input-group-addon">{{"客户组"|T}}</span>
+							<select name="groupId" class="form-control" id="groupId" onchange="$('#search-form').submit()">{{$groupId := (Formx `groupId`).Uint}}
+								<option value=""> - {{"不限"|T}} - </option>
+								{{range $k, $v := Stored.groupList}}
+								<option value="{{$v.Id}}" {{if eq $groupId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+								{{end}}
+							</select>
+							<span class="input-group-addon">{{"客户等级"|T}}</span>
+							<select name="levelId" class="form-control" id="levelId" onchange="$('#search-form').submit()">{{$levelId := (Formx `levelId`).Uint}}
+								<option value=""> - {{"不限"|T}} - </option>
+								{{range $k, $v := Stored.levelList}}
+								<option value="{{$v.Id}}" {{if eq $levelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+								{{end}}
+							</select>
+							<span class="input-group-addon">{{"代理等级"|T}}</span>
+							<select name="agentLevelId" class="form-control" id="agentLevelId" onchange="$('#search-form').submit()">{{$agentLevelId := (Formx `agentLevelId`).Uint}}
+								<option value=""> - {{"不限"|T}} - </option>
+								{{range $k, $v := Stored.agentLevelList}}
+								<option value="{{$v.Id}}" {{if eq $agentLevelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+								{{end}}
+							</select>
+							<span class="input-group-addon">{{"角色"|T}}</span>
+							<select name="roleId" class="form-control" id="roleId" onchange="$('#search-form').submit()">{{$roleId := (Formx `roleId`).Uint}}
+								<option value=""> - {{"不限"|T}} - </option>
+								{{range $k, $v := Stored.roleList}}
+								<option value="{{$v.Id}}" {{if eq $roleId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+								{{end}}
+							</select>
+						</div>
+					</form>
+				</div>
+				<a href="{{BackendURL}}/official/customer/add" class="btn btn-success pull-right">
+					<i class="fa fa-plus"></i>
+					{{"添加客户"|T}}
+				</a>
+				<h3>{{"客户列表"|T}}</h3>
+			</div>
+			<div class="content">
+				<div class="table-responsive">
+				<table class="table no-border hover">
+					<thead class="no-border">
+						<tr>
+							<th style="width:60px"><strong>ID</strong></th>
+							<th style="width:50px"><strong>{{"头像"|T}}</strong></th>
+							<th style="width:300px"><strong>{{"客户名称"|T}}</strong></th>
+							<th><strong>{{"描述"|T}}</strong></th>
+							<th><strong>{{"角色"|T}}</strong></th>
+							<th style="width:85px"><strong>{{"创建时间"|T}}</strong></th>
+							<th style="width:85px"><strong>{{"更新时间"|T}}</strong></th>
+							<th style="width:80px" class="text-center"><strong>{{"操作"|T}}</strong></th>
+						</tr>
+					</thead>
+					<tbody class="no-border-y">
+                        {{range $k,$v := Stored.listData}}
+						<tr>
+							<td>{{$v.Id}}</td>
+							<td class="no-padding-x"><a href="{{FrontendURL}}/u/{{$v.Id}}" target="_blank" class="text-bold"><img style="width:50px;height:50px" src="{{if $v.Avatar}}{{AddSuffix $v.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" onerror="this.src='{{AssetsURL}}/images/user_128.png';" /></a></td>
+							<td>
+								<a href="{{FrontendURL}}/u/{{$v.Id}}" target="_blank" class="text-bold">{{$v.Name}}</a>
+								{{- if eq $v.Online "Y" }}
+								<img src="{{AssetsURL}}/images/state_online.png" alt="Status" data-toggle="tooltip" title="{{"在线"|T}}" />
+								{{- end -}}
+								<span class="pull-right">
+								{{- if $v.SessionId -}}
+								<a onclick="return confirm('{{T `真的要将客户“%s”踢下线吗？` $v.Name}}');" title="{{"将客户踢下线"|T}}" data-toggle="tooltip" class="text-red" href="{{BackendURL}}/official/customer/kick?id={{$v.Id}}">[{{`踢下线`|T}}]</a>
+								{{end}}
+								<a title="{{"查看登录记录"|T}}" data-toggle="tooltip" class="text-info" href="{{BackendURL}}/manager/login_log?ownerType=customer&username={{$v.Name}}" target="_blank">[{{`登录记录`|T}}]</a>
+								</span>
+								<br />
+								{{- if $v.Group}}
+								<span class="label label-info label-xs" data-toggle="tooltip" title="{{`客户组`|T}}: {{$v.Group.Name}}">{{$v.Group.Name}}</span>
+								{{- end}}
+								{{- if $v.Level}}
+								<span class="label label-primary label-xs" data-toggle="tooltip" title="{{`客户等级`|T}}: {{$v.Level.Name}}">{{$v.Level.Name}}</span>
+								{{- end}}
+								{{- if $v.Agent}}
+								<span class="label label-danger label-xs" data-toggle="tooltip" title="{{`代理等级`|T}}: {{$v.Agent.Name}}">{{$v.Agent.Name}}</span>
+								{{- end}}
+							</td>
+							<td>{{$v.Description}}</td>
+							<td>
+								{{- range $v.Roles -}}
+								<span class="label label-default label-xs" data-toggle="tooltip" title="{{.Name}}">{{.Name}}</span>
+								{{- end -}}
+							</td>
+							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
+							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{end}}</td>
+							<td class="text-center label-group">
+							<a class="label label-warning" href="{{BackendURL}}/official/customer/wallet/index?customerId={{$v.Id}}" title="{{"资产"|T}}" data-toggle="tooltip"><i class="fa fa-money"></i></a>
+							<a class="label label-default" href="{{BackendURL}}/official/customer/add?copyId={{$v.Id}}" title="{{"复制"|T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
+							<a class="label label-success" href="{{BackendURL}}/official/customer/edit?id={{$v.Id}}" title="{{"编辑"|T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
+							<a class="label label-danger" href="{{BackendURL}}/official/customer/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|T}}');" title="{{`删除`|T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+                        {{end}}
+					</tbody>
+				</table>		
+				</div>
+				{{Stored.pagination.Render}}
+			</div>
+		</div>				
+	</div>
+</div>
+{{/Block}}
