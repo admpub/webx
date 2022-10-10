@@ -11,6 +11,7 @@ import (
 	"github.com/admpub/events"
 	"github.com/admpub/nging/v4/application/cmd/bootconfig"
 	"github.com/admpub/webx/application/initialize/frontend"
+	xbindata "github.com/admpub/webx/application/library/bindata"
 	"github.com/admpub/webx/application/library/xtemplate"
 	formConfig "github.com/coscms/forms/config"
 	"github.com/webx-top/com"
@@ -61,13 +62,22 @@ func getTemplateInfo(name string) (*xtemplate.ThemeInfo, error) {
 
 var (
 	templateRoot    = `/frontend/`
+	templateDiskFS  xtemplate.FileSystems
+	templateDiskMx  sync.Once
 	templateEmbedFS http.FileSystem
 	templateEmbedMx sync.Once
 	embedThemes     []*xtemplate.ThemeInfo
 	embedThemesMx   sync.Once
 )
 
-func initTemplateFS() {
+func initTemplateDiskFS() {
+	templateDiskFS = xtemplate.NewFileSystems()
+	for _, tmplDir := range xbindata.FrontendTemplateDirs.TmplDirs() {
+		templateDiskFS.Register(http.Dir(tmplDir))
+	}
+}
+
+func initTemplateEmbedFS() {
 	if mgr, ok := bootconfig.FrontendTmplMgr.(*bindata.TmplManager); ok {
 		templateEmbedFS = mgr.FileSystem
 	}
@@ -108,8 +118,13 @@ func initEmbedThemes() {
 }
 
 func GetTemplateEmbedFS() http.FileSystem {
-	templateEmbedMx.Do(initTemplateFS)
+	templateEmbedMx.Do(initTemplateEmbedFS)
 	return templateEmbedFS
+}
+
+func GetTemplateDiskFS() http.FileSystem {
+	templateDiskMx.Do(initTemplateDiskFS)
+	return templateDiskFS
 }
 
 func GetEmbedThemes() []*xtemplate.ThemeInfo {
