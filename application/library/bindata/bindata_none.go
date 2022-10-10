@@ -45,14 +45,11 @@ func Initialize(callbacks ...func()) {
 	}
 	log.Debug(`[backend] `, `Template subfolder "official" is relocated to: `, backendTemplateDir)
 	selfBackend.TmplPathFixers.AddDir(`official`, backendTemplateDir)
-	backendUniqueTemplateDirs := map[string]struct{}{}
-	for prefix, templateDirs := range BackendTemplateDirs {
-		for _, templateDir := range templateDirs {
-			log.Debug(`[backend] `, `Template subfolder "`+prefix+`" is relocated to: `, templateDir)
-			backendUniqueTemplateDirs[templateDir] = struct{}{}
-			selfBackend.TmplPathFixers.AddDir(prefix, templateDir)
-		}
-	}
+	BackendTemplateDirs.Range(func(prefix, templateDir string) error {
+		log.Debug(`[backend] `, `Template subfolder "`+prefix+`" is relocated to: `, templateDir)
+		selfBackend.TmplPathFixers.AddDir(prefix, templateDir)
+		return nil
+	})
 	backend.RendererDo = func(renderer driver.Driver) {
 		selfBackend.TmplPathFixers.SetTmplDir(renderer.TmplDir()).SetHandler(func(c echo.Context, theme string, tmpl string) string {
 			var found bool
@@ -67,7 +64,7 @@ func Initialize(callbacks ...func()) {
 			return selfBackend.TmplPathFixers.Handle(c, theme, tmpl)
 		})
 		renderer.Manager().AddWatchDir(backendTemplateDir)
-		for templateDir := range backendUniqueTemplateDirs {
+		for _, templateDir := range BackendTemplateDirs.TmplDirs() {
 			log.Debug(`[backend] `, `Watch folder: `, templateDir)
 			renderer.Manager().AddWatchDir(templateDir)
 		}
@@ -90,14 +87,11 @@ func Initialize(callbacks ...func()) {
 	frontendTemplateDir := filepath.Join(WebxDir, `template/frontend`)
 	FrontendTemplateDirs.AddAllSubdir(frontendTemplateDir)
 	//FrontendTemplateDirs.Add(`default`, frontendTemplateDir)
-	frontendUniqueTemplateDirs := map[string]struct{}{}
-	for prefix, templateDirs := range FrontendTemplateDirs {
-		for _, templateDir := range templateDirs {
-			frontendUniqueTemplateDirs[templateDir] = struct{}{}
-			log.Debug(`[frontend] `, `Template subfolder "`+prefix+`" is relocated to: `, templateDir)
-			frontend.TmplPathFixers.AddDir(prefix, templateDir)
-		}
-	}
+	FrontendTemplateDirs.Range(func(prefix, templateDir string) error {
+		log.Debug(`[frontend] `, `Template subfolder "`+prefix+`" is relocated to: `, templateDir)
+		frontend.TmplPathFixers.AddDir(prefix, templateDir)
+		return nil
+	})
 	frontend.RendererDo = func(renderer driver.Driver) {
 		frontend.TmplPathFixers.SetTmplDir(renderer.TmplDir()).SetHandler(func(c echo.Context, theme string, tmpl string) string {
 			var found bool
