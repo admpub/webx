@@ -1,6 +1,7 @@
 package xtemplate
 
 import (
+	"io"
 	"io/fs"
 	"net/http"
 	"os"
@@ -24,6 +25,51 @@ func (f FileSystems) Open(name string) (file http.File, err error) {
 			return
 		}
 	}
+	return
+}
+
+func (f FileSystems) ReadFile(name string) (content []byte, err error) {
+	var fp http.File
+	fp, err = f.Open(name)
+	if err != nil {
+		return
+	}
+	if fp == nil {
+		err = os.ErrNotExist
+		return
+	}
+	b, err := io.ReadAll(fp)
+	fp.Close()
+	return b, err
+}
+
+func (f FileSystems) ReadDir(name string, count int) (dirs []fs.FileInfo, err error) {
+	var fp http.File
+	fp, err = f.Open(name)
+	if err != nil {
+		return
+	}
+	if fp == nil {
+		err = os.ErrNotExist
+		return
+	}
+	dirs, err = fp.Readdir(count)
+	fp.Close()
+	return
+}
+
+func (f FileSystems) Stat(name string) (fi fs.FileInfo, err error) {
+	var fp http.File
+	fp, err = f.Open(name)
+	if err != nil {
+		return
+	}
+	if fp == nil {
+		err = os.ErrNotExist
+		return
+	}
+	fi, err = fp.Stat()
+	fp.Close()
 	return
 }
 
