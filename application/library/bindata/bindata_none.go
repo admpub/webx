@@ -88,7 +88,8 @@ func Initialize(callbacks ...func()) {
 	frontend.TemplateDir = filepath.Join(WebxDir, frontend.DefaultTemplateDir) //模板文件夹
 	frontend.AssetsDir = filepath.Join(WebxDir, frontend.DefaultAssetsDir)     //素材文件夹
 	frontendTemplateDir := filepath.Join(WebxDir, `template/frontend`)
-	FrontendTemplateDirs.Add(`default`, frontendTemplateDir)
+	FrontendTemplateDirs.AddAllSubdir(frontendTemplateDir)
+	//FrontendTemplateDirs.Add(`default`, frontendTemplateDir)
 	frontendUniqueTemplateDirs := map[string]struct{}{}
 	for prefix, templateDirs := range FrontendTemplateDirs {
 		for _, templateDir := range templateDirs {
