@@ -18,6 +18,28 @@ func (p *PathAliases) TmplDirs() []string {
 	return p.tmplDirs
 }
 
+func (p *PathAliases) Aliases() []string {
+	aliases := make([]string, len(p.aliases))
+	var i int
+	for alias := range p.aliases {
+		aliases[i] = alias
+		i++
+	}
+	return aliases
+}
+
+func (p *PathAliases) Range(fn func(string, string) error) (err error) {
+	for alias, templateDirs := range p.aliases {
+		for _, templateDir := range templateDirs {
+			err = fn(alias, templateDir)
+			if err != nil {
+				return
+			}
+		}
+	}
+	return
+}
+
 func (p *PathAliases) AddAllSubdir(absPath string) error {
 	fp, err := os.Open(absPath)
 	if err != nil {

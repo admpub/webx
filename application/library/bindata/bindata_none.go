@@ -114,7 +114,7 @@ func Initialize(callbacks ...func()) {
 			theme := c.Internal().String(`theme`, `default`)
 			return frontend.TmplPathFixers.Handle(c, theme, tmpl)
 		})
-		for templateDir := range frontendUniqueTemplateDirs {
+		for _, templateDir := range FrontendTemplateDirs.TmplDirs() {
 			log.Debug(`[frontend] `, `Watch folder: `, templateDir)
 			renderer.Manager().AddWatchDir(templateDir)
 		}
