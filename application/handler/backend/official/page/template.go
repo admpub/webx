@@ -46,23 +46,29 @@ func TemplatePreviewImage(ctx echo.Context) error {
 	if len(previewImage) == 0 {
 		return echo.ErrNotFound
 	}
-	previewImageFile := filepath.Join(frontend.TemplateDir, name, previewImage)
-	if !com.FileExists(previewImageFile) {
-		if GetTemplateEmbedFS() != nil {
-			previewImageFile = path.Join(templateRoot, name, previewImage)
-
-			if tfs, err := GetTemplateEmbedFS().Open(previewImageFile); err == nil {
-				defer tfs.Close()
-				fi, err := tfs.Stat()
-				if err != nil {
-					return err
-				}
-				return ctx.ServeContent(tfs, previewImage, fi.ModTime())
-			}
+	previewImageFile := filepath.Join(name, previewImage)
+	file, err := GetTemplateDiskFS().Open(previewImageFile)
+	if err == nil {
+		defer file.Close()
+		fi, err := file.Stat()
+		if err != nil {
+			return err
 		}
-		return echo.ErrNotFound
+		return ctx.ServeContent(file, previewImage, fi.ModTime())
 	}
-	return ctx.File(previewImageFile)
+	if GetTemplateEmbedFS() != nil {
+		previewImageFile = path.Join(templateRoot, name, previewImage)
+
+		if tfs, err := GetTemplateEmbedFS().Open(previewImageFile); err == nil {
+			defer tfs.Close()
+			fi, err := tfs.Stat()
+			if err != nil {
+				return err
+			}
+			return ctx.ServeContent(tfs, previewImage, fi.ModTime())
+		}
+	}
+	return echo.ErrNotFound
 }
 
 func TemplateEnable(ctx echo.Context) error {
@@ -89,22 +95,13 @@ func TemplateIndex(ctx echo.Context) error {
 	if ctx.Form(`op`) == `preview` {
 		return TemplatePreviewImage(ctx)
 	}
-	templateDir := frontend.TemplateDir
 	var (
-		dirs   []fs.DirEntry
+		dirs   []fs.FileInfo
 		list   []*xtemplate.ThemeInfo
 		pdirs  = map[string]struct{}{}
 		embeds []*xtemplate.ThemeInfo
 	)
-	f, err := os.Open(templateDir)
-	if err != nil {
-		if os.IsNotExist(err) {
-			err = nil
-		}
-		goto END
-	}
-	defer f.Close()
-	dirs, err = f.ReadDir(-1)
+	dirs, err := GetTemplateDiskFS().ReadDir(`./`)
 	if err != nil {
 		goto END
 	}
@@ -117,9 +114,10 @@ func TemplateIndex(ctx echo.Context) error {
 		themeInfo := &xtemplate.ThemeInfo{
 			Name: dir.Name(),
 		}
-		infoFile := filepath.Join(templateDir, dir.Name(), `@info.yaml`)
-		if com.FileExists(infoFile) {
-			themeInfo.DecodeFile(infoFile)
+		infoFile := filepath.Join(dir.Name(), `@info.yaml`)
+		content, err := GetTemplateDiskFS().ReadFile(infoFile)
+		if err == nil {
+			themeInfo.Decode(content)
 		} else {
 			for _, v := range embeds {
 				if v.Name == themeInfo.Name {
@@ -133,6 +131,7 @@ func TemplateIndex(ctx echo.Context) error {
 				themeInfo.Version = `0.0.1`
 				themeInfo.UpdatedAt = time.Now().Format(param.DateTimeNormal)
 				themeInfo.Fallback = []string{`default`}
+				infoFile = filepath.Join(frontend.DefaultTemplateDir, infoFile)
 				themeInfo.EncodeToFile(infoFile)
 			}
 		}
@@ -163,7 +162,6 @@ func valiateFileName(ctx echo.Context, fileName string) error {
 }
 
 func TemplateEdit(ctx echo.Context) error {
-	templateDir := frontend.TemplateDir
 	name := ctx.Form(`name`)
 	if len(name) == 0 {
 		return echo.ErrNotFound
@@ -171,7 +169,7 @@ func TemplateEdit(ctx echo.Context) error {
 	if !xtemplate.IsThemeName(name) {
 		return echo.ErrNotFound
 	}
-	themeDir := filepath.Join(templateDir, name)
+	themeDir := name
 	var dirPositions []string
 	var dirURLs []string
 	var embedThemeDir string
@@ -182,7 +180,9 @@ func TemplateEdit(ctx echo.Context) error {
 	}
 	var tfs http.File
 	var err error
-	exists := com.FileExists(themeDir)
+
+	fi, err := GetTemplateDiskFS().Stat(themeDir)
+	exists := err == nil && fi.IsDir()
 	closeEmbedFS := func() error {
 		if tfs != nil {
 			return tfs.Close()
@@ -229,30 +229,26 @@ func TemplateEdit(ctx echo.Context) error {
 		}
 		_file := file
 		var b []byte
-		file = filepath.Clean(file)
 		file = filepath.Join(themeDir, file)
-		if !com.FileExists(file) {
-			if getEmbedFS() == nil {
-				if err != nil && !os.IsNotExist(err) {
-					return err
-				}
-				return echo.ErrNotFound
-			}
-			file = path.Clean(_file)
-			file = path.Join(embedThemeDir, file)
-			var f http.File
-			f, err = GetTemplateEmbedFS().Open(file)
-			if err != nil {
-				return err
-			}
-			b, err = io.ReadAll(f)
-			f.Close()
-			if err != nil {
-				return err
-			}
+		b, err := GetTemplateDiskFS().ReadFile(file)
+		if err == nil {
 			return ctx.JSON(ctx.Data().SetData(echo.H{`content`: com.Bytes2str(b)}))
 		}
-		b, err = os.ReadFile(file)
+		if getEmbedFS() == nil {
+			if err != nil && !os.IsNotExist(err) {
+				return err
+			}
+			return echo.ErrNotFound
+		}
+		file = path.Clean(_file)
+		file = path.Join(embedThemeDir, file)
+		var f http.File
+		f, err = GetTemplateEmbedFS().Open(file)
+		if err != nil {
+			return err
+		}
+		b, err = io.ReadAll(f)
+		f.Close()
 		if err != nil {
 			return err
 		}
@@ -267,6 +263,7 @@ func TemplateEdit(ctx echo.Context) error {
 			return err
 		}
 		original := file
+		themeDir = filepath.Join(frontend.DefaultTemplateDir, themeDir)
 		file = filepath.Join(themeDir, file)
 		if ctx.Formx(`isNew`).Bool() {
 			if com.FileExists(file) && !ctx.Formx(`confirmed`).Bool() {
@@ -299,6 +296,7 @@ func TemplateEdit(ctx echo.Context) error {
 			return err
 		}
 		original := file
+		themeDir = filepath.Join(frontend.DefaultTemplateDir, themeDir)
 		file = filepath.Join(themeDir, file)
 		if com.FileExists(file) && !ctx.Formx(`confirmed`).Bool() {
 			return ctx.NewError(code.DataAlreadyExists, `文件“%s”已经存在，确定要覆盖吗？`, original)
@@ -326,6 +324,8 @@ func TemplateEdit(ctx echo.Context) error {
 			return ctx.NewError(code.InvalidParameter, `请设置文件的新名称`).SetZone(`file`)
 		}
 		original := newFile
+		srcFile := filepath.Join(themeDir, file)
+		themeDir = filepath.Join(frontend.DefaultTemplateDir, themeDir)
 		newFile = filepath.Join(themeDir, newFile)
 		if com.FileExists(newFile) && !ctx.Formx(`confirmed`).Bool() {
 			return ctx.NewError(code.DataAlreadyExists, `文件“%s”已经存在，确定要覆盖吗？`, original)
@@ -334,6 +334,7 @@ func TemplateEdit(ctx echo.Context) error {
 		if err = valiateFileName(ctx, newFile); err != nil {
 			return err
 		}
+		var b []byte
 		if getEmbedFS() == nil {
 			if err != nil && !os.IsNotExist(err) {
 				return err
@@ -342,8 +343,7 @@ func TemplateEdit(ctx echo.Context) error {
 			if file == newFile {
 				return ctx.JSON(ctx.Data().SetInfo(ctx.T(`保存成功`), 1))
 			}
-			file = filepath.Join(themeDir, file)
-			err = os.Rename(file, newFile)
+			b, err = GetTemplateDiskFS().ReadFile(srcFile)
 		} else {
 			file = path.Clean(file)
 			if file == newFile {
@@ -358,12 +358,11 @@ func TemplateEdit(ctx echo.Context) error {
 				}
 				return err
 			}
-			var b []byte
 			b, err = io.ReadAll(f)
 			f.Close()
-			if err == nil {
-				err = os.WriteFile(newFile, b, os.ModePerm)
-			}
+		}
+		if err == nil {
+			err = os.WriteFile(newFile, b, os.ModePerm)
 		}
 		if err != nil {
 			return err
@@ -383,9 +382,9 @@ func TemplateEdit(ctx echo.Context) error {
 		}
 		file = filepath.Clean(file)
 		original := file
-		file = filepath.Join(themeDir, file)
+		file = filepath.Join(frontend.DefaultTemplateDir, themeDir, file)
 		if !com.FileExists(file) {
-			return ctx.NewError(code.DataAlreadyExists, `文件“%s”不存在`, original)
+			return ctx.NewError(code.DataAlreadyExists, `文件“%s”不存在或不属于当前项目`, original)
 		}
 		err := os.Remove(file)
 		if err != nil {
@@ -398,8 +397,8 @@ func TemplateEdit(ctx echo.Context) error {
 		return ctx.JSON(ctx.Data().SetInfo(ctx.T(`删除成功`), 1))
 	}
 	var (
-		dirs  []fs.DirEntry
-		ldirs []xtemplate.DirEntry
+		dirs  []fs.FileInfo
+		ldirs []xtemplate.FileInfo
 		pdirs = map[string]struct{}{}
 	)
 	if tfs == nil && GetTemplateEmbedFS() != nil {
@@ -412,16 +411,7 @@ func TemplateEdit(ctx echo.Context) error {
 			defer tfs.Close()
 		}
 	}
-	var f *os.File
-	f, err = os.Open(themeDir)
-	if err != nil {
-		if tfs != nil {
-			goto EMD
-		}
-		goto END
-	}
-	defer f.Close()
-	dirs, err = f.ReadDir(-1)
+	dirs, err = GetTemplateDiskFS().ReadDir(themeDir)
 	if err != nil {
 		if tfs != nil {
 			goto EMD
@@ -429,7 +419,7 @@ func TemplateEdit(ctx echo.Context) error {
 		goto END
 	}
 	for _, d := range dirs {
-		ldirs = append(ldirs, xtemplate.DirEntry{DirEntry: d})
+		ldirs = append(ldirs, xtemplate.FileInfo{FileInfo: d})
 		pdirs[d.Name()] = struct{}{}
 	}
 
@@ -444,13 +434,13 @@ EMD:
 			if _, ok := pdirs[v.Name()]; ok {
 				continue
 			}
-			ldirs = append(ldirs, xtemplate.DirEntry{DirEntry: fs.FileInfoToDirEntry(v), Embed: true})
+			ldirs = append(ldirs, xtemplate.FileInfo{FileInfo: v, Embed: true})
 		}
 	} else if err != nil && !os.IsNotExist(err) {
 		return err
 	}
 
-	sort.Sort(xtemplate.SortDirEntryByFileType(ldirs))
+	sort.Sort(xtemplate.SortFileInfoByFileType(ldirs))
 	ctx.Set(`dirs`, ldirs)
 	if len(dir) > 0 {
 		dirPositions = strings.Split(strings.Trim(filepath.ToSlash(dir), `/`), `/`)

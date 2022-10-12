@@ -43,18 +43,36 @@ func (f FileSystems) ReadFile(name string) (content []byte, err error) {
 	return b, err
 }
 
-func (f FileSystems) ReadDir(name string, count int) (dirs []fs.FileInfo, err error) {
-	var fp http.File
-	fp, err = f.Open(name)
-	if err != nil {
-		return
+func (f FileSystems) ReadDir(name string) (dirs []fs.FileInfo, err error) {
+	unique := map[string]struct{}{}
+	for _, fileSystem := range f {
+		var file http.File
+		file, err = fileSystem.Open(name)
+		if err != nil {
+			if !os.IsNotExist(err) {
+				return
+			}
+			err = nil
+			continue
+		}
+		var _dirs []fs.FileInfo
+		_dirs, err = file.Readdir(-1)
+		file.Close()
+		if err != nil {
+			if !os.IsNotExist(err) {
+				return
+			}
+			err = nil
+			continue
+		}
+		for _, dir := range _dirs {
+			if _, ok := unique[dir.Name()]; ok {
+				continue
+			}
+			unique[dir.Name()] = struct{}{}
+			dirs = append(dirs, dir)
+		}
 	}
-	if fp == nil {
-		err = os.ErrNotExist
-		return
-	}
-	dirs, err = fp.Readdir(count)
-	fp.Close()
 	return
 }
 
@@ -110,15 +128,15 @@ func (s *StaticDir) Open(name string) (http.File, error) {
 	return f, err
 }
 
-type DirEntry struct {
-	fs.DirEntry
+type FileInfo struct {
+	fs.FileInfo
 	Embed bool
 }
 
-type SortDirEntryByFileType []DirEntry
+type SortFileInfoByFileType []FileInfo
 
-func (s SortDirEntryByFileType) Len() int { return len(s) }
-func (s SortDirEntryByFileType) Less(i, j int) bool {
+func (s SortFileInfoByFileType) Len() int { return len(s) }
+func (s SortFileInfoByFileType) Less(i, j int) bool {
 	if s[i].IsDir() {
 		if !s[j].IsDir() {
 			return true
@@ -130,4 +148,4 @@ func (s SortDirEntryByFileType) Less(i, j int) bool {
 	}
 	return s[i].Name() < s[j].Name()
 }
-func (s SortDirEntryByFileType) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s SortFileInfoByFileType) Swap(i, j int) { s[i], s[j] = s[j], s[i] }

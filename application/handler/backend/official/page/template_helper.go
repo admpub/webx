@@ -14,7 +14,6 @@ import (
 	xbindata "github.com/admpub/webx/application/library/bindata"
 	"github.com/admpub/webx/application/library/xtemplate"
 	formConfig "github.com/coscms/forms/config"
-	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware/bindata"
 )
@@ -29,7 +28,6 @@ func init() {
 }
 
 func getTemplateInfo(name string) (*xtemplate.ThemeInfo, error) {
-	templateDir := frontend.TemplateDir
 	if len(name) == 0 {
 		return nil, echo.ErrNotFound
 	}
@@ -40,24 +38,25 @@ func getTemplateInfo(name string) (*xtemplate.ThemeInfo, error) {
 		CustomConfig: echo.H{},
 		FormConfig:   make(map[string]formConfig.Config),
 	}
-	infoFile := filepath.Join(templateDir, name, `@info.yaml`)
-	if !com.FileExists(infoFile) {
-		if GetTemplateEmbedFS() != nil {
-			infoFile = path.Join(templateRoot, name, `@info.yaml`)
+	infoFile := filepath.Join(name, `@info.yaml`)
+	content, err := GetTemplateDiskFS().ReadFile(infoFile)
+	if err == nil {
+		err = themeInfo.Decode(content)
+		return themeInfo, err
+	}
+	if GetTemplateEmbedFS() != nil {
+		infoFile = path.Join(templateRoot, name, `@info.yaml`)
 
-			if tfs, err := GetTemplateEmbedFS().Open(infoFile); err == nil {
-				b, err := io.ReadAll(tfs)
-				tfs.Close()
-				if err == nil {
-					err = themeInfo.Decode(b)
-					return themeInfo, err
-				}
+		if tfs, err := GetTemplateEmbedFS().Open(infoFile); err == nil {
+			b, err := io.ReadAll(tfs)
+			tfs.Close()
+			if err == nil {
+				err = themeInfo.Decode(b)
+				return themeInfo, err
 			}
 		}
-		return nil, echo.ErrNotFound
 	}
-	err := themeInfo.DecodeFile(infoFile)
-	return themeInfo, err
+	return nil, echo.ErrNotFound
 }
 
 var (
@@ -72,6 +71,7 @@ var (
 
 func initTemplateDiskFS() {
 	templateDiskFS = xtemplate.NewFileSystems()
+	templateDiskFS.Register(http.Dir(frontend.DefaultTemplateDir))
 	for _, tmplDir := range xbindata.FrontendTemplateDirs.TmplDirs() {
 		templateDiskFS.Register(http.Dir(tmplDir))
 	}
@@ -122,7 +122,7 @@ func GetTemplateEmbedFS() http.FileSystem {
 	return templateEmbedFS
 }
 
-func GetTemplateDiskFS() http.FileSystem {
+func GetTemplateDiskFS() xtemplate.FileSystems {
 	templateDiskMx.Do(initTemplateDiskFS)
 	return templateDiskFS
 }
