@@ -27,8 +27,8 @@ var (
 	}
 	NgingDir             = `../nging`
 	WebxDir              = `../webx`
-	BackendTemplateDirs  = bindata.PathAliases     //{prefix:templateDir}
-	FrontendTemplateDirs = ntemplate.PathAliases{} //{prefix:templateDir}
+	BackendTemplateDirs  = bindata.PathAliases        //{prefix:templateDir}
+	FrontendTemplateDirs = ntemplate.NewPathAliases() //{prefix:templateDir}
 )
 
 func Initialize(callbacks ...func()) {
