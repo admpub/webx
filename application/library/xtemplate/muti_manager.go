@@ -36,6 +36,10 @@ type MultiManager struct {
 	hasBindata  bool
 }
 
+func (b *MultiManager) GetManagers() []driver.Manager {
+	return b.managers
+}
+
 func (b *MultiManager) Start() error {
 	errs := common.NewErrors()
 	for _, mgr := range b.managers {

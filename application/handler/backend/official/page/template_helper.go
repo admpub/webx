@@ -75,8 +75,16 @@ func initTemplateDiskFS() {
 }
 
 func initTemplateEmbedFS() {
-	if mgr, ok := bootconfig.FrontendTmplMgr.(*bindata.TmplManager); ok {
+	switch mgr := bootconfig.FrontendTmplMgr.(type) {
+	case *bindata.TmplManager:
 		templateEmbedFS = mgr.FileSystem
+	case *xtemplate.MultiManager:
+		for _, m := range mgr.GetManagers() {
+			if mgr, ok := m.(*bindata.TmplManager); ok {
+				templateEmbedFS = mgr.FileSystem
+				break
+			}
+		}
 	}
 }
 
