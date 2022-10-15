@@ -11,7 +11,6 @@ import (
 	"github.com/admpub/events"
 	"github.com/admpub/nging/v4/application/cmd/bootconfig"
 	"github.com/admpub/webx/application/initialize/frontend"
-	xbindata "github.com/admpub/webx/application/library/bindata"
 	"github.com/admpub/webx/application/library/xtemplate"
 	formConfig "github.com/coscms/forms/config"
 	"github.com/webx-top/echo"
@@ -72,9 +71,7 @@ var (
 func initTemplateDiskFS() {
 	templateDiskFS = xtemplate.NewFileSystems()
 	templateDiskFS.Register(http.Dir(frontend.DefaultTemplateDir))
-	for _, tmplDir := range xbindata.FrontendTemplateDirs.TmplDirs() {
-		templateDiskFS.Register(http.Dir(tmplDir))
-	}
+	initTemplateBindata()
 }
 
 func initTemplateEmbedFS() {
