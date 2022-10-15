@@ -102,7 +102,7 @@ func TemplateIndex(ctx echo.Context) error {
 		embeds []*xtemplate.ThemeInfo
 	)
 	dirs, err := GetTemplateDiskFS().ReadDir(`./`)
-	if err != nil && os.IsNotExist(err) {
+	if err != nil && !os.IsNotExist(err) {
 		goto END
 	}
 	list = make([]*xtemplate.ThemeInfo, 0, len(dirs))
