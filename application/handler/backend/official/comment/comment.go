@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/webx-top/db"
+	"github.com/webx-top/db/lib/sqlbuilder"
 	"github.com/webx-top/echo"
 
 	"github.com/admpub/nging/v4/application/handler"
@@ -23,11 +24,16 @@ func Index(ctx echo.Context) error {
 		cond = append(cond, db.Cond{`content`: db.Like(`%` + q + `%`)})
 	}
 	ctx.Request().Form().Set(`pageSize`, `10`)
-	p, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
-		return r.OrderBy(`-id`)
+	list := []*modelComment.CommentAndReplyTarget{}
+	p, err := handler.PagingWithLister(ctx, handler.NewLister(m, &list, func(r db.Result) db.Result {
+		return r.OrderBy(`-id`).Relation(`ReplyTarget`, func(sel sqlbuilder.Selector) sqlbuilder.Selector {
+			if modelComment.NeedWithQuoteComment(ctx) {
+				return sel
+			}
+			return nil
+		})
 	}, db.And(cond...)))
 	ret := handler.Err(ctx, err)
-	list := m.Objects()
 	listx, err := m.WithExtra(list, nil, handler.User(ctx), p)
 	if err != nil {
 		return err
@@ -74,11 +80,16 @@ func List(ctx echo.Context) error {
 		ctx.Set(`targetDetailURL`, detailURL)
 	}
 	ctx.Request().Form().Set(`pageSize`, `10`)
-	p, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
-		return r.OrderBy(`-id`)
+	list := []*modelComment.CommentAndReplyTarget{}
+	p, err := handler.PagingWithLister(ctx, handler.NewLister(m, &list, func(r db.Result) db.Result {
+		return r.OrderBy(`-id`).Relation(`ReplyTarget`, func(sel sqlbuilder.Selector) sqlbuilder.Selector {
+			if modelComment.NeedWithQuoteComment(ctx) {
+				return sel
+			}
+			return nil
+		})
 	}, db.And(cond...)))
 	ret := handler.Err(ctx, err)
-	list := m.Objects()
 	listx, err := m.WithExtra(list, nil, handler.User(ctx), p)
 	if err != nil {
 		return err

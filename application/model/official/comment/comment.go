@@ -369,7 +369,7 @@ func (f *Comment) RowNums(targetType, subType string, targetID uint64, ids []uin
 	return result, nil
 }
 
-func (f *Comment) WithExtra(list []*dbschema.OfficialCommonComment, customer *dbschema.OfficialCustomer, user *dbschemaNging.NgingUser, p *pagination.Pagination) ([]*CommentAndExtra, error) {
+func (f *Comment) WithExtra(list []*CommentAndReplyTarget, customer *dbschema.OfficialCustomer, user *dbschemaNging.NgingUser, p *pagination.Pagination) ([]*CommentAndExtra, error) {
 	c := f.Context()
 	listx := make([]*CommentAndExtra, len(list))
 	var (
@@ -414,7 +414,7 @@ func (f *Comment) WithExtra(list []*dbschema.OfficialCommonComment, customer *db
 		}
 		commentIds[k] = row.Id
 		listx[k] = &CommentAndExtra{
-			OfficialCommonComment: row,
+			CommentAndReplyTarget: row,
 			FloorNumber:           common.FloorNumber(p.Page(), p.Size(), k),
 			Extra:                 extra,
 		}

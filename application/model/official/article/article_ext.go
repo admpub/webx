@@ -4,6 +4,7 @@ import (
 	"github.com/webx-top/echo"
 
 	"github.com/admpub/webx/application/dbschema"
+	modelAuthor "github.com/admpub/webx/application/model/author"
 	"github.com/admpub/webx/application/model/official"
 )
 
@@ -11,29 +12,9 @@ var Contype = official.Contype
 
 type ArticleWithOwner struct {
 	*dbschema.OfficialCommonArticle
-	User     *User     `db:"-,relation=id:owner_id|gtZero|eq(owner_type:user),columns=id&username&avatar" json:",omitempty"`
-	Customer *Customer `db:"-,relation=id:owner_id|gtZero|eq(owner_type:customer),columns=id&name&avatar" json:",omitempty"`
-	Category *Category `db:"-,relation=id:category_id|gtZero,columns=id&name" json:",omitempty"`
-}
-
-type User struct {
-	Id       uint   `db:"id"`
-	Username string `db:"username"`
-	Avatar   string `db:"avatar"`
-}
-
-func (u *User) Name_() string {
-	return dbschema.WithPrefix(`nging_user`)
-}
-
-type Customer struct {
-	Id     uint64 `db:"id"`
-	Name   string `db:"name"`
-	Avatar string `db:"avatar"`
-}
-
-func (c *Customer) Name_() string {
-	return dbschema.WithPrefix(`official_customer`)
+	User     *modelAuthor.User     `db:"-,relation=id:owner_id|gtZero|eq(owner_type:user),columns=id&username&avatar" json:",omitempty"`
+	Customer *modelAuthor.Customer `db:"-,relation=id:owner_id|gtZero|eq(owner_type:customer),columns=id&name&avatar" json:",omitempty"`
+	Category *Category             `db:"-,relation=id:category_id|gtZero,columns=id&name" json:",omitempty"`
 }
 
 type Category struct {

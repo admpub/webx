@@ -1,9 +1,12 @@
 package comment
 
 import (
+	"strconv"
+
 	"github.com/webx-top/echo"
 
 	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/nging/v4/application/model"
 	"github.com/admpub/webx/application/dbschema"
 )
 
@@ -68,4 +71,18 @@ func CommentReview() bool {
 		return true
 	}
 	return CommentSetting() == `review`
+}
+
+func NeedWithQuoteComment(c echo.Context) bool {
+	kvM := model.NewKv(c)
+	v, _ := kvM.GetValue(`WITH_QUOTE_COMMENT`, `1`)
+	ok, _ := strconv.ParseBool(v)
+	return ok
+}
+
+func PureJSONCommentList(c echo.Context) bool {
+	kvM := model.NewKv(c)
+	v, _ := kvM.GetValue(`PUREJSON_COMMENT_LIST`, `0`)
+	ok, _ := strconv.ParseBool(v)
+	return ok
 }

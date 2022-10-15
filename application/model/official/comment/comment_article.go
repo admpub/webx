@@ -7,6 +7,7 @@ import (
 	"github.com/admpub/webx/application/model/official/article"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 )
 
 func commentArticleGetTarget(ctx echo.Context, targetID uint64) (res echo.H, breadcrumb []echo.KV, detailURL string, err error) {
@@ -14,7 +15,7 @@ func commentArticleGetTarget(ctx echo.Context, targetID uint64) (res echo.H, bre
 	err = articleM.Get(nil, `id`, targetID)
 	if err != nil {
 		if err == db.ErrNoMoreRows {
-			err = ctx.E(`文章不存在`)
+			err = ctx.NewError(code.DataNotFound, `文章不存在`).SetZone(`id`)
 		}
 		return
 	}
@@ -30,7 +31,7 @@ func commentArticleGetTarget(ctx echo.Context, targetID uint64) (res echo.H, bre
 
 func commentArticleCheck(ctx echo.Context, f *dbschema.OfficialCommonComment) error {
 	if f.TargetId < 1 {
-		return ctx.E(`资讯ID无效`)
+		return ctx.NewError(code.InvalidParameter, `资讯ID无效`).SetZone(`TargetId`)
 	}
 	newsM := dbschema.NewOfficialCommonArticle(ctx)
 	err := newsM.Get(nil, `id`, f.TargetId)
@@ -38,7 +39,7 @@ func commentArticleCheck(ctx echo.Context, f *dbschema.OfficialCommonComment) er
 		if err != db.ErrNoMoreRows {
 			return err
 		}
-		return ctx.E(`您要评论的资讯(ID:%d)不存在`, f.TargetId)
+		return ctx.NewError(code.DataNotFound, `您要评论的资讯(ID:%d)不存在`, f.TargetId).SetZone(`id`)
 	}
 	if newsM.CommentAutoDisplay == `Y` {
 		f.Display = `Y`

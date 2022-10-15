@@ -2,6 +2,7 @@ package article
 
 import (
 	"github.com/webx-top/db"
+	"github.com/webx-top/db/lib/sqlbuilder"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
@@ -76,8 +77,14 @@ func articleCommentReplyList(c echo.Context, commentID uint64, urlLayout string,
 		return nil, err
 	}
 	cond := cmtM.ListReplyCond(commentID)
-	p, err := common.NewLister(cmtM, nil, func(r db.Result) db.Result {
-		return r.OrderBy(`id`)
+	list := []*modelComment.CommentAndReplyTarget{}
+	p, err := common.NewLister(cmtM, &list, func(r db.Result) db.Result {
+		return r.OrderBy(`id`).Relation(`ReplyTarget`, func(sel sqlbuilder.Selector) sqlbuilder.Selector {
+			if modelComment.NeedWithQuoteComment(c) {
+				return sel
+			}
+			return nil
+		})
 	}, cond.And()).Paging(c, pagingVarSuffix...)
 	if err != nil {
 		return nil, err
@@ -85,7 +92,6 @@ func articleCommentReplyList(c echo.Context, commentID uint64, urlLayout string,
 	if len(urlLayout) > 0 {
 		p.SetURL(urlLayout)
 	}
-	list := cmtM.Objects()
 	return cmtM.WithExtra(list, sessdata.Customer(c), handler.User(c), p)
 }
 
@@ -115,6 +121,8 @@ func ArticleCommentReplyList(c echo.Context) error {
 				`html`:       string(b),
 				`pagination`: c.Get(`pagination`),
 			})
+		} else if modelComment.PureJSONCommentList(c) {
+			data.SetData(c.Stored())
 		}
 		return c.JSON(data)
 	}
@@ -135,8 +143,14 @@ func articleCommentList(c echo.Context, articleID uint64, articleSN string, targ
 	}
 	cmtM := modelComment.NewComment(c)
 	cond := cmtM.ListCond(targetType, subType, articleID, flat)
-	p, err := common.NewLister(cmtM, nil, func(r db.Result) db.Result {
-		return r.OrderBy(`id`)
+	list := []*modelComment.CommentAndReplyTarget{}
+	p, err := common.NewLister(cmtM, &list, func(r db.Result) db.Result {
+		return r.OrderBy(`id`).Relation(`ReplyTarget`, func(sel sqlbuilder.Selector) sqlbuilder.Selector {
+			if modelComment.NeedWithQuoteComment(c) {
+				return sel
+			}
+			return nil
+		})
 	}, cond.And()).Paging(c, pagingVarSuffix...)
 	if err != nil {
 		return nil, err
@@ -144,7 +158,6 @@ func articleCommentList(c echo.Context, articleID uint64, articleSN string, targ
 	if len(urlLayout) > 0 {
 		p.SetURL(urlLayout)
 	}
-	list := cmtM.Objects()
 	var rowNums map[uint64]int
 	var replyCommentIndexes map[uint64][]int
 	if flat {
@@ -210,6 +223,8 @@ func ArticleCommentList(c echo.Context) (err error) {
 				`html`:       string(b),
 				`pagination`: c.Get(`pagination`),
 			})
+		} else if modelComment.PureJSONCommentList(c) {
+			data.SetData(c.Stored())
 		}
 		return c.JSON(data)
 	}
