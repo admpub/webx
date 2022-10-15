@@ -71,7 +71,7 @@ var (
 func initTemplateDiskFS() {
 	templateDiskFS = xtemplate.NewFileSystems()
 	templateDiskFS.Register(http.Dir(frontend.DefaultTemplateDir))
-	initTemplateBindata()
+	initTemplateDiskOtherFS()
 }
 
 func initTemplateEmbedFS() {

@@ -3,5 +3,5 @@
 
 package page
 
-func initTemplateBindata() {
+func initTemplateDiskOtherFS() {
 }
