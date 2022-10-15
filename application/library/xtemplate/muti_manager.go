@@ -40,6 +40,10 @@ func (b *MultiManager) GetManagers() []driver.Manager {
 	return b.managers
 }
 
+func (b *MultiManager) TemplateDir() string {
+	return b.templateDir
+}
+
 func (b *MultiManager) HasBindata() bool {
 	return b.hasBindata
 }
