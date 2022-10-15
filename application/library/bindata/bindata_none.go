@@ -15,6 +15,7 @@ import (
 	"github.com/admpub/nging/v4/application/initialize/backend"
 	"github.com/admpub/nging/v4/application/library/bindata"
 	"github.com/admpub/nging/v4/application/library/modal"
+	"github.com/admpub/nging/v4/application/library/ntemplate"
 	selfBackend "github.com/admpub/webx/application/initialize/backend"
 	"github.com/admpub/webx/application/initialize/frontend"
 )
@@ -24,8 +25,10 @@ var (
 		Root: "",
 		Path: "/public/assets/frontend/",
 	}
-	NgingDir = `../nging`
-	WebxDir  = `../webx`
+	NgingDir             = `../nging`
+	WebxDir              = `../webx`
+	BackendTemplateDirs  = bindata.PathAliases        //{prefix:templateDir}
+	FrontendTemplateDirs = ntemplate.NewPathAliases() //{prefix:templateDir}
 )
 
 func Initialize(callbacks ...func()) {
