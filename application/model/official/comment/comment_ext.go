@@ -18,6 +18,7 @@ type CommentAndReplyTarget struct {
 }
 
 type CommentLite struct {
+	Id        uint64 `db:"id" bson:"id" json:"id" xml:"id"` // 关联值字段不能缺少
 	OwnerId   uint64 `db:"owner_id" bson:"owner_id" comment:"评论者ID" json:"owner_id" xml:"owner_id"`
 	OwnerType string `db:"owner_type" bson:"owner_type" comment:"评论者类型(customer-前台客户;user-后台用户)" json:"owner_type" xml:"owner_type"`
 	Content   string `db:"content" bson:"content" comment:"评论内容" json:"content" xml:"content"`
@@ -25,6 +26,10 @@ type CommentLite struct {
 	Created   uint   `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
 	Updated   uint   `db:"updated" bson:"updated" comment:"编辑时间" json:"updated" xml:"updated"`
 	Display   string `db:"display" bson:"display" comment:"显示" json:"display" xml:"display"`
+}
+
+func (c *CommentLite) Name_() string {
+	return dbschema.WithPrefix(`official_common_comment`)
 }
 
 type CommentAndExtraLite struct {
