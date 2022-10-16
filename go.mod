@@ -61,7 +61,7 @@ require (
 	github.com/webx-top/echo-socket.io v1.1.2
 	github.com/webx-top/image v0.0.9
 	github.com/webx-top/pagination v0.1.1
-	github.com/webx-top/validation v0.0.3
+	github.com/webx-top/validation v0.0.3 // indirect
 	github.com/yanyiwu/gojieba v1.1.2
 	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1
 	golang.org/x/sync v0.0.0-20220929204114-8fcdb60fdcc0
