@@ -7,12 +7,13 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 	"github.com/webx-top/pagination"
-	"github.com/webx-top/validation"
 
 	"github.com/admpub/log"
 	dbschemaNging "github.com/admpub/nging/v4/application/dbschema"
+	"github.com/admpub/nging/v4/application/handler"
 	"github.com/admpub/nging/v4/application/library/common"
 	"github.com/admpub/nging/v4/application/model"
 	"github.com/admpub/null"
@@ -37,20 +38,14 @@ type Comment struct {
 	*dbschema.OfficialCommonComment
 }
 
-func (f *Comment) CopyFromUser(user *dbschemaNging.NgingUser) {
-	f.OwnerId = uint64(user.Id)
+func (f *Comment) SetUserID(userID uint) {
+	f.OwnerId = uint64(userID)
 	f.OwnerType = `user`
-	f.Name = user.Username
-	f.Email = user.Email
-	f.Mobile = user.Mobile
 }
 
-func (f *Comment) CopyFromCustomer(customer *dbschema.OfficialCustomer) {
-	f.OwnerId = customer.Id
+func (f *Comment) SetCustomerID(customerID uint64) {
+	f.OwnerId = customerID
 	f.OwnerType = `customer`
-	f.Name = customer.Name
-	f.Email = customer.Email
-	f.Mobile = customer.Mobile
 }
 
 func (f *Comment) ListCond(typ, subType string, id uint64, flat bool, tableAlias ...string) *db.Compounds {
@@ -125,39 +120,19 @@ func (f *Comment) check() (func() error, error) {
 	if len(f.Content) < 6 {
 		return nil, f.Context().E(`评论内容不可少于6个字`)
 	}
-	if f.OwnerType == `user` {
-		if len(f.Name) < 1 {
-			userM := model.NewUser(f.Context())
-			err := userM.Get(nil, `id`, f.OwnerId)
-			if err != nil {
-				if err != db.ErrNoMoreRows {
-					return nil, err
-				}
-				return nil, f.Context().E(`不存在UID为“%d”的用户`, f.OwnerId)
+	if f.OwnerId < 1 {
+		if f.OwnerType == `customer` {
+			customer := sessdata.Customer(f.Context())
+			if customer == nil {
+				return nil, f.Context().NewError(code.Unauthenticated, `请登录后再评论`)
 			}
-			f.CopyFromUser(userM.NgingUser)
-		}
-	} else if f.OwnerId < 1 {
-		customer := sessdata.Customer(f.Context())
-		if customer != nil {
-			f.CopyFromCustomer(customer)
+			f.SetCustomerID(customer.Id)
 		} else {
-			if len(f.Name) < 2 {
-				return nil, f.Context().E(`请输入您的名称，并且不能少于两个字`)
+			user := handler.User(f.Context())
+			if user == nil {
+				return nil, f.Context().NewError(code.Unauthenticated, `请登录后再评论`)
 			}
-			if len(f.Email) < 1 {
-				return nil, f.Context().E(`请输入您的电子邮箱(E-mail)地址`)
-			}
-			if !com.IsEmail(f.Email) {
-				return nil, f.Context().E(`电子邮箱(E-mail)地址的格式不正确`)
-			}
-			v := validation.New()
-			if len(f.Mobile) > 0 && !v.Mobile(f.Mobile, `mobile`).Ok {
-				return nil, f.Context().E(`手机号码的格式不正确`)
-			}
-			if len(f.Website) > 0 && !com.IsURL(f.Website) {
-				return nil, f.Context().E(`您输入的网址格式不正确`)
-			}
+			f.SetUserID(user.Id)
 		}
 	}
 	if f.ReplyCommentId > 0 {

@@ -311,10 +311,6 @@ CREATE TABLE `official_common_comment` (
   `target_owner_type` enum('user','customer') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'customer' COMMENT '目标作者类型(customer-前台客户;user-后台用户)',
   `owner_id` bigint unsigned NOT NULL DEFAULT '0' COMMENT '评论者ID',
   `owner_type` enum('user','customer') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'customer' COMMENT '评论者类型(customer-前台客户;user-后台用户)',
-  `name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '发布人姓名',
-  `email` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '发布人E-mail',
-  `mobile` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '发布人手机号',
-  `website` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '发布人网址',
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '评论内容',
   `contype` enum('text','html','markdown') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'text' COMMENT '内容类型',
   `created` int unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -1182,4 +1178,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-12 23:43:08
+-- Dump completed on 2022-10-16 16:21:51

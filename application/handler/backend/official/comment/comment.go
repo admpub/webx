@@ -122,7 +122,7 @@ func Add(ctx echo.Context) error {
 		m.TargetType = targetType
 		m.Contype = ctx.Formx(`contype`).String()
 		m.TargetId = targetID
-		m.CopyFromUser(user)
+		m.SetUserID(user.Id)
 		m.Content = ctx.Formx(`content`).String()
 		m.ReplyCommentId = ctx.Formx(`replyId`).Uint64()
 		_, err = m.Add()

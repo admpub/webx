@@ -51,7 +51,7 @@ func ArticleCommentAdd(c echo.Context) (err error) {
 	cmtM.TargetType = typ
 	cmtM.TargetSubtype = subType
 	cmtM.TargetId = id
-	cmtM.CopyFromCustomer(customer)
+	cmtM.SetCustomerID(customer.Id)
 	cmtM.Content = c.Formx(`content`).String()
 	cmtM.Contype = `text`
 	cmtM.ReplyCommentId = c.Formx(`replyId`).Uint64()

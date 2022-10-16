@@ -114,10 +114,6 @@ type OfficialCommonComment struct {
 	TargetOwnerType string `db:"target_owner_type" bson:"target_owner_type" comment:"目标作者类型(customer-前台客户;user-后台用户)" json:"target_owner_type" xml:"target_owner_type"`
 	OwnerId         uint64 `db:"owner_id" bson:"owner_id" comment:"评论者ID" json:"owner_id" xml:"owner_id"`
 	OwnerType       string `db:"owner_type" bson:"owner_type" comment:"评论者类型(customer-前台客户;user-后台用户)" json:"owner_type" xml:"owner_type"`
-	Name            string `db:"name" bson:"name" comment:"发布人姓名" json:"name" xml:"name"`
-	Email           string `db:"email" bson:"email" comment:"发布人E-mail" json:"email" xml:"email"`
-	Mobile          string `db:"mobile" bson:"mobile" comment:"发布人手机号" json:"mobile" xml:"mobile"`
-	Website         string `db:"website" bson:"website" comment:"发布人网址" json:"website" xml:"website"`
 	Content         string `db:"content" bson:"content" comment:"评论内容" json:"content" xml:"content"`
 	Contype         string `db:"contype" bson:"contype" comment:"内容类型" json:"contype" xml:"contype"`
 	Created         uint   `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
@@ -709,10 +705,6 @@ func (a *OfficialCommonComment) Reset() *OfficialCommonComment {
 	a.TargetOwnerType = ``
 	a.OwnerId = 0
 	a.OwnerType = ``
-	a.Name = ``
-	a.Email = ``
-	a.Mobile = ``
-	a.Website = ``
 	a.Content = ``
 	a.Contype = ``
 	a.Created = 0
@@ -741,10 +733,6 @@ func (a *OfficialCommonComment) AsMap(onlyFields ...string) param.Store {
 		r["TargetOwnerType"] = a.TargetOwnerType
 		r["OwnerId"] = a.OwnerId
 		r["OwnerType"] = a.OwnerType
-		r["Name"] = a.Name
-		r["Email"] = a.Email
-		r["Mobile"] = a.Mobile
-		r["Website"] = a.Website
 		r["Content"] = a.Content
 		r["Contype"] = a.Contype
 		r["Created"] = a.Created
@@ -783,14 +771,6 @@ func (a *OfficialCommonComment) AsMap(onlyFields ...string) param.Store {
 			r["OwnerId"] = a.OwnerId
 		case "OwnerType":
 			r["OwnerType"] = a.OwnerType
-		case "Name":
-			r["Name"] = a.Name
-		case "Email":
-			r["Email"] = a.Email
-		case "Mobile":
-			r["Mobile"] = a.Mobile
-		case "Website":
-			r["Website"] = a.Website
 		case "Content":
 			r["Content"] = a.Content
 		case "Contype":
@@ -843,14 +823,6 @@ func (a *OfficialCommonComment) FromRow(row map[string]interface{}) {
 			a.OwnerId = param.AsUint64(value)
 		case "owner_type":
 			a.OwnerType = param.AsString(value)
-		case "name":
-			a.Name = param.AsString(value)
-		case "email":
-			a.Email = param.AsString(value)
-		case "mobile":
-			a.Mobile = param.AsString(value)
-		case "website":
-			a.Website = param.AsString(value)
 		case "content":
 			a.Content = param.AsString(value)
 		case "contype":
@@ -919,14 +891,6 @@ func (a *OfficialCommonComment) Set(key interface{}, value ...interface{}) {
 			a.OwnerId = param.AsUint64(vv)
 		case "OwnerType":
 			a.OwnerType = param.AsString(vv)
-		case "Name":
-			a.Name = param.AsString(vv)
-		case "Email":
-			a.Email = param.AsString(vv)
-		case "Mobile":
-			a.Mobile = param.AsString(vv)
-		case "Website":
-			a.Website = param.AsString(vv)
 		case "Content":
 			a.Content = param.AsString(vv)
 		case "Contype":
@@ -966,10 +930,6 @@ func (a *OfficialCommonComment) AsRow(onlyFields ...string) param.Store {
 		r["target_owner_type"] = a.TargetOwnerType
 		r["owner_id"] = a.OwnerId
 		r["owner_type"] = a.OwnerType
-		r["name"] = a.Name
-		r["email"] = a.Email
-		r["mobile"] = a.Mobile
-		r["website"] = a.Website
 		r["content"] = a.Content
 		r["contype"] = a.Contype
 		r["created"] = a.Created
@@ -1008,14 +968,6 @@ func (a *OfficialCommonComment) AsRow(onlyFields ...string) param.Store {
 			r["owner_id"] = a.OwnerId
 		case "owner_type":
 			r["owner_type"] = a.OwnerType
-		case "name":
-			r["name"] = a.Name
-		case "email":
-			r["email"] = a.Email
-		case "mobile":
-			r["mobile"] = a.Mobile
-		case "website":
-			r["website"] = a.Website
 		case "content":
 			r["content"] = a.Content
 		case "contype":
