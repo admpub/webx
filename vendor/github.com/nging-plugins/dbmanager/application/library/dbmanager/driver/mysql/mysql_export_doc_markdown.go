@@ -25,8 +25,8 @@ func (a *mysqlExportMarkdownDoc) Open(c echo.Context) error {
 func (a *mysqlExportMarkdownDoc) Write(c echo.Context, table *TableStatus, fields []*Field) error {
 	c.Response().Write([]byte(`## ` + table.Name.String + "\n\n"))
 	c.Response().Write([]byte(`> ` + table.Comment.String + "\n\n"))
-	c.Response().Write([]byte(`| ` + c.T(`字段名`) + ` | ` + c.T(`数据类型`) + ` | ` + c.T(`说明`) + ` |` + "\n"))
-	c.Response().Write([]byte(`| :------------ | :------------ | :------------ |` + "\n"))
+	c.Response().Write([]byte(`| ` + c.T(`字段名`) + ` | ` + c.T(`数据类型`) + ` | ` + c.T(`默认值`) + ` | ` + c.T(`是否必填`) + ` | ` + c.T(`说明`) + ` |` + "\n"))
+	c.Response().Write([]byte(`| :------------ | :------------ |  :------------ |  :------------ | :------------ |` + "\n"))
 	for _, v := range fields {
 		dataType := v.Full_type
 		if v.Null {
@@ -35,17 +35,22 @@ func (a *mysqlExportMarkdownDoc) Write(c echo.Context, table *TableStatus, field
 		if v.AutoIncrement.Valid {
 			dataType += ` *` + c.T("自动增量") + `*`
 		}
-		if v.Default.Valid {
-			if len(v.Default.String) > 0 {
-				dataType += ` [**` + v.Default.String + `**]`
-			} else {
-				dataType += ` []`
-			}
-		}
 		if len(v.On_update) > 0 {
 			dataType += ` ON UPDATE **` + v.On_update + `**`
 		}
-		c.Response().Write([]byte(`| ` + v.Field + ` | ` + dataType + ` | ` + v.Comment + ` |` + "\n"))
+		var defaultValue string
+		if v.Default.Valid {
+			if len(v.Default.String) > 0 {
+				defaultValue = `[**` + v.Default.String + `**]`
+			} else {
+				defaultValue = `[]`
+			}
+		}
+		required := c.T(`是`)
+		if !v.IsRequired() {
+			required = c.T(`否`)
+		}
+		c.Response().Write([]byte(`| ` + v.Field + ` | ` + dataType + ` | ` + defaultValue + ` | ` + required + ` | ` + v.Comment + ` |` + "\n"))
 	}
 	c.Response().Write([]byte("\n"))
 	return nil

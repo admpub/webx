@@ -77,7 +77,7 @@ require (
 	github.com/admpub/nging/v4 v4.1.5
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.20.1
-	github.com/nging-plugins/dbmanager v0.9.0
+	github.com/nging-plugins/dbmanager v0.9.3
 )
 
 require (

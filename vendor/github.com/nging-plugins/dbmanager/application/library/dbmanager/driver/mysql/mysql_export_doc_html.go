@@ -29,7 +29,7 @@ func (a *mysqlExportHTMLDoc) Write(c echo.Context, table *TableStatus, fields []
 	c.Response().Write([]byte(`<h2 id="` + strings.ReplaceAll(table.Name.String, `"`, ``) + `">` + table.Name.String + `</h2>`))
 	c.Response().Write([]byte(`<em>` + table.Comment.String + `</em>`))
 	c.Response().Write([]byte(`<table class="table table-bordered table-hover table-condensed">`))
-	c.Response().Write([]byte(`<thead><tr><th>` + c.T(`字段名`) + `</th><th>` + c.T(`数据类型`) + `</th><th>` + c.T(`说明`) + `</th></tr></thead>`))
+	c.Response().Write([]byte(`<thead><tr><th>` + c.T(`字段名`) + `</th><th>` + c.T(`数据类型`) + `</th><th>` + c.T(`默认值`) + `</th><th>` + c.T(`是否必填`) + `</th><th>` + c.T(`说明`) + `</th></tr></thead>`))
 	c.Response().Write([]byte(`<tbody>`))
 	for _, v := range fields {
 		dataType := v.Full_type
@@ -39,13 +39,18 @@ func (a *mysqlExportHTMLDoc) Write(c echo.Context, table *TableStatus, fields []
 		if v.AutoIncrement.Valid {
 			dataType += ` <em>` + c.T("自动增量") + `</em>`
 		}
-		if v.Default.Valid {
-			dataType += ` [<b>` + v.Default.String + `</b>]`
-		}
 		if len(v.On_update) > 0 {
 			dataType += ` ON UPDATE <b>` + v.On_update + `</b>`
 		}
-		c.Response().Write([]byte(`<tr><td>` + v.Field + `</td><td>` + dataType + `</td><td>` + v.Comment + `</td></tr>`))
+		var defaultValue string
+		if v.Default.Valid {
+			defaultValue = ` [<b>` + v.Default.String + `</b>]`
+		}
+		required := c.T(`是`)
+		if !v.IsRequired() {
+			required = c.T(`否`)
+		}
+		c.Response().Write([]byte(`<tr><td>` + v.Field + `</td><td>` + dataType + `</td><td>` + defaultValue + `</td><td>` + required + `</td><td>` + v.Comment + `</td></tr>`))
 	}
 	c.Response().Write([]byte(`</tbody>`))
 	c.Response().Write([]byte(`</table>`))
