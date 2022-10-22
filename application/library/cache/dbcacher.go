@@ -6,6 +6,7 @@ import (
 )
 
 var DBCacher = NewDBCacher()
+var _ factory.Cacher = DBCacher
 
 func NewDBCacher() factory.Cacher {
 	return &dbCacher{}
