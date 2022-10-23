@@ -299,6 +299,7 @@ github.com/admpub/nging/v4/application/library/license
 github.com/admpub/nging/v4/application/library/modal
 github.com/admpub/nging/v4/application/library/module
 github.com/admpub/nging/v4/application/library/msgbox
+github.com/admpub/nging/v4/application/library/namedstruct
 github.com/admpub/nging/v4/application/library/notice
 github.com/admpub/nging/v4/application/library/ntemplate
 github.com/admpub/nging/v4/application/library/oauth
@@ -343,6 +344,7 @@ github.com/admpub/nging/v4/application/registry/upload/driver/s3
 github.com/admpub/nging/v4/application/registry/upload/pipe
 github.com/admpub/nging/v4/application/registry/upload/prepare
 github.com/admpub/nging/v4/application/registry/upload/thumb
+github.com/admpub/nging/v4/application/response
 github.com/admpub/nging/v4/application/version
 # github.com/admpub/null v8.0.4+incompatible
 ## explicit
