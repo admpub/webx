@@ -4,8 +4,8 @@ import (
 	"sync"
 
 	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/admpub/webx/application/library/top"
 	"github.com/admpub/webx/application/middleware/sessdata"
-	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware/tplfunc"
 )
 
@@ -29,7 +29,7 @@ func init() {
 	tplfunc.TplFuncMap[`AbsoluteURL`] = sessdata.AbsoluteURL
 	tplfunc.TplFuncMap[`PictureHTML`] = sessdata.PictureWithDefaultHTML
 	tplfunc.TplFuncMap[`OutputContent`] = sessdata.OutputContent
-	tplfunc.TplFuncMap[`Config`] = func() echo.H {
-		return config.FromDB()
-	}
+	tplfunc.TplFuncMap[`Config`] = config.FromDB
+	tplfunc.TplFuncMap[`StarsSlice`] = top.StarsSlice
+	tplfunc.TplFuncMap[`StarsSlicex`] = top.StarsSlicex
 }
