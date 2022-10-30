@@ -53,6 +53,9 @@ func NavigateList(ctx echo.Context, m *dbschema.OfficialCommonNavigate, navType 
 			db.Cond{`disabled`: `N`},
 			db.Cond{`type`: navType},
 		))
+		for _, _nav := range nav {
+			_nav.SetContext(ctx)
+		}
 		ctx.Internal().Set(internalKey, nav)
 	}
 	if len(parentIDs) > 0 {
@@ -64,6 +67,9 @@ func NavigateList(ctx echo.Context, m *dbschema.OfficialCommonNavigate, navType 
 				if v.ParentId == parentIDs[0] {
 					navList = append(navList, v)
 				}
+			}
+			for _, _nav := range navList {
+				_nav.SetContext(ctx)
 			}
 			ctx.Internal().Set(key, navList)
 		}

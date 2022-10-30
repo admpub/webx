@@ -1,4 +1,4 @@
-{{- $themeInfo := ThemeInfo -}}
+{{- $themeInfo := call $.Func.ThemeInfo -}}
 {{- $articleIds := $themeInfo.CustomConfig.String `indexSliderItems` -}}
 {{- if $articleIds -}}
 {{- $relationList := articleListByIds $articleIds -}}

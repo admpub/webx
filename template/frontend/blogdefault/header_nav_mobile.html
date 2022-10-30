@@ -7,28 +7,30 @@
                 </button>
                 <nav class="sidebar-nav">
                     <ul class="metismenu" id="mobile-menu">
-                    {{- range $k,$v := FrontendNav 0 -}}
+                    {{- range $k,$v := $.FrontendNav 0 -}}
                     {{- $url := $v.URL -}}
                     {{- $isValidURL := $url -}}
-                        {{- if $v.HasChildren Context -}}
+                        {{- if $v.HasChildren -}}
                             {{- if eq $v.Direction `X` -}}
-                                {{- range $key,$sub := $v.FetchChildren Context -}}
+                                {{- range $key,$sub := $v.FetchChildren -}}
                         <li>
-                            <a href="{{$sub.Url}}" class="{{- if $sub.HasChildren Context -}}has-arrow{{- end -}}{{if $sub.IsActive Context}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}</a>
-                            {{- if $sub.HasChildren Context -}}
-                            {{Include "header_nav_mobile_children" $sub}}
+                            <a href="{{$sub.Url}}" class="{{- if $sub.HasChildren -}}has-arrow{{- end -}}{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}</a>
+                            {{- if $sub.HasChildren -}}
+                            {{- $.Set `mobileHeaderNavChildren` $sub -}}
+                            {{Include "header_nav_mobile_children" $}}
                             {{- end -}}
                         </li>
                                 {{- end -}}
                             {{- else -}}
                         <li>
-                            <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="has-arrow{{if $v.IsActive Context}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>{{$v.Title}}</a>
-                            {{Include "header_nav_mobile_children" $v}}
+                            <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="has-arrow{{if $v.IsActive}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>{{$v.Title}}</a>
+                            {{- $.Set `mobileHeaderNavChildren` $v -}}
+                            {{Include "header_nav_mobile_children" $}}
                         </li>
                             {{- end -}}
                         {{- else -}}
                         <li>
-                            <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}"{{if $v.IsActive Context}} class="active"{{end}}{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>{{$v.Title}}</a>
+                            <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}"{{if $v.IsActive}} class="active"{{end}}{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>{{$v.Title}}</a>
                         </li>
                         {{- end -}}
                     {{- else -}}

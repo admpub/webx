@@ -20,8 +20,8 @@
       </ul>
       
       <div class="backward-md-down">
-        {{if Customer}}
-        <a href="{{FrontendURL}}/user/index" class="btn btn-secondary bd-2 tx-medium tx-size-12 tx-gray rounded-0" data-toggle="tooltip" data-placement="bottom" title="{{`进入会员中心`|$.T}}">{{Customer.Name}}</a>
+        {{if $.Customer}}
+        <a href="{{FrontendURL}}/user/index" class="btn btn-secondary bd-2 tx-medium tx-size-12 tx-gray rounded-0" data-toggle="tooltip" data-placement="bottom" title="{{`进入会员中心`|$.T}}">{{$.Customer.Name}}</a>
         <a href="{{FrontendURL}}/sign_out" class="btn btn-danger bd-2 tx-medium tx-size-12 tx-white rounded-0" data-toggle="tooltip" data-placement="bottom" title="{{`退出登录`|$.T}}" onclick="return confirm('{{`真的要退出登录吗？`|$.T}}');">{{"退出"|$.T}}</a>
         {{else}}
         <a href="{{FrontendURL}}/sign_in" class="btn btn-secondary bd-2 tx-medium tx-size-12 tx-gray rounded-0">{{"登录"|$.T}}</a>

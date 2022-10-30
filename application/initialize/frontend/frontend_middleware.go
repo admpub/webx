@@ -12,6 +12,7 @@ import (
 func addGlobalFuncMap(fm map[string]interface{}) map[string]interface{} {
 	fm[`AssetsURL`] = getAssetsURL
 	fm[`BackendURL`] = getBackendURL
+	fm[`AssetsXURL`] = getAssetsXURL
 	fm[`FrontendURL`] = getFrontendURL
 	fm[`SubDomain`] = subdomains.Default.Get(`frontend`).TypeHost
 	return fm

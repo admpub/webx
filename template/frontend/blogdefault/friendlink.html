@@ -7,7 +7,7 @@
         </div>
         <div class="row">
             <div class="col-12 friend-links">
-                {{- $friendlinks := Friendlink -1 -}}
+                {{- $friendlinks := $.Friendlink -1 -}}
                 {{- range $k,$v := $friendlinks -}}
                 <a title="{{$v.Name}}" href="{{$v.Url}}" class="link-item {{- if $v.Logo}} no-padding{{end}}" target="_blank">
                     {{- if $v.Logo -}}

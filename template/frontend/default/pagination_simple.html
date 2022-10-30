@@ -1,4 +1,5 @@
 {{Strip}}{{$pjax := $.Form "_pjax"}}
+{{- with $.Data -}}
 <nav aria-label="Page navigation">
     <ul class="pagination mg-0">
     {{- $page := .Page -}}
@@ -14,4 +15,5 @@
       </li>
     </ul>
 </nav>
+{{- end -}}
 {{/Strip}}

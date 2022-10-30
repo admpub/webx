@@ -41,6 +41,7 @@ func init() {
 				},
 				isActive: GenActiveDetector(`categoryId`, category.Id),
 			}
+			navExt.SetContext(ctx)
 			if category.ParentId < 1 {
 				list = append(list, navExt)
 				continue
@@ -84,7 +85,7 @@ func GenActiveDetector(categoryKey string, categoryID uint) func(ctx echo.Contex
 type NavigateExt struct {
 	*dbschema.OfficialCommonNavigate
 	isInside null.Bool // 是否是内部链接
-	isActive func(ctx echo.Context) bool
+	isActive func(echo.Context) bool
 	Children *[]*NavigateExt
 	Extra    echo.H
 }
@@ -114,11 +115,11 @@ func (f *NavigateExt) IsValidURL() bool {
 	return true
 }
 
-func (f *NavigateExt) IsActive(ctx echo.Context) bool {
+func (f *NavigateExt) IsActive() bool {
 	if f.isActive != nil {
-		return f.isActive(ctx)
+		return f.isActive(f.Context())
 	}
-	currentPath := ctx.Request().URL().Path()
+	currentPath := f.Context().Request().URL().Path()
 	if f.IsInside() && currentPath == f.Url {
 		return true
 	}
@@ -155,13 +156,13 @@ func (f *NavigateExt) SetExtraKV(k string, v interface{}) *NavigateExt {
 	return f
 }
 
-func (f *NavigateExt) HasChildren(c context.Context) bool {
-	f.getChildren(c)
+func (f *NavigateExt) HasChildren() bool {
+	f.getChildren()
 	return len(*f.Children) > 0
 }
 
-func (f *NavigateExt) FetchChildren(c context.Context, forces ...bool) []*NavigateExt {
-	f.getChildren(c, forces...)
+func (f *NavigateExt) FetchChildren(forces ...bool) []*NavigateExt {
+	f.getChildren(forces...)
 	return *f.Children
 }
 
@@ -170,7 +171,7 @@ func (f *NavigateExt) ClearChildren() *NavigateExt {
 	return f
 }
 
-func (f *NavigateExt) getChildren(c context.Context, forces ...bool) *NavigateExt {
+func (f *NavigateExt) getChildren(forces ...bool) *NavigateExt {
 	var force bool
 	if len(forces) > 0 {
 		force = forces[0]
@@ -193,7 +194,7 @@ func (f *NavigateExt) getChildren(c context.Context, forces ...bool) *NavigateEx
 	if item.Fn() == nil {
 		return f
 	}
-	if list, ok := item.Fn()(c).([]*NavigateExt); ok {
+	if list, ok := item.Fn()(f.Context()).([]*NavigateExt); ok {
 		f.Children = &list
 	}
 	return f

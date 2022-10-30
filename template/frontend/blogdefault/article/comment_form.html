@@ -21,7 +21,7 @@
    {{- else -}}
   <form class="comment-form" action="/article/comment_add" method="POST" id="{{if $inModal}}modal-{{end}}comment-post-form">
       <div class="row">
-        {{- if Customer -}}{{$customer := Customer}}
+        {{- if $.Customer -}}{{$customer := $.Customer}}
         <div class="col-md-7">
             <div class="input-group comment-author">
             <span class="input-group-addon"><a href="javascript:;"><img src="{{if $customer.Avatar}}{{AddSuffix $customer.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="rounded-circle bg-info avatar" alt="{{$customer.Name}}"></a></span>

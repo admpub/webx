@@ -11,7 +11,7 @@
                 </div><!-- card-header -->
                 <div class="card-body">
                     <nav class="nav nav-gray-light tx-size-13 friend-links">
-                        {{- $friendlinks := Friendlink -1 -}}
+                        {{- $friendlinks := $.Friendlink -1 -}}
                         {{- range $k,$v := $friendlinks -}}
                         <a title="{{$v.Name}}" href="{{$v.Url}}" class="nav-link" target="_blank">
                             {{- if $v.Logo -}}

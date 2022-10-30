@@ -11,39 +11,41 @@
         </div>
         <nav class="main-nav">
             <ul class="navmenu-items">
-            {{- range $k,$v := FrontendNav 0 -}}
+            {{- range $k,$v := $.FrontendNav 0 -}}
             {{- $url := $v.URL -}}
             {{- $isValidURL := $url -}}
-                {{- if $v.HasChildren Context -}}
+                {{- if $v.HasChildren -}}
                     {{- if eq $v.Direction `X` -}}
-                        {{- range $key,$sub := $v.FetchChildren Context -}}
-                        <li class="navmenu-item {{- if $sub.HasChildren Context}} submenu-wrapper{{- end -}}">
-                            <a href="{{$sub.Url}}" class="navmenu-link{{if $sub.IsActive Context}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}
-                                {{if $sub.HasChildren Context -}}
+                        {{- range $key,$sub := $v.FetchChildren -}}
+                        <li class="navmenu-item {{- if $sub.HasChildren}} submenu-wrapper{{- end -}}">
+                            <a href="{{$sub.Url}}" class="navmenu-link{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}
+                                {{if $sub.HasChildren -}}
                                 <span class="icon">
                                     <i class="fal fa-chevron-down"></i>
                                 </span>
                                 {{- end -}}
                             </a>
-                            {{- if $sub.HasChildren Context -}}
-                            {{Include "header_nav_children" $sub}}
+                            {{- if $sub.HasChildren -}}
+                            {{- $.Set `headerNavChildren` $sub -}}
+                            {{Include "header_nav_children" $}}
                             {{- end -}}
                         </li>
                         {{- end -}}
                     {{- else -}}
                     <li class="navmenu-item submenu-wrapper">
-                        <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="navmenu-link{{if $v.IsActive Context}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
+                        <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="navmenu-link{{if $v.IsActive}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
                             {{$v.Title}}
                             <span class="icon">
                                 <i class="fal fa-chevron-down"></i>
                             </span>
                         </a>
-                        {{Include "header_nav_children" $v}}
+                        {{- $.Set `headerNavChildren` $v -}}
+                        {{Include "header_nav_children" $}}
                     </li>
                     {{- end -}}
                 {{- else -}}
                 <li class="navmenu-item">
-                    <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="navmenu-link{{if $v.IsActive Context}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>{{$v.Title}}</a>
+                    <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="navmenu-link{{if $v.IsActive}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>{{$v.Title}}</a>
                 </li>
                 {{- end -}}
             {{- else -}}

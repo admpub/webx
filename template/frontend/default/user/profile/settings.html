@@ -6,7 +6,7 @@
 {{Super}}
 {{$agentLevel := $.Stored.agentLevel}}
 {{$customerGroup := $.Stored.customerGroup}}
-{{$customer := Customer}}
+{{$customer := $.Customer}}
  <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
     {{Include "user/profile/_breadcrumb"}}
   <div class="main-body pd-20">
@@ -115,7 +115,7 @@
 {{/Block}}
 {{Block "footer"}}
 {{Super}}
-{{$customer := Customer}}
+{{$customer := $.Customer}}
 <script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
 <script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
 <script type="text/javascript">

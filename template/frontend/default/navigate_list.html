@@ -1,19 +1,20 @@
-{{Strip}}{{- range $k,$v := FrontendNav 0 -}}
+{{Strip}}{{- range $k,$v := $.FrontendNav 0 -}}
 {{- $url := $v.URL -}}
 {{- $isValidURL := $url -}}
-{{- if $v.HasChildren Context -}}
+{{- if $v.HasChildren -}}
   {{- if eq $v.Direction `X` -}}
-  {{- range $key,$sub := $v.FetchChildren Context -}}
+  {{- range $key,$sub := $v.FetchChildren -}}
   <li class="nav-item dropdown">
-    {{- if $sub.HasChildren Context -}}
-    <a href="{{if $sub.Url}}{{$sub.Url}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive Context}} active{{end}}" data-toggle="dropdown"{{if and $sub.Url $sub.Target}} target="{{$sub.Target}}"{{end}}>
+    {{- if $sub.HasChildren -}}
+    <a href="{{if $sub.Url}}{{$sub.Url}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive}} active{{end}}" data-toggle="dropdown"{{if and $sub.Url $sub.Target}} target="{{$sub.Target}}"{{end}}>
       {{$sub.Title}}
       {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
       <i class="fa fa-angle-down"></i>
     </a>
-    {{Include "#default#navigate_list_children" $sub}}
+    {{- $.Set `navigateListChildren` $sub -}}
+    {{Include "#default#navigate_list_children" $}}
     {{- else -}}
-    <a href="{{if $sub.Url}}{{$sub.Url}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive Context}} active{{end}}"{{if and $sub.Url $sub.Target}} target="{{$sub.Target}}"{{end}}>
+    <a href="{{if $sub.Url}}{{$sub.Url}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive}} active{{end}}"{{if and $sub.Url $sub.Target}} target="{{$sub.Target}}"{{end}}>
       {{$sub.Title}}
       {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
     </a>
@@ -22,20 +23,21 @@
   {{- end -}}
   {{- else -}}
   <li class="nav-item dropdown">
-    <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive Context}} active{{end}}" data-toggle="dropdown"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
+    <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive}} active{{end}}" data-toggle="dropdown"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
       {{$v.Title}}
       {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
       <i class="fa fa-angle-down"></i>
     </a>
-    {{Include "#default#navigate_list_children" $v}}
+    {{- $.Set `navigateListChildren` $v -}}
+    {{Include "#default#navigate_list_children" $}}
   </li>
   {{- end -}}
 {{- else -}}
-  <li class="nav-item"><a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive Context}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
+  <li class="nav-item"><a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
     {{$v.Title}}
     {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
   </a></li>
 {{- end -}}
 {{- else -}}
-<li class="nav-item"><a href="{{FrontendURL}}/" class="nav-link{{if eq $.URL.Path "/"}} active{{end}}">{{"首页"|$.T}}</a></li>
+<li class="nav-item"><a href="{{FrontendURL}}/" class="nav-link{{if eq $.URL.Path `/`}} active{{end}}">{{"首页"|$.T}}</a></li>
 {{- end -}}{{/Strip}}

@@ -1,9 +1,10 @@
-<ul class="sub-menu">{{$v := .}}
-{{- range $key,$sub := $v.FetchChildren Context -}}
+<ul class="sub-menu">{{$v := $.Get `mobileHeaderNavChildren`}}
+{{- range $key,$sub := $v.FetchChildren -}}
     <li>
-        <a href="{{$sub.Url}}" class="{{- if $sub.HasChildren Context -}}has-arrow{{- end -}}{{if $sub.IsActive Context}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}</a>
-        {{- if $sub.HasChildren Context -}}
-        {{Include "header_nav_mobile_children" $sub}}
+        <a href="{{$sub.Url}}" class="{{- if $sub.HasChildren -}}has-arrow{{- end -}}{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}</a>
+        {{- if $sub.HasChildren -}}
+        {{- $.Set `mobileHeaderNavChildren` $sub -}}
+        {{Include "header_nav_mobile_children" $}}
         {{- end -}}
     </li>
 {{- end -}}

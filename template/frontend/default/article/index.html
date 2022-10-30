@@ -20,7 +20,7 @@
                     </span>
                 </div><!-- card-header -->
                 <div class="media-list">
-                    {{- $articles := getArticles -}}
+                    {{- $articles := call $.Func.getArticles -}}
                     {{- $endIndex := Sub (len $articles) 1 -}}
                     {{- range $k, $v := $articles -}}
                     <div class="media pd-20 bg-white{{if ne $k $endIndex}} bd-b bd-gray-light{{end}} hover-bg-gray-xlightest">

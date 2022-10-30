@@ -1,5 +1,5 @@
 {{Strip}}<!DOCTYPE html>
-<html lang="{{Lang}}">
+<html lang="{{$.Lang}}">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,7 +21,7 @@
 
         <!-- ============= MAIN CSS ============= -->
         <link id="css-lazyload-end" rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/style.min.css?t={{BuildTime}}" />
-        {{- $themeInfo := ThemeInfo -}}
+        {{- $themeInfo := call $.Func.ThemeInfo -}}
         {{- if eq ($themeInfo.CustomConfig.String `color`) `dark` -}}
         <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/dark.min.css?t={{BuildTime}}" />
         {{- end -}}
@@ -62,7 +62,7 @@
 
         <!-- ============= MAIN JS ============= -->
         <script>
-        window.activeURL={{if $.Stored.Get "activeURL"}}'{{FrontendURL}}{{$.Stored.Get "activeURL"}}'{{else}}null{{end}};window.errorMSG=null;window.successMSG=null;App.lang='{{Lang}}';
+        window.activeURL={{if $.Stored.Get "activeURL"}}'{{FrontendURL}}{{$.Stored.Get "activeURL"}}'{{else}}null{{end}};window.errorMSG=null;window.successMSG=null;App.lang='{{$.Lang}}';
         {{- if . -}}
           {{- if IsError . -}}
         window.errorMSG="{{.}}";

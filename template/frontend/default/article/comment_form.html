@@ -25,7 +25,7 @@
             {{- else -}}
             <form action="/article/comment_add" method="POST" id="{{if $inModal}}modal-{{end}}comment-post-form">
             <div class="form-group row row-sm">
-            {{- if Customer -}}
+            {{- if $.Customer -}}
             {{Include "#default#article/comment_form_customer"}}
             {{- else -}}
             {{Include "#default#article/comment_form_guest"}}
