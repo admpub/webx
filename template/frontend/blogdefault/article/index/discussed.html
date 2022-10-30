@@ -2,9 +2,9 @@
 <section class="discussed-post-wrapper section-padding">
     <div class="container">
         <div class="section-head">
-            <h2 class="heading-primary">{{`热评文章`|T}}</h2>
+            <h2 class="heading-primary">{{`热评文章`|$.T}}</h2>
             <a href="{{FrontendURL}}/articles" class="button button-minimal">
-                {{`查看全部`|T}}
+                {{`查看全部`|$.T}}
                 <span class="icon">
                     <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                 </span>
@@ -20,7 +20,7 @@
                         {{- if $article.Category -}}
                         <span class="category"> {{$article.Category.Name}} </span>
                         {{- end -}}
-                        <a href="{{FrontendURL}}/article/{{$article.Id}}{{Ext}}">
+                        <a href="{{FrontendURL}}/article/{{$article.Id}}{{$.Ext}}">
                             <h3 class="heading-secondary">{{$article.Title}}</h3>
                         </a>
                         <div class="post-meta-wrapper">
@@ -31,7 +31,7 @@
                                     {{- else if $article.User -}}
                                     <span>{{$article.User.Username}}</span>
                                     {{- else -}}
-                                    <span>{{`未知`|T}}</span>
+                                    <span>{{`未知`|$.T}}</span>
                                     {{- end -}}
                                 </p>
                                 <span class="post-date meta-item"> {{(Date $article.Created).Format `2006-01-02`}} </span>
@@ -40,7 +40,7 @@
                                     {{$article.Comments}}
                                 </span>
                             </div>
-                            <a href="{{FrontendURL}}/article/{{$article.Id}}{{Ext}}" class="button post-button">
+                            <a href="{{FrontendURL}}/article/{{$article.Id}}{{$.Ext}}" class="button post-button">
                                 <span class="icon">
                                     <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                                 </span>
@@ -84,10 +84,10 @@
                     {{- if gt $k 0 -}}
                     <div class="widget-category">
                         {{- if $v.Image -}}
-                        <a class="cat-thumb bg-cover" href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}"><img class="card-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
+                        <a class="cat-thumb bg-cover" href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}"><img class="card-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
                         {{- end -}}
                         <div class="cat-content">
-                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                                 <h4 class="cat-title">{{$v.Title}}</h4></a
                             >
                             <div class="cat-meta">

@@ -1,30 +1,30 @@
 {{Strip}}{{Extend "#blogdefault#base"}}
 {{Block "title"}}
-{{- "文章列表"|T -}}{{range $index, $category := Stored.categories}} - {{$category.Name}}{{- end -}}
+{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}} - {{$category.Name}}{{- end -}}
 {{/Block}}
-{{Block "keywords"}}{{- "文章列表"|T -}}{{range $index, $category := Stored.categories}},{{$category.Name}}{{- end -}}{{/Block}}
+{{Block "keywords"}}{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}},{{$category.Name}}{{- end -}}{{/Block}}
 {{Block "description"}}{{/Block}}
 {{Block "body"}}
         <!-- ============= BLOG LIST ============= -->
         <section class="blog-list-wrapper section-padding">
             <div class="container">
                 <div class="section-head">
-                    {{- $categoryEndIndex := Sub (len Stored.categories) 1 -}}
+                    {{- $categoryEndIndex := Sub (len $.Stored.categories) 1 -}}
                     <h2 class="heading-secondary">
                         {{- if ge $categoryEndIndex 0 -}}
-                        {{- $category := index Stored.categories $categoryEndIndex -}}
+                        {{- $category := index $.Stored.categories $categoryEndIndex -}}
                         {{$category.Name}}
                         {{- else -}}
-                        {{`全部分类`|T}}
+                        {{`全部分类`|$.T}}
                         {{- end -}}
                     </h2>
                     <ul class="c-bredcrumb">
                         <li>
-                            <a href="{{FrontendURL}}/"> {{`首页`|T}} </a>
+                            <a href="{{FrontendURL}}/"> {{`首页`|$.T}} </a>
                         </li>
-                        <li><a href="{{FrontendURL}}/articles">{{`文章列表`|T}}</a></li>
-                        {{range $index, $category := Stored.categories -}}
-                        <li><a href="{{Stored.listURL}}?categoryId={{$category.Id}}">{{$category.Name}}</a></li>
+                        <li><a href="{{FrontendURL}}/articles">{{`文章列表`|$.T}}</a></li>
+                        {{range $index, $category := $.Stored.categories -}}
+                        <li><a href="{{$.Stored.listURL}}?categoryId={{$category.Id}}">{{$category.Name}}</a></li>
                         {{- end -}}
                     </ul>
                 </div>
@@ -32,10 +32,10 @@
                     <div class="col-lg-9">
                         <div class="left-content">
                             <!-- Post card -->
-                            {{- range $k, $v := Stored.articles -}}
+                            {{- range $k, $v := $.Stored.articles -}}
                             <div class="post-card">
                                 {{- if $v.Image -}}
-                                <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                                <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                                     <img src="{{$v.ImageOriginal}}" class="card-thumb bg-cover" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" style="min-height:300px;height:300px">
                                 </a>
                                 {{- end -}}
@@ -50,7 +50,7 @@
                                             {{- else if $v.User -}}
                                             <span class="author-name">{{$v.User.Username}}</span>
                                             {{- else -}}
-                                            <span class="author-name">{{`未知`|T}}</span>
+                                            <span class="author-name">{{`未知`|$.T}}</span>
                                             {{- end -}}
                                         </div>
                                         <span class="meta-item"> {{(Date $v.Created).Format `2006-01-02`}} </span>
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="post-content">
                                         <div class="post-info">
-                                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                                                 <h3 class="heading-primary">
                                                     {{$v.Title}}
                                                 </h3>
@@ -73,7 +73,7 @@
                                                 {{$v.Summary}}
                                             </p>
                                         </div>
-                                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="button icon-button">
+                                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="button icon-button">
                                             <span class="icon">
                                                 <i class="fas fa-chevron-right"></i>
                                             </span>
@@ -84,7 +84,7 @@
                             {{end}}
                         </div>
                         <!-- PAGINATION -->
-                        {{(Stored.pagination.SetNum 1).Render}}
+                        {{($.Stored.pagination.SetNum 1).Render}}
                         <!-- ============= AD CAMPAIGN-2 ============= -->
                         <div
                             class="ad-campaign-2 bg-cover mt-35"

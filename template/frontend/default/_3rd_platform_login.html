@@ -4,7 +4,7 @@
 		<div class="third-platform-login">
             {{- $returnURL := GetNextURL|Default URI -}}
             <div class="tx-size-xs mg-t-10 mg-b-0">
-                <div class="heading-hr mg-b-5">{{`用第三方账号登录`|T}}</div>
+                <div class="heading-hr mg-b-5">{{`用第三方账号登录`|$.T}}</div>
                 {{- range $k, $v := $oauthAccounts -}}
                 {{- if $v.IconImage -}}
                 <a href="{{WithURLParams $v.LoginURL `next` $returnURL}}" title="{{$v.Name}}" data-toggle="tooltip" data-placement="top"><img src="{{$v.IconImage}}" alt="{{$v.Name}}" /></a>

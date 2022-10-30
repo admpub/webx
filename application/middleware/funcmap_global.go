@@ -3,6 +3,7 @@ package middleware
 import (
 	"sync"
 
+	"github.com/admpub/webx/application/middleware/sessdata"
 	"github.com/webx-top/echo/middleware/tplfunc"
 )
 
@@ -18,4 +19,12 @@ func initTplFuncMap() {
 func TplFuncMap() map[string]interface{} {
 	tplOnce.Do(initTplFuncMap)
 	return tplFuncMap
+}
+
+func init() {
+	tplfunc.TplFuncMap[`ImageProxyURL`] = sessdata.ImageProxyURL
+	tplfunc.TplFuncMap[`ResizeImageURL`] = sessdata.ResizeImageURL
+	tplfunc.TplFuncMap[`AbsoluteURL`] = sessdata.AbsoluteURL
+	tplfunc.TplFuncMap[`PictureHTML`] = sessdata.PictureWithDefaultHTML
+	tplfunc.TplFuncMap[`OutputContent`] = sessdata.OutputContent
 }

@@ -1,11 +1,11 @@
 {{Extend "layout"}}
-{{Block "title"}}{{"评论列表"|T}}{{if Stored.data}} - {{Stored.data.Title}}{{end}}{{/Block}}
+{{Block "title"}}{{"评论列表"|$.T}}{{if $.Stored.data}} - {{$.Stored.data.Title}}{{end}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-{{range $k, $r := Stored.breadcrumb}}
+{{range $k, $r := $.Stored.breadcrumb}}
 <li><a href="{{BackendURL}}/{{$r.K}}">{{$r.V}}</a></li>
 {{end}}
-<li class="active">{{"评论列表"|T}}</li>
+<li class="active">{{"评论列表"|$.T}}</li>
 {{/Block}}
 {{Block "head"}}
 {{/Block}}
@@ -13,13 +13,13 @@
 <style>
 .padding-x-15{padding-left:15px;padding-right:15px;}
 </style>
-{{if Stored.data}}
+{{if $.Stored.data}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat no-margin-y">
-            <span class="label label-default">{{"评论对象"|T}}</span>
-            <a style="font-weight:bold;font-size:18px" href="{{FrontendURL}}/{{Stored.targetDetailURL}}" target="_blank" data-toggle="tooltip" title="{{"点击打开详情页面"|T}}">
-                {{Stored.data.Title|Default (T "无标题")}}
+            <span class="label label-default">{{"评论对象"|$.T}}</span>
+            <a style="font-weight:bold;font-size:18px" href="{{FrontendURL}}/{{$.Stored.targetDetailURL}}" target="_blank" data-toggle="tooltip" title="{{"点击打开详情页面"|$.T}}">
+                {{$.Stored.data.Title|Default ($.T "无标题")}}
             </a>
             <i class="fa fa-share-square grey"></i>
         </div>
@@ -32,19 +32,19 @@
           <div class="header" style="height:40px;line-height:30px;">
             <span class="pull-right">
                 <form class="form-horizontal" action="" id="search-form" method="GET">
-                    <input type="hidden" name="targetId" value="{{Form "targetId"}}">
-                    <input type="hidden" name="targetType" value="{{Form "targetType"}}">
-					<div class="input-group">{{$display := Form "display"}}
-						<span class="input-group-addon">{{"状态"|T}}</span>
+                    <input type="hidden" name="targetId" value="{{$.Form "targetId"}}">
+                    <input type="hidden" name="targetType" value="{{$.Form "targetType"}}">
+					<div class="input-group">{{$display := $.Form "display"}}
+						<span class="input-group-addon">{{"状态"|$.T}}</span>
 						<select name="display" class="form-control" id="display" onchange="$('#search-form').submit()">
-							<option value=""> - {{"不限"|T}} - </option>
-							<option value="Y" {{if eq $display "Y"}} selected{{end}}>{{"显示"|T}}</option>
-							<option value="N" {{if eq $display "N"}} selected{{end}}>{{"隐藏"|T}}</option>
+							<option value=""> - {{"不限"|$.T}} - </option>
+							<option value="Y" {{if eq $display "Y"}} selected{{end}}>{{"显示"|$.T}}</option>
+							<option value="N" {{if eq $display "N"}} selected{{end}}>{{"隐藏"|$.T}}</option>
 						</select>
 					</div>
 				</form>
             </span>
-            <h4>{{"评论列表"|T}}</h4>
+            <h4>{{"评论列表"|$.T}}</h4>
           </div>
           <div id="comment-list-container">
               {{Include "official/comment/list_partial"}}
@@ -52,19 +52,19 @@
         </div>
     </div>
 </div>
-<div class="row"{{if not Stored.data}} style="display:none;"{{end}}>
+<div class="row"{{if not $.Stored.data}} style="display:none;"{{end}}>
     <div class="col-md-12">
         <div class="block-flat">
             <div class="header">
-                <h3>{{"发表评论"|T}}</h3>
+                <h3>{{"发表评论"|$.T}}</h3>
             </div>
             <div class="content">
-                <form class="form-horizontal group-border-dashed" action="{{BackendURL}}/official/article/comment/add" id="comment-form" novalidate>{{$targetType := Form "targetType"}}
+                <form class="form-horizontal group-border-dashed" action="{{BackendURL}}/official/article/comment/add" id="comment-form" novalidate>{{$targetType := $.Form "targetType"}}
                     {{Include "official/comment/form"}}
                     <div class="form-group">
                         <div class="col-sm-12">
-                          <button type="submit" class="btn btn-primary">{{"发表评论"|T}}</button>
-                          <button class="btn btn-default">{{"取消"|T}}</button>
+                          <button type="submit" class="btn btn-primary">{{"发表评论"|$.T}}</button>
+                          <button class="btn btn-default">{{"取消"|$.T}}</button>
                         </div>
                     </div>
                 </form>
@@ -74,20 +74,20 @@
 </div>
 {{/Block}}
 {{Block "footer"}}
-{{Modal "__TMPL__/official/comment/form.yaml"}}
+{{call $.Func.Modal "__TMPL__/official/comment/form.yaml"}}
 <script type="text/template" id="tmpl-modal-comment-form">
-    {{- Set `comment.form.prefix` `modal-` -}}
+    {{- $.Set `comment.form.prefix` `modal-` -}}
     {{Include "official/comment/form"}}
-    {{- Set `comment.form.prefix` `` -}}
+    {{- $.Set `comment.form.prefix` `` -}}
 </script>
 <script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
 <script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
 <script type="text/javascript">
-var LANG_REPLY_SUCCESS='{{"回复成功"|T}}';
-var LANG_OP_SUCCESS='{{"操作成功"|T}}';
-var LANG_RM_SUCCESS='{{"删除成功"|T}}';
-var LANG_COMMENT_SUCCESS='{{"评论成功"|T}}';
-var LANG_RM_CONFIRM='{{"确认要删除吗？一旦删除将会同时删除该评论下的所有回复，并且不可恢复。"|T}}';
+var LANG_REPLY_SUCCESS='{{"回复成功"|$.T}}';
+var LANG_OP_SUCCESS='{{"操作成功"|$.T}}';
+var LANG_RM_SUCCESS='{{"删除成功"|$.T}}';
+var LANG_COMMENT_SUCCESS='{{"评论成功"|$.T}}';
+var LANG_RM_CONFIRM='{{"确认要删除吗？一旦删除将会同时删除该评论下的所有回复，并且不可恢复。"|$.T}}';
 function showCommentFormModal(){
     $('#modal-comment-form').niftyModal('show');
 }

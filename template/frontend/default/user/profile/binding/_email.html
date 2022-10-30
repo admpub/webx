@@ -6,25 +6,25 @@
                 <div class="input-group">
                 <input type="email" class="form-control" name="email" id="inputEmail" value="{{$customer.Email}}"{{if eq $customer.EmailBind "Y"}} readonly="readonly"{{end}}>
                 {{if eq $customer.EmailBind "Y"}}
-                <span class="input-group-addon">{{"已绑定"|T}}</span>
+                <span class="input-group-addon">{{"已绑定"|$.T}}</span>
                 {{end}}
                 </div>
-                <small id="emailHelp" class="form-text text-muted">{{"如果已经绑定，必须取消原有绑定之后才能绑定新地址"|T}}</small>
+                <small id="emailHelp" class="form-text text-muted">{{"如果已经绑定，必须取消原有绑定之后才能绑定新地址"|$.T}}</small>
               </div>
-              <label for="inputCaptcha" class="col-sm-2 col-form-label">{{"图形验证码"|T}}:</label>
+              <label for="inputCaptcha" class="col-sm-2 col-form-label">{{"图形验证码"|$.T}}:</label>
               <div class="col-sm-4">
                 <div class="input-group">
-                <input id="inputCaptcha" type="text" placeholder="{{"验证码"|T}}" value="{{Form "code"}}" name="code" required="required" title="{{"验证码"|T}}" class="form-control tx-size-14 pd-y-12 bd-color-gray-lighter">
+                <input id="inputCaptcha" type="text" placeholder="{{"验证码"|$.T}}" value="{{$.Form "code"}}" name="code" required="required" title="{{"验证码"|$.T}}" class="form-control tx-size-14 pd-y-12 bd-color-gray-lighter">
                 <span class="input-group-addon pd-0">{{CaptchaForm}}</span>
                 </div>
               </div>
             </div>
             <!-- <div class="form-group row">
               <label for="inputEmail" class="col-sm-2 col-form-label">
-                  {{"邮件验证码"|T}}:</label>
+                  {{"邮件验证码"|$.T}}:</label>
               <div class="col-sm-4">
                 <input type="text" class="form-control" name="vcode" id="vcode" value="">
-                <small id="vcodeHelp" class="form-text text-muted">{{"请输入邮件中包含的验证码"|T}}</small>
+                <small id="vcodeHelp" class="form-text text-muted">{{"请输入邮件中包含的验证码"|$.T}}</small>
               </div>
             </div> -->
             <div class="form-group row">
@@ -32,13 +32,13 @@
                   <button type="submit" class="btn btn-{{if eq $customer.EmailBind `Y`}}danger{{else}}primary{{end}}">
                   {{if eq $customer.EmailBind "Y"}}
                     <i class="fa fa-unlink"></i>
-                    {{T "发送%s，解除绑定" Stored.objectName}}
+                    {{$.T "发送%s，解除绑定" $.Stored.objectName}}
                   {{else}}
                     <i class="fa fa-link"></i>
-                    {{T "发送%s，绑定%s" Stored.objectName Stored.typeName}}
+                    {{$.T "发送%s，绑定%s" $.Stored.objectName $.Stored.typeName}}
                   {{end}}
                   </button>
-                  <small class="text-muted mg-l-20">{{T "今天还能再发%d次" Stored.remainCount}}</small>
+                  <small class="text-muted mg-l-20">{{$.T "今天还能再发%d次" $.Stored.remainCount}}</small>
               </div>
             </div>
           </form>

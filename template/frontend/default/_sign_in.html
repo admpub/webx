@@ -10,19 +10,19 @@
         <div class="row color-box-wrapper">
           <a href="{{FrontendURL}}/" class="col-6 bg-success color-box">
             <i class="bg-icon fa fa-reply"></i>
-            {{`返回首页`|T}}
+            {{`返回首页`|$.T}}
           </a>
           <a href="{{FrontendURL}}/sign_up?next={{GetNextURL}}" class="col-6 bg-info color-box">
             <i class="bg-icon fa fa-user"></i>
-            {{`注册会员`|T}}
+            {{`注册会员`|$.T}}
           </a>
           <a href="{{FrontendURL}}/film/guide" class="col-6 bg-primary color-box">
             <i class="bg-icon fa fa-star"></i>
-            {{`观影指南`|T}}
+            {{`观影指南`|$.T}}
           </a>
           <a href="{{FrontendURL}}/film/list" class="col-6 bg-warning color-box">
             <i class="bg-icon fa fa-film"></i>
-            {{`全部电影`|T}}
+            {{`全部电影`|$.T}}
           </a>
           <!-- <a href="#" class="col-6 bg-danger color-box">
                   <i class="bg-icon fa fa-star"></i>
@@ -36,10 +36,10 @@
         {{- else -}}
           <!-- <div class="tx-center tx-lg-left-force hx-gray-dark" id="left-force">
             <i class="icon ion-ios-box-outline tx-size-100 lh-0 tx-primary op-2"></i>
-              <h4 class="tx-size-xs-32 tx-size-sm-40 tx-normal tx-inverse lh-3 mg-b-20">{{"当前最新版本"|T}} Nging v<span id="version-number">1.6.0</span></h4>
-              <p class="mg-b-25 mg-xl-b-30">{{"马上下载体验版本，抢先体验最新功能吧"|T}}</p>
-              <a href="{{FrontendURL}}/product/download/nging" class="btn btn-inverse bg-black-2 tx-uppercase tx-spacing-2 tx-size-11 tx-medium pd-y-15" target="_blank">{{"免费下载"|T}}</a>
-              <a href="{{FrontendURL}}/product/detail/nging#sectionPricing" class="btn btn-inverse bg-success tx-uppercase tx-spacing-2 tx-size-11 tx-medium pd-y-15">{{"购买授权"|T}}</a>
+              <h4 class="tx-size-xs-32 tx-size-sm-40 tx-normal tx-inverse lh-3 mg-b-20">{{"当前最新版本"|$.T}} Nging v<span id="version-number">1.6.0</span></h4>
+              <p class="mg-b-25 mg-xl-b-30">{{"马上下载体验版本，抢先体验最新功能吧"|$.T}}</p>
+              <a href="{{FrontendURL}}/product/download/nging" class="btn btn-inverse bg-black-2 tx-uppercase tx-spacing-2 tx-size-11 tx-medium pd-y-15" target="_blank">{{"免费下载"|$.T}}</a>
+              <a href="{{FrontendURL}}/product/detail/nging#sectionPricing" class="btn btn-inverse bg-success tx-uppercase tx-spacing-2 tx-size-11 tx-medium pd-y-15">{{"购买授权"|$.T}}</a>
         </div> -->
           {{Config.custom.login|ToHTML}}
         {{- end -}}

@@ -57,6 +57,7 @@ func init() {
 func InitWebServer() {
 	Prefix = echo.String(`FrontendPrefix`)
 	e := IRegister().Echo().SetPrefix(Prefix)
+	e.SetRenderDataWrapper(xMW.DefaultRenderDataWrapper)
 	e.SetDefaultExtension(RouteDefaultExtension)
 	if len(config.FromCLI().BackendDomain) > 0 {
 		// 如果指定了后台域名则只能用该域名访问后台。此时将其它域名指向前台

@@ -1,30 +1,30 @@
-{{Strip}}{{$path := Form "path"}}
-{{range $k,$v := Stored.listData}}
+{{Strip}}{{$path := $.Form "path"}}
+{{range $k,$v := $.Stored.listData}}
 <tr class="parent-{{$v.ParentId}}" data-parents="{{$path}}">
 	<td>{{$v.Id}}</td>
 	<td class="category-name{{if eq $v.HasChild `Y`}} clickable{{end}}" data-id="{{$v.Id}}">
 		<i class="fa fa-{{if eq $v.HasChild `Y`}}plus-square-o{{else}}minus-square-o{{end}} category-level-{{$v.Level}} grey"></i>{{$v.Name}}
 	</td>
-	<td>{{getTypeName $v.Type $v.Type}}</td>
+	<td>{{call $.Func.getTypeName $v.Type $v.Type}}</td>
 	<td>{{$v.Description}}</td>
 	<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 	<td>
 		<div class="checkbox checkbox-success no-margin-y">
-			<input id="checkbox-showOnMenu-{{$v.Id}}" class="styled switch-showOnMenu" type="checkbox" type="checkbox" data-id="{{$v.Id}}" data-showOnMenu="{{$v.ShowOnMenu}}"{{if eq $v.ShowOnMenu "Y"}} checked="checked"{{end}} value="Y" /><label for="checkbox-showOnMenu-{{$v.Id}}">{{"显示"|T}}</label>
+			<input id="checkbox-showOnMenu-{{$v.Id}}" class="styled switch-showOnMenu" type="checkbox" type="checkbox" data-id="{{$v.Id}}" data-showOnMenu="{{$v.ShowOnMenu}}"{{if eq $v.ShowOnMenu "Y"}} checked="checked"{{end}} value="Y" /><label for="checkbox-showOnMenu-{{$v.Id}}">{{"显示"|$.T}}</label>
 		</div>
 	</td>
 	<td>
 		<div class="checkbox checkbox-success no-margin-y">
-			<input id="checkbox-{{$v.Id}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}" data-disabled="{{$v.Disabled}}"{{if eq $v.Disabled "N"}} checked="checked"{{end}} value="N" /><label for="checkbox-{{$v.Id}}">{{"启用"|T}}</label>
+			<input id="checkbox-{{$v.Id}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}" data-disabled="{{$v.Disabled}}"{{if eq $v.Disabled "N"}} checked="checked"{{end}} value="N" /><label for="checkbox-{{$v.Id}}">{{"启用"|$.T}}</label>
 		</div>
 	</td>
 	<td class="text-right">
-	<a class="label label-default" href="{{BackendURL}}/official/article/category_add?copyId={{$v.Id}}" title="{{"复制"|T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
-	{{if lt $v.Level Stored.maxLevel}}
-	<a class="label label-primary" href="{{BackendURL}}/official/article/category_add?parentId={{$v.Id}}" title="{{"添加下级分类"|T}}" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+	<a class="label label-default" href="{{BackendURL}}/official/article/category_add?copyId={{$v.Id}}" title="{{"复制"|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
+	{{if lt $v.Level $.Stored.maxLevel}}
+	<a class="label label-primary" href="{{BackendURL}}/official/article/category_add?parentId={{$v.Id}}" title="{{"添加下级分类"|$.T}}" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
 	{{end}}
-	<a class="label label-success" href="{{BackendURL}}/official/article/category_edit?id={{$v.Id}}" title="{{"编辑"|T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
-	<a class="label label-danger" href="{{BackendURL}}/official/article/category_delete?id={{$v.Id}}" onclick="return confirm('{{"真的要删除吗？"|T}}');" title="{{"删除"|T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+	<a class="label label-success" href="{{BackendURL}}/official/article/category_edit?id={{$v.Id}}" title="{{"编辑"|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
+	<a class="label label-danger" href="{{BackendURL}}/official/article/category_delete?id={{$v.Id}}" onclick="return confirm('{{"真的要删除吗？"|$.T}}');" title="{{"删除"|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 	</td>
 </tr>
 {{end}}

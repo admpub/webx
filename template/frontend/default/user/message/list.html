@@ -4,10 +4,10 @@
 
 <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
-    <h5 class="tx-inverse tx-bold mg-b-0">{{"用户消息"|T}} - {{Stored.boxTypeName}}</h5>
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"用户消息"|$.T}} - {{$.Stored.boxTypeName}}</h5>
     <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
-      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|T}}</a>
-      <span class="breadcrumb-item active">{{"消息中心"|T}}</span>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.T}}</a>
+      <span class="breadcrumb-item active">{{"消息中心"|$.T}}</span>
     </nav>
   </div>
 
@@ -15,33 +15,33 @@
 <div class="row">
   <div class="col-lg-12 mg-t-0">
     <div class="card bd-0 rounded-0">
-      {{$boxType := Stored.boxType}}
+      {{$boxType := $.Stored.boxType}}
         <div class="pd-10 bg-inverse rounded-top">
           <ul class="nav nav-pills nav-white flex-column flex-sm-row">
-            <li class="nav-item"><a class="nav-link{{if eq $boxType "inbox"}} active{{end}}" href="{{FrontendURL}}/user/message/inbox">{{"收件箱"|T}}</a></li>
-            <li class="nav-item"><a class="nav-link{{if eq $boxType "outbox"}} active{{end}}" href="{{FrontendURL}}/user/message/outbox">{{"发件箱"|T}}</a></li>
-            <li class="nav-item"><a class="nav-link{{if eq $boxType "system"}} active{{end}}" href="{{FrontendURL}}/user/message/system">{{"系统消息"|T}}</a></li>
+            <li class="nav-item"><a class="nav-link{{if eq $boxType "inbox"}} active{{end}}" href="{{FrontendURL}}/user/message/inbox">{{"收件箱"|$.T}}</a></li>
+            <li class="nav-item"><a class="nav-link{{if eq $boxType "outbox"}} active{{end}}" href="{{FrontendURL}}/user/message/outbox">{{"发件箱"|$.T}}</a></li>
+            <li class="nav-item"><a class="nav-link{{if eq $boxType "system"}} active{{end}}" href="{{FrontendURL}}/user/message/system">{{"系统消息"|$.T}}</a></li>
           </ul>
         </div>
 
 
         <div class="card-header bd-b-0 rounded-0 pd-0 bg-superlight">
-          <nav class="nav nav-outline nav-gray tx-bold tx-size-13 tx-uppercase pd-sm-x-20 flex-column flex-sm-row">{{$type := Form "type"}}
-            <a href="{{FrontendURL}}/user/message/{{$boxType}}" class="nav-link pd-y-20{{if not $type}} active{{end}}">{{"所有消息"|T}}</a>
-            <a href="{{FrontendURL}}/user/message/{{$boxType}}?type=unread" class="nav-link pd-y-20{{if eq $type "unread"}} active{{end}}">{{"未读消息"|T}}</a>
+          <nav class="nav nav-outline nav-gray tx-bold tx-size-13 tx-uppercase pd-sm-x-20 flex-column flex-sm-row">{{$type := $.Form "type"}}
+            <a href="{{FrontendURL}}/user/message/{{$boxType}}" class="nav-link pd-y-20{{if not $type}} active{{end}}">{{"所有消息"|$.T}}</a>
+            <a href="{{FrontendURL}}/user/message/{{$boxType}}?type=unread" class="nav-link pd-y-20{{if eq $type "unread"}} active{{end}}">{{"未读消息"|$.T}}</a>
           </nav><!-- nav -->
         </div><!-- card-header -->
-        {{if Stored.list}}
+        {{if $.Stored.list}}
         <form method="GET">
         <input type="hidden" name="type" value="{{$type}}">
         <div class="input-group bd-b">
-          <input type="search" class="form-control pd-y-20 bd-0 pd-l-30 rounded-left-0" placeholder="{{"搜索消息"|T}}" name="q" value="{{Form "q"}}">
+          <input type="search" class="form-control pd-y-20 bd-0 pd-l-30 rounded-left-0" placeholder="{{"搜索消息"|$.T}}" name="q" value="{{$.Form "q"}}">
           <span class="input-group-btn">
             <button type="submit" class="btn btn-secondary bd-0 rounded-right-0"><i class="fa fa-search"></i></button>
           </span>
         </div><!-- input-group -->
         </form>
-        {{range $k, $v := Stored.list}}
+        {{range $k, $v := $.Stored.list}}
         <div class="row mg-0{{if gt $k 0}} bd-t{{end}} bg-superlight-hover">
           <div class="col-md-8 col-lg-9">
             <div class="pd-20">
@@ -50,15 +50,15 @@
                   <a href="{{FrontendURL}}/user/message/view/{{$boxType}}/{{$v.Id}}" class="{{if $v.IsViewed}}tx-gray-light{{else}}tx-gray-dark{{end}}">{{$v.Title}}</a>
                   {{if not $v.IsViewed}}
                   <span class="tx-size-11 mg-l-5">
-                    <span class="square-8 bg-danger rounded-circle" data-toggle="tooltip" title="{{"未读"|T}}"></span>
+                    <span class="square-8 bg-danger rounded-circle" data-toggle="tooltip" title="{{"未读"|$.T}}"></span>
                   </span>
                   {{end}}
                   {{if eq $v.Encrypted "Y"}}
-                  <i class="fa fa-lock tx-success mg-l-5" data-toggle="tooltip" title="{{"加密消息"|T}}"></i>
+                  <i class="fa fa-lock tx-success mg-l-5" data-toggle="tooltip" title="{{"加密消息"|$.T}}"></i>
                   {{end}}
               </h6>
               <p class="mg-b-0 tx-size-12">
-                <span class="d-block d-sm-inline">{{"发送时间"|T}}: {{(Ts2time $v.Created).Format "2006-01-02 15:04:05"}}</span>
+                <span class="d-block d-sm-inline">{{"发送时间"|$.T}}: {{(Ts2time $v.Created).Format "2006-01-02 15:04:05"}}</span>
                 <!-- <span class="d-block d-sm-inline mg-sm-l-10">Last updated: June 20, 2017</span> -->
               </p>
             </div><!-- pd-20 -->
@@ -75,7 +75,7 @@
         </div><!-- row -->
         {{end}}
         <div class="card-footer tx-size-xs pd-y-15 auto-bottom-float">
-        {{Stored.pagination.Render `#default#pagination`}}
+        {{$.Stored.pagination.Render `#default#pagination`}}
         </div><!-- card-footer -->
         {{else}}
         <div class="pd-5">
@@ -86,8 +86,8 @@
           <div class="d-flex align-items-center justify-content-start">
             <i class="icon ion-alert-circled alert-icon tx-size-52 tx-warning mg-r-20"></i>
             <div class="ml50">
-              <h5 class="mg-b-2 tx-warning">{{"暂无消息"|T}}</h5>
-              <p class="mg-b-0 tx-gray">{{"暂时没有找到任何数据"|T}}</p>
+              <h5 class="mg-b-2 tx-warning">{{"暂无消息"|$.T}}</h5>
+              <p class="mg-b-0 tx-gray">{{"暂时没有找到任何数据"|$.T}}</p>
             </div>
           </div><!-- d-flex -->
         </div>

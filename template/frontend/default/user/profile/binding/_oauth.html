@@ -1,5 +1,5 @@
     <div class="list-group">
-        {{- range $k, $v := Stored.oAuthProviders -}}
+        {{- range $k, $v := $.Stored.oAuthProviders -}}
         {{- if $v.Binded -}}
         {{range $key,$account := $v.OAuthUsers}}
         <div class="list-group-item pd-y-20 tx-center tx-sm-left-force d-block d-sm-flex justify-content-between align-items-center{{if eq $k 0}} rounded-top-0{{end}}">
@@ -13,14 +13,14 @@
               <p class="mg-b-0 tx-size-xs">{{$v.Description}}</p>
               <span class="tx-size-11 d-block">
                 <span class="square-8 bg-success mg-r-5 rounded-circle"></span>
-                {{"已绑定"|T}}
+                {{"已绑定"|$.T}}
               </span>
             </div><!-- media-body -->
           </div><!-- media -->
           <div class="btn-group">
-          <button type="button" class="btn btn-default-outline"><i class="fa fa-check"></i> {{"已绑定"|T}}</button>
-          <a href="{{FrontendURL}}/user/profile/binding?type=oauth&provider={{$v.Provider}}&cancelId={{$account.Id}}" class="btn btn-danger mg-t-10 mg-sm-t-0" onclick="return confirm('{{T `确定要解除绑定%s?` $v.Title}}');"><i class="fa fa-unlink"></i>
-            {{"解绑"|T}}
+          <button type="button" class="btn btn-default-outline"><i class="fa fa-check"></i> {{"已绑定"|$.T}}</button>
+          <a href="{{FrontendURL}}/user/profile/binding?type=oauth&provider={{$v.Provider}}&cancelId={{$account.Id}}" class="btn btn-danger mg-t-10 mg-sm-t-0" onclick="return confirm('{{$.T `确定要解除绑定%s?` $v.Title}}');"><i class="fa fa-unlink"></i>
+            {{"解绑"|$.T}}
             </a>
           </div>
         </div><!-- list-group-item -->
@@ -37,13 +37,13 @@
               <p class="mg-b-0 tx-size-xs">{{$v.Description}}</p>
               <span class="tx-size-11 d-block">
                 <span class="square-8 bg-warning mg-r-5 rounded-circle"></span>
-                {{"未绑定"|T}}
+                {{"未绑定"|$.T}}
               </span>
             </div><!-- media-body -->
           </div><!-- media -->
           <a href="{{FrontendURL}}/user/profile/binding?type=oauth&provider={{$v.Provider}}" class="btn btn-primary mg-t-10 mg-sm-t-0">
             <i class="fa fa-link"></i>
-            {{"绑定"|T}}
+            {{"绑定"|$.T}}
           </a>
         </div><!-- list-group-item -->
         {{- end -}}

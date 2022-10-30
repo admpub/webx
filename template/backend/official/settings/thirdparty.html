@@ -1,27 +1,27 @@
-{{$config := Stored.thirdparty}}
+{{$config := $.Stored.thirdparty}}
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"收银台"|T}}</label>
+    <label class="col-sm-2 control-label">{{"收银台"|$.T}}</label>
     <div class="col-sm-4">
         {{$apiAccountID := Uint64 $config.payment.Value}}
         <select class="form-control" name="thirdparty[payment][value]">
-            <option value="">- {{`本地模式`|T}} -</option>
-            <optgroup label="{{`远程模式:选择API账号`|T}}">
-            {{- range $k, $v := Stored.apiAccounts -}}
+            <option value="">- {{`本地模式`|$.T}} -</option>
+            <optgroup label="{{`远程模式:选择API账号`|$.T}}">
+            {{- range $k, $v := $.Stored.apiAccounts -}}
             <option value="{{$v.Id}}"{{if eq $apiAccountID $v.Id}} selected="selected"{{end}}>
-                {{`远程模式`|T}}:{{$v.Name}}
+                {{`远程模式`|$.T}}:{{$v.Name}}
             </option>
             {{- end -}}
             </optgroup>
         </select>
     </div><!-- col-sm-4 -->
-    <label class="col-sm-2 control-label">{{"第三方登录"|T}}</label>
+    <label class="col-sm-2 control-label">{{"第三方登录"|$.T}}</label>
     <div class="col-sm-4">{{$apiAccountID := Uint64 $config.oauth.Value}}
         <select class="form-control" name="thirdparty[oauth][value]">
-            <option value="">- {{`本地模式`|T}} -</option>
-            <optgroup label="{{`远程模式:选择API账号`|T}}">
-            {{- range $k, $v := Stored.apiAccounts -}}
+            <option value="">- {{`本地模式`|$.T}} -</option>
+            <optgroup label="{{`远程模式:选择API账号`|$.T}}">
+            {{- range $k, $v := $.Stored.apiAccounts -}}
             <option value="{{$v.Id}}"{{if eq $apiAccountID $v.Id}} selected="selected"{{end}}>
-                {{`远程模式`|T}}:{{$v.Name}}
+                {{`远程模式`|$.T}}:{{$v.Name}}
             </option>
             {{- end -}}
             </optgroup>

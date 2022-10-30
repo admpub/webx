@@ -1,9 +1,9 @@
 {{Extend "layout"}}
-{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "title"}}{{$.Stored.title}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li><a href="{{BackendURL}}/official/customer/prepaid_card/index">{{"充值卡列表"|T}}</a></li>
-<li class="active">{{Stored.title}}</li>
+<li><a href="{{BackendURL}}/official/customer/prepaid_card/index">{{"充值卡列表"|$.T}}</a></li>
+<li class="active">{{$.Stored.title}}</li>
 {{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.uploadPreviewer/css/jquery.uploadPreviewer.min.css?t={{BuildTime}}" type="text/css" />
@@ -14,56 +14,56 @@
     <div class="col-md-12">
         <div class="block-flat">
           <div class="header">							
-            <h3>{{Stored.title}}</h3>
+            <h3>{{$.Stored.title}}</h3>
           </div>
           <div class="content">
               <form class="form-horizontal group-border-dashed" method="POST" action="">
-              {{if not Stored.isAdd}}
+              {{if not $.Stored.isAdd}}
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"卡号"|T}}</label>
+                <label class="col-sm-2 control-label">{{"卡号"|$.T}}</label>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" name="number" value="{{Form `number`}}" required="required">
+                  <input type="text" class="form-control" name="number" value="{{$.Form `number`}}" required="required">
                 </div>
-                <label class="col-sm-2 control-label">{{"密码"|T}}</label>
+                <label class="col-sm-2 control-label">{{"密码"|$.T}}</label>
                 <div class="col-sm-3">
-                  <input type="password" class="form-control" name="password" value="{{Form `password`}}" required="required">
+                  <input type="password" class="form-control" name="password" value="{{$.Form `password`}}" required="required">
                 </div>
               </div>
               {{end}}
               <div class="form-group">
-                <label class="col-sm-2 control-label required">{{"面值"|T}}</label>
+                <label class="col-sm-2 control-label required">{{"面值"|$.T}}</label>
                 <div class="col-sm-3">
                   <div class="input-group no-margin-bottom">
-                    <input type="number" class="form-control" name="amount" value="{{Form `amount` `1`}}" min="1" step="1" required="required">
-                    <span class="input-group-addon">{{`元`|T}}</span>
+                    <input type="number" class="form-control" name="amount" value="{{$.Form `amount` `1`}}" min="1" step="1" required="required">
+                    <span class="input-group-addon">{{`元`|$.T}}</span>
                   </div>
-                  <div class="help-block">{{`整数`|T}}</div>
+                  <div class="help-block">{{`整数`|$.T}}</div>
                 </div>
-                <label class="col-sm-2 control-label required">{{"售价"|T}}</label>
+                <label class="col-sm-2 control-label required">{{"售价"|$.T}}</label>
                 <div class="col-sm-3">
                   <div class="input-group no-margin-bottom">
-                    <input type="number" class="form-control" name="salePrice" value="{{Form `salePrice` `1.00`}}" min="0.01" step="0.01" required="required">
-                    <span class="input-group-addon">{{`元`|T}}</span>
+                    <input type="number" class="form-control" name="salePrice" value="{{$.Form `salePrice` `1.00`}}" min="0.01" step="0.01" required="required">
+                    <span class="input-group-addon">{{`元`|$.T}}</span>
                   </div>
-                  <div class="help-block">{{`支持两位小数`|T}}</div>
+                  <div class="help-block">{{`支持两位小数`|$.T}}</div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"有效期"|T}}</label>
+                <label class="col-sm-2 control-label">{{"有效期"|$.T}}</label>
                 <div class="col-sm-8">
                   <div class="input-group">
-                      <input class="form-control" type="date" name="start" value="{{Form "start"}}">
+                      <input class="form-control" type="date" name="start" value="{{$.Form "start"}}">
                       <span class="input-group-addon"> ~ </span>
-                      <input class="form-control" type="date" name="end" value="{{Form "end"}}">
+                      <input class="form-control" type="date" name="end" value="{{$.Form "end"}}">
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"背景图片"|T}}</label>
-                <div class="col-sm-8">{{$image := Form `bgImage`}}
+                <label class="col-sm-2 control-label">{{"背景图片"|$.T}}</label>
+                <div class="col-sm-8">{{$image := $.Form `bgImage`}}
                   <span class="input-group">
                   <span class="input-group-btn{{if not $image}} hidden{{end}}" id="imagePreviewBtn">
-                    <a class="btn btn-default no-padding" href="{{$image}}" target="_blank" data-toggle="tooltip" title="{{`查看图片`|T}}"><img src="{{$image}}" class="scale" /></a>
+                    <a class="btn btn-default no-padding" href="{{$image}}" target="_blank" data-toggle="tooltip" title="{{`查看图片`|$.T}}"><img src="{{$image}}" class="scale" /></a>
                   </span>
                   <input type="text" class="form-control" id="inputImage" name="bgImage" value="{{$image}}" maxlength="200" />
                   <label class="input-group-btn">
@@ -74,32 +74,32 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"状态"|T}}</label>
+                <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := Form "disabled"}}
+                  {{$v := $.Form "disabled"}}
                   <div class="radio radio-success radio-inline">
-                      <input type="radio" value="N" id="disabled-N" name="disabled"{{if or (eq $v "N") (eq $v "")}} checked{{end}}> <label for="disabled-N">{{"启用"|T}}</label>
+                      <input type="radio" value="N" id="disabled-N" name="disabled"{{if or (eq $v "N") (eq $v "")}} checked{{end}}> <label for="disabled-N">{{"启用"|$.T}}</label>
                   </div>
                   <div class="radio radio-danger radio-inline">
                       <input type="radio" value="Y" id="disabled-Y" name="disabled"{{if eq $v "Y"}} checked{{end}}> 
-                      <label for="disabled-Y">{{"禁用"|T}}</label>
+                      <label for="disabled-Y">{{"禁用"|$.T}}</label>
                   </div>
                 </div>
-                {{if Stored.isAdd}}
-                <label class="col-sm-2 control-label">{{"生成数量"|T}}</label>
+                {{if $.Stored.isAdd}}
+                <label class="col-sm-2 control-label">{{"生成数量"|$.T}}</label>
                 <div class="col-sm-3">
-                  <input type="number" class="form-control" name="count" value="{{Form `count` `1`}}" min="1" step="1" required="required">
+                  <input type="number" class="form-control" name="count" value="{{$.Form `count` `1`}}" min="1" step="1" required="required">
                 </div>
                 {{end}}
               </div>
               <div class="form-group form-submit-group">
 									<div class="col-sm-9 col-sm-offset-2">
-                    {{if Stored.isAdd}}
-                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-check"></i> {{"生成"|T}}</button>
+                    {{if $.Stored.isAdd}}
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-check"></i> {{"生成"|$.T}}</button>
                     {{else}}
-                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|$.T}}</button>
                     {{end}}
-									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|$.T}}</button>
 									</div>
 							</div>
             </form>

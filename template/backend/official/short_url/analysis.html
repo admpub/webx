@@ -1,27 +1,27 @@
 {{Extend "layout"}}
-{{Block "title"}}{{"访问统计"|T}}{{/Block}}
+{{Block "title"}}{{"访问统计"|$.T}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li class="active">{{"访问统计"|T}}</li>
+<li class="active">{{"访问统计"|$.T}}</li>
 {{/Block}}
 {{Block "main"}}
 <div class="row">
 	<div class="col-md-6">
 		<div class="block-flat">
 			<div class="header">
-				<h3>{{"热门网络"|T}}</h3>
+				<h3>{{"热门网络"|$.T}}</h3>
 			</div>
 			<div class="content">
 				<div class="table-responsive">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<td>{{"网络"|T}}</td>
-							<th style="width:60px"><strong>{{"访问量"|T}}</strong></th>
+							<td>{{"网络"|$.T}}</td>
+							<th style="width:60px"><strong>{{"访问量"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
-                        {{range $k,$v := Stored.ispTopList}}
+                        {{range $k,$v := $.Stored.ispTopList}}
 						<tr>
 							<td>{{$v.Isp}}</td>
 							<td>{{$v.Num}}</td>
@@ -36,19 +36,19 @@
 	<div class="col-md-6">
 		<div class="block-flat">
 			<div class="header">
-				<h3>{{"热门省份"|T}}</h3>
+				<h3>{{"热门省份"|$.T}}</h3>
 			</div>
 			<div class="content">
 				<div class="table-responsive">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<th><strong>{{"访客地区"|T}}</strong></th>
-							<th style="width:60px"><strong>{{"访问量"|T}}</strong></th>
+							<th><strong>{{"访客地区"|$.T}}</strong></th>
+							<th style="width:60px"><strong>{{"访问量"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
-                        {{range $k,$v := Stored.provinceTopList}}
+                        {{range $k,$v := $.Stored.provinceTopList}}
 						<tr>
 							<td>
 								{{$v.Country}}
@@ -69,19 +69,19 @@
 	<div class="col-md-6">
 		<div class="block-flat">
 			<div class="header">
-				<h3>{{"热门操作系统"|T}}</h3>
+				<h3>{{"热门操作系统"|$.T}}</h3>
 			</div>
 			<div class="content">
 				<div class="table-responsive">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<th><strong>{{"操作系统"|T}}</strong></th>
-							<th style="width:60px"><strong>{{"访问量"|T}}</strong></th>
+							<th><strong>{{"操作系统"|$.T}}</strong></th>
+							<th style="width:60px"><strong>{{"访问量"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
-                        {{range $k,$v := Stored.osTopList}}
+                        {{range $k,$v := $.Stored.osTopList}}
 						<tr>
 							<td>{{$v.Os}}</td>
 							<td>{{$v.Num}}</td>
@@ -96,19 +96,19 @@
 	<div class="col-md-6">
 		<div class="block-flat">
 			<div class="header">
-				<h3>{{"热门浏览器"|T}}</h3>
+				<h3>{{"热门浏览器"|$.T}}</h3>
 			</div>
 			<div class="content">
 				<div class="table-responsive">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<th><strong>{{"浏览器"|T}}</strong></th>
-							<th style="width:60px"><strong>{{"访问量"|T}}</strong></th>
+							<th><strong>{{"浏览器"|$.T}}</strong></th>
+							<th style="width:60px"><strong>{{"访问量"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
-                        {{range $k,$v := Stored.browserTopList}}
+                        {{range $k,$v := $.Stored.browserTopList}}
 						<tr>
 							<td>{{$v.Browser}}</td>
 							<td>{{$v.Num}}</td>
@@ -127,25 +127,25 @@
 	<div class="col-md-12">
 		<div class="block-flat">
 			<div class="header">
-				<h3>{{"最新访问"|T}}</h3>
+				<h3>{{"最新访问"|$.T}}</h3>
 			</div>
 			<div class="content">
 				<div class="table-responsive">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<th><strong>{{"短链接"|T}}</strong></th>
-							<th style="width:90px"><strong>{{"访客IP"|T}}</strong></th>
-							<th style="width:60px"><strong>{{"来源"|T}}</strong></th>
-							<th style="width:50px"><strong>{{"语言"|T}}</strong></th>
-							<th style="width:90px"><strong>{{"访客地区"|T}}</strong></th>
-							<th style="width:80px"><strong>{{"访客系统"|T}}</strong></th>
-							<th style="width:80px"><strong>{{"浏览器"|T}}</strong></th>
-							<th style="width:90px"><strong>{{"访问时间"|T}}</strong></th>
+							<th><strong>{{"短链接"|$.T}}</strong></th>
+							<th style="width:90px"><strong>{{"访客IP"|$.T}}</strong></th>
+							<th style="width:60px"><strong>{{"来源"|$.T}}</strong></th>
+							<th style="width:50px"><strong>{{"语言"|$.T}}</strong></th>
+							<th style="width:90px"><strong>{{"访客地区"|$.T}}</strong></th>
+							<th style="width:80px"><strong>{{"访客系统"|$.T}}</strong></th>
+							<th style="width:80px"><strong>{{"浏览器"|$.T}}</strong></th>
+							<th style="width:90px"><strong>{{"访问时间"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
-                        {{range $k,$v := Stored.lastList}}
+                        {{range $k,$v := $.Stored.lastList}}
 						<tr>
 							<td>
 								<a href="{{FrontendURL}}/r/{{$v.URL.ShortUrl}}" target="_blank" class="x-block">{{$v.URL.ShortUrl}}</a>
@@ -169,7 +169,7 @@
 					</tbody>
 				</table>		
 				</div>
-				<!-- {{Stored.pagination.Render}} -->
+				<!-- {{$.Stored.pagination.Render}} -->
 			</div>
 		</div>				
 	</div>

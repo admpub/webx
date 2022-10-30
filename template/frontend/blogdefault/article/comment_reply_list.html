@@ -6,9 +6,9 @@
             <div class="meta-item post-author">
                 <div><img src="{{if $v.Extra.avatar}}{{AddSuffix $v.Extra.avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="author-avatar bg-info bg-cover" alt="{{$v.Extra.name}}"></div>
                 <a href="#" class="author-name">{{$v.Extra.name}}</a>
-                {{if $v.Extra.isTargetAuthor}}&nbsp;<span class="badge bg-primary">{{"作者"|T}}</span>{{end}}
-                {{if $v.Extra.isBought}}&nbsp;<span class="badge bg-success">{{"已购买"|T}}</span>{{end}}
-                {{if $v.Extra.isAdmin}}&nbsp;<span class="badge bg-warning">{{"管理员"|T}}</span>{{end}}
+                {{if $v.Extra.isTargetAuthor}}&nbsp;<span class="badge bg-primary">{{"作者"|$.T}}</span>{{end}}
+                {{if $v.Extra.isBought}}&nbsp;<span class="badge bg-success">{{"已购买"|$.T}}</span>{{end}}
+                {{if $v.Extra.isAdmin}}&nbsp;<span class="badge bg-warning">{{"管理员"|$.T}}</span>{{end}}
             </div>
             <span class="meta-item" title="{{(DateFormat `2006-01-02 15:04` $v.Created)}}"> {{TimeAgo $v.Created}} </span>
         </div>
@@ -17,14 +17,14 @@
             <span>
                 <img src="{{AssetsXURL}}/blogdefault/img/icons/corner-left-down.png" alt="" />
             </span>
-            {{`回复`|T}}
+            {{`回复`|$.T}}
             </a>
         </div>
     </div>
     <div class="body-text{{if eq $v.Contype `markdown`}} markdown-code{{end}}" id="comment-content-{{$v.Id}}">
         {{if gt $v.ReplyCommentId 0}}
         <span class="reply-head">
-            <span>{{"回复"|T}}</span>
+            <span>{{"回复"|$.T}}</span>
             <a href="#" class="author-name">{{$v.Extra.repliedCustomerName}}</a>
         </span>
         {{end}}
@@ -33,10 +33,10 @@
 </div>
 {{- end -}}
 {{- if $commentList -}}
-    {{- $paging := Get `paginationComment` -}}
+    {{- $paging := $.Get `paginationComment` -}}
     {{- if $paging -}}
     {{- ($paging.SetNum 1).Render -}}
     {{- else -}}
-    {{- (Stored.pagination.SetNum 1).Render -}}
+    {{- ($.Stored.pagination.SetNum 1).Render -}}
     {{- end -}}
 {{- end -}}

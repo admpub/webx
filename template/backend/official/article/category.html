@@ -1,8 +1,8 @@
 {{Strip}}{{Extend "layout"}}
-{{Block "title"}}{{"分类管理"|T}}{{/Block}}
+{{Block "title"}}{{"分类管理"|$.T}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li class="active">{{"分类管理"|T}}</li>
+<li class="active">{{"分类管理"|$.T}}</li>
 {{/Block}}
 {{Block "head"}}
 <!-- <link href="{{AssetsURL}}/js/treetable/bootstrap-gtreetable.min.css?t={{BuildTime}}" rel="stylesheet" /> -->
@@ -16,11 +16,11 @@
 				<div class="pull-right" style="margin-left:10px">
 					<form class="form-horizontal" action="" id="search-form" method="GET">
 						<div class="input-group">
-							<span class="input-group-addon">{{"组类型"|T}}</span>
+							<span class="input-group-addon">{{"组类型"|$.T}}</span>
 							<select name="type" class="form-control" id="selectType" onchange="$('#search-form').submit()">
-								<option value=""> - {{"不限"|T}} - </option>
-								{{$type := Stored.type}} 
-								{{range $k, $v := Stored.typeList}}
+								<option value=""> - {{"不限"|$.T}} - </option>
+								{{$type := $.Stored.type}} 
+								{{range $k, $v := $.Stored.typeList}}
 								<option value="{{$v.K}}" {{if eq $type $v.K}} selected{{end}}>{{$v.V}}</option>
 								{{end}}
 							</select>
@@ -29,9 +29,9 @@
 				</div>
 				<a href="{{BackendURL}}/official/article/category_add" class="btn btn-success pull-right">
 					<i class="fa fa-plus"></i>
-					{{"添加分类"|T}}
+					{{"添加分类"|$.T}}
 				</a>							
-				<h3>{{"分类列表"|T}}</h3>
+				<h3>{{"分类列表"|$.T}}</h3>
 			</div>
 			<div class="content">
 				<div class="table-responsive">
@@ -39,13 +39,13 @@
 					<thead class="no-border">
 						<tr>
 							<th style="width:50px"><strong>ID</strong></th>
-							<th><strong>{{"分类名称"|T}}</strong></th>
-							<th style="width:100px"><strong>{{"类别"|T}}</strong></th>
-							<th><strong>{{"分类说明"|T}}</strong></th>
-							<th style="width:130px"><strong>{{"创建时间"|T}}</strong></th>
-							<th style="width:90px"><strong>{{"显示在菜单"|T}}</strong></th>
-							<th style="width:60px"><strong>{{"状态"|T}}</strong></th>
-							<th style="width:150px" class="text-right"><strong>{{"操作"|T}}</strong></th>
+							<th><strong>{{"分类名称"|$.T}}</strong></th>
+							<th style="width:100px"><strong>{{"类别"|$.T}}</strong></th>
+							<th><strong>{{"分类说明"|$.T}}</strong></th>
+							<th style="width:130px"><strong>{{"创建时间"|$.T}}</strong></th>
+							<th style="width:90px"><strong>{{"显示在菜单"|$.T}}</strong></th>
+							<th style="width:60px"><strong>{{"状态"|$.T}}</strong></th>
+							<th style="width:150px" class="text-right"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y" id="category-list-container">
@@ -53,7 +53,7 @@
 					</tbody>
 				</table>		
 				</div>
-				{{Stored.pagination.Render}}
+				{{$.Stored.pagination.Render}}
 			</div>
 		</div>				
 	</div>

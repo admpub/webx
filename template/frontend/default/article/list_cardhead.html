@@ -1,16 +1,16 @@
 {{Strip}}
-                  {{- if gt (len Stored.categories) 0 -}}
-                  <a href="{{Stored.listURL}}" class="tx-inverse tx-uppercase">{{`文章列表`|T}}</a>:
-                  {{range $index, $category := Stored.categories -}}
+                  {{- if gt (len $.Stored.categories) 0 -}}
+                  <a href="{{$.Stored.listURL}}" class="tx-inverse tx-uppercase">{{`文章列表`|$.T}}</a>:
+                  {{range $index, $category := $.Stored.categories -}}
                   {{- if gt $index 0 -}}
                   <i class="fa fa-angle-right wd-10 text-center"></i>
                   {{- end -}}
-                  <a href="{{Stored.listURL}}?categoryId={{$category.Id}}" class="tx-inverse tx-normal tx-size-16">{{$category.Name}}</a>
+                  <a href="{{$.Stored.listURL}}?categoryId={{$category.Id}}" class="tx-inverse tx-normal tx-size-16">{{$category.Name}}</a>
                   {{- end -}}
-                  {{- else if Stored.tag -}}
-                  <a href="{{Stored.listURL}}" class="tx-inverse tx-uppercase">{{`文章列表`|T}}</a>:
-                  <a href="{{Stored.listURL}}?tag={{Stored.tag}}" class="tx-inverse tx-normal tx-size-16"><i class="fa fa-tags tx-gray-lighter"></i> {{Stored.tag}}</a>
+                  {{- else if $.Stored.tag -}}
+                  <a href="{{$.Stored.listURL}}" class="tx-inverse tx-uppercase">{{`文章列表`|$.T}}</a>:
+                  <a href="{{$.Stored.listURL}}?tag={{$.Stored.tag}}" class="tx-inverse tx-normal tx-size-16"><i class="fa fa-tags tx-gray-lighter"></i> {{$.Stored.tag}}</a>
                   {{- else -}}
-                  <span class="tx-uppercase">{{`全部文章`|T}}</span>
+                  <span class="tx-uppercase">{{`全部文章`|$.T}}</span>
                   {{- end -}}
 {{/Strip}}

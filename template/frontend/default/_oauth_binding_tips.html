@@ -1,13 +1,13 @@
 {{Strip}}
-{{- if Stored.oauth -}}
+{{- if $.Stored.oauth -}}
 <div class="popover popover-top popover-title-danger" style="position:relative;margin:0;max-width:100%;">
   <div class="popover-arrow"></div>
-  <h3 class="popover-title">{{"绑定本站账号"|T}}</h3>
+  <h3 class="popover-title">{{"绑定本站账号"|$.T}}</h3>
   <div class="popover-content bg-white">
     <p>
-        {{T "您已经通过第三方账号%s登录成功，请登录您的本站账号进行绑定。" Stored.oauth.Provider}}
+        {{$.T "您已经通过第三方账号%s登录成功，请登录您的本站账号进行绑定。" $.Stored.oauth.Provider}}
         <br />
-        {{T "如果您没有本站账号，可以点击%s自动创建新账号%s来进行绑定。" "<a href='{{FrontendURL}}/oauth_sign_in?force-create=1' class='btn btn-info' style='padding:1px 2px;font-size:0.6rem'>" "</a>"|ToHTML}}
+        {{$.T "如果您没有本站账号，可以点击%s自动创建新账号%s来进行绑定。" "<a href='{{FrontendURL}}/oauth_sign_in?force-create=1' class='btn btn-info' style='padding:1px 2px;font-size:0.6rem'>" "</a>"|ToHTML}}
     </p>
   </div>
 </div>

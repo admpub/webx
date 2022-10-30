@@ -1,38 +1,38 @@
 {{Extend "layout"}}
-{{Block "title"}}{{"修改资产"|T}}{{/Block}}
+{{Block "title"}}{{"修改资产"|$.T}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li><a href="{{BackendURL}}/official/customer/index">{{`客户列表`|T}}</a></li>
-<li><a href="{{BackendURL}}/official/customer/wallet/index?customerId={{Form `customerId`}}">{{"客户资产列表"|T}}</a></li>
-<li class="active">{{"修改资产"|T}}</li>
+<li><a href="{{BackendURL}}/official/customer/index">{{`客户列表`|$.T}}</a></li>
+<li><a href="{{BackendURL}}/official/customer/wallet/index?customerId={{$.Form `customerId`}}">{{"客户资产列表"|$.T}}</a></li>
+<li class="active">{{"修改资产"|$.T}}</li>
 {{/Block}}
 {{Block "main"}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat">
           <div class="header">							
-            <h3>{{"修改资产"|T}}</h3>
+            <h3>{{"修改资产"|$.T}}</h3>
           </div>
           <div class="content">
               <form class="form-horizontal wallet-border-dashed" data-parsley-validate novalidate method="POST" action="">
-              {{$customer := Stored.customer}}
+              {{$customer := $.Stored.customer}}
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"客户名"|T}}</label>
+                <label class="col-sm-2 control-label">{{"客户名"|$.T}}</label>
                 <div class="col-sm-3">
                   <div class="form-control no-border">
                   {{if $customer}}{{$customer.Name}}{{end}}
                   </div>
                 </div>
-                <label class="col-sm-2 control-label">{{"客户ID"|T}}</label>
+                <label class="col-sm-2 control-label">{{"客户ID"|$.T}}</label>
                 <div class="col-sm-3">
                   <input type="text" class="form-control" name="customerId" value="{{if $customer}}{{$customer.Id}}{{else}}0{{end}}" readonly="readonly" />
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"资产类型"|T}}</label>
+                <label class="col-sm-2 control-label">{{"资产类型"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$v := Stored.assetType}}
-                  {{range $k, $t := Stored.assetTypes}}
+                  {{$v := $.Stored.assetType}}
+                  {{range $k, $t := $.Stored.assetTypes}}
                   <div class="radio radio-success radio-inline">
                     <input type="radio" value="{{$t.K}}" id="type-{{$t.K}}" name="assetType"{{if or (eq $v $t.K) (and (eq $v "") (eq $k 0))}} checked{{end}}{{if $customer}} onclick="window.location='{{BackendURL}}/official/customer/wallet/edit?customerId={{$customer.Id}}&assetType='+this.value;"{{end}}> <label for="type-{{$t.K}}">{{$t.V}}</label>
                   </div>
@@ -41,28 +41,28 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"余额"|T}}</label>
-                <div class="col-sm-8">{{$balance := Form `balance` `0`}}
+                <label class="col-sm-2 control-label">{{"余额"|$.T}}</label>
+                <div class="col-sm-8">{{$balance := $.Form `balance` `0`}}
                   <div class="input-group no-margin">
                   <input type="text" class="form-control" name="balance" value="{{$balance}}" disabled="disabled" />
-                  <span class="input-group-addon">{{"调整额度"|T}}</span>
-                  <input type="number" class="form-control" name="changeBalance" value="{{Form `changeBalance` `0`}}" placeholder="{{`负数代表扣除`|T}}" title="{{`负数代表扣除`|T}}" min="{{if ne $balance `0`}}-{{end}}{{$balance}}" step="0.01" data-parsley-errors-container="#balance-error-container" />
-                  <span class="input-group-addon">{{"调整原因"|T}}</span>
-                  <input type="text" class="form-control" name="changeBalanceReason" value="{{Form `changeBalanceReason`}}" placeholder="" />
+                  <span class="input-group-addon">{{"调整额度"|$.T}}</span>
+                  <input type="number" class="form-control" name="changeBalance" value="{{$.Form `changeBalance` `0`}}" placeholder="{{`负数代表扣除`|$.T}}" title="{{`负数代表扣除`|$.T}}" min="{{if ne $balance `0`}}-{{end}}{{$balance}}" step="0.01" data-parsley-errors-container="#balance-error-container" />
+                  <span class="input-group-addon">{{"调整原因"|$.T}}</span>
+                  <input type="text" class="form-control" name="changeBalanceReason" value="{{$.Form `changeBalanceReason`}}" placeholder="" />
                   </div>
                   <div class="help-block" id="balance-error-container"></div>
                 </div>
               </div>
               
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"冻结"|T}}</label>
-                <div class="col-sm-8">{{$freeze := Form `freeze` `0`}}
+                <label class="col-sm-2 control-label">{{"冻结"|$.T}}</label>
+                <div class="col-sm-8">{{$freeze := $.Form `freeze` `0`}}
                   <div class="input-group no-margin">
                   <input type="text" class="form-control" name="freeze" value="{{$freeze}}" disabled="disabled" />
-                  <span class="input-group-addon">{{"调整额度"|T}}</span>
-                  <input type="number" class="form-control" name="changeFreeze" value="{{Form `changeFreeze` `0`}}" placeholder="{{`负数代表扣除`|T}}" title="{{`负数代表扣除`|T}}" min="{{if ne $freeze `0`}}-{{end}}{{$freeze}}" step="0.01" data-parsley-errors-container="#freeze-error-container" />
-                  <span class="input-group-addon">{{"调整原因"|T}}</span>
-                  <input type="text" class="form-control" name="changeFreezeReason" value="{{Form `changeFreezeReason`}}" placeholder="" />
+                  <span class="input-group-addon">{{"调整额度"|$.T}}</span>
+                  <input type="number" class="form-control" name="changeFreeze" value="{{$.Form `changeFreeze` `0`}}" placeholder="{{`负数代表扣除`|$.T}}" title="{{`负数代表扣除`|$.T}}" min="{{if ne $freeze `0`}}-{{end}}{{$freeze}}" step="0.01" data-parsley-errors-container="#freeze-error-container" />
+                  <span class="input-group-addon">{{"调整原因"|$.T}}</span>
+                  <input type="text" class="form-control" name="changeFreezeReason" value="{{$.Form `changeFreezeReason`}}" placeholder="" />
                   </div>
                   <div class="help-block" id="freeze-error-container"></div>
                 </div>
@@ -70,8 +70,8 @@
 
               <div class="form-group form-submit-wallet">
 									<div class="col-sm-9 col-sm-offset-2">
-									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
-									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|$.T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|$.T}}</button>
 									</div>
 							</div>
             </form>

@@ -28,12 +28,12 @@ Coming Soon
                 {{- .content|ToHTML -}}
             </div>
             {{if .enabledNotify}}
-            <h6 class="tx-size-14 tx-size-xs-16 mg-b-15 tx-inverse">{{"接收邮件通知"|T}}</h6>
+            <h6 class="tx-size-14 tx-size-xs-16 mg-b-15 tx-inverse">{{"接收邮件通知"|$.T}}</h6>
             <form>
             <div class="input-group">
-              <input type="text" class="form-control lh-6 tx-size-12 tx-size-sm-14" placeholder="{{"输入E-mail地址"|T}}">
+              <input type="text" class="form-control lh-6 tx-size-12 tx-size-sm-14" placeholder="{{"输入E-mail地址"|$.T}}">
               <div class="input-group-btn pd-l-1">
-                <button class="btn btn-inverse tx-size-12 tx-size-sm-14">{{"通知我"|T}}</button>
+                <button class="btn btn-inverse tx-size-12 tx-size-sm-14">{{"通知我"|$.T}}</button>
               </div><!-- input-group-btn -->
             </div><!-- input-group -->
             </form>
@@ -42,7 +42,7 @@ Coming Soon
         </div><!-- row -->
       </div><!-- container -->
     </div><!-- pos-absolute -->
-    {{- Set `footerClass` `tx-left` -}}
+    {{- $.Set `footerClass` `tx-left` -}}
     {{Include "#default#footer"}}
 {{/Block}}
 {{/Strip}}

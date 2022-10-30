@@ -1,4 +1,4 @@
-{{$config := Stored.cache}}
+{{$config := $.Stored.cache}}
 {{Include "official/settings/cache_help"}}
 <script type="text/javascript">
 function onSelectDbAccount(a){
@@ -27,13 +27,13 @@ function onSelectCacheAdapter(a){
 }
 </script>
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"主要缓存"|T}}</label>
+    <label class="col-sm-2 control-label">{{"主要缓存"|$.T}}</label>
     <div class="col-sm-8">
         <div class="fieldset bg-fc">
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"存储方式"|T}}</label>
+                <label class="col-sm-2 control-label">{{"存储方式"|$.T}}</label>
                 <div class="col-sm-9">{{$adapter := $config.default.ValueObject.Adapter|Default "redis"}}
-                    {{range $k, $v := Stored.cacheAdapters}}
+                    {{range $k, $v := $.Stored.cacheAdapters}}
                     <div class="radio radio-success radio-inline">
                         <input type="radio" value="{{$v}}" name="cache[default][value][Adapter]" id="cache-default-Adapter-{{$v}}"{{if eq $adapter $v}} checked{{end}} onclick="onSelectCacheAdapter(this)"> <label for="cache-default-Adapter-{{$v}}">{{$v}}</label>
                     </div>
@@ -41,14 +41,14 @@ function onSelectCacheAdapter(a){
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"配置"|T}}</label>
+                <label class="col-sm-2 control-label">{{"配置"|$.T}}</label>
                 <div class="col-sm-9">{{$adapterConfig := $config.default.ValueObject.AdapterConfig | Default ""}}
                     <span class="input-group" style="width:100%">
-                    <input type="{{if and (eq $adapter `redis`) (isDbAccount $adapterConfig)}}hidden{{else}}text{{end}}" class="form-control" name="cache[default][value][AdapterConfig]" value="{{$adapterConfig}}">
+                    <input type="{{if and (eq $adapter `redis`) (call $.Func.isDbAccount $adapterConfig)}}hidden{{else}}text{{end}}" class="form-control" name="cache[default][value][AdapterConfig]" value="{{$adapterConfig}}">
                     <span class="input-group-addon no-padding no-border" style="min-width:100px{{if ne $adapter `redis`}};display:none{{end}}">
                     <select class="form-control" name="cache[default][value][dbAccount]" onchange="onSelectDbAccount(this)">
-                        <option value="">{{`- 账号 -`|T}}</option>
-                        {{range $k, $v := Stored.dbAccounts}}
+                        <option value="">{{`- 账号 -`|$.T}}</option>
+                        {{range $k, $v := $.Stored.dbAccounts}}
                         <option value="{{$v.Id}}"{{if eq (Str $v.Id) $adapterConfig}} selected="selected"{{end}}>{{$v.Title|Default $v.Host}}</option>
                         {{end}}
                     </select>
@@ -57,13 +57,13 @@ function onSelectCacheAdapter(a){
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"GC间隔"|T}}</label>
+                <label class="col-sm-2 control-label">{{"GC间隔"|$.T}}</label>
                 <div class="col-sm-9">
                     <span class="input-group">
                     <input type="number" class="form-control" name="cache[default][value][Interval]" value="{{$config.default.ValueObject.Interval}}">
-                    <span class="input-group-addon">{{`秒`|T}}</span>
+                    <span class="input-group-addon">{{`秒`|$.T}}</span>
                     </span>
-                    <div class="help-block">{{`用于file缓存清理过期缓存的间隔时间，0代表使用默认值(60秒)，负数代表禁用自动清理`|T}}</div>
+                    <div class="help-block">{{`用于file缓存清理过期缓存的间隔时间，0代表使用默认值(60秒)，负数代表禁用自动清理`|$.T}}</div>
                 </div>
             </div><!-- form-group -->
         </div><!-- fieldset -->
@@ -72,13 +72,13 @@ function onSelectCacheAdapter(a){
 
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"备用存储"|T}}</label>
+    <label class="col-sm-2 control-label">{{"备用存储"|$.T}}</label>
     <div class="col-sm-8">
         <div class="fieldset bg-fc">
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"存储方式"|T}}</label>
+                <label class="col-sm-2 control-label">{{"存储方式"|$.T}}</label>
                 <div class="col-sm-9">{{$adapter := $config.fallback.ValueObject.Adapter|Default "file"}}
-                    {{range $k, $v := Stored.cacheAdapters}}
+                    {{range $k, $v := $.Stored.cacheAdapters}}
                     <div class="radio radio-success radio-inline">
                         <input type="radio" value="{{$v}}" name="cache[fallback][value][Adapter]" id="cache-fallback-Adapter-{{$v}}"{{if eq $adapter $v}} checked{{end}} onclick="onSelectCacheAdapter(this)"> <label for="cache-fallback-Adapter-{{$v}}">{{$v}}</label>
                     </div>
@@ -86,27 +86,27 @@ function onSelectCacheAdapter(a){
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"配置"|T}}</label>
+                <label class="col-sm-2 control-label">{{"配置"|$.T}}</label>
                 <div class="col-sm-9">{{$adapterConfig := $config.fallback.ValueObject.AdapterConfig | Default ""}}
                     <span class="input-group" style="width:100%">
-                    <input type="{{if and (eq $adapter `redis`) (isDbAccount $adapterConfig)}}hidden{{else}}text{{end}}" class="form-control" name="cache[fallback][value][AdapterConfig]" value="{{$adapterConfig}}">
+                    <input type="{{if and (eq $adapter `redis`) (call $.Func.isDbAccount $adapterConfig)}}hidden{{else}}text{{end}}" class="form-control" name="cache[fallback][value][AdapterConfig]" value="{{$adapterConfig}}">
                     <span class="input-group-addon no-padding no-border" style="min-width:100px{{if ne $adapter `redis`}};display:none{{end}}">
                     <select class="form-control" name="cache[fallback][value][dbAccount]" onchange="onSelectDbAccount(this)">
-                        <option value="">{{`- 账号 -`|T}}</option>
-                        {{range $k, $v := Stored.dbAccounts}}
+                        <option value="">{{`- 账号 -`|$.T}}</option>
+                        {{range $k, $v := $.Stored.dbAccounts}}
                         <option value="{{$v.Id}}"{{if eq (Str $v.Id) $adapterConfig}} selected="selected"{{end}}>{{$v.Title|Default $v.Host}}</option>
                         {{end}}
                     </select>
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"GC间隔"|T}}</label>
+                <label class="col-sm-2 control-label">{{"GC间隔"|$.T}}</label>
                 <div class="col-sm-9">
                     <span class="input-group">
                     <input type="number" class="form-control" name="cache[fallback][value][Interval]" value="{{$config.fallback.ValueObject.Interval}}">
-                    <span class="input-group-addon">{{`秒`|T}}</span>
+                    <span class="input-group-addon">{{`秒`|$.T}}</span>
                     </span>
-                    <div class="help-block">{{`用于file缓存清理过期缓存的间隔时间，0代表使用默认值(60秒)，负数代表禁用自动清理`|T}}</div>
+                    <div class="help-block">{{`用于file缓存清理过期缓存的间隔时间，0代表使用默认值(60秒)，负数代表禁用自动清理`|$.T}}</div>
                 </div>
             </div><!-- form-group -->
         </div><!-- fieldset -->

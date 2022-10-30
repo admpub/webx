@@ -1,9 +1,9 @@
 {{Extend "layout"}}
-{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "title"}}{{$.Stored.title}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li><a href="{{BackendURL}}/manager/navigate/index">{{"菜单管理"|T}}</a></li>
-<li class="active">{{Stored.title}}</li>
+<li><a href="{{BackendURL}}/manager/navigate/index">{{"菜单管理"|$.T}}</a></li>
+<li class="active">{{$.Stored.title}}</li>
 {{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.uploadPreviewer/css/jquery.uploadPreviewer.min.css?t={{BuildTime}}" type="text/css" />
@@ -13,96 +13,97 @@
     <div class="col-md-12">
         <div class="block-flat">
           <div class="header">							
-            <h3>{{Stored.title}}</h3>
+            <h3>{{$.Stored.title}}</h3>
           </div>
           <div class="content">
               <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"类别"|T}}</label>
+                <label class="col-sm-2 control-label">{{"类别"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$type := Stored.type}}
-                  {{$id := Form "id"}}
-                  {{if Stored.editableType}}
-                  {{range $k, $v := Stored.typeList}}
+                  {{$type := $.Stored.type}}
+                  {{$id := $.Form "id"}}
+                  {{if $.Stored.editableType}}
+                  {{range $k, $v := $.Stored.typeList}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="{{$v.K}}" id="type-{{$v.K}}" name="type"{{if eq $v.K $type}} checked="checked"{{end}} onclick="window.location.href='?type={{$v.K}}&id={{$id}}'"><label for="type-{{$v.K}}">{{$v.V}}</label> 
                   </div>
                   {{end}}
                   {{else}}
-                  <span class="form-control no-border">{{getTypeName $type $type}}</span>
+                  <span class="form-control no-border">{{call $.Func.getTypeName $type $type}}</span>
                   {{end}}
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"上级菜单"|T}}</label>
+                <label class="col-sm-2 control-label">{{"上级菜单"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := (Formx "parentId").Uint}}
+                  {{$v := ($.Formx "parentId").Uint}}
                   <select name="parentId" class="form-control" id="parentId">
                     <option value=""></option>
-                    {{range $k, $c := Stored.navigateList}}
+                    {{range $k, $c := $.Stored.navigateList}}
                     <option value="{{$c.Id}}"{{if eq $c.Id $v}} selected="selected"{{end}}>{{$c.Title}}</option>
                     {{end}}
                   </select>
                 </div>
-                <label class="col-sm-2 control-label">{{"徽标文本"|T}}</label>
+                <label class="col-sm-2 control-label">{{"徽标文本"|$.T}}</label>
                 <div class="col-sm-3">
-                  <input name="badge" class="form-control" id="badge" value="{{Form `badge`}}">
+                  <input name="badge" class="form-control" id="badge" value="{{$.Form `badge`}}">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"封面图片"|T}}</label>
+                <label class="col-sm-2 control-label">{{"封面图片"|$.T}}</label>
                 <div class="col-sm-8">
-                    {{Include "_common/file_input" (MakeMap `name` `cover` `value` (Form `cover`) `subdir` `navigate`)}}
+                    {{- $.Set `fileInputConfig` (MakeMap `name` `cover` `value` ($.Form `cover`) `subdir` `navigate`) -}}
+                    {{Include "_common/file_input" $}}
                 </div>
               </div>
-              {{$isAdd := HasSuffix URL.Path "/add"}}
+              {{$isAdd := HasSuffix $.URL.Path "/add"}}
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"菜单标题"|T}}</label>
+                <label class="col-sm-2 control-label">{{"菜单标题"|$.T}}</label>
                 <div class="col-sm-8">
                     {{- if $isAdd -}}
-                    <textarea class="form-control resize-y" placeholder='{{"菜单标题"|T}}|{{"匹配标识"|T}}|{{"网址"|T}}' name="title" rows="5">{{Form "title"}}</textarea>
+                    <textarea class="form-control resize-y" placeholder='{{"菜单标题"|$.T}}|{{"匹配标识"|$.T}}|{{"网址"|$.T}}' name="title" rows="5">{{$.Form "title"}}</textarea>
                     <div class="help-block">
-                      {{"如要一次添加多个同级菜单，请一行一个，并且每行中格式为"|T}}: <code>{{"菜单标题"|T}}</code>|<code>{{"匹配标识"|T}}</code>|<code>{{"网址"|T}}</code>
+                      {{"如要一次添加多个同级菜单，请一行一个，并且每行中格式为"|$.T}}: <code>{{"菜单标题"|$.T}}</code>|<code>{{"匹配标识"|$.T}}</code>|<code>{{"网址"|$.T}}</code>
                       <br />
-                      {{`其中，匹配标识如要指定正则表达式，请添加前缀<code>regexp:</code>`|T|ToHTML}}
+                      {{`其中，匹配标识如要指定正则表达式，请添加前缀<code>regexp:</code>`|$.T|ToHTML}}
                     </div>
                     {{- else -}}
-                    <input type="text" class="form-control" name="title" value="{{Form "title"}}">
+                    <input type="text" class="form-control" name="title" value="{{$.Form "title"}}">
                     {{- end -}}
                 </div>
               </div>
               {{- if not $isAdd -}}
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"网址"|T}}</label>
+                <label class="col-sm-2 control-label">{{"网址"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="url" value="{{Form "url"}}">
+                    <input type="text" class="form-control" name="url" value="{{$.Form "url"}}">
                 </div>
-                <label class="col-sm-2 control-label">{{"匹配标识"|T}}</label>
+                <label class="col-sm-2 control-label">{{"匹配标识"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="ident" value="{{Form "ident"}}">
-                    <div class="help-block">{{`如要指定正则表达式，请添加前缀<code>regexp:</code>`|T|ToHTML}}</div>
+                    <input type="text" class="form-control" name="ident" value="{{$.Form "ident"}}">
+                    <div class="help-block">{{`如要指定正则表达式，请添加前缀<code>regexp:</code>`|$.T|ToHTML}}</div>
                 </div>
               </div>
               {{- end -}}
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"排序编号"|T}}</label>
+                <label class="col-sm-2 control-label">{{"排序编号"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="number" class="form-control" name="sort" value="{{Form `sort` `5000`}}">
-                    <div class="help-block">{{"排序编号(从小到大)"|T}}</div>
+                    <input type="number" class="form-control" name="sort" value="{{$.Form `sort` `5000`}}">
+                    <div class="help-block">{{"排序编号(从小到大)"|$.T}}</div>
                 </div>
-                <label class="col-sm-2 control-label">{{"打开方式"|T}}</label>
+                <label class="col-sm-2 control-label">{{"打开方式"|$.T}}</label>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" name="target" value="{{Form "target"}}">
+                  <input type="text" class="form-control" name="target" value="{{$.Form "target"}}">
                   <div class="help-block"><code>_self</code> / <code>_blank</code> / <code>_parent</code> /<code> _top</code></div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"链接类型"|T}}</label>
+                <label class="col-sm-2 control-label">{{"链接类型"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$v := Form "linkType" "custom"}}
-                  {{range Stored.linkTypeList}}
+                  {{$v := $.Form "linkType" "custom"}}
+                  {{range $.Stored.linkTypeList}}
                   <div class="radio radio-primary radio-inline"> 
                     <input type="radio" value="{{.K}}" id="linkType-{{.K}}" name="linkType"{{if eq $v .K}} checked{{end}}><label for="linkType-{{.K}}">{{.V}}</label>
                   </div>
@@ -110,39 +111,39 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"状态"|T}}</label>
+                <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := Form "disabled"}}
+                  {{$v := $.Form "disabled"}}
                   <div class="radio radio-primary radio-inline"> 
-                    <input type="radio" value="N" id="disabled-N" name="disabled"{{if or (eq $v "N") (eq $v "")}} checked{{end}}><label for="disabled-N">{{"启用"|T}}</label>
+                    <input type="radio" value="N" id="disabled-N" name="disabled"{{if or (eq $v "N") (eq $v "")}} checked{{end}}><label for="disabled-N">{{"启用"|$.T}}</label>
                   </div>
                   <div class="radio radio-danger radio-inline"> 
-                    <input type="radio" value="Y" id="disabled-Y" name="disabled"{{if eq $v "Y"}} checked{{end}}><label for="disabled-Y">{{"禁用"|T}}</label> 
+                    <input type="radio" value="Y" id="disabled-Y" name="disabled"{{if eq $v "Y"}} checked{{end}}><label for="disabled-Y">{{"禁用"|$.T}}</label> 
                   </div>
                 </div>
-                <label class="col-sm-2 control-label">{{"排列方式"|T}}</label>
+                <label class="col-sm-2 control-label">{{"排列方式"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := Form "direction"}}
+                  {{$v := $.Form "direction"}}
                   <div class="radio radio-primary radio-inline"> 
-                    <input type="radio" value="Y" id="direction-Y" name="direction"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}><label for="direction-Y">{{"竖向"|T}}</label>
+                    <input type="radio" value="Y" id="direction-Y" name="direction"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}><label for="direction-Y">{{"竖向"|$.T}}</label>
                   </div>
                   <div class="radio radio-success radio-inline"> 
-                    <input type="radio" value="X" id="direction-X" name="direction"{{if eq $v "X"}} checked{{end}}><label for="direction-X">{{"横向"|T}}</label> 
+                    <input type="radio" value="X" id="direction-X" name="direction"{{if eq $v "X"}} checked{{end}}><label for="direction-X">{{"横向"|$.T}}</label> 
                   </div>
-                  <div class="help-block">{{`对自定义链接无效`|T}}</div>
+                  <div class="help-block">{{`对自定义链接无效`|$.T}}</div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"备注"|T}}</label>
+                <label class="col-sm-2 control-label">{{"备注"|$.T}}</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" name="remark" value="{{Form "remark"}}">
+                  <input type="text" class="form-control" name="remark" value="{{$.Form "remark"}}">
                 </div>
               </div>
 
               <div class="form-group form-submit-group">
 									<div class="col-sm-9 col-sm-offset-2">
-									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
-									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|$.T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|$.T}}</button>
 									</div>
 							</div>
             </form>

@@ -2,7 +2,7 @@
   <div class="toppanel pos-fixed-top l-lg-240 t-neg-60 t-sm-0 bg-info tx-white pd-y-15 pd-x-25 z-index-100 d-sm-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center flex-row">
       <a href="javascript:;" class="left-menu nav-link tx-white hidden-xs-down hidden-lg-up pd-x-0 d-inline-block mg-r-25"><i class="fa fa-navicon"></i></a>
-      <form action="{{URL.Path}}" id="global-search-form" method="GET">
+      <form action="{{$.URL.Path}}" id="global-search-form" method="GET">
       {{- range $field,$values:=Queries -}}
       {{- if ne $field "q" -}}
       {{- range $k,$value:=$values -}}
@@ -11,7 +11,7 @@
       {{- end -}}
       {{- end -}}
       <div class="input-group input-group-inverse wd-sm-250 wd-md-300 mg-b-20 mg-sm-b-0">
-        <input type="text" class="form-control" id="input-search-keywords" placeholder="Search for..." name="q" value="{{Form "q"}}">
+        <input type="text" class="form-control" id="input-search-keywords" placeholder="Search for..." name="q" value="{{$.Form "q"}}">
         <span class="input-group-btn pd-l-1">
           <button class="btn btn-secondary pd-r-15" type="submit"><i class="fa fa-search"></i></button>
         </span>
@@ -33,10 +33,10 @@
       <div class="dropdown">
         <a href="javascript:;" class="nav-link tx-white pd-x-0 tx-size-13" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="hidden-sm-down">{{$customer.Name}}</span><i class="fa fa-angle-down mg-l-5"></i></a>
         <div class="dropdown-menu dropdown-menu-right tx-size-13 mg-t-19 rounded-top-0 shadow-base">
-          <!-- <a class="dropdown-item" href="#"><i class=""></i> {{"修改资料"|T}}</a> -->
-          <a class="dropdown-item" href="{{FrontendURL}}/user/profile/detail">{{"我的资料"|T}}</a>
-          <a class="dropdown-item" href="{{FrontendURL}}/user/profile/settings">{{"账号设置"|T}}</a>
-          <a class="dropdown-item" href="{{FrontendURL}}/sign_out">{{"注销登录"|T}}</a>
+          <!-- <a class="dropdown-item" href="#"><i class=""></i> {{"修改资料"|$.T}}</a> -->
+          <a class="dropdown-item" href="{{FrontendURL}}/user/profile/detail">{{"我的资料"|$.T}}</a>
+          <a class="dropdown-item" href="{{FrontendURL}}/user/profile/settings">{{"账号设置"|$.T}}</a>
+          <a class="dropdown-item" href="{{FrontendURL}}/sign_out">{{"注销登录"|$.T}}</a>
         </div><!-- dropdown-menu -->
       </div><!-- dropdown -->
     </nav>

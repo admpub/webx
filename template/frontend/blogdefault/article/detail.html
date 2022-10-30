@@ -1,33 +1,33 @@
 {{Strip}}{{Extend "#blogdefault#base"}}
-{{Block "title"}}{{- Stored.data.Title}} - {{"文章详情"|T -}}{{/Block}}
-{{Block "keywords"}}{{- "文章详情"|T -}},{{Stored.data.Title}}{{/Block}}
-{{Block "description"}}{{Stored.data.Summary}}{{/Block}}
+{{Block "title"}}{{- $.Stored.data.Title}} - {{"文章详情"|$.T -}}{{/Block}}
+{{Block "keywords"}}{{- "文章详情"|$.T -}},{{$.Stored.data.Title}}{{/Block}}
+{{Block "description"}}{{$.Stored.data.Summary}}{{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsXURL}}/css/_page/article_detail.css?t={{BuildTime}}" />
 {{/Block}}
 {{Block "body"}}
-{{- $data := Stored.data -}}
-{{- $clickFlow := Stored.clickFlow -}}
-{{- $sourceInfo := Stored.sourceInfo -}}
+{{- $data := $.Stored.data -}}
+{{- $clickFlow := $.Stored.clickFlow -}}
+{{- $sourceInfo := $.Stored.sourceInfo -}}
 {{- $hasSourceInfo := and $sourceInfo $sourceInfo.X -}}
-{{- $categoryEndIndex := Sub (len Stored.categories) 1 -}}
+{{- $categoryEndIndex := Sub (len $.Stored.categories) 1 -}}
         <!-- ============= SINGLE POST ============= -->
         <section class="single-post-wrapper blog-list-wrapper section-padding">
             <div class="container">
                 <div class="section-head">
                     <h2 class="heading-secondary">
                         {{- if ge $categoryEndIndex 0 -}}
-                        {{- $category := index Stored.categories $categoryEndIndex -}}
+                        {{- $category := index $.Stored.categories $categoryEndIndex -}}
                         {{$category.Name}}
                         {{- end -}}
                     </h2>
                     <ul class="c-bredcrumb">
                         <li>
-                            <a href="{{FrontendURL}}/"> {{`首页`|T}} </a>
+                            <a href="{{FrontendURL}}/"> {{`首页`|$.T}} </a>
                         </li>
-                        <li><a href="{{FrontendURL}}/articles">{{`文章列表`|T}}</a></li>
-                        {{range $index, $category := Stored.categories -}}
-                        <li><a href="{{Stored.listURL}}?categoryId={{$category.Id}}">{{$category.Name}}</a></li>
+                        <li><a href="{{FrontendURL}}/articles">{{`文章列表`|$.T}}</a></li>
+                        {{range $index, $category := $.Stored.categories -}}
+                        <li><a href="{{$.Stored.listURL}}?categoryId={{$category.Id}}">{{$category.Name}}</a></li>
                         {{- end -}}
                     </ul>
                 </div>
@@ -43,17 +43,17 @@
                                     <div class="card-meta">
                                         <div class="meta-item post-author">
                                             {{- if ge $categoryEndIndex 0 -}}
-                                            {{- $category := index Stored.categories $categoryEndIndex -}}
+                                            {{- $category := index $.Stored.categories $categoryEndIndex -}}
                                             <span class="category">{{$category.Name}}</span>
                                             {{- end -}}
-                                            {{- $author := Stored.author -}}
+                                            {{- $author := $.Stored.author -}}
                                             {{if $author.HomeURL -}}
                                             <a href="{{$author.HomeURL}}" class="author-name" target="_blank">{{$author.Name}}</a>
                                             {{- else -}}
                                             <span class="author-name">{{- $author.Name -}}</span>
                                             {{- end -}}
                                         </div>
-                                        <span class="meta-item"> {{(Date $data.Created).Format (T "2006年1月2日")}} </span>
+                                        <span class="meta-item"> {{(Date $data.Created).Format ($.T "2006年1月2日")}} </span>
                                         {{- if eq $data.CloseComment "N" -}}
                                         <a href="#comment-list" class="meta-item">
                                             <i class="fal fa-comment"></i>
@@ -92,7 +92,7 @@
                                 <h3 class="heading-secondary">Tags</h3>
                                 <div class="categories-tags">
                                     {{range $tagK,$tagV := Split $data.Tags ","}}
-                                    <a href="{{Stored.listURL}}?tag={{$tagV}}"> {{$tagV}} </a>
+                                    <a href="{{$.Stored.listURL}}?tag={{$tagV}}"> {{$tagV}} </a>
                                     {{- end -}}
                                 </div>
                             </div>
@@ -103,43 +103,43 @@
                             <!-- Post navigation -->
                             <div class="post-navigation">
                                 <div class="nav-prev">
-                                    {{- $prevRow := Stored.prevRow -}}
+                                    {{- $prevRow := $.Stored.prevRow -}}
                                     {{- if and $prevRow (gt $prevRow.Id 0) -}}
-                                    <a href="{{FrontendURL}}/article/{{$prevRow.Id}}{{Ext}}" class="nav-button">
+                                    <a href="{{FrontendURL}}/article/{{$prevRow.Id}}{{$.Ext}}" class="nav-button">
                                         <span>
                                             <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow-2.png" alt="arrow" />
                                         </span>
                                         prev post
                                     </a>
                                     <div class="nav-post">
-                                        <a href="{{FrontendURL}}/article/{{$prevRow.Id}}{{Ext}}">
+                                        <a href="{{FrontendURL}}/article/{{$prevRow.Id}}{{$.Ext}}">
                                             <h3 class="heading-tertiary">{{$prevRow.Title}}</h3>
                                         </a>
-                                        <span class="date body-text">{{(Date $prevRow.Created).Format (T "2006年1月2日")}}</span>
+                                        <span class="date body-text">{{(Date $prevRow.Created).Format ($.T "2006年1月2日")}}</span>
                                     </div>
                                     {{- end -}}
                                 </div>
                                 <div class="nav-next">
-                                    {{- $nextRow := Stored.nextRow -}}
+                                    {{- $nextRow := $.Stored.nextRow -}}
                                     {{- if and $nextRow (gt $nextRow.Id 0) -}}
-                                    <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{Ext}}" class="nav-button">
+                                    <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{$.Ext}}" class="nav-button">
                                         Next post
                                         <span>
                                             <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                                         </span>
                                     </a>
                                     <div class="nav-post">
-                                        <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{Ext}}">
+                                        <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{$.Ext}}">
                                             <h3 class="heading-tertiary">{{$nextRow.Title}}</h3>
                                         </a>
-                                        <span class="date body-text">{{(Date $nextRow.Created).Format (T "2006年1月2日")}}</span>
+                                        <span class="date body-text">{{(Date $nextRow.Created).Format ($.T "2006年1月2日")}}</span>
                                     </div>
                                     {{- end -}}
                                 </div>
                             </div>
                             {{- if and (eq $data.CloseComment "N") (ne Config.base.comment "close") -}}
                             <div class="post-comments">
-                               <h3 class="heading-secondary">{{`评论`|T}} (<span class="comment-count-num">{{$data.Comments}}</span>)</h3>
+                               <h3 class="heading-secondary">{{`评论`|$.T}} (<span class="comment-count-num">{{$data.Comments}}</span>)</h3>
                                 {{Include "article/comment_list"}}
                                 {{Include "article/comment_form"}}
                             </div>

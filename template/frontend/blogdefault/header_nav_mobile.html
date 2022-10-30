@@ -32,7 +32,7 @@
                         </li>
                         {{- end -}}
                     {{- else -}}
-                        <li><a href="{{FrontendURL}}/"{{if eq URL.Path `/`}} class="active"{{end}}>{{"首页"|T}}</a></li>
+                        <li><a href="{{FrontendURL}}/"{{if eq $.URL.Path `/`}} class="active"{{end}}>{{"首页"|$.T}}</a></li>
                     {{- end -}}
                     </ul>
                     <a href="contact.html" class="button button-primary mt-20 ml-20 d-inline-block"

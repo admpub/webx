@@ -1,27 +1,27 @@
 {{Strip}}{{- $customer := Customer -}}
 <div class="row" id="authentication-box"><div class="col-md-12">
 <div class="card card-flat tx-size-sm">
-{{- $type := Stored.type -}}
+{{- $type := $.Stored.type -}}
 {{- if eq $type `password` -}}
 <form class="form form-label-right" id="authentication-form" method="POST">
     <div class="form-group row mg-b-0">
-      <label for="auth-input-oldpwd" class="col-sm-3 col-form-label">{{"当前密码"|T}}:</label>
+      <label for="auth-input-oldpwd" class="col-sm-3 col-form-label">{{"当前密码"|$.T}}:</label>
       <div class="col-sm-8">
         <div class="input-group">
         <input type="password" class="form-control" name="oldPwd" id="auth-input-oldpwd" value="">
         <input type="hidden" name="authType" value="password">
         </div>
-        <small id="auth-oldpwd-help" class="form-text text-muted">{{"我们需要验证您的旧密码以确认您的身份"|T}}</small>
+        <small id="auth-oldpwd-help" class="form-text text-muted">{{"我们需要验证您的旧密码以确认您的身份"|$.T}}</small>
       </div>
     </div>
 </form>
 {{- else -}}
 <ul class="nav nav-outline nav-gray d-block d-sm-flex justify-content-center mg-b-10" role="tablist">
   {{- if eq $customer.EmailBind "Y" -}}
-  <li class="nav-item"><a class="nav-link{{if eq $type `email`}} active{{end}}" href="javascript:;" data-type="email" data-object-name="{{`邮件`|T}}">{{"验证邮件"|T}}</a></li>
+  <li class="nav-item"><a class="nav-link{{if eq $type `email`}} active{{end}}" href="javascript:;" data-type="email" data-object-name="{{`邮件`|$.T}}">{{"验证邮件"|$.T}}</a></li>
   {{- end -}}
   {{- if eq $customer.MobileBind "Y" -}}
-  <li class="nav-item"><a class="nav-link{{if eq $type `mobile`}} active{{end}}" href="javascript:;" data-type="mobile" data-object-name="{{`短信`|T}}">{{"验证短信"|T}}</a></li>
+  <li class="nav-item"><a class="nav-link{{if eq $type `mobile`}} active{{end}}" href="javascript:;" data-type="mobile" data-object-name="{{`短信`|$.T}}">{{"验证短信"|$.T}}</a></li>
   {{- end -}}
 </ul>
 <form class="form form-label-right" id="authentication-form" method="POST">
@@ -32,7 +32,7 @@
       </button> -->
       <div class="d-flex align-items-center justify-content-start">
           <i class="icon ion-alert-circled alert-icon tx-size-32 mg-t-5 mg-xs-t-0"></i>
-          <span><strong>{{"提醒"|T}}</strong> {{T "今天还能再发%d次" Stored.remainCount}}</span>
+          <span><strong>{{"提醒"|$.T}}</strong> {{$.T "今天还能再发%d次" $.Stored.remainCount}}</span>
       </div><!-- d-flex -->
   </div>
   <div class="form-group row">
@@ -44,7 +44,7 @@
       </div>
     </div>
     {{else}}
-    <label for="auth-input-mobile" class="col-sm-3 col-form-label">{{"手机号"|T}}:</label>
+    <label for="auth-input-mobile" class="col-sm-3 col-form-label">{{"手机号"|$.T}}:</label>
     <div class="col-sm-9">
       <div class="input-group">
       <input type="text" class="form-control-plaintext" name="mobile" id="auth-input-mobile" value="{{$customer.Mobile}}" readonly="readonly">
@@ -53,10 +53,10 @@
     {{end}}
   </div>
   <div class="form-group row">
-    <label for="auth-input-captcha" class="col-sm-3 col-form-label">{{"图形验证码"|T}}:</label>
+    <label for="auth-input-captcha" class="col-sm-3 col-form-label">{{"图形验证码"|$.T}}:</label>
     <div class="col-sm-9">
       <div class="input-group">
-      <input id="auth-input-captcha" type="text" placeholder="{{"验证码"|T}}" value="{{Form "code"}}" name="code" required="required" title="{{"验证码"|T}}" class="form-control tx-size-14 pd-y-12 bd-color-gray-lighter">
+      <input id="auth-input-captcha" type="text" placeholder="{{"验证码"|$.T}}" value="{{$.Form "code"}}" name="code" required="required" title="{{"验证码"|$.T}}" class="form-control tx-size-14 pd-y-12 bd-color-gray-lighter">
       <span class="input-group-addon pd-0">{{CaptchaForm}}</span>
       </div>
     </div>

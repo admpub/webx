@@ -1,9 +1,9 @@
 {{Extend "layout"}}
-{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "title"}}{{$.Stored.title}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li><a href="{{BackendURL}}/official/customer/level/index">{{"客户等级"|T}}</a></li>
-<li class="active">{{Stored.title}}</li>
+<li><a href="{{BackendURL}}/official/customer/level/index">{{"客户等级"|$.T}}</a></li>
+<li class="active">{{$.Stored.title}}</li>
 {{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.uploadPreviewer/css/jquery.uploadPreviewer.min.css?t={{BuildTime}}" type="text/css" />
@@ -16,14 +16,14 @@
     <div class="col-md-12">
         <div class="block-flat">
           <div class="header">							
-            <h3>{{Stored.title}}</h3>
+            <h3>{{$.Stored.title}}</h3>
           </div>
           <div class="content">
               <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"等级组"|T}}</label>
-                <div class="col-sm-8">{{$group := Form `group` `base`}}
-                  {{range $k,$v := Stored.groupList}}
+                <label class="col-sm-2 control-label">{{"等级组"|$.T}}</label>
+                <div class="col-sm-8">{{$group := $.Form `group` `base`}}
+                  {{range $k,$v := $.Stored.groupList}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="{{$v.K}}" name="group" id="group-{{$v.K}}" {{- if or (and (not $group) (eq $v.K `base`)) (eq $group $v.K)}} checked="checked" {{end}}>
                     <label for="group-{{$v.K}}">{{$v.V}}</label>
@@ -32,62 +32,62 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"等级名称"|T}}</label>
+                <label class="col-sm-2 control-label">{{"等级名称"|$.T}}</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" required name="name" value="{{Form `name`}}">
+                    <input type="text" class="form-control" required name="name" value="{{$.Form `name`}}">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"简称"|T}}</label>
+                <label class="col-sm-2 control-label">{{"简称"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="short" value="{{Form `short`}}" maxlength="10" placeholder="">
-                    <div class="help-block">{{"等级简称"|T}}</div>
+                    <input type="text" class="form-control" name="short" value="{{$.Form `short`}}" maxlength="10" placeholder="">
+                    <div class="help-block">{{"等级简称"|$.T}}</div>
                 </div>
-                <label class="col-sm-2 control-label">{{"分值"|T}}</label>
+                <label class="col-sm-2 control-label">{{"分值"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="number" class="form-control" name="score" value="{{Form `score`}}" step="1" placeholder="">
-                    <div class="help-block">{{"分值越大等级越高"|T}}</div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"前景色"|T}}</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" name="color" value="{{Form `color`}}" placeholder="" id="inputColor" style="color:{{Form `color`}};background-color:{{Form `bgcolor`}};">
-                </div>
-                <label class="col-sm-2 control-label">{{"背景色"|T}}</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" name="bgcolor" value="{{Form `bgcolor`}}" placeholder="" id="inputBgColor" style="color:{{Form `color`}};background-color:{{Form `bgcolor`}};">
+                    <input type="number" class="form-control" name="score" value="{{$.Form `score`}}" step="1" placeholder="">
+                    <div class="help-block">{{"分值越大等级越高"|$.T}}</div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"升级积分"|T}}</label>
+                <label class="col-sm-2 control-label">{{"前景色"|$.T}}</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="color" value="{{$.Form `color`}}" placeholder="" id="inputColor" style="color:{{$.Form `color`}};background-color:{{$.Form `bgcolor`}};">
+                </div>
+                <label class="col-sm-2 control-label">{{"背景色"|$.T}}</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="bgcolor" value="{{$.Form `bgcolor`}}" placeholder="" id="inputBgColor" style="color:{{$.Form `color`}};background-color:{{$.Form `bgcolor`}};">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"升级积分"|$.T}}</label>
                 <div class="col-sm-3">
                   <span class="input-group">
-                    <input type="number" class="form-control" name="integralMin" value="{{Form `integralMin`}}" placeholder="">
-                    <span class="input-group-addon">{{`至`|T}}</span>
-                    <input type="number" class="form-control" name="integralMax" value="{{Form `integralMax`}}" placeholder="">
+                    <input type="number" class="form-control" name="integralMin" value="{{$.Form `integralMin`}}" placeholder="">
+                    <span class="input-group-addon">{{`至`|$.T}}</span>
+                    <input type="number" class="form-control" name="integralMax" value="{{$.Form `integralMax`}}" placeholder="">
                   </span>
                 </div>
-                <label class="col-sm-2 control-label">{{"升级价格"|T}}</label>
+                <label class="col-sm-2 control-label">{{"升级价格"|$.T}}</label>
                 <div class="col-sm-3">
                   <span class="input-group">
-                    <input type="number" class="form-control" name="price" value="{{Form `price`}}" placeholder="">
-                    <span class="input-group-addon">{{`元`|T}}</span>
+                    <input type="number" class="form-control" name="price" value="{{$.Form `price`}}" placeholder="">
+                    <span class="input-group-addon">{{`元`|$.T}}</span>
                   </span>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"图标类名"|T}}</label>
+                <label class="col-sm-2 control-label">{{"图标类名"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="iconClass" value="{{Form `iconClass`}}" placeholder="fa fa-star">
+                    <input type="text" class="form-control" name="iconClass" value="{{$.Form `iconClass`}}" placeholder="fa fa-star">
                 </div>
-                <label class="col-sm-2 control-label">{{"图标图片"|T}}</label>
+                <label class="col-sm-2 control-label">{{"图标图片"|$.T}}</label>
                 <div class="col-sm-3">
-                  <span class="input-group">{{$image := Form `iconImage`}}
+                  <span class="input-group">{{$image := $.Form `iconImage`}}
                     <span class="input-group-btn{{if not $image}} hidden{{end}}" id="imagePreviewBtn">
-                      <a class="btn btn-default no-padding" href="{{$image}}" target="_blank" data-toggle="tooltip" title="{{`查看图片`|T}}"><img src="{{$image}}" class="scale" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_30.png';" /></a>
+                      <a class="btn btn-default no-padding" href="{{$image}}" target="_blank" data-toggle="tooltip" title="{{`查看图片`|$.T}}"><img src="{{$image}}" class="scale" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_30.png';" /></a>
                     </span>
-                    <input type="text" class="form-control" name="iconImage" value="{{Form `iconImage`}}" placeholder="" id="inputImage">
+                    <input type="text" class="form-control" name="iconImage" value="{{$.Form `iconImage`}}" placeholder="" id="inputImage">
                     <label class="input-group-btn">
                       <input type="file" id="iconImageFile" style="width:70px" />
                     </label>
@@ -96,38 +96,38 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"说明"|T}}</label>
+                <label class="col-sm-2 control-label">{{"说明"|$.T}}</label>
                 <div class="col-sm-8">
-                  <textarea class="form-control" name="description" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-validation-threshold="10">{{Form "description"}}</textarea>
+                  <textarea class="form-control" name="description" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-validation-threshold="10">{{$.Form "description"}}</textarea>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{`是否禁用`|T}}</label>
-                <div class="col-sm-8">{{$v := Form `disabled` `N`}}
+                <label class="col-sm-2 control-label">{{`是否禁用`|$.T}}</label>
+                <div class="col-sm-8">{{$v := $.Form `disabled` `N`}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="Y" name="disabled" id="disabled-Y" {{- if eq $v "Y"}} checked="checked" {{end}}>
-                    <label for="disabled-Y">{{`禁用`|T}}</label>
+                    <label for="disabled-Y">{{`禁用`|$.T}}</label>
                   </div>
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="N" name="disabled" id="disabled-N" {{- if eq $v "N"}} checked="checked" {{end}}>
-                    <label for="disabled-N">{{`启用`|T}}</label>
+                    <label for="disabled-N">{{`启用`|$.T}}</label>
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"客户角色"|T}}</label>
+                <label class="col-sm-2 control-label">{{"客户角色"|$.T}}</label>
                 <div class="col-sm-8">
                   <select id="select2roles" name="roleIds" multiple="multiple">
-                    {{range $k, $v := Stored.roleList}}
-                    <option value="{{$v.Id}}"{{if isChecked $v.Id}} selected="selected"{{end}}>{{$v.Name}}</option>
+                    {{range $k, $v := $.Stored.roleList}}
+                    <option value="{{$v.Id}}"{{if call $.Func.isChecked $v.Id}} selected="selected"{{end}}>{{$v.Name}}</option>
                     {{end}}
                   </select>
                 </div>
               </div>
               <div class="form-group form-submit-group">
 									<div class="col-sm-9 col-sm-offset-2">
-									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
-									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|$.T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|$.T}}</button>
 									</div>
 							</div>
             </form>

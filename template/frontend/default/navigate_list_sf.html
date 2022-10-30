@@ -30,5 +30,5 @@
         </a></li>
     {{- end -}}
 {{- else -}}
-        <li><a href="{{FrontendURL}}/" class="nav-link{{if eq URL.Path `/`}} active{{end}}">{{"首页"|T}}</a></li>
+        <li><a href="{{FrontendURL}}/" class="nav-link{{if eq $.URL.Path `/`}} active{{end}}">{{"首页"|$.T}}</a></li>
 {{- end -}}{{/Strip}}

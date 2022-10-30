@@ -1,17 +1,17 @@
 {{Strip}}{{Extend "#default#base"}}
-{{Block "title"}}{{"验证账号"|T}}{{/Block}}
+{{Block "title"}}{{"验证账号"|$.T}}{{/Block}}
 {{Block "bodyAttr"}} class="bg-white tx-size-sm ht-100p pos-relative"{{/Block}}
 {{Block "body"}}
     {{Include "#default#headsimple"}}
     <div class="ht-100v wd-100p d-flex align-items-center justify-content-center pd-md-t-70 pd-x-20">
       <div class="card pd-25 pd-md-40 rounded-0 wd-450">
-        <h5 class="tx-size-md-32 tx-gray-dark tx-center">{{"验证账号"|T}}</h5>
-        <p class="tx-size-12 tx-size-md-14 mg-b-30 tx-center">{{T "请输入我们发送到您邮箱中的%d位数字的验证码。" 6}} {{"没有收到验证码？"|T}} <a href="">{{"重发邮件"|T}}</a></p>
+        <h5 class="tx-size-md-32 tx-gray-dark tx-center">{{"验证账号"|$.T}}</h5>
+        <p class="tx-size-12 tx-size-md-14 mg-b-30 tx-center">{{$.T "请输入我们发送到您邮箱中的%d位数字的验证码。" 6}} {{"没有收到验证码？"|$.T}} <a href="">{{"重发邮件"|$.T}}</a></p>
         <div class="form-group">
-          <input class="form-control tx-size-sm" placeholder="{{"输入验证码"|T}}" type="text">
+          <input class="form-control tx-size-sm" placeholder="{{"输入验证码"|$.T}}" type="text">
         </div><!-- form-group -->
-        <button class="btn btn-inverse">{{"验证账号"|T}}</button>
-        <p class="tx-size-xs mg-t-30 mg-b-0 tx-center">{{"无法获取"|T}}? <a href="{{FrontendURL}}/sign_up">{{"换一个账号登录"|T}}</a></p>
+        <button class="btn btn-inverse">{{"验证账号"|$.T}}</button>
+        <p class="tx-size-xs mg-t-30 mg-b-0 tx-center">{{"无法获取"|$.T}}? <a href="{{FrontendURL}}/sign_up">{{"换一个账号登录"|$.T}}</a></p>
       </div><!-- card -->
     </div><!-- container -->
     {{Include "#default#footer"}}

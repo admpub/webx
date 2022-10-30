@@ -1,44 +1,44 @@
 {{Strip}}{{Extend "#default#base"}}
-{{Block "title"}}{{"找回密码"|T}}{{/Block}}
+{{Block "title"}}{{"找回密码"|$.T}}{{/Block}}
 {{Block "bodyAttr"}} class="bg-superlight tx-size-sm ht-100p pos-relative"{{/Block}}
 {{Block "body"}}
     {{Include "#default#headsimple"}}
     <div class="ht-100v wd-100p d-flex align-items-center justify-content-center pd-md-t-70 pd-x-20">
       <div class="card pd-y-30 pd-x-25 rounded-0 wd-450">
-        <h5 class="tx-size-md-32 tx-gray-dark tx-center">{{"找回密码"|T}}</h5>
-        <p class="tx-size-12 tx-size-md-14 mg-b-30 tx-center">{{T "请输入您收到的%d位数字的验证码。" Stored.verifyCodeLength}}</p>
+        <h5 class="tx-size-md-32 tx-gray-dark tx-center">{{"找回密码"|$.T}}</h5>
+        <p class="tx-size-12 tx-size-md-14 mg-b-30 tx-center">{{$.T "请输入您收到的%d位数字的验证码。" $.Stored.verifyCodeLength}}</p>
           <form id="sign-in-form" onsubmit="resetPassword(this,'{{GetNextURL}}');return false;">
           <div class="form-group">
             <span class="input-group">
-                <span class="input-group-addon bg-white bd-r-0">{{`用户名`|T}}</span>
-                <input class="form-control tx-size-sm" id="recoverBy" name="name" value="{{Form `name`}}" placeholder="{{`输入用户名`|T}}" type="text" required="required" autofocus="autofocus">
+                <span class="input-group-addon bg-white bd-r-0">{{`用户名`|$.T}}</span>
+                <input class="form-control tx-size-sm" id="recoverBy" name="name" value="{{$.Form `name`}}" placeholder="{{`输入用户名`|$.T}}" type="text" required="required" autofocus="autofocus">
             </span>
           </div><!-- form-group -->
-          <input type="hidden" id="recvType" name="type" value="{{Form `type`}}">
-          <input type="hidden" id="recvAccount" name="account" value="{{Form `account`}}">
+          <input type="hidden" id="recvType" name="type" value="{{$.Form `type`}}">
+          <input type="hidden" id="recvAccount" name="account" value="{{$.Form `account`}}">
           <input type="hidden" name="op" value="modifyPassword">
           <div class="form-group">
               <span class="input-group">
-                <span class="input-group-addon bg-white bd-r-0">{{`验证码`|T}}</span>
-                  <input class="form-control tx-size-sm" name="vcode" value="{{Form `vcode`}}" placeholder="{{`输入接收到的验证码`|T}}" type="text" required="required">
-                  <a href="javascript:;" class="btn btn-primary input-group-btn" onclick="openForgotModal(this)" data-submit-url="{{FrontendURL}}/forgot?op=sendCode&next={{GetNextURL}}" data-form-tmpl="#tmplReceiveRecoverCode" data-name-sync="#recoverBy">{{`获取验证码`|T}}</a>
+                <span class="input-group-addon bg-white bd-r-0">{{`验证码`|$.T}}</span>
+                  <input class="form-control tx-size-sm" name="vcode" value="{{$.Form `vcode`}}" placeholder="{{`输入接收到的验证码`|$.T}}" type="text" required="required">
+                  <a href="javascript:;" class="btn btn-primary input-group-btn" onclick="openForgotModal(this)" data-submit-url="{{FrontendURL}}/forgot?op=sendCode&next={{GetNextURL}}" data-form-tmpl="#tmplReceiveRecoverCode" data-name-sync="#recoverBy">{{`获取验证码`|$.T}}</a>
               </span>
           </div><!-- form-group -->
           <div class="form-group">
             <span class="input-group">
-                <span class="input-group-addon bg-white bd-r-0">{{`新密码`|T}}</span>
-                <input class="form-control tx-size-sm" name="password" value="{{Form `password`}}" placeholder="{{`输入新密码`|T}}" type="password" required="required">
+                <span class="input-group-addon bg-white bd-r-0">{{`新密码`|$.T}}</span>
+                <input class="form-control tx-size-sm" name="password" value="{{$.Form `password`}}" placeholder="{{`输入新密码`|$.T}}" type="password" required="required">
             </span>
           </div><!-- form-group -->
           <div class="form-group">
             <span class="input-group">
-                <span class="input-group-addon bg-white bd-r-0">{{`新密码`|T}}</span>
-                <input class="form-control tx-size-sm" name="repassword" value="{{Form `repassword`}}" placeholder="{{`确认新密码`|T}}" type="password" required="required">
+                <span class="input-group-addon bg-white bd-r-0">{{`新密码`|$.T}}</span>
+                <input class="form-control tx-size-sm" name="repassword" value="{{$.Form `repassword`}}" placeholder="{{`确认新密码`|$.T}}" type="password" required="required">
             </span>
           </div><!-- form-group -->
-            <button class="btn btn-inverse wd-100p-force" type="submit">{{"修改密码"|T}}</button>
+            <button class="btn btn-inverse wd-100p-force" type="submit">{{"修改密码"|$.T}}</button>
           </form>
-        <p class="tx-size-xs mg-t-30 mg-b-0 tx-center">{{"无法获取"|T}}? <a href="{{WithNextURL Stored.signInURL}}">{{"换一个账号登录"|T}}</a> {{`或`|T}} <a href="{{WithNextURL Stored.signUpURL}}">{{"注册一个新账号"|T}}</a></p>
+        <p class="tx-size-xs mg-t-30 mg-b-0 tx-center">{{"无法获取"|$.T}}? <a href="{{WithNextURL $.Stored.signInURL}}">{{"换一个账号登录"|$.T}}</a> {{`或`|$.T}} <a href="{{WithNextURL $.Stored.signUpURL}}">{{"注册一个新账号"|$.T}}</a></p>
       </div><!-- card -->
     </div><!-- container -->
     {{Include "#default#footer"}}
@@ -47,19 +47,19 @@
 <script type="text/template" id="tmplReceiveRecoverCode">
     <div class="form-group">
         <span class="input-group">
-            <span class="input-group-addon bg-white bd-r-0 wd-100">{{`用户名`|T}}</span>
-            <input class="form-control tx-size-sm" name="name" value="{{Form `name`}}" placeholder="{{`输入用户名`|T}}" type="text" required="required">
+            <span class="input-group-addon bg-white bd-r-0 wd-100">{{`用户名`|$.T}}</span>
+            <input class="form-control tx-size-sm" name="name" value="{{$.Form `name`}}" placeholder="{{`输入用户名`|$.T}}" type="text" required="required">
         </span>
     </div><!-- form-group -->
-    <div class="form-group mg-b-0">{{$type := Form `type`}}
+    <div class="form-group mg-b-0">{{$type := $.Form `type`}}
         <div class="input-group">
             <span class="input-group-static wd-100 tx-center">
                 <select name="type" id="receiverType" class="form-control wd-100p-force">
-                    {{- range $key, $rtype := Stored.recvTypes -}}
+                    {{- range $key, $rtype := $.Stored.recvTypes -}}
                     <option value="{{$rtype.Key}}"{{if eq $type $rtype.Key}} selected="selected"{{end}}>{{$rtype.Label}}</option>
                     {{- end -}}
                 </select>
-            </span>{{$account := Form `account`}}{{$recvType := Stored.recvType}}
+            </span>{{$account := $.Form `account`}}{{$recvType := $.Stored.recvType}}
             <input class="form-control tx-size-sm" id="receiverAccount" name="account" value="{{$account}}" placeholder="{{if $recvType}}{{$recvType.Placeholder}}{{end}}" type="text" required="required">
         </div>
     </div><!-- form-group -->

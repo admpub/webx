@@ -37,5 +37,5 @@
   </a></li>
 {{- end -}}
 {{- else -}}
-<li class="nav-item"><a href="{{FrontendURL}}/" class="nav-link{{if eq URL.Path "/"}} active{{end}}">{{"首页"|T}}</a></li>
+<li class="nav-item"><a href="{{FrontendURL}}/" class="nav-link{{if eq $.URL.Path "/"}} active{{end}}">{{"首页"|$.T}}</a></li>
 {{- end -}}{{/Strip}}

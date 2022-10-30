@@ -1,9 +1,9 @@
-{{- $currentDir := Form `dir` -}}
-{{- range $k, $v := Stored.dirs -}}
+{{- $currentDir := $.Form `dir` -}}
+{{- range $k, $v := $.Stored.dirs -}}
     <li class="primary-active"><!-- active -->
-        {{if $v.Embed}}<span class="badge-embed" title="{{`内置模板`|T}}">{{`内置`|T}}</span>{{end}}
+        {{if $v.Embed}}<span class="badge-embed" title="{{`内置模板`|$.T}}">{{`内置`|$.T}}</span>{{end}}
         {{- if $v.IsDir -}}
-        <a title="{{$v.Name}}" href="{{BackendURL}}/official/page/template_edit?name={{Form `name`}}&dir={{if $currentDir}}{{$currentDir}}/{{end}}{{$v.Name}}">
+        <a title="{{$v.Name}}" href="{{BackendURL}}/official/page/template_edit?name={{$.Form `name`}}&dir={{if $currentDir}}{{$currentDir}}/{{end}}{{$v.Name}}">
             <i class="fa fa-folder"></i>
             {{- $v.Name -}}
         </a>
@@ -20,4 +20,4 @@
         {{- end -}}
     </li>
 {{- end -}}
-<div class="text-center" style="color:#ccc"> - {{`没有了`|T}} -</div>
+<div class="text-center" style="color:#ccc"> - {{`没有了`|$.T}} -</div>

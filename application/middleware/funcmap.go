@@ -26,7 +26,6 @@ import (
 
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/mwutils"
-	"github.com/admpub/webx/application/middleware/sessdata"
 	"github.com/admpub/webx/application/model/official"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )
@@ -34,34 +33,6 @@ import (
 var TmplFuncGenerator = mwutils.TmplFuncGenerators{}
 
 func SetFunc(ctx echo.Context) error {
-	ctx.SetFunc(`Customer`, func() *dbschema.OfficialCustomer {
-		return Customer(ctx)
-	})
-	ctx.SetFunc(`CustomerDetail`, func() *modelCustomer.CustomerAndGroup {
-		return CustomerDetail(ctx)
-	})
-	ctx.SetFunc(`ImageProxyURL`, sessdata.ImageProxyURL)
-	ctx.SetFunc(`ResizeImageURL`, sessdata.ResizeImageURL)
-	ctx.SetFunc(`AbsoluteURL`, sessdata.AbsoluteURL)
-	ctx.SetFunc(`PictureHTML`, sessdata.PictureWithDefaultHTML)
-	ctx.SetFunc(`OutputContent`, sessdata.OutputContent)
-
-	m := dbschema.NewOfficialCommonNavigate(ctx)
-
-	ctx.SetFunc(`FrontendNav`, func(parentIDs ...uint) []*official.NavigateExt {
-		return navigateList(ctx, m, `default`, parentIDs...)
-	})
-
-	ctx.SetFunc(`CustomerNav`, func(parentIDs ...uint) []*official.NavigateExt {
-		return navigateList(ctx, m, `userCenter`, parentIDs...)
-	})
-
-	ctx.SetFunc(`Friendlink`, func(limit int, categoryIds ...uint) []*dbschema.OfficialCommonFriendlink {
-		m := official.NewFriendlink(ctx)
-		list, _ := m.ListShowAndRecord(limit, categoryIds...)
-		return list
-	})
-
 	TmplFuncGenerator.Apply(ctx)
 	return nil
 }
@@ -71,7 +42,7 @@ func CustomerDetail(c echo.Context) *modelCustomer.CustomerAndGroup {
 	return customerDetail
 }
 
-func navigateList(ctx echo.Context, m *dbschema.OfficialCommonNavigate, navType string, parentIDs ...uint) []*official.NavigateExt {
+func NavigateList(ctx echo.Context, m *dbschema.OfficialCommonNavigate, navType string, parentIDs ...uint) []*official.NavigateExt {
 	internalKey := `navigate.` + navType
 	nav, ok := ctx.Internal().Get(internalKey).([]*official.NavigateExt)
 	if !ok {

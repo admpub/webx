@@ -1,16 +1,16 @@
 {{Strip}}
-{{- $customer := Stored.info -}}
+{{- $customer := $.Stored.info -}}
 <div class="card-header pd-y-30 d-flex justify-content-between align-items-center bg-transparent">
     <div class="tx-size-xs tx-size-xs-14">
       <a href="{{FrontendURL}}/u/{{$customer.Id}}/followers" class="tx-gray mg-r-10"><span class="tx-inverse tx-semibold">{{$customer.Followers}}</span> Followers</a>
       <a href="{{FrontendURL}}/u/{{$customer.Id}}/following" class="tx-gray"><span class="tx-inverse tx-semibold">{{$customer.Following}}</span> Following</a>
     </div>
     <div class="hidden-xss-down">
-      <a href="{{FrontendURL}}/u/{{$customer.Id}}/msgsend" data-toggle="tooltip" title="{{`私信`|T}}" class="tx-gray mg-r-15 lh-1 d-inline-block"><i class="fa fa-envelope-o lh-1"></i></a>
+      <a href="{{FrontendURL}}/u/{{$customer.Id}}/msgsend" data-toggle="tooltip" title="{{`私信`|$.T}}" class="tx-gray mg-r-15 lh-1 d-inline-block"><i class="fa fa-envelope-o lh-1"></i></a>
       <div class="dropdown d-inline-block">  
           <a href="javascript:;" class="tx-gray lh-1" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h lh-1"></i></a>
           <div class="dropdown-menu dropdown-menu-right tx-size-13 rounded-top-0 shadow-base" aria-labelledby="dropdownMenuLink2">
-              <a class="dropdown-item" href="{{FrontendURL}}/u/{{$customer.Id}}/report">{{"举报"|T}}</a>
+              <a class="dropdown-item" href="{{FrontendURL}}/u/{{$customer.Id}}/report">{{"举报"|$.T}}</a>
           </div><!-- /.dropdown-menu -->
       </div><!-- /.dropdown -->
     </div>
@@ -18,13 +18,13 @@
   <div class="card-block tx-center">
     <div class="pos-relative tx-center">
       <div class="wd-100p pos-md-absolute t-neg-60">
-        <img src="{{if $customer.Avatar}}{{AddSuffix $customer.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="bg-info wd-72 ht-72 rounded-circle" alt="{{T `%s头像` $customer.Name}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_128.png';">
+        <img src="{{if $customer.Avatar}}{{AddSuffix $customer.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="bg-info wd-72 ht-72 rounded-circle" alt="{{$.T `%s头像` $customer.Name}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_128.png';">
       </div>
     </div><!-- pos-relative -->
     <h5 class="tx-size-xs-26 tx-size-md-32 mg-t-20 mg-md-t-40 mg-b-2 tx-inverse tx-bold">
       {{- $customer.Name -}}
     </h5>
-    <a href="javascript:;" onclick="follow(this)" data-following-uid="{{$customer.Id}}" data-i18n-following="{{`关注`|T}}" data-i18n-unfollow="{{`取消关注`|T}}" data-i18n-followed="{{`已关注`|T}}" class="btn btn-outline-primary btn-xs">{{"关注"|T}}</a>
+    <a href="javascript:;" onclick="follow(this)" data-following-uid="{{$customer.Id}}" data-i18n-following="{{`关注`|$.T}}" data-i18n-unfollow="{{`取消关注`|$.T}}" data-i18n-followed="{{`已关注`|$.T}}" class="btn btn-outline-primary btn-xs">{{"关注"|$.T}}</a>
     <p class="mg-b-10">
       {{- if $customer.Group -}}
       <span class="badge badge-info mg-r-5">{{$customer.Group.Name}}</span>

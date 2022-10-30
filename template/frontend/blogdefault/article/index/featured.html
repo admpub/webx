@@ -2,9 +2,9 @@
 <section class="featured-topics-wrapper section-padding">
     <div class="container">
         <div class="section-head">
-            <h2 class="heading-primary">{{`特色话题`|T}}</h2>
+            <h2 class="heading-primary">{{`特色话题`|$.T}}</h2>
             <a href="{{FrontendURL}}/articles" class="button button-minimal">
-                {{`查看全部`|T}}
+                {{`查看全部`|$.T}}
                 <span class="icon">
                     <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                 </span>
@@ -16,13 +16,13 @@
                 {{- range $k, $v := $relationList -}}
                 <div class="featured-topics-card {{- if $v.ImageOriginal}} has-card-thumb {{- end -}}">
                     {{- if $v.ImageOriginal -}}
-                    <a class="card-thumb bg-cover" style="background-image:url('{{$v.ImageOriginal}}')" href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}"></a>
+                    <a class="card-thumb bg-cover" style="background-image:url('{{$v.ImageOriginal}}')" href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}"></a>
                     {{- if $v.Category -}}
                     <span class="topic-category"> {{$v.Category.Name}} </span>
                     {{- end -}}
                     {{- end -}}
                     <div class="card-content">
-                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                             <h3 class="heading-secondary">{{$v.Title}}</h3>
                         </a>
                         <p class="body-text">
@@ -36,12 +36,12 @@
                                 {{- else if $v.User -}}
                                 <span>{{$v.User.Username}}</span>
                                 {{- else -}}
-                                <span>{{`未知`|T}}</span>
+                                <span>{{`未知`|$.T}}</span>
                                 {{- end -}}
                             </p>
                             <span class="post-date"> {{(Date $v.Created).Format `2006-01-02`}} </span>
                         </div>
-                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="button icon-button">
+                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="button icon-button">
                             <span class="icon">
                                 <i class="fas fa-chevron-right"></i>
                             </span>
@@ -54,10 +54,10 @@
                 <div class="featured-topic-slidebar">
                     <div class="sidebar-widget widget-categories">
                         <div class="gradient-bar mb-30"></div>
-                        <h3 class="heading-tertiary mb-20">{{`分类`|T}}</h3>
+                        <h3 class="heading-tertiary mb-20">{{`分类`|$.T}}</h3>
                         {{- $categoryList := categoryList 10 -}}
                         {{- range $k,$v := $categoryList -}}
-                        <a href="{{FrontendURL}}/articles{{Ext}}?categoryId={{$v.Id}}" class="cat-item-link">
+                        <a href="{{FrontendURL}}/articles{{$.Ext}}?categoryId={{$v.Id}}" class="cat-item-link">
                             <div class="cat-item">
                                 <div class="cat-thumb" style="background-image: url('{{if $v.Cover}}{{$v.Cover}}{{else}}{{AssetsXURL}}/blogdefault/img/blog/cat-1.png{{end}}')"></div>
                                 <p class="cat-name">

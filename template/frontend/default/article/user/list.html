@@ -4,10 +4,10 @@
 
 <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
-    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的文章"|T}}</h5>
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的文章"|$.T}}</h5>
     <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
-      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|T}}</a>
-      <span class="breadcrumb-item active">{{"我的文章"|T}}</span>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.T}}</a>
+      <span class="breadcrumb-item active">{{"我的文章"|$.T}}</span>
     </nav>
   </div>
 
@@ -18,28 +18,28 @@
       <div class="card-header">
         <a class="btn btn-inverse pull-right tx-white" href="{{FrontendURL}}/user/article/create">
           <i class="fa fa-plus"></i>
-          {{"投稿"|T}}
+          {{"投稿"|$.T}}
         </a>
-        {{- if gt (Formx `categoryId`).Uint 0 -}}
-        <a class="btn btn-info pull-right tx-white mg-r-5" href="{{FrontendURL}}/user/articles">{{"全部文章"|T}}</a>
+        {{- if gt ($.Formx `categoryId`).Uint 0 -}}
+        <a class="btn btn-info pull-right tx-white mg-r-5" href="{{FrontendURL}}/user/articles">{{"全部文章"|$.T}}</a>
         {{- end -}}
-        <h6 class="card-title tx-uppercase pd-y-10 tx-size-15 tx-poppins mg-b-0">{{"我的文章"|T}}</h6>
+        <h6 class="card-title tx-uppercase pd-y-10 tx-size-15 tx-poppins mg-b-0">{{"我的文章"|$.T}}</h6>
       </div><!-- card-header -->
       <div class="table-responsive">
       <table class="table table-hover">
-        <thead sort-current="{{Form `sort`}}">
+        <thead sort-current="{{$.Form `sort`}}">
           <tr>
             <th style="width:60px">&nbsp;</th>
-            <th>{{"文章标题"|T}}</th>
-            <th style="width:90px" sort="-views">{{"访问次数"|T}}</th>
-            <th class="tx-right" style="width:65px">{{"状态"|T}}</th>
-            <th style="width:90px">{{"评论"|T}}</th>
-            <th style="width:170px">{{"时间"|T}}</th>
-            <th class="tx-center" style="width:160px">{{"操作"|T}}</th>
+            <th>{{"文章标题"|$.T}}</th>
+            <th style="width:90px" sort="-views">{{"访问次数"|$.T}}</th>
+            <th class="tx-right" style="width:65px">{{"状态"|$.T}}</th>
+            <th style="width:90px">{{"评论"|$.T}}</th>
+            <th style="width:170px">{{"时间"|$.T}}</th>
+            <th class="tx-center" style="width:160px">{{"操作"|$.T}}</th>
           </tr>
         </thead>
         <tbody>
-          {{range $k, $v := Stored.list}}
+          {{range $k, $v := $.Stored.list}}
           <tr>
             <td class="pd-l-20">
                 <a href="{{FrontendURL}}/article/{{$v.Id}}" target="_blank"><img src="{{$v.Image|Default (AssetsXURL `/images/background/img442.jpg`)}}" onerror="this.onerror=null; this.src='{{AssetsXURL}}/images/background/img442.jpg';" class="wd-55 ht-55" alt="{{$v.Title}}"></a>
@@ -47,9 +47,9 @@
             <td>
               <a href="{{FrontendURL}}/article/{{$v.Id}}" target="_blank" class="tx-inverse tx-size-14 tx-medium">
                 {{- if eq $v.Display "Y" -}}
-                <span class="square-8 bg-success mg-r-5 rounded-circle" data-toggle="tooltip" title="{{`已发布`|T}}"></span>
+                <span class="square-8 bg-success mg-r-5 rounded-circle" data-toggle="tooltip" title="{{`已发布`|$.T}}"></span>
                 {{- else -}}
-                <span class="square-8 bg-danger mg-r-5 rounded-circle" data-toggle="tooltip" title="{{`待审核`|T}}"></span>
+                <span class="square-8 bg-danger mg-r-5 rounded-circle" data-toggle="tooltip" title="{{`待审核`|$.T}}"></span>
                 {{- end -}}
                 {{$v.Title}}
               </a>
@@ -68,24 +68,24 @@
               {{- end -}}
               </small>
               {{- end -}}
-              <br /><small><span class="label label-default label-xs" data-toggle="tooltip" title="{{`内容格式`|T}}: {{getContypeName $v.Contype}}">{{getContypeName $v.Contype}}</span></small>
+              <br /><small><span class="label label-default label-xs" data-toggle="tooltip" title="{{`内容格式`|$.T}}: {{call $.Func.getContypeName $v.Contype}}">{{call $.Func.getContypeName $v.Contype}}</span></small>
             </td>
             <td class="valign-middle">{{$v.Views}}</td>
-            <td class="valign-middle tx-right">{{if eq $v.Display "Y"}}<span class="tx-success">{{"已发布"|T}}</span>{{else}}<span class="tx-danger">{{"待审核"|T}}</span>{{end}}</td>
+            <td class="valign-middle tx-right">{{if eq $v.Display "Y"}}<span class="tx-success">{{"已发布"|$.T}}</span>{{else}}<span class="tx-danger">{{"待审核"|$.T}}</span>{{end}}</td>
             <td class="valign-middle">{{$v.Comments}}</td>
             <td class="valign-middle">
-              {{"创建"|T}}: {{(Date $v.Created).Format "2006-01-02 15:04:05"}}<br />
-              {{"修改"|T}}: {{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}
+              {{"创建"|$.T}}: {{(Date $v.Created).Format "2006-01-02 15:04:05"}}<br />
+              {{"修改"|$.T}}: {{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}
             </td>
             <td class="valign-middle tx-center">
               <div class="btn-group">
               <a href="{{FrontendURL}}/user/article/edit/{{$v.Id}}" class="btn btn-outline-primary btn-xs">
                 <i class="fa fa-edit"></i>
-                {{"修改"|T}}
+                {{"修改"|$.T}}
               </a>
-              <a href="{{FrontendURL}}/user/article/delete/{{$v.Id}}" class="btn btn-outline-danger btn-xs" onclick="return confirm('{{"确定要删除吗？"|T}}');">
+              <a href="{{FrontendURL}}/user/article/delete/{{$v.Id}}" class="btn btn-outline-danger btn-xs" onclick="return confirm('{{"确定要删除吗？"|$.T}}');">
                 <i class="fa fa-trash"></i>
-                {{"删除"|T}}
+                {{"删除"|$.T}}
               </a>
               </div><!-- /.btn-group -->
             </td>
@@ -95,7 +95,7 @@
       </table>
       </div><!-- table-responsive -->
       <div class="card-footer auto-bottom-float">
-        {{Stored.pagination.Render `#default#pagination`}}
+        {{$.Stored.pagination.Render `#default#pagination`}}
       </div><!-- card-footer -->
       
     </div><!-- card -->

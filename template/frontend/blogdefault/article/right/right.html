@@ -8,25 +8,25 @@
         </button>
         </form>
     </div>
-    <h3 class="heading-tertiary">{{`最近的文章`|T}}</h3>
+    <h3 class="heading-tertiary">{{`最近的文章`|$.T}}</h3>
     {{- $relationList := relationList 2 `-id` -}}
     {{- range $k, $v := $relationList -}}
     <div class="recent-post-card">
         {{- if $v.Image -}}
-        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="card-thumb bg-cover"><img class="card-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
+        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="card-thumb bg-cover"><img class="card-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
         {{- end -}}
         <div class="card-content">
             <div class="post-meta">
                 {{- if $v.Category -}}
                 <span class="meta-item"> {{$v.Category.Name}} </span>
                 {{- end -}}
-                <span class="meta-item"> {{(Date $v.Created).Format (T "2006年1月2日")}} </span>
+                <span class="meta-item"> {{(Date $v.Created).Format ($.T "2006年1月2日")}} </span>
                 <span class="meta-item">
                     <i class="fal fa-comment"></i>
                     {{$v.Comments}}
                 </span>
             </div>
-            <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+            <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                 <h3 class="heading-secondary">
                     {{$v.Title}}
                 </h3>
@@ -36,7 +36,7 @@
     {{- end -}}
     <!-- Widget category -->
     <div class="widget-categories">
-        <h3 class="footer-heading mb-20">{{`文章标签`|T}}</h3>
+        <h3 class="footer-heading mb-20">{{`文章标签`|$.T}}</h3>
         <div class="categories-tags">
             {{- range $k,$v := tagList -}}
             <a href="{{FrontendURL}}/articles?tag={{$v.Name}}" class="active"> {{$v.Name}} <sup>{{$v.Num}}</sup> </a>
@@ -64,20 +64,20 @@
 
     <!-- Widget popular post -->
     <div class="widget-popular-post mt-30">
-        <h3 class="heading-tertiary mb-20">{{`热门文章`|T}}</h3>
+        <h3 class="heading-tertiary mb-20">{{`热门文章`|$.T}}</h3>
         <!-- Cat item -->
         {{- $relationList := relationList 5 `-updated` -}}
         {{- range $k, $v := $relationList -}}
         <div class="widget-category">
             {{- if $v.Image -}}
-            <a class="cat-thumb bg-cover" href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}"><img class="cat-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
+            <a class="cat-thumb bg-cover" href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}"><img class="cat-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
             {{- end -}}
             <div class="cat-content">
-                <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                     <h4 class="cat-title">{{$v.Title}}</h4></a
                 >
                 <div class="cat-meta">
-                    <span class="post-date meta-item"> {{(Date $v.Created).Format (T "2006年1月2日")}} </span>
+                    <span class="post-date meta-item"> {{(Date $v.Created).Format ($.T "2006年1月2日")}} </span>
                     <span class="meta-item comment">
                         <i class="fal fa-comment"></i>
                         {{$v.Comments}}

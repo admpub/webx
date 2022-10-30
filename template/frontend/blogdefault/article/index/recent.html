@@ -2,9 +2,9 @@
 <section class="recent-post-wrapper section-padding">
     <div class="container">
         <div class="section-head">
-            <h2 class="heading-primary">{{`最近文章`|T}}</h2>
+            <h2 class="heading-primary">{{`最近文章`|$.T}}</h2>
             <a href="{{FrontendURL}}/articles" class="button button-minimal">
-                {{`查看全部`|T}}
+                {{`查看全部`|$.T}}
                 <span class="icon">
                     <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                 </span>
@@ -16,7 +16,7 @@
                 {{- $list := queryList `` 2 4 -}}
                 {{- range $k, $v := $list -}}
                 <div class="recent-post-card">
-                    <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                    <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                         <img class="card-thumb bg-cover" src="{{if $v.ImageOriginal}}{{$v.ImageOriginal}}{{else}}{{AssetsXURL}}/images/placeholder/default-sm.jpg{{end}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}" />
                     </a>
                     <div class="card-content">
@@ -30,7 +30,7 @@
                                 {{$v.Comments}}
                             </span>
                         </div>
-                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                             <h3 class="heading-secondary">
                                 {{$v.Title}}
                             </h3>
@@ -59,7 +59,7 @@
                     <div class="col-md-6">
                         <!-- Post item -->
                         <div class="main-post-card">
-                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}"><img class="card-thumb bg-cover" src="{{if $v.ImageOriginal}}{{$v.ImageOriginal}}{{else}}{{AssetsXURL}}/images/placeholder/default-sm.jpg{{end}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
+                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}"><img class="card-thumb bg-cover" src="{{if $v.ImageOriginal}}{{$v.ImageOriginal}}{{else}}{{AssetsXURL}}/images/placeholder/default-sm.jpg{{end}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
                             {{- if $v.Category -}}
                             <span class="category"> {{$v.Category.Name}} </span>
                             {{- end -}}
@@ -75,7 +75,7 @@
                                             {{- else if $v.User -}}
                                             <span>{{$v.User.Username}}</span>
                                             {{- else -}}
-                                            <span>{{`未知`|T}}</span>
+                                            <span>{{`未知`|$.T}}</span>
                                             {{- end -}}
                                         </p>
                                     </div>
@@ -84,12 +84,12 @@
                                         <i class="fal fa-share-alt"></i>
                                     </span>
                                 </div>
-                                <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                                <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                                     <h3 class="heading-tertiary">
                                         {{$v.Title}}
                                     </h3>
                                 </a>
-                                <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="button">
+                                <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="button">
                                     <span>
                                         <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                                     </span>

@@ -6,7 +6,7 @@
               <div class="panel-heading">
                 <h4 class="panel-title no-margin">
                   <a class="collapsed" data-toggle="collapse" data-parent="#cache-adapterconfig-accordion" href="#cache-adapterconfig-collapseOne">
-                      <i class="fa fa-angle-right"></i> {{`Redis`|T}}
+                      <i class="fa fa-angle-right"></i> {{`Redis`|$.T}}
                   </a>
                 </h4>
               </div>
@@ -14,14 +14,14 @@
                 <div class="panel-body">
                     <pre>network=tcp,addr=:6379,password=123456,db=0,pool_size=100,idle_timeout=180,hset_name=Cache,prefix=cache:</pre>
                     <ol>
-                        <li><code>{{"network"|T}}</code> {{`网络类型`}}</li>
-                        <li><code>{{"addr"|T}}</code> {{`连接地址`|T}} ([ip]:port)</li>
-                        <li><code>{{"password"|T}}</code> {{`密码`|T}}</li>
-                        <li><code>{{"db"|T}}</code> {{`数据库`|T}}</li>
-                        <li><code>{{"pool_size"|T}}</code> {{`连接池大小`|T}}</li>
-                        <li><code>{{"idle_timeout"|T}}</code> {{`空闲超时时长(秒)`|T}}</li>
-                        <li><code>{{"hset_name"|T}}</code> {{`集合名称`|T}}</li>
-                        <li><code>{{"prefix"|T}}</code> {{`前缀`|T}}</li>
+                        <li><code>{{"network"|$.T}}</code> {{`网络类型`}}</li>
+                        <li><code>{{"addr"|$.T}}</code> {{`连接地址`|$.T}} ([ip]:port)</li>
+                        <li><code>{{"password"|$.T}}</code> {{`密码`|$.T}}</li>
+                        <li><code>{{"db"|$.T}}</code> {{`数据库`|$.T}}</li>
+                        <li><code>{{"pool_size"|$.T}}</code> {{`连接池大小`|$.T}}</li>
+                        <li><code>{{"idle_timeout"|$.T}}</code> {{`空闲超时时长(秒)`|$.T}}</li>
+                        <li><code>{{"hset_name"|$.T}}</code> {{`集合名称`|$.T}}</li>
+                        <li><code>{{"prefix"|$.T}}</code> {{`前缀`|$.T}}</li>
                     </ol>
                 </div>
               </div>
@@ -30,14 +30,14 @@
               <div class="panel-heading">
                 <h4 class="panel-title no-margin">
                   <a class="collapsed" data-toggle="collapse" data-parent="#cache-adapterconfig-accordion" href="#cache-adapterconfig-collapseTwo">
-                    <i class="fa fa-angle-right"></i> {{`File`|T}}
+                    <i class="fa fa-angle-right"></i> {{`File`|$.T}}
                   </a>
                 </h4>
               </div>
               <div id="cache-adapterconfig-collapseTwo" class="panel-collapse collapse">
                 <div class="panel-body">
                     <pre>./data/cache/temp</pre>
-                    {{`指定缓存文件的保存路径`|T}}
+                    {{`指定缓存文件的保存路径`|$.T}}
                 </div>
               </div>
             </div>

@@ -1,6 +1,8 @@
-{{- range $key, $nav := Stored.topNavigate -}}
-{{Include "official/customer/role/edit_perm_page_list" $nav}}
+{{- range $key, $nav := $.Stored.topNavigate -}}
+{{- $.Set `navigateItem` $nav -}}
+{{Include "official/customer/role/edit_perm_page_list" $}}
 {{- end -}}
-{{- range $key, $nav := Stored.leftNavigate -}}
-{{Include "official/customer/role/edit_perm_page_list" $nav}}
+{{- range $key, $nav := $.Stored.leftNavigate -}}
+{{- $.Set `navigateItem` $nav -}}
+{{Include "official/customer/role/edit_perm_page_list" $}}
 {{- end -}}

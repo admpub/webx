@@ -1,5 +1,5 @@
 {{Extend "layout"}}
-{{Block "title"}}{{"发送消息"|T}}{{/Block}}
+{{Block "title"}}{{"发送消息"|$.T}}{{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" type="text/css" href="{{AssetsURL}}/js/selectpage/selectpage.css?t={{BuildTime}}" />
 {{/Block}}
@@ -10,14 +10,14 @@
 {{Block "main"}}
 <div class="block-flat no-margin no-border">
   <div class="header">							
-    <h3>{{"发送消息"|T}}</h3>
+    <h3>{{"发送消息"|$.T}}</h3>
   </div>
   <div class="content">
     <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="" id="message-send-form">
-    {{if gt Stored.replyId 0}}
-    {{$data := Stored.replyMsg}}
+    {{if gt $.Stored.replyId 0}}
+    {{$data := $.Stored.replyMsg}}
     <div class="form-group">
-      <label class="col-sm-2 control-label">{{"回复消息"|T}}</label>
+      <label class="col-sm-2 control-label">{{"回复消息"|$.T}}</label>
       <div class="col-sm-9">
         <blockquote>
           <div id="message-content">
@@ -27,21 +27,21 @@
           {{- OutputContent $data.Content $data.Contype -}}
           {{- end -}}
           </div>
-          <small>{{Stored.replySender}}</small>
+          <small>{{$.Stored.replySender}}</small>
         </blockquote>
       </div>
     </div>
     {{else}}
     <div class="form-group">
-      <label class="col-sm-2 control-label">{{"收信人"|T}}</label>
+      <label class="col-sm-2 control-label">{{"收信人"|$.T}}</label>
       <div class="col-sm-9">
-        {{$recipientId := (Formx "recipientId").Uint64}}
-        {{$recipientType := Form "recipientType"}}
+        {{$recipientId := ($.Formx "recipientId").Uint64}}
+        {{$recipientType := $.Form "recipientType"}}
         <div class="input-group no-margin-bottom">
             <span class="input-group-btn">
                 <select name="recipientType" id="recipientType" class="form-control" style="width:100px">
-                    <option value="user"{{if eq $recipientType "user"}} selected="selected"{{end}}>{{"后台用户"|T}}</option>
-                    <option value="customer"{{if eq $recipientType "customer"}} selected="selected"{{end}}>{{"前台客户"|T}}</option>
+                    <option value="user"{{if eq $recipientType "user"}} selected="selected"{{end}}>{{"后台用户"|$.T}}</option>
+                    <option value="customer"{{if eq $recipientType "customer"}} selected="selected"{{end}}>{{"前台客户"|$.T}}</option>
                 </select>
             </span>
             <input type="text" name="recipientId" id="recipientId" data-init="{{$recipientId}}" value="{{$recipientId}}" class="form-control">
@@ -50,30 +50,30 @@
     </div>
     {{end}}
     <div class="form-group">
-      <label class="col-sm-2 control-label">{{"消息标题"|T}}</label>
+      <label class="col-sm-2 control-label">{{"消息标题"|$.T}}</label>
       <div class="col-sm-9">
-          <input type="text" class="form-control" required name="title" value="{{Form "title"}}">
+          <input type="text" class="form-control" required name="title" value="{{$.Form "title"}}">
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-2 control-label">{{"消息内容"|T}}</label>
+      <label class="col-sm-2 control-label">{{"消息内容"|$.T}}</label>
       <div class="col-sm-9">
-        <textarea name="content" id="content" placeholder="{{`消息内容`|T}}" action="{{BackendUploadURL ``}}">{{Form "content"}}</textarea>
-        <input type="hidden" name="contentType" value="{{Form `contentType` `html`}}">
-        <input type="hidden" name="replyId" value="{{Stored.replyId}}">
+        <textarea name="content" id="content" placeholder="{{`消息内容`|$.T}}" action="{{BackendUploadURL ``}}">{{$.Form "content"}}</textarea>
+        <input type="hidden" name="contentType" value="{{$.Form `contentType` `html`}}">
+        <input type="hidden" name="replyId" value="{{$.Stored.replyId}}">
       </div>
     </div>
       <div class="form-group form-submit-group">
         <div class="col-sm-2 control-label">
-          {{$v := Form "encrypted"}}
+          {{$v := $.Form "encrypted"}}
           <div class="checkbox checkbox-success">
             <input type="checkbox" value="Y" name="encrypted" id="encrypted-Y"{{if eq $v "Y"}} checked{{end}}> 
-            <label class="text-left" for="encrypted-Y">{{"加密"|T}}</label>
+            <label class="text-left" for="encrypted-Y">{{"加密"|$.T}}</label>
           </div>
         </div>
 				<div class="col-sm-9">
-					<button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-share"></i> {{"发送"|T}}</button>
-					<button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+					<button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-share"></i> {{"发送"|$.T}}</button>
+					<button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|$.T}}</button>
 				</div>
 			</div>
     </form>

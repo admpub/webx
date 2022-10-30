@@ -1,70 +1,70 @@
 {{Extend "layout"}}
-{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "title"}}{{$.Stored.title}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li><a href="{{BackendURL}}/official/short_url/index">{{"短链接管理"|T}}</a></li>
-<li class="active">{{Stored.title}}</li>
+<li><a href="{{BackendURL}}/official/short_url/index">{{"短链接管理"|$.T}}</a></li>
+<li class="active">{{$.Stored.title}}</li>
 {{/Block}}
 {{Block "main"}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat">
           <div class="header">							
-            <h3>{{Stored.title}}</h3>
+            <h3>{{$.Stored.title}}</h3>
           </div>
           <div class="content">
               <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"网址"|T}}</label>
+                <label class="col-sm-2 control-label">{{"网址"|$.T}}</label>
                 <div class="col-sm-8">
-                    <input type="url" class="form-control" name="longUrl" id="input-longUrl" value="{{Form `longUrl`}}" required placeholder="https://...">
+                    <input type="url" class="form-control" name="longUrl" id="input-longUrl" value="{{$.Form `longUrl`}}" required placeholder="https://...">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"密码"|T}}</label>
+                <label class="col-sm-2 control-label">{{"密码"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{- $password := Form `password` -}}
+                  {{- $password := $.Form `password` -}}
                   {{- if $password -}}
-                  {{- $modifyPassword := Form `modifyPassword` -}}
+                  {{- $modifyPassword := $.Form `modifyPassword` -}}
                   <div class="checkbox checkbox-success">
                   <input type="checkbox" value="1" name="modifyPassword" id="modifyPassword-1"{{if eq $modifyPassword `1`}} checked{{end}}>
-                      <label for="modifyPassword-1">{{"修改密码"|T}}</label>
+                      <label for="modifyPassword-1">{{"修改密码"|$.T}}</label>
                   </div>
                   <div id="input-password-container" class="hidden">
-                  <input type="text" class="form-control" name="password" id="input-password" value="" placeholder="{{`请输入新密码`|T}}" autocomplete="off">
-                  <small class="help-block">{{T "如果不设置则代表无需加密"}}</small>
+                  <input type="text" class="form-control" name="password" id="input-password" value="" placeholder="{{`请输入新密码`|$.T}}" autocomplete="off">
+                  <small class="help-block">{{$.T "如果不设置则代表无需加密"}}</small>
                   </div>
                   {{- else -}}
                   <input type="text" class="form-control" name="password" id="input-password" value="" autocomplete="off">
-                  <small class="help-block">{{T "如果不设置则代表无需加密"}}</small>
+                  <small class="help-block">{{$.T "如果不设置则代表无需加密"}}</small>
                   {{- end -}}
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"过期时间"|T}}</label>
+                <label class="col-sm-2 control-label">{{"过期时间"|$.T}}</label>
                 <div class="col-sm-8">
-                  <input type="date" class="form-control" name="expired" value="{{Form "expired"}}" />
+                  <input type="date" class="form-control" name="expired" value="{{$.Form "expired"}}" />
                 </div>
               </div>
               
               <div class="form-group">
-                  <label class="col-sm-2 control-label">{{"状态"|T}}</label>
+                  <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                   <div class="col-sm-8">
-                    {{$v := Form "available"}}
+                    {{$v := $.Form "available"}}
                     <div class="radio radio-success radio-inline">
-                        <input type="radio" value="Y" name="available" id="available-Y"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}> <label for="available-Y">{{"有效"|T}}</label>
+                        <input type="radio" value="Y" name="available" id="available-Y"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}> <label for="available-Y">{{"有效"|$.T}}</label>
                     </div>
                       <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="N" name="available" id="available-N"{{if eq $v "N"}} checked{{end}}> <label for="available-N">{{"无效"|T}}</label>
+                        <input type="radio" value="N" name="available" id="available-N"{{if eq $v "N"}} checked{{end}}> <label for="available-N">{{"无效"|$.T}}</label>
                       </div>
                   </div>
                 </div>
               <div class="form-group form-submit-group">
 									<div class="col-sm-9 col-sm-offset-2">
-									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
-									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|$.T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|$.T}}</button>
 									</div>
 							</div>
             </form>

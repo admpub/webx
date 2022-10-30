@@ -1,6 +1,6 @@
 {{Strip}}
-{{- $rows := Stored.list -}}
-{{- $isFollowing := Stored.isFollowing -}}
+{{- $rows := $.Stored.list -}}
+{{- $isFollowing := $.Stored.isFollowing -}}
 <div class="card bd-0 rounded-0 mg-t-20">
     <div class="card-body">
     {{- range $k, $v := $rows -}}
@@ -13,19 +13,19 @@
           </div><!-- media-body -->
         </div><!-- media -->
         {{if $isFollowing}}<!-- 显示我关注的人的时候 -->
-        <a href="javascript:;" onclick="follow(this)" data-following-uid="{{$v.Customer.Id}}" data-i18n-following="{{`关注`|T}}" data-i18n-followed="{{`已关注`|T}}" data-i18n-unfollow="{{`取消关注`|T}}" class="btn btn-outline-danger btn-xs">{{`取消关注`|T}}</a>
+        <a href="javascript:;" onclick="follow(this)" data-following-uid="{{$v.Customer.Id}}" data-i18n-following="{{`关注`|$.T}}" data-i18n-followed="{{`已关注`|$.T}}" data-i18n-unfollow="{{`取消关注`|$.T}}" class="btn btn-outline-danger btn-xs">{{`取消关注`|$.T}}</a>
         {{else}}<!-- 显示关注我的人的时候 -->
-        <a href="javascript:;" onclick="follow(this)" data-following-uid="{{$v.Customer.Id}}" data-i18n-following="{{`关注`|T}}" data-i18n-followed="{{`已关注`|T}}" data-i18n-unfollow="{{`取消关注`|T}}" class="btn btn-outline-primary btn-xs">{{"关注"|T}}</a>
+        <a href="javascript:;" onclick="follow(this)" data-following-uid="{{$v.Customer.Id}}" data-i18n-following="{{`关注`|$.T}}" data-i18n-followed="{{`已关注`|$.T}}" data-i18n-unfollow="{{`取消关注`|$.T}}" class="btn btn-outline-primary btn-xs">{{"关注"|$.T}}</a>
         {{end}}
       </div>
     {{- else -}}
     <p class="card-text pd-25">
-      {{"没有记录"|T}}
+      {{"没有记录"|$.T}}
     </p>
     {{- end -}}
     </div><!-- card-body -->
     <div class="card-footer tx-size-xs pd-y-15 auto-bottom-float">
-      {{Stored.pagination.Render `#default#pagination`}}
+      {{$.Stored.pagination.Render `#default#pagination`}}
     </div><!-- card-footer -->
 </div><!-- card -->
 {{/Strip}}

@@ -1,16 +1,16 @@
 {{Strip}}{{Extend "#default#base"}}
 {{Block "description"}}{{.title}}{{/Block}}
-{{Block "title"}}{{"提示"|T}}{{/Block}}
+{{Block "title"}}{{"提示"|$.T}}{{/Block}}
 {{Block "bodyAttr"}} class="bg-superlight tx-size-sm ht-100p pos-relative"{{/Block}}
 {{Block "body"}}
 {{Include "#default#headsimple"}}
 <div class="ht-100v wd-100p d-flex align-items-center justify-content-center pd-md-t-70 pd-x-20">
   <div class="card">
 	<div class="card-block color-gray-lighter">
-	  <p class="mg-b-0">{{Stored.message}}</p>
+	  <p class="mg-b-0">{{$.Stored.message}}</p>
 	</div><!-- card-block -->
 	<div class="card-footer tx-size-xs bd-color-gray-lighter tx-center">
-	  <a href="{{Stored.link.K}}">{{Stored.link.V}}</a>
+	  <a href="{{$.Stored.link.K}}">{{$.Stored.link.V}}</a>
 	</div><!-- card-footer -->
   </div>
 </div><!-- container -->

@@ -1,10 +1,10 @@
 {{Extend "layout"}}
-{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "title"}}{{$.Stored.title}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li><a href="{{BackendURL}}/official/page/template_index">{{"主题列表"|T}}</a></li>
-<li>{{Stored.info.Title}}</li>
-<li class="active">{{`主题配置`|T}}</li>
+<li><a href="{{BackendURL}}/official/page/template_index">{{"主题列表"|$.T}}</a></li>
+<li>{{$.Stored.info.Title}}</li>
+<li class="active">{{`主题配置`|$.T}}</li>
 {{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" type="text/css" href="{{AssetsURL}}/js/selectpage/selectpage.css?t={{BuildTime}}" />
@@ -18,18 +18,18 @@
     <div class="col-md-12">
         <div class="block-flat">
             <div class="header">
-                <h3>{{`主题配置`|T}}</h3>
+                <h3>{{`主题配置`|$.T}}</h3>
             </div>
             <div class="content">
                 <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
-                {{- if Stored.info.HasForm `config` -}}
-                    {{- if Stored.info.Colors -}}
+                {{- if $.Stored.info.HasForm `config` -}}
+                    {{- if $.Stored.info.Colors -}}
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">{{"主题色"|T}}</label>
-                        <div class="col-sm-8">{{$color := Form `color`}}
-                            {{- range $k,$v := Stored.info.Colors -}}
+                        <label class="col-sm-2 control-label">{{"主题色"|$.T}}</label>
+                        <div class="col-sm-8">{{$color := $.Form `color`}}
+                            {{- range $k,$v := $.Stored.info.Colors -}}
                             <label class="themecolor">
-                                <div class="preview" style="{{if $v.Color}}background-color:{{$v.Color}};{{end}}{{if $v.PreviewImage}}background-image:url('{{BackendURL}}/official/page/template_index?op=preview&name={{Stored.info.Name}}&color={{$v.Name}}');{{end}}">
+                                <div class="preview" style="{{if $v.Color}}background-color:{{$v.Color}};{{end}}{{if $v.PreviewImage}}background-image:url('{{BackendURL}}/official/page/template_index?op=preview&name={{$.Stored.info.Name}}&color={{$v.Name}}');{{end}}">
                                 </div>
                                 <div class="radio radio-primary radio-inline">
                                     <input type="radio" value="{{$v.Name}}" name="color" id="color-{{$v.Name}}" {{- if eq $color $v.Name}} checked="checked" {{end}}>
@@ -40,29 +40,29 @@
                         </div>
                     </div>
                     {{- end -}}
-                    {{Stored.info.Render `config`}}
+                    {{$.Stored.info.Render `config`}}
                     <div class="form-group form-submit-group">
                         <div class="col-sm-9 col-sm-offset-2">
                             <button type="submit" class="btn btn-primary btn-lg">
                                 <i class="fa fa-save"></i>
-                                {{"保存"|T}}
+                                {{"保存"|$.T}}
                             </button>
                             <button type="reset" class="btn btn-default btn-lg">
                                 <i class="fa fa-refresh"></i>
-                                {{"重置"|T}}
+                                {{"重置"|$.T}}
                             </button>
                         </div>
                     </div>
                 {{- else -}}
                     <div class="alert alert-warning no-margin-bottom">
 				    	<i class="fa fa-lightbulb-o text-warning"></i>
-				    	{{`此模板没有可配置项`|T}}
+				    	{{`此模板没有可配置项`|$.T}}
 				    </div>
                     <div class="form-group">
                         <div class="col-sm-9 col-sm-offset-2">
                             <a href="{{BackendURL}}/official/page/template_index" class="btn btn-default btn-lg">
                                 <i class="fa fa-reply"></i>
-                                {{"返回列表"|T}}
+                                {{"返回列表"|$.T}}
                             </a>
                         </div>
                     </div>

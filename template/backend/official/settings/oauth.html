@@ -1,17 +1,17 @@
-{{$config := Stored.oauth}}
+{{$config := $.Stored.oauth}}
 {{/*$config|JSONEncode*/}}
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"支付宝登录"|T}}</label>
+    <label class="col-sm-2 control-label">{{"支付宝登录"|$.T}}</label>
     <div class="col-sm-10">
         <div class="form-group no-padding-y">
             {{$disabled := $config.alipay.Disabled}}
             <div class="radio radio-success radio-inline">
                 <input type="radio" value="N" name="oauth[alipay][disabled]" id="oauth-alipay-disabled-N"{{if eq $disabled `N`}} checked{{end}} onclick="$('#oauth-settings-alipay').removeClass('hidden');"> 
-                <label for="oauth-alipay-disabled-N">{{"启用"|T}}</label>
+                <label for="oauth-alipay-disabled-N">{{"启用"|$.T}}</label>
             </div>
             <div class="radio radio-danger radio-inline">
                 <input type="radio" value="Y" name="oauth[alipay][disabled]" id="oauth-alipay-disabled-Y"{{if eq $disabled `Y`}} checked{{end}} onclick="$('#oauth-settings-alipay:not(.hidden)').addClass('hidden');"> 
-                <label for="oauth-alipay-disabled-Y">{{"禁用"|T}}</label>
+                <label for="oauth-alipay-disabled-Y">{{"禁用"|$.T}}</label>
             </div>
         </div><!-- form-group -->
         <div class="fieldset bg-fc{{if eq $disabled `Y`}} hidden{{end}}" id="oauth-settings-alipay">
@@ -22,23 +22,23 @@
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label"><span class="text-red">{{`应用`|T}}</span>{{`私钥`|T}}</label>
+                <label class="col-sm-2 control-label"><span class="text-red">{{`应用`|$.T}}</span>{{`私钥`|$.T}}</label>
                 <div class="col-sm-9">
                     <textarea class="form-control" name="oauth[alipay][value][secret]">{{$config.alipay.ValueObject.Secret}}</textarea>
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"图标类名"|T}}</label>
+                <label class="col-sm-2 control-label">{{"图标类名"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[alipay][value][extra][iconClass]" value="{{$config.alipay.ValueObject.Extra.iconClass}}">
-                    <div class="help-block">{{"例如: "|T}}<code>iconfont icon-zhifubao1 </code></div>
+                    <div class="help-block">{{"例如: "|$.T}}<code>iconfont icon-zhifubao1 </code></div>
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"登录标题"|T}}</label>
+                <label class="col-sm-2 control-label">{{"登录标题"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[alipay][value][extra][title]" value="{{$config.alipay.ValueObject.Extra.title}}">
-                    <div class="help-block">{{"例如: 支付宝登录"|T}}</div>
+                    <div class="help-block">{{"例如: 支付宝登录"|$.T}}</div>
                 </div>
             </div><!-- form-group -->
         </div><!-- fieldset -->
@@ -47,15 +47,15 @@
 
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"微信登录"|T}}</label>
+    <label class="col-sm-2 control-label">{{"微信登录"|$.T}}</label>
     <div class="col-sm-10">{{$disabled := $config.wechat.Disabled}}
         <div class="radio radio-success radio-inline">
             <input type="radio" value="N" name="oauth[wechat][disabled]" id="oauth-wechat-disabled-N"{{if eq $disabled `N`}} checked{{end}} onclick="$('#oauth-settings-wechat').removeClass('hidden');"> 
-            <label for="oauth-wechat-disabled-N">{{"启用"|T}}</label>
+            <label for="oauth-wechat-disabled-N">{{"启用"|$.T}}</label>
         </div>
         <div class="radio radio-danger radio-inline">
             <input type="radio" value="Y" name="oauth[wechat][disabled]" id="oauth-wechat-disabled-Y"{{if eq $disabled `Y`}} checked{{end}} onclick="$('#oauth-settings-wechat:not(.hidden)').addClass('hidden');"> 
-            <label for="oauth-wechat-disabled-Y">{{"禁用"|T}}</label>
+            <label for="oauth-wechat-disabled-Y">{{"禁用"|$.T}}</label>
         </div>
         <div class="fieldset bg-fc{{if eq $disabled `Y`}} hidden{{end}}" id="oauth-settings-wechat">
             <div class="form-group">
@@ -71,17 +71,17 @@
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"图标类名"|T}}</label>
+                <label class="col-sm-2 control-label">{{"图标类名"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[wechat][value][extra][iconClass]" value="{{$config.wechat.ValueObject.Extra.iconClass}}">
-                    <div class="help-block">{{"例如: "|T}}<code>fa fa-wechat</code></div>
+                    <div class="help-block">{{"例如: "|$.T}}<code>fa fa-wechat</code></div>
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"登录标题"|T}}</label>
+                <label class="col-sm-2 control-label">{{"登录标题"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[wechat][value][extra][title]" value="{{$config.wechat.ValueObject.Extra.title}}">
-                    <div class="help-block">{{"例如: 微信登录"|T}}</div>
+                    <div class="help-block">{{"例如: 微信登录"|$.T}}</div>
                 </div>
             </div><!-- form-group -->
         </div><!-- fieldset -->
@@ -90,15 +90,15 @@
 
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"QQ登录"|T}}</label>
+    <label class="col-sm-2 control-label">{{"QQ登录"|$.T}}</label>
     <div class="col-sm-10">{{$disabled := $config.qq.Disabled}}
         <div class="radio radio-success radio-inline">
             <input type="radio" value="N" name="oauth[qq][disabled]" id="oauth-qq-disabled-N"{{if eq $disabled `N`}} checked{{end}} onclick="$('#oauth-settings-qq').removeClass('hidden');"> 
-            <label for="oauth-qq-disabled-N">{{"启用"|T}}</label>
+            <label for="oauth-qq-disabled-N">{{"启用"|$.T}}</label>
         </div>
         <div class="radio radio-danger radio-inline">
             <input type="radio" value="Y" name="oauth[qq][disabled]" id="oauth-qq-disabled-Y"{{if eq $disabled `Y`}} checked{{end}} onclick="$('#oauth-settings-qq:not(.hidden)').addClass('hidden');"> 
-            <label for="oauth-qq-disabled-Y">{{"禁用"|T}}</label>
+            <label for="oauth-qq-disabled-Y">{{"禁用"|$.T}}</label>
         </div>
         <div class="fieldset bg-fc{{if eq $disabled `Y`}} hidden{{end}}" id="oauth-settings-qq">
             <div class="form-group">
@@ -114,17 +114,17 @@
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"图标类名"|T}}</label>
+                <label class="col-sm-2 control-label">{{"图标类名"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[qq][value][extra][iconClass]" value="{{$config.qq.ValueObject.Extra.iconClass}}">
-                    <div class="help-block">{{"例如: "|T}}<code>fa fa-qq</code></div>
+                    <div class="help-block">{{"例如: "|$.T}}<code>fa fa-qq</code></div>
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"登录标题"|T}}</label>
+                <label class="col-sm-2 control-label">{{"登录标题"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[qq][value][extra][title]" value="{{$config.qq.ValueObject.Extra.title}}">
-                    <div class="help-block">{{"例如: QQ登录"|T}}</div>
+                    <div class="help-block">{{"例如: QQ登录"|$.T}}</div>
                 </div>
             </div><!-- form-group -->
         </div><!-- fieldset -->
@@ -133,15 +133,15 @@
 
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"Github登录"|T}}</label>
+    <label class="col-sm-2 control-label">{{"Github登录"|$.T}}</label>
     <div class="col-sm-10">{{$disabled := $config.github.Disabled}}
         <div class="radio radio-success radio-inline">
             <input type="radio" value="N" name="oauth[github][disabled]" id="oauth-github-disabled-N"{{if eq $disabled `N`}} checked{{end}} onclick="$('#oauth-settings-github').removeClass('hidden');"> 
-            <label for="oauth-github-disabled-N">{{"启用"|T}}</label>
+            <label for="oauth-github-disabled-N">{{"启用"|$.T}}</label>
         </div>
         <div class="radio radio-danger radio-inline">
             <input type="radio" value="Y" name="oauth[github][disabled]" id="oauth-github-disabled-Y"{{if eq $disabled `Y`}} checked{{end}} onclick="$('#oauth-settings-github:not(.hidden)').addClass('hidden');"> 
-            <label for="oauth-github-disabled-Y">{{"禁用"|T}}</label>
+            <label for="oauth-github-disabled-Y">{{"禁用"|$.T}}</label>
         </div>
         <div class="fieldset bg-fc{{if eq $disabled `Y`}} hidden{{end}}" id="oauth-settings-github">
             <div class="form-group">
@@ -157,17 +157,17 @@
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"图标类名"|T}}</label>
+                <label class="col-sm-2 control-label">{{"图标类名"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[github][value][extra][iconClass]" value="{{$config.github.ValueObject.Extra.iconClass}}">
-                    <div class="help-block">{{"例如: "|T}}<code>fa fa-github</code></div>
+                    <div class="help-block">{{"例如: "|$.T}}<code>fa fa-github</code></div>
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"登录标题"|T}}</label>
+                <label class="col-sm-2 control-label">{{"登录标题"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[github][value][extra][title]" value="{{$config.github.ValueObject.Extra.title}}">
-                    <div class="help-block">{{"例如: Github登录"|T}}</div>
+                    <div class="help-block">{{"例如: Github登录"|$.T}}</div>
                 </div>
             </div><!-- form-group -->
         </div><!-- fieldset -->
@@ -176,15 +176,15 @@
 
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"微软登录"|T}}</label>
+    <label class="col-sm-2 control-label">{{"微软登录"|$.T}}</label>
     <div class="col-sm-10">{{$disabled := $config.microsoft.Disabled| Default `Y`}}
         <div class="radio radio-success radio-inline">
             <input type="radio" value="N" name="oauth[microsoft][disabled]" id="oauth-microsoft-disabled-N"{{if eq $disabled `N`}} checked{{end}} onclick="$('#oauth-settings-microsoft').removeClass('hidden');"> 
-            <label for="oauth-microsoft-disabled-N">{{"启用"|T}}</label>
+            <label for="oauth-microsoft-disabled-N">{{"启用"|$.T}}</label>
         </div>
         <div class="radio radio-danger radio-inline">
             <input type="radio" value="Y" name="oauth[microsoft][disabled]" id="oauth-microsoft-disabled-Y"{{if eq $disabled `Y`}} checked{{end}} onclick="$('#oauth-settings-microsoft:not(.hidden)').addClass('hidden');"> 
-            <label for="oauth-microsoft-disabled-Y">{{"禁用"|T}}</label>
+            <label for="oauth-microsoft-disabled-Y">{{"禁用"|$.T}}</label>
         </div>
         <div class="fieldset bg-fc{{if eq $disabled `Y`}} hidden{{end}}" id="oauth-settings-microsoft">
             <div class="form-group">
@@ -200,17 +200,17 @@
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"图标类名"|T}}</label>
+                <label class="col-sm-2 control-label">{{"图标类名"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[microsoft][value][extra][iconClass]" value="{{$config.microsoft.ValueObject.Extra.iconClass}}">
-                    <div class="help-block">{{"例如: "|T}}<code>fa fa-windows</code></div>
+                    <div class="help-block">{{"例如: "|$.T}}<code>fa fa-windows</code></div>
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"登录标题"|T}}</label>
+                <label class="col-sm-2 control-label">{{"登录标题"|$.T}}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="oauth[microsoft][value][extra][title]" value="{{$config.microsoft.ValueObject.Extra.title}}">
-                    <div class="help-block">{{"例如: Microsoft登录"|T}}</div>
+                    <div class="help-block">{{"例如: Microsoft登录"|$.T}}</div>
                 </div>
             </div><!-- form-group -->
         </div><!-- fieldset -->

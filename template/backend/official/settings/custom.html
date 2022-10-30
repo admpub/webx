@@ -1,18 +1,18 @@
-{{$config := Stored.custom}}
+{{$config := $.Stored.custom}}
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"登录页面左侧区域"|T}}</label>
+    <label class="col-sm-2 control-label">{{"登录页面左侧区域"|$.T}}</label>
     <div class="col-sm-10">
         {{$disabled := $config.login.Disabled | Default "N"}}
         <span class="radio radio-primary radio-inline">
             <input type="radio" name="custom[login][disabled]" value="N"{{if eq $disabled "N"}} checked{{end}} id="custom-login-disabled-N">
-            <label for="custom-login-disabled-N">{{"显示"|T}}</label>
+            <label for="custom-login-disabled-N">{{"显示"|$.T}}</label>
         </span>
         <span class="radio radio-primary radio-inline">
             <input type="radio" name="custom[login][disabled]" value="Y"{{if eq $disabled "Y"}} checked{{end}} id="custom-login-disabled-Y">
-            <label for="custom-login-disabled-Y">{{"不显示"|T}}</label>
+            <label for="custom-login-disabled-Y">{{"不显示"|$.T}}</label>
         </span>
         <textarea class="form-control" name="custom[login][value]"
         action="!{{BackendURL}}/finder?multiple=1" rows="15" placeholder="">{{$config.login.Value}}</textarea>
-        <div class="help-block">{{`支持输入HTML代码`|T}}</div>
+        <div class="help-block">{{`支持输入HTML代码`|$.T}}</div>
     </div>
 </div>

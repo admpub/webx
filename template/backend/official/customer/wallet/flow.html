@@ -1,13 +1,13 @@
 {{Extend "layout"}}
-{{Block "title"}}{{"资产流水记录"|T}}{{/Block}}
+{{Block "title"}}{{"资产流水记录"|$.T}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li><a href="{{BackendURL}}/official/customer/index">{{`客户列表`|T}}</a></li>
-{{if gt Stored.customer.Id 0}}
-<li><a href="{{BackendURL}}/official/customer/edit?id={{Form `customerId`}}">{{Stored.customer.Name}}</a></li>
+<li><a href="{{BackendURL}}/official/customer/index">{{`客户列表`|$.T}}</a></li>
+{{if gt $.Stored.customer.Id 0}}
+<li><a href="{{BackendURL}}/official/customer/edit?id={{$.Form `customerId`}}">{{$.Stored.customer.Name}}</a></li>
 {{end}}
-<li><a href="{{BackendURL}}/official/customer/wallet/index?customerId={{Form `customerId`}}">{{"客户资产列表"|T}}</a></li>
-<li class="active">{{"资产流水记录"|T}}</li>
+<li><a href="{{BackendURL}}/official/customer/wallet/index?customerId={{$.Form `customerId`}}">{{"客户资产列表"|$.T}}</a></li>
+<li class="active">{{"资产流水记录"|$.T}}</li>
 {{/Block}}
 {{Block "main"}}
 <div class="row">
@@ -16,68 +16,68 @@
 			<div class="header">
 				<div class="pull-right" style="margin-left:10px">
 					<form class="form-horizontal" action="" id="search-form" method="GET">
-                        <input type="hidden" name="customerId" value="{{Form `customerId`}}">
+                        <input type="hidden" name="customerId" value="{{$.Form `customerId`}}">
 						<div class="input-group">
-							<span class="input-group-addon">{{"资产类型"|T}}</span>
+							<span class="input-group-addon">{{"资产类型"|$.T}}</span>
 							<select name="assetType" class="form-control" id="assetType" onchange="$('#search-form').submit()">
-								<option value=""> - {{"不限"|T}} - </option>
-								{{$assetType := Stored.assetType}} 
-								{{range $k, $v := Stored.assetTypes}}
+								<option value=""> - {{"不限"|$.T}} - </option>
+								{{$assetType := $.Stored.assetType}} 
+								{{range $k, $v := $.Stored.assetTypes}}
 								<option value="{{$v.K}}" {{if eq $assetType $v.K}} selected{{end}}>{{$v.V}}</option>
 								{{end}}
 							</select>
-							<span class="input-group-addon">{{"金额类型"|T}}</span>
+							<span class="input-group-addon">{{"金额类型"|$.T}}</span>
 							<select name="amountType" class="form-control" id="amountType" onchange="$('#search-form').submit()">
-								<option value=""> - {{"不限"|T}} - </option>
-								{{$amountType := Form `amountType`}}
-								<option value="balance" {{if eq $amountType `balance`}} selected{{end}}>{{`可用余额`|T}}</option>
-								<option value="freeze" {{if eq $amountType `freeze`}} selected{{end}}>{{`冻结额`|T}}</option>
+								<option value=""> - {{"不限"|$.T}} - </option>
+								{{$amountType := $.Form `amountType`}}
+								<option value="balance" {{if eq $amountType `balance`}} selected{{end}}>{{`可用余额`|$.T}}</option>
+								<option value="freeze" {{if eq $amountType `freeze`}} selected{{end}}>{{`冻结额`|$.T}}</option>
 							</select>
-							<span class="input-group-addon">{{"消费类型"|T}}</span>
+							<span class="input-group-addon">{{"消费类型"|$.T}}</span>
 							<select name="type" class="form-control" id="type" onchange="$('#search-form').submit()">
-								<option value=""> - {{"不限"|T}} - </option>
-								{{$type := Form `type`}}
-								<option value="income" {{if eq $type `income`}} selected{{end}}>{{`收入`|T}}</option>
-								<option value="consume" {{if eq $type `consume`}} selected{{end}}>{{`支出`|T}}</option>
+								<option value=""> - {{"不限"|$.T}} - </option>
+								{{$type := $.Form `type`}}
+								<option value="income" {{if eq $type `income`}} selected{{end}}>{{`收入`|$.T}}</option>
+								<option value="consume" {{if eq $type `consume`}} selected{{end}}>{{`支出`|$.T}}</option>
 							</select>
 						</div>
 					</form>
 				</div>					
-				<h3>{{"资产流水记录"|T}}</h3>
+				<h3>{{"资产流水记录"|$.T}}</h3>
 			</div>
 			<div class="content">
 				<div class="table-responsive">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<th><strong>{{"客户"|T}}</strong></th>
-							<th><strong>{{"发起人"|T}}</strong></th>
-							<th><strong>{{"资产类型"|T}}</strong></th>
-							<th><strong>{{"类型"|T}}</strong></th>
-							<th><strong>{{"额度"|T}}</strong></th>
-							<th><strong>{{"变动后"|T}}</strong></th>
-							<th><strong>{{"来源类型"|T}}</strong></th>
-							<th><strong>{{"来源表"|T}}</strong></th>
-							<th><strong>{{"来源ID"|T}}</strong></th>
-							<th><strong>{{"交易号"|T}}</strong></th>
-							<th><strong>{{"说明"|T}}</strong></th>
-							<th style="width:65px"><strong>{{"状态"|T}}</strong></th>
-							<th style="width:65px"><strong>{{"创建时间"|T}}</strong></th>
+							<th><strong>{{"客户"|$.T}}</strong></th>
+							<th><strong>{{"发起人"|$.T}}</strong></th>
+							<th><strong>{{"资产类型"|$.T}}</strong></th>
+							<th><strong>{{"类型"|$.T}}</strong></th>
+							<th><strong>{{"额度"|$.T}}</strong></th>
+							<th><strong>{{"变动后"|$.T}}</strong></th>
+							<th><strong>{{"来源类型"|$.T}}</strong></th>
+							<th><strong>{{"来源表"|$.T}}</strong></th>
+							<th><strong>{{"来源ID"|$.T}}</strong></th>
+							<th><strong>{{"交易号"|$.T}}</strong></th>
+							<th><strong>{{"说明"|$.T}}</strong></th>
+							<th style="width:65px"><strong>{{"状态"|$.T}}</strong></th>
+							<th style="width:65px"><strong>{{"创建时间"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">{{$zero := Float64 0}}
-                        {{range $k,$v := Stored.listData}}
+                        {{range $k,$v := $.Stored.listData}}
 						<tr>
 							<td>{{if $v.Customer}}{{$v.Customer.Name}}{{else}}-{{end}}</td>
 							<td>{{if $v.SrcCustomer}}{{$v.SrcCustomer.Name}}{{else}}-{{end}}</td>
 							<td>{{$v.AssetTypeName}}</td>
 							<td>
                                 {{if eq $v.AmountType `balance`}}
-                                {{`余额`|T}}
+                                {{`余额`|$.T}}
                                 {{else if eq $v.AmountType `freeze`}}
-                                {{`冻结额`|T}}
+                                {{`冻结额`|$.T}}
                                 {{else}}
-                                {{`未知`|T}}: {{$v.AmountTyp}}
+                                {{`未知`|$.T}}: {{$v.AmountTyp}}
                                 {{end}}
                             </td>
 							<td>
@@ -95,17 +95,17 @@
 							<td>{{$v.Description}}</td>
 							<td>
                                 {{if eq $v.Status `confirmed`}}
-                                <span class="label label-success">{{`已确认`|T}}</span>
+                                <span class="label label-success">{{`已确认`|$.T}}</span>
                                 {{else if eq $v.Status `pending`}}
-                                <span class="label label-primary">{{`待确认`|T}}</span>
+                                <span class="label label-primary">{{`待确认`|$.T}}</span>
                                 {{else if eq $v.Status `refunded`}}
-                                <span class="label label-danger">{{`已退款`|T}}</span>
+                                <span class="label label-danger">{{`已退款`|$.T}}</span>
                                 {{else if eq $v.Status `failed`}}
-                                <span class="label label-danger">{{`失败`|T}}</span>
+                                <span class="label label-danger">{{`失败`|$.T}}</span>
                                 {{else if eq $v.Status `succeed`}}
-                                <span class="label label-success">{{`成功`|T}}</span>
+                                <span class="label label-success">{{`成功`|$.T}}</span>
                                 {{else if eq $v.Status `canceled`}}
-                                <span class="label label-default">{{`已取消`|T}}</span>
+                                <span class="label label-default">{{`已取消`|$.T}}</span>
                                 {{else}}
                                 {{$v.Status}}
                                 {{end}}
@@ -116,7 +116,7 @@
 					</tbody>
 				</table>		
 				</div>
-				{{Stored.pagination.Render}}
+				{{$.Stored.pagination.Render}}
 			</div>
 		</div>				
 	</div>

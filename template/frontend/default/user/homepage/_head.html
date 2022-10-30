@@ -1,23 +1,23 @@
 {{Strip}}
-{{- $agentLevel := Stored.uAgentLevel -}}
-{{- $customerGroup := Stored.uCustomerGroup -}}
-{{- $info := Stored.info -}}
-{{- $operate := Stored.operate -}}
+{{- $agentLevel := $.Stored.uAgentLevel -}}
+{{- $customerGroup := $.Stored.uCustomerGroup -}}
+{{- $info := $.Stored.info -}}
+{{- $operate := $.Stored.operate -}}
 <div class="card card-flat tx-size-sm">
   {{Include "user/homepage/_head_card_top"}}
   <div class="card-footer tx-size-14 d-sm-flex justify-content-sm-center bg-transparent">
     <nav class="nav nav-pills flex-column flex-sm-row">
-      {{- range Stored.blocks -}}
+      {{- range $.Stored.blocks -}}
       {{- if and . (not .Hidden.Bool) -}}
       <a href="{{FrontendURL}}/u/{{$info.Id}}/{{.Ident}}" class="nav-link{{if eq $operate .Ident}} active{{end}}">{{.Title}}</a>
       {{- end -}}
       {{- else -}}
-      <a href="{{FrontendURL}}/u/{{$info.Id}}/profile" class="nav-link{{if eq $operate "profile"}} active{{end}}">{{"个人资料"|T}}</a>
-      <a href="{{FrontendURL}}/u/{{$info.Id}}/following" class="nav-link{{if eq $operate "following"}} active{{end}}">{{"我关注的"|T}}</a>
-      <a href="{{FrontendURL}}/u/{{$info.Id}}/followers" class="nav-link{{if eq $operate "followers"}} active{{end}}">{{"关注我的"|T}}</a>
-      <!-- <a href="{{FrontendURL}}/u/{{$info.Id}}/comments" class="nav-link{{if eq $operate "comments"}} active{{end}}">{{"我的评论"|T}}</a>
-      <a href="{{FrontendURL}}/u/{{$info.Id}}/favorites" class="nav-link{{if eq $operate "favorites"}} active{{end}}">{{"我的收藏"|T}}</a>
-      <a href="{{FrontendURL}}/u/{{$info.Id}}/likes" class="nav-link{{if eq $operate "likes"}} active{{end}}">{{"我的喜欢"|T}}</a> -->
+      <a href="{{FrontendURL}}/u/{{$info.Id}}/profile" class="nav-link{{if eq $operate "profile"}} active{{end}}">{{"个人资料"|$.T}}</a>
+      <a href="{{FrontendURL}}/u/{{$info.Id}}/following" class="nav-link{{if eq $operate "following"}} active{{end}}">{{"我关注的"|$.T}}</a>
+      <a href="{{FrontendURL}}/u/{{$info.Id}}/followers" class="nav-link{{if eq $operate "followers"}} active{{end}}">{{"关注我的"|$.T}}</a>
+      <!-- <a href="{{FrontendURL}}/u/{{$info.Id}}/comments" class="nav-link{{if eq $operate "comments"}} active{{end}}">{{"我的评论"|$.T}}</a>
+      <a href="{{FrontendURL}}/u/{{$info.Id}}/favorites" class="nav-link{{if eq $operate "favorites"}} active{{end}}">{{"我的收藏"|$.T}}</a>
+      <a href="{{FrontendURL}}/u/{{$info.Id}}/likes" class="nav-link{{if eq $operate "likes"}} active{{end}}">{{"我的喜欢"|$.T}}</a> -->
       {{- end -}}
     </nav>
   </div><!-- card-footer -->

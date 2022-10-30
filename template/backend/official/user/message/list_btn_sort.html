@@ -1,14 +1,14 @@
         <div class="btn-group pull-right">
             <button data-toggle="dropdown" class="btn btn-sm btn-flat btn-default dropdown-toggle" type="button">
-                {{"排序"|T}}
+                {{"排序"|$.T}}
                 <span class="caret"></span>
             </button>
-            {{$sort := Form "sort" "-created"}}
+            {{$sort := $.Form "sort" "-created"}}
             <ul role="menu" class="dropdown-menu" sort-current="{{$sort}}">
-                <li><a href="javascript:;" sort="-created">{{"发信日期"|T}}</a></li>
-                <li><a href="javascript:;" sort="-user_a">{{"发信人ID"|T}}</a></li>
-                <li><a href="javascript:;" sort="-title">{{"消息主题"|T}}</a></li>
+                <li><a href="javascript:;" sort="-created">{{"发信日期"|$.T}}</a></li>
+                <li><a href="javascript:;" sort="-user_a">{{"发信人ID"|$.T}}</a></li>
+                <li><a href="javascript:;" sort="-title">{{"消息主题"|$.T}}</a></li>
                 <!-- <li class="divider"></li>
-                <li><a href="#">{{"尺寸"|T}}</a></li> -->
+                <li><a href="#">{{"尺寸"|$.T}}</a></li> -->
             </ul>
         </div>

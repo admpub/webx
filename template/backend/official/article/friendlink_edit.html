@@ -1,9 +1,9 @@
 {{Extend "layout"}}
-{{Block "title"}}{{Stored.title}}{{/Block}}
+{{Block "title"}}{{$.Stored.title}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li><a href="{{BackendURL}}/official/article/friendlink_index">{{"友情链接管理"|T}}</a></li>
-<li class="active">{{Stored.title}}</li>
+<li><a href="{{BackendURL}}/official/article/friendlink_index">{{"友情链接管理"|$.T}}</a></li>
+<li class="active">{{$.Stored.title}}</li>
 {{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.crop/css/jquery.Jcrop.min.css?t={{BuildTime}}" type="text/css" />
@@ -13,69 +13,69 @@
     <div class="col-md-12">
         <div class="block-flat">
           <div class="header">							
-            <h3>{{Stored.title}}</h3>
+            <h3>{{$.Stored.title}}</h3>
           </div>
           <div class="content">
               <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"分类"|T}}</label>
+                <label class="col-sm-2 control-label">{{"分类"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := (Formx "categoryId").Uint}}
+                  {{$v := ($.Formx "categoryId").Uint}}
                   <select name="categoryId" class="form-control" id="categoryId">
                     <option value=""></option>
-                    {{range $k, $c := Stored.categoryList}}
+                    {{range $k, $c := $.Stored.categoryList}}
                     <option value="{{$c.Id}}"{{if eq $c.Id $v}} selected="selected"{{end}}>{{$c.Name}}</option>
                     {{end}}
                   </select>
                 </div>
-                <label class="col-sm-2 control-label">{{"网站名称"|T}}</label>
+                <label class="col-sm-2 control-label">{{"网站名称"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" required name="name" value="{{Form `name`}}">
+                    <input type="text" class="form-control" required name="name" value="{{$.Form `name`}}">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"网址"|T}}</label>
+                <label class="col-sm-2 control-label">{{"网址"|$.T}}</label>
                 <div class="col-sm-8">
-                    <input type="url" class="form-control" required name="url" value="{{Form `url`}}">
+                    <input type="url" class="form-control" required name="url" value="{{$.Form `url`}}">
                 </div>
               </div>
               <div class="form-group">
-                  <label class="col-sm-2 control-label">{{"网站LOGO"|T}}</label>
+                  <label class="col-sm-2 control-label">{{"网站LOGO"|$.T}}</label>
                   <div class="col-sm-3">
                     <div class="avatar-upload">
-                      {{$logo := Form "logo"}}
+                      {{$logo := $.Form "logo"}}
                       <img src="{{$logo|Default (AssetsURL "/images/user_128.png")}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
                       <input id="fileupload" type="file" name="files[]">
                       <input type="hidden" id="logo-image" name="logo" value="{{$logo}}" />
-                      <input type="hidden" id="logo-image-original" name="logoOriginal" value="{{Form `logoOriginal`}}" />
+                      <input type="hidden" id="logo-image-original" name="logoOriginal" value="{{$.Form `logoOriginal`}}" />
                       <div id="progress" class="overlay"></div>
                       {{Include "modal_crop_image"}}
                     </div>
                   </div>
-                <label class="col-sm-2 control-label">{{"网站说明"|T}}</label>
+                <label class="col-sm-2 control-label">{{"网站说明"|$.T}}</label>
                 <div class="col-sm-3">
-                  <textarea class="form-control" name="description" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-validation-threshold="10">{{Form "description"}}</textarea>
+                  <textarea class="form-control" name="description" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-validation-threshold="10">{{$.Form "description"}}</textarea>
                 </div>
               </div>
               <div class="form-group">
-                  <label class="col-sm-2 control-label">{{"状态"|T}}</label>
+                  <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                   <div class="col-sm-8">
-                    {{$v := Form "process" "idle"}}
+                    {{$v := $.Form "process" "idle"}}
                     <div class="radio radio-primary radio-inline">
-                        <input type="radio" value="idle" name="process" id="process-idle"{{if eq $v "idle"}} checked{{end}}> <label for="process-idle">{{"待处理"|T}}</label>
+                        <input type="radio" value="idle" name="process" id="process-idle"{{if eq $v "idle"}} checked{{end}}> <label for="process-idle">{{"待处理"|$.T}}</label>
                     </div>
                       <div class="radio radio-success radio-inline">
-                        <input type="radio" value="success" name="process" id="process-success"{{if eq $v "success"}} checked{{end}}> <label for="process-success">{{"通过"|T}}</label>
+                        <input type="radio" value="success" name="process" id="process-success"{{if eq $v "success"}} checked{{end}}> <label for="process-success">{{"通过"|$.T}}</label>
                       </div>
                       <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="reject" name="process" id="process-reject"{{if eq $v "reject"}} checked{{end}}> <label for="process-reject">{{"拒绝"|T}}</label>
+                        <input type="radio" value="reject" name="process" id="process-reject"{{if eq $v "reject"}} checked{{end}}> <label for="process-reject">{{"拒绝"|$.T}}</label>
                       </div>
                   </div>
                 </div>
               <div class="form-group form-submit-group">
 									<div class="col-sm-9 col-sm-offset-2">
-									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
-									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|$.T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|$.T}}</button>
 									</div>
 							</div>
             </form>
@@ -89,7 +89,7 @@
 <script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
 <script type="text/javascript">
 $(function(){
-  App.editor.cropImage('{{BackendUploadURL `friendlink`}}',"#logo-image",'#logo-image-original',null,{{Stored.thumbSize.Width}},{{Stored.thumbSize.Height}});
+  App.editor.cropImage('{{BackendUploadURL `friendlink`}}',"#logo-image",'#logo-image-original',null,{{$.Stored.thumbSize.Width}},{{$.Stored.thumbSize.Height}});
 });
 </script>
 {{/Block}}

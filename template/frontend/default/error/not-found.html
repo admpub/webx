@@ -24,7 +24,7 @@
           <h6 class="tx-size-12 tx-size-xs-13 tx-size-sm-14 tx-size-md-15 tx-size-lg-15 tx-size-xl-16 mg-b-0 tx-inverse tx-normal lh-5">Whooops, we couldn't find the page your were looking for. Please try searching.</h6>
           <form action="{{FrontendURL}}/search" method="GET">
           <div class="input-group mg-t-20 wd-md-350">
-            <input type="text" class="form-control lh-6 bd-r-0 tx-size-12" placeholder="Search page" name="q" value="{{Form "q"}}">
+            <input type="text" class="form-control lh-6 bd-r-0 tx-size-12" placeholder="Search page" name="q" value="{{$.Form "q"}}">
             <div class="input-group-btn pd-l-1">
               <button class="btn btn-inverse tx-size-12">Search</button>
             </div><!-- input-group-btn -->
@@ -33,7 +33,7 @@
         </div><!-- card -->
       </div><!-- container -->
     </div><!-- container -->
-    {{- Set `footerClass` `tx-left` -}}
+    {{- $.Set `footerClass` `tx-left` -}}
     {{Include "#default#footer"}}
 {{/Block}}
 {{/Strip}}

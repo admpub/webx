@@ -2,9 +2,9 @@
 <section class="trending-wrapper section-padding">
     <div class="container">
         <div class="section-head">
-            <h2 class="heading-primary">{{`热门话题`|T}}</h2>
+            <h2 class="heading-primary">{{`热门话题`|$.T}}</h2>
             <a href="{{FrontendURL}}/articles" class="button button-minimal">
-                {{`查看全部`|T}}
+                {{`查看全部`|$.T}}
                 <span class="icon">
                     <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                 </span>
@@ -21,7 +21,7 @@
                         {{- if $v.Category -}}
                         <span class="category"> {{$v.Category.Name}} </span>
                         {{- end -}}
-                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                             <h3 class="heading-primary">
                                 {{$v.Title}}
                             </h3>
@@ -33,11 +33,11 @@
                             {{- else if $v.User -}}
                             <span>{{$v.User.Username}}</span>
                             {{- else -}}
-                            <span>{{`未知`|T}}</span>
+                            <span>{{`未知`|$.T}}</span>
                             {{- end -}}
                         </p>
 
-                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="button icon-button">
+                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="button icon-button">
                             <span class="icon">
                                 <i class="fas fa-chevron-right"></i>
                             </span>

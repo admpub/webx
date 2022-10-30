@@ -1,5 +1,5 @@
 {{Extend "layout"}}
-{{Block "title"}}{{"消息管理"|T}}{{/Block}}
+{{Block "title"}}{{"消息管理"|$.T}}{{/Block}}
 {{Block "head"}}
 {{/Block}}
 {{Block "bodyNav"}}
@@ -7,14 +7,14 @@
 {{/Block}}
 {{Block "bodyClass"}}no-padding{{/Block}}
 {{Block "main"}}
-{{- $boxType := Stored.boxType -}}
+{{- $boxType := $.Stored.boxType -}}
 <div class="mail-inbox">
     <div class="head">
         <h3>
-            {{Stored.boxTypeName}} 
-            <span>({{T "%v条数据" Stored.pagination.Rows}})</span>
+            {{$.Stored.boxTypeName}} 
+            <span>({{$.T "%v条数据" $.Stored.pagination.Rows}})</span>
         </h3>
-        <form action="{{URL.Path}}" method="GET">
+        <form action="{{$.URL.Path}}" method="GET">
         {{- range $field, $values := Queries -}}
         {{- if ne $field "q" -}}
         {{- range $k, $value := $values -}}
@@ -22,27 +22,27 @@
         {{- end -}}
         {{- end -}}
         {{- end -}}
-        <input type="text" name="q" class="form-control" value="{{Form "q"}}" placeholder="{{"搜索消息"|T}}..." />
+        <input type="text" name="q" class="form-control" value="{{$.Form "q"}}" placeholder="{{"搜索消息"|$.T}}..." />
         </form>
     </div>
     <div class="filters">
         <div class="checkbox checkbox-inline checkbox-success xs-margin-top">
             <input id="check-all" type="checkbox" name="checkall" onclick="App.checkedAll(this,'.mails input:checkbox[id^=check-]')" />
-            <label for="check-all" class="no-margin-bottom">{{"全选"|T}}</label>
+            <label for="check-all" class="no-margin-bottom">{{"全选"|$.T}}</label>
         </div>
         <div class="btn-group no-padding">
             <button type="button" class="btn btn-danger btn-sm no-margin" id="delete-selected">
                 <i class="fa fa-trash"></i>
-                {{"删除"|T}}
+                {{"删除"|$.T}}
             </button>
         </div>
         <div class="btn-group pull-right">
-            {{Stored.pagination.Render "pagination_btn"}}
+            {{$.Stored.pagination.Render "pagination_btn"}}
         </div>
         <!-- {{/*Include "official/user/message/list_btn_sort"*/}} -->
     </div>
     <div class="mails">
-        {{range $k, $v := Stored.list}}
+        {{range $k, $v := $.Stored.list}}
         <div class="item" style="cursor:auto">
             <div>
                 <div class="checkbox checkbox-success">
@@ -70,7 +70,7 @@
 		 <div class="alert alert-warning alert-white rounded">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			<div class="icon"><i class="fa fa-warning"></i></div>
-			<strong><i class="fa fa-smile-o"></i></strong> {{"暂时没有任何数据哟～"|T}}
+			<strong><i class="fa fa-smile-o"></i></strong> {{"暂时没有任何数据哟～"|$.T}}
 		 </div>
         {{end}}
     </div><!-- /.mails -->
@@ -82,9 +82,9 @@ $(function(){
     $('#delete-selected').on('click',function(){
         var s=$('.mails input:checkbox[id^=check-]:checked');
         if(s.length<=0){
-            return App.message({title:App.i18n.SYS_INFO,text:'{{"请选中要删除的项"|T}}',type:'warning'});
+            return App.message({title:App.i18n.SYS_INFO,text:'{{"请选中要删除的项"|$.T}}',type:'warning'});
         }
-        if(!confirm('{{"确定要删除选中的这些消息码？"|T}}')) return;
+        if(!confirm('{{"确定要删除选中的这些消息码？"|$.T}}')) return;
         console.dir(s.serializeArray())
         $.post(BACKEND_URL+'/user/message/delete',s.serializeArray(),function(r){
             if(r.Code!=1) return App.message({title:App.i18n.SYS_INFO,text:r.Info,type:'error'});

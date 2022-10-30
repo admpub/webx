@@ -3,24 +3,24 @@
   <div class="modal-content tx-size-sm bd-0">
     <div class="modal-body pd-0">
       <div class="modal-header pd-x-10">
-        <h5 class="modal-title">{{"发表评论"|T}}</h5>
+        <h5 class="modal-title">{{"发表评论"|$.T}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      {{- Set "comment_form.in_modal" true -}}
+      {{- $.Set "comment_form.in_modal" true -}}
       <div class="row no-gutters">
           <div class="col-lg-12">
               <div class="pd-10">
                 <div id="reply-comment-blockquote" class="comment-content" style="display:none">
-                {{"回复评论"|T}}:
+                {{"回复评论"|$.T}}:
                 <blockquote class="blockquote">
                   <div class="mb-0 tx-size-xs tx-inverse" id="reply-comment-content"></div>
                   <footer class="blockquote-footer tx-size-sm" id="reply-comment-author"></footer>
                 </blockquote>
                 </div>
                 {{Include "#default#article/comment_form"}}
-                {{- Set "comment_form.in_modal" false -}}
+                {{- $.Set "comment_form.in_modal" false -}}
               </div>
           </div><!-- col-12 -->
         </div><!-- row -->

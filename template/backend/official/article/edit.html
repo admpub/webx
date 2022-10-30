@@ -1,9 +1,9 @@
 {{Extend "layout"}}
-{{Block "title"}}{{if HasSuffix URL.Path "/add"}}{{"添加资讯"|T}}{{else}}{{"修改资讯"|T}}{{end}}{{/Block}}
+{{Block "title"}}{{if HasSuffix $.URL.Path "/add"}}{{"添加资讯"|$.T}}{{else}}{{"修改资讯"|$.T}}{{end}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
-<li><a href="{{BackendURL}}/official/article/index">{{"资讯管理"|T}}</a></li>
-<li class="active">{{if HasSuffix URL.Path "/add"}}{{"添加"|T}}{{else}}{{"修改"|T}}{{end}}</li>
+<li><a href="{{BackendURL}}/official/article/index">{{"资讯管理"|$.T}}</a></li>
+<li class="active">{{if HasSuffix $.URL.Path "/add"}}{{"添加"|$.T}}{{else}}{{"修改"|$.T}}{{end}}</li>
 {{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" type="text/css" href="{{AssetsURL}}/js/jquery.select2/select2.css" />
@@ -15,69 +15,69 @@
     <div class="col-md-12">
         <div class="block-flat">
           <div class="header">							
-            <h3>{{if HasSuffix URL.Path "/add"}}{{"添加资讯"|T}}{{else}}{{"修改资讯"|T}}{{end}}</h3>
+            <h3>{{if HasSuffix $.URL.Path "/add"}}{{"添加资讯"|$.T}}{{else}}{{"修改资讯"|$.T}}{{end}}</h3>
           </div>
           <div class="content">
               <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"资讯分类"|T}}</label>
+                <label class="col-sm-2 control-label">{{"资讯分类"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$v := (Formx "categoryId").Uint}}
+                  {{$v := ($.Formx "categoryId").Uint}}
                   <select name="categoryId" class="form-control" id="categoryId">
                     <option value=""></option>
-                    {{range $k, $c := Stored.categoryList}}
+                    {{range $k, $c := $.Stored.categoryList}}
                     <option value="{{$c.Id}}"{{if eq $c.Id $v}} selected="selected"{{end}}>{{$c.Name}}</option>
                     {{end}}
                   </select>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"资讯类型"|T}}</label>
+                <label class="col-sm-2 control-label">{{"资讯类型"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := Form "sourceTable"}}
+                  {{$v := $.Form "sourceTable"}}
                   <select name="sourceTable" class="form-control" id="sourceTable">
-                    <option value="">{{`默认`|T}}</option>
-                    {{range $k, $c := Stored.sourceTableList}}
+                    <option value="">{{`默认`|$.T}}</option>
+                    {{range $k, $c := $.Stored.sourceTableList}}
                     <option value="{{$c.K}}"{{if eq $c.K $v}} selected="selected"{{end}}>{{$c.V}}</option>
                     {{end}}
                   </select>
                 </div>
                 <label class="col-sm-2 control-label" id="source-id-label" style="display:none"></label>
                 <div class="col-sm-3" id="source-id-input" style="display:none">
-                  {{$v := Form "sourceId"}}
+                  {{$v := $.Form "sourceId"}}
                   <input type="text" class="form-control" id="sourceId" name="sourceId" value="{{$v}}" data-init="{{$v}}">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"资讯标题"|T}}</label>
+                <label class="col-sm-2 control-label">{{"资讯标题"|$.T}}</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" required name="title" value="{{Form "title"}}">
+                    <input type="text" class="form-control" required name="title" value="{{$.Form "title"}}">
                 </div>
               </div>
               <div class="form-group">
-                  <label class="col-sm-2 control-label">{{"封面图"|T}}</label>
+                  <label class="col-sm-2 control-label">{{"封面图"|$.T}}</label>
                   <div class="col-sm-8">
                     <div class="avatar-upload">
-                      {{$image := Form "image"}}
+                      {{$image := $.Form "image"}}
                       <img src="{{$image|Default (AssetsURL "/images/user_128.png")}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
                       <input id="fileupload" type="file" name="files[]">
                       <input type="hidden" id="article-image" name="image" value="{{$image}}" />
-                      <input type="hidden" id="article-image-original" name="imageOriginal" value="{{Form "imageOriginal"}}" />
+                      <input type="hidden" id="article-image-original" name="imageOriginal" value="{{$.Form "imageOriginal"}}" />
                       <div id="progress" class="overlay"></div>
                     </div>
                   </div>
                 </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"资讯摘要"|T}}</label>
+                <label class="col-sm-2 control-label">{{"资讯摘要"|$.T}}</label>
                 <div class="col-sm-8">
-                  <textarea class="form-control" name="summary" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-validation-threshold="10">{{Form "summary"}}</textarea>
+                  <textarea class="form-control" name="summary" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-validation-threshold="10">{{$.Form "summary"}}</textarea>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"编辑器类型"|T}}</label>
+                <label class="col-sm-2 control-label">{{"编辑器类型"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$contype := Form `contype` `html`}}
-                  {{- range Stored.contypes -}}
+                  {{$contype := $.Form `contype` `html`}}
+                  {{- range $.Stored.contypes -}}
                   <div class="radio radio-primary radio-inline">
                       <input type="radio" value="{{.K}}" name="contype" id="contype-{{.K}}"{{if eq $contype .K}} checked{{end}}>
                       <label for="contype-{{.K}}">{{.V}}</label>
@@ -86,50 +86,50 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"资讯内容"|T}}</label>
+                <label class="col-sm-2 control-label">{{"资讯内容"|$.T}}</label>
                 <div class="col-sm-8">
                   <div class="checkbox checkbox-primary">
-                      <input type="checkbox" value="1" name="syncRemoteImage" id="syncRemoteImage"{{if eq (Form `syncRemoteImage`) `1`}} checked{{end}}>
-                      <label for="syncRemoteImage">{{`自动下载远程图片`|T}}</label>
+                      <input type="checkbox" value="1" name="syncRemoteImage" id="syncRemoteImage"{{if eq ($.Form `syncRemoteImage`) `1`}} checked{{end}}>
+                      <label for="syncRemoteImage">{{`自动下载远程图片`|$.T}}</label>
                   </div>
                   <div id="content-container">
-                  <textarea name="content" data-editor-name="tinymce" class="form-control" cols="50" rows="20" id="content" placeholder="{{`资讯内容`|T}}" action="{{BackendUploadURL ``}}">{{Form "content"}}</textarea>
+                  <textarea name="content" data-editor-name="tinymce" class="form-control" cols="50" rows="20" id="content" placeholder="{{`资讯内容`|$.T}}" action="{{BackendUploadURL ``}}">{{$.Form "content"}}</textarea>
                   </div>
                   <div class="help-block">
-                    {{`支持内容隐藏标签`|T}}: <strong>[hide]</strong><code>{{`隐藏的内容`|T}}</code><strong>[/hide]</strong> {{`或者指定条件标识`|T}} <strong>[hide:</strong><code>{{`条件标识`|T}}</code><strong>]</strong><code>{{`隐藏的内容`|T}}</code><strong>[/hide]</strong><br />
-                    {{`在不指定条件标识的情况下采用默认条件标识: comment`|T}}<br />
-                    {{`支持以下`|T}}<code>{{`条件标识`|T}}</code>:<br />
-                    {{- range Stored.contentHideTags -}}
+                    {{`支持内容隐藏标签`|$.T}}: <strong>[hide]</strong><code>{{`隐藏的内容`|$.T}}</code><strong>[/hide]</strong> {{`或者指定条件标识`|$.T}} <strong>[hide:</strong><code>{{`条件标识`|$.T}}</code><strong>]</strong><code>{{`隐藏的内容`|$.T}}</code><strong>[/hide]</strong><br />
+                    {{`在不指定条件标识的情况下采用默认条件标识: comment`|$.T}}<br />
+                    {{`支持以下`|$.T}}<code>{{`条件标识`|$.T}}</code>:<br />
+                    {{- range $.Stored.contentHideTags -}}
                     <code>{{.K}}</code>: {{.H.description|Default .V}}<br />
                     {{- end -}}
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                  <label class="col-sm-2 control-label">{{"资讯状态"|T}}</label>
+                  <label class="col-sm-2 control-label">{{"资讯状态"|$.T}}</label>
                   <div class="col-sm-3">
-                    {{$v := Form "display"}}
+                    {{$v := $.Form "display"}}
                     <div class="radio radio-success radio-inline">
-                        <input type="radio" value="Y" name="display" id="display-Y"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}> <label for="display-Y">{{"显示"|T}}</label>
+                        <input type="radio" value="Y" name="display" id="display-Y"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}> <label for="display-Y">{{"显示"|$.T}}</label>
                     </div>
                       <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="N" name="display" id="display-N"{{if eq $v "N"}} checked{{end}}> <label for="display-N">{{"隐藏"|T}}</label>
+                        <input type="radio" value="N" name="display" id="display-N"{{if eq $v "N"}} checked{{end}}> <label for="display-N">{{"隐藏"|$.T}}</label>
                       </div>
                   </div>
-                  <label class="col-sm-2 control-label">{{"售价"|T}}</label>
+                  <label class="col-sm-2 control-label">{{"售价"|$.T}}</label>
                   <div class="col-sm-3">
-                    <input type="number" class="form-control" name="price" value="{{Form `price`}}" min="0" step="0.01">
+                    <input type="number" class="form-control" name="price" value="{{$.Form `price`}}" min="0" step="0.01">
                   </div>
                 </div>
               <div class="form-group">
-                  <label class="col-sm-2 control-label">{{"评论开关"|T}}</label>
+                  <label class="col-sm-2 control-label">{{"评论开关"|$.T}}</label>
                   <div class="col-sm-8">
-                    {{$closeComment := Form "closeComment"}}
+                    {{$closeComment := $.Form "closeComment"}}
                     <div class="radio radio-success radio-inline">
-                      <input type="radio" value="N" name="closeComment" id="closeComment-N"{{if or (eq $closeComment "N") (eq $closeComment "")}} checked{{end}} onclick="$('#comment-settings').removeClass('hide');"> <label for="closeComment-N">{{"允许评论"|T}}</label>
+                      <input type="radio" value="N" name="closeComment" id="closeComment-N"{{if or (eq $closeComment "N") (eq $closeComment "")}} checked{{end}} onclick="$('#comment-settings').removeClass('hide');"> <label for="closeComment-N">{{"允许评论"|$.T}}</label>
                     </div>
                     <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="Y" name="closeComment" id="closeComment-Y"{{if eq $closeComment "Y"}} checked{{end}} onclick="$('#comment-settings').addClass('hide');"> <label for="closeComment-Y">{{"关闭评论"|T}}</label>
+                        <input type="radio" value="Y" name="closeComment" id="closeComment-Y"{{if eq $closeComment "Y"}} checked{{end}} onclick="$('#comment-settings').addClass('hide');"> <label for="closeComment-Y">{{"关闭评论"|$.T}}</label>
                     </div>
 
                     <!-- comment-settings -->
@@ -137,22 +137,22 @@
                   <div id="comment-settings" class="fieldset bg-fc{{if eq $closeComment "Y"}} hide{{end}}">
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">{{"显示评论"|T}}</label>
+                    <label class="col-sm-2 control-label">{{"显示评论"|$.T}}</label>
                     <div class="col-sm-8">
-                      {{$v := Form "commentAutoDisplay"}}
+                      {{$v := $.Form "commentAutoDisplay"}}
                       <div class="radio radio-success radio-inline">
-                        <input type="radio" value="Y" name="commentAutoDisplay" id="commentAutoDisplay-Y"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}> <label for="commentAutoDisplay-Y">{{"直接显示"|T}}</label>
+                        <input type="radio" value="Y" name="commentAutoDisplay" id="commentAutoDisplay-Y"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}> <label for="commentAutoDisplay-Y">{{"直接显示"|$.T}}</label>
                       </div>
                       <div class="radio radio-primary radio-inline">
-                          <input type="radio" value="N" name="commentAutoDisplay" id="commentAutoDisplay-N"{{if eq $v "N"}} checked{{end}}> <label for="commentAutoDisplay-N">{{"需要审核"|T}}</label>
+                          <input type="radio" value="N" name="commentAutoDisplay" id="commentAutoDisplay-N"{{if eq $v "N"}} checked{{end}}> <label for="commentAutoDisplay-N">{{"需要审核"|$.T}}</label>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                      <label class="col-sm-2 control-label">{{"允许评论"|T}}</label>
+                      <label class="col-sm-2 control-label">{{"允许评论"|$.T}}</label>
                       <div class="col-sm-8">
-                        {{$v := Form "commentAllowUser"}}
-                        {{range $i,$r := Stored.allowUsers}}
+                        {{$v := $.Form "commentAllowUser"}}
+                        {{range $i,$r := $.Stored.allowUsers}}
                         <div class="radio radio-success radio-inline">
                           <input type="radio" value="{{$r.K}}" name="commentAllowUser" id="commentAllowUser-{{$r.K}}"{{if or (eq $v $r.K) (and (eq $v "") (eq $r.K "all") )}} checked{{end}}> <label for="commentAllowUser-{{$r.K}}">{{$r.V}}</label>
                         </div>
@@ -166,15 +166,15 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">{{"标签"|T}}</label>
+                  <label class="col-sm-2 control-label">{{"标签"|$.T}}</label>
                   <div class="col-sm-8">
-                    <input id="select2tags" name="tags" type="hidden" value="{{Form "tags"}}" />
+                    <input id="select2tags" name="tags" type="hidden" value="{{$.Form "tags"}}" />
                   </div>
                 </div>
               <div class="form-group form-submit-group">
 									<div class="col-sm-9 col-sm-offset-2">
-									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|T}}</button>
-									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|T}}</button>
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|$.T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|$.T}}</button>
 									</div>
 							</div>
             </form>
@@ -206,7 +206,7 @@ $(function(){
     checked.trigger('click');
   }
   App.editor.selectPage('#sourceId',{
-    data: '{{URL.Path}}?operation=selectSource',
+    data: '{{$.URL.Path}}?operation=selectSource',
     params: function(){
       return {sourceTable:$('#sourceTable').val()};
     }
@@ -222,7 +222,7 @@ $(function(){
       $('#source-id-label,#source-id-input').hide();
     }
   }).trigger('change');
-  var tagList={{Stored.tagList|JSONEncode|ToJS}};
+  var tagList={{$.Stored.tagList|JSONEncode|ToJS}};
   App.select2.tags('#select2tags',tagList);
 });
 </script>

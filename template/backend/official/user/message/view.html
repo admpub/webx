@@ -1,5 +1,5 @@
 {{Extend "layout"}}
-{{Block "title"}}{{"消息详情"|T}}{{/Block}}
+{{Block "title"}}{{"消息详情"|$.T}}{{/Block}}
 {{Block "head"}}
 {{/Block}}
 {{Block "bodyNav"}}
@@ -7,26 +7,26 @@
 {{/Block}}
 {{Block "bodyClass"}}no-padding{{/Block}}
 {{Block "main"}}
-{{$data := Stored.data}}
-{{$replyList := Stored.replyList}}
-{{$msgUser := Stored.msgUser}}
-{{$user := Stored.user}}
+{{$data := $.Stored.data}}
+{{$replyList := $.Stored.replyList}}
+{{$msgUser := $.Stored.msgUser}}
+{{$user := $.Stored.user}}
 <div class="message">
     <div class="head">
         <h3>
             {{$msgUser.Name}}
             {{- if eq $msgUser.Type "customer" -}}
-            <span class="badge badge-warning">{{"前台客户"|T}}</span>
+            <span class="badge badge-warning">{{"前台客户"|$.T}}</span>
             {{- else -}}
-            <span class="badge badge-default">{{"后台管理"|T}}</span>
+            <span class="badge badge-default">{{"后台管理"|$.T}}</span>
             {{- end -}}
             <span>
-                <a href="{{BackendURL}}/user/message/inbox" data-toggle="tooltip" title="{{T "返回收件箱"}}"><i class="fa fa-inbox"></i></a>
-                <a href="{{BackendURL}}/user/message/send?replyId={{$data.Id}}" data-toggle="tooltip" title="{{T "回复消息"}}"><i class="fa fa-reply"></i></a>
+                <a href="{{BackendURL}}/user/message/inbox" data-toggle="tooltip" title="{{$.T "返回收件箱"}}"><i class="fa fa-inbox"></i></a>
+                <a href="{{BackendURL}}/user/message/send?replyId={{$data.Id}}" data-toggle="tooltip" title="{{$.T "回复消息"}}"><i class="fa fa-reply"></i></a>
             </span>
         </h3>
         <h4>
-            {{$data.Title|Default (T "无标题")}}
+            {{$data.Title|Default ($.T "无标题")}}
             <span>
             <a href="#"><i class="fa fa-star"></i></a>
             <b data-toggle="tooltip" title="{{(Date $data.Created).Format "2006-01-02 15:04:05"}}">{{$data.Created|TsHumanize}}</b>

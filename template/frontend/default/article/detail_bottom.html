@@ -1,4 +1,4 @@
-{{Strip}}{{$sourceInfo := Stored.sourceInfo}}
+{{Strip}}{{$sourceInfo := $.Stored.sourceInfo}}
 {{- if and $sourceInfo $sourceInfo.X -}}
 {{- $detailURL := $sourceInfo.H.detailURL -}}
   <div class="container-wrapper bg-gray-lighter pd-y-20 pd-sm-y-30 pd-lg-y-40">
@@ -8,7 +8,7 @@
           <h4 class="tx-inverse">{{$sourceInfo.V}}</h4>
           <p class="mg-b-0 tx-size-sm">{{$sourceInfo.H.Summary}}</p>
         </div>
-        <a href="{{$detailURL}}" class="btn btn-inverse tx-uppercase tx-size-12 tx-medium tx-spacing-2 pd-y-15">{{"查看更多"|T}} <i class="fa fa-angle-right mg-l-5"></i></a>
+        <a href="{{$detailURL}}" class="btn btn-inverse tx-uppercase tx-size-12 tx-medium tx-spacing-2 pd-y-15">{{"查看更多"|$.T}} <i class="fa fa-angle-right mg-l-5"></i></a>
       </div><!-- d-flex -->
     </div><!-- container -->
   </div><!-- container-wrapper -->

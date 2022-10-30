@@ -1,37 +1,37 @@
 {{Strip}}
 <div class="pd-30 bd-0 mg-t-20 bg-white">
-  {{- $customer := Stored.info -}}
+  {{- $customer := $.Stored.info -}}
   {{- $noSet := T "未设置" -}}
     <dl class="row">
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"客户ID"|T}}</dt>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"客户ID"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.Id}}</dd>
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"用户名"|T}}</dt>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"用户名"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.Name}}</dd>
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"用户组"|T}}</dt>
-      <dd class="col-sm-9">{{if $customer.Group}}{{$customer.Group.Name}}{{else}}{{"普通会员"|T}}{{end}}</dd>
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"用户等级"|T}}</dt>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"用户组"|$.T}}</dt>
+      <dd class="col-sm-9">{{if $customer.Group}}{{$customer.Group.Name}}{{else}}{{"普通会员"|$.T}}{{end}}</dd>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"用户等级"|$.T}}</dt>
       <dd class="col-sm-9">{{if $customer.Level}}{{$customer.Level.Name}}{{else}}-{{end}}</dd>
       {{if $customer.Agent}}
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"代理等级"|T}}</dt>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"代理等级"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.Agent.Name}}</dd>
       {{end}}
       <dd class="col-sm-9 offset-sm-3">-</dd>
-      <!-- <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"真实姓名"|T}}</dt>
+      <!-- <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"真实姓名"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.RealName|Default $noSet}} &nbsp;</dd>
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"身份证号"|T}}</dt>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"身份证号"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.IdCardNo|Default $noSet}} &nbsp;</dd> -->
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"手机号码"|T}}</dt>
-      <dd class="col-sm-9">{{$customer.Mobile|Default $noSet}} {{if eq $customer.MobileBind "Y"}}<i class="fa fa-check tx-success" title="{{"已验证"|T}}"></i>{{end}} &nbsp;</dd>
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"电子邮箱"|T}}</dt>
-      <dd class="col-sm-9">{{$customer.Email|Default $noSet}} {{if eq $customer.EmailBind "Y"}}<i class="fa fa-check tx-success" title="{{"已验证"|T}}"></i>{{end}} &nbsp;</dd>
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"性别"|T}}</dt>
-      <dd class="col-sm-9">{{if eq $customer.Gender "male"}}{{"男"|T}}{{else if eq $customer.Gender "female"}}{{"女"|T}}{{else}}{{"保密"|T}}{{end}}</dd>
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"购买授权数量"|T}}</dt>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"手机号码"|$.T}}</dt>
+      <dd class="col-sm-9">{{$customer.Mobile|Default $noSet}} {{if eq $customer.MobileBind "Y"}}<i class="fa fa-check tx-success" title="{{"已验证"|$.T}}"></i>{{end}} &nbsp;</dd>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"电子邮箱"|$.T}}</dt>
+      <dd class="col-sm-9">{{$customer.Email|Default $noSet}} {{if eq $customer.EmailBind "Y"}}<i class="fa fa-check tx-success" title="{{"已验证"|$.T}}"></i>{{end}} &nbsp;</dd>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"性别"|$.T}}</dt>
+      <dd class="col-sm-9">{{if eq $customer.Gender "male"}}{{"男"|$.T}}{{else if eq $customer.Gender "female"}}{{"女"|$.T}}{{else}}{{"保密"|$.T}}{{end}}</dd>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"购买授权数量"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.Licenses}} &nbsp;</dd>
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"说明"|T}}</dt>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"说明"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.Description|Default $noSet|Nl2br}} &nbsp;</dd>
-      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"推荐人"|T}}</dt>
-      <dd class="col-sm-9">{{if gt $customer.InviterId 0}}<a href="{{FrontendURL}}/u/{{$customer.InviterId}}" target="_blank">{{$customer.InviterId}}</a>{{else}}{{"无"|T}}{{end}} &nbsp;</dd>
+      <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"推荐人"|$.T}}</dt>
+      <dd class="col-sm-9">{{if gt $customer.InviterId 0}}<a href="{{FrontendURL}}/u/{{$customer.InviterId}}" target="_blank">{{$customer.InviterId}}</a>{{else}}{{"无"|$.T}}{{end}} &nbsp;</dd>
     </dl>
 </div>
 {{/Strip}}

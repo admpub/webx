@@ -1,13 +1,13 @@
 {{Strip}}<div class="col-lg mg-t-20 mg-lg-t-0">
     <div class="card bd-0 rounded-0 bg-transparent">
       <div class="card-header bg-transparent pd-x-0 pd-t-0 bd-b-0 tx-size-sm">
-        <div class="lh-1 tx-uppercase tx-bold tx-gray-dark tx-size-14">{{"最新资讯"|T}}</div>
+        <div class="lh-1 tx-uppercase tx-bold tx-gray-dark tx-size-14">{{"最新资讯"|$.T}}</div>
       </div><!-- card-header -->
       <div class="list-group list-group-transparent">
-        {{range $k,$v := Stored.newsList}}
+        {{range $k,$v := $.Stored.newsList}}
         <div class="list-group-item d-block">
-          <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="tx-gray-dark tx-medium lh-4 tx-size-sm">{{$v.Title}}</a>
-          <span class="tx-size-xs tx-gray-light d-block mg-t-5">{{(Date $v.Created).Format (printf "%s%s" (T "2006年1月2日") " 15:04")}}</span>
+          <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="tx-gray-dark tx-medium lh-4 tx-size-sm">{{$v.Title}}</a>
+          <span class="tx-size-xs tx-gray-light d-block mg-t-5">{{(Date $v.Created).Format (printf "%s%s" ($.T "2006年1月2日") " 15:04")}}</span>
         </div>
         {{end}}
       </div><!-- list-group -->
@@ -15,12 +15,12 @@
 
     <div class="card bd-0 rounded-0 bg-transparent mg-t-60">
       <div class="card-header bg-transparent pd-x-0 pd-t-0 bd-b-0 tx-size-sm">
-        <div class="lh-1 tx-uppercase tx-bold tx-gray-dark tx-size-14">{{"分类"|T}}</div>
+        <div class="lh-1 tx-uppercase tx-bold tx-gray-dark tx-size-14">{{"分类"|$.T}}</div>
       </div><!-- card-header -->
       <div class="list-group list-group-transparent">
-        {{range $k, $v := Stored.tagList}}
+        {{range $k, $v := $.Stored.tagList}}
         <div class="list-group-item">
-          <a href="{{FrontendURL}}/articlesBy/{{$product.Ident}}{{Ext}}?tag={{$v.Name}}" class="tx-gray-dark lh-1 tx-size-sm">{{$v.Name}}</a>
+          <a href="{{FrontendURL}}/articlesBy/{{$product.Ident}}{{$.Ext}}?tag={{$v.Name}}" class="tx-gray-dark lh-1 tx-size-sm">{{$v.Name}}</a>
         </div>
         {{end}}
       </div><!-- list-group -->
@@ -30,7 +30,7 @@
       <div class="overlay">
         <img src="http://via.placeholder.com/700x1000" class="img-fluid rounded" alt="">
         <div class="overlay-block pd-20 rounded bg-opacity-inverse-7">
-          <p class="tx-white op-3 mg-b-20 tx-size-10 tx-uppercase bg-danger pd-y-3 pd-x-10 d-inline-block">Sponsored ({{"赞助"|T}})</p>
+          <p class="tx-white op-3 mg-b-20 tx-size-10 tx-uppercase bg-danger pd-y-3 pd-x-10 d-inline-block">Sponsored ({{"赞助"|$.T}})</p>
           <p class="lh-3 tx-medium mg-b-20"><a href="" class="tx-white">Learn Five Design Tips Every Developer Should Know</a></p>
           <p class="tx-size-xs tx-white op-2 mg-b-20">
             <span class="mg-r-20"><i class="fa fa-calendar-o mg-r-5"></i> Mar 27, 2017</span>

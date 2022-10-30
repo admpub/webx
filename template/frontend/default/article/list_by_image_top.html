@@ -1,20 +1,20 @@
 {{Strip}}{{Extend "base"}}
 {{Block "title"}}
-{{- "资讯列表"|T}} - {{Stored.product.Name|Title}}: {{Stored.product.Slogan -}}
+{{- "资讯列表"|$.T}} - {{$.Stored.product.Name|Title}}: {{$.Stored.product.Slogan -}}
 {{/Block}}
-{{Block "keywords"}}{{Stored.product.Keywords}}{{/Block}}
-{{Block "description"}}{{Stored.product.Summary}}{{/Block}}
+{{Block "keywords"}}{{$.Stored.product.Keywords}}{{/Block}}
+{{Block "description"}}{{$.Stored.product.Summary}}{{/Block}}
 {{Block "bodyAttr"}} class="pd-t-70"{{/Block}}
 {{Block "body"}}
-{{$product := Stored.product}}
+{{$product := $.Stored.product}}
 {{Include "#default#header"}}
 
 <div class="bb-mainpanel">
     {{Include "#default#article/_list_top"}}
 
     <div class="container pd-b-40">
-    {{$end := Sub (len Stored.articles) 1}}
-    {{range $k, $v := Stored.articles}}
+    {{$end := Sub (len $.Stored.articles) 1}}
+    {{range $k, $v := $.Stored.articles}}
     {{if Eq (Math "mod" $k 4) 0}}
       {{if gt $k 0}}</div><!-- card-deck -->{{end}}
       <div class="card-deck{{if ge $k 4}} mg-t-20{{end}}">
@@ -22,7 +22,7 @@
         <div class="card bd-0 rounded-0{{if not $v.Image}} card-inverse bg-indigo{{end}}">
             <!-- bg-indigo/bg-info -->
           {{if $v.Image}}
-          <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+          <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
             <figure class="effect-shine">
               <img class="img-fluid wd-100p" src="{{$v.Image}}" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
               <figcaption></figcaption>
@@ -33,9 +33,9 @@
             <div class="d-flex justify-content-center align-items-center{{if $v.Image}} tx-gray-light{{end}} tx-size-12">
               <span class="d-inline-block tx-info">Health</span>
               <i class="fa fa-circle tx-size-8 mg-x-10 tx-gray-lighter"></i>
-              <span class="d-inline-block">{{(Date $v.Created).Format (T "2006年1月2日")}}</span>
+              <span class="d-inline-block">{{(Date $v.Created).Format ($.T "2006年1月2日")}}</span>
             </div><!-- d-flex -->
-            <h6 class="lh-5 mg-t-10 mg-b-0"><a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="{{if not $v.Image}}tx-white{{else}}tx-inverse{{end}}">{{$v.Title}}</a></h6>
+            <h6 class="lh-5 mg-t-10 mg-b-0"><a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="{{if not $v.Image}}tx-white{{else}}tx-inverse{{end}}">{{$v.Title}}</a></h6>
             {{if not $v.Image}}
             <p class="tx-size-xs mg-b-30">{{$v.Summary}}</p>
             {{end}}
@@ -62,7 +62,7 @@
     {{end}}
 
       <nav class="mg-t-60 d-flex justify-content-center">
-        {{Stored.pagination.Render "#default#pagination_circle"}}
+        {{$.Stored.pagination.Render "#default#pagination_circle"}}
       </nav>
 
     </div><!-- container -->

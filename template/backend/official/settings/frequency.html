@@ -1,4 +1,4 @@
-{{$frequency := Stored.frequency}}
+{{$frequency := $.Stored.frequency}}
 <script type="text/javascript">
 function onSelectDbAccount(a) {
     if (a.value) {
@@ -9,95 +9,95 @@ function onSelectDbAccount(a) {
 }
 </script>
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"网站限流"|T}}</label>
+    <label class="col-sm-2 control-label">{{"网站限流"|$.T}}</label>
     <div class="col-sm-10">
         {{$on := $frequency.rateLimiter.ValueObject.On|Default false}}
         <span class="radio radio-primary radio-inline">
             <input type="radio" name="frequency[rateLimiter][value][On]" value="1"{{if $on}} checked{{end}} id="frequency-rateLimiter-On-1" onclick="$('#frequency-rateLimiter-settings').removeClass('hide')">
-            <label for="frequency-rateLimiter-On-1">{{"启用"|T}}</label>
+            <label for="frequency-rateLimiter-On-1">{{"启用"|$.T}}</label>
         </span>
         <span class="radio radio-primary radio-inline">
             <input type="radio" name="frequency[rateLimiter][value][On]" value="0"{{if not $on}} checked{{end}} id="frequency-rateLimiter-On-0" onclick="$('#frequency-rateLimiter-settings:not(.hide)').addClass('hide')">
-            <label for="frequency-rateLimiter-On-0">{{"禁用"|T}}</label>
+            <label for="frequency-rateLimiter-On-0">{{"禁用"|$.T}}</label>
         </span>
         <div class="fieldset bg-fc{{if not $on}} hide{{end}}" id="frequency-rateLimiter-settings">
             <div class="form-group xs-padding-top">
                 <div class="alert alert-warning no-margin">
-                    <strong class="text-danger">!</strong> {{`带此标记的参数代表修改后需要重启还会生效`|T}}
+                    <strong class="text-danger">!</strong> {{`带此标记的参数代表修改后需要重启还会生效`|$.T}}
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"最大请求量"|T}}
+                <label class="col-sm-2 control-label">{{"最大请求量"|$.T}}
                     <strong class="text-danger">!</strong>
                 </label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" name="frequency[rateLimiter][value][Max]" value="{{$frequency.rateLimiter.ValueObject.Max}}" placeholder="100" min="0">
-                    <div class="help-block">{{"单位持续时间的最大请求量"|T}}</div>
+                    <div class="help-block">{{"单位持续时间的最大请求量"|$.T}}</div>
                 </div>
-                <label class="col-sm-2 control-label">{{"持续时长"|T}}
+                <label class="col-sm-2 control-label">{{"持续时长"|$.T}}
                     <strong class="text-danger">!</strong>
                 </label>
                 <div class="col-sm-4">
                     <div class="input-group">
                         <input type="number" class="form-control" name="frequency[rateLimiter][value][Duration]" value="{{$frequency.rateLimiter.ValueObject.Duration}}" placeholder="60" min="0">
-                        <span class="input-group-addon">{{"秒"|T}}</span>
+                        <span class="input-group-addon">{{"秒"|$.T}}</span>
                     </div>
-                    <div class="help-block">{{"单位持续时间"|T}}</div>
+                    <div class="help-block">{{"单位持续时间"|$.T}}</div>
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"Key前缀"|T}}
+                <label class="col-sm-2 control-label">{{"Key前缀"|$.T}}
                     <strong class="text-danger">!</strong>
                 </label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" name="frequency[rateLimiter][value][Prefix]" value="{{$frequency.rateLimiter.ValueObject.Prefix}}" placeholder="LIMIT:" min="0">
                 </div>
-                <label class="col-sm-2 control-label">{{"报错页面"|T}}
+                <label class="col-sm-2 control-label">{{"报错页面"|$.T}}
                     <strong class="text-danger">!</strong>
                 </label>
                 <div class="col-sm-4">{{$skipInternalError := $frequency.rateLimiter.ValueObject.SkipInternalError |
                     Default false}}
                     <span class="radio radio-primary radio-inline">
                         <input type="radio" name="frequency[rateLimiter][value][SkipInternalError]" value="1"{{if $skipInternalError}} checked{{end}} id="frequency-rateLimiter-SkipInternalError-1">
-                        <label for="frequency-rateLimiter-SkipInternalError-1">{{"不限流"|T}}</label>
+                        <label for="frequency-rateLimiter-SkipInternalError-1">{{"不限流"|$.T}}</label>
                     </span>
                     <span class="radio radio-primary radio-inline">
                         <input type="radio" name="frequency[rateLimiter][value][SkipInternalError]" value="0"{{if not $skipInternalError}} checked{{end}} id="frequency-rateLimiter-SkipInternalError-0">
-                        <label for="frequency-rateLimiter-SkipInternalError-0">{{"限流"|T}}</label>
+                        <label for="frequency-rateLimiter-SkipInternalError-0">{{"限流"|$.T}}</label>
                     </span>
                 </div>
             </div><!-- form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"选择账号"|T}}
+                <label class="col-sm-2 control-label">{{"选择账号"|$.T}}
                     <strong class="text-danger">!</strong>
                 </label>
                 <div class="col-sm-10">{{$dbAccountID := Uint $frequency.rateLimiter.ValueObject.DBAccountID}}
                     <select class="form-control" name="frequency[rateLimiter][value][DBAccountID]"
                         onchange="onSelectDbAccount(this)">
-                        <option value="">{{`- 账号 -`|T}}</option>
-                        {{- range $k, $v := Stored.dbAccounts -}}
+                        <option value="">{{`- 账号 -`|$.T}}</option>
+                        {{- range $k, $v := $.Stored.dbAccounts -}}
                         <option value="{{$v.Id}}"{{if eq $v.Id $dbAccountID}} selected="selected" {{end}}>
                             {{$v.Title|Default $v.Host}}
                         </option>
                         {{- end -}}
                     </select>
-                    <div class="help-block">{{"选择Redis账号"|T}}</div>
+                    <div class="help-block">{{"选择Redis账号"|$.T}}</div>
                 </div>
             </div><!-- form-group -->
             <div class="form-group{{if gt $dbAccountID 0}} hide{{end}}" id="custom-redis-connection-settings">
-                <label class="col-sm-2 control-label">{{"输入账号"|T}}
+                <label class="col-sm-2 control-label">{{"输入账号"|$.T}}
                     <strong class="text-danger">!</strong>
                 </label>
                 <div class="col-sm-10">
                     <span class="input-group">
-                        <span class="input-group-addon">{{`地址`|T}}</span>
+                        <span class="input-group-addon">{{`地址`|$.T}}</span>
                         <input type="text" class="form-control" name="frequency[rateLimiter][value][RedisAddr]" value="{{$frequency.rateLimiter.ValueObject.RedisAddr}}" placeholder="ip:port">
-                        <span class="input-group-addon">{{`密码`|T}}</span>
+                        <span class="input-group-addon">{{`密码`|$.T}}</span>
                         <input type="text" class="form-control" name="frequency[rateLimiter][value][RedisPassword]" value="{{$frequency.rateLimiter.ValueObject.RedisPassword}}">
-                        <span class="input-group-addon">{{`库编号`|T}}</span>
+                        <span class="input-group-addon">{{`库编号`|$.T}}</span>
                         <input type="number" class="form-control" name="frequency[rateLimiter][value][RedisDB]" value="{{$frequency.rateLimiter.ValueObject.RedisDB}}" min="0" step="1">
                     </span>
-                    <div class="help-block">{{"输入Redis账号"|T}}, {{"如果地址留空则代表不使用Redis，使用内存保存"|T}}</div>
+                    <div class="help-block">{{"输入Redis账号"|$.T}}, {{"如果地址留空则代表不使用Redis，使用内存保存"|$.T}}</div>
                 </div>
             </div><!-- form-group -->
         </div><!-- fieldset -->
@@ -105,22 +105,22 @@ function onSelectDbAccount(a) {
 </div>
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"短信发送频率"|T}}</label>
+    <label class="col-sm-2 control-label">{{"短信发送频率"|$.T}}</label>
     <div class="col-sm-10">
         <div class="fieldset bg-fc">
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"每日上限"|T}}</label>
+                <label class="col-sm-2 control-label">{{"每日上限"|$.T}}</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" name="frequency[mobile][value][maxPerDay]" value="{{$frequency.mobile.ValueObject.maxPerDay}}" placeholder="10" min="0">
-                    <div class="help-block">{{"前台每个用户每天的发送上限"|T}}</div>
+                    <div class="help-block">{{"前台每个用户每天的发送上限"|$.T}}</div>
                 </div>
-                <label class="col-sm-2 control-label">{{"间隔时长"|T}}</label>
+                <label class="col-sm-2 control-label">{{"间隔时长"|$.T}}</label>
                 <div class="col-sm-4">
                     <div class="input-group">
                         <input type="number" class="form-control" name="frequency[mobile][value][interval]" value="{{$frequency.mobile.ValueObject.interval}}" placeholder="60" min="0">
-                        <span class="input-group-addon">{{"秒"|T}}</span>
+                        <span class="input-group-addon">{{"秒"|$.T}}</span>
                     </div>
-                    <div class="help-block">{{"每次发送之后等待的时长"|T}}</div>
+                    <div class="help-block">{{"每次发送之后等待的时长"|$.T}}</div>
                 </div>
             </div>
         </div><!-- fieldset -->
@@ -129,22 +129,22 @@ function onSelectDbAccount(a) {
 
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"邮件发送频率"|T}}</label>
+    <label class="col-sm-2 control-label">{{"邮件发送频率"|$.T}}</label>
     <div class="col-sm-10">
         <div class="fieldset bg-fc">
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"每日上限"|T}}</label>
+                <label class="col-sm-2 control-label">{{"每日上限"|$.T}}</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" name="frequency[email][value][maxPerDay]" value="{{$frequency.email.ValueObject.maxPerDay}}" placeholder="10" min="0">
-                    <div class="help-block">{{"前台每个用户每天的发送上限"|T}}</div>
+                    <div class="help-block">{{"前台每个用户每天的发送上限"|$.T}}</div>
                 </div>
-                <label class="col-sm-2 control-label">{{"间隔时长"|T}}</label>
+                <label class="col-sm-2 control-label">{{"间隔时长"|$.T}}</label>
                 <div class="col-sm-4">
                     <div class="input-group">
                         <input type="number" class="form-control" name="frequency[email][value][interval]" value="{{$frequency.email.ValueObject.interval}}" placeholder="60" min="0">
-                        <span class="input-group-addon">{{"秒"|T}}</span>
+                        <span class="input-group-addon">{{"秒"|$.T}}</span>
                     </div>
-                    <div class="help-block">{{"每次发送之后等待的时长"|T}}</div>
+                    <div class="help-block">{{"每次发送之后等待的时长"|$.T}}</div>
                 </div>
             </div>
         </div><!-- fieldset -->
@@ -153,22 +153,22 @@ function onSelectDbAccount(a) {
 
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"发送私信"|T}}</label>
+    <label class="col-sm-2 control-label">{{"发送私信"|$.T}}</label>
     <div class="col-sm-10">
         <div class="fieldset bg-fc">
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"每日上限"|T}}</label>
+                <label class="col-sm-2 control-label">{{"每日上限"|$.T}}</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" name="frequency[message][value][maxPerDay]" value="{{$frequency.message.ValueObject.maxPerDay}}" placeholder="10" min="0">
-                    <div class="help-block">{{"前台每个用户每天的发送上限"|T}}, {{"0代表关闭私信功能"|T}}</div>
+                    <div class="help-block">{{"前台每个用户每天的发送上限"|$.T}}, {{"0代表关闭私信功能"|$.T}}</div>
                 </div>
-                <label class="col-sm-2 control-label">{{"间隔时长"|T}}</label>
+                <label class="col-sm-2 control-label">{{"间隔时长"|$.T}}</label>
                 <div class="col-sm-4">
                     <div class="input-group">
                         <input type="number" class="form-control" name="frequency[message][value][interval]" value="{{$frequency.message.ValueObject.interval}}" placeholder="60" min="0">
-                        <span class="input-group-addon">{{"秒"|T}}</span>
+                        <span class="input-group-addon">{{"秒"|$.T}}</span>
                     </div>
-                    <div class="help-block">{{"每次发送之后等待的时长"|T}}, {{"0代表不限制"|T}}</div>
+                    <div class="help-block">{{"每次发送之后等待的时长"|$.T}}, {{"0代表不限制"|$.T}}</div>
                 </div>
             </div>
         </div><!-- fieldset -->
@@ -177,19 +177,19 @@ function onSelectDbAccount(a) {
 
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"发布评论"|T}}</label>
+    <label class="col-sm-2 control-label">{{"发布评论"|$.T}}</label>
     <div class="col-sm-10">
         <div class="fieldset bg-fc">
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"每日上限"|T}}</label>
+                <label class="col-sm-2 control-label">{{"每日上限"|$.T}}</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" name="frequency[comment][value][maxPerDay]" value="{{$frequency.comment.ValueObject.maxPerDay|Default `100`}}" placeholder="100" min="0">
-                    <div class="help-block">{{"前台每个用户每天的发布上限"|T}}, {{"0代表关闭评论功能"|T}}</div>
+                    <div class="help-block">{{"前台每个用户每天的发布上限"|$.T}}, {{"0代表关闭评论功能"|$.T}}</div>
                 </div>
-                <label class="col-sm-2 control-label">{{"待审核上限"|T}}</label>
+                <label class="col-sm-2 control-label">{{"待审核上限"|$.T}}</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" name="frequency[comment][value][maxPending]" value="{{$frequency.comment.ValueObject.maxPending|Default `10`}}" placeholder="10" min="0">
-                    <div class="help-block">{{"前台每个用户的待审核评论上限。达到上限后将无法发布新评论"|T}}, {{"0代表不限制"|T}}</div>
+                    <div class="help-block">{{"前台每个用户的待审核评论上限。达到上限后将无法发布新评论"|$.T}}, {{"0代表不限制"|$.T}}</div>
                 </div>
             </div>
         </div><!-- fieldset -->
@@ -198,19 +198,19 @@ function onSelectDbAccount(a) {
 
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{"发布文章"|T}}</label>
+    <label class="col-sm-2 control-label">{{"发布文章"|$.T}}</label>
     <div class="col-sm-10">
         <div class="fieldset bg-fc">
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"每日上限"|T}}</label>
+                <label class="col-sm-2 control-label">{{"每日上限"|$.T}}</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" name="frequency[article][value][maxPerDay]" value="{{$frequency.article.ValueObject.maxPerDay|Default `100`}}" placeholder="100" min="0">
-                    <div class="help-block">{{"前台每个用户每天的发布上限"|T}}, {{"0代表关闭投稿功能"|T}}</div>
+                    <div class="help-block">{{"前台每个用户每天的发布上限"|$.T}}, {{"0代表关闭投稿功能"|$.T}}</div>
                 </div>
-                <label class="col-sm-2 control-label">{{"待审核上限"|T}}</label>
+                <label class="col-sm-2 control-label">{{"待审核上限"|$.T}}</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" name="frequency[article][value][maxPending]" value="{{$frequency.article.ValueObject.maxPending|Default `10`}}" placeholder="10" min="0">
-                    <div class="help-block">{{"前台每个用户的待审核文章上限。达到上限后将无法发布新文章"|T}}, {{"0代表不限制"|T}}</div>
+                    <div class="help-block">{{"前台每个用户的待审核文章上限。达到上限后将无法发布新文章"|$.T}}, {{"0代表不限制"|$.T}}</div>
                 </div>
             </div>
         </div><!-- fieldset -->

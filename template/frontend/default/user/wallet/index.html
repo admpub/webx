@@ -11,17 +11,17 @@
 
 <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
-    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的钱包"|T}}</h5>
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的钱包"|$.T}}</h5>
     <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
-      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|T}}</a>
-      <span class="breadcrumb-item active">{{"我的钱包"|T}}</span>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.T}}</a>
+      <span class="breadcrumb-item active">{{"我的钱包"|$.T}}</span>
     </nav>
   </div>
 
   <div class="main-body pd-20">
         <div class="row">
-          {{- range $k,$v := Stored.assetTypes -}}
-          {{- $asset := index Stored.assets $v.K -}}
+          {{- range $k,$v := $.Stored.assetTypes -}}
+          {{- $asset := index $.Stored.assets $v.K -}}
           <div class="col-md-6 col-xl-3 mg-b-20">
             <div class="card pd-20 bd-0">
               <div class="d-flex justify-content-between align-items-center">
@@ -37,11 +37,11 @@
                     {{- $asset.Balance -}}
                   </h2>
                   {{- if and (eq $v.K `money`) Config.base.recharge.On -}}
-                  <a href="{{FrontendURL}}/user/wallet/recharge" class="btn btn-xs btn-pink tx-size-xs pd-y-0 pd-x-5" data-toggle="tooltip" title="{{`点击充值`|T}}" target="_blank">{{`充值`|T}}</a>
+                  <a href="{{FrontendURL}}/user/wallet/recharge" class="btn btn-xs btn-pink tx-size-xs pd-y-0 pd-x-5" data-toggle="tooltip" title="{{`点击充值`|$.T}}" target="_blank">{{`充值`|$.T}}</a>
                   {{- end -}}
                   {{- if gt $asset.Freeze 0.0 -}}
                   <span class="tx-size-xs tx-gray-light">
-                    {{- `冻结`|T}}:
+                    {{- `冻结`|$.T}}:
                     {{if $v.H.symbol}}{{$v.H.symbol|ToHTML}}{{end -}}
                     {{- $asset.Freeze -}}
                   </span>
@@ -57,22 +57,22 @@
   <div class="col-lg-12 mg-t-0">
     <div class="card card-table">
       <div class="card-header">
-        <h6 class="card-title">{{"资产流水"|T}}</h6>
+        <h6 class="card-title">{{"资产流水"|$.T}}</h6>
       </div><!-- card-header -->
       <div class="table-responsive">
       <table class="table">
         <thead>
           <tr>
-            <th style="width:130px">{{"时间"|T}}</th>
-            <th style="width:100px">{{"资产"|T}}</th>
-            <th style="width:100px">{{"变动后"|T}}</th>
-            <th class="tx-right" style="width:100px">{{"类型"|T}}</th>
-            <th>{{"说明"|T}}</th>
-            <th style="width:100px">{{"状态"|T}}</th>
+            <th style="width:130px">{{"时间"|$.T}}</th>
+            <th style="width:100px">{{"资产"|$.T}}</th>
+            <th style="width:100px">{{"变动后"|$.T}}</th>
+            <th class="tx-right" style="width:100px">{{"类型"|$.T}}</th>
+            <th>{{"说明"|$.T}}</th>
+            <th style="width:100px">{{"状态"|$.T}}</th>
           </tr>
         </thead>
         <tbody>{{$zeroAmt := Float64 0}}
-          {{range $k, $v := Stored.list}}
+          {{range $k, $v := $.Stored.list}}
           <tr>
             <td class="valign-middle" id="wallet-flow-{{$v.Id}}" title="{{(Date $v.Created).Format `2006-01-02 15:04:05`}}">
               {{TimeAgo $v.Created `now`}}
@@ -95,11 +95,11 @@
             </td>
             <td class="valign-middle">
               {{if eq $v.Status "pending"}}
-                <span class="tx-size-11 d-block"><span class="square-8 bg-warning mg-r-5 rounded-circle"></span> {{"待确认"|T}}</span>
+                <span class="tx-size-11 d-block"><span class="square-8 bg-warning mg-r-5 rounded-circle"></span> {{"待确认"|$.T}}</span>
               {{else if eq $v.Status "confirmed"}}
-                <span class="tx-size-11 d-block"><span class="square-8 bg-success mg-r-5 rounded-circle"></span> {{"已生效"|T}}</span>
+                <span class="tx-size-11 d-block"><span class="square-8 bg-success mg-r-5 rounded-circle"></span> {{"已生效"|$.T}}</span>
               {{else if eq $v.Status "canceled"}}
-                <span class="tx-size-11 d-block"><span class="square-8 bg-gray-light mg-r-5 rounded-circle"></span> {{"已取消"|T}}</span>
+                <span class="tx-size-11 d-block"><span class="square-8 bg-gray-light mg-r-5 rounded-circle"></span> {{"已取消"|$.T}}</span>
               {{else}}
               {{end}}
             </td>
@@ -109,7 +109,7 @@
       </table>
       </div><!-- table-responsive -->
       <div class="card-footer">
-        {{Stored.pagination.Render `#default#pagination`}}
+        {{$.Stored.pagination.Render `#default#pagination`}}
       </div><!-- card-footer -->
       
     </div><!-- card -->

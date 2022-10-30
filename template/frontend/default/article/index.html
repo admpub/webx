@@ -1,8 +1,8 @@
 {{Strip}}{{Extend "base"}}
 {{Block "title"}}
-{{- "文章列表"|T -}}{{range $index, $category := Stored.categories}} - {{$category.Name}}{{- end -}}
+{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}} - {{$category.Name}}{{- end -}}
 {{/Block}}
-{{Block "keywords"}}{{- "文章列表"|T -}}{{range $index, $category := Stored.categories}},{{$category.Name}}{{- end -}}
+{{Block "keywords"}}{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}},{{$category.Name}}{{- end -}}
 {{/Block}}
 {{Block "description"}}{{/Block}}
 {{Block "bodyAttr"}} class="pd-t-70 bg-gray-lightest"{{/Block}}
@@ -16,7 +16,7 @@
             <div class="card bd-0 bg-transparent mg-t-20 bg-white">
                 <div class="card-header pd-x-0 bg-transparent bd-color-gray-lighter">
                     <span class="tx-size-18 tx-bold tx-inverse pd-x-15">
-                        <span class="tx-uppercase">{{`全部文章`|T}}</span>
+                        <span class="tx-uppercase">{{`全部文章`|$.T}}</span>
                     </span>
                 </div><!-- card-header -->
                 <div class="media-list">
@@ -32,13 +32,13 @@
                                     {{- range $tagK,$tagV := Split $v.Tags ","}}
                                     {{- if gt $tagK 0}}/{{end}}
                                     <span class="tx-info">
-                                        <a href="{{FrontendURL}}/articles{{Ext}}?tag={{$tagV}}">{{$tagV}}</a>
+                                        <a href="{{FrontendURL}}/articles{{$.Ext}}?tag={{$tagV}}">{{$tagV}}</a>
                                     </span>
                                     {{- end -}}
                                 </span>
                                 {{- end -}}
                             </span>
-                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}" class="tx-medium tx-size-20">{{$v.Title}}</a>
+                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="tx-medium tx-size-20">{{$v.Title}}</a>
                             <p class="tx-gray-light mg-b-5 d-block">
                                 {{$v.Summary}}
                             </p>
@@ -58,7 +58,7 @@
                             </div>
                         </div><!-- media-body -->
                         {{- if $v.Image -}}
-                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{Ext}}">
+                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
                             <img src="{{$v.Image}}" class="img-fluid wd-100 mg-l-15" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';">
                         </a>
                         {{- end -}}
@@ -66,7 +66,7 @@
                     {{- end -}}
                 </div><!-- media-list -->
                 <nav class="d-flex justify-content-center bd-t pd-t-10">
-                    {{(Get `pagination`).Render "#default#pagination_circle"}}
+                    {{($.Get `pagination`).Render "#default#pagination_circle"}}
                 </nav>
             </div><!-- card -->
         

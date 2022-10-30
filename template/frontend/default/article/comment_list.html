@@ -9,15 +9,15 @@
             <div class="d-block">
               <span class="tx-medium tx-gray-dark tx-size-sm">{{$v.Extra.name}}</span>
               {{if $v.Extra.isTargetAuthor}}
-              <span class="badge badge-primary tx-normal">{{"作者"|T}}</span>
+              <span class="badge badge-primary tx-normal">{{"作者"|$.T}}</span>
               {{end}}
               {{if $v.Extra.isBought}}
-              <span class="badge badge-success tx-normal">{{"已购买"|T}}</span>
+              <span class="badge badge-success tx-normal">{{"已购买"|$.T}}</span>
               {{end}}
               {{if $v.Extra.isAdmin}}
-              <span class="badge badge-warning tx-normal">{{"管理员"|T}}</span>
+              <span class="badge badge-warning tx-normal">{{"管理员"|$.T}}</span>
               {{end}}
-              <small class="tx-normal tx-light">{{T `%d楼` $v.FloorNumber}}</small>
+              <small class="tx-normal tx-light">{{$.T `%d楼` $v.FloorNumber}}</small>
             </div>
           <small class="tx-size-12 d-block mg-b-20">
             <span title="{{(DateFormat `2006-01-02 15:04` $v.Created)}}">{{TimeAgo $v.Created}}</span>
@@ -25,8 +25,8 @@
               <i class="fa fa-thumbs-up"></i>
               <span class="tx-size-14 comment-likes">{{$v.Likes}}</span>
             </a>
-            <a href="javascript:;" class="mg-l-10" data-toggle="modal" data-target="#modal-comment-form" data-comment-id="{{$v.Id}}" data-root-id="{{$v.RootId}}" data-comment-author="{{$v.Extra.name}}" data-comment-content="#comment-content-{{$v.Id}}">{{"回复"|T}}</a>
-            {{if and (not Stored.flat) (not Stored.isReply)}}
+            <a href="javascript:;" class="mg-l-10" data-toggle="modal" data-target="#modal-comment-form" data-comment-id="{{$v.Id}}" data-root-id="{{$v.RootId}}" data-comment-author="{{$v.Extra.name}}" data-comment-content="#comment-content-{{$v.Id}}">{{"回复"|$.T}}</a>
+            {{if and (not $.Stored.flat) (not $.Stored.isReply)}}
             (<a href="javascript:;" data-reply-id="{{$v.Id}}">{{$v.Replies}}</a>)
             {{end}}
           </small>
@@ -34,16 +34,16 @@
           <div class="comment-content mg-b-0{{if eq $v.Contype `markdown`}} markdown-code{{end}}" id="comment-content-{{$v.Id}}">
             {{if gt $v.ReplyCommentId 0}}
             <div class="reply-head mg-b-10 inline">
-            <span class="tx-gray-light tx-light">{{"回复"|T}}</span>
+            <span class="tx-gray-light tx-light">{{"回复"|$.T}}</span>
             <span class="tx-medium tx-gray-dark tx-size-sm">{{$v.Extra.repliedCustomerName}}</span>
             {{if gt $v.ReplyFloorNumber 0 -}}
-            <span class="tx-gray-light tx-light">{{T "%d楼" $v.ReplyFloorNumber}}</span>
+            <span class="tx-gray-light tx-light">{{$.T "%d楼" $v.ReplyFloorNumber}}</span>
             {{- end -}}
             :</div>
             {{end}}
             {{- OutputContent $v.Content $v.Contype -}}
           </div>
-          {{if and (not Stored.flat) (not Stored.isReply)}}
+          {{if and (not $.Stored.flat) (not $.Stored.isReply)}}
           <div id="reply-list-box-{{$v.Id}}" data-url="/article/comment_reply_list?commentId={{$v.Id}}"></div>
           {{end}}
         </div><!-- media-body -->
@@ -52,16 +52,16 @@
 {{end}}
 
 <div class="card-footer tx-size-xs pd-x-0">
-  {{- $paging := Get `paginationComment` -}}
+  {{- $paging := $.Get `paginationComment` -}}
   {{- if $paging -}}
   {{- $paging.Render `#default#pagination` -}}
   {{- else -}}
-  {{- Stored.pagination.Render `#default#pagination` -}}
+  {{- $.Stored.pagination.Render `#default#pagination` -}}
   {{- end -}}
 </div><!-- card-footer -->
 {{else}}
 <div class="alert" role="alert">
-    <strong><i class="fa fa-comments"></i></strong> {{"当前尚未发布任何评论"|T}}
+    <strong><i class="fa fa-comments"></i></strong> {{"当前尚未发布任何评论"|$.T}}
 </div>
 {{end}}
 {{/Strip}}

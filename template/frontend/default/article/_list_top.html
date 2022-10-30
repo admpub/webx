@@ -1,4 +1,4 @@
-{{Strip}}{{$sourceInfo := Stored.sourceInfo}}
+{{Strip}}{{$sourceInfo := $.Stored.sourceInfo}}
 {{- if and $sourceInfo $sourceInfo.X -}}
     <div class="container-wrapper pd-b-20 pd-t-0 pd-md-t-20">
       <div class="container pd-y-10 rainbow-bar">
@@ -15,7 +15,7 @@
           </div>
           <div>
             <a href="{{$detailURL}}" class="btn btn-success bd-0 tx-uppercase tx-size-13 tx-spacing-2 pd-y-15 mg-t-10 mg-md-t-60">
-              {{`产品详情`|T}}
+              {{`产品详情`|$.T}}
             </a>
           </div>
         </div><!-- d-flex -->

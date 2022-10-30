@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="widget-categories">
-                                <h3 class="footer-heading">{{`标签`|T}}</h3>
+                                <h3 class="footer-heading">{{`标签`|$.T}}</h3>
                                 <div class="categories-tags">
                                     {{- range $k,$v := tagList -}}
                                     <a href="{{FrontendURL}}/articles?tag={{$v.Name}}" class="active"> {{$v.Name}} <sup>{{$v.Num}}</sup> </a>

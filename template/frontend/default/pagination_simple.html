@@ -1,15 +1,15 @@
-{{Strip}}{{$pjax := Form "_pjax"}}
+{{Strip}}{{$pjax := $.Form "_pjax"}}
 <nav aria-label="Page navigation">
     <ul class="pagination mg-0">
     {{- $page := .Page -}}
       <li class="page-item{{if eq $page 1}} disabled{{end}}">
         <a class="page-link" href="{{if eq $page 1}}javascript:;{{else}}{{.URL .PrevPage}}{{end}}" aria-label="Previous"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
-          {{`上一页`|T}}
+          {{`上一页`|$.T}}
         </a>
       </li>
       <li class="page-item{{if ge $page .Pages}} disabled{{end}}">
         <a class="page-link" href="{{if ge $page .Pages}}javascript:;{{else}}{{.URL .NextPage}}{{end}}" aria-label="Next"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
-            {{`下一页`|T}}
+            {{`下一页`|$.T}}
         </a>
       </li>
     </ul>
