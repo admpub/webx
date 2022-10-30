@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/webx-top/com"
 	"github.com/webx-top/echo/middleware/tplfunc"
 	"github.com/webx-top/echo/subdomains"
 
-	"github.com/admpub/nging/v5/application/library/common"
 	uploadChecker "github.com/admpub/nging/v5/application/registry/upload/checker"
 )
 
@@ -62,7 +62,7 @@ func URLFor(purl string) string {
 }
 
 func AbsoluteURL(purl string) string {
-	if !common.IsFullURL(purl) {
+	if !com.IsFullURL(purl) {
 		return URLFor(purl)
 	}
 	return purl

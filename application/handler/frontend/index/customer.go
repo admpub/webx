@@ -51,7 +51,7 @@ func SignUp(c echo.Context) error {
 	var err error
 
 	next := c.Form(`next`)
-	next = common.GetOtherURL(c, next)
+	next = echo.GetOtherURL(c, next)
 	if len(next) == 0 {
 		next = sessdata.URLFor(`/index`)
 	}
@@ -170,7 +170,7 @@ func SignIn(c echo.Context) error {
 	}
 
 	next := c.Form(`next`)
-	next = common.GetOtherURL(c, next)
+	next = echo.GetOtherURL(c, next)
 	if len(next) == 0 {
 		next = sessdata.URLFor(`/index`)
 	}

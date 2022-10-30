@@ -2,7 +2,6 @@ package profile
 
 import (
 	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/handler/frontend/user/binding"
 	"github.com/admpub/webx/application/library/apiutils"
@@ -32,7 +31,7 @@ func bindingOAuth(ctx echo.Context, customer *modelCustomer.Customer) error {
 	if item == nil {
 		return ctx.NewError(code.Unsupported, `不支持绑定: %v`, provider)
 	}
-	loginURL := common.WithURLParams(item.LoginURL, `next`, nextURL)
+	loginURL := com.WithURLParams(item.LoginURL, `next`, nextURL)
 	return ctx.Redirect(loginURL)
 }
 
