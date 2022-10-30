@@ -7,7 +7,7 @@
       <div class="card pd-y-30 pd-x-25 rounded-0 wd-450">
         <h5 class="tx-size-md-32 tx-gray-dark tx-center">{{"找回密码"|$.T}}</h5>
         <p class="tx-size-12 tx-size-md-14 mg-b-30 tx-center">{{$.T "请输入您收到的%d位数字的验证码。" $.Stored.verifyCodeLength}}</p>
-          <form id="sign-in-form" onsubmit="resetPassword(this,'{{GetNextURL}}');return false;">
+          <form id="sign-in-form" onsubmit="resetPassword(this,'{{$.GetNextURL}}');return false;">
           <div class="form-group">
             <span class="input-group">
                 <span class="input-group-addon bg-white bd-r-0">{{`用户名`|$.T}}</span>
@@ -21,7 +21,7 @@
               <span class="input-group">
                 <span class="input-group-addon bg-white bd-r-0">{{`验证码`|$.T}}</span>
                   <input class="form-control tx-size-sm" name="vcode" value="{{$.Form `vcode`}}" placeholder="{{`输入接收到的验证码`|$.T}}" type="text" required="required">
-                  <a href="javascript:;" class="btn btn-primary input-group-btn" onclick="openForgotModal(this)" data-submit-url="{{FrontendURL}}/forgot?op=sendCode&next={{GetNextURL}}" data-form-tmpl="#tmplReceiveRecoverCode" data-name-sync="#recoverBy">{{`获取验证码`|$.T}}</a>
+                  <a href="javascript:;" class="btn btn-primary input-group-btn" onclick="openForgotModal(this)" data-submit-url="{{FrontendURL}}/forgot?op=sendCode&next={{$.GetNextURL}}" data-form-tmpl="#tmplReceiveRecoverCode" data-name-sync="#recoverBy">{{`获取验证码`|$.T}}</a>
               </span>
           </div><!-- form-group -->
           <div class="form-group">
@@ -38,7 +38,7 @@
           </div><!-- form-group -->
             <button class="btn btn-inverse wd-100p-force" type="submit">{{"修改密码"|$.T}}</button>
           </form>
-        <p class="tx-size-xs mg-t-30 mg-b-0 tx-center">{{"无法获取"|$.T}}? <a href="{{WithNextURL $.Stored.signInURL}}">{{"换一个账号登录"|$.T}}</a> {{`或`|$.T}} <a href="{{WithNextURL $.Stored.signUpURL}}">{{"注册一个新账号"|$.T}}</a></p>
+        <p class="tx-size-xs mg-t-30 mg-b-0 tx-center">{{"无法获取"|$.T}}? <a href="{{$.WithNextURL $.Stored.signInURL}}">{{"换一个账号登录"|$.T}}</a> {{`或`|$.T}} <a href="{{$.WithNextURL $.Stored.signUpURL}}">{{"注册一个新账号"|$.T}}</a></p>
       </div><!-- card -->
     </div><!-- container -->
     {{Include "#default#footer"}}

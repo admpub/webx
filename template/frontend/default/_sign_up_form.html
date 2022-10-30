@@ -2,7 +2,7 @@
       <div class="wd-100p pd-30">
       {{/*Include "#default#_oauth_binding_tips"*/}}
       <form method="POST" action="{{$.URL.Path}}">
-        <input type="hidden" name="next" value="{{GetNextURL}}">
+        <input type="hidden" name="next" value="{{$.GetNextURL}}">
         <!-- <div class="tx-center mg-b-20">
           <a href="{{FrontendURL}}/product/detail/nging" class="tx-inverse tx-size-32 tx-spacing-neg-2 tx-bold"><i class="icon ion-earth tx-primary tx-size-30"></i> nging</a>
         </div> -->
@@ -12,7 +12,7 @@
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-addon bg-white bd-r-0"><i class="fa fa-code"></i></span>
-            <input name="invitation" value="{{$.Form "invitation"}}" data-toggle="tooltip" title="{{"邀请码"|$.T}}" placeholder="{{"邀请码"|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="text" required="required">
+            <input name="invitation" value="{{$.Form `invitation`}}" data-toggle="tooltip" title="{{`邀请码`|$.T}}" placeholder="{{`邀请码`|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="text" required="required">
           </div>
         </div>
         {{end}}
@@ -20,43 +20,43 @@
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-addon bg-white bd-r-0"><i class="fa fa-phone tx-gray-light"></i></span>
-            <input name="mobile" value="{{$.Form "mobile"}}" data-toggle="tooltip" title="{{"手机号码"|$.T}}" placeholder="{{"手机号码"|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="text" required="required" autofocus="autofocus">
+            <input name="mobile" value="{{$.Form `mobile`}}" data-toggle="tooltip" title="{{`手机号码`|$.T}}" placeholder="{{`手机号码`|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="text" required="required" autofocus="autofocus">
           </div>
         </div><!-- form-group -->
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-email tx-gray-light"></i></span>
-            <input name="email" value="{{$.Form "email"}}" data-toggle="tooltip" title="{{"E-mail地址"|$.T}}" placeholder="{{"E-mail地址"|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="email" required="required">
+            <input name="email" value="{{$.Form `email`}}" data-toggle="tooltip" title="{{`E-mail地址`|$.T}}" placeholder="{{`E-mail地址`|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="email" required="required">
           </div>
         </div><!-- form-group -->
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-addon bg-white bd-r-0"><i class="fa fa-user tx-gray-light"></i></span>
-            <input name="name" value="{{$.Form "name"}}" data-toggle="tooltip" title="{{"登录名"|$.T}}" placeholder="{{"登录名"|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="name" required="required">
+            <input name="name" value="{{$.Form `name`}}" data-toggle="tooltip" title="{{`登录名`|$.T}}" placeholder="{{`登录名`|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="name" required="required">
           </div>
         </div><!-- form-group -->
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-addon bg-white bd-r-0"><i class="fa fa-lock tx-gray-light"></i></span>
-            <input name="password" value="{{$.Form "password"}}" data-toggle="tooltip" title="{{"登录密码"|$.T}}" placeholder="{{"登录密码"|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="password" required="required">
+            <input name="password" value="{{$.Form `password`}}" data-toggle="tooltip" title="{{`登录密码`|$.T}}" placeholder="{{`登录密码`|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="password" required="required">
           </div>
         </div><!-- form-group -->
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-addon bg-white bd-r-0"><i class="fa fa-lock tx-gray-light"></i></span>
-            <input name="repassword" value="{{$.Form "repassword"}}" data-toggle="tooltip" title="{{"再输入一次登录密码"|$.T}}" placeholder="{{"再输入一次登录密码"|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="password" required="required">
+            <input name="repassword" value="{{$.Form `repassword`}}" data-toggle="tooltip" title="{{`再输入一次登录密码`|$.T}}" placeholder="{{`再输入一次登录密码`|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" type="password" required="required">
           </div>
         </div>
         <div class="form-group mg-b-20">
           <div class="input-group">
             <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-eye tx-gray-light"></i></span>
-            <input type="text" placeholder="{{"验证码"|$.T}}" value="{{$.Form "code"}}" name="code" required="required" data-toggle="tooltip" title="{{"验证码"|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter">
-            <span class="input-group-addon pd-0">{{CaptchaForm}}</span>
+            <input type="text" placeholder="{{`验证码`|$.T}}" value="{{$.Form `code`}}" name="code" required="required" data-toggle="tooltip" title="{{`验证码`|$.T}}" class="form-control tx-size-14 pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter">
+            <span class="input-group-addon pd-0">{{$.CaptchaForm}}</span>
           </div>
         </div><!-- form-group -->
         <!-- <p class="tx-size-xs mg-b-30 tx-center">By creating this account, you agree to our <a href="">Terms of Use</a> and <a href="">Privacy Policy</a> upon using this website.</p> -->
         <p class="tx-center mg-b-20"><button class="btn btn-primary btn-block tx-size-14">{{"创建账号"|$.T}}</button></p><!--  data-toggle="modal" data-target="#error-dialog" -->
-        <p class="tx-center tx-size-12 mg-b-0">{{"已经有账号了？"|$.T}} <a href="{{WithNextURL $.Stored.signInURL}}">{{"登录"|$.T}}</a></p>
+        <p class="tx-center tx-size-12 mg-b-0">{{"已经有账号了？"|$.T}} <a href="{{$.WithNextURL $.Stored.signInURL}}">{{"登录"|$.T}}</a></p>
       </form>
       </div>
 {{/Strip}}

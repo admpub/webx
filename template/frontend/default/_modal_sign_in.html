@@ -36,18 +36,18 @@
                 <h3 class="tx-semibold tx-gray-dark  mg-b-5">{{"欢迎回来！"|$.T}}</h3>
                 <p>{{"请登录之后再继续操作"|$.T}}</p>
                 <br />
-                <form id="modal-sign-in-form" onsubmit="signIn(this,'{{GetNextURL | Default URI}}');return false;">
+                <form id="modal-sign-in-form" onsubmit="signIn(this,'{{$.GetNextURL | Default $.URI}}');return false;">
                 <div class="form-group">
-                  <input type="text" name="name" class="form-control" placeholder="{{"登录名"|$.T}}" data-toggle="tooltip" title="{{"请输入登录名"|$.T}}" required>
+                  <input type="text" name="name" class="form-control" placeholder="{{`登录名`|$.T}}" data-toggle="tooltip" title="{{`请输入登录名`|$.T}}" required>
                 </div><!-- form-group -->
                 <div class="form-group mg-b-20">
-                  <input type="password" name="password" class="form-control" placeholder="{{"登录密码"|$.T}}" data-toggle="tooltip" title="{{"请输入登录密码"|$.T}}" required>
-                  <a href="{{FrontendURL}}/forgot?next={{GetNextURL}}" class="tx-size-xs d-block mg-t-10" target="_blank">{{"忘记密码？"|$.T}}</a>
+                  <input type="password" name="password" class="form-control" placeholder="{{`登录密码`|$.T}}" data-toggle="tooltip" title="{{`请输入登录密码`|$.T}}" required>
+                  <a href="{{FrontendURL}}/forgot?next={{$.GetNextURL}}" class="tx-size-xs d-block mg-t-10" target="_blank">{{"忘记密码？"|$.T}}</a>
                 </div><!-- form-group -->
                 <div class="form-group mg-b-20">
                 <div class="input-group">
-                  <input type="text" placeholder="{{"验证码"|$.T}}" value="{{$.Form "code"}}" name="code" required="required" data-toggle="tooltip" title="{{"请输入验证码"|$.T}}" class="form-control">
-                  <span class="input-group-addon pd-0">{{CaptchaForm}}</span>
+                  <input type="text" placeholder="{{`验证码`|$.T}}" value="{{$.Form `code`}}" name="code" required="required" data-toggle="tooltip" title="{{`请输入验证码`|$.T}}" class="form-control">
+                  <span class="input-group-addon pd-0">{{$.CaptchaForm}}</span>
                 </div>
                 </div>
                 <button class="btn btn-inverse" type="submit">{{"登入"|$.T}}</button>
