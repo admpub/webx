@@ -1,6 +1,6 @@
-{{if .panic}}
+{{if $.Data.panic}}
 <div class="card-body">
-<div style="overflow:auto;height:300px;"><pre id="panic-content" class="bg-inverse tx-white">{{.content}}</pre></div>
+<div style="overflow:auto;height:300px;"><pre id="panic-content" class="bg-inverse tx-white">{{$.Data.content}}</pre></div>
 </div>
 {{else}}
 <div class="card-body pd-20">
@@ -8,7 +8,7 @@
 		<i class="icon ion-ios-close alert-icon tx-size-52 tx-danger mg-r-20"></i>
 		<div>
 			<h5 class="mg-b-2 tx-danger">{{"非常抱歉，操作出错了"|$.T}}</h5>
-			<p class="mg-b-0 tx-gray">{{.content}}</p>
+			<p class="mg-b-0 tx-gray">{{$.Data.content}}</p>
 		</div>
 	</div>
 </div>

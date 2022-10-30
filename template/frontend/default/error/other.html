@@ -1,6 +1,6 @@
 {{Extend "#default#base"}}
-{{Block "description"}}{{.title}}{{/Block}}
-{{Block "title"}}{{.title}}{{/Block}}
+{{Block "description"}}{{$.Data.title}}{{/Block}}
+{{Block "title"}}{{$.Data.title}}{{/Block}}
 {{Block "bodyAttr"}} class="bg-gray"{{/Block}}
 {{Block "body"}}
 <div class="col-md-12 mg-y-50">
@@ -10,7 +10,7 @@
 		  <h5 class="card-title"><i class="fa fa-error"></i> 
 			Error</h5>
 		  <h6 class="card-subtitle mb-2 tx-normal mg-b-20"></h6>
-		  <p class="card-text">{{.content}}</p>
+		  <p class="card-text">{{$.Data.content}}</p>
 		  <a class="btn btn-primary btn-rad" href="javascript:;" onclick="backLastPage()">
 				<i class="fa fa-reply"></i>
 				{{"回到上一页"|$.T}}
