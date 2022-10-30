@@ -1,5 +1,5 @@
 {{Strip}}
-{{- $oauthAccounts := OAuthAccounts -}}
+{{- $oauthAccounts := call $.Func.OAuthAccounts -}}
 {{- if gt (len $oauthAccounts) 0 -}}
 		<div class="third-platform-login">
             {{- $returnURL := $.GetNextURL|Default $.URI -}}
