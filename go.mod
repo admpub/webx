@@ -78,7 +78,7 @@ require (
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.20.1
 	github.com/nging-plugins/dbmanager v0.9.4
-	github.com/webx-top/validator v0.1.2
+	github.com/webx-top/validator v0.2.0
 )
 
 require (

@@ -284,6 +284,7 @@ github.com/admpub/nging/v5/application/library/cron/cmder
 github.com/admpub/nging/v5/application/library/cron/send
 github.com/admpub/nging/v5/application/library/cron/writer
 github.com/admpub/nging/v5/application/library/email
+github.com/admpub/nging/v5/application/library/errorslice
 github.com/admpub/nging/v5/application/library/filemanager
 github.com/admpub/nging/v5/application/library/fileupdater
 github.com/admpub/nging/v5/application/library/fileupdater/listener
@@ -1259,7 +1260,7 @@ github.com/webx-top/tagfast
 # github.com/webx-top/validation v0.0.3
 ## explicit; go 1.16
 github.com/webx-top/validation
-# github.com/webx-top/validator v0.1.2
+# github.com/webx-top/validator v0.2.0
 ## explicit
 github.com/webx-top/validator
 # github.com/xdg-go/pbkdf2 v1.0.0
