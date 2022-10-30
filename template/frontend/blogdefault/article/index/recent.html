@@ -13,7 +13,7 @@
         <div class="row gy-5 justify-content-end">
             <div class="col-lg-3 sidebar">
                 <div class="gradient-bar mb-30"></div>
-                {{- $list := queryList `` 2 4 -}}
+                {{- $list := call $.Func.queryList `` 2 4 -}}
                 {{- range $k, $v := $list -}}
                 <div class="recent-post-card">
                     <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
@@ -54,7 +54,7 @@
             </div>
             <div class="col-lg-9">
                 <div class="row gy-4 main-post-card-wrapper">
-                    {{- $relationList := relationList 4 -}}
+                    {{- $relationList := call $.Func.relationList 4 -}}
                     {{- range $k, $v := $relationList -}}
                     <div class="col-md-6">
                         <!-- Post item -->

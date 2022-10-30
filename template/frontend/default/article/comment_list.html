@@ -1,5 +1,5 @@
 {{Strip}}
-{{- $commentList := commentList -}}
+{{- $commentList := call $.Func.commentList -}}
 {{if $commentList}}
 {{range $k,$v := $commentList}}
 <div class="card-block pd-y-30 pd-x-0">
@@ -20,7 +20,7 @@
               <small class="tx-normal tx-light">{{$.T `%d楼` $v.FloorNumber}}</small>
             </div>
           <small class="tx-size-12 d-block mg-b-20">
-            <span title="{{(DateFormat `2006-01-02 15:04` $v.Created)}}">{{TimeAgo $v.Created}}</span>
+            <span title="{{(DateFormat `2006-01-02 15:04` $v.Created)}}">{{$.TimeAgo $v.Created}}</span>
             <a href="javascript:;" class="{{if and $v.Extra.clickFlow (eq $v.Extra.clickFlow.Type `like`)}}tx-success{{else}}tx-gray-light{{end}} hover-success mg-l-10" data-comment-like-id="{{$v.Id}}">
               <i class="fa fa-thumbs-up"></i>
               <span class="tx-size-14 comment-likes">{{$v.Likes}}</span>

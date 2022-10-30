@@ -12,7 +12,7 @@
         </div>
         <div class="row gy-5">
             <div class="col-lg-9 left-content">
-                {{- $hotCommentArticles := hotCommentArticles `` 6 0 -}}
+                {{- $hotCommentArticles := call $.Func.hotCommentArticles `` 6 0 -}}
                 {{- if gt (len $hotCommentArticles) 0 -}}
                 {{- $article := index $hotCommentArticles 0 -}}
                 <div class="discussed-post bg-cover" style="background-image:url('{{if $article.ImageOriginal}}{{$article.ImageOriginal}}{{else}}{{AssetsXURL}}/blogdefault/img/blog/discussed-post-bg.png{{end}}')">

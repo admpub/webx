@@ -12,7 +12,7 @@
         </div>
         <div class="row gy-5">
             <div class="col-lg-9 left-content">
-                {{- $relationList := relationList 3 -}}
+                {{- $relationList := call $.Func.relationList 3 -}}
                 {{- range $k, $v := $relationList -}}
                 <div class="featured-topics-card {{- if $v.ImageOriginal}} has-card-thumb {{- end -}}">
                     {{- if $v.ImageOriginal -}}
@@ -55,7 +55,7 @@
                     <div class="sidebar-widget widget-categories">
                         <div class="gradient-bar mb-30"></div>
                         <h3 class="heading-tertiary mb-20">{{`分类`|$.T}}</h3>
-                        {{- $categoryList := categoryList 10 -}}
+                        {{- $categoryList := call $.Func.categoryList 10 -}}
                         {{- range $k,$v := $categoryList -}}
                         <a href="{{FrontendURL}}/articles{{$.Ext}}?categoryId={{$v.Id}}" class="cat-item-link">
                             <div class="cat-item">

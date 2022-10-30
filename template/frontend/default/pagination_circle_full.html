@@ -3,7 +3,7 @@
 {{$page := .Page}}
 <ul class="pagination pagination-inverse pagination-circle tx-size-12">
     <li class="page-item">
-      <a class="page-link lh-5" href="{{$.URL 1}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+      <a class="page-link lh-5" href="{{$.Data.URL 1}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
         <i class="fa fa-angle-double-left"></i>
       </a>
     </li>
@@ -23,7 +23,7 @@
       </a>
     </li>
     <li class="page-item">
-      <a class="page-link lh-5" href="{{$.URL .Pages}}" aria-label="Last"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+      <a class="page-link lh-5" href="{{$.Data.URL .Pages}}" aria-label="Last"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
         <i class="fa fa-angle-double-right"></i>
       </a>
     </li>

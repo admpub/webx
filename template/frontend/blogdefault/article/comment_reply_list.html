@@ -1,4 +1,4 @@
-{{- $commentList := commentList -}}
+{{- $commentList := call $.Func.commentList -}}
 {{- range $k, $v := $commentList -}}
 <div class="comment-card reply">
     <div class="card-top">
@@ -10,7 +10,7 @@
                 {{if $v.Extra.isBought}}&nbsp;<span class="badge bg-success">{{"已购买"|$.T}}</span>{{end}}
                 {{if $v.Extra.isAdmin}}&nbsp;<span class="badge bg-warning">{{"管理员"|$.T}}</span>{{end}}
             </div>
-            <span class="meta-item" title="{{(DateFormat `2006-01-02 15:04` $v.Created)}}"> {{TimeAgo $v.Created}} </span>
+            <span class="meta-item" title="{{(DateFormat `2006-01-02 15:04` $v.Created)}}"> {{$.TimeAgo $v.Created}} </span>
         </div>
         <div class="button button-reply">
             <a href="javascript:;" class="button button-reply" data-toggle="modal" data-target="#modal-comment-form" data-comment-id="{{$v.Id}}" data-root-id="{{$v.RootId}}" data-comment-author="{{$v.Extra.name}}" data-comment-content="#comment-content-{{$v.Id}}">

@@ -9,7 +9,7 @@
         </form>
     </div>
     <h3 class="heading-tertiary">{{`最近的文章`|$.T}}</h3>
-    {{- $relationList := relationList 2 `-id` -}}
+    {{- $relationList := call $.Func.relationList 2 `-id` -}}
     {{- range $k, $v := $relationList -}}
     <div class="recent-post-card">
         {{- if $v.Image -}}
@@ -38,7 +38,7 @@
     <div class="widget-categories">
         <h3 class="footer-heading mb-20">{{`文章标签`|$.T}}</h3>
         <div class="categories-tags">
-            {{- range $k,$v := tagList -}}
+            {{- range $k,$v := call $.Func.tagList -}}
             <a href="{{FrontendURL}}/articles?tag={{$v.Name}}" class="active"> {{$v.Name}} <sup>{{$v.Num}}</sup> </a>
             {{- end -}}
         </div>
@@ -66,7 +66,7 @@
     <div class="widget-popular-post mt-30">
         <h3 class="heading-tertiary mb-20">{{`热门文章`|$.T}}</h3>
         <!-- Cat item -->
-        {{- $relationList := relationList 5 `-updated` -}}
+        {{- $relationList := call $.Func.relationList 5 `-updated` -}}
         {{- range $k, $v := $relationList -}}
         <div class="widget-category">
             {{- if $v.Image -}}

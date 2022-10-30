@@ -4,7 +4,7 @@
     <ul class="pagination mg-0">
     {{- $page := .Page -}}
       <li class="page-item">
-        <a class="page-link" href="{{$.URL 1}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+        <a class="page-link" href="{{$.Data.URL 1}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
           <i class="fa fa-angle-double-left"></i>
         </a>
       </li>
@@ -24,7 +24,7 @@
         </a>
       </li>
       <li class="page-item">
-        <a class="page-link" href="{{$.URL .Pages}}" aria-label="Last"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+        <a class="page-link" href="{{$.Data.URL .Pages}}" aria-label="Last"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
           <i class="fa fa-angle-double-right"></i>
         </a>
       </li>

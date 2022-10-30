@@ -75,7 +75,7 @@
           {{range $k, $v := $.Stored.list}}
           <tr>
             <td class="valign-middle" id="wallet-flow-{{$v.Id}}" title="{{(Date $v.Created).Format `2006-01-02 15:04:05`}}">
-              {{TimeAgo $v.Created `now`}}
+              {{$.TimeAgo $v.Created `now`}}
             </td>
             <td>
               {{if gt $v.Amount $zeroAmt}}

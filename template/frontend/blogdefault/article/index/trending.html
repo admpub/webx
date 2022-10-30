@@ -13,7 +13,7 @@
     </div>
     <div class="container-fluid">
         <div class="row gy-3">
-            {{- $list := queryList `` 3 0 `-likes` -}}
+            {{- $list := call $.Func.queryList `` 3 0 `-likes` -}}
             {{- range $k, $v := $list -}}
             <div class="col-lg-{{if eq $k 0}}5{{else if eq $k 1}}4{{else}}3{{end}}">
                 <div class="trending-card bg-cover" style="background-image: url('{{if $v.ImageOriginal}}{{$v.ImageOriginal}}{{else}}{{AssetsXURL}}/blogdefault/img/blog/trending-post1.png{{end}}')">

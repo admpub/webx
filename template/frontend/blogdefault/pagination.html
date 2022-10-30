@@ -3,7 +3,7 @@
 <ul class="pagination pagination-wrapper">
     {{- $page := .Page -}}
       <li>
-        <a href="{{$.URL 1}}"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+        <a href="{{$.Data.URL 1}}"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
           <i class="fa fa-angle-double-left"></i>
         </a>
       </li>
@@ -23,7 +23,7 @@
         </a>
       </li>
       <li>
-        <a href="{{$.URL .Pages}}"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+        <a href="{{$.Data.URL .Pages}}"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
           <i class="fa fa-angle-double-right"></i>
         </a>
       </li>

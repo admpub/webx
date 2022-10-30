@@ -4,7 +4,7 @@
 <ul class="pagination pagination-inverse pagination-circle tx-size-12">
   {{- if gt $page 1 -}}
     <li class="page-item">
-      <a class="page-link lh-5" href="{{$.URL 1}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+      <a class="page-link lh-5" href="{{$.Data.URL 1}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
         <i class="fa fa-angle-double-left"></i>
       </a>
     </li>

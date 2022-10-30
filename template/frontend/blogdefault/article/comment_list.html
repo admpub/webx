@@ -1,6 +1,6 @@
  <!-- Comments -->
  <div id="comment-list-container" data-replace-state="1">
-    {{- $commentList := commentList -}}
+    {{- $commentList := call $.Func.commentList -}}
     {{- range $k, $v := $commentList -}}
     <div class="comment-card">
         <div class="card-top">
@@ -12,7 +12,7 @@
                     {{if $v.Extra.isBought}}&nbsp;<span class="badge bg-success">{{"已购买"|$.T}}</span>{{end}}
                     {{if $v.Extra.isAdmin}}&nbsp;<span class="badge bg-warning">{{"管理员"|$.T}}</span>{{end}}
                 </div>
-                <span class="meta-item" title="{{(DateFormat `2006-01-02 15:04` $v.Created)}}"> {{TimeAgo $v.Created}} </span>
+                <span class="meta-item" title="{{(DateFormat `2006-01-02 15:04` $v.Created)}}"> {{$.TimeAgo $v.Created}} </span>
                 <span class="meta-item"> {{$.T `%d楼` $v.FloorNumber}} </span>
             </div>
             <div class="button button-reply">

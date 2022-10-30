@@ -1,10 +1,10 @@
 {{- $themeInfo := call $.Func.ThemeInfo -}}
 {{- $articleIds := $themeInfo.CustomConfig.String `indexSliderItems` -}}
 {{- if $articleIds -}}
-{{- $relationList := articleListByIds $articleIds -}}
+{{- $relationList := call $.Func.articleListByIds $articleIds -}}
 {{- $.Set `heroList` $relationList -}}
 {{- else -}}
-{{- $relationList := queryList `image_original <>=` 3 0 -}}
+{{- $relationList := call $.Func.queryList `image_original <>=` 3 0 -}}
 {{- $.Set `heroList` $relationList -}}
 {{- end -}}
 <!-- ============= HERO ============= -->
