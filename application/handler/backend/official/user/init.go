@@ -1,8 +1,8 @@
 package user
 
 import (
-	"github.com/admpub/nging/v4/application/handler"
-	"github.com/admpub/nging/v4/application/registry/dashboard"
+	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/registry/dashboard"
 	"github.com/webx-top/echo"
 )
 

@@ -3,8 +3,8 @@ package userhome
 import (
 	"strings"
 
-	"github.com/admpub/nging/v4/application/handler"
-	"github.com/admpub/nging/v4/application/registry/dashboard"
+	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/registry/dashboard"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	registryUserhome "github.com/admpub/webx/application/registry/userhome"
 	"github.com/admpub/webx/application/transform/transformCustomer"

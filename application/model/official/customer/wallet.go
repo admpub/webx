@@ -7,8 +7,8 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v4/application/library/common"
-	"github.com/admpub/nging/v4/application/model/base"
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/model/base"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/middleware/sessdata"
 )

@@ -2,8 +2,8 @@ package cache
 
 import (
 	"github.com/admpub/cache"
-	"github.com/admpub/nging/v4/application/library/common"
-	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/webx-top/db/lib/factory"
 )
 

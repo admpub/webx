@@ -5,7 +5,7 @@ import (
 
 	"github.com/admpub/ipfilter"
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/nging/v5/application/library/config"
 	cfgIPFilter "github.com/admpub/webx/application/library/ipfilter"
 	caddyPluginIPfilter "github.com/caddy-plugins/ipfilter"
 	"github.com/webx-top/com"

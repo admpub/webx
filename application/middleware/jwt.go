@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v4/application/library/codec"
-	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/nging/v5/application/library/codec"
+	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/golang-jwt/jwt"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"

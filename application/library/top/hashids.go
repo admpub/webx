@@ -6,7 +6,7 @@ import (
 	"github.com/webx-top/echo"
 
 	hashids "github.com/admpub/go-hashids"
-	"github.com/admpub/nging/v4/application/library/common"
+	"github.com/admpub/nging/v5/application/library/common"
 	syncOnce "github.com/admpub/once"
 	"github.com/martinlindhe/base36"
 )

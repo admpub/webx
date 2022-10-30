@@ -12,10 +12,10 @@ import (
 	"github.com/webx-top/echo/middleware/render/driver"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v4/application/initialize/backend"
-	"github.com/admpub/nging/v4/application/library/bindata"
-	"github.com/admpub/nging/v4/application/library/modal"
-	"github.com/admpub/nging/v4/application/library/ntemplate"
+	"github.com/admpub/nging/v5/application/initialize/backend"
+	"github.com/admpub/nging/v5/application/library/bindata"
+	"github.com/admpub/nging/v5/application/library/modal"
+	"github.com/admpub/nging/v5/application/library/ntemplate"
 	selfBackend "github.com/admpub/webx/application/initialize/backend"
 	"github.com/admpub/webx/application/initialize/frontend"
 )

@@ -1,7 +1,7 @@
 package version
 
 import (
-	"github.com/admpub/nging/v4/application/version"
+	"github.com/admpub/nging/v5/application/version"
 )
 
 const (

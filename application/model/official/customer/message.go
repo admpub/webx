@@ -11,10 +11,10 @@ import (
 	"github.com/webx-top/echo/middleware/tplfunc"
 	"github.com/webx-top/echo/param"
 
-	dbschemaNging "github.com/admpub/nging/v4/application/dbschema"
-	"github.com/admpub/nging/v4/application/library/common"
-	"github.com/admpub/nging/v4/application/library/config"
-	"github.com/admpub/nging/v4/application/model"
+	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/admpub/nging/v5/application/model"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/top"
 )
@@ -293,7 +293,7 @@ func (f *Message) IsSystemMessage() bool {
 	return f.UserA == 0 && f.CustomerA == 0
 }
 
-//ListWithViewedByRecipient 收件箱列表
+// ListWithViewedByRecipient 收件箱列表
 func (f *Message) ListWithViewedByRecipient(viewerID uint64, groupIDs []uint, isSystemMessage bool, onlyUnread bool, otherCond db.Compound, viewerTypes ...string) ([]*MessageWithViewed, error) {
 	viewerType := `customer`
 	if len(viewerTypes) > 0 {
@@ -446,7 +446,7 @@ func (f *Message) WithViewedByRecipient(rows []*dbschema.OfficialCommonMessage, 
 	return list, err
 }
 
-//ListWithViewedBySender 发件箱列表
+// ListWithViewedBySender 发件箱列表
 func (f *Message) ListWithViewedBySender(senderID uint64, onlyUnread bool, otherCond db.Compound, viewerTypes ...string) ([]*MessageWithViewed, error) {
 	viewerType := `customer`
 	if len(viewerTypes) > 0 {
@@ -542,7 +542,7 @@ func (f *Message) WithViewedBySender(rows []*dbschema.OfficialCommonMessage) ([]
 	return list, err
 }
 
-//ListAll 列出所有人的消息
+// ListAll 列出所有人的消息
 func (f *Message) ListAll(onlyUnread bool, otherCond db.Compound) ([]*MessageWithViewed, error) {
 	cond := []db.Compound{}
 	if onlyUnread {

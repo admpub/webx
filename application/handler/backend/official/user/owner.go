@@ -1,9 +1,9 @@
 package user
 
 import (
-	"github.com/admpub/nging/v4/application/handler"
-	"github.com/admpub/nging/v4/application/library/common"
-	"github.com/admpub/nging/v4/application/model"
+	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/model"
 	"github.com/admpub/null"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/webx-top/db"

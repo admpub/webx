@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/admpub/nging/v4/application/library/common"
+	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/webx-top/com"
 )
 
@@ -44,10 +44,12 @@ func BuildURLValues(values url.Values, secret string) url.Values {
 // 等价的PHP代码：
 // ```php
 // <?php
-// function makeSign(array $data, string $secret): string{
-// 	ksort($data);
-// 	return hash('sha256',http_build_query($data).'&secret='.$secret);
-//}
+//
+//	function makeSign(array $data, string $secret): string{
+//		ksort($data);
+//		return hash('sha256',http_build_query($data).'&secret='.$secret);
+//	}
+//
 // ```
 func MakeSign(data url.Values, secret string) string {
 	return com.Sha256(data.Encode() + `&secret=` + secret)

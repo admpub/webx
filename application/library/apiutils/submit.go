@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/admpub/nging/v4/application/library/restclient"
+	"github.com/admpub/nging/v5/application/library/restclient"
 	"github.com/admpub/resty/v2"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"

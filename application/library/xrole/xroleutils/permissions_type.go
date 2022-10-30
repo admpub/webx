@@ -4,7 +4,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v4/application/library/perm"
+	"github.com/admpub/nging/v5/application/library/perm"
 	"github.com/admpub/webx/application/library/xrole"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )

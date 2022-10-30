@@ -13,12 +13,12 @@ import (
 
 	"github.com/admpub/cache/x"
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v4/application/handler"
-	"github.com/admpub/nging/v4/application/library/common"
-	"github.com/admpub/nging/v4/application/library/config"
-	"github.com/admpub/nging/v4/application/library/license"
-	uploadLibrary "github.com/admpub/nging/v4/application/library/upload"
-	nav "github.com/admpub/nging/v4/application/registry/navigate"
+	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/admpub/nging/v5/application/library/license"
+	uploadLibrary "github.com/admpub/nging/v5/application/library/upload"
+	nav "github.com/admpub/nging/v5/application/registry/navigate"
 
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/handler/frontend/user/navigate"

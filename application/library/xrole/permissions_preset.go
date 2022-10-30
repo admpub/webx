@@ -3,7 +3,7 @@ package xrole
 import (
 	"strings"
 
-	"github.com/admpub/nging/v4/application/library/perm"
+	"github.com/admpub/nging/v5/application/library/perm"
 	"github.com/admpub/webx/application/handler/frontend/user/navigate"
 	"github.com/webx-top/echo"
 )

@@ -1,7 +1,7 @@
 package initnavigate
 
 import (
-	"github.com/admpub/nging/v4/application/registry/navigate"
+	"github.com/admpub/nging/v5/application/registry/navigate"
 	"github.com/admpub/webx/application/handler/backend/official/advert"
 	"github.com/admpub/webx/application/handler/backend/official/agent"
 	"github.com/admpub/webx/application/handler/backend/official/api"

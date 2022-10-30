@@ -1,7 +1,7 @@
 package oauth
 
 import (
-	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/nging/v5/application/library/config"
 	indexHanlder "github.com/admpub/webx/application/handler/frontend/index"
 	"github.com/admpub/webx/application/library/microprogram/mpwechat"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"

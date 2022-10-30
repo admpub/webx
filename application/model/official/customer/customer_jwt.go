@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/admpub/nging/v4/application/cmd/bootconfig"
-	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/nging/v5/application/cmd/bootconfig"
+	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/golang-jwt/jwt"
 	"github.com/webx-top/db"

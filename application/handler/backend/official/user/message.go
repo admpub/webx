@@ -6,10 +6,10 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v4/application/dbschema"
-	"github.com/admpub/nging/v4/application/handler"
-	"github.com/admpub/nging/v4/application/library/common"
-	"github.com/admpub/nging/v4/application/model"
+	"github.com/admpub/nging/v5/application/dbschema"
+	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/model"
 	xschema "github.com/admpub/webx/application/dbschema"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )
@@ -224,7 +224,7 @@ func MessageSendHandler(ctx echo.Context) error {
 	return ctx.Render(`official/user/message/send`, common.Err(ctx, err))
 }
 
-//MessageSend 发送消息
+// MessageSend 发送消息
 func MessageSend(ctx echo.Context, targetUser *dbschema.NgingUser, targetCustomer *xschema.OfficialCustomer) error {
 	replyID := ctx.Formx(`replyId`).Uint64()
 	data := ctx.Data()
@@ -275,7 +275,7 @@ func MessageSend(ctx echo.Context, targetUser *dbschema.NgingUser, targetCustome
 	return ctx.JSON(data)
 }
 
-//MessageDelete 删除消息
+// MessageDelete 删除消息
 func MessageDelete(ctx echo.Context) error {
 	ids := param.StringSlice(ctx.FormValues(`messageId[]`)).Uint64()
 	data := ctx.Data()

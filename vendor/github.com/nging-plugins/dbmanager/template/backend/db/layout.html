@@ -1,5 +1,5 @@
 {{Strip}}
-{{$pjax := Form "_pjax"}}
+{{$pjax := $.Form "_pjax"}}
 {{if $pjax}}<title>{{Block "title"}}Start{{/Block}} - {{Version}}</title>
 	{{if eq $pjax "#main-container"}}
 		{{Block "head"}}{{/Block}}
@@ -40,11 +40,11 @@
 	{{end}}
 {{else}}
 <!DOCTYPE html>
-<html lang="{{Lang}}">
+<html lang="{{$.Lang}}">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="{{Version.Name}}{{"管理面板登录"|T}}">
+	<meta name="description" content="{{Version.Name}}{{"管理面板登录"|$.T}}">
 	<meta name="buildTime" content="{{BuildTime}}">
 	<meta name="commitID" content="{{CommitID}}">
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
@@ -101,14 +101,14 @@
 <script type="text/javascript" src="{{AssetsURL}}/js/storeWithJson2.min.js?t={{BuildTime}}"></script>
 <script type="text/javascript" src="{{AssetsURL}}/js/bootstrap.typeahead/typeahead.bundle.min.js?t={{BuildTime}}"></script>
 <script type="text/javascript" src="{{AssetsURL}}/js/jquery.parsley/parsley.min.js?t={{BuildTime}}"></script>
-<script type="text/javascript" src="{{AssetsURL}}/js/jquery.parsley/i18n/{{Lang.Format false `_`}}.js?t={{BuildTime}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{AssetsURL}}/js/jquery.parsley/i18n/{{$.Lang.Format false `_`}}.js?t={{BuildTime}}" charset="utf-8"></script>
 {{Block "importJS"}}{{/Block}}
 {{Include "init_js"}}
 <script type="text/javascript" src="{{AssetsURL}}/js/behaviour/page/footer.min.js?t={{BuildTime}}"></script>
 {{Block "footer"}}{{/Block}}
-{{- range $k,$footer := GlobalFooters -}}
+{{- range $k,$footer := call $.Func.GlobalFooters -}}
 {{- if $footer -}}
-{{- if $footer.Tmpl}}{{Fetch $footer.Tmpl $}}{{end -}}
+{{- if $footer.Tmpl}}{{$.Fetch $footer.Tmpl $}}{{end -}}
 {{- end -}}
 {{- end -}}
 <div id="loading-status"><i class="fa fa-spinner fa-spin fa-3x"></i></div>

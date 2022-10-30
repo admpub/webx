@@ -8,13 +8,13 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v4/application/handler"
-	"github.com/admpub/nging/v4/application/handler/manager"
-	"github.com/admpub/nging/v4/application/handler/manager/file"
-	"github.com/admpub/nging/v4/application/library/config"
-	uploadLibrary "github.com/admpub/nging/v4/application/library/upload"
-	"github.com/admpub/nging/v4/application/registry/upload"
-	"github.com/admpub/nging/v4/application/registry/upload/checker"
+	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/handler/manager"
+	"github.com/admpub/nging/v5/application/handler/manager/file"
+	"github.com/admpub/nging/v5/application/library/config"
+	uploadLibrary "github.com/admpub/nging/v5/application/library/upload"
+	"github.com/admpub/nging/v5/application/registry/upload"
+	"github.com/admpub/nging/v5/application/registry/upload/checker"
 	"github.com/admpub/webx/application/middleware/sessdata"
 )
 

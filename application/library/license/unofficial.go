@@ -4,7 +4,7 @@
 package license
 
 import (
-	"github.com/admpub/nging/v4/application/library/license"
+	"github.com/admpub/nging/v5/application/library/license"
 )
 
 func init() {

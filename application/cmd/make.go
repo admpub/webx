@@ -4,8 +4,8 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/webx-top/db/lib/factory"
 
-	"github.com/admpub/nging/v4/application/cmd"
-	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/nging/v5/application/cmd"
+	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/webx/application/cmd/maker"
 )
 

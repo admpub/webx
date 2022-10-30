@@ -1,7 +1,7 @@
 package official
 
 import (
-	backendRoute "github.com/admpub/nging/v4/application/registry/route"
+	backendRoute "github.com/admpub/nging/v5/application/registry/route"
 	"github.com/admpub/webx/application/library/top"
 	"github.com/webx-top/echo"
 )

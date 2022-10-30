@@ -16,12 +16,12 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware/tplfunc"
 
-	"github.com/admpub/nging/v4/application/handler/manager"
-	"github.com/admpub/nging/v4/application/library/notice"
-	modelFile "github.com/admpub/nging/v4/application/model/file"
-	"github.com/admpub/nging/v4/application/registry/upload"
-	"github.com/admpub/nging/v4/application/registry/upload/checker"
-	"github.com/admpub/nging/v4/application/registry/upload/driver"
+	"github.com/admpub/nging/v5/application/handler/manager"
+	"github.com/admpub/nging/v5/application/library/notice"
+	modelFile "github.com/admpub/nging/v5/application/model/file"
+	"github.com/admpub/nging/v5/application/registry/upload"
+	"github.com/admpub/nging/v5/application/registry/upload/checker"
+	"github.com/admpub/nging/v5/application/registry/upload/driver"
 )
 
 func Download(ctx echo.Context, options ...Options) (*uploadClient.Result, string, error) {

@@ -1,7 +1,7 @@
 package group
 
 import (
-	"github.com/admpub/nging/v4/application/handler"
+	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/model/official"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"

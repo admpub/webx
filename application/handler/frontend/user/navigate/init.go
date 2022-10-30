@@ -1,6 +1,6 @@
 package navigate
 
-import "github.com/admpub/nging/v4/application/registry/navigate"
+import "github.com/admpub/nging/v5/application/registry/navigate"
 
 func init() {
 	navigate.Default.Frontend.Add(navigate.Left, LeftNavigate)

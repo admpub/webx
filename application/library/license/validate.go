@@ -6,7 +6,7 @@ import (
 
 	"github.com/admpub/license_gen/lib"
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v4/application/library/license"
+	"github.com/admpub/nging/v5/application/library/license"
 	"github.com/webx-top/com"
 )
 

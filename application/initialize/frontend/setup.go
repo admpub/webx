@@ -6,7 +6,7 @@ import (
 	"github.com/webx-top/db/lib/factory"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v4/application/handler/setup"
+	"github.com/admpub/nging/v5/application/handler/setup"
 )
 
 var MinCustomerID = 1000

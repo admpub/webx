@@ -10,8 +10,8 @@ import (
 	"github.com/webx-top/echo/middleware/tplfunc"
 	"github.com/webx-top/echo/subdomains"
 
-	"github.com/admpub/nging/v4/application/library/common"
-	uploadChecker "github.com/admpub/nging/v4/application/registry/upload/checker"
+	"github.com/admpub/nging/v5/application/library/common"
+	uploadChecker "github.com/admpub/nging/v5/application/registry/upload/checker"
 )
 
 // TokenURL 带签名网址

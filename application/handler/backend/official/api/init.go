@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/admpub/nging/v4/application/handler"
+	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/handler/backend/official/api/account"
 	"github.com/webx-top/echo"
 )

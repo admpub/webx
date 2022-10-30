@@ -1,8 +1,8 @@
 package index
 
 import (
-	"github.com/admpub/nging/v4/application/handler/manager"
-	uploadLibrary "github.com/admpub/nging/v4/application/library/upload"
+	"github.com/admpub/nging/v5/application/handler/manager"
+	uploadLibrary "github.com/admpub/nging/v5/application/library/upload"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/webx-top/echo"
 )

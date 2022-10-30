@@ -12,7 +12,7 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 
-	_ "github.com/admpub/nging/v4/application/library/formbuilder"
+	_ "github.com/admpub/nging/v5/application/library/formbuilder"
 	_ "github.com/admpub/webx/application/library/formbuilder"
 	//_ "github.com/coscms/forms/defaults"
 )

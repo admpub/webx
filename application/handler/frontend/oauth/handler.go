@@ -2,7 +2,7 @@ package oauth
 
 import (
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/webx/application/library/oauthutils"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"

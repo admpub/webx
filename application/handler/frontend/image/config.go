@@ -7,10 +7,10 @@ import (
 	"sync"
 
 	imageproxy "github.com/admpub/imageproxy"
-	"github.com/admpub/nging/v4/application/handler/manager"
-	modelFile "github.com/admpub/nging/v4/application/model/file"
-	"github.com/admpub/nging/v4/application/registry/upload/convert"
-	"github.com/admpub/nging/v4/application/registry/upload/driver"
+	"github.com/admpub/nging/v5/application/handler/manager"
+	modelFile "github.com/admpub/nging/v5/application/model/file"
+	"github.com/admpub/nging/v5/application/registry/upload/convert"
+	"github.com/admpub/nging/v5/application/registry/upload/driver"
 	"github.com/webx-top/echo"
 	"golang.org/x/sync/singleflight"
 )

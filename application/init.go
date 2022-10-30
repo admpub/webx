@@ -1,9 +1,9 @@
 package application
 
 import (
-	_ "github.com/admpub/nging/v4/application"
-	"github.com/admpub/nging/v4/application/cmd/bootconfig"
-	_ "github.com/admpub/nging/v4/application/library/sqlite"
+	_ "github.com/admpub/nging/v5/application"
+	"github.com/admpub/nging/v5/application/cmd/bootconfig"
+	_ "github.com/admpub/nging/v5/application/library/sqlite"
 	_ "github.com/admpub/webx/application/cmd"
 	_ "github.com/admpub/webx/application/handler"
 	_ "github.com/admpub/webx/application/initialize"

@@ -1,8 +1,8 @@
 package manager
 
 import (
-	"github.com/admpub/nging/v4/application/handler"
-	"github.com/admpub/nging/v4/application/library/common"
+	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/library/common"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -67,7 +67,7 @@ func MessageView(c echo.Context) error {
 	return c.Render(`official/manager/message/view`, ret)
 }
 
-//MessageDelete 删除消息
+// MessageDelete 删除消息
 func MessageDelete(ctx echo.Context) error {
 	var ids []uint64
 	id := ctx.Formx(`id`).Uint64()

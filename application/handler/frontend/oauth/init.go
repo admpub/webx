@@ -1,7 +1,7 @@
 package oauth
 
 import (
-	"github.com/admpub/nging/v4/application/handler/setup"
+	"github.com/admpub/nging/v5/application/handler/setup"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/library/apiutils"
 	xMW "github.com/admpub/webx/application/middleware"

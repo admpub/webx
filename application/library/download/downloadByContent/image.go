@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v4/application/handler/manager"
-	"github.com/admpub/nging/v4/application/model"
-	uploadPrepare "github.com/admpub/nging/v4/application/registry/upload/prepare"
+	"github.com/admpub/nging/v5/application/handler/manager"
+	"github.com/admpub/nging/v5/application/model"
+	uploadPrepare "github.com/admpub/nging/v5/application/registry/upload/prepare"
 	"github.com/admpub/webx/application/library/download"
 	"github.com/webx-top/echo"
 )

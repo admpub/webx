@@ -6,7 +6,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory"
 
-	"github.com/admpub/nging/v4/application/library/fileupdater/listener"
+	"github.com/admpub/nging/v5/application/library/fileupdater/listener"
 	"github.com/admpub/webx/application/dbschema"
 )
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/admpub/cache/x"
-	"github.com/admpub/nging/v4/application/library/config"
+	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/cache"
 	"github.com/admpub/webx/application/library/xrole"

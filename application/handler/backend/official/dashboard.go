@@ -7,7 +7,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v4/application/registry/dashboard"
+	"github.com/admpub/nging/v5/application/registry/dashboard"
 	"github.com/admpub/webx/application/dbschema"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )

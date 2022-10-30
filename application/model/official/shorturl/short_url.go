@@ -11,8 +11,8 @@ import (
 
 	"github.com/admpub/errors"
 	shortid "github.com/admpub/go-shortid"
-	"github.com/admpub/nging/v4/application/library/ip2region"
-	"github.com/admpub/nging/v4/application/model/base"
+	"github.com/admpub/nging/v5/application/library/ip2region"
+	"github.com/admpub/nging/v5/application/model/base"
 	ua "github.com/admpub/useragent"
 	"github.com/admpub/webx/application/dbschema"
 )

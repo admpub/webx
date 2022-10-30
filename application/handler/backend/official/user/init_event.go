@@ -6,7 +6,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	dbschemaNG "github.com/admpub/nging/v4/application/dbschema"
+	dbschemaNG "github.com/admpub/nging/v5/application/dbschema"
 	"github.com/admpub/webx/application/dbschema"
 )
 

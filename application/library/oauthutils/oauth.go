@@ -10,10 +10,10 @@ import (
 	"github.com/webx-top/echo/middleware/session"
 	"github.com/webx-top/echo/subdomains"
 
-	dbschemaNging "github.com/admpub/nging/v4/application/dbschema"
-	"github.com/admpub/nging/v4/application/library/config"
-	oauthLibrary "github.com/admpub/nging/v4/application/library/oauth"
-	"github.com/admpub/nging/v4/application/registry/settings"
+	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
+	"github.com/admpub/nging/v5/application/library/config"
+	oauthLibrary "github.com/admpub/nging/v5/application/library/oauth"
+	"github.com/admpub/nging/v5/application/registry/settings"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/coscms/oauth2s/client/goth/providers"
 )

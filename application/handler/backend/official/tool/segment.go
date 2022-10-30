@@ -5,7 +5,7 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v4/application/handler"
+	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/library/search/segment"
 
 	//_ "github.com/admpub/webx/application/library/search/segment/gojieba"

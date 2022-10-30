@@ -15,14 +15,15 @@ import (
 	"github.com/webx-top/echo/middleware/render/driver"
 	"github.com/webx-top/echo/middleware/session"
 	"github.com/webx-top/echo/subdomains"
+	"github.com/webx-top/validator"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v4/application/cmd/bootconfig"
-	"github.com/admpub/nging/v4/application/handler/user"
-	"github.com/admpub/nging/v4/application/initialize/backend"
-	"github.com/admpub/nging/v4/application/library/common"
-	"github.com/admpub/nging/v4/application/library/config"
-	ngingMW "github.com/admpub/nging/v4/application/middleware"
+	"github.com/admpub/nging/v5/application/cmd/bootconfig"
+	"github.com/admpub/nging/v5/application/handler/user"
+	"github.com/admpub/nging/v5/application/initialize/backend"
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/library/config"
+	ngingMW "github.com/admpub/nging/v5/application/middleware"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/xmetrics"
 	xMW "github.com/admpub/webx/application/middleware"
@@ -134,7 +135,7 @@ func addMiddleware(e *echo.Echo) {
 	e.Use(i18n.Middleware())
 
 	// 启用Validation
-	e.Use(middleware.Validate(echo.NewValidation))
+	e.Use(validator.Middleware())
 
 	// 事物支持
 	e.Use(ngingMW.Transaction())
@@ -153,13 +154,8 @@ func addMiddleware(e *echo.Echo) {
 		Reload:               true,
 		ErrorPages:           config.FromFile().Sys.ErrorPages,
 		ErrorProcessors:      common.ErrorProcessors,
+		FuncMapGlobal:        addGlobalFuncMap(xMW.TplFuncMap()),
 	}
-	renderOptions.SetFuncMapSkipper(func(ctx echo.Context) bool {
-		if ctx.Formx(`partial`).Bool() {
-			return false
-		}
-		return render.DefaultFuncMapSkipper(ctx)
-	})
 	if RendererDo != nil {
 		renderOptions.AddRendererDo(RendererDo)
 	}

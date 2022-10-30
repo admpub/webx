@@ -4,9 +4,9 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	dbschemaNging "github.com/admpub/nging/v4/application/dbschema"
-	"github.com/admpub/nging/v4/application/handler"
-	"github.com/admpub/nging/v4/application/library/common"
+	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
+	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/initialize/frontend"
 	xMW "github.com/admpub/webx/application/middleware"
@@ -214,7 +214,7 @@ func MessageSendHandler(ctx echo.Context) error {
 	return MessageSend(ctx, m.OfficialCustomer)
 }
 
-//MessageSend 此为公共函数，会员主页发送私信时也会调用
+// MessageSend 此为公共函数，会员主页发送私信时也会调用
 func MessageSend(ctx echo.Context, targetCustomer *dbschema.OfficialCustomer) error {
 	replyID := ctx.Formx(`replyId`).Uint64()
 	data := ctx.Data()

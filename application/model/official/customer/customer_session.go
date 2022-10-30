@@ -4,8 +4,8 @@ import (
 	"github.com/admpub/log"
 	"github.com/webx-top/db"
 
-	"github.com/admpub/nging/v4/application/library/common"
-	"github.com/admpub/nging/v4/application/library/sessionguard"
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/library/sessionguard"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/middleware/sessdata"
 )

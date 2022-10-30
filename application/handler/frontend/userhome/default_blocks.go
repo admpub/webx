@@ -1,7 +1,7 @@
 package userhome
 
 import (
-	"github.com/admpub/nging/v4/application/registry/dashboard"
+	"github.com/admpub/nging/v5/application/registry/dashboard"
 	userArticle "github.com/admpub/webx/application/handler/frontend/article/user"
 	"github.com/admpub/webx/application/handler/frontend/user"
 	"github.com/admpub/webx/application/handler/frontend/user/profile"

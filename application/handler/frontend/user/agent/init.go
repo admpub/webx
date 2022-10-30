@@ -3,7 +3,7 @@ package agent
 import (
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v4/application/handler"
+	"github.com/admpub/nging/v5/application/handler"
 	_ "github.com/admpub/webx/application/handler/frontend/user/wallet"
 	"github.com/admpub/webx/application/initialize/frontend"
 	xMW "github.com/admpub/webx/application/middleware"

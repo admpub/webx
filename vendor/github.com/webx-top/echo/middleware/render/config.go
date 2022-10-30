@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/webx-top/echo"
-	"github.com/webx-top/echo/handler/mvc/static/resource"
 	"github.com/webx-top/echo/middleware"
 	"github.com/webx-top/echo/middleware/render/driver"
 	"github.com/webx-top/echo/middleware/tplfunc"
@@ -26,17 +25,12 @@ type Config struct {
 	Debug                bool
 	renderer             driver.Driver
 	errorPageFuncSetter  []echo.HandlerFunc
-	FuncMapSkipper       echo.Skipper
+	FuncMapGlobal        map[string]interface{}
 	RendererDo           []func(driver.Driver)
 }
 
 var DefaultFuncMapSkipper = func(c echo.Context) bool {
 	return c.Format() != `html` && !c.IsAjax() && !c.IsPjax()
-}
-
-func (t *Config) SetFuncMapSkipper(skipper echo.Skipper) *Config {
-	t.FuncMapSkipper = skipper
-	return t
 }
 
 func (t *Config) SetRendererDo(rd ...func(driver.Driver)) *Config {
@@ -87,32 +81,13 @@ func (t *Config) NewRenderer(manager ...driver.Manager) driver.Driver {
 	}
 	renderer.Init()
 	renderer.SetContentProcessor(t.Parser())
-	if t.StaticOptions != nil {
-		st := t.NewStatic()
-		renderer.SetFuncMap(func() map[string]interface{} {
-			return st.Register(nil)
-		})
-		absTmplPath, err := filepath.Abs(tmplDir)
-		var absFilePath string
-		if err == nil {
-			absFilePath, err = filepath.Abs(t.StaticOptions.Root)
-		}
-		if err == nil {
-			if strings.HasPrefix(absFilePath, absTmplPath) {
-				//如果静态文件在模板的子文件夹时，监控模板时判断静态文件更改
-				renderer.MonitorEvent(st.OnUpdate())
-			}
-		}
-	}
 	return renderer
 }
 
 func (t *Config) AddFuncSetter(set ...echo.HandlerFunc) *Config {
 	if t.errorPageFuncSetter == nil {
 		t.errorPageFuncSetter = make([]echo.HandlerFunc, len(DefaultOptions.SetFuncMap))
-		for index, setter := range DefaultOptions.SetFuncMap {
-			t.errorPageFuncSetter[index] = setter
-		}
+		copy(t.errorPageFuncSetter, DefaultOptions.SetFuncMap)
 	}
 	t.errorPageFuncSetter = append(t.errorPageFuncSetter, set...)
 	return t
@@ -133,16 +108,6 @@ func (t *Config) HTTPErrorHandler() echo.HTTPErrorHandler {
 	return HTTPErrorHandler(opt)
 }
 
-func (t *Config) FuncMapMiddleware() interface{} {
-	var funcMapSkipper echo.Skipper
-	if t.FuncMapSkipper != nil {
-		funcMapSkipper = t.FuncMapSkipper
-	} else {
-		funcMapSkipper = DefaultFuncMapSkipper
-	}
-	return middleware.FuncMap(tplfunc.New(), funcMapSkipper)
-}
-
 func (t *Config) StaticMiddleware() interface{} {
 	if t.StaticOptions != nil {
 		return middleware.Static(t.StaticOptions)
@@ -155,7 +120,6 @@ func (t *Config) ApplyTo(e *echo.Echo, manager ...driver.Manager) *Config {
 		t.renderer.Close()
 	}
 	e.SetHTTPErrorHandler(t.HTTPErrorHandler())
-	e.Use(t.FuncMapMiddleware())
 	staticMW := t.StaticMiddleware()
 	if staticMW != nil {
 		e.Use(staticMW)
@@ -165,18 +129,23 @@ func (t *Config) ApplyTo(e *echo.Echo, manager ...driver.Manager) *Config {
 	return t
 }
 
+func defaultTplFuncMap() map[string]interface{} {
+	return tplfunc.TplFuncMap
+}
+
 func (t *Config) MakeRenderer(manager ...driver.Manager) driver.Driver {
 	renderer := t.NewRenderer(manager...)
+	if t.FuncMapGlobal == nil {
+		renderer.SetFuncMap(defaultTplFuncMap)
+	} else {
+		renderer.SetFuncMap(func() map[string]interface{} { return t.FuncMapGlobal })
+	}
 	t.renderer = renderer
 	return renderer
 }
 
 func (t *Config) Renderer() driver.Driver {
 	return t.renderer
-}
-
-func (t *Config) NewStatic() *resource.Static {
-	return resource.NewStatic(t.StaticOptions.Path, t.StaticOptions.Root)
 }
 
 // ThemeDir 主题所在文件夹的路径

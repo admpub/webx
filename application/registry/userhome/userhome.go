@@ -1,7 +1,7 @@
 package userhome
 
 import (
-	"github.com/admpub/nging/v4/application/registry/dashboard"
+	"github.com/admpub/nging/v5/application/registry/dashboard"
 	"github.com/webx-top/echo"
 )
 
@@ -15,12 +15,12 @@ func BlockAdd(index int, block ...*dashboard.Block) {
 	blocks.Add(index, block...)
 }
 
-//BlockRemove 删除元素
+// BlockRemove 删除元素
 func BlockRemove(index int) {
 	blocks.Remove(index)
 }
 
-//BlockSet 设置元素
+// BlockSet 设置元素
 func BlockSet(index int, list ...*dashboard.Block) {
 	blocks.Set(index, list...)
 }

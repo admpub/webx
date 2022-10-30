@@ -30,11 +30,11 @@ func AddAcceptFormat(mime, format string) *echo.Echo {
 	return Default.AddAcceptFormat(mime, format)
 }
 
-func SetFormatRenderers(formatRenderers map[string]func(c echo.Context, data interface{}) error) *echo.Echo {
+func SetFormatRenderers(formatRenderers map[string]echo.FormatRender) *echo.Echo {
 	return Default.SetFormatRenderers(formatRenderers)
 }
 
-func AddFormatRenderer(format string, renderer func(c echo.Context, data interface{}) error) *echo.Echo {
+func AddFormatRenderer(format string, renderer echo.FormatRender) *echo.Echo {
 	return Default.AddFormatRenderer(format, renderer)
 }
 
@@ -106,6 +106,16 @@ func SetRenderer(r echo.Renderer) {
 // Renderer returns the renderer instance.
 func Renderer() echo.Renderer {
 	return Default.Renderer()
+}
+
+// RenderDataWrapper .
+func RenderDataWrapper() echo.DataWrapper {
+	return Default.RenderDataWrapper()
+}
+
+// SetRenderDataWrapper .
+func SetRenderDataWrapper(dataWrapper echo.DataWrapper) {
+	Default.SetRenderDataWrapper(dataWrapper)
 }
 
 func SetRewriter(r echo.Rewriter) {

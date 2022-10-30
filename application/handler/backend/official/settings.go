@@ -14,12 +14,12 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/subdomains"
 
-	dbschemaNging "github.com/admpub/nging/v4/application/dbschema"
-	"github.com/admpub/nging/v4/application/library/common"
-	"github.com/admpub/nging/v4/application/library/config"
-	"github.com/admpub/nging/v4/application/library/license"
-	"github.com/admpub/nging/v4/application/registry/settings"
-	"github.com/admpub/nging/v4/application/registry/upload"
+	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/admpub/nging/v5/application/library/license"
+	"github.com/admpub/nging/v5/application/registry/settings"
+	"github.com/admpub/nging/v5/application/registry/upload"
 
 	xOAuth "github.com/admpub/webx/application/handler/frontend/oauth"
 	xcache "github.com/admpub/webx/application/library/cache"

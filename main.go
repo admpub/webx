@@ -37,14 +37,14 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v4/application/cmd"
-	"github.com/admpub/nging/v4/application/cmd/bootconfig"
-	"github.com/admpub/nging/v4/application/library/config"
-	"github.com/admpub/nging/v4/application/library/module"
+	"github.com/admpub/nging/v5/application/cmd"
+	"github.com/admpub/nging/v5/application/cmd/bootconfig"
+	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/admpub/nging/v5/application/library/module"
 
 	// register
 
-	_ "github.com/admpub/nging/v4/application/initialize/manager" // must first
+	_ "github.com/admpub/nging/v5/application/initialize/manager" // must first
 
 	_ "github.com/admpub/webx/application"
 	"github.com/admpub/webx/application/initialize/initnavigate"
@@ -59,8 +59,8 @@ import (
 	"github.com/admpub/webx/application/version"
 
 	// module
-	"github.com/admpub/nging/v4/application/handler/cloud"
-	"github.com/admpub/nging/v4/application/handler/task"
+	"github.com/admpub/nging/v5/application/handler/cloud"
+	"github.com/admpub/nging/v5/application/handler/task"
 	"github.com/nging-plugins/dbmanager"
 )
 

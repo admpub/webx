@@ -1,7 +1,7 @@
 package xrole
 
 import (
-	"github.com/admpub/nging/v4/application/library/role"
+	"github.com/admpub/nging/v5/application/library/role"
 )
 
 func NewRolePermission() *RolePermission {

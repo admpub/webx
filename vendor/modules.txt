@@ -1,13 +1,12 @@
-# cloud.google.com/go v0.103.0
-## explicit; go 1.15
-cloud.google.com/go
+# cloud.google.com/go v0.105.0
+## explicit; go 1.19
 cloud.google.com/go/internal/optional
 cloud.google.com/go/internal/pubsub
 # cloud.google.com/go/compute v1.10.0
 ## explicit; go 1.17
 cloud.google.com/go/compute/metadata
-# cloud.google.com/go/iam v0.3.0
-## explicit; go 1.15
+# cloud.google.com/go/iam v0.6.0
+## explicit; go 1.19
 cloud.google.com/go/iam
 # cloud.google.com/go/pubsub v1.23.1
 ## explicit; go 1.15
@@ -104,8 +103,8 @@ github.com/admpub/color
 # github.com/admpub/confl v0.2.2
 ## explicit
 github.com/admpub/confl
-# github.com/admpub/copier v0.0.2
-## explicit; go 1.15
+# github.com/admpub/copier v0.0.3
+## explicit; go 1.13
 github.com/admpub/copier
 # github.com/admpub/cron v0.0.1
 ## explicit; go 1.12
@@ -250,102 +249,103 @@ github.com/admpub/marmot/miner
 github.com/admpub/mysql-schema-sync/internal
 github.com/admpub/mysql-schema-sync/sqlite
 github.com/admpub/mysql-schema-sync/sync
-# github.com/admpub/nging/v4 v4.1.5 => ../../../github.com/admpub/nging
+# github.com/admpub/nging/v5 v5.0.0 => ../../../github.com/admpub/nging
 ## explicit; go 1.17
-github.com/admpub/nging/v4/application
-github.com/admpub/nging/v4/application/cmd
-github.com/admpub/nging/v4/application/cmd/bootconfig
-github.com/admpub/nging/v4/application/dbschema
-github.com/admpub/nging/v4/application/handler
-github.com/admpub/nging/v4/application/handler/cloud
-github.com/admpub/nging/v4/application/handler/index
-github.com/admpub/nging/v4/application/handler/manager
-github.com/admpub/nging/v4/application/handler/manager/file
-github.com/admpub/nging/v4/application/handler/setup
-github.com/admpub/nging/v4/application/handler/task
-github.com/admpub/nging/v4/application/handler/tool
-github.com/admpub/nging/v4/application/handler/user
-github.com/admpub/nging/v4/application/initialize/backend
-github.com/admpub/nging/v4/application/initialize/manager
-github.com/admpub/nging/v4/application/library/bindata
-github.com/admpub/nging/v4/application/library/charset
-github.com/admpub/nging/v4/application/library/cloudbackup
-github.com/admpub/nging/v4/application/library/codec
-github.com/admpub/nging/v4/application/library/common
-github.com/admpub/nging/v4/application/library/config
-github.com/admpub/nging/v4/application/library/config/cmder
-github.com/admpub/nging/v4/application/library/config/extend
-github.com/admpub/nging/v4/application/library/config/startup
-github.com/admpub/nging/v4/application/library/config/subconfig/scookie
-github.com/admpub/nging/v4/application/library/config/subconfig/scron
-github.com/admpub/nging/v4/application/library/config/subconfig/sdb
-github.com/admpub/nging/v4/application/library/config/subconfig/ssystem
-github.com/admpub/nging/v4/application/library/cron
-github.com/admpub/nging/v4/application/library/cron/cmder
-github.com/admpub/nging/v4/application/library/cron/send
-github.com/admpub/nging/v4/application/library/cron/writer
-github.com/admpub/nging/v4/application/library/email
-github.com/admpub/nging/v4/application/library/filemanager
-github.com/admpub/nging/v4/application/library/fileupdater
-github.com/admpub/nging/v4/application/library/fileupdater/listener
-github.com/admpub/nging/v4/application/library/flock
-github.com/admpub/nging/v4/application/library/formbuilder
-github.com/admpub/nging/v4/application/library/imbot
-github.com/admpub/nging/v4/application/library/imbot/dingding
-github.com/admpub/nging/v4/application/library/imbot/http
-github.com/admpub/nging/v4/application/library/imbot/workwx
-github.com/admpub/nging/v4/application/library/ip2region
-github.com/admpub/nging/v4/application/library/license
-github.com/admpub/nging/v4/application/library/modal
-github.com/admpub/nging/v4/application/library/module
-github.com/admpub/nging/v4/application/library/msgbox
-github.com/admpub/nging/v4/application/library/namedstruct
-github.com/admpub/nging/v4/application/library/notice
-github.com/admpub/nging/v4/application/library/ntemplate
-github.com/admpub/nging/v4/application/library/oauth
-github.com/admpub/nging/v4/application/library/perm
-github.com/admpub/nging/v4/application/library/respond
-github.com/admpub/nging/v4/application/library/restclient
-github.com/admpub/nging/v4/application/library/role
-github.com/admpub/nging/v4/application/library/role/roleutils
-github.com/admpub/nging/v4/application/library/route
-github.com/admpub/nging/v4/application/library/s3manager
-github.com/admpub/nging/v4/application/library/s3manager/s3client
-github.com/admpub/nging/v4/application/library/s3manager/s3client/awsclient
-github.com/admpub/nging/v4/application/library/service
-github.com/admpub/nging/v4/application/library/sessionguard
-github.com/admpub/nging/v4/application/library/setup
-github.com/admpub/nging/v4/application/library/sqlite
-github.com/admpub/nging/v4/application/library/upload
-github.com/admpub/nging/v4/application/library/webhook
-github.com/admpub/nging/v4/application/listener
-github.com/admpub/nging/v4/application/listener/upload
-github.com/admpub/nging/v4/application/listener/upload/file
-github.com/admpub/nging/v4/application/middleware
-github.com/admpub/nging/v4/application/model
-github.com/admpub/nging/v4/application/model/alert
-github.com/admpub/nging/v4/application/model/base
-github.com/admpub/nging/v4/application/model/file
-github.com/admpub/nging/v4/application/model/file/storer
-github.com/admpub/nging/v4/application/registry/alert
-github.com/admpub/nging/v4/application/registry/dashboard
-github.com/admpub/nging/v4/application/registry/navigate
-github.com/admpub/nging/v4/application/registry/route
-github.com/admpub/nging/v4/application/registry/settings
-github.com/admpub/nging/v4/application/registry/upload
-github.com/admpub/nging/v4/application/registry/upload/checker
-github.com/admpub/nging/v4/application/registry/upload/chunk
-github.com/admpub/nging/v4/application/registry/upload/client
-github.com/admpub/nging/v4/application/registry/upload/convert
-github.com/admpub/nging/v4/application/registry/upload/dbsaver
-github.com/admpub/nging/v4/application/registry/upload/driver
-github.com/admpub/nging/v4/application/registry/upload/driver/local
-github.com/admpub/nging/v4/application/registry/upload/driver/s3
-github.com/admpub/nging/v4/application/registry/upload/pipe
-github.com/admpub/nging/v4/application/registry/upload/prepare
-github.com/admpub/nging/v4/application/registry/upload/thumb
-github.com/admpub/nging/v4/application/response
-github.com/admpub/nging/v4/application/version
+github.com/admpub/nging/v5/application
+github.com/admpub/nging/v5/application/cmd
+github.com/admpub/nging/v5/application/cmd/bootconfig
+github.com/admpub/nging/v5/application/dbschema
+github.com/admpub/nging/v5/application/handler
+github.com/admpub/nging/v5/application/handler/cloud
+github.com/admpub/nging/v5/application/handler/index
+github.com/admpub/nging/v5/application/handler/manager
+github.com/admpub/nging/v5/application/handler/manager/file
+github.com/admpub/nging/v5/application/handler/setup
+github.com/admpub/nging/v5/application/handler/task
+github.com/admpub/nging/v5/application/handler/tool
+github.com/admpub/nging/v5/application/handler/user
+github.com/admpub/nging/v5/application/initialize/backend
+github.com/admpub/nging/v5/application/initialize/manager
+github.com/admpub/nging/v5/application/library/bindata
+github.com/admpub/nging/v5/application/library/charset
+github.com/admpub/nging/v5/application/library/cloudbackup
+github.com/admpub/nging/v5/application/library/codec
+github.com/admpub/nging/v5/application/library/common
+github.com/admpub/nging/v5/application/library/config
+github.com/admpub/nging/v5/application/library/config/cmder
+github.com/admpub/nging/v5/application/library/config/extend
+github.com/admpub/nging/v5/application/library/config/startup
+github.com/admpub/nging/v5/application/library/config/subconfig/scookie
+github.com/admpub/nging/v5/application/library/config/subconfig/scron
+github.com/admpub/nging/v5/application/library/config/subconfig/sdb
+github.com/admpub/nging/v5/application/library/config/subconfig/ssystem
+github.com/admpub/nging/v5/application/library/cron
+github.com/admpub/nging/v5/application/library/cron/cmder
+github.com/admpub/nging/v5/application/library/cron/send
+github.com/admpub/nging/v5/application/library/cron/writer
+github.com/admpub/nging/v5/application/library/email
+github.com/admpub/nging/v5/application/library/filemanager
+github.com/admpub/nging/v5/application/library/fileupdater
+github.com/admpub/nging/v5/application/library/fileupdater/listener
+github.com/admpub/nging/v5/application/library/flock
+github.com/admpub/nging/v5/application/library/formbuilder
+github.com/admpub/nging/v5/application/library/imbot
+github.com/admpub/nging/v5/application/library/imbot/dingding
+github.com/admpub/nging/v5/application/library/imbot/http
+github.com/admpub/nging/v5/application/library/imbot/workwx
+github.com/admpub/nging/v5/application/library/ip2region
+github.com/admpub/nging/v5/application/library/license
+github.com/admpub/nging/v5/application/library/modal
+github.com/admpub/nging/v5/application/library/module
+github.com/admpub/nging/v5/application/library/msgbox
+github.com/admpub/nging/v5/application/library/namedstruct
+github.com/admpub/nging/v5/application/library/notice
+github.com/admpub/nging/v5/application/library/ntemplate
+github.com/admpub/nging/v5/application/library/oauth
+github.com/admpub/nging/v5/application/library/perm
+github.com/admpub/nging/v5/application/library/respond
+github.com/admpub/nging/v5/application/library/restclient
+github.com/admpub/nging/v5/application/library/role
+github.com/admpub/nging/v5/application/library/role/roleutils
+github.com/admpub/nging/v5/application/library/route
+github.com/admpub/nging/v5/application/library/s3manager
+github.com/admpub/nging/v5/application/library/s3manager/s3client
+github.com/admpub/nging/v5/application/library/s3manager/s3client/awsclient
+github.com/admpub/nging/v5/application/library/service
+github.com/admpub/nging/v5/application/library/sessionguard
+github.com/admpub/nging/v5/application/library/setup
+github.com/admpub/nging/v5/application/library/sqlite
+github.com/admpub/nging/v5/application/library/upload
+github.com/admpub/nging/v5/application/library/webhook
+github.com/admpub/nging/v5/application/listener
+github.com/admpub/nging/v5/application/listener/upload
+github.com/admpub/nging/v5/application/listener/upload/file
+github.com/admpub/nging/v5/application/middleware
+github.com/admpub/nging/v5/application/model
+github.com/admpub/nging/v5/application/model/alert
+github.com/admpub/nging/v5/application/model/base
+github.com/admpub/nging/v5/application/model/file
+github.com/admpub/nging/v5/application/model/file/storer
+github.com/admpub/nging/v5/application/registry/alert
+github.com/admpub/nging/v5/application/registry/dashboard
+github.com/admpub/nging/v5/application/registry/navigate
+github.com/admpub/nging/v5/application/registry/route
+github.com/admpub/nging/v5/application/registry/settings
+github.com/admpub/nging/v5/application/registry/upload
+github.com/admpub/nging/v5/application/registry/upload/checker
+github.com/admpub/nging/v5/application/registry/upload/chunk
+github.com/admpub/nging/v5/application/registry/upload/client
+github.com/admpub/nging/v5/application/registry/upload/convert
+github.com/admpub/nging/v5/application/registry/upload/dbsaver
+github.com/admpub/nging/v5/application/registry/upload/driver
+github.com/admpub/nging/v5/application/registry/upload/driver/local
+github.com/admpub/nging/v5/application/registry/upload/driver/s3
+github.com/admpub/nging/v5/application/registry/upload/pipe
+github.com/admpub/nging/v5/application/registry/upload/prepare
+github.com/admpub/nging/v5/application/registry/upload/thumb
+github.com/admpub/nging/v5/application/request
+github.com/admpub/nging/v5/application/response
+github.com/admpub/nging/v5/application/version
 # github.com/admpub/null v8.0.4+incompatible
 ## explicit
 github.com/admpub/null
@@ -420,7 +420,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.4
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.44.121
+# github.com/aws/aws-sdk-go v1.44.126
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -569,9 +569,6 @@ github.com/francoispqt/gojay
 # github.com/friendsofgo/errors v0.9.2
 ## explicit; go 1.13
 github.com/friendsofgo/errors
-# github.com/fsnotify/fsnotify v1.6.0
-## explicit; go 1.16
-github.com/fsnotify/fsnotify
 # github.com/garyburd/redigo v1.6.4
 ## explicit; go 1.17
 github.com/garyburd/redigo/internal
@@ -614,6 +611,27 @@ github.com/go-openapi/spec
 # github.com/go-openapi/swag v0.21.1
 ## explicit; go 1.11
 github.com/go-openapi/swag
+# github.com/go-playground/locales v0.14.0
+## explicit; go 1.13
+github.com/go-playground/locales
+github.com/go-playground/locales/currency
+github.com/go-playground/locales/en
+github.com/go-playground/locales/en_US
+github.com/go-playground/locales/fr
+github.com/go-playground/locales/ja_JP
+github.com/go-playground/locales/ru
+github.com/go-playground/locales/zh
+# github.com/go-playground/universal-translator v0.18.0
+## explicit; go 1.13
+github.com/go-playground/universal-translator
+# github.com/go-playground/validator/v10 v10.11.1
+## explicit; go 1.13
+github.com/go-playground/validator/v10
+github.com/go-playground/validator/v10/translations/en
+github.com/go-playground/validator/v10/translations/fr
+github.com/go-playground/validator/v10/translations/ja
+github.com/go-playground/validator/v10/translations/ru
+github.com/go-playground/validator/v10/translations/zh
 # github.com/go-redis/redis/v8 v8.11.5
 ## explicit; go 1.17
 github.com/go-redis/redis/v8
@@ -695,6 +713,9 @@ github.com/google/go-cmp/cmp/internal/value
 # github.com/google/go-querystring v1.1.0
 ## explicit; go 1.10
 github.com/google/go-querystring/query
+# github.com/google/pprof v0.0.0-20221010195024-131d412537ea
+## explicit; go 1.18
+github.com/google/pprof/profile
 # github.com/google/uuid v1.3.0
 ## explicit
 github.com/google/uuid
@@ -792,7 +813,7 @@ github.com/kelseyhightower/envconfig
 ## explicit; go 1.14
 github.com/kisielk/errcheck
 github.com/kisielk/errcheck/errcheck
-# github.com/klauspost/compress v1.15.11
+# github.com/klauspost/compress v1.15.12
 ## explicit; go 1.17
 github.com/klauspost/compress
 github.com/klauspost/compress/flate
@@ -814,7 +835,10 @@ github.com/klauspost/cpuid/v2
 # github.com/klauspost/pgzip v1.2.5
 ## explicit
 github.com/klauspost/pgzip
-# github.com/lucas-clemente/quic-go v0.29.2
+# github.com/leodido/go-urn v1.2.1
+## explicit; go 1.13
+github.com/leodido/go-urn
+# github.com/lucas-clemente/quic-go v0.30.0
 ## explicit; go 1.18
 github.com/lucas-clemente/quic-go
 github.com/lucas-clemente/quic-go/http3
@@ -843,7 +867,7 @@ github.com/mailru/easyjson/jwriter
 # github.com/markbates/going v1.0.3
 ## explicit
 github.com/markbates/going/defaults
-# github.com/markbates/goth v1.74.1
+# github.com/markbates/goth v1.74.2
 ## explicit; go 1.15
 github.com/markbates/goth
 github.com/markbates/goth/providers/amazon
@@ -898,10 +922,10 @@ github.com/mattn/go-isatty
 # github.com/mattn/go-runewidth v0.0.14
 ## explicit; go 1.9
 github.com/mattn/go-runewidth
-# github.com/mattn/go-sqlite3 v1.14.15
+# github.com/mattn/go-sqlite3 v1.14.16
 ## explicit; go 1.16
 github.com/mattn/go-sqlite3
-# github.com/matttproud/golang_protobuf_extensions v1.0.2
+# github.com/matttproud/golang_protobuf_extensions v1.0.4
 ## explicit; go 1.9
 github.com/matttproud/golang_protobuf_extensions/pbutil
 # github.com/meilisearch/meilisearch-go v0.20.1
@@ -973,38 +997,24 @@ github.com/nging-plugins/dlmanager/application/library/config
 # github.com/nwaples/rardecode v1.1.3
 ## explicit
 github.com/nwaples/rardecode
-# github.com/nxadm/tail v1.4.8
-## explicit; go 1.13
-github.com/nxadm/tail
-github.com/nxadm/tail/ratelimiter
-github.com/nxadm/tail/util
-github.com/nxadm/tail/watch
-github.com/nxadm/tail/winfile
-# github.com/onsi/ginkgo v1.16.5
-## explicit; go 1.16
-github.com/onsi/ginkgo/config
-github.com/onsi/ginkgo/formatter
-github.com/onsi/ginkgo/ginkgo
-github.com/onsi/ginkgo/ginkgo/convert
-github.com/onsi/ginkgo/ginkgo/interrupthandler
-github.com/onsi/ginkgo/ginkgo/nodot
-github.com/onsi/ginkgo/ginkgo/outline
-github.com/onsi/ginkgo/ginkgo/testrunner
-github.com/onsi/ginkgo/ginkgo/testsuite
-github.com/onsi/ginkgo/ginkgo/watch
-github.com/onsi/ginkgo/internal/codelocation
-github.com/onsi/ginkgo/internal/containernode
-github.com/onsi/ginkgo/internal/failer
-github.com/onsi/ginkgo/internal/leafnodes
-github.com/onsi/ginkgo/internal/remote
-github.com/onsi/ginkgo/internal/spec
-github.com/onsi/ginkgo/internal/spec_iterator
-github.com/onsi/ginkgo/internal/writer
-github.com/onsi/ginkgo/reporters
-github.com/onsi/ginkgo/reporters/stenographer
-github.com/onsi/ginkgo/reporters/stenographer/support/go-colorable
-github.com/onsi/ginkgo/reporters/stenographer/support/go-isatty
-github.com/onsi/ginkgo/types
+# github.com/onsi/ginkgo/v2 v2.4.0
+## explicit; go 1.18
+github.com/onsi/ginkgo/v2/config
+github.com/onsi/ginkgo/v2/formatter
+github.com/onsi/ginkgo/v2/ginkgo
+github.com/onsi/ginkgo/v2/ginkgo/build
+github.com/onsi/ginkgo/v2/ginkgo/command
+github.com/onsi/ginkgo/v2/ginkgo/generators
+github.com/onsi/ginkgo/v2/ginkgo/internal
+github.com/onsi/ginkgo/v2/ginkgo/labels
+github.com/onsi/ginkgo/v2/ginkgo/outline
+github.com/onsi/ginkgo/v2/ginkgo/run
+github.com/onsi/ginkgo/v2/ginkgo/unfocus
+github.com/onsi/ginkgo/v2/ginkgo/watch
+github.com/onsi/ginkgo/v2/internal/interrupt_handler
+github.com/onsi/ginkgo/v2/internal/parallel_support
+github.com/onsi/ginkgo/v2/reporters
+github.com/onsi/ginkgo/v2/types
 # github.com/opentracing/opentracing-go v1.2.0
 ## explicit; go 1.14
 github.com/opentracing/opentracing-go
@@ -1080,7 +1090,7 @@ github.com/smartwalle/crypto4go/pbkdf2
 # github.com/spf13/cast v1.5.0
 ## explicit; go 1.18
 github.com/spf13/cast
-# github.com/spf13/cobra v1.6.0
+# github.com/spf13/cobra v1.6.1
 ## explicit; go 1.15
 github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.5
@@ -1109,20 +1119,6 @@ github.com/syndtr/goleveldb/leveldb/opt
 github.com/syndtr/goleveldb/leveldb/storage
 github.com/syndtr/goleveldb/leveldb/table
 github.com/syndtr/goleveldb/leveldb/util
-# github.com/tdewolff/minify v2.3.6+incompatible
-## explicit
-github.com/tdewolff/minify
-github.com/tdewolff/minify/css
-github.com/tdewolff/minify/html
-github.com/tdewolff/minify/js
-# github.com/tdewolff/parse v2.3.4+incompatible
-## explicit
-github.com/tdewolff/parse
-github.com/tdewolff/parse/buffer
-github.com/tdewolff/parse/css
-github.com/tdewolff/parse/html
-github.com/tdewolff/parse/js
-github.com/tdewolff/parse/strconv
 # github.com/tklauser/go-sysconf v0.3.10
 ## explicit; go 1.13
 github.com/tklauser/go-sysconf
@@ -1177,7 +1173,7 @@ github.com/webx-top/client/upload/watermark
 # github.com/webx-top/codec v0.2.1
 ## explicit
 github.com/webx-top/codec
-# github.com/webx-top/com v0.7.1
+# github.com/webx-top/com v0.7.3
 ## explicit
 github.com/webx-top/com
 github.com/webx-top/com/encoding/json
@@ -1199,7 +1195,7 @@ github.com/webx-top/db/lib/reflectx
 github.com/webx-top/db/lib/sqlbuilder
 github.com/webx-top/db/mysql
 github.com/webx-top/db/sqlite
-# github.com/webx-top/echo v2.27.0+incompatible
+# github.com/webx-top/echo v2.29.4+incompatible
 ## explicit
 github.com/webx-top/echo
 github.com/webx-top/echo/code
@@ -1211,8 +1207,6 @@ github.com/webx-top/echo/engine/mock
 github.com/webx-top/echo/engine/standard
 github.com/webx-top/echo/formfilter
 github.com/webx-top/echo/handler/captcha
-github.com/webx-top/echo/handler/mvc/static/minify
-github.com/webx-top/echo/handler/mvc/static/resource
 github.com/webx-top/echo/handler/oauth2
 github.com/webx-top/echo/handler/pprof
 github.com/webx-top/echo/handler/sockjs
@@ -1250,7 +1244,7 @@ github.com/webx-top/echo-socket.io
 ## explicit
 github.com/webx-top/image
 github.com/webx-top/image/webp
-# github.com/webx-top/pagination v0.1.2
+# github.com/webx-top/pagination v0.2.1
 ## explicit
 github.com/webx-top/pagination
 # github.com/webx-top/poolx v0.0.0-20210912044716-5cfa2d58e380
@@ -1265,6 +1259,9 @@ github.com/webx-top/tagfast
 # github.com/webx-top/validation v0.0.3
 ## explicit; go 1.16
 github.com/webx-top/validation
+# github.com/webx-top/validator v0.1.2
+## explicit
+github.com/webx-top/validator
 # github.com/xdg-go/pbkdf2 v1.0.0
 ## explicit; go 1.9
 github.com/xdg-go/pbkdf2
@@ -1361,7 +1358,8 @@ golang.org/x/crypto/internal/poly1305
 golang.org/x/crypto/ocsp
 golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/scrypt
-# golang.org/x/exp v0.0.0-20221019170559-20944726eadf
+golang.org/x/crypto/sha3
+# golang.org/x/exp v0.0.0-20221028150844-83b7d23a625f
 ## explicit; go 1.18
 golang.org/x/exp/constraints
 # golang.org/x/image v0.1.0
@@ -1499,7 +1497,7 @@ golang.org/x/tools/internal/typesinternal
 ## explicit; go 1.17
 golang.org/x/xerrors
 golang.org/x/xerrors/internal
-# google.golang.org/api v0.100.0
+# google.golang.org/api v0.101.0
 ## explicit; go 1.19
 google.golang.org/api/googleapi
 google.golang.org/api/internal
@@ -1526,7 +1524,7 @@ google.golang.org/appengine/internal/socket
 google.golang.org/appengine/internal/urlfetch
 google.golang.org/appengine/socket
 google.golang.org/appengine/urlfetch
-# google.golang.org/genproto v0.0.0-20221018160656-63c7b68cfc55
+# google.golang.org/genproto v0.0.0-20221027153422-115e99e71e1c
 ## explicit; go 1.19
 google.golang.org/genproto/googleapis/api/annotations
 google.golang.org/genproto/googleapis/iam/v1
@@ -1665,6 +1663,6 @@ gopkg.in/yaml.v3
 # rsc.io/qr v0.2.0
 ## explicit
 rsc.io/qr/gf256
-# github.com/admpub/nging/v4 => ../../../github.com/admpub/nging
+# github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 # github.com/nging-plugins/dbmanager => ../../nging-plugins/dbmanager
 # github.com/nging-plugins/dlmanager => ../../nging-plugins/dlmanager

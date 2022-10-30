@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v4/application/library/common"
+	"github.com/admpub/nging/v5/application/library/common"
 	socketio "github.com/googollee/go-socket.io"
 	"github.com/googollee/go-socket.io/engineio"
 	"github.com/webx-top/echo"

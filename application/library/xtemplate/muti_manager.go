@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/admpub/nging/v4/application/library/common"
+	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/logger"
 	"github.com/webx-top/echo/middleware/bindata"

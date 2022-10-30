@@ -5,8 +5,8 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/image"
 
-	"github.com/admpub/nging/v4/application/library/notice"
-	uploadPrepare "github.com/admpub/nging/v4/application/registry/upload/prepare"
+	"github.com/admpub/nging/v5/application/library/notice"
+	uploadPrepare "github.com/admpub/nging/v5/application/registry/upload/prepare"
 )
 
 type Config struct {

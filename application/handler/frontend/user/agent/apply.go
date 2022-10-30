@@ -1,7 +1,7 @@
 package agent
 
 import (
-	"github.com/admpub/nging/v4/application/library/common"
+	"github.com/admpub/nging/v5/application/library/common"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelAgent "github.com/admpub/webx/application/model/official/agent"
 	"github.com/webx-top/db"

@@ -7,7 +7,7 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/nging/v4/application/handler"
+	"github.com/admpub/nging/v5/application/handler"
 	modelAdvert "github.com/admpub/webx/application/model/official/advert"
 )
 

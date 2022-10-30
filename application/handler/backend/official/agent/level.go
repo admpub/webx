@@ -8,8 +8,8 @@ import (
 	"github.com/webx-top/echo/formfilter"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v4/application/handler"
-	"github.com/admpub/nging/v4/application/library/common"
+	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/library/common"
 	modelAgent "github.com/admpub/webx/application/model/official/agent"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )
