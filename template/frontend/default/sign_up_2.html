@@ -12,11 +12,11 @@
   </div><!-- ht-100v -->
 {{/Block}}
 {{Block "footer"}}
-{{- if . -}}
+{{- if $.Data -}}
 {{Include "_modal"}}
 <script>
 $(function(){
-	showModal("{{.}}","{{if IsError .}}error{{else if IsOk .}}success{{else}}info{{end}}");
+	showModal("{{$.Data}}","{{if IsError $.Data}}error{{else if IsOk $.Data}}success{{else}}info{{end}}");
 });
 </script>
 {{- end -}}

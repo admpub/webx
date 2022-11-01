@@ -63,11 +63,11 @@
         <!-- ============= MAIN JS ============= -->
         <script>
         window.activeURL={{if $.Stored.Get "activeURL"}}'{{FrontendURL}}{{$.Stored.Get "activeURL"}}'{{else}}null{{end}};window.errorMSG=null;window.successMSG=null;App.lang='{{$.Lang}}';
-        {{- if . -}}
-          {{- if IsError . -}}
-        window.errorMSG="{{.}}";
-          {{- else if IsOk . -}}
-        window.successMSG="{{.}}";
+        {{- if $.Data -}}
+          {{- if IsError $.Data -}}
+        window.errorMSG="{{$.Data}}";
+          {{- else if IsOk $.Data -}}
+        window.successMSG="{{$.Data}}";
           {{- end -}}
         {{- end -}}
         </script>
