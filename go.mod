@@ -50,13 +50,13 @@ require (
 	github.com/markbates/goth v1.74.2
 	github.com/prometheus/client_golang v1.13.0
 	github.com/spf13/cobra v1.6.1
-	github.com/stretchr/testify v1.8.0
+	github.com/stretchr/testify v1.8.1
 	github.com/swaggo/swag v1.8.3
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.7.1
 	github.com/webx-top/com v0.8.0
-	github.com/webx-top/db v1.23.4
-	github.com/webx-top/echo v2.29.5+incompatible
+	github.com/webx-top/db v1.23.5
+	github.com/webx-top/echo v2.29.6+incompatible
 	github.com/webx-top/echo-prometheus v1.1.0
 	github.com/webx-top/echo-socket.io v1.1.2
 	github.com/webx-top/image v0.0.9
@@ -77,7 +77,7 @@ require (
 	github.com/admpub/nging/v5 v5.0.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.20.1
-	github.com/nging-plugins/dbmanager v0.9.4
+	github.com/nging-plugins/dbmanager v1.0.1
 	github.com/webx-top/validator v0.2.0
 )
 
@@ -137,7 +137,7 @@ require (
 	github.com/admpub/timeago v1.2.1 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
-	github.com/aws/aws-sdk-go v1.44.126 // indirect
+	github.com/aws/aws-sdk-go v1.44.127 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
@@ -174,7 +174,7 @@ require (
 	github.com/go-stack/stack v1.8.1 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0 // indirect
 	github.com/goccy/go-json v0.9.11 // indirect
-	github.com/gofrs/uuid v4.3.0+incompatible // indirect
+	github.com/gofrs/uuid v4.3.1+incompatible // indirect
 	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
@@ -226,7 +226,7 @@ require (
 	github.com/microcosm-cc/bluemonday v1.0.21 // indirect
 	github.com/miekg/dns v1.1.50 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/minio-go/v7 v7.0.42 // indirect
+	github.com/minio/minio-go/v7 v7.0.43 // indirect
 	github.com/minio/sha256-simd v1.0.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -234,7 +234,7 @@ require (
 	github.com/mrjones/oauth v0.0.0-20190623134757-126b35219450 // indirect
 	github.com/muesli/smartcrop v0.3.0 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/nging-plugins/dlmanager v0.9.0 // indirect
+	github.com/nging-plugins/dlmanager v1.0.1 // indirect
 	github.com/nwaples/rardecode v1.1.3 // indirect
 	github.com/onsi/ginkgo/v2 v2.4.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
@@ -253,7 +253,7 @@ require (
 	github.com/rs/xid v1.4.0 // indirect
 	github.com/russross/blackfriday v1.6.0 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
-	github.com/shirou/gopsutil/v3 v3.22.9 // indirect
+	github.com/shirou/gopsutil/v3 v3.22.10 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/smartwalle/crypto4go v1.0.3 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
@@ -283,7 +283,7 @@ require (
 	go.mongodb.org/mongo-driver v1.9.1 // indirect
 	go.opencensus.io v0.23.0 // indirect
 	golang.org/x/crypto v0.1.0 // indirect
-	golang.org/x/exp v0.0.0-20221028150844-83b7d23a625f // indirect
+	golang.org/x/exp v0.0.0-20221031165847-c99f073a8326 // indirect
 	golang.org/x/image v0.1.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.6.0 // indirect
