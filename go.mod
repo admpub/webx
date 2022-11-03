@@ -48,14 +48,14 @@ require (
 	github.com/hibiken/asynq v0.23.0
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76
 	github.com/markbates/goth v1.74.2
-	github.com/prometheus/client_golang v1.13.0
+	github.com/prometheus/client_golang v1.13.1
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.1
 	github.com/swaggo/swag v1.8.3
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.7.1
 	github.com/webx-top/com v0.8.0
-	github.com/webx-top/db v1.23.5
+	github.com/webx-top/db v1.23.8
 	github.com/webx-top/echo v2.29.6+incompatible
 	github.com/webx-top/echo-prometheus v1.1.0
 	github.com/webx-top/echo-socket.io v1.1.2
@@ -83,7 +83,8 @@ require (
 
 require (
 	cloud.google.com/go v0.105.0 // indirect
-	cloud.google.com/go/compute v1.10.0 // indirect
+	cloud.google.com/go/compute v1.12.1 // indirect
+	cloud.google.com/go/compute/metadata v0.2.1 // indirect
 	cloud.google.com/go/iam v0.6.0 // indirect
 	cloud.google.com/go/pubsub v1.23.1 // indirect
 	gitee.com/admpub/certmagic v0.8.8 // indirect
@@ -137,7 +138,7 @@ require (
 	github.com/admpub/timeago v1.2.1 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
-	github.com/aws/aws-sdk-go v1.44.127 // indirect
+	github.com/aws/aws-sdk-go v1.44.129 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
@@ -184,10 +185,10 @@ require (
 	github.com/gomodule/redigo v1.8.9 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20221010195024-131d412537ea // indirect
+	github.com/google/pprof v0.0.0-20221103000818-d260c55eee4c // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
-	github.com/googleapis/gax-go/v2 v2.6.0 // indirect
+	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
 	github.com/gorilla/css v1.0.0 // indirect
 	github.com/gorilla/schema v1.2.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
@@ -253,6 +254,7 @@ require (
 	github.com/rs/xid v1.4.0 // indirect
 	github.com/russross/blackfriday v1.6.0 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
+	github.com/segmentio/fasthash v1.0.3 // indirect
 	github.com/shirou/gopsutil/v3 v3.22.10 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/smartwalle/crypto4go v1.0.3 // indirect
@@ -293,7 +295,7 @@ require (
 	golang.org/x/time v0.1.0 // indirect
 	golang.org/x/tools v0.2.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	google.golang.org/api v0.101.0 // indirect
+	google.golang.org/api v0.102.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20221027153422-115e99e71e1c // indirect
 	google.golang.org/grpc v1.50.1 // indirect

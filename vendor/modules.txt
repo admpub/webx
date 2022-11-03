@@ -2,8 +2,11 @@
 ## explicit; go 1.19
 cloud.google.com/go/internal/optional
 cloud.google.com/go/internal/pubsub
-# cloud.google.com/go/compute v1.10.0
-## explicit; go 1.17
+# cloud.google.com/go/compute v1.12.1
+## explicit; go 1.19
+cloud.google.com/go/compute/internal
+# cloud.google.com/go/compute/metadata v0.2.1
+## explicit; go 1.19
 cloud.google.com/go/compute/metadata
 # cloud.google.com/go/iam v0.6.0
 ## explicit; go 1.19
@@ -421,7 +424,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.4
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.44.127
+# github.com/aws/aws-sdk-go v1.44.129
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -714,7 +717,7 @@ github.com/google/go-cmp/cmp/internal/value
 # github.com/google/go-querystring v1.1.0
 ## explicit; go 1.10
 github.com/google/go-querystring/query
-# github.com/google/pprof v0.0.0-20221010195024-131d412537ea
+# github.com/google/pprof v0.0.0-20221103000818-d260c55eee4c
 ## explicit; go 1.18
 github.com/google/pprof/profile
 # github.com/google/uuid v1.3.0
@@ -724,7 +727,7 @@ github.com/google/uuid
 ## explicit; go 1.18
 github.com/googleapis/enterprise-certificate-proxy/client
 github.com/googleapis/enterprise-certificate-proxy/client/util
-# github.com/googleapis/gax-go/v2 v2.6.0
+# github.com/googleapis/gax-go/v2 v2.7.0
 ## explicit; go 1.19
 github.com/googleapis/gax-go/v2
 github.com/googleapis/gax-go/v2/apierror
@@ -1043,7 +1046,7 @@ github.com/pmezard/go-difflib/difflib
 # github.com/power-devops/perfstat v0.0.0-20220216144756-c35f1ee13d7c
 ## explicit; go 1.14
 github.com/power-devops/perfstat
-# github.com/prometheus/client_golang v1.13.0
+# github.com/prometheus/client_golang v1.13.1
 ## explicit; go 1.17
 github.com/prometheus/client_golang/prometheus
 github.com/prometheus/client_golang/prometheus/internal
@@ -1077,6 +1080,9 @@ github.com/russross/blackfriday
 ## explicit
 github.com/rwcarlsen/goexif/exif
 github.com/rwcarlsen/goexif/tiff
+# github.com/segmentio/fasthash v1.0.3
+## explicit; go 1.11
+github.com/segmentio/fasthash/fnv1a
 # github.com/shirou/gopsutil/v3 v3.22.10
 ## explicit; go 1.15
 github.com/shirou/gopsutil/v3/cpu
@@ -1179,11 +1185,10 @@ github.com/webx-top/codec
 github.com/webx-top/com
 github.com/webx-top/com/encoding/json
 github.com/webx-top/com/httpClientOptions
-# github.com/webx-top/db v1.23.5
+# github.com/webx-top/db v1.23.8
 ## explicit; go 1.16
 github.com/webx-top/db
 github.com/webx-top/db/internal/cache
-github.com/webx-top/db/internal/cache/hashstructure
 github.com/webx-top/db/internal/immutable
 github.com/webx-top/db/internal/sqladapter
 github.com/webx-top/db/internal/sqladapter/compat
@@ -1499,7 +1504,7 @@ golang.org/x/tools/internal/typesinternal
 ## explicit; go 1.17
 golang.org/x/xerrors
 golang.org/x/xerrors/internal
-# google.golang.org/api v0.101.0
+# google.golang.org/api v0.102.0
 ## explicit; go 1.19
 google.golang.org/api/googleapi
 google.golang.org/api/internal
