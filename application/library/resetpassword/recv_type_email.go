@@ -8,7 +8,7 @@ import (
 )
 
 func emailValidate(c echo.Context, fieldName string, fieldValue string) error {
-	if !c.Validate(fieldName, fieldValue, `email`).Ok() {
+	if err := c.Validate(fieldName, fieldValue, `email`); err != nil {
 		return c.E(`E-mail地址不正确`)
 	}
 	return nil

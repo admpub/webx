@@ -9,7 +9,7 @@ import (
 )
 
 func mobileValidate(c echo.Context, fieldName string, fieldValue string) error {
-	if !c.Validate(fieldName, fieldValue, `mobile`).Ok() {
+	if err := c.Validate(fieldName, fieldValue, `mobile`); err != nil {
 		return c.E(`手机号码不正确`)
 	}
 	return nil

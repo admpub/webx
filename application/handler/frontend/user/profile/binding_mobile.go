@@ -28,7 +28,7 @@ func bindingMobileVerify(ctx echo.Context, m *modelCustomer.Customer) error {
 	var operateDesc string
 	if m.MobileBind != `Y` {
 		m.Mobile = ctx.Formx(`mobile`).String()
-		if !ctx.Validate(`mobile`, m.Mobile, `mobile`).Ok() {
+		if err := ctx.Validate(`mobile`, m.Mobile, `mobile`); err != nil {
 			return ctx.E(`手机号码格式不正确`)
 		}
 		m.MobileBind = `Y` //新绑定
@@ -103,7 +103,7 @@ func MobileSend(ctx echo.Context, m *modelCustomer.Customer, purpose string, mes
 	}
 	if m.MobileBind != `Y` {
 		m.Mobile = ctx.Formx(`mobile`).String()
-		if !ctx.Validate(`mobile`, m.Mobile, `mobile`).Ok() {
+		if err := ctx.Validate(`mobile`, m.Mobile, `mobile`); err != nil {
 			return ctx.E(`手机号码格式不正确`)
 		}
 	}

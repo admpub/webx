@@ -84,7 +84,7 @@ func (f *Customer) check(isNew bool, id uint64) (err error) {
 	}
 	var exists bool
 	if len(f.Mobile) > 0 {
-		if !f.Context().Validate(`mobile`, f.Mobile, `mobile`).Ok() {
+		if _err := f.Context().Validate(`mobile`, f.Mobile, `mobile`); _err != nil {
 			err = f.Context().NewError(code.InvalidParameter, `手机号码格式不正确`)
 			return
 		}
@@ -102,7 +102,7 @@ func (f *Customer) check(isNew bool, id uint64) (err error) {
 		}
 	}
 	if len(f.Email) > 0 {
-		if !f.Context().Validate(`email`, f.Email, `email`).Ok() {
+		if _err := f.Context().Validate(`email`, f.Email, `email`); _err != nil {
 			err = f.Context().NewError(code.InvalidParameter, `E-mail格式不正确`)
 			return
 		}
