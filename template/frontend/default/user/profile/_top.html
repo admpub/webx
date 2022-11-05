@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center flex-row">
       <a href="javascript:;" class="left-menu nav-link tx-white hidden-xs-down hidden-lg-up pd-x-0 d-inline-block mg-r-25"><i class="fa fa-navicon"></i></a>
       <form action="{{$.URL.Path}}" id="global-search-form" method="GET">
-      {{- range $field,$values:=Queries -}}
+      {{- range $field,$values:=$.Queries -}}
       {{- if ne $field "q" -}}
       {{- range $k,$value:=$values -}}
       <input type="hidden" name="{{$field}}" value="{{$value}}" />

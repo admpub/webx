@@ -15,7 +15,7 @@
             <span>({{$.T "%v条数据" $.Stored.pagination.Rows}})</span>
         </h3>
         <form action="{{$.URL.Path}}" method="GET">
-        {{- range $field, $values := Queries -}}
+        {{- range $field, $values := $.Queries -}}
         {{- if ne $field "q" -}}
         {{- range $k, $value := $values -}}
         <input type="hidden" name="{{$field}}" value="{$value}">
