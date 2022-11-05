@@ -9,17 +9,17 @@
 
     <ul class="nav nav-gray nav-pills nav-hover-bg-gray-lightest flex-column mg-t-20 lh-10 tx-size-13 wd-100p mg-lg-b-auto">
       {{- $activeURL := $.Stored.String "activeURL" "-" -}}
-      {{- range $k,$nav := LeftNavigate -}}
+      {{- range $k,$nav := call $.Func.LeftNavigate -}}
       {{- if $nav.Display -}}
       {{- range $nav.Children -}}
       {{- if .Display -}}
       <li class="nav-item">{{$route := printf "/user/%s/%s" $nav.Action .Action}}
-        <a href="{{FrontendURL}}/user/{{$nav.Action}}/{{.Action}}" class="nav-link{{if or (eq Path $route) (HasPrefix $route $activeURL)}} active{{end}}"><i class="fa fa-{{$nav.Icon}} tx-center wd-16 mg-r-5"></i> {{.Name}}</a>
+        <a href="{{FrontendURL}}/user/{{$nav.Action}}/{{.Action}}" class="nav-link{{if or (eq $.Path $route) (HasPrefix $route $activeURL)}} active{{end}}"><i class="fa fa-{{$nav.Icon}} tx-center wd-16 mg-r-5"></i> {{.Name}}</a>
       </li>
       {{- end -}}
       {{- else -}}
       <li class="nav-item">{{$route := printf "/user/%s" $nav.Action}}
-        <a href="{{FrontendURL}}/user/{{$nav.Action}}" class="nav-link{{if or (eq Path $route) (HasPrefix $route $activeURL)}} active{{end}}"><i class="fa fa-{{$nav.Icon}} tx-center wd-16 mg-r-5"></i> {{$nav.Name}}</a>
+        <a href="{{FrontendURL}}/user/{{$nav.Action}}" class="nav-link{{if or (eq $.Path $route) (HasPrefix $route $activeURL)}} active{{end}}"><i class="fa fa-{{$nav.Icon}} tx-center wd-16 mg-r-5"></i> {{$nav.Name}}</a>
       </li>
       {{- end -}}
       {{- end -}}

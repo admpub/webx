@@ -1,20 +1,20 @@
-{{$customer := CustomerDetail}}
+{{$customer := $.CustomerDetail}}
 <div class="card card-flat tx-size-sm">
   {{Include "user/profile/_profile_head_card_top"}}
   <div class="card-footer tx-size-14 d-sm-flex justify-content-sm-center bg-transparent">
     <nav class="nav nav-pills flex-column flex-sm-row">
-      <a href="{{FrontendURL}}/user/profile/detail" class="nav-link{{if eq Path `/user/profile/detail`}} active{{end}}">{{"个人资料"|$.T}}</a>
-      <a href="{{FrontendURL}}/user/profile/following" class="nav-link{{if eq Path `/user/profile/following`}} active{{end}}">{{"我关注的"|$.T}}</a>
-      <a href="{{FrontendURL}}/user/profile/followers" class="nav-link{{if eq Path `/user/profile/followers`}} active{{end}}">{{"关注我的"|$.T}}</a>
-      <!-- <a href="{{FrontendURL}}/user/profile/comments" class="nav-link{{if eq Path `/user/profile/comments`}} active{{end}}">{{"我的评论"|$.T}}</a>
-      <a href="{{FrontendURL}}/user/profile/favorites" class="nav-link{{if eq Path `/user/profile/favorites`}} active{{end}}">{{"我的收藏"|$.T}}</a>
-      <a href="{{FrontendURL}}/user/profile/likes" class="nav-link{{if eq Path `/user/profile/likes`}} active{{end}}">{{"我的喜欢"|$.T}}</a> -->
+      <a href="{{FrontendURL}}/user/profile/detail" class="nav-link{{if eq $.Path `/user/profile/detail`}} active{{end}}">{{"个人资料"|$.T}}</a>
+      <a href="{{FrontendURL}}/user/profile/following" class="nav-link{{if eq $.Path `/user/profile/following`}} active{{end}}">{{"我关注的"|$.T}}</a>
+      <a href="{{FrontendURL}}/user/profile/followers" class="nav-link{{if eq $.Path `/user/profile/followers`}} active{{end}}">{{"关注我的"|$.T}}</a>
+      <!-- <a href="{{FrontendURL}}/user/profile/comments" class="nav-link{{if eq $.Path `/user/profile/comments`}} active{{end}}">{{"我的评论"|$.T}}</a>
+      <a href="{{FrontendURL}}/user/profile/favorites" class="nav-link{{if eq $.Path `/user/profile/favorites`}} active{{end}}">{{"我的收藏"|$.T}}</a>
+      <a href="{{FrontendURL}}/user/profile/likes" class="nav-link{{if eq $.Path `/user/profile/likes`}} active{{end}}">{{"我的喜欢"|$.T}}</a> -->
       {{if $customer.Agent}}
-      <a href="{{FrontendURL}}/user/profile/invitations" class="nav-link{{if eq Path `/user/profile/invitations`}} active{{end}}">{{"我邀请的"|$.T}}</a>
+      <a href="{{FrontendURL}}/user/profile/invitations" class="nav-link{{if eq $.Path `/user/profile/invitations`}} active{{end}}">{{"我邀请的"|$.T}}</a>
       {{end}}
-      <a href="{{FrontendURL}}/user/profile/settings" class="nav-link{{if eq Path `/user/profile/settings`}} active{{end}}">{{"账号设置"|$.T}}</a>
-      <a href="{{FrontendURL}}/user/profile/password" class="nav-link{{if eq Path `/user/profile/password`}} active{{end}}">{{"修改密码"|$.T}}</a>
-      <a href="{{FrontendURL}}/user/profile/binding" class="nav-link{{if eq Path `/user/profile/binding`}} active{{end}}">{{"账号绑定"|$.T}}</a>
+      <a href="{{FrontendURL}}/user/profile/settings" class="nav-link{{if eq $.Path `/user/profile/settings`}} active{{end}}">{{"账号设置"|$.T}}</a>
+      <a href="{{FrontendURL}}/user/profile/password" class="nav-link{{if eq $.Path `/user/profile/password`}} active{{end}}">{{"修改密码"|$.T}}</a>
+      <a href="{{FrontendURL}}/user/profile/binding" class="nav-link{{if eq $.Path `/user/profile/binding`}} active{{end}}">{{"账号绑定"|$.T}}</a>
     </nav>
   </div><!-- card-footer -->
 </div><!-- card -->

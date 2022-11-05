@@ -10,7 +10,7 @@
       <a class="breadcrumb-item" href="{{FrontendURL}}/user/wallet">{{"我的钱包"|$.T}}</a>
       {{- if $assetType -}}
       <a class="breadcrumb-item" href="{{FrontendURL}}/user/wallet/flow">{{"资产流水"|$.T}}</a>
-      <span class="breadcrumb-item active">{{assetTypeName $assetType|Default $assetType}}</span>
+      <span class="breadcrumb-item active">{{call $.Func.assetTypeName $assetType|Default $assetType}}</span>
       {{- else -}}
       <span class="breadcrumb-item active">{{"资产流水"|$.T}}</span>
       {{- end -}}
@@ -53,7 +53,7 @@
               {{$v.WalletAmount}}
             </td>
             <td class="valign-middle tx-right">
-              {{assetTypeName $v.AssetType}}
+              {{call $.Func.assetTypeName $v.AssetType}}
             </td>
             <td>
               {{$v.Description}}

@@ -21,7 +21,7 @@
           {{"投稿"|$.T}}
         </a>
         {{- if gt ($.Formx `categoryId`).Uint 0 -}}
-        <a class="btn btn-info pull-right tx-white mg-r-5" href="{{FrontendURL}}/user/articles">{{"全部文章"|$.T}}</a>
+        <a class="btn btn-info pull-right tx-white mg-r-5" href="{{FrontendURL}}/user/article/list">{{"全部文章"|$.T}}</a>
         {{- end -}}
         <h6 class="card-title tx-uppercase pd-y-10 tx-size-15 tx-poppins mg-b-0">{{"我的文章"|$.T}}</h6>
       </div><!-- card-header -->
@@ -55,7 +55,7 @@
               </a>
               {{- if $v.Tags -}}
               {{- range $index, $tagName := Split $v.Tags "," -}}
-              <a href="{{FrontendURL}}/user/articles?tag={{$tagName}}">
+              <a href="{{FrontendURL}}/user/article/list?tag={{$tagName}}">
                 <span class="label label-default label-xs label-hover-primary">{{$tagName}}</span>
               </a>
               {{- end -}}
@@ -64,7 +64,7 @@
               <br /><small>
               {{- range $index, $category := $v.Categories -}}
               {{- if gt $index 0 -}}<i class="fa fa-angle-right wd-10 text-center"></i>{{- end -}}
-              <a href="{{FrontendURL}}/user/articles?categoryId={{$category.Id}}">{{$category.Name}}</a>
+              <a href="{{FrontendURL}}/user/article/list?categoryId={{$category.Id}}">{{$category.Name}}</a>
               {{- end -}}
               </small>
               {{- end -}}

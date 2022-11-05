@@ -1,7 +1,7 @@
 {{Strip}}
 <div class="pd-30 bd-0 mg-t-20 bg-white">
   {{- $customer := $.Stored.info -}}
-  {{- $noSet := T "未设置" -}}
+  {{- $noSet := $.T "未设置" -}}
     <dl class="row">
       <dt class="col-sm-3 text-truncate tx-semibold tx-inverse">{{"客户ID"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.Id}}</dd>

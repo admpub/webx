@@ -101,12 +101,12 @@ func Create(ctx echo.Context) error {
 		if err != nil {
 			goto END
 		}
-		return ctx.Redirect(sessdata.URLFor(`/user/articles`))
+		return ctx.Redirect(sessdata.URLFor(`/user/article/list`))
 	}
 
 END:
 	hanlderArticle.SetArticleFormData(ctx, sourceID, sourceTable)
-	ctx.Set(`activeURL`, `/user/articles`)
+	ctx.Set(`activeURL`, `/user/article/list`)
 	ctx.Set(`sourceId`, sourceID)
 	ctx.Set(`sourceTable`, sourceTable)
 	ctx.Set(`contypes`, modelArticle.Contype.Slice())
@@ -143,13 +143,13 @@ func Edit(ctx echo.Context) error {
 			goto END
 		}
 		common.SendOk(ctx, ctx.T(`修改成功`))
-		return ctx.Redirect(sessdata.URLFor(`/user/articles`))
+		return ctx.Redirect(sessdata.URLFor(`/user/article/list`))
 	}
 	echo.StructToForm(ctx, m.OfficialCommonArticle, ``, echo.LowerCaseFirstLetter)
 
 END:
 	hanlderArticle.SetArticleFormData(ctx, sourceID, sourceTable)
-	ctx.Set(`activeURL`, `/user/articles`)
+	ctx.Set(`activeURL`, `/user/article/list`)
 	ctx.Set(`sourceId`, sourceID)
 	ctx.Set(`sourceTable`, sourceTable)
 	ctx.Set(`contypes`, modelArticle.Contype.Slice())
@@ -176,5 +176,5 @@ func Delete(ctx echo.Context) error {
 	if m.OwnerType != `customer` || m.OwnerId != customer.Id {
 		return ctx.NewError(code.NonPrivileged, `越权操作！您没有权限删除此数据`)
 	}
-	return ctx.Redirect(sessdata.URLFor(`/user/articles`))
+	return ctx.Redirect(sessdata.URLFor(`/user/article/list`))
 }
