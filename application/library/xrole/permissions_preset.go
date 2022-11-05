@@ -37,8 +37,8 @@ var PermPageList = func(ctx echo.Context) ([]interface{}, error) {
 }
 
 func PermPageOnRender(ctx echo.Context) error {
-	ctx.Set(`leftNavigate`, navigate.LeftNavigate)
-	ctx.Set(`topNavigate`, navigate.TopNavigate)
+	ctx.Set(`customerLeftNavigate`, navigate.LeftNavigate)
+	ctx.Set(`customerTopNavigate`, navigate.TopNavigate)
 	return nil
 }
 
@@ -79,12 +79,12 @@ func PermBehaviorOnRender(ctx echo.Context) error {
 	if err != nil {
 		return err
 	}
-	ctx.Set(`behaviorList`, behaviorList)
+	ctx.Set(`customerBehaviorList`, behaviorList)
 	return nil
 }
 
 func PermBehaviorIsValid(ctx echo.Context) bool {
-	if list, ok := ctx.Get(`behaviorList`).([]interface{}); ok {
+	if list, ok := ctx.Get(`customerBehaviorList`).([]interface{}); ok {
 		return len(list) > 0
 	}
 	return false
