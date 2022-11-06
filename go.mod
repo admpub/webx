@@ -47,7 +47,7 @@ require (
 	github.com/gosimple/slug v1.12.0
 	github.com/hibiken/asynq v0.23.0
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76
-	github.com/markbates/goth v1.74.2
+	github.com/markbates/goth v1.75.1
 	github.com/prometheus/client_golang v1.13.1
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.1
@@ -77,7 +77,7 @@ require (
 	github.com/admpub/nging/v5 v5.0.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.20.1
-	github.com/nging-plugins/dbmanager v1.0.1
+	github.com/nging-plugins/dbmanager v1.0.6
 	github.com/webx-top/validator v0.2.0
 )
 
@@ -138,7 +138,7 @@ require (
 	github.com/admpub/timeago v1.2.1 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
-	github.com/aws/aws-sdk-go v1.44.129 // indirect
+	github.com/aws/aws-sdk-go v1.44.131 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
@@ -283,7 +283,7 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	go.mongodb.org/mongo-driver v1.9.1 // indirect
-	go.opencensus.io v0.23.0 // indirect
+	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.1.0 // indirect
 	golang.org/x/exp v0.0.0-20221031165847-c99f073a8326 // indirect
 	golang.org/x/image v0.1.0 // indirect
