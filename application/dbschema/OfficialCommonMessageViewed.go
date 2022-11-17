@@ -110,11 +110,11 @@ type OfficialCommonMessageViewed struct {
 
 // - base function
 
-func (a *OfficialCommonMessageViewed) Trans() *factory.Transaction {
+func (a *OfficialCommonMessageViewed) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialCommonMessageViewed) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialCommonMessageViewed) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -141,6 +141,10 @@ func (a *OfficialCommonMessageViewed) Context() echo.Context {
 func (a *OfficialCommonMessageViewed) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialCommonMessageViewed) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialCommonMessageViewed) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -214,7 +218,7 @@ func (a *OfficialCommonMessageViewed) Name_() string {
 
 func (a *OfficialCommonMessageViewed) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

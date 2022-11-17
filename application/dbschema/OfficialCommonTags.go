@@ -108,11 +108,11 @@ type OfficialCommonTags struct {
 
 // - base function
 
-func (a *OfficialCommonTags) Trans() *factory.Transaction {
+func (a *OfficialCommonTags) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialCommonTags) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialCommonTags) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -139,6 +139,10 @@ func (a *OfficialCommonTags) Context() echo.Context {
 func (a *OfficialCommonTags) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialCommonTags) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialCommonTags) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -212,7 +216,7 @@ func (a *OfficialCommonTags) Name_() string {
 
 func (a *OfficialCommonTags) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

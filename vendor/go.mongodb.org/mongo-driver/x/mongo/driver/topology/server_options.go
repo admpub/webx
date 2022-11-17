@@ -44,7 +44,6 @@ func newServerConfig(opts ...ServerOption) *serverConfig {
 	cfg := &serverConfig{
 		heartbeatInterval: 10 * time.Second,
 		heartbeatTimeout:  10 * time.Second,
-		maxConns:          100,
 		registry:          defaultRegistry,
 	}
 
@@ -60,6 +59,12 @@ func newServerConfig(opts ...ServerOption) *serverConfig {
 
 // ServerOption configures a server.
 type ServerOption func(*serverConfig)
+
+// ServerAPIFromServerOptions will return the server API options if they have been functionally set on the ServerOption
+// slice.
+func ServerAPIFromServerOptions(opts []ServerOption) *driver.ServerAPIOptions {
+	return newServerConfig(opts...).serverAPI
+}
 
 func withMonitoringDisabled(fn func(bool) bool) ServerOption {
 	return func(cfg *serverConfig) {

@@ -125,7 +125,7 @@ func (c *Cursor) Next(ctx context.Context) bool {
 
 // TryNext attempts to get the next document for this cursor. It returns true if there were no errors and the next
 // document is available. This is only recommended for use with tailable cursors as a non-blocking alternative to
-// Next. See https://docs.mongodb.com/manual/core/tailable-cursors/ for more information about tailable cursors.
+// Next. See https://www.mongodb.com/docs/manual/core/tailable-cursors/ for more information about tailable cursors.
 //
 // TryNext returns false if the cursor is exhausted, an error occurs when getting results from the server, the next
 // document is not yet available, or ctx expires. If ctx expires, the error will be set to ctx.Err().
@@ -246,7 +246,10 @@ func (c *Cursor) All(ctx context.Context, results interface{}) error {
 	var index int
 	var err error
 
-	defer c.Close(ctx)
+	// Defer a call to Close to try to clean up the cursor server-side when all
+	// documents have not been exhausted. Use context.Background() to ensure Close
+	// completes even if the context passed to All has errored.
+	defer c.Close(context.Background())
 
 	batch := c.batch // exhaust the current batch before iterating the batch cursor
 	for {

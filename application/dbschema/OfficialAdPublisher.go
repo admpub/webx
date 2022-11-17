@@ -113,11 +113,11 @@ type OfficialAdPublisher struct {
 
 // - base function
 
-func (a *OfficialAdPublisher) Trans() *factory.Transaction {
+func (a *OfficialAdPublisher) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialAdPublisher) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialAdPublisher) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -144,6 +144,10 @@ func (a *OfficialAdPublisher) Context() echo.Context {
 func (a *OfficialAdPublisher) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialAdPublisher) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialAdPublisher) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -217,7 +221,7 @@ func (a *OfficialAdPublisher) Name_() string {
 
 func (a *OfficialAdPublisher) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

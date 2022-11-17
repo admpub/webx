@@ -127,11 +127,11 @@ type OfficialShortUrlVisit struct {
 
 // - base function
 
-func (a *OfficialShortUrlVisit) Trans() *factory.Transaction {
+func (a *OfficialShortUrlVisit) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialShortUrlVisit) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialShortUrlVisit) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -158,6 +158,10 @@ func (a *OfficialShortUrlVisit) Context() echo.Context {
 func (a *OfficialShortUrlVisit) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialShortUrlVisit) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialShortUrlVisit) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -231,7 +235,7 @@ func (a *OfficialShortUrlVisit) Name_() string {
 
 func (a *OfficialShortUrlVisit) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

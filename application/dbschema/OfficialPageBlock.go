@@ -115,11 +115,11 @@ type OfficialPageBlock struct {
 
 // - base function
 
-func (a *OfficialPageBlock) Trans() *factory.Transaction {
+func (a *OfficialPageBlock) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialPageBlock) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialPageBlock) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -146,6 +146,10 @@ func (a *OfficialPageBlock) Context() echo.Context {
 func (a *OfficialPageBlock) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialPageBlock) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialPageBlock) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -219,7 +223,7 @@ func (a *OfficialPageBlock) Name_() string {
 
 func (a *OfficialPageBlock) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

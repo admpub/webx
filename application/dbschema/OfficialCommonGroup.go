@@ -113,11 +113,11 @@ type OfficialCommonGroup struct {
 
 // - base function
 
-func (a *OfficialCommonGroup) Trans() *factory.Transaction {
+func (a *OfficialCommonGroup) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialCommonGroup) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialCommonGroup) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -144,6 +144,10 @@ func (a *OfficialCommonGroup) Context() echo.Context {
 func (a *OfficialCommonGroup) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialCommonGroup) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialCommonGroup) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -217,7 +221,7 @@ func (a *OfficialCommonGroup) Name_() string {
 
 func (a *OfficialCommonGroup) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

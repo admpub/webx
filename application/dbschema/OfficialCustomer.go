@@ -138,11 +138,11 @@ type OfficialCustomer struct {
 
 // - base function
 
-func (a *OfficialCustomer) Trans() *factory.Transaction {
+func (a *OfficialCustomer) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialCustomer) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialCustomer) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -169,6 +169,10 @@ func (a *OfficialCustomer) Context() echo.Context {
 func (a *OfficialCustomer) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialCustomer) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialCustomer) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -242,7 +246,7 @@ func (a *OfficialCustomer) Name_() string {
 
 func (a *OfficialCustomer) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

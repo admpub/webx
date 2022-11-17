@@ -113,11 +113,11 @@ type OfficialPage struct {
 
 // - base function
 
-func (a *OfficialPage) Trans() *factory.Transaction {
+func (a *OfficialPage) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialPage) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialPage) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -144,6 +144,10 @@ func (a *OfficialPage) Context() echo.Context {
 func (a *OfficialPage) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialPage) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialPage) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -217,7 +221,7 @@ func (a *OfficialPage) Name_() string {
 
 func (a *OfficialPage) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

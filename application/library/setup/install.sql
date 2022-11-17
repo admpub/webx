@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.30, for macos12.4 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for macos12.6 (x86_64)
 --
 -- Host: 127.0.0.1    Database: nging
 -- ------------------------------------------------------
@@ -1178,4 +1178,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-16 17:29:48
+-- Dump completed on 2022-11-18  1:36:29

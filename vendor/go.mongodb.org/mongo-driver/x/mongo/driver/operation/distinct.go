@@ -9,7 +9,9 @@ package operation
 import (
 	"context"
 	"errors"
+	"time"
 
+	"go.mongodb.org/mongo-driver/bson/bsontype"
 	"go.mongodb.org/mongo-driver/event"
 	"go.mongodb.org/mongo-driver/mongo/description"
 	"go.mongodb.org/mongo-driver/mongo/readconcern"
@@ -23,11 +25,12 @@ import (
 type Distinct struct {
 	collation      bsoncore.Document
 	key            *string
-	maxTimeMS      *int64
+	maxTime        *time.Duration
 	query          bsoncore.Document
 	session        *session.Client
 	clock          *session.ClusterClock
 	collection     string
+	comment        bsoncore.Value
 	monitor        *event.CommandMonitor
 	crypt          driver.Crypt
 	database       string
@@ -38,6 +41,7 @@ type Distinct struct {
 	retry          *driver.RetryMode
 	result         DistinctResult
 	serverAPI      *driver.ServerAPIOptions
+	timeout        *time.Duration
 }
 
 // DistinctResult represents a distinct result returned by the server.
@@ -95,11 +99,13 @@ func (d *Distinct) Execute(ctx context.Context) error {
 		Crypt:             d.crypt,
 		Database:          d.database,
 		Deployment:        d.deployment,
+		MaxTime:           d.maxTime,
 		ReadConcern:       d.readConcern,
 		ReadPreference:    d.readPreference,
 		Selector:          d.selector,
 		ServerAPI:         d.serverAPI,
-	}.Execute(ctx, nil)
+		Timeout:           d.timeout,
+	}.Execute(ctx)
 
 }
 
@@ -111,11 +117,11 @@ func (d *Distinct) command(dst []byte, desc description.SelectedServer) ([]byte,
 		}
 		dst = bsoncore.AppendDocumentElement(dst, "collation", d.collation)
 	}
+	if d.comment.Type != bsontype.Type(0) {
+		dst = bsoncore.AppendValueElement(dst, "comment", d.comment)
+	}
 	if d.key != nil {
 		dst = bsoncore.AppendStringElement(dst, "key", *d.key)
-	}
-	if d.maxTimeMS != nil {
-		dst = bsoncore.AppendInt64Element(dst, "maxTimeMS", *d.maxTimeMS)
 	}
 	if d.query != nil {
 		dst = bsoncore.AppendDocumentElement(dst, "query", d.query)
@@ -143,13 +149,13 @@ func (d *Distinct) Key(key string) *Distinct {
 	return d
 }
 
-// MaxTimeMS specifies the maximum amount of time to allow the query to run.
-func (d *Distinct) MaxTimeMS(maxTimeMS int64) *Distinct {
+// MaxTime specifies the maximum amount of time to allow the query to run on the server.
+func (d *Distinct) MaxTime(maxTime *time.Duration) *Distinct {
 	if d == nil {
 		d = new(Distinct)
 	}
 
-	d.maxTimeMS = &maxTimeMS
+	d.maxTime = maxTime
 	return d
 }
 
@@ -190,6 +196,16 @@ func (d *Distinct) Collection(collection string) *Distinct {
 	}
 
 	d.collection = collection
+	return d
+}
+
+// Comment sets a value to help trace an operation.
+func (d *Distinct) Comment(comment bsoncore.Value) *Distinct {
+	if d == nil {
+		d = new(Distinct)
+	}
+
+	d.comment = comment
 	return d
 }
 
@@ -243,7 +259,7 @@ func (d *Distinct) ReadConcern(readConcern *readconcern.ReadConcern) *Distinct {
 	return d
 }
 
-// ReadPreference set the read prefernce used with this operation.
+// ReadPreference set the read preference used with this operation.
 func (d *Distinct) ReadPreference(readPreference *readpref.ReadPref) *Distinct {
 	if d == nil {
 		d = new(Distinct)
@@ -281,5 +297,15 @@ func (d *Distinct) ServerAPI(serverAPI *driver.ServerAPIOptions) *Distinct {
 	}
 
 	d.serverAPI = serverAPI
+	return d
+}
+
+// Timeout sets the timeout for this operation.
+func (d *Distinct) Timeout(timeout *time.Duration) *Distinct {
+	if d == nil {
+		d = new(Distinct)
+	}
+
+	d.timeout = timeout
 	return d
 }

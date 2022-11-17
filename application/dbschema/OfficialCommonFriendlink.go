@@ -124,11 +124,11 @@ type OfficialCommonFriendlink struct {
 
 // - base function
 
-func (a *OfficialCommonFriendlink) Trans() *factory.Transaction {
+func (a *OfficialCommonFriendlink) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialCommonFriendlink) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialCommonFriendlink) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -155,6 +155,10 @@ func (a *OfficialCommonFriendlink) Context() echo.Context {
 func (a *OfficialCommonFriendlink) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialCommonFriendlink) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialCommonFriendlink) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -228,7 +232,7 @@ func (a *OfficialCommonFriendlink) Name_() string {
 
 func (a *OfficialCommonFriendlink) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

@@ -121,11 +121,11 @@ type OfficialCommonApiAccount struct {
 
 // - base function
 
-func (a *OfficialCommonApiAccount) Trans() *factory.Transaction {
+func (a *OfficialCommonApiAccount) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialCommonApiAccount) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialCommonApiAccount) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -152,6 +152,10 @@ func (a *OfficialCommonApiAccount) Context() echo.Context {
 func (a *OfficialCommonApiAccount) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialCommonApiAccount) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialCommonApiAccount) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -225,7 +229,7 @@ func (a *OfficialCommonApiAccount) Name_() string {
 
 func (a *OfficialCommonApiAccount) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

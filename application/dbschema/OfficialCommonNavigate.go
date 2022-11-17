@@ -124,11 +124,11 @@ type OfficialCommonNavigate struct {
 
 // - base function
 
-func (a *OfficialCommonNavigate) Trans() *factory.Transaction {
+func (a *OfficialCommonNavigate) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialCommonNavigate) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialCommonNavigate) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -155,6 +155,10 @@ func (a *OfficialCommonNavigate) Context() echo.Context {
 func (a *OfficialCommonNavigate) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialCommonNavigate) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialCommonNavigate) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -228,7 +232,7 @@ func (a *OfficialCommonNavigate) Name_() string {
 
 func (a *OfficialCommonNavigate) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

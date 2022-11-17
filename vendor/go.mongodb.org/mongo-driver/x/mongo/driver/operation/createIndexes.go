@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson/bsontype"
 	"go.mongodb.org/mongo-driver/event"
@@ -24,7 +25,7 @@ import (
 type CreateIndexes struct {
 	commitQuorum bsoncore.Value
 	indexes      bsoncore.Document
-	maxTimeMS    *int64
+	maxTime      *time.Duration
 	session      *session.Client
 	clock        *session.ClusterClock
 	collection   string
@@ -36,6 +37,7 @@ type CreateIndexes struct {
 	writeConcern *writeconcern.WriteConcern
 	result       CreateIndexesResult
 	serverAPI    *driver.ServerAPIOptions
+	timeout      *time.Duration
 }
 
 // CreateIndexesResult represents a createIndexes result returned by the server.
@@ -110,10 +112,12 @@ func (ci *CreateIndexes) Execute(ctx context.Context) error {
 		Crypt:             ci.crypt,
 		Database:          ci.database,
 		Deployment:        ci.deployment,
+		MaxTime:           ci.maxTime,
 		Selector:          ci.selector,
 		WriteConcern:      ci.writeConcern,
 		ServerAPI:         ci.serverAPI,
-	}.Execute(ctx, nil)
+		Timeout:           ci.timeout,
+	}.Execute(ctx)
 
 }
 
@@ -127,9 +131,6 @@ func (ci *CreateIndexes) command(dst []byte, desc description.SelectedServer) ([
 	}
 	if ci.indexes != nil {
 		dst = bsoncore.AppendArrayElement(dst, "indexes", ci.indexes)
-	}
-	if ci.maxTimeMS != nil {
-		dst = bsoncore.AppendInt64Element(dst, "maxTimeMS", *ci.maxTimeMS)
 	}
 	return dst, nil
 }
@@ -156,13 +157,13 @@ func (ci *CreateIndexes) Indexes(indexes bsoncore.Document) *CreateIndexes {
 	return ci
 }
 
-// MaxTimeMS specifies the maximum amount of time to allow the query to run.
-func (ci *CreateIndexes) MaxTimeMS(maxTimeMS int64) *CreateIndexes {
+// MaxTime specifies the maximum amount of time to allow the query to run on the server.
+func (ci *CreateIndexes) MaxTime(maxTime *time.Duration) *CreateIndexes {
 	if ci == nil {
 		ci = new(CreateIndexes)
 	}
 
-	ci.maxTimeMS = &maxTimeMS
+	ci.maxTime = maxTime
 	return ci
 }
 
@@ -263,5 +264,15 @@ func (ci *CreateIndexes) ServerAPI(serverAPI *driver.ServerAPIOptions) *CreateIn
 	}
 
 	ci.serverAPI = serverAPI
+	return ci
+}
+
+// Timeout sets the timeout for this operation.
+func (ci *CreateIndexes) Timeout(timeout *time.Duration) *CreateIndexes {
+	if ci == nil {
+		ci = new(CreateIndexes)
+	}
+
+	ci.timeout = timeout
 	return ci
 }

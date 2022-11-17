@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
 
 	"go.mongodb.org/mongo-driver/event"
 	"go.mongodb.org/mongo-driver/mongo/description"
@@ -22,7 +23,7 @@ import (
 // DropIndexes performs an dropIndexes operation.
 type DropIndexes struct {
 	index        *string
-	maxTimeMS    *int64
+	maxTime      *time.Duration
 	session      *session.Client
 	clock        *session.ClusterClock
 	collection   string
@@ -34,6 +35,7 @@ type DropIndexes struct {
 	writeConcern *writeconcern.WriteConcern
 	result       DropIndexesResult
 	serverAPI    *driver.ServerAPIOptions
+	timeout      *time.Duration
 }
 
 // DropIndexesResult represents a dropIndexes result returned by the server.
@@ -92,10 +94,12 @@ func (di *DropIndexes) Execute(ctx context.Context) error {
 		Crypt:             di.crypt,
 		Database:          di.database,
 		Deployment:        di.deployment,
+		MaxTime:           di.maxTime,
 		Selector:          di.selector,
 		WriteConcern:      di.writeConcern,
 		ServerAPI:         di.serverAPI,
-	}.Execute(ctx, nil)
+		Timeout:           di.timeout,
+	}.Execute(ctx)
 
 }
 
@@ -104,14 +108,10 @@ func (di *DropIndexes) command(dst []byte, desc description.SelectedServer) ([]b
 	if di.index != nil {
 		dst = bsoncore.AppendStringElement(dst, "index", *di.index)
 	}
-	if di.maxTimeMS != nil {
-		dst = bsoncore.AppendInt64Element(dst, "maxTimeMS", *di.maxTimeMS)
-	}
 	return dst, nil
 }
 
 // Index specifies the name of the index to drop. If '*' is specified, all indexes will be dropped.
-//
 func (di *DropIndexes) Index(index string) *DropIndexes {
 	if di == nil {
 		di = new(DropIndexes)
@@ -121,13 +121,13 @@ func (di *DropIndexes) Index(index string) *DropIndexes {
 	return di
 }
 
-// MaxTimeMS specifies the maximum amount of time to allow the query to run.
-func (di *DropIndexes) MaxTimeMS(maxTimeMS int64) *DropIndexes {
+// MaxTime specifies the maximum amount of time to allow the query to run on the server.
+func (di *DropIndexes) MaxTime(maxTime *time.Duration) *DropIndexes {
 	if di == nil {
 		di = new(DropIndexes)
 	}
 
-	di.maxTimeMS = &maxTimeMS
+	di.maxTime = maxTime
 	return di
 }
 
@@ -228,5 +228,15 @@ func (di *DropIndexes) ServerAPI(serverAPI *driver.ServerAPIOptions) *DropIndexe
 	}
 
 	di.serverAPI = serverAPI
+	return di
+}
+
+// Timeout sets the timeout for this operation.
+func (di *DropIndexes) Timeout(timeout *time.Duration) *DropIndexes {
+	if di == nil {
+		di = new(DropIndexes)
+	}
+
+	di.timeout = timeout
 	return di
 }

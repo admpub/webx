@@ -777,9 +777,9 @@ func (s *Server) check() (description.Server, error) {
 	}
 
 	if descPtr != nil {
-		// The check was successful. Set the average RTT and return.
+		// The check was successful. Set the average RTT and the 90th percentile RTT and return.
 		desc := *descPtr
-		desc = desc.SetAverageRTT(s.rttMonitor.getRTT())
+		desc = desc.SetAverageRTT(s.rttMonitor.EWMA())
 		desc.HeartbeatInterval = s.cfg.heartbeatInterval
 		return desc, nil
 	}
@@ -814,9 +814,9 @@ func extractTopologyVersion(err error) *description.TopologyVersion {
 	return nil
 }
 
-// MinRTT returns the minimum round-trip time to the server observed over the last 5 minutes.
-func (s *Server) MinRTT() time.Duration {
-	return s.rttMonitor.getMinRTT()
+// RTTMonitor returns this server's round-trip-time monitor.
+func (s *Server) RTTMonitor() driver.RTTMonitor {
+	return s.rttMonitor
 }
 
 // OperationCount returns the current number of in-progress operations for this server.
@@ -834,7 +834,7 @@ func (s *Server) String() string {
 		str += fmt.Sprintf(", Tag sets: %s", desc.Tags)
 	}
 	if state == serverConnected {
-		str += fmt.Sprintf(", Average RTT: %s, Min RTT: %s", desc.AverageRTT, s.MinRTT())
+		str += fmt.Sprintf(", Average RTT: %s, Min RTT: %s", desc.AverageRTT, s.RTTMonitor().Min())
 	}
 	if desc.LastError != nil {
 		str += fmt.Sprintf(", Last error: %s", desc.LastError)

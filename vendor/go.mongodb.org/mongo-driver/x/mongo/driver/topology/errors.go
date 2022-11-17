@@ -1,6 +1,13 @@
+// Copyright (C) MongoDB, Inc. 2022-present.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may
+// not use this file except in compliance with the License. You may obtain
+// a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+
 package topology
 
 import (
+	"context"
 	"fmt"
 
 	"go.mongodb.org/mongo-driver/mongo/description"
@@ -72,8 +79,20 @@ type WaitQueueTimeoutError struct {
 // Error implements the error interface.
 func (w WaitQueueTimeoutError) Error() string {
 	errorMsg := "timed out while checking out a connection from connection pool"
-	if w.Wrapped != nil {
-		errorMsg = fmt.Sprintf("%s: %s", errorMsg, w.Wrapped.Error())
+	switch w.Wrapped {
+	case nil:
+	case context.Canceled:
+		errorMsg = fmt.Sprintf(
+			"%s: %s",
+			"canceled while checking out a connection from connection pool",
+			w.Wrapped.Error(),
+		)
+	default:
+		errorMsg = fmt.Sprintf(
+			"%s: %s",
+			errorMsg,
+			w.Wrapped.Error(),
+		)
 	}
 
 	return fmt.Sprintf(

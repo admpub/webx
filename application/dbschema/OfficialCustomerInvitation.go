@@ -119,11 +119,11 @@ type OfficialCustomerInvitation struct {
 
 // - base function
 
-func (a *OfficialCustomerInvitation) Trans() *factory.Transaction {
+func (a *OfficialCustomerInvitation) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialCustomerInvitation) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialCustomerInvitation) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -150,6 +150,10 @@ func (a *OfficialCustomerInvitation) Context() echo.Context {
 func (a *OfficialCustomerInvitation) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialCustomerInvitation) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialCustomerInvitation) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -223,7 +227,7 @@ func (a *OfficialCustomerInvitation) Name_() string {
 
 func (a *OfficialCustomerInvitation) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }

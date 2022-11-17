@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
@@ -26,8 +27,9 @@ type FindAndModify struct {
 	arrayFilters             bsoncore.Document
 	bypassDocumentValidation *bool
 	collation                bsoncore.Document
+	comment                  bsoncore.Value
 	fields                   bsoncore.Document
-	maxTimeMS                *int64
+	maxTime                  *time.Duration
 	newDocument              *bool
 	query                    bsoncore.Document
 	remove                   *bool
@@ -47,6 +49,7 @@ type FindAndModify struct {
 	hint                     bsoncore.Value
 	serverAPI                *driver.ServerAPIOptions
 	let                      bsoncore.Document
+	timeout                  *time.Duration
 
 	result FindAndModifyResult
 }
@@ -134,11 +137,13 @@ func (fam *FindAndModify) Execute(ctx context.Context) error {
 		CommandMonitor: fam.monitor,
 		Database:       fam.database,
 		Deployment:     fam.deployment,
+		MaxTime:        fam.maxTime,
 		Selector:       fam.selector,
 		WriteConcern:   fam.writeConcern,
 		Crypt:          fam.crypt,
 		ServerAPI:      fam.serverAPI,
-	}.Execute(ctx, nil)
+		Timeout:        fam.timeout,
+	}.Execute(ctx)
 
 }
 
@@ -162,13 +167,12 @@ func (fam *FindAndModify) command(dst []byte, desc description.SelectedServer) (
 		}
 		dst = bsoncore.AppendDocumentElement(dst, "collation", fam.collation)
 	}
+	if fam.comment.Type != bsontype.Type(0) {
+		dst = bsoncore.AppendValueElement(dst, "comment", fam.comment)
+	}
 	if fam.fields != nil {
 
 		dst = bsoncore.AppendDocumentElement(dst, "fields", fam.fields)
-	}
-	if fam.maxTimeMS != nil {
-
-		dst = bsoncore.AppendInt64Element(dst, "maxTimeMS", *fam.maxTimeMS)
 	}
 	if fam.newDocument != nil {
 
@@ -240,6 +244,16 @@ func (fam *FindAndModify) Collation(collation bsoncore.Document) *FindAndModify 
 	return fam
 }
 
+// Comment sets a value to help trace an operation.
+func (fam *FindAndModify) Comment(comment bsoncore.Value) *FindAndModify {
+	if fam == nil {
+		fam = new(FindAndModify)
+	}
+
+	fam.comment = comment
+	return fam
+}
+
 // Fields specifies a subset of fields to return.
 func (fam *FindAndModify) Fields(fields bsoncore.Document) *FindAndModify {
 	if fam == nil {
@@ -250,13 +264,13 @@ func (fam *FindAndModify) Fields(fields bsoncore.Document) *FindAndModify {
 	return fam
 }
 
-// MaxTimeMS specifies the maximum amount of time to allow the operation to run.
-func (fam *FindAndModify) MaxTimeMS(maxTimeMS int64) *FindAndModify {
+// MaxTime specifies the maximum amount of time to allow the operation to run on the server.
+func (fam *FindAndModify) MaxTime(maxTime *time.Duration) *FindAndModify {
 	if fam == nil {
 		fam = new(FindAndModify)
 	}
 
-	fam.maxTimeMS = &maxTimeMS
+	fam.maxTime = maxTime
 	return fam
 }
 
@@ -291,7 +305,6 @@ func (fam *FindAndModify) Remove(remove bool) *FindAndModify {
 }
 
 // Sort determines which document the operation modifies if the query matches multiple documents.The first document matched by the sort order will be modified.
-//
 func (fam *FindAndModify) Sort(sort bsoncore.Document) *FindAndModify {
 	if fam == nil {
 		fam = new(FindAndModify)
@@ -450,5 +463,15 @@ func (fam *FindAndModify) Let(let bsoncore.Document) *FindAndModify {
 	}
 
 	fam.let = let
+	return fam
+}
+
+// Timeout sets the timeout for this operation.
+func (fam *FindAndModify) Timeout(timeout *time.Duration) *FindAndModify {
+	if fam == nil {
+		fam = new(FindAndModify)
+	}
+
+	fam.timeout = timeout
 	return fam
 }

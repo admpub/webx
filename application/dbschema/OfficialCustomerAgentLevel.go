@@ -125,11 +125,11 @@ type OfficialCustomerAgentLevel struct {
 
 // - base function
 
-func (a *OfficialCustomerAgentLevel) Trans() *factory.Transaction {
+func (a *OfficialCustomerAgentLevel) Trans() factory.Transactioner {
 	return a.base.Trans()
 }
 
-func (a *OfficialCustomerAgentLevel) Use(trans *factory.Transaction) factory.Model {
+func (a *OfficialCustomerAgentLevel) Use(trans factory.Transactioner) factory.Model {
 	a.base.Use(trans)
 	return a
 }
@@ -156,6 +156,10 @@ func (a *OfficialCustomerAgentLevel) Context() echo.Context {
 func (a *OfficialCustomerAgentLevel) SetConnID(connID int) factory.Model {
 	a.base.SetConnID(connID)
 	return a
+}
+
+func (a *OfficialCustomerAgentLevel) ConnID() int {
+	return a.base.ConnID()
 }
 
 func (a *OfficialCustomerAgentLevel) SetNamer(namer func(factory.Model) string) factory.Model {
@@ -229,7 +233,7 @@ func (a *OfficialCustomerAgentLevel) Name_() string {
 
 func (a *OfficialCustomerAgentLevel) CPAFrom(source factory.Model) factory.Model {
 	a.SetContext(source.Context())
-	a.Use(source.Trans())
+	a.SetConnID(source.ConnID())
 	a.SetNamer(source.Namer())
 	return a
 }
