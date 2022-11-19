@@ -56,7 +56,7 @@
 						<tr>
 							<td>{{$v.Id}}</td>
 							<td>{{$v.Name}}</td>
-							<td>{{typeName $v.PageType}}</td>
+							<td>{{call $.Func.typeName $v.PageType}}</td>
 							<td><a href="{{FrontendURL}}{{$v.Route}}" target="_blank">{{$v.Route}}</a></td>
 							<td>{{$v.Method}}</td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
