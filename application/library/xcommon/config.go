@@ -5,7 +5,7 @@ import (
 
 	"github.com/admpub/nging/v5/application/initialize/backend"
 	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/webx/application/initialize/frontend"
+	"github.com/admpub/webx/application/library/frontend"
 	"github.com/webx-top/echo"
 )
 

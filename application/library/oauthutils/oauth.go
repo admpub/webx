@@ -14,7 +14,7 @@ import (
 	"github.com/admpub/nging/v5/application/library/config"
 	oauthLibrary "github.com/admpub/nging/v5/application/library/oauth"
 	"github.com/admpub/nging/v5/application/registry/settings"
-	"github.com/admpub/webx/application/initialize/frontend"
+	"github.com/admpub/webx/application/library/frontend"
 	"github.com/coscms/oauth2s/client/goth/providers"
 )
 
