@@ -18,7 +18,7 @@ var NavigateLinkType = echo.NewKVData()
 
 func init() {
 	NavigateLinkType.Add(`custom`, `自定义链接`)
-	item := echo.NewKV(`article-category`, `资讯分类`)
+	item := echo.NewKV(`article-category`, `文章分类`)
 	item.SetFn(func(c context.Context) interface{} {
 		ctx := c.(echo.Context)
 		m := NewCategory(ctx)

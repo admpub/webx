@@ -51,12 +51,12 @@ func Detail(c echo.Context) error {
 		return c.JSON(data)
 	}
 
-	// 资讯
+	// 文章
 	articleM := modelArticle.NewArticle(c)
 	err = articleM.Get(nil, `id`, id)
 	if err != nil {
 		if err == db.ErrNoMoreRows {
-			return c.NewError(stdCode.DataNotFound, `不存id为“%d”的资讯`, id)
+			return c.NewError(stdCode.DataNotFound, `不存id为“%d”的文章`, id)
 		}
 		return err
 	}
@@ -109,7 +109,7 @@ func Detail(c echo.Context) error {
 		return tags
 	})
 
-	// 资讯点赞记录
+	// 文章点赞记录
 	clickFlowM := official.NewClickFlow(c)
 	var (
 		ownerID   uint64
@@ -245,14 +245,14 @@ func Pay(c echo.Context) error {
 	}
 	id := c.Paramx(`id`).Uint64()
 
-	// 资讯
+	// 文章
 	articleM := modelArticle.NewArticle(c)
 	err := articleM.Get(func(r db.Result) db.Result {
 		return r.Select(`id`, `price`, `title`)
 	}, `id`, id)
 	if err != nil {
 		if err == db.ErrNoMoreRows {
-			return c.NewError(stdCode.DataNotFound, `不存id为“%d”的资讯`, id)
+			return c.NewError(stdCode.DataNotFound, `不存id为“%d”的文章`, id)
 		}
 		return err
 	}

@@ -9,13 +9,13 @@ import (
 func init() {
 	handler.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
 		g = g.Group(`/article`)
-		// 新闻资讯
+		// 文章
 		g.Route(`GET,POST`, `/index`, Index)
 		g.Route(`GET,POST`, `/add`, Add)
 		g.Route(`GET,POST`, `/edit`, Edit)
 		g.Route(`GET,POST`, `/delete`, Delete)
 
-		// 新闻分类
+		// 分类
 		g.Route(`GET,POST`, `/category`, CategoryIndex)
 		g.Route(`GET,POST`, `/category_add`, CategoryAdd)
 		g.Route(`GET,POST`, `/category_edit`, CategoryEdit)

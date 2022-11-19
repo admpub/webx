@@ -49,7 +49,7 @@ var (
 			AfterDelete: commentArticleAfterDelete,
 			WithTarget:  commentArticleWithTarget,
 			Ident:       `article`,
-			Label:       `资讯`,
+			Label:       `文章`,
 		},
 		`other`: {
 			Ident: `other`,

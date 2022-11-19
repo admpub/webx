@@ -19,7 +19,7 @@ var (
 )
 
 func init() {
-	CategoryTypes.AddItem(&echo.KV{K: `article`, V: `资讯`})
+	CategoryTypes.AddItem(&echo.KV{K: `article`, V: `文章`})
 	CategoryTypes.AddItem(&echo.KV{K: `friendlink`, V: `友情链接`})
 }
 

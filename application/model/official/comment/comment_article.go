@@ -22,7 +22,7 @@ func commentArticleGetTarget(ctx echo.Context, targetID uint64) (res echo.H, bre
 	res = articleM.AsMap()
 	id := fmt.Sprint(targetID)
 	breadcrumb = []echo.KV{
-		{K: `official/article/index`, V: ctx.T(`资讯列表`)},
+		{K: `official/article/index`, V: ctx.T(`文章列表`)},
 		{K: `official/article/edit?id=` + id, V: articleM.Title},
 	}
 	detailURL = `article/` + id + ctx.DefaultExtension()
@@ -31,7 +31,7 @@ func commentArticleGetTarget(ctx echo.Context, targetID uint64) (res echo.H, bre
 
 func commentArticleCheck(ctx echo.Context, f *dbschema.OfficialCommonComment) error {
 	if f.TargetId < 1 {
-		return ctx.NewError(code.InvalidParameter, `资讯ID无效`).SetZone(`TargetId`)
+		return ctx.NewError(code.InvalidParameter, `文章ID无效`).SetZone(`TargetId`)
 	}
 	newsM := dbschema.NewOfficialCommonArticle(ctx)
 	err := newsM.Get(nil, `id`, f.TargetId)
@@ -39,7 +39,7 @@ func commentArticleCheck(ctx echo.Context, f *dbschema.OfficialCommonComment) er
 		if err != db.ErrNoMoreRows {
 			return err
 		}
-		return ctx.NewError(code.DataNotFound, `您要评论的资讯(ID:%d)不存在`, f.TargetId).SetZone(`id`)
+		return ctx.NewError(code.DataNotFound, `您要评论的文章(ID:%d)不存在`, f.TargetId).SetZone(`id`)
 	}
 	if newsM.CommentAutoDisplay == `Y` {
 		f.Display = `Y`

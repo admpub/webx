@@ -4,31 +4,31 @@ import "github.com/admpub/nging/v5/application/registry/navigate"
 
 var LeftNavigate = &navigate.Item{
 	Display: true,
-	Name:    `资讯管理`,
+	Name:    `文章管理`,
 	Action:  `official/article`,
 	Icon:    `file-text-o`,
 	Children: &navigate.List{
 		///==========================article
 		{
 			Display: true,
-			Name:    `资讯管理`,
+			Name:    `文章管理`,
 			Action:  `index`,
 		},
 		{
 			Display: false,
-			Name:    `添加资讯`,
+			Name:    `添加文章`,
 			Action:  `add`,
 			Icon:    `plus`,
 		},
 		{
 			Display: false,
-			Name:    `修改资讯`,
+			Name:    `修改文章`,
 			Action:  `edit`,
 			Icon:    `pencil`,
 		},
 		{
 			Display: false,
-			Name:    `删除资讯`,
+			Name:    `删除文章`,
 			Action:  `delete`,
 			Icon:    `remove`,
 		},
