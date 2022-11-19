@@ -37,10 +37,10 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"路由方法"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$methods := FormxValues "method[]"}}
+                  {{$methods := $.FormxValues "method[]"}}
                   {{range $k, $method := $.Stored.methodList}}
                   <div class="checkbox checkbox-primary checkbox-inline"> 
-                    <input type="checkbox" value="{{$method}}" id="method-{{$method}}" name="method[]"{{if methodChecked $method $methods}} checked{{end}}><label for="method-{{$method}}">{{$method}}</label>
+                    <input type="checkbox" value="{{$method}}" id="method-{{$method}}" name="method[]"{{if call $.Func.methodChecked $method $methods}} checked{{end}}><label for="method-{{$method}}">{{$method}}</label>
                   </div>
                   {{end}}
                 </div>

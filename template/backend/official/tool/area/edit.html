@@ -79,7 +79,7 @@
 <script src="{{AssetsURL}}/js/behaviour/page/cascade-select.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
-  CascadeSelect.init('#select-parent-id',{{FormxValues `pids[]`|JSONEncode|ToJS}});
+  CascadeSelect.init('#select-parent-id',{{$.FormxValues `pids[]`|JSONEncode|ToJS}});
 });
 </script>
 {{/Block}}
