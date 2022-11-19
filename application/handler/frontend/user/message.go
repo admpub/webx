@@ -8,7 +8,7 @@ import (
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
-	"github.com/admpub/webx/application/library/frontend"
+	"github.com/admpub/webx/application/initialize/frontend"
 	xMW "github.com/admpub/webx/application/middleware"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"

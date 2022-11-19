@@ -13,8 +13,9 @@ import (
 )
 
 var (
-	tplFuncMap map[string]interface{}
-	tplOnce    sync.Once
+	AssetsURLPath = `/public/assets/frontend`
+	tplFuncMap    map[string]interface{}
+	tplOnce       sync.Once
 )
 
 func initTplFuncMap() {

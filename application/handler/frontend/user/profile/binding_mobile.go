@@ -15,7 +15,7 @@ import (
 	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/nging/v5/application/model"
 	uploadChecker "github.com/admpub/nging/v5/application/registry/upload/checker"
-	"github.com/admpub/webx/application/library/frontend"
+	"github.com/admpub/webx/application/initialize/frontend"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )

@@ -18,8 +18,6 @@ import (
 	"github.com/admpub/nging/v5/application/library/ntemplate"
 	selfBackend "github.com/admpub/webx/application/initialize/backend"
 	"github.com/admpub/webx/application/initialize/frontend"
-
-	frontendLib "github.com/admpub/webx/application/library/frontend"
 )
 
 var (
@@ -83,9 +81,9 @@ func Initialize(callbacks ...func()) {
 	if len(StaticOptions.Root) == 0 {
 		StaticOptions.Root = filepath.Join(WebxDir, `public/assets/frontend`)
 	}
-	frontendLib.StaticMW = middleware.Static(StaticOptions)
-	frontendLib.TemplateDir = filepath.Join(WebxDir, frontendLib.DefaultTemplateDir) //模板文件夹
-	frontendLib.AssetsDir = filepath.Join(WebxDir, frontendLib.DefaultAssetsDir)     //素材文件夹
+	frontend.StaticMW = middleware.Static(StaticOptions)
+	frontend.TemplateDir = filepath.Join(WebxDir, frontend.DefaultTemplateDir) //模板文件夹
+	frontend.AssetsDir = filepath.Join(WebxDir, frontend.DefaultAssetsDir)     //素材文件夹
 	frontendTemplateDir := filepath.Join(WebxDir, `template/frontend`)
 	FrontendTemplateDirs.AddAllSubdir(frontendTemplateDir)
 	//FrontendTemplateDirs.Add(`default`, frontendTemplateDir)
@@ -94,7 +92,7 @@ func Initialize(callbacks ...func()) {
 		frontend.TmplPathFixers.AddDir(prefix, templateDir)
 		return nil
 	})
-	frontendLib.RendererDo = func(renderer driver.Driver) {
+	frontend.RendererDo = func(renderer driver.Driver) {
 		frontend.TmplPathFixers.SetTmplDir(renderer.TmplDir()).SetHandler(func(c echo.Context, theme string, tmpl string) string {
 			var found bool
 			tmpl, found = frontend.TmplPathFixers.Fix(c, theme, tmpl)

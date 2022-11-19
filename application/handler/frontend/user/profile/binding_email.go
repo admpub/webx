@@ -13,7 +13,7 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/webx/application/library/frontend"
+	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/library/xcommon"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )

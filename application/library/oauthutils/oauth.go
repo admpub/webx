@@ -2,6 +2,7 @@ package oauthutils
 
 import (
 	"github.com/admpub/log"
+	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/markbates/goth"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
@@ -14,7 +15,6 @@ import (
 	"github.com/admpub/nging/v5/application/library/config"
 	oauthLibrary "github.com/admpub/nging/v5/application/library/oauth"
 	"github.com/admpub/nging/v5/application/registry/settings"
-	"github.com/admpub/webx/application/library/frontend"
 	"github.com/coscms/oauth2s/client/goth/providers"
 )
 

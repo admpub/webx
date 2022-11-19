@@ -23,7 +23,6 @@ import (
 
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/initialize/frontend"
-	frontendLib "github.com/admpub/webx/application/library/frontend"
 	"github.com/admpub/webx/application/library/xtemplate"
 )
 
@@ -132,7 +131,7 @@ func TemplateIndex(ctx echo.Context) error {
 				themeInfo.Version = `0.0.1`
 				themeInfo.UpdatedAt = time.Now().Format(param.DateTimeNormal)
 				themeInfo.Fallback = []string{`default`}
-				infoFile = filepath.Join(frontendLib.DefaultTemplateDir, infoFile)
+				infoFile = filepath.Join(frontend.DefaultTemplateDir, infoFile)
 				themeInfo.EncodeToFile(infoFile)
 			}
 		}
@@ -264,7 +263,7 @@ func TemplateEdit(ctx echo.Context) error {
 			return err
 		}
 		original := file
-		themeDir = filepath.Join(frontendLib.DefaultTemplateDir, themeDir)
+		themeDir = filepath.Join(frontend.DefaultTemplateDir, themeDir)
 		file = filepath.Join(themeDir, file)
 		if ctx.Formx(`isNew`).Bool() {
 			if com.FileExists(file) && !ctx.Formx(`confirmed`).Bool() {
@@ -297,7 +296,7 @@ func TemplateEdit(ctx echo.Context) error {
 			return err
 		}
 		original := file
-		themeDir = filepath.Join(frontendLib.DefaultTemplateDir, themeDir)
+		themeDir = filepath.Join(frontend.DefaultTemplateDir, themeDir)
 		file = filepath.Join(themeDir, file)
 		if com.FileExists(file) && !ctx.Formx(`confirmed`).Bool() {
 			return ctx.NewError(code.DataAlreadyExists, `文件“%s”已经存在，确定要覆盖吗？`, original)
@@ -326,7 +325,7 @@ func TemplateEdit(ctx echo.Context) error {
 		}
 		original := newFile
 		srcFile := filepath.Join(themeDir, file)
-		themeDir = filepath.Join(frontendLib.DefaultTemplateDir, themeDir)
+		themeDir = filepath.Join(frontend.DefaultTemplateDir, themeDir)
 		newFile = filepath.Join(themeDir, newFile)
 		if com.FileExists(newFile) && !ctx.Formx(`confirmed`).Bool() {
 			return ctx.NewError(code.DataAlreadyExists, `文件“%s”已经存在，确定要覆盖吗？`, original)
@@ -383,7 +382,7 @@ func TemplateEdit(ctx echo.Context) error {
 		}
 		file = filepath.Clean(file)
 		original := file
-		file = filepath.Join(frontendLib.DefaultTemplateDir, themeDir, file)
+		file = filepath.Join(frontend.DefaultTemplateDir, themeDir, file)
 		if !com.FileExists(file) {
 			return ctx.NewError(code.DataAlreadyExists, `文件“%s”不存在或不属于当前项目`, original)
 		}

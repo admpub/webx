@@ -6,17 +6,18 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/admpub/log"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/engine/mock"
 	"github.com/webx-top/echo/handler/captcha"
 	"github.com/webx-top/echo/middleware"
 	"github.com/webx-top/echo/middleware/language"
 	"github.com/webx-top/echo/middleware/render"
+	"github.com/webx-top/echo/middleware/render/driver"
 	"github.com/webx-top/echo/middleware/session"
 	"github.com/webx-top/echo/subdomains"
 	"github.com/webx-top/validator"
 
-	"github.com/admpub/log"
 	"github.com/admpub/nging/v5/application/cmd/bootconfig"
 	"github.com/admpub/nging/v5/application/handler/user"
 	"github.com/admpub/nging/v5/application/initialize/backend"
@@ -31,19 +32,43 @@ import (
 	"github.com/admpub/webx/application/model/official"
 )
 
+const (
+	Name                  = `frontend`
+	DefaultTemplateDir    = `./template/` + Name
+	DefaultAssetsDir      = `./public/assets`
+	DefaultAssetsURLPath  = `/public/assets/frontend`
+	RouteDefaultExtension = `.html`
+)
+
+var (
+	Prefix             string
+	StaticMW           interface{}
+	TemplateDir        = DefaultTemplateDir //模板文件夹
+	AssetsDir          = DefaultAssetsDir   //素材文件夹
+	AssetsURLPath      = DefaultAssetsURLPath
+	StaticRootURLPath  = `/public/`
+	RendererDo         = func(driver.Driver) {}
+	DefaultMiddlewares = []interface{}{middleware.Log()}
+)
+
 func init() {
-	echo.Set(`FrontendPrefix`, frontend.Prefix)
-	bootconfig.OnStart(1, InitWebServer)
+	echo.Set(`FrontendPrefix`, Prefix)
+	bootconfig.OnStart(1, start)
+}
+
+func start() {
+	Prefix = echo.String(`FrontendPrefix`)
+	frontend.AssetsURLPath = AssetsURLPath
+	InitWebServer()
 }
 
 func InitWebServer() {
-	frontend.Prefix = echo.String(`FrontendPrefix`)
-	e := IRegister().Echo().SetPrefix(frontend.Prefix)
+	e := IRegister().Echo().SetPrefix(Prefix)
 	e.SetRenderDataWrapper(xMW.DefaultRenderDataWrapper)
-	e.SetDefaultExtension(frontend.RouteDefaultExtension)
+	e.SetDefaultExtension(RouteDefaultExtension)
 	if len(config.FromCLI().BackendDomain) > 0 {
 		// 如果指定了后台域名则只能用该域名访问后台。此时将其它域名指向前台
-		subdomains.Default.Default = frontend.Name // 设置默认(没有匹配到域名的时候)访问的域名别名
+		subdomains.Default.Default = Name // 设置默认(没有匹配到域名的时候)访问的域名别名
 	}
 	siteURL := config.Setting(`base`).String(`siteURL`)
 	var frontendDomain string
@@ -78,9 +103,9 @@ func InitWebServer() {
 
 		frontendDomain = strings.Join(domains, `,`)
 	}
-	subdomains.Default.Add(frontend.Name+`@`+frontendDomain, e)
+	subdomains.Default.Add(Name+`@`+frontendDomain, e)
 	addMiddleware(e)
-	log.Infof(`Registered host: %s@%s`, frontend.Name, frontendDomain)
+	log.Infof(`Registered host: %s@%s`, Name, frontendDomain)
 	e.Get(`/favicon.ico`, faviconHandler)
 	e.Use(xMW.SessionInfo)
 	if config.IsInstalled() {
@@ -99,9 +124,9 @@ func addMiddleware(e *echo.Echo) {
 	}
 	e.Use(middleware.Recover())
 	e.Use(ngingMW.MaxRequestBodySize)
-	e.Use(frontend.DefaultMiddlewares...)
-	if frontend.StaticMW != nil {
-		e.Use(frontend.StaticMW)
+	e.Use(DefaultMiddlewares...)
+	if StaticMW != nil {
+		e.Use(StaticMW)
 	}
 	e.Use(bootconfig.StaticMW) //后台静态资源(在bindata模式下也包含了前台静态资源)
 
@@ -126,10 +151,10 @@ func addMiddleware(e *echo.Echo) {
 		renderOptions.Renderer().Close()
 	}
 	renderOptions = &render.Config{
-		TmplDir: frontend.TemplateDir,
+		TmplDir: TemplateDir,
 		Engine:  `standard`,
 		ParseStrings: map[string]string{
-			`__TMPL__`: frontend.TemplateDir,
+			`__TMPL__`: TemplateDir,
 		},
 		DefaultHTTPErrorCode: http.StatusOK,
 		Reload:               true,
@@ -137,8 +162,8 @@ func addMiddleware(e *echo.Echo) {
 		ErrorProcessors:      common.ErrorProcessors,
 		FuncMapGlobal:        frontend.GlobalFuncMap(),
 	}
-	if frontend.RendererDo != nil {
-		renderOptions.AddRendererDo(frontend.RendererDo)
+	if RendererDo != nil {
+		renderOptions.AddRendererDo(RendererDo)
 	}
 	renderOptions.AddFuncSetter(FrontendURLFunc, ngingMW.ErrorPageFunc, xMW.SetFunc)
 	renderOptions.ApplyTo(e, bootconfig.FrontendTmplMgr)
@@ -164,11 +189,11 @@ func addMiddleware(e *echo.Echo) {
 	e.Use(xMW.FuncMap())
 	e.Use(render.Auto())
 
-	keepExtensionPrefixes := []string{frontend.StaticRootURLPath}
+	keepExtensionPrefixes := []string{StaticRootURLPath}
 	if config.IsInstalled() {
 		ctx := echo.NewContext(mock.NewRequest(), mock.NewResponse(), e)
 		routeM := official.NewRoutePage(ctx)
-		routes, _ := routeM.ListWithExtensionRoutes(frontend.RouteDefaultExtension)
+		routes, _ := routeM.ListWithExtensionRoutes(RouteDefaultExtension)
 		keepExtensionPrefixes = append(keepExtensionPrefixes, routes...)
 	}
 	e.Pre(xMW.TrimPathSuffix(keepExtensionPrefixes...))

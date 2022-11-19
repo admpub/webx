@@ -11,7 +11,6 @@ import (
 	"github.com/admpub/events"
 	"github.com/admpub/nging/v5/application/cmd/bootconfig"
 	"github.com/admpub/webx/application/initialize/frontend"
-	frontendLib "github.com/admpub/webx/application/library/frontend"
 	"github.com/admpub/webx/application/library/xtemplate"
 	formConfig "github.com/coscms/forms/config"
 	"github.com/webx-top/echo"
@@ -71,7 +70,7 @@ var (
 
 func initTemplateDiskFS() {
 	templateDiskFS = xtemplate.NewFileSystems()
-	templateDiskFS.Register(http.Dir(frontendLib.DefaultTemplateDir))
+	templateDiskFS.Register(http.Dir(frontend.DefaultTemplateDir))
 	initTemplateDiskOtherFS()
 }
 
