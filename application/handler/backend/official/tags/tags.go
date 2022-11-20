@@ -39,6 +39,7 @@ func Add(ctx echo.Context) error {
 	if ctx.IsPost() {
 		err = ctx.MustBind(m.OfficialCommonTags, FormFilter())
 		if err == nil {
+			m.Group = ctx.Form(`newGroup`)
 			_, err = m.Add()
 			if err == nil {
 				handler.SendOk(ctx, ctx.T(`操作成功`))
@@ -67,6 +68,7 @@ func Edit(ctx echo.Context) error {
 	if ctx.IsPost() {
 		err = ctx.MustBind(m.OfficialCommonTags, FormFilter(formfilter.Exclude(`name`)))
 		if err == nil {
+			m.Group = ctx.Form(`newGroup`)
 			m.Name = name
 			err = m.Edit(nil, db.Cond{`name`: name})
 			if err == nil {
