@@ -139,25 +139,20 @@ func (f *Category) Positions(id uint) ([]dbschema.OfficialCommonCategory, error)
 	return positions, err
 }
 
-func (f *Category) ParentIds(parentID uint) []uint {
-	var r []uint
-	for parentID > 0 && !com.InUintSlice(parentID, r) {
-		err := f.Get(nil, `id`, parentID)
-		if err != nil {
-			if err == db.ErrNoMoreRows {
-				break
-			}
-			return r
-		}
-		r = append(r, parentID)
-		parentID = f.ParentId
+func (f *Category) PositionIds(id uint) ([]uint, error) {
+	parents, err := f.Parents(id)
+	if err != nil {
+		return nil, err
 	}
-	result := make([]uint, len(r))
-	for k, i := 0, len(r)-1; i >= 0; i-- {
-		result[k] = r[i]
+	if len(parents) == 0 {
+		return nil, nil
+	}
+	result := make([]uint, len(parents))
+	for k, i := 0, len(parents)-1; i >= 0; i-- {
+		result[k] = parents[i].Id
 		k++
 	}
-	return result
+	return result, nil
 }
 
 func (f *Category) Add() (pk interface{}, err error) {

@@ -160,7 +160,7 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 			db.Cond{`category_id`: categoryID[0]},
 		))
 		cateM := official.NewCategory(c)
-		categories, _ = cateM.Parents(categoryID[0])
+		categories, _ = cateM.Positions(categoryID[0])
 	}
 	if len(tag) > 0 {
 		cond.Add(articleM.TagCond(tag))
@@ -212,7 +212,7 @@ func List(c echo.Context) error {
 			db.Cond{`category_id`: categoryID},
 		))
 		cateM := official.NewCategory(c)
-		categories, _ = cateM.Parents(categoryID)
+		categories, _ = cateM.Positions(categoryID)
 	}
 	if len(tag) > 0 {
 		cond.Add(articleM.TagCond(tag))

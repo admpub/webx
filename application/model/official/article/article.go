@@ -45,7 +45,7 @@ func (f *Article) GetCategories(rows ...*dbschema.OfficialCommonArticle) ([]dbsc
 		row = rows[0]
 	}
 	cateM := official.NewCategory(f.Context())
-	return cateM.Parents(row.CategoryId)
+	return cateM.Positions(row.CategoryId)
 }
 
 func (f *Article) TagCond(tag string) db.Compound {
@@ -61,7 +61,10 @@ func (f *Article) check(old *dbschema.OfficialCommonArticle) error {
 	}
 	if f.CategoryId > 0 {
 		cateM := official.NewCategory(f.Context())
-		parentIDs := cateM.ParentIds(f.CategoryId)
+		parentIDs, err := cateM.PositionIds(f.CategoryId)
+		if err != nil {
+			return err
+		}
 		f.Category3 = 0
 		f.Category2 = 0
 		f.Category1 = 0
