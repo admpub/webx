@@ -127,6 +127,23 @@ func (f *Category) Parents(parentID uint) ([]dbschema.OfficialCommonCategory, er
 	return result, nil
 }
 
+func (f *Category) Positions(id uint) ([]dbschema.OfficialCommonCategory, error) {
+	parents, err := f.Parents(id)
+	if err != nil {
+		return parents, err
+	}
+	if len(parents) == 0 {
+		return parents, nil
+	}
+	positions := make([]dbschema.OfficialCommonCategory, len(parents))
+	var index int
+	for end := len(parents) - 1; end >= 0; end-- {
+		positions[index] = parents[end]
+		index++
+	}
+	return positions, err
+}
+
 func (f *Category) ParentIds(parentID uint) []uint {
 	var r []uint
 	for parentID > 0 && !com.InUintSlice(parentID, r) {
@@ -322,7 +339,10 @@ func (f *Category) ExistsOther(name string, id uint) error {
 
 // ListChildren 查询子分类
 func (f *Category) ListChildren(parentID uint) ([]*dbschema.OfficialCommonCategory, error) {
-	_, err := f.ListByOffset(nil, nil, 0, -1, `parent_id`, parentID)
+	_, err := f.ListByOffset(nil, nil, 0, -1, db.And(
+		db.Cond{`parent_id`: parentID},
+		db.Cond{`disabled`: `N`},
+	))
 	if err != nil {
 		return nil, err
 	}
