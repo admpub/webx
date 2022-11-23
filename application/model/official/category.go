@@ -320,6 +320,15 @@ func (f *Category) ExistsOther(name string, id uint) error {
 	return err
 }
 
+// ListChildren 查询子分类
+func (f *Category) ListChildren(parentID uint) ([]*dbschema.OfficialCommonCategory, error) {
+	_, err := f.ListByOffset(nil, nil, 0, -1, `parent_id`, parentID)
+	if err != nil {
+		return nil, err
+	}
+	return f.Objects(), nil
+}
+
 func (f *Category) FillTo(tg []ICategory) error {
 	var categoryIds []uint
 	for _, u := range tg {
