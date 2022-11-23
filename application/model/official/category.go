@@ -6,6 +6,7 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/top"
@@ -54,7 +55,7 @@ func (f *Category) Delete(mw func(db.Result) db.Result, args ...interface{}) err
 		return err
 	}
 	if f.HasChild == `Y` {
-		return f.Context().E(`删除失败：请先删除子分类`)
+		return f.Context().NewError(code.Failure, `删除失败：请先删除子分类`)
 	}
 	if err = f.Context().Begin(); err != nil {
 		return err
@@ -163,7 +164,7 @@ func (f *Category) Add() (pk interface{}, err error) {
 			if err != db.ErrNoMoreRows {
 				return
 			}
-			err = f.Context().E(`父级分类不存在`)
+			err = f.Context().NewError(code.DataNotFound, `父级分类不存在`)
 			return
 		}
 		f.Level = parent.Level + 1
@@ -178,7 +179,7 @@ func (f *Category) Add() (pk interface{}, err error) {
 		f.Level = 0
 	}
 	if f.Level > f.MaxLevel() {
-		err = f.Context().E(`操作失败！分类超过最大层数: %d`, f.MaxLevel())
+		err = f.Context().NewError(code.Failure, `操作失败！分类超过最大层数: %d`, f.MaxLevel())
 		return
 	}
 	f.Slugify = top.Slugify(f.Name)
@@ -199,10 +200,10 @@ func (f *Category) Edit(mw func(db.Result) db.Result, args ...interface{}) (err 
 		if err != db.ErrNoMoreRows {
 			return err
 		}
-		return f.Context().E(`分类不存在`)
+		return f.Context().NewError(code.DataNotFound, `分类不存在`)
 	}
 	if oldData.Id == f.ParentId {
-		return f.Context().E(`不能选择自己为上级分类`)
+		return f.Context().NewError(code.Failure, `不能选择自己为上级分类`)
 	}
 	if oldData.ParentId != f.ParentId {
 		if f.ParentId > 0 {
@@ -212,7 +213,7 @@ func (f *Category) Edit(mw func(db.Result) db.Result, args ...interface{}) (err 
 				if err != db.ErrNoMoreRows {
 					return err
 				}
-				return f.Context().E(`父级分类不存在`)
+				return f.Context().NewError(code.DataNotFound, `父级分类不存在`)
 			}
 			f.Level = parent.Level + 1
 			f.Type = parent.Type
@@ -226,7 +227,7 @@ func (f *Category) Edit(mw func(db.Result) db.Result, args ...interface{}) (err 
 			f.Level = 0
 		}
 		if f.Level > f.MaxLevel() {
-			return f.Context().E(`操作失败！分类超过最大层数: %d`, f.MaxLevel())
+			return f.Context().NewError(code.Failure, `操作失败！分类超过最大层数: %d`, f.MaxLevel())
 		}
 		err = f.UpdateAllParents(oldData)
 		if err != nil {
@@ -300,7 +301,7 @@ func (f *Category) Exists(name string) error {
 		return err
 	}
 	if exists {
-		err = f.Context().E(`分类名称“%s”已经使用过了`, name)
+		err = f.Context().NewError(code.DataAlreadyExists, `分类名称“%s”已经使用过了`, name)
 	}
 	return err
 }
@@ -314,7 +315,7 @@ func (f *Category) ExistsOther(name string, id uint) error {
 		return err
 	}
 	if exists {
-		err = f.Context().E(`分类名称“%s”已经使用过了`, name)
+		err = f.Context().NewError(code.DataAlreadyExists, `分类名称“%s”已经使用过了`, name)
 	}
 	return err
 }
