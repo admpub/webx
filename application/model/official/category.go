@@ -105,26 +105,21 @@ func (f *Category) ListIndent(categoryList []*dbschema.OfficialCommonCategory) [
 }
 
 func (f *Category) Parents(parentID uint) ([]dbschema.OfficialCommonCategory, error) {
-	categories := map[uint]dbschema.OfficialCommonCategory{}
-	var r []uint
-	for parentID > 0 && !com.InUintSlice(parentID, r) {
+	categories := []dbschema.OfficialCommonCategory{}
+	r := map[uint]bool{}
+	for parentID > 0 && !r[parentID] {
 		err := f.Get(nil, `id`, parentID)
 		if err != nil {
 			if err == db.ErrNoMoreRows {
 				break
 			}
-			return nil, err
+			return categories, err
 		}
-		categories[parentID] = *f.OfficialCommonCategory
-		r = append(r, parentID)
+		categories = append(categories, *f.OfficialCommonCategory)
+		r[parentID] = true
 		parentID = f.ParentId
 	}
-	result := make([]dbschema.OfficialCommonCategory, len(r))
-	for k, i := 0, len(r)-1; i >= 0; i-- {
-		result[k] = categories[r[i]]
-		k++
-	}
-	return result, nil
+	return categories, nil
 }
 
 func (f *Category) Positions(id uint) ([]dbschema.OfficialCommonCategory, error) {
