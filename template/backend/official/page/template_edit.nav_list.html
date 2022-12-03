@@ -8,7 +8,7 @@
             {{- $v.Name -}}
         </a>
         {{- else -}}
-        {{if canEdit $v.Name}}
+        {{if call $.Func.canEdit $v.Name}}
         <a class="editable" href="javascript:;" onclick="openTemplateFile(this)" data-file="{{$v.Name}}" title="{{$v.Name}}">
             <!-- <span class="label label-primary pull-right unsaved">*</span> -->
             <i class="fa fa-file"></i>
