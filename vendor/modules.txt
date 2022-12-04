@@ -176,7 +176,7 @@ github.com/admpub/go-shortid
 # github.com/admpub/go-utility v0.0.1
 ## explicit; go 1.13
 github.com/admpub/go-utility/filesystem
-# github.com/admpub/go-zinc v0.0.5
+# github.com/admpub/go-zinc v0.0.8
 ## explicit; go 1.16
 github.com/admpub/go-zinc/doc
 github.com/admpub/go-zinc/doc/schemas

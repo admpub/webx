@@ -204,8 +204,8 @@ github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe h1:mR9VsdfIkdT8q
 github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe/go.mod h1:EVIe79bkZxI2fkWBKI8Is5RIRs3ooZdoTermKYIDbQ4=
 github.com/admpub/go-utility v0.0.1 h1:/nja86vknCoMYJtMCm8nV+vuBiOf5PU45I5w7XAJUEU=
 github.com/admpub/go-utility v0.0.1/go.mod h1:QZ/OrlUkHyD7Hg8Jj/iPkT6RZuMfYUOp0S4NsaQzRnA=
-github.com/admpub/go-zinc v0.0.5 h1:lyfr7Em4F7J4B48WNtGbCm7xKkvlRxQVkf3WMtokAiY=
-github.com/admpub/go-zinc v0.0.5/go.mod h1:bjKwJkA815+2rinV8qRISWKGJLN64F7PwAPiTzEWdpc=
+github.com/admpub/go-zinc v0.0.8 h1:u4Wjl5OlqVRVeeT76uJuGsVo3Uxxy6uyVcl9pcdC4ig=
+github.com/admpub/go-zinc v0.0.8/go.mod h1:xbAw2TiBrxTvUiOUDX8dkEt8MFmtqo/vWerMnb/F9A4=
 github.com/admpub/godotenv v1.4.2 h1:qJ9Uci5bCxlVsLrR5E1ovOuChz26Ap/PbggdL0qwMQ4=
 github.com/admpub/godotenv v1.4.2/go.mod h1:W8zOql4lSgnK6zfI6Le+GXlAaz5ZCj4kZI2wgcjar18=
 github.com/admpub/godownloader v2.2.0+incompatible h1:NB6TSZel/F/gQSZSwD1bkxKepcClrnfvuUO1xFAA2Rg=
@@ -1471,6 +1471,7 @@ github.com/webx-top/com v0.3.0/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEG
 github.com/webx-top/com v0.3.2/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEGsM2Q=
 github.com/webx-top/com v0.3.3/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEGsM2Q=
 github.com/webx-top/com v0.5.0/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEGsM2Q=
+github.com/webx-top/com v0.6.2/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEGsM2Q=
 github.com/webx-top/com v0.7.0/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEGsM2Q=
 github.com/webx-top/com v0.8.1/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEGsM2Q=
 github.com/webx-top/com v0.8.2 h1:Lmq1BtZHlaeNFkttdl79eL7YCzPtaPCHu/AEOUlF4so=
@@ -1744,6 +1745,7 @@ golang.org/x/net v0.0.0-20220520000938-2e3eb7b945c2/go.mod h1:CfG3xpIq0wQ8r1q4Su
 golang.org/x/net v0.0.0-20220624214902-1bab6f366d9e/go.mod h1:XRhObCWvk6IyKnWLug+ECip1KBveYUHfp+8e9klMJ9c=
 golang.org/x/net v0.0.0-20220722155237-a158d28d115b/go.mod h1:XRhObCWvk6IyKnWLug+ECip1KBveYUHfp+8e9klMJ9c=
 golang.org/x/net v0.0.0-20220812174116-3211cb980234/go.mod h1:YDH+HFinaLZZlnHAfSS6ZXJJ9M9t4Dl22yv3iI2vPwk=
+golang.org/x/net v0.0.0-20220923203811-8be639271d50/go.mod h1:YDH+HFinaLZZlnHAfSS6ZXJJ9M9t4Dl22yv3iI2vPwk=
 golang.org/x/net v0.1.0/go.mod h1:Cx3nUiGt4eDBEyega/BKRp+/AlGL8hYe7U9odMt2Cco=
 golang.org/x/net v0.2.0 h1:sZfSu1wtKLGlWI4ZZayP0ck9Y73K1ynO6gqzTdBVdPU=
 golang.org/x/net v0.2.0/go.mod h1:KqCZLdyyvdV855qA2rE3GC2aiw5xGR5TEjj8smXukLY=

@@ -4,10 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"net/url"
+	"strings"
 	"time"
 
 	"github.com/admpub/go-zinc/doc/schemas"
 	resty "github.com/admpub/resty/v2"
+	"github.com/webx-top/restyclient"
 )
 
 type ZincDocSDK interface {
@@ -25,9 +28,21 @@ type ZincDocSDK interface {
 type zincDocImpl struct {
 	client *resty.Client
 	host   string
+	path   string
 }
 
 func NewSDK(host, user, pwd string, timeout ...time.Duration) (ZincDocSDK, error) {
+	u, err := url.Parse(host)
+	if err != nil {
+		return nil, err
+	}
+	host = u.Host
+	if len(u.Scheme) > 0 {
+		host = u.Scheme + `://` + host
+	} else {
+		host = `https://` + host
+	}
+	path := u.Path
 	client := resty.New()
 	client.SetBasicAuth(user, pwd)
 	client.SetBaseURL(host)
@@ -35,9 +50,12 @@ func NewSDK(host, user, pwd string, timeout ...time.Duration) (ZincDocSDK, error
 	if len(timeout) > 0 {
 		client.SetTimeout(timeout[0])
 	}
+	path = strings.TrimRight(path, `/`)
+	restyclient.InitRestyHook(client)
 	return &zincDocImpl{
 		client: client,
 		host:   host,
+		path:   path,
 	}, nil
 }
 
@@ -56,7 +74,7 @@ func (c *zincDocImpl) CreateIndex(name string, p *schemas.IndexProperty, storage
 	if len(storageType) > 0 && len(storageType[0]) > 0 {
 		data.StorageType = storageType[0]
 	}
-	resp, err := c.request().SetBody(data).Put("/api/index")
+	resp, err := c.request().SetBody(data).Put(c.path + "/api/index")
 	if err != nil {
 		return err
 	}
@@ -68,7 +86,7 @@ func (c *zincDocImpl) CreateIndex(name string, p *schemas.IndexProperty, storage
 
 func (c *zincDocImpl) ListIndex() (schemas.IndexList, error) {
 	list := schemas.IndexList{}
-	resp, err := c.request().SetResult(&list).Get("/api/index")
+	resp, err := c.request().SetResult(&list).Get(c.path + "/api/index")
 	if err != nil {
 		return list, err
 	}
@@ -92,7 +110,7 @@ func (c *zincDocImpl) ExistIndex(name string) (bool, error) {
 }
 
 func (c *zincDocImpl) InsertDocumentWithID(name string, id string, doc interface{}) error {
-	resp, err := c.request().SetBody(doc).Put(fmt.Sprintf("/api/%s/_doc/%s", name, id))
+	resp, err := c.request().SetBody(doc).Put(c.path + fmt.Sprintf("/api/%s/_doc/%s", name, id))
 	if err != nil {
 		return err
 	}
@@ -112,7 +130,7 @@ func (c *zincDocImpl) BulkPush(docs []map[string]interface{}) error {
 			buf.WriteString("\n")
 		}
 	}
-	resp, err := c.request().SetBody(buf.String()).Post("/api/_bulk")
+	resp, err := c.request().SetBody(buf.String()).Post(c.path + "/api/_bulk")
 	if err != nil {
 		return err
 	}
@@ -122,8 +140,8 @@ func (c *zincDocImpl) BulkPush(docs []map[string]interface{}) error {
 	return nil
 }
 
-func (sdk *zincDocImpl) InsertDocument(index string, doc interface{}) error {
-	resp, err := sdk.request().SetBody(doc).Put(fmt.Sprintf("/api/%s/_doc", index))
+func (c *zincDocImpl) InsertDocument(index string, doc interface{}) error {
+	resp, err := c.request().SetBody(doc).Put(c.path + fmt.Sprintf("/api/%s/_doc", index))
 	if err != nil {
 		return err
 	}
@@ -133,8 +151,8 @@ func (sdk *zincDocImpl) InsertDocument(index string, doc interface{}) error {
 	return nil
 }
 
-func (sdk *zincDocImpl) DeleteDocument(index string, id string) error {
-	resp, err := sdk.request().Delete(fmt.Sprintf("/api/%s/_doc/%s", index, id))
+func (c *zincDocImpl) DeleteDocument(index string, id string) error {
+	resp, err := c.request().Delete(c.path + fmt.Sprintf("/api/%s/_doc/%s", index, id))
 	if err != nil {
 		return err
 	}
@@ -144,8 +162,8 @@ func (sdk *zincDocImpl) DeleteDocument(index string, id string) error {
 	return nil
 }
 
-func (sdk *zincDocImpl) UpdateDocument(index string, id string, doc interface{}) error {
-	resp, err := sdk.request().SetBody(doc).Post(fmt.Sprintf("/api/%s/_update/%s", index, id))
+func (c *zincDocImpl) UpdateDocument(index string, id string, doc interface{}) error {
+	resp, err := c.request().SetBody(doc).Post(c.path + fmt.Sprintf("/api/%s/_update/%s", index, id))
 	if err != nil {
 		return err
 	}
@@ -155,9 +173,9 @@ func (sdk *zincDocImpl) UpdateDocument(index string, id string, doc interface{})
 	return nil
 }
 
-func (sdk *zincDocImpl) SearchDocuments(index string, req *schemas.SearchRequest) (*schemas.SearchResponse, error) {
+func (c *zincDocImpl) SearchDocuments(index string, req *schemas.SearchRequest) (*schemas.SearchResponse, error) {
 	out := &schemas.SearchResponse{}
-	resp, err := sdk.request().SetBody(req).SetResult(out).Post(fmt.Sprintf("/api/%s/_search", index))
+	resp, err := c.request().SetBody(req).SetResult(out).Post(c.path + fmt.Sprintf("/api/%s/_search", index))
 	if err != nil {
 		return nil, err
 	}

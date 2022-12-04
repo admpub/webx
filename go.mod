@@ -73,7 +73,7 @@ require (
 	github.com/admpub/events v1.3.5
 	github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588
 	github.com/admpub/go-lock v1.3.0
-	github.com/admpub/go-zinc v0.0.5
+	github.com/admpub/go-zinc v0.0.8
 	github.com/admpub/nging/v5 v5.0.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.20.1
