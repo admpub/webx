@@ -36,6 +36,18 @@ func IRegister() route.IRegister {
 	return routeRegister
 }
 
+func MetaHandler(handler interface{}, m echo.H, requests ...interface{}) echo.Handler {
+	return routeRegister.MetaHandler(m, handler, requests...)
+}
+
+func MetaHandlerWithRequest(handler interface{}, m echo.H, requests interface{}, methods ...string) echo.Handler {
+	return routeRegister.MetaHandlerWithRequest(m, handler, requests, methods...)
+}
+
+func HandlerWithRequest(handler interface{}, requests interface{}, methods ...string) echo.Handler {
+	return routeRegister.HandlerWithRequest(handler, requests, methods...)
+}
+
 func Pre(middlewares ...interface{}) {
 	routeRegister.Pre(middlewares...)
 }

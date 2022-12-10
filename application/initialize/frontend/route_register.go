@@ -23,12 +23,15 @@ import (
 )
 
 var (
-	IRegister       = route.IRegister
-	Pre             = route.Pre
-	Use             = route.Use
-	UseToGroup      = route.UseToGroup
-	Register        = route.Register
-	RegisterToGroup = route.RegisterToGroup
-	Host            = route.Host
-	Apply           = route.Apply
+	IRegister          = route.IRegister
+	WithMeta           = route.MetaHandler
+	WithMetaAndRequest = route.MetaHandlerWithRequest
+	WithRequest        = route.HandlerWithRequest
+	Pre                = route.Pre
+	Use                = route.Use
+	UseToGroup         = route.UseToGroup
+	Register           = route.Register
+	RegisterToGroup    = route.RegisterToGroup
+	Host               = route.Host
+	Apply              = route.Apply
 )
