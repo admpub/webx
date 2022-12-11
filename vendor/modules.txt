@@ -272,6 +272,7 @@ github.com/admpub/nging/v5/application/handler/user
 github.com/admpub/nging/v5/application/initialize/backend
 github.com/admpub/nging/v5/application/initialize/manager
 github.com/admpub/nging/v5/application/library/backend
+github.com/admpub/nging/v5/application/library/background
 github.com/admpub/nging/v5/application/library/bindata
 github.com/admpub/nging/v5/application/library/charset
 github.com/admpub/nging/v5/application/library/cloudbackup

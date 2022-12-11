@@ -29,6 +29,7 @@ import (
 	"github.com/webx-top/echo"
 
 	"github.com/admpub/nging/v5/application/handler"
+	"github.com/admpub/nging/v5/application/library/background"
 	"github.com/admpub/nging/v5/application/library/notice"
 	"github.com/admpub/nging/v5/application/library/respond"
 
@@ -83,12 +84,17 @@ func (m *mySQL) Import() error {
 		if err != nil {
 			return responseDropzone(err, m.Context)
 		}
-		imports := utils.Exec{}
-		bgExec := utils.NewGBExec(context.TODO(), echo.H{
+		bgExec := background.New(context.TODO(), echo.H{
 			`database`: m.dbName,
 			`sqlFiles`: sqlFiles,
 			`async`:    async,
 		})
+		cacheKey := bgExec.Started.Format(`20060102150405`)
+		imports, err := background.Register(m.Context, utils.OpImport, cacheKey, bgExec)
+		if err != nil {
+			return err
+		}
+		fileInfos := &utils.FileInfos{}
 		noticer := notice.NewP(m.Context, `databaseImport`, username, bgExec.Context())
 		noticer.Success(m.T(`文件上传成功`))
 		cfg := *m.DbAuth
@@ -101,14 +107,12 @@ func (m *mySQL) Import() error {
 
 		for _, sqlFile := range sqlFiles {
 			fi, _ := os.Stat(sqlFile)
-			bgExec.AddFileInfo(&utils.FileInfo{
+			fileInfos.Add(&utils.FileInfo{
 				Start: time.Now(),
 				Path:  sqlFile,
 				Size:  fi.Size(),
 			})
 		}
-		cacheKey := bgExec.Started.Format(`20060102150405`)
-		imports.Add(utils.OpImport, cacheKey, bgExec)
 		if async {
 			go func() {
 				done := make(chan error)
@@ -141,10 +145,10 @@ func (m *mySQL) Import() error {
 			done := make(chan struct{})
 			ctx := m.StdContext()
 			go func() {
+				defer imports.Cancel(cacheKey)
 				for {
 					select {
 					case <-ctx.Done():
-						bgExec.Cancel()()
 						return
 					case <-done:
 						return
@@ -155,7 +159,6 @@ func (m *mySQL) Import() error {
 			if err != nil {
 				noticer.Failure(m.T(`导入失败`) + `: ` + err.Error())
 			}
-			imports.Cancel(cacheKey)
 			done <- struct{}{}
 			close(done)
 		}
