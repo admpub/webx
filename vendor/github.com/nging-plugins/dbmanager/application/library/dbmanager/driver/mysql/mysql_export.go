@@ -74,10 +74,7 @@ func (m *mySQL) bgExecManage(op string) error {
 		data := m.Data()
 		keys := m.FormValues(`key`)
 		for _, key := range keys {
-			err = background.Cancel(op, key)
-			if err != nil {
-				return m.JSON(data.SetError(err))
-			}
+			background.Cancel(op, key)
 		}
 		data.SetInfo(m.T(`操作成功`))
 		m.ok(m.T(`操作成功`))

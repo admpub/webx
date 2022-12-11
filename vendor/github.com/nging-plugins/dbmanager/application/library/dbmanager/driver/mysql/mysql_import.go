@@ -133,7 +133,7 @@ func (m *mySQL) Import() error {
 				for {
 					select {
 					case <-t.C:
-						bgExec.Cancel()()
+						imports.Cancel(cacheKey)
 						return
 					case <-done:
 						return
