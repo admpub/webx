@@ -6,7 +6,10 @@ package gojieba
 #include "jieba.h"
 */
 import "C"
-import "unsafe"
+import (
+	"runtime"
+	"unsafe"
+)
 
 type TokenizeMode int
 
@@ -33,7 +36,7 @@ func NewJieba(paths ...string) *Jieba {
 	defer C.free(unsafe.Pointer(upath))
 	defer C.free(unsafe.Pointer(ipath))
 	defer C.free(unsafe.Pointer(spath))
-	return &Jieba{
+	jieba := &Jieba{
 		C.NewJieba(
 			dpath,
 			hpath,
@@ -42,6 +45,8 @@ func NewJieba(paths ...string) *Jieba {
 			spath,
 		),
 	}
+	runtime.SetFinalizer(jieba, (*Jieba).Free)
+	return jieba
 }
 
 func (x *Jieba) Free() {
@@ -96,6 +101,12 @@ func (x *Jieba) AddWord(s string) {
 	cstr := C.CString(s)
 	defer C.free(unsafe.Pointer(cstr))
 	C.AddWord(x.jieba, cstr)
+}
+
+func (x *Jieba) RemoveWord(s string) {
+	cstr := C.CString(s)
+	defer C.free(unsafe.Pointer(cstr))
+	C.RemoveWord(x.jieba, cstr)
 }
 
 func (x *Jieba) Tokenize(s string, mode TokenizeMode, hmm bool) []Word {

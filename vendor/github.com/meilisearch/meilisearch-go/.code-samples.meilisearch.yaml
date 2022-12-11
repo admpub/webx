@@ -6,7 +6,7 @@
 get_one_index_1: |-
   client.GetIndex("movies")
 list_all_indexes_1: |-
-  client.GetAllIndexes(&meilisearch.IndexesQuery{
+  client.GetIndexes(&meilisearch.IndexesQuery{
     Limit: 3,
   })
 create_an_index_1: |-
@@ -71,6 +71,10 @@ get_one_key_1: |-
   client.GetKey("6062abda-a5aa-4414-ac91-ecd7944c0f8d")
 get_keys_1: |-
   client.GetKeys(nil)
+get_all_keys: |-
+  client.GetKeys(&meilisearch.KeysQuery{
+    Limit: 3
+  });
 create_a_key_1: |-
   client.CreateKey(&meilisearch.Key{
     Description: "Add documents: Products API key",
@@ -227,6 +231,12 @@ update_sortable_attributes_1: |-
   client.Index("books").UpdateSortableAttributes(&sortableAttributes)
 reset_sortable_attributes_1: |-
   client.Index("books").ResetSortableAttributes()
+getting_started_typo_tolerance: |-
+  client.index("movies").UpdateTypoTolerance({
+    MinWordSizeForTypos: meilisearch.MinWordSizeForTypos{
+      OneTypo: 4,
+    },
+  })
 get_typo_tolerance_1:
   client.Index("books").GetTypoTolerance()
 update_typo_tolerance_1: |-
@@ -258,7 +268,7 @@ reset_faceting_settings_1: |-
 get_index_stats_1: |-
   client.Index("movies").GetStats()
 get_indexes_stats_1: |-
-  client.GetAllStats()
+  client.GetStats()
 get_health_1: |-
   client.Health()
 get_version_1: |-
@@ -329,6 +339,14 @@ search_parameter_guide_highlight_tag_1: |-
 search_parameter_guide_show_matches_position_1: |-
   resp, err := client.Index("movies").Search("winter feast", &meilisearch.SearchRequest{
     ShowMatchesPosition:    true,
+  })
+search_parameter_guide_matching_strategy_1: |-
+  resp, err := client.Index("movies").Search("big fat liar", &meilisearch.SearchRequest{
+    MatchingStrategy:    "last",
+  })
+search_parameter_guide_matching_strategy_2: |-
+  resp, err := client.Index("movies").Search("big fat liar", &meilisearch.SearchRequest{
+    MatchingStrategy:    "all",
   })
 settings_guide_synonyms_1: |-
   settings := meilisearch.Settings{
@@ -403,26 +421,26 @@ settings_guide_faceting_1: |-
     MaxValuesPerFacet: 5,
   })
 settings_guide_typo_tolerance_1: |-
-  client.index("movies").UpdateTypoTolerance({
+  client.Index("movies").UpdateTypoTolerance(&meilisearch.TypoTolerance{
     MinWordSizeForTypos: meilisearch.MinWordSizeForTypos{
       TwoTypos: 12,
     },
     DisableOnAttributes: []string{"title"},
   })
 typo_tolerance_guide_1: |-
-  client.index("movies").UpdateTypoTolerance({
+  client.Index("movies").UpdateTypoTolerance(&meilisearch.TypoTolerance{
     Enabled: false,
   })
 typo_tolerance_guide_2: |-
-  client.index("movies").UpdateTypoTolerance({
+  client.Index("movies").UpdateTypoTolerance(&meilisearch.TypoTolerance{
     DisableOnAttributes: []string{"title"},
   })
 typo_tolerance_guide_3: |-
-  client.index("movies").UpdateTypoTolerance({
+  client.Index("movies").UpdateTypoTolerance(&meilisearch.TypoTolerance{
     DisableOnWords: []string{"shrek"},
   })
 typo_tolerance_guide_4: |-
-  client.index("movies").UpdateTypoTolerance({
+  client.Index("movies").UpdateTypoTolerance(&meilisearch.TypoTolerance{
     MinWordSizeForTypos: meilisearch.MinWordSizeForTypos{
       OneTypo: 4,
       TwoTypos: 10,
@@ -431,10 +449,10 @@ typo_tolerance_guide_4: |-
 add_movies_json_1: |-
   import (
     "encoding/json"
-    "io/ioutil"
+    "os"
   )
 
-  file, _ := ioutil.ReadFile("movies.json")
+  file, _ := os.ReadFile("movies.json")
 
   var movies interface{}
   json.Unmarshal([]byte(file), &movies)
@@ -442,7 +460,7 @@ add_movies_json_1: |-
   client.Index("movies").AddDocuments(&movies)
 landing_getting_started_1: |-
   client := meilisearch.NewClient(meilisearch.ClientConfig{
-    Host: "http://127.0.0.1:7700",
+    Host: "http://localhost:7700",
     APIKey: "masterKey",
   })
 
@@ -476,20 +494,20 @@ getting_started_add_documents_md: |-
   import (
     "os"
     "encoding/json"
-    "io/ioutil"
+    "io"
 
     "github.com/meilisearch/meilisearch-go"
   )
 
   func main() {
     client := meilisearch.NewClient(meilisearch.ClientConfig{
-      Host: "http://127.0.0.1:7700",
+      Host: "http://localhost:7700",
     })
 
     jsonFile, _ := os.Open("movies.json")
     defer jsonFile.Close()
 
-    byteValue, _ := ioutil.ReadAll(jsonFile)
+    byteValue, _ := io.ReadAll(jsonFile)
     var movies []map[string]interface{}
     json.Unmarshal(byteValue, &movies)
 
@@ -510,13 +528,13 @@ getting_started_search_md: |-
   [About this SDK](https://github.com/meilisearch/meilisearch-go/)
 getting_started_add_meteorites: |-
     client := meilisearch.NewClient(meilisearch.ClientConfig{
-      Host: "http://127.0.0.1:7700",
+      Host: "http://localhost:7700",
     })
 
     jsonFile, _ := os.Open("meteorites.json")
     defer jsonFile.Close()
 
-    byteValue, _ := ioutil.ReadAll(jsonFile)
+    byteValue, _ := io.ReadAll(jsonFile)
     var meteorites []map[string]interface{}
     json.Unmarshal(byteValue, &meteorites)
 
@@ -589,7 +607,7 @@ getting_started_configure_settings: |-
   client.Index("meteorites").UpdateSettings(&settings)
 getting_started_communicating_with_a_protected_instance: |-
   client := meilisearch.NewClient(meilisearch.ClientConfig{
-    Host: "http://127.0.0.1:7700",
+    Host: "http://localhost:7700",
     APIKey: "apiKey",
   })
 
@@ -708,13 +726,13 @@ primary_field_guide_update_document_primary_key: |-
   client.Index("books").UpdateIndex("title")
 security_guide_search_key_1: |-
   client := meilisearch.NewClient(meilisearch.ClientConfig{
-    Host: "http://127.0.0.1:7700",
+    Host: "http://localhost:7700",
     APIKey: "apiKey",
   })
   client.Index("patient_medical_records").Search();
 security_guide_update_key_1: |-
   client := meilisearch.NewClient(meilisearch.ClientConfig{
-    Host: "http://127.0.0.1:7700",
+    Host: "http://localhost:7700",
     APIKey: "masterKey",
   })
 
@@ -723,7 +741,7 @@ security_guide_update_key_1: |-
   })
 security_guide_create_key_1: |-
   client := meilisearch.NewClient(meilisearch.ClientConfig{
-    Host: "http://127.0.0.1:7700",
+    Host: "http://localhost:7700",
     APIKey: "masterKey",
   })
 
@@ -735,19 +753,19 @@ security_guide_create_key_1: |-
   })
 security_guide_list_keys_1: |-
   client := meilisearch.NewClient(meilisearch.ClientConfig{
-    Host: "http://127.0.0.1:7700",
+    Host: "http://localhost:7700",
     APIKey: "masterKey",
   })
   client.GetKeys(nil);
 security_guide_delete_key_1: |-
   client := meilisearch.NewClient(meilisearch.ClientConfig{
-    Host: "http://127.0.0.1:7700",
+    Host: "http://localhost:7700",
     APIKey: "masterKey",
   })
   client.DeleteKey("74c9c733-3368-4738-bbe5-1d18a5fecb37");
 authorization_header_1: |-
   client := meilisearch.NewClient(meilisearch.ClientConfig{
-    Host: "http://127.0.0.1:7700",
+    Host: "http://localhost:7700",
     APIKey: "masterKey",
   })
   client.GetKeys(nil);
@@ -765,7 +783,7 @@ tenant_token_guide_generate_sdk_1: |-
   token, err := client.GenerateTenantToken(searchRules, options);
 tenant_token_guide_search_sdk_1: |-
   frontEndClient := meilisearch.NewClient(meilisearch.ClientConfig{
-    Host: "http://127.0.0.1:7700",
+    Host: "http://localhost:7700",
     APIKey: token,
   })
   frontEndClient.Index("patient_medical_records").Search("blood test", &meilisearch.SearchRequest{});

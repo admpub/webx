@@ -8,7 +8,7 @@ import (
 	"github.com/admpub/nging/v5/application/cmd/bootconfig"
 	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/webx/application/dbschema"
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/webx-top/db"
 	mwJWT "github.com/webx-top/echo/middleware/jwt"
 	"github.com/webx-top/echo/param"

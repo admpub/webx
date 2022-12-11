@@ -7,7 +7,7 @@ import (
 	"github.com/admpub/log"
 	"github.com/admpub/nging/v5/application/library/codec"
 	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 	mwJWT "github.com/webx-top/echo/middleware/jwt"

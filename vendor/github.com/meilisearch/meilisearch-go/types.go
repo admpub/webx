@@ -3,7 +3,7 @@ package meilisearch
 import (
 	"time"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/valyala/fasthttp"
 )
 
@@ -199,7 +199,7 @@ type Key struct {
 type KeyParsed struct {
 	Name        string    `json:"name"`
 	Description string    `json:"description"`
-	Key         string    `json:"key,omitempty"`
+	UID         string    `json:"uid,omitempty"`
 	Actions     []string  `json:"actions,omitempty"`
 	Indexes     []string  `json:"indexes,omitempty"`
 	CreatedAt   time.Time `json:"createdAt,omitempty"`
@@ -240,29 +240,7 @@ type TenantTokenOptions struct {
 type TenantTokenClaims struct {
 	APIKeyUID   string      `json:"apiKeyUid"`
 	SearchRules interface{} `json:"searchRules"`
-	jwt.StandardClaims
-}
-
-// DumpStatus is the status of a dump
-type DumpStatus string
-
-const (
-	// DumpStatusInProgress means the server is processing the dump
-	DumpStatusInProgress DumpStatus = "in_progress"
-	// DumpStatusFailed means the server failed to create a dump
-	DumpStatusFailed DumpStatus = "failed"
-	// DumpStatusDone means the server completed the dump
-	DumpStatusDone DumpStatus = "done"
-)
-
-// Dump indicate information about an dump
-//
-// Documentation: https://docs.meilisearch.com/reference/api/dump.html
-type Dump struct {
-	UID        string     `json:"uid"`
-	Status     DumpStatus `json:"status"`
-	StartedAt  time.Time  `json:"startedAt"`
-	FinishedAt time.Time  `json:"finishedAt"`
+	jwt.RegisteredClaims
 }
 
 //
@@ -289,6 +267,7 @@ type SearchRequest struct {
 	AttributesToHighlight []string
 	HighlightPreTag       string
 	HighlightPostTag      string
+	MatchingStrategy      string
 	Filter                interface{}
 	ShowMatchesPosition   bool
 	Facets                []string

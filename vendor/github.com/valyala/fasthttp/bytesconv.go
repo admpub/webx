@@ -234,7 +234,7 @@ func ParseUfloat(buf []byte) (float64, error) {
 				if err != nil {
 					return -1, errInvalidFloatExponent
 				}
-				return float64(v) * offset * math.Pow10(minus*int(vv)), nil
+				return float64(v) * offset * math.Pow10(minus*vv), nil
 			}
 			return -1, errUnexpectedFloatChar
 		}
@@ -252,9 +252,7 @@ var (
 )
 
 func readHexInt(r *bufio.Reader) (int, error) {
-	n := 0
-	i := 0
-	var k int
+	var k, i, n int
 	for {
 		c, err := r.ReadByte()
 		if err != nil {
