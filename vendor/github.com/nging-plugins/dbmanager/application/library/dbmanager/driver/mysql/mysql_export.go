@@ -73,9 +73,7 @@ func (m *mySQL) bgExecManage(op string) error {
 	if m.IsPost() {
 		data := m.Data()
 		keys := m.FormValues(`key`)
-		for _, key := range keys {
-			background.Cancel(op, key)
-		}
+		background.Cancel(op, keys...)
 		data.SetInfo(m.T(`操作成功`))
 		m.ok(m.T(`操作成功`))
 		return m.returnTo(m.GenURL(op) + `&process=1`)
@@ -153,7 +151,7 @@ func (m *mySQL) Export() error {
 			return err
 		}
 		nowTime := time.Now().Format("20060102150405.000")
-		saveDir := TempDir(`export`)
+		saveDir := TempDir(utils.OpExport)
 		switch output {
 		case `down`:
 			m.Response().Header().Set(echo.HeaderContentType, echo.MIMEOctetStream)
@@ -293,7 +291,7 @@ func (m *mySQL) Export() error {
 		}
 		data := m.Data()
 		data.SetInfo(m.T(`任务已经在后台成功启动`))
-		data.SetURL(handler.URLFor(`/download/file?path=dbmanager/cache/export/` + m.dbName))
+		data.SetURL(handler.URLFor(`/download/file?path=dbmanager/cache/` + utils.OpExport + `/` + m.dbName))
 		go worker(bgExec.Context(), cfg)
 		return m.JSON(data)
 	}

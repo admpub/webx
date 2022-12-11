@@ -24,9 +24,9 @@ import (
 
 const (
 	// OpExport 导出操作
-	OpExport string = `dbmanager.mysql.export`
+	OpExport string = `mysql-export`
 	// OpImport 导入操作
-	OpImport string = `dbmanager.mysql.import`
+	OpImport string = `mysql-import`
 )
 
 // FileInfos 文件信息集合
