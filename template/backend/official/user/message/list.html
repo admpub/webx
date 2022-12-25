@@ -59,7 +59,7 @@
                 <div class="friend-widget no-padding no-margin-bottom">
                     <a{{if eq $v.MsgUser.Type "customer"}} href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank"{{end}}><img src="{{if $v.MsgUser.Avatar}}{{AddSuffix $v.MsgUser.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';"></a>
                     <h4><a{{if eq $v.MsgUser.Type "customer"}} href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank"{{end}}>{{$v.MsgUser.Name}}</a></h4>
-                    <p><span class="date">{{$v.Created|TsHumanize}}</span></p>
+                    <p><span class="date">{{$v.Created|$.TsHumanize}}</span></p>
                 </div>
                 </div>
 

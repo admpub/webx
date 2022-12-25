@@ -15,7 +15,7 @@
         <h4>
             {{$data.Title|Default ($.T "无标题")}}
             <span>
-            <b data-toggle="tooltip" title="{{(Date $data.Created).Format "2006-01-02 15:04:05"}}">{{$data.Created|TsHumanize}}</b>
+            <b data-toggle="tooltip" title="{{(Date $data.Created).Format "2006-01-02 15:04:05"}}">{{$data.Created|$.TsHumanize}}</b>
             </span>
         </h4>
     </div>

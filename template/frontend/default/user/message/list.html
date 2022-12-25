@@ -68,7 +68,7 @@
               <a class="d-flex mg-r-10" href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank"><img src="{{if $v.MsgUser.Avatar}}{{AddSuffix $v.MsgUser.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-40 ht-40 rounded-circle" alt="Image"></a>
               <div class="media-body">
                 <p class="tx-size-sm mg-b-0 tx-bold"><a href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank" class="tx-gray-dark d-block">{{$v.MsgUser.Name}}</a></p>
-                <div class="tx-size-12">{{$v.Created|TsHumanize}}</div>
+                <div class="tx-size-12">{{$v.Created|$.TsHumanize}}</div>
               </div><!-- media-body -->
             </div><!-- media -->
           </div><!-- col-3 -->
