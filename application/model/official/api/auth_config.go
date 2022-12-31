@@ -14,13 +14,13 @@ var APIAccountAuthConfig = mwapp.NewAuthConfig().SetSecretGetter(func(ctx echo.C
 	err := m.Get(nil, `app_id`, appID)
 	if err != nil {
 		if err == db.ErrNoMoreRows {
-			err = ctx.NewError(code.DataNotFound, `API账号“%s”没找到`, appID)
+			err = ctx.NewError(code.DataNotFound, `API账号“%s”没找到`, appID).SetZone(`appId`)
 		}
 		return "", err
 	}
 
 	if m.Disabled != `N` {
-		return "", ctx.NewError(code.DataUnavailable, `API账号“%s”已经停用`, appID)
+		return "", ctx.NewError(code.DataUnavailable, `API账号“%s”已经停用`, appID).SetZone(`appId`)
 	}
 	ctx.Internal().Store(`ApiAccount`, m.OfficialCommonApiAccount)
 	return m.AppSecret, nil
