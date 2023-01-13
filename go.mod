@@ -16,7 +16,7 @@ require (
 	github.com/admpub/bindata/v3 v3.1.5
 	github.com/admpub/cache v0.3.8
 	github.com/admpub/color v1.8.1
-	github.com/admpub/copier v0.1.0
+	github.com/admpub/copier v0.1.1
 	github.com/admpub/decimal v1.3.1
 	github.com/admpub/errors v0.8.2
 	github.com/admpub/fasttemplate v0.0.2
@@ -52,7 +52,7 @@ require (
 	github.com/stretchr/testify v1.8.1
 	github.com/swaggo/swag v1.8.8
 	github.com/wangbin/jiebago v0.3.2
-	github.com/webx-top/client v0.8.0
+	github.com/webx-top/client v0.8.1
 	github.com/webx-top/com v0.8.3
 	github.com/webx-top/db v1.23.13
 	github.com/webx-top/echo v2.33.0+incompatible
