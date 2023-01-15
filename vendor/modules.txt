@@ -996,7 +996,7 @@ github.com/nging-plugins/dbmanager/application/library/dbmanager/driver/redis
 github.com/nging-plugins/dbmanager/application/library/dbmanager/result
 github.com/nging-plugins/dbmanager/application/library/setup
 github.com/nging-plugins/dbmanager/application/model
-# github.com/nging-plugins/dlmanager v1.1.0 => ../../nging-plugins/dlmanager
+# github.com/nging-plugins/dlmanager v1.1.1 => ../../nging-plugins/dlmanager
 ## explicit; go 1.17
 github.com/nging-plugins/dlmanager/application/library/config
 # github.com/nwaples/rardecode v1.1.3
