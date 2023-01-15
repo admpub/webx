@@ -99,8 +99,8 @@ github.com/admpub/ccs-gm/sm2
 github.com/admpub/ccs-gm/sm3
 github.com/admpub/ccs-gm/utils
 github.com/admpub/ccs-gm/x509
-# github.com/admpub/checksum v1.0.1
-## explicit; go 1.12
+# github.com/admpub/checksum v1.1.0
+## explicit; go 1.19
 github.com/admpub/checksum
 # github.com/admpub/color v1.8.1
 ## explicit; go 1.13
@@ -428,7 +428,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.4
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.44.178
+# github.com/aws/aws-sdk-go v1.44.180
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -559,8 +559,8 @@ github.com/dsnet/compress/internal/prefix
 # github.com/dsoprea/go-logging v0.0.0-20200710184922-b02d349568dd
 ## explicit; go 1.13
 github.com/dsoprea/go-logging
-# github.com/dustin/go-humanize v1.0.0
-## explicit
+# github.com/dustin/go-humanize v1.0.1
+## explicit; go 1.16
 github.com/dustin/go-humanize
 # github.com/fatih/color v1.13.0
 ## explicit; go 1.13
@@ -943,7 +943,7 @@ github.com/miekg/dns
 # github.com/minio/md5-simd v1.1.2
 ## explicit; go 1.14
 github.com/minio/md5-simd
-# github.com/minio/minio-go/v7 v7.0.46
+# github.com/minio/minio-go/v7 v7.0.47
 ## explicit; go 1.17
 github.com/minio/minio-go/v7
 github.com/minio/minio-go/v7/pkg/credentials
@@ -1168,7 +1168,7 @@ github.com/webx-top/captcha
 # github.com/webx-top/chardet v0.0.1
 ## explicit
 github.com/webx-top/chardet
-# github.com/webx-top/client v0.8.6
+# github.com/webx-top/client v0.8.7
 ## explicit
 github.com/webx-top/client/upload
 github.com/webx-top/client/upload/driver
@@ -1353,6 +1353,7 @@ golang.org/x/crypto/acme
 golang.org/x/crypto/acme/autocert
 golang.org/x/crypto/argon2
 golang.org/x/crypto/blake2b
+golang.org/x/crypto/blake2s
 golang.org/x/crypto/chacha20
 golang.org/x/crypto/chacha20poly1305
 golang.org/x/crypto/cryptobyte
@@ -1367,7 +1368,7 @@ golang.org/x/crypto/ocsp
 golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/scrypt
 golang.org/x/crypto/sha3
-# golang.org/x/exp v0.0.0-20230111222715-75897c7a292a
+# golang.org/x/exp v0.0.0-20230113213754-f9f960f08ad4
 ## explicit; go 1.18
 golang.org/x/exp/constraints
 # golang.org/x/image v0.3.0
@@ -1505,7 +1506,7 @@ golang.org/x/tools/internal/typesinternal
 ## explicit; go 1.17
 golang.org/x/xerrors
 golang.org/x/xerrors/internal
-# google.golang.org/api v0.106.0
+# google.golang.org/api v0.107.0
 ## explicit; go 1.19
 google.golang.org/api/googleapi
 google.golang.org/api/internal
@@ -1532,7 +1533,7 @@ google.golang.org/appengine/internal/socket
 google.golang.org/appengine/internal/urlfetch
 google.golang.org/appengine/socket
 google.golang.org/appengine/urlfetch
-# google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f
+# google.golang.org/genproto v0.0.0-20230113154510-dbe35b8444a5
 ## explicit; go 1.19
 google.golang.org/genproto/googleapis/api
 google.golang.org/genproto/googleapis/api/annotations
