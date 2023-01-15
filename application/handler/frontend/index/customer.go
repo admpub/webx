@@ -8,6 +8,7 @@ import (
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/library/top"
 	"github.com/admpub/webx/application/middleware/sessdata"
@@ -141,11 +142,14 @@ func SignOut(c echo.Context) error {
 	m := modelCustomer.NewCustomer(c)
 	deviceM := modelCustomer.NewDevice(c)
 	var err error
+	var copied dbschema.OfficialCustomer
 	customer := sessdata.Customer(c)
 	if customer == nil {
 		goto END
 	}
-	m.OfficialCustomer = customer
+	copied = *customer
+	m.OfficialCustomer = &copied
+	m.SetContext(c)
 	deviceM.SessionId = c.Session().ID()
 	deviceM.CustomerId = customer.Id
 	err = deviceM.CleanCustomer(customer, modelCustomer.GenerateOptionsFromHeader(c)...)
