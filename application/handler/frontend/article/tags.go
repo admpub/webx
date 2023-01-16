@@ -7,12 +7,13 @@ import (
 	"github.com/webx-top/echo"
 )
 
-func getTags(ctx echo.Context) ([]*dbschema.OfficialCommonTags, error) {
-	return articlelogic.GetTags(ctx)
+func getTags(ctx echo.Context, group ...string) ([]*dbschema.OfficialCommonTags, error) {
+	return articlelogic.GetTags(ctx, group...)
 }
 
 func Tags(ctx echo.Context) error {
-	tags, err := getTags(ctx)
+	group := ctx.Query(`group`)
+	tags, err := getTags(ctx, group)
 	if err != nil {
 		return err
 	}

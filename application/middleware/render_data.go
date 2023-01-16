@@ -61,7 +61,7 @@ func (r *RenderData) CaptchaForm(args ...interface{}) template.HTML {
 	return common.CaptchaForm(r.ctx, args...)
 }
 
-func (r *RenderData) TagList() []*dbschema.OfficialCommonTags {
-	list, _ := articlelogic.GetTags(r.ctx)
+func (r *RenderData) TagList(group ...string) []*dbschema.OfficialCommonTags {
+	list, _ := articlelogic.GetTags(r.ctx, group...)
 	return list
 }
