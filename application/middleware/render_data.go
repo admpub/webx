@@ -11,7 +11,7 @@ import (
 	"github.com/webx-top/echo"
 )
 
-func DefaultRenderDataWrapper(ctx echo.Context, data interface{}) interface{} {
+var DefaultRenderDataWrapper = func(ctx echo.Context, data interface{}) interface{} {
 	return NewRenderData(ctx, data)
 }
 
