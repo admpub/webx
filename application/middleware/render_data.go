@@ -5,6 +5,7 @@ import (
 
 	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
+	"github.com/admpub/webx/application/library/logic/articlelogic"
 	"github.com/admpub/webx/application/model/official"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/webx-top/echo"
@@ -58,4 +59,9 @@ func (r *RenderData) SQLQueryLimit(offset int, limit int, linkID ...int) *common
 
 func (r *RenderData) CaptchaForm(args ...interface{}) template.HTML {
 	return common.CaptchaForm(r.ctx, args...)
+}
+
+func (r *RenderData) TagList() []*dbschema.OfficialCommonTags {
+	list, _ := articlelogic.GetTags(r.ctx)
+	return list
 }

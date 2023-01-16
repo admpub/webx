@@ -17,7 +17,7 @@
                             <div class="widget-categories">
                                 <h3 class="footer-heading">{{`标签`|$.T}}</h3>
                                 <div class="categories-tags">
-                                    {{- range $k,$v := call $.Func.tagList -}}
+                                    {{- range $k,$v := call $.TagList -}}
                                     <a href="{{FrontendURL}}/articles?tag={{$v.Name}}" class="active"> {{$v.Name}} <sup>{{$v.Num}}</sup> </a>
                                     {{- end -}}
                                 </div>

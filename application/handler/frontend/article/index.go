@@ -28,10 +28,6 @@ func Index(c echo.Context) error {
 		rows, _ := hotCommentArticles(c, query, limit, offset)
 		return rows
 	})
-	c.SetFunc(`tagList`, func() []*dbschema.OfficialCommonTags {
-		tags, _ := getTags(c)
-		return tags
-	})
 	c.SetFunc(`categoryList`, func(limit int) []*dbschema.OfficialCommonCategory {
 		categories, _ := getCategories(c, limit)
 		return categories

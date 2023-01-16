@@ -104,10 +104,6 @@ func Detail(c echo.Context) error {
 	}
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
-	c.SetFunc(`tagList`, func() []*dbschema.OfficialCommonTags {
-		tags, _ := getTags(c)
-		return tags
-	})
 
 	// 文章点赞记录
 	clickFlowM := official.NewClickFlow(c)
@@ -188,10 +184,6 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 	c.Set(`listURL`, sessdata.URLFor(`/articlesBy/`+sourceTable+`/`+sourceID))
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
-	c.SetFunc(`tagList`, func() []*dbschema.OfficialCommonTags {
-		tags, _ := getTags(c)
-		return tags
-	})
 	return c.Render(`article/list_by`, handler.Err(c, err))
 }
 
@@ -231,10 +223,6 @@ func List(c echo.Context) error {
 	c.Set(`listURL`, sessdata.URLFor(`/articles`)+c.DefaultExtension())
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
-	c.SetFunc(`tagList`, func() []*dbschema.OfficialCommonTags {
-		tags, _ := getTags(c)
-		return tags
-	})
 	return c.Render(`article/list`, handler.Err(c, err))
 }
 
