@@ -55,7 +55,7 @@
                     <div class="sidebar-widget widget-categories">
                         <div class="gradient-bar mb-30"></div>
                         <h3 class="heading-tertiary mb-20">{{`分类`|$.T}}</h3>
-                        {{- $categoryList := call $.Func.categoryList 10 -}}
+                        {{- $categoryList := $.CategoryList 10 -}}
                         {{- range $k,$v := $categoryList -}}
                         <a href="{{FrontendURL}}/articles{{$.Ext}}?categoryId={{$v.Id}}" class="cat-item-link">
                             <div class="cat-item">

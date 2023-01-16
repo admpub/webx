@@ -65,3 +65,13 @@ func (r *RenderData) TagList(group ...string) []*dbschema.OfficialCommonTags {
 	list, _ := articlelogic.GetTags(r.ctx, group...)
 	return list
 }
+
+func (r *RenderData) CategoryList(limit int, ctype ...string) []*dbschema.OfficialCommonCategory {
+	categories, _ := articlelogic.GetCategories(r.ctx, limit, ctype...)
+	return categories
+}
+
+func (r *RenderData) SubCategoryList(parentId int, limit int, ctype ...string) []*dbschema.OfficialCommonCategory {
+	categories, _ := articlelogic.GetSubCategories(r.ctx, parentId, limit, ctype...)
+	return categories
+}

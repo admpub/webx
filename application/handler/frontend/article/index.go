@@ -5,7 +5,6 @@ import (
 
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelArticle "github.com/admpub/webx/application/model/official/article"
 	modelComment "github.com/admpub/webx/application/model/official/comment"
@@ -27,10 +26,6 @@ func Index(c echo.Context) error {
 	c.SetFunc(`hotCommentArticles`, func(query string, limit int, offset int) []*modelArticle.ArticleWithOwner {
 		rows, _ := hotCommentArticles(c, query, limit, offset)
 		return rows
-	})
-	c.SetFunc(`categoryList`, func(limit int) []*dbschema.OfficialCommonCategory {
-		categories, _ := getCategories(c, limit)
-		return categories
 	})
 	c.SetFunc(`getArticles`, func() []*modelArticle.ArticleWithOwner {
 		c.Request().Form().Set(`pageSize`, `20`)
