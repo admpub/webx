@@ -249,7 +249,7 @@ github.com/admpub/mail
 # github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5
 ## explicit
 github.com/admpub/marmot/miner
-# github.com/admpub/mysql-schema-sync v0.2.1
+# github.com/admpub/mysql-schema-sync v0.2.3
 ## explicit; go 1.15
 github.com/admpub/mysql-schema-sync/internal
 github.com/admpub/mysql-schema-sync/sqlite
@@ -428,7 +428,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.4
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.44.180
+# github.com/aws/aws-sdk-go v1.44.188
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -562,8 +562,8 @@ github.com/dsoprea/go-logging
 # github.com/dustin/go-humanize v1.0.1
 ## explicit; go 1.16
 github.com/dustin/go-humanize
-# github.com/fatih/color v1.13.0
-## explicit; go 1.13
+# github.com/fatih/color v1.14.1
+## explicit; go 1.17
 github.com/fatih/color
 # github.com/fcjr/aia-transport-go v1.2.2
 ## explicit; go 1.13
@@ -673,7 +673,7 @@ github.com/goccy/go-json/internal/encoder/vm_color_indent
 github.com/goccy/go-json/internal/encoder/vm_indent
 github.com/goccy/go-json/internal/errors
 github.com/goccy/go-json/internal/runtime
-# github.com/gofrs/uuid v4.3.1+incompatible
+# github.com/gofrs/uuid v4.4.0+incompatible
 ## explicit
 github.com/gofrs/uuid
 # github.com/golang-jwt/jwt/v4 v4.4.3
@@ -815,7 +815,7 @@ github.com/kelseyhightower/envconfig
 ## explicit; go 1.14
 github.com/kisielk/errcheck
 github.com/kisielk/errcheck/errcheck
-# github.com/klauspost/compress v1.15.14
+# github.com/klauspost/compress v1.15.15
 ## explicit; go 1.17
 github.com/klauspost/compress
 github.com/klauspost/compress/flate
@@ -1369,7 +1369,7 @@ golang.org/x/crypto/ocsp
 golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/scrypt
 golang.org/x/crypto/sha3
-# golang.org/x/exp v0.0.0-20230113213754-f9f960f08ad4
+# golang.org/x/exp v0.0.0-20230126173853-a67bb567ff2e
 ## explicit; go 1.18
 golang.org/x/exp/constraints
 # golang.org/x/image v0.3.0
@@ -1507,7 +1507,7 @@ golang.org/x/tools/internal/typesinternal
 ## explicit; go 1.17
 golang.org/x/xerrors
 golang.org/x/xerrors/internal
-# google.golang.org/api v0.107.0
+# google.golang.org/api v0.108.0
 ## explicit; go 1.19
 google.golang.org/api/googleapi
 google.golang.org/api/internal
@@ -1534,7 +1534,7 @@ google.golang.org/appengine/internal/socket
 google.golang.org/appengine/internal/urlfetch
 google.golang.org/appengine/socket
 google.golang.org/appengine/urlfetch
-# google.golang.org/genproto v0.0.0-20230113154510-dbe35b8444a5
+# google.golang.org/genproto v0.0.0-20230125152338-dcaf20b6aeaa
 ## explicit; go 1.19
 google.golang.org/genproto/googleapis/api
 google.golang.org/genproto/googleapis/api/annotations
@@ -1544,7 +1544,7 @@ google.golang.org/genproto/googleapis/rpc/errdetails
 google.golang.org/genproto/googleapis/rpc/status
 google.golang.org/genproto/googleapis/type/expr
 google.golang.org/genproto/protobuf/field_mask
-# google.golang.org/grpc v1.52.0
+# google.golang.org/grpc v1.52.3
 ## explicit; go 1.17
 google.golang.org/grpc
 google.golang.org/grpc/attributes
@@ -1553,7 +1553,7 @@ google.golang.org/grpc/balancer
 google.golang.org/grpc/balancer/base
 google.golang.org/grpc/balancer/grpclb
 google.golang.org/grpc/balancer/grpclb/grpc_lb_v1
-google.golang.org/grpc/balancer/grpclb/grpclbstate
+google.golang.org/grpc/balancer/grpclb/state
 google.golang.org/grpc/balancer/roundrobin
 google.golang.org/grpc/binarylog/grpc_binarylog_v1
 google.golang.org/grpc/channelz
