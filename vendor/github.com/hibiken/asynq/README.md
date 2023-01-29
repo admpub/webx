@@ -33,6 +33,7 @@ Task queues are used as a mechanism to distribute work across multiple machines.
 - Low latency to add a task since writes are fast in Redis
 - De-duplication of tasks using [unique option](https://github.com/hibiken/asynq/wiki/Unique-Tasks)
 - Allow [timeout and deadline per task](https://github.com/hibiken/asynq/wiki/Task-Timeout-and-Cancelation)
+- Allow [aggregating group of tasks](https://github.com/hibiken/asynq/wiki/Task-aggregation) to batch multiple successive operations
 - [Flexible handler interface with support for middlewares](https://github.com/hibiken/asynq/wiki/Handler-Deep-Dive)
 - [Ability to pause queue](/tools/asynq/README.md#pause) to stop processing tasks from the queue
 - [Periodic Tasks](https://github.com/hibiken/asynq/wiki/Periodic-Tasks)
@@ -291,12 +292,12 @@ Asynq ships with a command line tool to inspect the state of queues and tasks.
 To install the CLI tool, run the following command:
 
 ```sh
-go get -u github.com/hibiken/asynq/tools/asynq
+go install github.com/hibiken/asynq/tools/asynq
 ```
 
-Here's an example of running the `asynq stats` command:
+Here's an example of running the `asynq dash` command:
 
-![Gif](/docs/assets/demo.gif)
+![Gif](/docs/assets/dash.gif)
 
 For details on how to use the tool, refer to the tool's [README](/tools/asynq/README.md).
 

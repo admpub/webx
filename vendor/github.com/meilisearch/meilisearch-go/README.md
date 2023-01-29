@@ -28,21 +28,12 @@
 
 ## Table of Contents <!-- omit in toc -->
 
-- [🎃 Hacktoberfest](#-hacktoberfest)
 - [📖 Documentation](#-documentation)
 - [🔧 Installation](#-installation)
 - [🚀 Getting started](#-getting-started)
 - [🤖 Compatibility with Meilisearch](#-compatibility-with-meilisearch)
 - [💡 Learn more](#-learn-more)
 - [⚙️ Contributing](#️-contributing)
-
-## 🎃 Hacktoberfest
-
-It’s Hacktoberfest 2022 @Meilisearch
-
-[Hacktoberfest](https://hacktoberfest.com/) is a celebration of the open-source community. This year, and for the third time in a row, Meilisearch is participating in this fantastic event.
-
-You’d like to contribute? Don’t hesitate to check out our [contributing guidelines](./CONTRIBUTING.md).
 
 ## 📖 Documentation
 
@@ -239,7 +230,7 @@ searchRes, err := index.Search("wonder",
 
 ## 🤖 Compatibility with Meilisearch
 
-This package only guarantees the compatibility with the [version v0.29.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v0.29.0).
+This package only guarantees the compatibility with the [version v0.30.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v0.30.0).
 
 ## 💡 Learn more
 
