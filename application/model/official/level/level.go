@@ -27,6 +27,40 @@ type Level struct {
 	*dbschema.OfficialCustomerLevel
 }
 
+func (f *Level) GreaterOrEqualThan(levelId uint, targetLevelId uint) (bool, error) {
+	return f.Than(levelId, targetLevelId, func(a *dbschema.OfficialCustomerLevel, b *dbschema.OfficialCustomerLevel) bool {
+		return a.Score >= b.Score
+	})
+}
+
+func (f *Level) LessThan(levelId uint, targetLevelId uint) (bool, error) {
+	return f.Than(levelId, targetLevelId, func(a *dbschema.OfficialCustomerLevel, b *dbschema.OfficialCustomerLevel) bool {
+		return a.Score < b.Score
+	})
+}
+
+func (f *Level) Than(
+	levelId uint, targetLevelId uint,
+	compare func(*dbschema.OfficialCustomerLevel, *dbschema.OfficialCustomerLevel) bool,
+) (bool, error) {
+	row := dbschema.NewOfficialCustomerLevel(f.Context())
+	err := row.Get(nil, `id`, levelId)
+	if err != nil {
+		return false, err
+	}
+	err = f.Get(nil, db.And(
+		db.Cond{`id`: targetLevelId},
+		db.Cond{`group`: row.Group},
+	))
+	if err != nil {
+		if err == db.ErrNoMoreRows {
+			err = nil
+		}
+		return false, err
+	}
+	return compare(row, f.OfficialCustomerLevel), err
+}
+
 func (f *Level) check() error {
 	if len(f.Group) == 0 {
 		return f.Context().E(`group is required`)
