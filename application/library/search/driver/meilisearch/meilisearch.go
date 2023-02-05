@@ -45,8 +45,8 @@ func (m *MeiliSearch) Add(index string, primaryKey string, docs ...interface{}) 
 	if err != nil {
 		return err
 	}
-	if len(t.Error.Code) > 0 {
-		err = fmt.Errorf(`code=%v, message=%v`, t.Error.Code, t.Error.Message)
+	if !isOk(t.Status) {
+		err = fmt.Errorf(`%+v`, *t)
 	}
 	return err
 }
@@ -65,8 +65,8 @@ func (m *MeiliSearch) Update(index string, primaryKey string, docs ...interface{
 	if err != nil {
 		return err
 	}
-	if len(t.Error.Code) > 0 {
-		err = fmt.Errorf(`code=%v, message=%v`, t.Error.Code, t.Error.Message)
+	if !isOk(t.Status) {
+		err = fmt.Errorf(`%+v`, *t)
 	}
 	return err
 }
