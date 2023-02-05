@@ -496,7 +496,7 @@ function bindCommentList(box,isReplyList,offsetY) {
         var id=$(this).data('comment-like-id'),me=$(this);
         $.post(BASE_URL+'/article/comment_like',{id:id},function(r){
             if(r.Code<1){
-                alert(r.Info);
+                App.message({text:r.Info,type:"error"});
                 return;
             }
             me.removeClass('tx-gray-light').addClass('tx-success');

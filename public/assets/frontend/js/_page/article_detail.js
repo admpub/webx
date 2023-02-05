@@ -3,7 +3,7 @@ $(function(){
         var id=$(this).data('article-id'),me=$(this);
         $.post(BASE_URL+'/article/like',{id:id},function(r){
             if(r.Code<1){
-                alert(r.Info);
+                App.message({text:r.Info,type:"error"});
                 return;
             }
             me.removeClass('tx-gray-light').addClass('tx-success');
@@ -17,7 +17,7 @@ $(function(){
         var id=$(this).data('article-id'),me=$(this);
         $.post(BASE_URL+'/article/hate',{id:id},function(r){
             if(r.Code<1){
-                alert(r.Info);
+                App.message({text:r.Info,type:"error"});
                 return;
             }
             me.removeClass('tx-gray-light').addClass('tx-danger');
