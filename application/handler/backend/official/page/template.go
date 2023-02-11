@@ -503,16 +503,16 @@ func TemplateConfig(ctx echo.Context) error {
 		fallbackThemes := ctx.Form(`_fallbackThemes`)
 		if len(fallbackThemes) > 0 {
 			themeInfo.Fallback = param.StringSlice(strings.Split(fallbackThemes, `,`)).Filter(func(s *string) bool {
-				if s == nil || len(*s) == 0 || *s == themeInfo.Name {
+				if s == nil || len(*s) == 0 || *s == themeInfo.Name || *s == `default` {
 					return false
 				}
 				return true
 			}).Unique().String()
-			if !com.InSlice(`default`, themeInfo.Fallback) {
-				themeInfo.Fallback = append(themeInfo.Fallback, `default`)
-			}
 		} else {
-			themeInfo.Fallback = []string{`default`}
+			themeInfo.Fallback = []string{}
+		}
+		if themeInfo.Name != `default` {
+			themeInfo.Fallback = append(themeInfo.Fallback, `default`)
 		}
 		err = frontend.TmplPathFixers.Storer().Put(ctx, name, themeInfo)
 		if err != nil {
