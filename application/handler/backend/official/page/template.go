@@ -548,7 +548,7 @@ END:
 
 	themeLsMu.RLock()
 	fallbacks := make([]xtemplate.ThemeInfoLite, 0, len(themeList))
-	for index, themeCfg := range themeList {
+	for _, themeCfg := range themeList {
 		if themeCfg.Name == themeInfo.Name || themeCfg.Name == `default` {
 			continue
 		}
@@ -556,7 +556,7 @@ END:
 		if len(lite.PreviewImage) > 0 {
 			lite.PreviewImage = handler.URLFor(`/official/page/template_index`) + `?op=preview&name=` + lite.Name
 		}
-		fallbacks[index] = lite
+		fallbacks = append(fallbacks, lite)
 	}
 	themeLsMu.RUnlock()
 
