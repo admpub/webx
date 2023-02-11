@@ -19,7 +19,7 @@
     {{/*Include "#default#user/homepage/_topic"*/}}
     {{/*Include "#default#user/homepage/_card_with_tabs"*/}}
     {{- $block := $.Stored.block -}}
-    {{- Fetch $block.Tmpl $ -}}
+    {{- $.Fetch $block.Tmpl $ -}}
     </div><!-- container -->
     <div class="container pd-b-20">
         &copy; {{Now.Format "2006"}} {{Config.base.siteName}}
