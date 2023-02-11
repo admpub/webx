@@ -500,6 +500,15 @@ func TemplateConfig(ctx echo.Context) error {
 		if err != nil {
 			goto END
 		}
+		fallbackThemes := ctx.Form(`_fallbackThemes`)
+		if len(fallbackThemes) > 0 {
+			themeInfo.Fallback = param.StringSlice(strings.Split(fallbackThemes, `,`)).Filter().Unique().String()
+			if !com.InSlice(`default`, themeInfo.Fallback) {
+				themeInfo.Fallback = append(themeInfo.Fallback, `default`)
+			}
+		} else {
+			themeInfo.Fallback = []string{`default`}
+		}
 		err = frontend.TmplPathFixers.Storer().Put(ctx, name, themeInfo)
 		if err != nil {
 			goto END
@@ -535,6 +544,9 @@ END:
 	themeLsMu.RLock()
 	fallbacks := make([]xtemplate.ThemeInfoLite, len(themeList))
 	for index, themeCfg := range themeList {
+		if themeCfg.Name == themeInfo.Name || themeCfg.Name == `default` {
+			continue
+		}
 		lite := themeCfg.AsLite()
 		if len(lite.PreviewImage) > 0 {
 			lite.PreviewImage = handler.URLFor(`/official/page/template_index`) + `?op=preview&name=` + lite.Name

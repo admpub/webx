@@ -27,7 +27,7 @@
                     <div class="col-sm-8">
                         <div class="form-selectpage-container">
                         {{- $fallbackThemes := Join $info.Fallback `,` -}}
-                        <input type="text" name="fallbackThemes" class="form-selectpage form-control" data-keyfield="name" data-thumbfield="previewImage" data-json='{{$.Stored.fallbacks|JOSNEncode}}' data-multiple="1" value="{{$fallbackThemes}}" data-init="{{$fallbackThemes}}" data-parsley-errors-container="#parsley-error-fallbackThemes" />
+                        <input type="text" name="_fallbackThemes" class="form-selectpage form-control" data-keyfield="name" data-thumbfield="previewImage" data-json='{{$.Stored.fallbacks|JOSNEncode}}' data-multiple="1" value="{{$fallbackThemes}}" data-init="{{$fallbackThemes}}" data-parsley-errors-container="#parsley-error-fallbackThemes" />
                         </div>
                         <div class="help-block">
                             {{`对于当前主题缺失的模板文件将会依次从替补主题中寻找`|$.T}}
