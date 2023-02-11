@@ -29,7 +29,7 @@
                         <div class="col-sm-8">{{$color := $.Form `color`}}
                             {{- range $k,$v := $.Stored.info.Colors -}}
                             <label class="themecolor">
-                                <div class="preview" style="{{if $v.Color}}background-color:{{$v.Color}};{{end}}{{if $v.PreviewImage}}background-image:url('{{BackendURL}}/official/page/template_index?op=preview&name={{$.Stored.info.Name}}&color={{$v.Name}}');{{end}}">
+                                <div class="preview" style="{{if $v.Color}}background-color:{{$v.HexColor}};{{end}}{{if $v.PreviewImage}}background-image:url('{{BackendURL}}/official/page/template_index?op=preview&name={{$.Stored.info.Name}}&color={{$v.Name}}');{{end}}">
                                 </div>
                                 <div class="radio radio-primary radio-inline">
                                     <input type="radio" value="{{$v.Name}}" name="color" id="color-{{$v.Name}}" {{- if eq $color $v.Name}} checked="checked" {{end}}>

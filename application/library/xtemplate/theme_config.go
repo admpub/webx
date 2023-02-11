@@ -1,9 +1,12 @@
 package xtemplate
 
 import (
+	"fmt"
 	"html/template"
 	"os"
 	"regexp"
+	"strconv"
+	"strings"
 
 	"github.com/admpub/confl"
 	"github.com/coscms/forms"
@@ -47,6 +50,44 @@ type ThemeColor struct {
 	IsDefault    bool   `json:"isDefault,omitempty"`    // 是否为默认颜色
 	Color        string `json:"color,omitempty"`        // 颜色值
 	PreviewImage string `json:"previewImage,omitempty"` // 预览图
+}
+
+func RGB2Hex(rgb string) string {
+	if len(rgb) == 0 {
+		return ``
+	}
+	if strings.HasPrefix(rgb, `#`) {
+		return rgb
+	}
+	n := 3
+	if strings.HasPrefix(rgb, `rgba(`) {
+		rgb = strings.TrimPrefix(rgb, `rgba(`)
+		n = 4
+	} else {
+		rgb = strings.TrimPrefix(rgb, `rgb(`)
+	}
+	rgb = strings.TrimRight(rgb, `);`)
+	parts := strings.SplitN(rgb, `,`, n)
+	if len(parts) < 3 {
+		return ``
+	}
+	rgbNums := make([]int, 3)
+	for x := 0; x < 3; x++ {
+		s := strings.TrimSpace(parts[x])
+		var i int
+		if len(s) > 0 {
+			i, _ = strconv.Atoi(s)
+			if i > 255 || i < 0 {
+				return ``
+			}
+		}
+		rgbNums[x] = i
+	}
+	return fmt.Sprintf(`#%X%X%X`, rgbNums[0], rgbNums[1], rgbNums[2])
+}
+
+func (t ThemeColor) HexColor() string {
+	return RGB2Hex(t.Color)
 }
 
 // ThemeInfo 模板主题信息
@@ -135,12 +176,27 @@ func (t *ThemeInfo) EncodeToFile(destFile string) error {
 	return err
 }
 
+func (t *ThemeInfo) fixedColors() {
+	for i, v := range t.Colors {
+		v.Name = strings.TrimSpace(v.Name)
+		v.Color = strings.TrimSpace(v.Color)
+		t.Colors[i] = v
+	}
+}
+
 func (t *ThemeInfo) Decode(b []byte) error {
-	return confl.Unmarshal(b, t)
+	err := confl.Unmarshal(b, t)
+	if err == nil {
+		t.fixedColors()
+	}
+	return err
 }
 
 func (t *ThemeInfo) DecodeFile(file string) error {
 	_, err := confl.DecodeFile(file, t)
+	if err == nil {
+		t.fixedColors()
+	}
 	return err
 }
 
