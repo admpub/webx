@@ -93,14 +93,12 @@ func TemplateEnable(ctx echo.Context) error {
 }
 
 var (
-	themeList []*xtemplate.ThemeInfo
-	themeLsMu sync.RWMutex
+	themeList       []*xtemplate.ThemeInfo
+	themeLsMu       sync.RWMutex
+	themeLsInitOnce sync.Once
 )
 
-func TemplateIndex(ctx echo.Context) error {
-	if ctx.Form(`op`) == `preview` {
-		return TemplatePreviewImage(ctx)
-	}
+func getTemplateList() []*xtemplate.ThemeInfo {
 	var (
 		dirs   []fs.FileInfo
 		list   []*xtemplate.ThemeInfo
@@ -109,7 +107,7 @@ func TemplateIndex(ctx echo.Context) error {
 	)
 	dirs, err := GetTemplateDiskFS().ReadDir(`./`)
 	if err != nil && !os.IsNotExist(err) {
-		goto END
+		return list
 	}
 	list = make([]*xtemplate.ThemeInfo, 0, len(dirs))
 	embeds = GetEmbedThemes()
@@ -133,7 +131,7 @@ func TemplateIndex(ctx echo.Context) error {
 			}
 			if !themeInfo.Embed() {
 				themeInfo.Author.Name = `coscms`
-				themeInfo.Title = ctx.T(`模板%s`, dir.Name())
+				themeInfo.Title = dir.Name()
 				themeInfo.Version = `0.0.1`
 				themeInfo.UpdatedAt = time.Now().Format(param.DateTimeNormal)
 				themeInfo.Fallback = []string{`default`}
@@ -150,11 +148,19 @@ func TemplateIndex(ctx echo.Context) error {
 		}
 		list = append(list, v)
 	}
+	return list
+}
+
+func TemplateIndex(ctx echo.Context) error {
+	if ctx.Form(`op`) == `preview` {
+		return TemplatePreviewImage(ctx)
+	}
+	list := getTemplateList()
 	themeLsMu.Lock()
 	themeList = list
+	themeLsInitOnce.Do(func() {})
 	themeLsMu.Unlock()
 
-END:
 	ctx.Set(`listData`, list)
 	ctx.Set(`current`, frontend.TmplPathFixers.ThemeInfo(ctx))
 	return ctx.Render(`official/page/template_index`, handler.Err(ctx, err))
@@ -545,6 +551,12 @@ func TemplateConfig(ctx echo.Context) error {
 END:
 	ctx.Set(`info`, themeInfo)
 	ctx.Set(`activeURL`, `/official/page/template_index`)
+
+	themeLsInitOnce.Do(func() {
+		themeLsMu.Lock()
+		themeList = getTemplateList()
+		themeLsMu.Unlock()
+	})
 
 	themeLsMu.RLock()
 	fallbacks := make([]xtemplate.ThemeInfoLite, 0, len(themeList))
