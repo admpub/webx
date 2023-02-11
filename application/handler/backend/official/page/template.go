@@ -502,7 +502,12 @@ func TemplateConfig(ctx echo.Context) error {
 		}
 		fallbackThemes := ctx.Form(`_fallbackThemes`)
 		if len(fallbackThemes) > 0 {
-			themeInfo.Fallback = param.StringSlice(strings.Split(fallbackThemes, `,`)).Filter().Unique().String()
+			themeInfo.Fallback = param.StringSlice(strings.Split(fallbackThemes, `,`)).Filter(func(s *string) bool {
+				if s == nil || len(*s) == 0 || *s == themeInfo.Name {
+					return false
+				}
+				return true
+			}).Unique().String()
 			if !com.InSlice(`default`, themeInfo.Fallback) {
 				themeInfo.Fallback = append(themeInfo.Fallback, `default`)
 			}
