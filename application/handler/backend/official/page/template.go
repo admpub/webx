@@ -542,7 +542,7 @@ END:
 	ctx.Set(`activeURL`, `/official/page/template_index`)
 
 	themeLsMu.RLock()
-	fallbacks := make([]xtemplate.ThemeInfoLite, len(themeList))
+	fallbacks := make([]xtemplate.ThemeInfoLite, 0, len(themeList))
 	for index, themeCfg := range themeList {
 		if themeCfg.Name == themeInfo.Name || themeCfg.Name == `default` {
 			continue
