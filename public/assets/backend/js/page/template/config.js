@@ -7,7 +7,11 @@ function initSelectpage(){
             maxSelectLimit = Number(maxSelectLimit);
             if(!multiple && maxSelectLimit>1) multiple = true;
         }
-        var url=$(this).data('url')||BACKEND_URL + '/official/article/index';
+        var url=$(this).data('url');
+        if(!url && (url=$(this).data('json'))){
+            if(typeof url == 'string') url = JSON.parse(url);
+        }
+        if(!url) url=BACKEND_URL + '/official/article/index';
         var showField=$(this).data('showfield')||'title';
         var keyField=$(this).data('keyfield')||'id';
         var thumbField=$(this).data('thumbfield')||'image';

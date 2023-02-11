@@ -107,6 +107,20 @@ type ThemeInfo struct {
 	embed        bool
 }
 
+type ThemeInfoLite struct {
+	Name         string `json:"name"`         // 主题英文名
+	Title        string `json:"title"`        // 主题中文标题
+	PreviewImage string `json:"previewImage"` // 预览图
+}
+
+func (t *ThemeInfo) AsLite() ThemeInfoLite {
+	return ThemeInfoLite{
+		Name:         t.Name,
+		Title:        t.Title,
+		PreviewImage: t.PreviewImage,
+	}
+}
+
 func (t *ThemeInfo) HasForm(templateName string) bool {
 	if len(t.Colors) > 0 {
 		return true

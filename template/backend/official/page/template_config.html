@@ -22,6 +22,19 @@
             </div>
             <div class="content">
                 <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{`替补主题`|$.T}}</label>
+                    <div class="col-sm-8">
+                        <div class="form-selectpage-container">
+                        {{- $fallbackThemes := Join $info.Fallback `,` -}}
+                        <input type="text" name="fallbackThemes" class="form-selectpage form-control" data-keyfield="name" data-thumbfield="previewImage" data-json='{{$.Stored.fallbacks|JOSNEncode}}' data-multiple="1" value="{{$fallbackThemes}}" data-init="{{$fallbackThemes}}" data-parsley-errors-container="#parsley-error-fallbackThemes" />
+                        </div>
+                        <div class="help-block">
+                            {{`对于当前主题缺失的模板文件将会依次从替补主题中寻找`|$.T}}
+                        </div>
+                        <div id='parsley-error-fallbackThemes'></div>
+                    </div>
+                </div>
                 {{- if $.Stored.info.HasForm `config` -}}
                     {{- if $.Stored.info.Colors -}}
                     <div class="form-group">
@@ -41,32 +54,19 @@
                     </div>
                     {{- end -}}
                     {{$.Stored.info.Render `config`}}
-                    <div class="form-group form-submit-group">
-                        <div class="col-sm-9 col-sm-offset-2">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="fa fa-save"></i>
-                                {{"保存"|$.T}}
-                            </button>
-                            <button type="reset" class="btn btn-default btn-lg">
-                                <i class="fa fa-refresh"></i>
-                                {{"重置"|$.T}}
-                            </button>
-                        </div>
-                    </div>
-                {{- else -}}
-                    <div class="alert alert-warning no-margin-bottom">
-				    	<i class="fa fa-lightbulb-o text-warning"></i>
-				    	{{`此模板没有可配置项`|$.T}}
-				    </div>
-                    <div class="form-group">
-                        <div class="col-sm-9 col-sm-offset-2">
-                            <a href="{{BackendURL}}/official/page/template_index" class="btn btn-default btn-lg">
-                                <i class="fa fa-reply"></i>
-                                {{"返回列表"|$.T}}
-                            </a>
-                        </div>
-                    </div>
                 {{- end -}}
+                <div class="form-group form-submit-group">
+                    <div class="col-sm-9 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fa fa-save"></i>
+                            {{"保存"|$.T}}
+                        </button>
+                        <button type="reset" class="btn btn-default btn-lg">
+                            <i class="fa fa-refresh"></i>
+                            {{"重置"|$.T}}
+                        </button>
+                    </div>
+                </div>
                 </form>
             </div><!-- /.content -->
         </div><!-- /.block-flat -->

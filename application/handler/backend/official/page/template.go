@@ -12,6 +12,7 @@ import (
 	"regexp"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/admpub/events"
@@ -91,6 +92,11 @@ func TemplateEnable(ctx echo.Context) error {
 	return ctx.JSON(data)
 }
 
+var (
+	themeList []*xtemplate.ThemeInfo
+	themeLsMu sync.RWMutex
+)
+
 func TemplateIndex(ctx echo.Context) error {
 	if ctx.Form(`op`) == `preview` {
 		return TemplatePreviewImage(ctx)
@@ -144,6 +150,9 @@ func TemplateIndex(ctx echo.Context) error {
 		}
 		list = append(list, v)
 	}
+	themeLsMu.Lock()
+	themeList = list
+	themeLsMu.Unlock()
 
 END:
 	ctx.Set(`listData`, list)
@@ -522,5 +531,18 @@ func TemplateConfig(ctx echo.Context) error {
 END:
 	ctx.Set(`info`, themeInfo)
 	ctx.Set(`activeURL`, `/official/page/template_index`)
+
+	themeLsMu.RLock()
+	fallbacks := make([]xtemplate.ThemeInfoLite, len(themeList))
+	for index, themeCfg := range themeList {
+		lite := themeCfg.AsLite()
+		if len(lite.PreviewImage) > 0 {
+			lite.PreviewImage = handler.URLFor(`/official/page/template_index`) + `?op=preview&name=` + lite.Name
+		}
+		fallbacks[index] = lite
+	}
+	themeLsMu.RUnlock()
+
+	ctx.Set(`fallbacks`, fallbacks)
 	return ctx.Render(`official/page/template_config`, handler.Err(ctx, err))
 }
