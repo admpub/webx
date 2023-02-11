@@ -163,7 +163,7 @@ func TemplateIndex(ctx echo.Context) error {
 
 	ctx.Set(`listData`, list)
 	ctx.Set(`current`, frontend.TmplPathFixers.ThemeInfo(ctx))
-	return ctx.Render(`official/page/template_index`, handler.Err(ctx, err))
+	return ctx.Render(`official/page/template_index`, nil)
 }
 
 var canEditExtensions = []string{`.js`, `.html`, `.css`, `.json`, `.txt`}
