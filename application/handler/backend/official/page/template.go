@@ -499,6 +499,9 @@ func TemplateConfig(ctx echo.Context) error {
 		err = nil
 	} else {
 		themeInfo.CustomConfig.DeepMerge(cfg.CustomConfig)
+		if len(cfg.Fallback) > 0 {
+			themeInfo.Fallback = cfg.Fallback
+		}
 	}
 	if ctx.IsPost() {
 		themeInfo.CustomConfig.Set(`color`, ctx.Form(`color`))
