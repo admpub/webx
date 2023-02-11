@@ -48,6 +48,15 @@
                                 </a>
                                 {{- end -}}
                                 <p class="text-grey">{{$v.Description|Default ($.T `无说明`)}}</p>
+								{{- if $v.Fallback -}}
+								<em class="text-grey">
+								{{`后备模板`|$.T}}:
+								{{ range $fk, $fv := $v.Fallback -}}
+								{{- if gt $fk 0}} / {{end -}}
+								{{- $fv -}}
+								{{- end -}}
+								</em>
+								{{- end -}}
                             </td>
                             <td>
                                 {{`版本`|$.T}}: v{{$v.Version}}<br />

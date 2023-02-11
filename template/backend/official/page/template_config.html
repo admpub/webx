@@ -23,14 +23,14 @@
             <div class="content">
                 <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">{{`替补主题`|$.T}}</label>
+                    <label class="col-sm-2 control-label">{{`后备模板`|$.T}}</label>
                     <div class="col-sm-8">
                         <div class="form-selectpage-container">
                         {{- $fallbackThemes := Join $.Stored.info.Fallback `,` -}}
                         <input type="text" name="_fallbackThemes" class="form-selectpage form-control" data-keyfield="name" data-thumbfield="previewImage" data-json='{{$.Stored.fallbacks|JSONEncode}}' data-multiple="1" value="{{$fallbackThemes}}" data-init="{{$fallbackThemes}}" data-parsley-errors-container="#parsley-error-fallbackThemes" />
                         </div>
                         <div class="help-block">
-                            {{`对于当前主题缺失的模板文件将会依次从替补主题中寻找`|$.T}}
+                            {{`对于当前模板缺失的文件将会依次从后备模板中寻找`|$.T}}
                         </div>
                         <div id='parsley-error-fallbackThemes'></div>
                     </div>
