@@ -62,8 +62,8 @@ github.com/RichardKnop/machinery/v1/retry
 github.com/RichardKnop/machinery/v1/tasks
 github.com/RichardKnop/machinery/v1/tracing
 github.com/RichardKnop/machinery/v1/utils
-# github.com/abh/errorutil v0.0.0-20130729183701-f9bd360d00b9
-## explicit
+# github.com/abh/errorutil v1.0.0
+## explicit; go 1.19
 github.com/abh/errorutil
 # github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d
 ## explicit
@@ -428,7 +428,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.4
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.44.199
+# github.com/aws/aws-sdk-go v1.44.201
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -726,7 +726,7 @@ github.com/google/pprof/profile
 # github.com/google/uuid v1.3.0
 ## explicit
 github.com/google/uuid
-# github.com/googleapis/enterprise-certificate-proxy v0.2.2
+# github.com/googleapis/enterprise-certificate-proxy v0.2.3
 ## explicit; go 1.19
 github.com/googleapis/enterprise-certificate-proxy/client
 github.com/googleapis/enterprise-certificate-proxy/client/util
@@ -948,7 +948,7 @@ github.com/miekg/dns
 # github.com/minio/md5-simd v1.1.2
 ## explicit; go 1.14
 github.com/minio/md5-simd
-# github.com/minio/minio-go/v7 v7.0.47
+# github.com/minio/minio-go/v7 v7.0.48
 ## explicit; go 1.17
 github.com/minio/minio-go/v7
 github.com/minio/minio-go/v7/pkg/credentials
@@ -1007,7 +1007,7 @@ github.com/nging-plugins/dlmanager/application/library/config
 # github.com/nwaples/rardecode v1.1.3
 ## explicit
 github.com/nwaples/rardecode
-# github.com/onsi/ginkgo/v2 v2.8.0
+# github.com/onsi/ginkgo/v2 v2.8.1
 ## explicit; go 1.18
 github.com/onsi/ginkgo/v2/config
 github.com/onsi/ginkgo/v2/formatter
@@ -1373,10 +1373,10 @@ golang.org/x/crypto/ocsp
 golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/scrypt
 golang.org/x/crypto/sha3
-# golang.org/x/exp v0.0.0-20230210204819-062eb4c674ab
+# golang.org/x/exp v0.0.0-20230213192124-5e25df0256eb
 ## explicit; go 1.18
 golang.org/x/exp/constraints
-# golang.org/x/image v0.4.0
+# golang.org/x/image v0.5.0
 ## explicit; go 1.12
 golang.org/x/image/bmp
 golang.org/x/image/ccitt
@@ -1400,7 +1400,7 @@ golang.org/x/mod/internal/lazyregexp
 golang.org/x/mod/modfile
 golang.org/x/mod/module
 golang.org/x/mod/semver
-# golang.org/x/net v0.6.0
+# golang.org/x/net v0.7.0
 ## explicit; go 1.17
 golang.org/x/net/bpf
 golang.org/x/net/context
@@ -1512,7 +1512,7 @@ golang.org/x/tools/internal/typesinternal
 ## explicit; go 1.17
 golang.org/x/xerrors
 golang.org/x/xerrors/internal
-# google.golang.org/api v0.109.0
+# google.golang.org/api v0.110.0
 ## explicit; go 1.19
 google.golang.org/api/googleapi
 google.golang.org/api/internal
