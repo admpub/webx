@@ -78,15 +78,16 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 	if len(flows) > 0 {
 		flow = flows[0]
 	}
+	err = f.base.Context.Begin()
+	if err != nil {
+		return
+	}
 	f.Wallet.Use(f.base.Tx())
 	flow.Use(f.base.Tx())
 	cond := db.And(
 		db.Cond{`customer_id`: flow.CustomerId},
 		db.Cond{`asset_type`: flow.AssetType},
 	)
-	if err := f.base.Context.Begin(); err != nil {
-		return err
-	}
 	err = f.Wallet.Get(nil, cond)
 	if err != nil {
 		if err != db.ErrNoMoreRows {
