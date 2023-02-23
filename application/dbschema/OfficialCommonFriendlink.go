@@ -462,6 +462,12 @@ func (a *OfficialCommonFriendlink) UpdateField(mw func(db.Result) db.Result, fie
 	}, args...)
 }
 
+func (a *OfficialCommonFriendlink) UpdatexField(mw func(db.Result) db.Result, field string, value interface{}, args ...interface{}) (affected int64, err error) {
+	return a.UpdatexFields(mw, map[string]interface{}{
+		field: value,
+	}, args...)
+}
+
 func (a *OfficialCommonFriendlink) UpdateFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (err error) {
 
 	if val, ok := kvset["verify_result"]; ok && val != nil {
@@ -490,6 +496,37 @@ func (a *OfficialCommonFriendlink) UpdateFields(mw func(db.Result) db.Result, kv
 		return
 	}
 	return DBI.FireUpdate("updated", &m, editColumns, mw, args...)
+}
+
+func (a *OfficialCommonFriendlink) UpdatexFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (affected int64, err error) {
+
+	if val, ok := kvset["verify_result"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["verify_result"] = "none"
+		}
+	}
+	if val, ok := kvset["process"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["process"] = "idle"
+		}
+	}
+	if !a.base.Eventable() {
+		return a.Param(mw, args...).SetSend(kvset).Updatex()
+	}
+	m := *a
+	m.FromRow(kvset)
+	var editColumns []string
+	for column := range kvset {
+		editColumns = append(editColumns, column)
+	}
+	if err = DBI.FireUpdate("updating", &m, editColumns, mw, args...); err != nil {
+		return
+	}
+	if affected, err = a.Param(mw, args...).SetSend(kvset).Updatex(); err != nil {
+		return
+	}
+	err = DBI.FireUpdate("updated", &m, editColumns, mw, args...)
+	return
 }
 
 func (a *OfficialCommonFriendlink) UpdateValues(mw func(db.Result) db.Result, keysValues *db.KeysValues, args ...interface{}) (err error) {

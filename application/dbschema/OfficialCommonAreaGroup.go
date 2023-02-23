@@ -417,6 +417,12 @@ func (a *OfficialCommonAreaGroup) UpdateField(mw func(db.Result) db.Result, fiel
 	}, args...)
 }
 
+func (a *OfficialCommonAreaGroup) UpdatexField(mw func(db.Result) db.Result, field string, value interface{}, args ...interface{}) (affected int64, err error) {
+	return a.UpdatexFields(mw, map[string]interface{}{
+		field: value,
+	}, args...)
+}
+
 func (a *OfficialCommonAreaGroup) UpdateFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (err error) {
 
 	if !a.base.Eventable() {
@@ -435,6 +441,27 @@ func (a *OfficialCommonAreaGroup) UpdateFields(mw func(db.Result) db.Result, kvs
 		return
 	}
 	return DBI.FireUpdate("updated", &m, editColumns, mw, args...)
+}
+
+func (a *OfficialCommonAreaGroup) UpdatexFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (affected int64, err error) {
+
+	if !a.base.Eventable() {
+		return a.Param(mw, args...).SetSend(kvset).Updatex()
+	}
+	m := *a
+	m.FromRow(kvset)
+	var editColumns []string
+	for column := range kvset {
+		editColumns = append(editColumns, column)
+	}
+	if err = DBI.FireUpdate("updating", &m, editColumns, mw, args...); err != nil {
+		return
+	}
+	if affected, err = a.Param(mw, args...).SetSend(kvset).Updatex(); err != nil {
+		return
+	}
+	err = DBI.FireUpdate("updated", &m, editColumns, mw, args...)
+	return
 }
 
 func (a *OfficialCommonAreaGroup) UpdateValues(mw func(db.Result) db.Result, keysValues *db.KeysValues, args ...interface{}) (err error) {

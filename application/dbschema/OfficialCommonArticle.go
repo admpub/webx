@@ -533,6 +533,12 @@ func (a *OfficialCommonArticle) UpdateField(mw func(db.Result) db.Result, field 
 	}, args...)
 }
 
+func (a *OfficialCommonArticle) UpdatexField(mw func(db.Result) db.Result, field string, value interface{}, args ...interface{}) (affected int64, err error) {
+	return a.UpdatexFields(mw, map[string]interface{}{
+		field: value,
+	}, args...)
+}
+
 func (a *OfficialCommonArticle) UpdateFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (err error) {
 
 	if val, ok := kvset["owner_type"]; ok && val != nil {
@@ -581,6 +587,57 @@ func (a *OfficialCommonArticle) UpdateFields(mw func(db.Result) db.Result, kvset
 		return
 	}
 	return DBI.FireUpdate("updated", &m, editColumns, mw, args...)
+}
+
+func (a *OfficialCommonArticle) UpdatexFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (affected int64, err error) {
+
+	if val, ok := kvset["owner_type"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["owner_type"] = "customer"
+		}
+	}
+	if val, ok := kvset["contype"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["contype"] = "markdown"
+		}
+	}
+	if val, ok := kvset["display"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["display"] = "Y"
+		}
+	}
+	if val, ok := kvset["close_comment"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["close_comment"] = "N"
+		}
+	}
+	if val, ok := kvset["comment_auto_display"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["comment_auto_display"] = "N"
+		}
+	}
+	if val, ok := kvset["comment_allow_user"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["comment_allow_user"] = "all"
+		}
+	}
+	if !a.base.Eventable() {
+		return a.Param(mw, args...).SetSend(kvset).Updatex()
+	}
+	m := *a
+	m.FromRow(kvset)
+	var editColumns []string
+	for column := range kvset {
+		editColumns = append(editColumns, column)
+	}
+	if err = DBI.FireUpdate("updating", &m, editColumns, mw, args...); err != nil {
+		return
+	}
+	if affected, err = a.Param(mw, args...).SetSend(kvset).Updatex(); err != nil {
+		return
+	}
+	err = DBI.FireUpdate("updated", &m, editColumns, mw, args...)
+	return
 }
 
 func (a *OfficialCommonArticle) UpdateValues(mw func(db.Result) db.Result, keysValues *db.KeysValues, args ...interface{}) (err error) {

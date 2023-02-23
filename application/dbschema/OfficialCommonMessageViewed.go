@@ -426,6 +426,12 @@ func (a *OfficialCommonMessageViewed) UpdateField(mw func(db.Result) db.Result, 
 	}, args...)
 }
 
+func (a *OfficialCommonMessageViewed) UpdatexField(mw func(db.Result) db.Result, field string, value interface{}, args ...interface{}) (affected int64, err error) {
+	return a.UpdatexFields(mw, map[string]interface{}{
+		field: value,
+	}, args...)
+}
+
 func (a *OfficialCommonMessageViewed) UpdateFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (err error) {
 
 	if val, ok := kvset["viewer_type"]; ok && val != nil {
@@ -449,6 +455,32 @@ func (a *OfficialCommonMessageViewed) UpdateFields(mw func(db.Result) db.Result,
 		return
 	}
 	return DBI.FireUpdate("updated", &m, editColumns, mw, args...)
+}
+
+func (a *OfficialCommonMessageViewed) UpdatexFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (affected int64, err error) {
+
+	if val, ok := kvset["viewer_type"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["viewer_type"] = "customer"
+		}
+	}
+	if !a.base.Eventable() {
+		return a.Param(mw, args...).SetSend(kvset).Updatex()
+	}
+	m := *a
+	m.FromRow(kvset)
+	var editColumns []string
+	for column := range kvset {
+		editColumns = append(editColumns, column)
+	}
+	if err = DBI.FireUpdate("updating", &m, editColumns, mw, args...); err != nil {
+		return
+	}
+	if affected, err = a.Param(mw, args...).SetSend(kvset).Updatex(); err != nil {
+		return
+	}
+	err = DBI.FireUpdate("updated", &m, editColumns, mw, args...)
+	return
 }
 
 func (a *OfficialCommonMessageViewed) UpdateValues(mw func(db.Result) db.Result, keysValues *db.KeysValues, args ...interface{}) (err error) {
