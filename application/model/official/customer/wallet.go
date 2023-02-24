@@ -88,9 +88,12 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 		db.Cond{`customer_id`: flow.CustomerId},
 		db.Cond{`asset_type`: flow.AssetType},
 	)
+	walletInfo := dbschema.NewOfficialCustomerWallet(f.base.Context)
 	err = f.Wallet.NewParam().AddArgs(cond).Select().Amend(func(queryIn string) (queryOut string) {
 		return queryIn + ` FOR UPDATE`
-	}).One(f.Wallet)
+	}).One(walletInfo)
+	walletInfo.CPAFrom(f.Wallet)
+	f.Wallet = walletInfo
 	//err = f.Wallet.Get(nil, cond)
 	if err != nil {
 		if err != db.ErrNoMoreRows {
