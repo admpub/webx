@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.8.8
 	github.com/webx-top/com v0.9.1
 	github.com/webx-top/db v1.23.15
-	github.com/webx-top/echo v2.33.1+incompatible
+	github.com/webx-top/echo v2.33.2+incompatible
 	github.com/webx-top/echo-prometheus v1.1.0
 	github.com/webx-top/echo-socket.io v1.1.2
 	github.com/webx-top/image v0.0.9

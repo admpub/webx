@@ -89,13 +89,13 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 		db.Cond{`customer_id`: flow.CustomerId},
 		db.Cond{`asset_type`: flow.AssetType},
 	)
-	err = xdatabase.GetAndLock(f.Wallet, cond)
-	//err = f.Wallet.Get(nil, cond)
+	var exists bool
+	exists, err = f.Wallet.Exists(nil, cond)
 	if err != nil {
-		if err != db.ErrNoMoreRows {
-			f.base.Context.Rollback()
-			return err
-		}
+		f.base.Context.Rollback()
+		return err
+	}
+	if !exists {
 		f.Wallet.Freeze = 0
 		f.Wallet.Balance = 0
 		if flow.AmountType == `balance` { // 余额操作
@@ -119,6 +119,11 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 		f.Wallet.AssetType = flow.AssetType
 		_, err = f.Wallet.Insert()
 	} else {
+		err = xdatabase.GetAndLock(f.Wallet, cond)
+		if err != nil {
+			f.base.Context.Rollback()
+			return err
+		}
 		var amount float64
 		if flow.AmountType == `balance` {
 			amount = f.Wallet.Balance
