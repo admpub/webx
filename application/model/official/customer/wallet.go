@@ -5,6 +5,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
 	"github.com/admpub/nging/v5/application/library/common"
@@ -101,7 +102,7 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 		if flow.AmountType == `balance` { // 余额操作
 			if flow.Amount < 0 { // 扣款操作
 				f.base.Context.Rollback()
-				return common.ErrBalanceNoEnough
+				return common.ErrBalanceNoEnough.SetZone(`balance`)
 			}
 			// 加款操作
 			f.Wallet.Balance = flow.Amount
@@ -109,7 +110,7 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 		} else { // 冻结金额操作
 			if flow.Amount < 0 { // 扣除冻结
 				f.base.Context.Rollback()
-				return f.base.E(`冻结额不能小于0`)
+				return f.base.NewError(code.BalanceNoEnough, `冻结额不能小于0`).SetZone(`freeze`)
 			}
 			// 增加冻结
 			f.Wallet.Freeze = flow.Amount
@@ -138,7 +139,7 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 		if flow.WalletAmount < 0 { //处理flow.Amount为负数(即扣除余额)的情况。扣款操作时检查余额是否足够
 			f.base.Context.Rollback()
 			if sessdata.User(f.base.Context) != nil {
-				return f.base.E(`扣除余额(%v)失败！客户(ID:%d)的余额不足`, flow.Amount, flow.CustomerId)
+				return f.base.NewError(code.BalanceNoEnough, `扣除余额(%v)失败！客户(ID:%d)的余额不足`, flow.Amount, flow.CustomerId).SetZone(`balance`)
 			}
 			return common.ErrBalanceNoEnough
 		}
