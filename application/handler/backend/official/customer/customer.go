@@ -140,6 +140,11 @@ END:
 }
 
 func setFormData(ctx echo.Context, m *modelCustomer.Customer) {
+	mg := official.NewGroup(ctx)
+	var groupList []*dbschema.OfficialCommonGroup
+	mg.ListByOffset(&groupList, nil, 0, -1, db.Cond{`type`: `customer`})
+	ctx.Set(`groupList`, groupList)
+
 	roleM := modelCustomer.NewRole(ctx)
 	roleM.ListByOffset(nil, func(r db.Result) db.Result {
 		return r.Select(`id`, `name`, `description`)
