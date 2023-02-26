@@ -175,10 +175,9 @@
                   <select name="groupId" id="groupId" class="form-control">
                     <option value="0">- {{"无"|$.T}} -</option>
                     {{range $k, $v := $.Stored.groupList}}
-                    <option value="{{$v.Id}}"{{if eq $groupId $.Id}} selected="selected"{{end}}>{{$v.Name}}</option>
+                    <option value="{{$v.Id}}"{{if eq $groupId $v.Id}} selected="selected"{{end}}>{{$v.Name}}</option>
                     {{end}}
                   </select>
-                  <input type="text" name="levelId" id="levelId"{{if gt $levelId 0}} data-init="{{$levelId}}"{{end}} value="{{$levelId}}" class="form-control">
                 </div>
                 <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                 <div class="col-sm-3">
