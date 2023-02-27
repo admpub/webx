@@ -9,7 +9,7 @@ import (
 
 // SignUp 注册用户
 func (f *Customer) SignUp(user, pass, mobile, email string, options ...CustomerOption) error {
-	co := NewCustomerOptions(f.OfficialCustomer)
+	co := NewCustomerOptions(f.OfficialCustomer, true)
 	co.Name = user
 	co.Password = pass
 	co.Mobile = mobile

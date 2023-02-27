@@ -7,13 +7,17 @@ import (
 	"github.com/webx-top/echo"
 )
 
-func NewCustomerOptions(customerM *dbschema.OfficialCustomer) *CustomerOptions {
+func NewCustomerOptions(customerM *dbschema.OfficialCustomer, noClear ...bool) *CustomerOptions {
 	var customer *dbschema.OfficialCustomer
 	if customerM == nil {
 		customer = dbschema.NewOfficialCustomer(nil)
 	} else {
-		_customer := ClearPasswordData(customerM)
-		customer = &_customer
+		if len(noClear) > 0 && noClear[0] {
+			customer = customerM
+		} else {
+			_customer := ClearPasswordData(customerM)
+			customer = &_customer
+		}
 	}
 	return &CustomerOptions{OfficialCustomer: customer}
 }
