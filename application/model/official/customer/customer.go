@@ -60,7 +60,15 @@ func (f *Customer) Exists(name string, fields ...string) (bool, error) {
 	if len(fields) > 0 {
 		fieldName = fields[0]
 	}
-	return f.OfficialCustomer.Exists(nil, db.Cond{fieldName: name})
+	cond := db.NewCompounds()
+	switch fieldName {
+	case `mobile`, `email`:
+		cond.Add(db.Cond{fieldName + `_bind`: `Y`})
+		fallthrough
+	default:
+		cond.Add(db.Cond{fieldName: name})
+	}
+	return f.OfficialCustomer.Exists(nil, cond.And())
 }
 
 func (f *Customer) ExistsOther(name string, id uint64, fields ...string) (bool, error) {
@@ -68,10 +76,16 @@ func (f *Customer) ExistsOther(name string, id uint64, fields ...string) (bool, 
 	if len(fields) > 0 {
 		fieldName = fields[0]
 	}
-	return f.OfficialCustomer.Exists(nil, db.And(
-		db.Cond{fieldName: name},
-		db.Cond{`id <>`: id},
-	))
+	cond := db.NewCompounds()
+	switch fieldName {
+	case `mobile`, `email`:
+		cond.Add(db.Cond{fieldName + `_bind`: `Y`})
+		fallthrough
+	default:
+		cond.Add(db.Cond{fieldName: name})
+		cond.Add(db.Cond{`id <>`: id})
+	}
+	return f.OfficialCustomer.Exists(nil, cond.And())
 }
 
 func (f *Customer) check(isNew bool, id uint64) (err error) {

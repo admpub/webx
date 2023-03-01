@@ -15,7 +15,10 @@ func Binding(ctx echo.Context) (err error) {
 	customer := xMW.Customer(ctx)
 	typ := ctx.Form(`type`, `email`)
 	m := modelCustomer.NewCustomer(ctx)
-	m.OfficialCustomer = customer
+	err = m.Get(nil, `id`, customer.Id)
+	if err != nil {
+		return
+	}
 	binder := binding.Get(typ)
 	if binder == nil {
 		return ctx.E(`不支持的类型: %s`, typ)

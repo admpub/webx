@@ -11,6 +11,7 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
 	"github.com/admpub/webx/application/initialize/frontend"
@@ -39,7 +40,6 @@ func bindingEmailSend(ctx echo.Context, m *modelCustomer.Customer) error {
 
 // EmailSend 发送验证码邮件
 func EmailSend(ctx echo.Context, m *modelCustomer.Customer, purpose string, titleAndMessage ...string) error {
-	var err error
 	now := time.Now()
 	vm := model.NewCode(ctx)
 	if err := vm.CheckFrequency(
@@ -60,7 +60,15 @@ func EmailSend(ctx echo.Context, m *modelCustomer.Customer, purpose string, titl
 	if m.EmailBind != `Y` {
 		m.Email = ctx.Formx(`email`).String()
 		if !com.IsEmail(m.Email) {
-			return ctx.E(`E-mail格式不正确`)
+			return ctx.NewError(code.InvalidParameter, `E-mail格式不正确`).SetZone(`email`)
+		}
+		customerM := modelCustomer.NewCustomer(ctx)
+		exists, err := customerM.ExistsOther(m.Email, m.Id, `email`)
+		if err != nil {
+			return err
+		}
+		if exists {
+			return ctx.NewError(code.DataAlreadyExists, `E-mail地址“%s”已被其他账号绑定`, m.Email).SetZone(`email`)
 		}
 	}
 
@@ -138,7 +146,7 @@ func EmailSend(ctx echo.Context, m *modelCustomer.Customer, purpose string, titl
 	if _, addErr := logM.Add(); addErr != nil {
 		return addErr
 	}
-	err = cron.SendMailWithID(logM.Id, toEmail, toUsername, title, content)
+	err := cron.SendMailWithID(logM.Id, toEmail, toUsername, title, content)
 	if err != nil {
 		logM.UpdateFields(nil, echo.H{
 			`status`: `failure`,
@@ -157,13 +165,21 @@ func bindingEmailVerify(ctx echo.Context, m *modelCustomer.Customer) error {
 	if m.EmailBind != `Y` {
 		m.Email = ctx.Formx(`email`).String()
 		if !com.IsEmail(m.Email) {
-			return ctx.E(`E-mail格式不正确`)
+			return ctx.NewError(code.InvalidParameter, `E-mail格式不正确`).SetZone(`email`)
+		}
+		customerM := modelCustomer.NewCustomer(ctx)
+		exists, err := customerM.ExistsOther(m.Email, m.Id, `email`)
+		if err != nil {
+			return err
+		}
+		if exists {
+			return ctx.NewError(code.DataAlreadyExists, `E-mail地址“%s”已被其他账号绑定`, m.Email).SetZone(`email`)
 		}
 		m.EmailBind = `Y` //新绑定
-		operateDesc = ctx.T(`%s绑定成功`, ctx.T(`邮箱`))
+		operateDesc = ctx.T(`%s绑定成功`, ctx.T(`邮箱地址`))
 	} else {
 		m.EmailBind = `N` //取消原绑定
-		operateDesc = ctx.T(`%s解绑成功`, ctx.T(`邮箱`))
+		operateDesc = ctx.T(`%s解绑成功`, ctx.T(`邮箱地址`))
 	}
 	ctx.Begin()
 	err := EmailVerify(ctx, m, `binding`)
@@ -189,7 +205,7 @@ func bindingEmailVerify(ctx echo.Context, m *modelCustomer.Customer) error {
 func EmailVerify(ctx echo.Context, m *modelCustomer.Customer, purpose string) error {
 	vcode := ctx.Formx(`vcode`).String()
 	if len(vcode) == 0 {
-		return ctx.E(`请输入邮件验证码`)
+		return ctx.NewError(code.InvalidParameter, `请输入邮件验证码`).SetZone(`vcode`)
 	}
 	vm := model.NewCode(ctx)
 	err := vm.CheckVerificationCode(vcode, purpose, m.Id, `customer`, `email`, m.Email)
