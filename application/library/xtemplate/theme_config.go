@@ -141,6 +141,14 @@ func (t *ThemeInfo) HasColorName(colorName string, notDefault ...bool) bool {
 	return t.Colors.HasName(colorName, notDefault...)
 }
 
+func (t *ThemeInfo) IsColorName(colorName string) bool {
+	return t.ColorName() == colorName
+}
+
+func (t *ThemeInfo) ColorName() string {
+	return t.CustomConfig.String(`color`)
+}
+
 func (t *ThemeInfo) HasForm(templateName string) bool {
 	if len(t.Colors) > 0 {
 		return true
