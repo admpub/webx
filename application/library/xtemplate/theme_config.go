@@ -44,9 +44,16 @@ type ThemeAuthor struct {
 
 type ThemeColors []ThemeColor
 
-func (t ThemeColors) HasName(colorName string) bool {
+func (t ThemeColors) HasName(colorName string, notDefault ...bool) bool {
+	var notDfl bool
+	if len(notDefault) > 0 {
+		notDfl = notDefault[0]
+	}
 	for _, ti := range t {
 		if ti.Name == colorName {
+			if ti.IsDefault && notDfl {
+				return false
+			}
 			return true
 		}
 	}
@@ -130,8 +137,8 @@ func (t *ThemeInfo) AsLite() ThemeInfoLite {
 	}
 }
 
-func (t *ThemeInfo) HasColorName(colorName string) bool {
-	return t.Colors.HasName(colorName)
+func (t *ThemeInfo) HasColorName(colorName string, notDefault ...bool) bool {
+	return t.Colors.HasName(colorName, notDefault...)
 }
 
 func (t *ThemeInfo) HasForm(templateName string) bool {
