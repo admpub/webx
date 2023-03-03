@@ -44,6 +44,15 @@ type ThemeAuthor struct {
 
 type ThemeColors []ThemeColor
 
+func (t ThemeColors) HasName(colorName string) bool {
+	for _, ti := range t {
+		if ti.Name == colorName {
+			return true
+		}
+	}
+	return false
+}
+
 type ThemeColor struct {
 	Name         string `json:"name,omitempty"`         // 颜色英文名(用于调用相应颜色的css文件)
 	Title        string `json:"title,omitempty"`        // 颜色中文标题
@@ -119,6 +128,10 @@ func (t *ThemeInfo) AsLite() ThemeInfoLite {
 		Title:        t.Title,
 		PreviewImage: t.PreviewImage,
 	}
+}
+
+func (t *ThemeInfo) HasColorName(colorName string) bool {
+	return t.Colors.HasName(colorName)
 }
 
 func (t *ThemeInfo) HasForm(templateName string) bool {
