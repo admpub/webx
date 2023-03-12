@@ -23,7 +23,7 @@ require (
 	github.com/admpub/go-download/v2 v2.1.12
 	github.com/admpub/go-hashids v2.0.1+incompatible
 	github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe
-	github.com/admpub/godotenv v1.4.2
+	github.com/admpub/godotenv v1.4.3
 	github.com/admpub/imageproxy v0.9.3
 	github.com/admpub/ipfilter v1.0.6
 	github.com/admpub/license_gen v0.1.0

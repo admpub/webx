@@ -181,7 +181,7 @@ github.com/admpub/go-utility/filesystem
 ## explicit; go 1.16
 github.com/admpub/go-zinc/doc
 github.com/admpub/go-zinc/doc/schemas
-# github.com/admpub/godotenv v1.4.2
+# github.com/admpub/godotenv v1.4.3
 ## explicit; go 1.12
 github.com/admpub/godotenv
 # github.com/admpub/godownloader v2.2.0+incompatible
