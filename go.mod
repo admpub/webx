@@ -34,7 +34,7 @@ require (
 	github.com/admpub/pinyin-golang v1.0.1
 	github.com/admpub/pp v0.0.5
 	github.com/admpub/redsync/v4 v4.0.3
-	github.com/admpub/resty/v2 v2.7.0
+	github.com/admpub/resty/v2 v2.7.1
 	github.com/admpub/sensitive v0.0.0-20200106142752-42d1c505be7b
 	github.com/admpub/useragent v0.0.1
 	github.com/caddy-plugins/ipfilter v1.1.8
@@ -274,7 +274,7 @@ require (
 	github.com/webx-top/chardet v0.0.1 // indirect
 	github.com/webx-top/codec v0.2.1 // indirect
 	github.com/webx-top/poolx v0.0.0-20210912044716-5cfa2d58e380 // indirect
-	github.com/webx-top/restyclient v0.0.3 // indirect
+	github.com/webx-top/restyclient v0.0.4 // indirect
 	github.com/webx-top/tagfast v0.0.0-20161020041435-9a2065ce3dd2 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.1.2 // indirect
