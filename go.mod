@@ -50,7 +50,7 @@ require (
 	github.com/prometheus/client_golang v1.14.0
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.2
-	github.com/swaggo/swag v1.8.10
+	github.com/swaggo/swag v1.8.11
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.8.8
 	github.com/webx-top/com v0.9.1
@@ -76,7 +76,7 @@ require (
 	github.com/admpub/nging/v5 v5.0.0
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
-	github.com/meilisearch/meilisearch-go v0.23.0
+	github.com/meilisearch/meilisearch-go v0.23.1
 	github.com/nging-plugins/dbmanager v1.2.0
 	github.com/webx-top/validator v0.2.0
 )
@@ -237,7 +237,7 @@ require (
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/oschwald/maxminddb-golang v1.10.0 // indirect
 	github.com/pborman/uuid v1.2.1 // indirect
-	github.com/phuslu/iploc v1.0.20230201 // indirect
+	github.com/phuslu/iploc v1.0.20230228 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
@@ -267,7 +267,7 @@ require (
 	github.com/tuotoo/qrcode v0.0.0-20220425170535-52ccc2bebf5d // indirect
 	github.com/ulikunitz/xz v0.5.11 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.44.0 // indirect
+	github.com/valyala/fasthttp v1.45.0 // indirect
 	github.com/volatiletech/inflect v0.0.1 // indirect
 	github.com/volatiletech/strmangle v0.0.4 // indirect
 	github.com/webx-top/captcha v0.1.0 // indirect
@@ -282,7 +282,7 @@ require (
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
-	go.mongodb.org/mongo-driver v1.11.2 // indirect
+	go.mongodb.org/mongo-driver v1.11.3 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.7.0 // indirect
 	golang.org/x/exp v0.0.0-20230321023759-10a507213a29 // indirect
