@@ -1010,7 +1010,7 @@ github.com/oschwald/maxminddb-golang
 # github.com/pborman/uuid v1.2.1
 ## explicit
 github.com/pborman/uuid
-# github.com/phuslu/iploc v1.0.20230228
+# github.com/phuslu/iploc v1.0.20230330
 ## explicit; go 1.16
 github.com/phuslu/iploc
 # github.com/pierrec/lz4 v2.6.1+incompatible
@@ -1118,7 +1118,7 @@ github.com/streadway/amqp
 # github.com/stretchr/testify v1.8.2
 ## explicit; go 1.13
 github.com/stretchr/testify/assert
-# github.com/swaggo/swag v1.8.11
+# github.com/swaggo/swag v1.8.12
 ## explicit; go 1.18
 github.com/swaggo/swag
 # github.com/syndtr/goleveldb v1.0.0
