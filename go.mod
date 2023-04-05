@@ -48,7 +48,7 @@ require (
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76
 	github.com/markbates/goth v1.76.1
 	github.com/prometheus/client_golang v1.14.0
-	github.com/spf13/cobra v1.6.1
+	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.2
 	github.com/swaggo/swag v1.8.12
 	github.com/wangbin/jiebago v0.3.2
