@@ -1,6 +1,8 @@
 package download
 
 import (
+	"time"
+
 	imageproxy "github.com/admpub/imageproxy"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/image"
@@ -11,21 +13,30 @@ import (
 
 type Config struct {
 	echo.Context
-	ID           string
-	FileURL      string
-	Checkin      bool
-	Watermark    *image.WatermarkOptions
-	Crop         *imageproxy.Options
-	PrepareData  *uploadPrepare.PrepareData
-	NoticeSender notice.Noticer
-	Progress     *notice.Progress
-	MaxMB        int64
+	ID            string
+	FileURL       string
+	Checkin       bool
+	Watermark     *image.WatermarkOptions
+	Crop          *imageproxy.Options
+	PrepareData   *uploadPrepare.PrepareData
+	NoticeSender  notice.Noticer
+	Progress      *notice.Progress
+	MaxMB         int64
+	MaxRetries    int
+	RetryInterval time.Duration
 }
+
+var (
+	MaxRetries    = 3
+	RetryInterval = time.Second
+)
 
 func NewConfig(ctx echo.Context) *Config {
 	return &Config{
-		Context: ctx,
-		MaxMB:   0,
+		Context:       ctx,
+		MaxMB:         0,
+		MaxRetries:    MaxRetries,
+		RetryInterval: RetryInterval,
 	}
 }
 

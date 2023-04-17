@@ -5,7 +5,9 @@ import (
 	"io"
 	"net/http"
 	"path"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/admpub/errors"
 	godl "github.com/admpub/go-download/v2"
@@ -63,22 +65,38 @@ func AdvanceDownload(ctx echo.Context, options ...Options) (*uploadClient.Result
 	if config.MaxMB > 0 {
 		godlCfg.MaxSize = config.MaxMB * godl.MB
 	}
-	file, err := godl.Open(fileURL, godlCfg)
+	dl := func() ([]byte, error) {
+		file, err := godl.Open(fileURL, godlCfg)
+		if err != nil {
+			return nil, err
+		}
+		defer file.Close()
+		return io.ReadAll(file)
+	}
+	b, err := dl()
+	if err != nil {
+		config.NoticeSender(`下载图片 "`+fileURL+`" 失败: `+err.Error(), 0, config.Progress)
+		for i := 1; i <= config.MaxRetries; i++ {
+			time.Sleep(config.RetryInterval)
+			iStr := strconv.Itoa(i)
+			b, err = dl()
+			if err == nil {
+				config.NoticeSender(`(重试`+iStr+`)下载图片 "`+fileURL+`" 成功`, 1, config.Progress)
+				break
+			}
+			config.NoticeSender(`(重试`+iStr+`)下载图片 "`+fileURL+`" 失败: `+err.Error(), 0, config.Progress)
+		}
+	}
 	if err != nil {
 		return result, thumbURL, errors.WithMessage(err, fileURL)
 	}
 	defer func() {
-		file.Close()
 		if e := recover(); e != nil {
-			config.NoticeSender(ctx.T(`下载图片 "`+fileURL+`"出错: %v`, e), 0, config.Progress)
-			err = fmt.Errorf(`下载图片 "`+fileURL+`"出错: %v`, e)
+			config.NoticeSender(ctx.T(`下载图片 "`+fileURL+`" 出错: %v`, e), 0, config.Progress)
+			err = fmt.Errorf(`下载图片 "`+fileURL+`" 出错: %v`, e)
 		}
 	}()
-	var b []byte
-	b, err = io.ReadAll(file)
-	if err != nil {
-		return result, thumbURL, errors.WithMessage(err, fileURL)
-	}
+
 	if config.Watermark != nil && config.Watermark.IsEnabled() {
 		if wmb, err := watermark.Bytes(b, extension, config.Watermark); err != nil {
 			if sendErr := config.NoticeSender(`下载图片 "`+fileURL+`", 添加水印失败`, 0, config.Progress); sendErr != nil {
