@@ -75,8 +75,11 @@ func AdvanceDownload(ctx echo.Context, options ...Options) (*uploadClient.Result
 	}
 	b, err := dl()
 	if err != nil {
-		retryMsg := fmt.Sprintf(`Will retry in %f seconds. %d retries left.`, config.RetryInterval.Seconds(), config.MaxRetries)
-		config.NoticeSender(`下载图片 "`+fileURL+`" 失败: `+err.Error()+` (`+retryMsg+`)`, 0, config.Progress)
+		printRetryMsg := func(i int) {
+			retryMsg := fmt.Sprintf(`Will retry in %f seconds. %d retries left.`, config.RetryInterval.Seconds(), config.MaxRetries-i)
+			config.NoticeSender(`下载图片 "`+fileURL+`" 失败: `+err.Error()+` (`+retryMsg+`)`, 0, config.Progress)
+		}
+		printRetryMsg(0)
 		for i := 1; i <= config.MaxRetries; i++ {
 			time.Sleep(config.RetryInterval)
 			iStr := strconv.Itoa(i)
@@ -85,8 +88,7 @@ func AdvanceDownload(ctx echo.Context, options ...Options) (*uploadClient.Result
 				config.NoticeSender(`(重试`+iStr+`)下载图片 "`+fileURL+`" 成功`, 1, config.Progress)
 				break
 			}
-			retryMsg = fmt.Sprintf(`Will retry in %f seconds. %d retries left.`, config.RetryInterval.Seconds(), config.MaxRetries-i)
-			config.NoticeSender(`(重试`+iStr+`)下载图片 "`+fileURL+`" 失败: `+err.Error()+` (`+retryMsg+`)`, 0, config.Progress)
+			printRetryMsg(i)
 		}
 	}
 	if err != nil {
