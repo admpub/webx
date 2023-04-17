@@ -85,7 +85,8 @@ func AdvanceDownload(ctx echo.Context, options ...Options) (*uploadClient.Result
 				config.NoticeSender(`(重试`+iStr+`)下载图片 "`+fileURL+`" 成功`, 1, config.Progress)
 				break
 			}
-			config.NoticeSender(`(重试`+iStr+`)下载图片 "`+fileURL+`" 失败: `+err.Error(), 0, config.Progress)
+			retryMsg = fmt.Sprintf(`Will retry in %f seconds. %d retries left.`, config.RetryInterval.Seconds(), config.MaxRetries-i)
+			config.NoticeSender(`(重试`+iStr+`)下载图片 "`+fileURL+`" 失败: `+err.Error()+` (`+retryMsg+`)`, 0, config.Progress)
 		}
 	}
 	if err != nil {
