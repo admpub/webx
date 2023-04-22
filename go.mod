@@ -50,7 +50,7 @@ require (
 	github.com/prometheus/client_golang v1.15.0
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.2
-	github.com/swaggo/swag v1.8.12
+	github.com/swaggo/swag v1.16.1
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.8.8
 	github.com/webx-top/com v0.9.2
@@ -76,16 +76,16 @@ require (
 	github.com/admpub/nging/v5 v5.0.0
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
-	github.com/meilisearch/meilisearch-go v0.23.1
+	github.com/meilisearch/meilisearch-go v0.24.0
 	github.com/nging-plugins/dbmanager v1.2.0
 	github.com/webx-top/validator v0.2.0
 )
 
 require (
 	cloud.google.com/go v0.110.0 // indirect
-	cloud.google.com/go/compute v1.19.0 // indirect
+	cloud.google.com/go/compute v1.19.1 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
-	cloud.google.com/go/iam v0.13.0 // indirect
+	cloud.google.com/go/iam v1.0.0 // indirect
 	cloud.google.com/go/pubsub v1.30.0 // indirect
 	gitee.com/admpub/certmagic v0.8.8 // indirect
 	github.com/KenmyZhang/aliyun-communicate v0.0.0-20180308134849-7997edc57454 // indirect
@@ -165,7 +165,7 @@ require (
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
-	github.com/go-openapi/spec v0.20.8 // indirect
+	github.com/go-openapi/spec v0.20.9 // indirect
 	github.com/go-openapi/swag v0.22.3 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
@@ -269,7 +269,7 @@ require (
 	github.com/tuotoo/qrcode v0.0.0-20220425170535-52ccc2bebf5d // indirect
 	github.com/ulikunitz/xz v0.5.11 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.45.0 // indirect
+	github.com/valyala/fasthttp v1.46.0 // indirect
 	github.com/volatiletech/inflect v0.0.1 // indirect
 	github.com/volatiletech/strmangle v0.0.4 // indirect
 	github.com/webx-top/captcha v0.1.0 // indirect
@@ -284,7 +284,7 @@ require (
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
-	go.mongodb.org/mongo-driver v1.11.3 // indirect
+	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.8.0 // indirect
 	golang.org/x/exp v0.0.0-20230420155640-133eef4313cb // indirect
