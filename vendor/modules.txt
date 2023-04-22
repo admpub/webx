@@ -367,7 +367,7 @@ github.com/admpub/pester
 # github.com/admpub/pinyin-golang v1.0.1
 ## explicit
 github.com/admpub/pinyin-golang/pinyin
-# github.com/admpub/pp v0.0.6
+# github.com/admpub/pp v0.0.7
 ## explicit; go 1.17
 github.com/admpub/pp
 # github.com/admpub/qrcode v0.0.3
@@ -428,7 +428,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.5
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.44.240
+# github.com/aws/aws-sdk-go v1.44.248
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -507,7 +507,7 @@ github.com/bradfitz/gomemcache/memcache
 # github.com/caddy-plugins/ipfilter v1.1.8
 ## explicit; go 1.16
 github.com/caddy-plugins/ipfilter
-# github.com/cenkalti/backoff/v4 v4.2.0
+# github.com/cenkalti/backoff/v4 v4.2.1
 ## explicit; go 1.18
 github.com/cenkalti/backoff/v4
 # github.com/cespare/xxhash/v2 v2.2.0
@@ -723,7 +723,7 @@ github.com/google/go-querystring/query
 # github.com/google/pprof v0.0.0-20230406165453-00490a63f317
 ## explicit; go 1.19
 github.com/google/pprof/profile
-# github.com/google/s2a-go v0.1.0
+# github.com/google/s2a-go v0.1.2
 ## explicit; go 1.16
 github.com/google/s2a-go
 github.com/google/s2a-go/fallback
@@ -841,7 +841,7 @@ github.com/kelseyhightower/envconfig
 ## explicit; go 1.14
 github.com/kisielk/errcheck
 github.com/kisielk/errcheck/errcheck
-# github.com/klauspost/compress v1.16.4
+# github.com/klauspost/compress v1.16.5
 ## explicit; go 1.18
 github.com/klauspost/compress
 github.com/klauspost/compress/flate
@@ -878,7 +878,7 @@ github.com/mailru/easyjson/jwriter
 # github.com/markbates/going v1.0.3
 ## explicit
 github.com/markbates/going/defaults
-# github.com/markbates/goth v1.76.1
+# github.com/markbates/goth v1.77.0
 ## explicit; go 1.15
 github.com/markbates/goth
 github.com/markbates/goth/providers/amazon
@@ -943,7 +943,7 @@ github.com/miekg/dns
 # github.com/minio/md5-simd v1.1.2
 ## explicit; go 1.14
 github.com/minio/md5-simd
-# github.com/minio/minio-go/v7 v7.0.51
+# github.com/minio/minio-go/v7 v7.0.52
 ## explicit; go 1.17
 github.com/minio/minio-go/v7
 github.com/minio/minio-go/v7/pkg/credentials
@@ -1047,7 +1047,7 @@ github.com/pmezard/go-difflib/difflib
 # github.com/power-devops/perfstat v0.0.0-20221212215047-62379fc7944b
 ## explicit; go 1.14
 github.com/power-devops/perfstat
-# github.com/prometheus/client_golang v1.14.0
+# github.com/prometheus/client_golang v1.15.0
 ## explicit; go 1.17
 github.com/prometheus/client_golang/prometheus
 github.com/prometheus/client_golang/prometheus/internal
@@ -1074,7 +1074,7 @@ github.com/quic-go/qtls-go1-19
 # github.com/quic-go/qtls-go1-20 v0.2.2
 ## explicit; go 1.20
 github.com/quic-go/qtls-go1-20
-# github.com/quic-go/quic-go v0.33.0
+# github.com/quic-go/quic-go v0.34.0
 ## explicit; go 1.19
 github.com/quic-go/quic-go
 github.com/quic-go/quic-go/http3
@@ -1097,7 +1097,7 @@ github.com/rivo/uniseg
 # github.com/robfig/cron/v3 v3.0.1
 ## explicit; go 1.12
 github.com/robfig/cron/v3
-# github.com/rs/xid v1.4.0
+# github.com/rs/xid v1.5.0
 ## explicit; go 1.12
 github.com/rs/xid
 # github.com/russross/blackfriday v1.6.0
@@ -1399,8 +1399,8 @@ golang.org/x/crypto/ocsp
 golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/scrypt
 golang.org/x/crypto/sha3
-# golang.org/x/exp v0.0.0-20230321023759-10a507213a29
-## explicit; go 1.18
+# golang.org/x/exp v0.0.0-20230420155640-133eef4313cb
+## explicit; go 1.20
 golang.org/x/exp/constraints
 # golang.org/x/image v0.7.0
 ## explicit; go 1.12
@@ -1539,7 +1539,7 @@ golang.org/x/tools/internal/typesinternal
 ## explicit; go 1.17
 golang.org/x/xerrors
 golang.org/x/xerrors/internal
-# google.golang.org/api v0.117.0
+# google.golang.org/api v0.119.0
 ## explicit; go 1.19
 google.golang.org/api/googleapi
 google.golang.org/api/googleapi/transport
