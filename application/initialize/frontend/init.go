@@ -211,8 +211,7 @@ func addMiddleware(e *echo.Echo) {
 
 	e.Use(xMW.Middlewares...)
 
-	opt := captcha.Options{EnableImage: true}
-	opt.Wrapper(e)
+	captcha.New(``).Wrapper(e)
 	e.Route("GET", `/qrcode`, user.QrCode)
 
 	i18n.Handler(e, `App.i18n`)
