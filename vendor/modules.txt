@@ -806,6 +806,9 @@ github.com/hashicorp/go-multierror
 # github.com/hashicorp/go-syslog v1.0.0
 ## explicit
 github.com/hashicorp/go-syslog
+# github.com/hashicorp/go-version v1.6.0
+## explicit
+github.com/hashicorp/go-version
 # github.com/hibiken/asynq v0.24.0
 ## explicit; go 1.14
 github.com/hibiken/asynq
@@ -1210,7 +1213,7 @@ github.com/webx-top/client/upload/watermark
 # github.com/webx-top/codec v0.2.3
 ## explicit
 github.com/webx-top/codec
-# github.com/webx-top/com v0.9.2
+# github.com/webx-top/com v0.9.3
 ## explicit
 github.com/webx-top/com
 github.com/webx-top/com/encoding/json

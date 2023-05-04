@@ -53,7 +53,7 @@ require (
 	github.com/swaggo/swag v1.16.1
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.8.8
-	github.com/webx-top/com v0.9.2
+	github.com/webx-top/com v0.9.3
 	github.com/webx-top/db v1.23.17
 	github.com/webx-top/echo v2.35.1+incompatible
 	github.com/webx-top/echo-prometheus v1.1.0
@@ -199,6 +199,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-syslog v1.0.0 // indirect
+	github.com/hashicorp/go-version v1.6.0 // indirect
 	github.com/imdario/mergo v0.3.15 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
