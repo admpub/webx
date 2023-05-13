@@ -985,7 +985,7 @@ github.com/muesli/smartcrop/options
 # github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 ## explicit
 github.com/nfnt/resize
-# github.com/nging-plugins/dbmanager v1.2.3 => ../../nging-plugins/dbmanager
+# github.com/nging-plugins/dbmanager v1.2.4 => ../../nging-plugins/dbmanager
 ## explicit; go 1.17
 github.com/nging-plugins/dbmanager
 github.com/nging-plugins/dbmanager/application/dbschema
@@ -1223,7 +1223,7 @@ github.com/webx-top/client/upload/watermark
 # github.com/webx-top/codec v0.3.0
 ## explicit
 github.com/webx-top/codec
-# github.com/webx-top/com v0.9.3
+# github.com/webx-top/com v0.9.4
 ## explicit
 github.com/webx-top/com
 github.com/webx-top/com/encoding/json

@@ -53,7 +53,7 @@ require (
 	github.com/swaggo/swag v1.16.1
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.8.8
-	github.com/webx-top/com v0.9.3
+	github.com/webx-top/com v0.9.4
 	github.com/webx-top/db v1.23.17
 	github.com/webx-top/echo v2.35.1+incompatible
 	github.com/webx-top/echo-prometheus v1.1.0
@@ -77,7 +77,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.24.0
-	github.com/nging-plugins/dbmanager v1.2.3
+	github.com/nging-plugins/dbmanager v1.2.4
 	github.com/webx-top/validator v0.2.0
 )
 
