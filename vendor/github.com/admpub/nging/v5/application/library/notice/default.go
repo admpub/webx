@@ -22,21 +22,20 @@ import "sync"
 
 var (
 	defaultUserNotices *userNotices
-	debug              bool //= true
 	once               sync.Once
 )
 
-func SetDebug(on bool) {
-	debug = on
-}
-
 func Initialize() {
-	defaultUserNotices = NewUserNotices(debug)
+	defaultUserNotices = NewUserNotices(false)
 }
 
 func Default() *userNotices {
 	once.Do(Initialize)
 	return defaultUserNotices
+}
+
+func SetDebug(on bool) {
+	Default().SetDebug(on)
 }
 
 func OnClose(fn ...func(user string)) *userNotices {
