@@ -23,21 +23,21 @@
                 <div class="col-sm-3">{{$positionId := ($.Formx `positionId`).Uint64}}
                   <select name="positionId" id="positionId" required class="form-control">
                     <option value=""> - {{`请选择`|$.T}} - </option>
-                    {{range $k, $v := $.Stored.positionList}}
+                    {{- range $k, $v := $.Stored.positionList -}}
                     <option value="{{$v.Id}}"{{if eq $v.Id $positionId}} selected="selected"{{end}}{{if eq $v.Disabled `Y`}} titile="{{`已禁用`|$.T}}" style="font-style:italic"{{end}}>{{$v.Name}}</option>
-                    {{end}}
+                    {{- end -}}
                   </select>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"广告类型"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$contype := $.Form "contype" "text"}}
+                  {{- $contype := $.Form "contype" "text" -}}
                   <select name="contype" required id="contype" class="form-control">
                     <option value=""> - {{`请选择`|$.T}} - </option>
-                    {{range $k, $v := $.Stored.contypes}}
+                    {{- range $k, $v := $.Stored.contypes -}}
                     <option value="{{$v.K}}"{{if eq $v.K $contype}} selected="selected"{{end}}>{{$v.V}}</option>
-                    {{end}}
+                    {{- end -}}
                   </select>
                 </div>
                 <label class="col-sm-2 control-label">{{"广告模式"|$.T}}</label>
@@ -45,9 +45,9 @@
                   {{$mode := $.Form "mode" "CPC"}}
                   <select name="mode" id="mode" class="form-control">
                     <option value=""> - {{`请选择`|$.T}} - </option>
-                    {{range $k, $v := $.Stored.modes}}
+                    {{- range $k, $v := $.Stored.modes -}}
                     <option value="{{$v.K}}"{{if eq $v.K $mode}} selected="selected"{{end}}>{{$v.V}}</option>
-                    {{end}}
+                    {{- end -}}
                   </select>
                 </div>
               </div>
@@ -55,6 +55,15 @@
                 <label class="col-sm-2 control-label">{{"广告内容"|$.T}}</label>
                 <div class="col-sm-8">
                   <textarea class="form-control" name="content">{{$.Form "content"}}</textarea>
+                  <div class="help-block">
+                    <ol class="no-margin-bottom md-padding-left">
+                      {{- range $k, $v := $.Stored.contypes -}}
+                      {{- if $v.H.description -}}
+                      <li>{{$v.V}}: {{$v.H.description}}</li>
+                      {{- end -}}
+                      {{- end -}}
+                    </ol>
+                  </div>
                 </div>
               </div>
               <div class="form-group">
