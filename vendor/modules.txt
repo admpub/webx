@@ -428,7 +428,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.5
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.44.262
+# github.com/aws/aws-sdk-go v1.44.264
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -985,7 +985,7 @@ github.com/muesli/smartcrop/options
 # github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 ## explicit
 github.com/nfnt/resize
-# github.com/nging-plugins/dbmanager v1.2.5 => ../../nging-plugins/dbmanager
+# github.com/nging-plugins/dbmanager v1.3.0 => ../../nging-plugins/dbmanager
 ## explicit; go 1.17
 github.com/nging-plugins/dbmanager
 github.com/nging-plugins/dbmanager/application/dbschema
@@ -999,13 +999,13 @@ github.com/nging-plugins/dbmanager/application/library/dbmanager/driver/redis
 github.com/nging-plugins/dbmanager/application/library/dbmanager/result
 github.com/nging-plugins/dbmanager/application/library/setup
 github.com/nging-plugins/dbmanager/application/model
-# github.com/nging-plugins/dlmanager v1.2.0 => ../../nging-plugins/dlmanager
+# github.com/nging-plugins/dlmanager v1.3.0 => ../../nging-plugins/dlmanager
 ## explicit; go 1.17
 github.com/nging-plugins/dlmanager/application/library/config
 # github.com/nwaples/rardecode v1.1.3
 ## explicit
 github.com/nwaples/rardecode
-# github.com/onsi/ginkgo/v2 v2.9.4
+# github.com/onsi/ginkgo/v2 v2.9.5
 ## explicit; go 1.18
 github.com/onsi/ginkgo/v2/config
 github.com/onsi/ginkgo/v2/formatter
@@ -1130,7 +1130,7 @@ github.com/shirou/gopsutil/v3/internal/common
 # github.com/shoenig/go-m1cpu v0.1.6
 ## explicit; go 1.20
 github.com/shoenig/go-m1cpu
-# github.com/sirupsen/logrus v1.9.0
+# github.com/sirupsen/logrus v1.9.1
 ## explicit; go 1.13
 github.com/sirupsen/logrus
 # github.com/smartwalle/crypto4go v1.0.3
@@ -1412,7 +1412,7 @@ golang.org/x/crypto/ocsp
 golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/scrypt
 golang.org/x/crypto/sha3
-# golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea
+# golang.org/x/exp v0.0.0-20230515195305-f3d0a9c9a5cc
 ## explicit; go 1.20
 golang.org/x/exp/constraints
 # golang.org/x/image v0.7.0
