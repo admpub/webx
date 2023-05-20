@@ -5,10 +5,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/admpub/fasttemplate"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo/middleware/tplfunc"
-	"github.com/webx-top/echo/param"
 )
 
 func TrimOverflowText(text string, maxLength int, seperators ...string) string {
@@ -109,37 +107,6 @@ func HideContent(content string, contype string, hide HideDetector) (result stri
 		return showStart + v + showEnd
 	})
 	return
-}
-
-func ReplacePlaceholder(content string, values map[string]interface{}, startAndEndTag ...string) string {
-	startTag := "{"
-	endTag := "}"
-	if len(startAndEndTag) > 0 {
-		if len(startAndEndTag[0]) > 0 {
-			startTag = startAndEndTag[0]
-		}
-		if len(startAndEndTag) > 1 && len(startAndEndTag[1]) > 0 {
-			startTag = startAndEndTag[1]
-		}
-	}
-	t := fasttemplate.New(content, startTag, endTag)
-	return t.ExecuteString(values)
-}
-
-func ReplacePlaceholderx(t *fasttemplate.Template, values map[string]interface{}, args ...interface{}) string {
-	var k string
-	for i, j := 0, len(args); i < j; i++ {
-		if i%2 == 0 {
-			k = param.AsString(args[i])
-			continue
-		}
-		values[k] = param.AsString(args[i])
-		k = ``
-	}
-	if len(k) > 0 {
-		values[k] = ``
-	}
-	return t.ExecuteString(values)
 }
 
 func MakeKVCallback(cb func(k interface{}, v interface{}) error, args ...interface{}) (err error) {
