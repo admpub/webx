@@ -67,12 +67,8 @@ func MakeValuesURLPath(args echo.H, sep string, keys ...string) string {
 	return strings.TrimRight(strings.Join(values, sep), sep)
 }
 
-func MakeListURL(
-	urlPrefix string,
-	params param.StringMap,
-	filterParamNames []string,
-	sep string,
-	args ...interface{}) string {
+func MakeListURL(urlPrefix string, params param.StringMap,
+	filterParamNames []string, sep string, args ...interface{}) string {
 	values := common.HPoolGet()
 	defer common.HPoolRelease(values)
 	for _, key := range filterParamNames {
