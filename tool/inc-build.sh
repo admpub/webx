@@ -23,8 +23,6 @@ else
 	export archiver_extension=zip
 fi
 
-cp -R ../dist/default/* ${RELEASEDIR}/
-
 rm -rf ${RELEASEDIR}.${archiver_extension}
 
 arc archive ${RELEASEDIR}.${archiver_extension} ${RELEASEDIR}

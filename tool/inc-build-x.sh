@@ -31,9 +31,6 @@ else
 	export archiver_extension=zip
 fi
 
-
-cp -R ${DISTPATH}/default/* ${RELEASEDIR}/
-
 rm -rf ${RELEASEDIR}.${archiver_extension}
 
 #${NGING_VERSION}${NGING_LABEL}
