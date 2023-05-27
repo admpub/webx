@@ -41,7 +41,7 @@ require (
 	github.com/chai2010/webp v1.1.1 // indirect
 	github.com/coscms/forms v1.12.1
 	github.com/coscms/oauth2s v0.2.1
-	github.com/coscms/sms v0.0.4
+	github.com/coscms/sms v0.0.5
 	github.com/googollee/go-socket.io v1.7.0
 	github.com/gosimple/slug v1.13.1
 	github.com/hibiken/asynq v0.24.1
@@ -73,7 +73,7 @@ require (
 	github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588
 	github.com/admpub/go-lock v1.3.0
 	github.com/admpub/go-zinc v0.0.8
-	github.com/admpub/nging/v5 v5.0.0
+	github.com/admpub/nging/v5 v5.0.1
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.24.0
@@ -83,10 +83,10 @@ require (
 
 require (
 	cloud.google.com/go v0.110.2 // indirect
-	cloud.google.com/go/compute v1.19.2 // indirect
+	cloud.google.com/go/compute v1.19.3 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	cloud.google.com/go/iam v1.0.1 // indirect
-	cloud.google.com/go/pubsub v1.30.1 // indirect
+	cloud.google.com/go/pubsub v1.31.0 // indirect
 	gitee.com/admpub/certmagic v0.8.8 // indirect
 	github.com/KenmyZhang/aliyun-communicate v0.0.0-20180308134849-7997edc57454 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
@@ -201,7 +201,7 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-syslog v1.0.0 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
-	github.com/imdario/mergo v0.3.15 // indirect
+	github.com/imdario/mergo v0.3.16 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
@@ -230,7 +230,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/montanaflynn/stats v0.7.0 // indirect
+	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/mrjones/oauth v0.0.0-20190623134757-126b35219450 // indirect
 	github.com/muesli/smartcrop v0.3.0 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
@@ -263,7 +263,7 @@ require (
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.9.2 // indirect
 	github.com/smartwalle/crypto4go v1.0.3 // indirect
-	github.com/spf13/cast v1.5.0 // indirect
+	github.com/spf13/cast v1.5.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/streadway/amqp v1.0.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
@@ -302,7 +302,9 @@ require (
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/api v0.124.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20230524185152-1884fd1fac28 // indirect
+	google.golang.org/genproto v0.0.0-20230526203410-71b5a4ffd15e // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20230526203410-71b5a4ffd15e // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20230526203410-71b5a4ffd15e // indirect
 	google.golang.org/grpc v1.55.0 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
