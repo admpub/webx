@@ -17,7 +17,7 @@ type InputConfig struct {
 	// in the generated output.
 	Path string
 
-	// Recusive defines whether subdirectories of Path
+	// Recursive defines whether subdirectories of Path
 	// should be recursively included in the conversion.
 	Recursive bool
 }
@@ -105,6 +105,10 @@ type Config struct {
 	// into Go code. The generated function will automatically unzip
 	// the file data when called. Defaults to false.
 	NoCompress bool
+
+	// NoUnpack means the assets are /not/ uncompressed before being turned
+	// into Go code of compress option enabled. Defaults to false.
+	NoUnpack bool
 
 	// HttpFileSystem means whether generate return http.FileSystem interface
 	// instance's function.When true,will generate relate code.
