@@ -1156,7 +1156,7 @@ github.com/spf13/pflag
 # github.com/streadway/amqp v1.0.0
 ## explicit; go 1.10
 github.com/streadway/amqp
-# github.com/stretchr/testify v1.8.3
+# github.com/stretchr/testify v1.8.4
 ## explicit; go 1.20
 github.com/stretchr/testify/assert
 # github.com/swaggo/swag v1.16.1
@@ -1252,7 +1252,7 @@ github.com/webx-top/db/lib/reflectx
 github.com/webx-top/db/lib/sqlbuilder
 github.com/webx-top/db/mysql
 github.com/webx-top/db/sqlite
-# github.com/webx-top/echo v2.36.1+incompatible
+# github.com/webx-top/echo v2.36.2+incompatible
 ## explicit
 github.com/webx-top/echo
 github.com/webx-top/echo/code

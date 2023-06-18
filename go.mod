@@ -49,13 +49,13 @@ require (
 	github.com/markbates/goth v1.77.0
 	github.com/prometheus/client_golang v1.16.0
 	github.com/spf13/cobra v1.7.0
-	github.com/stretchr/testify v1.8.3
+	github.com/stretchr/testify v1.8.4
 	github.com/swaggo/swag v1.16.1
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.8.9
 	github.com/webx-top/com v0.9.5
 	github.com/webx-top/db v1.23.17
-	github.com/webx-top/echo v2.36.1+incompatible
+	github.com/webx-top/echo v2.36.2+incompatible
 	github.com/webx-top/echo-prometheus v1.1.1
 	github.com/webx-top/echo-socket.io v1.1.2
 	github.com/webx-top/image v0.1.0
