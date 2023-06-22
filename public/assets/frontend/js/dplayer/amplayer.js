@@ -18,7 +18,9 @@
 			"p2pEngine": "",
 			"p2pConfig": {},
 			"srt2vttConvertApi": "",
-			"container": ""
+			"container": "",
+			"defaultType": "customHls",
+			"defaultExtName": ".m3u8"
 		},
 		'secure': window.location.protocol == 'https:',
 		'elemPrefix': function() {
@@ -302,13 +304,15 @@
 			},
 			'getType': function (urls) {
 				var type = 'auto', urls = String(urls).split('#')[0].split('?')[0], 
-					pos = urls.lastIndexOf('.'), extName = pos>-1?urls.substring(pos).toLowerCase():'';
+					pos = urls.lastIndexOf('.'), extName = pos>-1?urls.substring(pos).toLowerCase():amplayer.options.defaultExtName;
 				if (urls.substring(0, 7).toLowerCase() == 'magnet:' || extName=='.torrent') {
 					type = 'customWebTorrent';
 				} else if (extName=='.m3u8') {
 					type = 'customHls';
 				} else if (extName=='.mpd') {
 					type = 'customDash';
+				} else if (!extName&&amplayer.options.defaultType){
+					type = amplayer.options.defaultType;
 				}
 				return type;
 			},
