@@ -428,7 +428,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.5
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.44.283
+# github.com/aws/aws-sdk-go v1.44.286
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -587,7 +587,7 @@ github.com/gabriel-vasile/mimetype/internal/magic
 ## explicit; go 1.17
 github.com/garyburd/redigo/internal
 github.com/garyburd/redigo/redis
-# github.com/go-acme/lego/v4 v4.12.1
+# github.com/go-acme/lego/v4 v4.12.3
 ## explicit; go 1.19
 github.com/go-acme/lego/v4/acme
 github.com/go-acme/lego/v4/acme/api
@@ -947,7 +947,7 @@ github.com/meilisearch/meilisearch-go
 ## explicit; go 1.19
 github.com/microcosm-cc/bluemonday
 github.com/microcosm-cc/bluemonday/css
-# github.com/miekg/dns v1.1.54
+# github.com/miekg/dns v1.1.55
 ## explicit; go 1.19
 github.com/miekg/dns
 # github.com/minio/md5-simd v1.1.2
@@ -1012,7 +1012,7 @@ github.com/nging-plugins/dlmanager/application/library/config
 # github.com/nwaples/rardecode v1.1.3
 ## explicit
 github.com/nwaples/rardecode
-# github.com/onsi/ginkgo/v2 v2.10.0
+# github.com/onsi/ginkgo/v2 v2.11.0
 ## explicit; go 1.18
 github.com/onsi/ginkgo/v2/config
 github.com/onsi/ginkgo/v2/formatter
@@ -1035,8 +1035,8 @@ github.com/onsi/ginkgo/v2/types
 github.com/opentracing/opentracing-go
 github.com/opentracing/opentracing-go/ext
 github.com/opentracing/opentracing-go/log
-# github.com/oschwald/maxminddb-golang v1.10.0
-## explicit; go 1.18
+# github.com/oschwald/maxminddb-golang v1.11.0
+## explicit; go 1.19
 github.com/oschwald/maxminddb-golang
 # github.com/pborman/uuid v1.2.1
 ## explicit
@@ -1084,7 +1084,7 @@ github.com/quic-go/qtls-go1-19
 # github.com/quic-go/qtls-go1-20 v0.2.2
 ## explicit; go 1.20
 github.com/quic-go/qtls-go1-20
-# github.com/quic-go/quic-go v0.35.1
+# github.com/quic-go/quic-go v0.36.0
 ## explicit; go 1.19
 github.com/quic-go/quic-go
 github.com/quic-go/quic-go/http3
@@ -1098,6 +1098,7 @@ github.com/quic-go/quic-go/internal/qerr
 github.com/quic-go/quic-go/internal/qtls
 github.com/quic-go/quic-go/internal/utils
 github.com/quic-go/quic-go/internal/utils/linkedlist
+github.com/quic-go/quic-go/internal/utils/ringbuffer
 github.com/quic-go/quic-go/internal/wire
 github.com/quic-go/quic-go/logging
 github.com/quic-go/quic-go/quicvarint
