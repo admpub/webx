@@ -311,7 +311,7 @@
 					type = 'customHls';
 				} else if (extName=='.mpd') {
 					type = 'customDash';
-				} else if (!extName&&amplayer.options.defaultType){
+				} else if (amplayer.options.defaultType) {
 					type = amplayer.options.defaultType;
 				}
 				return type;
