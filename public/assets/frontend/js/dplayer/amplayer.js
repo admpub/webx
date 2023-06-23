@@ -271,10 +271,14 @@
 							case 'fragLoadError'://离开页面时触发
 								msg += data.details;
 								console.warn(msg);
-								return;
+								if(!data.fatal) return;
+								break;
 							//networkError
 							case 'manifestLoadError':
 								msg += '媒体加载失败';
+								break;
+							case 'manifestLoadTimeOut':
+								msg += '媒体加载超时';
 								break;
 							default:
 								msg += data.details;
