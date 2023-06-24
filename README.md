@@ -1,6 +1,8 @@
 # webx
 
-Go语言网站通用前台基础项目，基于后台管理项目[Nging](https://github.com/admpub/nging)。
+Go语言文章系统、博客系统。
+
+这是一个网站通用前台基础项目，基于后台管理项目[Nging](https://github.com/admpub/nging)。
 
 本项目作为网站项目基础核心代码，仅仅包含通用的基础功能。
 
