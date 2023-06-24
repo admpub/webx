@@ -84,3 +84,25 @@ Go语言网站通用前台基础项目，基于后台管理项目[Nging](https:/
 
 同样的，这个时候也会自动采用第一个域名作为前台页面内的网址（更改方式与上述后台的相似，唯一不同的是需设置“前台网址”）
 
+## 预览图
+
+### 文章模板（默认）
+
+* 列表页
+![列表页](./preview/demo-default-article-list.png)
+
+* 详情页
+![详情页](./preview/demo-default-article-detail.png)
+
+### 博客模板-暗色 (支持暗色和亮色)
+
+* 首页
+![首页](./preview/demo-blogdefault-index.png)
+
+
+* 列表页
+![列表页](./preview/demo-blogdefault-article-list.png)
+
+* 详情页
+![详情页](./preview/demo-blogdefault-article-detail.png)
+
