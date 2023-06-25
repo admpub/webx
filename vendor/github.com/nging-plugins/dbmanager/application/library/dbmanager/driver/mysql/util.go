@@ -53,7 +53,10 @@ func (m *mySQL) kvVal(sqlStr string) ([]map[string]string, error) {
 	return r, err
 }
 
-func (m *mySQL) newParam() *factory.Param {
+func (m *mySQL) newParam(dbfactory ...*factory.Factory) *factory.Param {
+	if len(dbfactory) > 0 && dbfactory[0] != nil {
+		return factory.NewParam(dbfactory[0])
+	}
 	return factory.NewParam(m.db)
 }
 
@@ -469,23 +472,28 @@ func (m *mySQL) where(wheres map[string]*echo.Mapx, nulls map[string]*echo.Mapx,
 }
 
 func enumValues(field *Field) []*Enum {
-	r := []*Enum{}
-	matches := reFieldEnumValue.FindAllStringSubmatch(field.Length, -1)
-	//com.Dump(matches)
-	if len(matches) > 0 {
-		for i, val := range matches {
-			val[1] = strings.Replace(val[1], `''`, `'`, -1)
-			val[1] = strings.Replace(val[1], `\`, ``, -1)
-			r = append(r, &Enum{
-				Int:    enumNumber(i),
-				String: val[1],
-			})
+	r := make([]*Enum, len(field.Options))
+	for index, option := range field.Options {
+		r[index] = &Enum{
+			Int:    index + 1,
+			String: option,
 		}
 	}
 	return r
 }
 
-func enumNumber(i int) int {
+func typeSetValues(field *Field) []*Enum {
+	r := make([]*Enum, len(field.Options))
+	for index, option := range field.Options {
+		r[index] = &Enum{
+			Int:    typeSetNumber(index),
+			String: option,
+		}
+	}
+	return r
+}
+
+func typeSetNumber(i int) int {
 	return 1 << uint64(math.Abs(float64(i)))
 }
 

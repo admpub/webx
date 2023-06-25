@@ -20,6 +20,8 @@ import (
 	"github.com/nging-plugins/dbmanager/application/library/dbmanager/driver"
 )
 
+const maxInsertBytes = 1024 * 1024
+
 // exportDBData 导出表数据s
 func (m *mySQL) exportDBData(ctx context.Context, noticer notice.Noticer,
 	cfg *driver.DbAuth, tables []string, dataWriter interface{}, mysqlVersion string) error {
@@ -77,15 +79,21 @@ func (m *mySQL) exportDBData(ctx context.Context, noticer notice.Noticer,
 	if err != nil {
 		return err
 	}
+	dbfactory, err := connect(cfg)
+	if err != nil {
+		return err
+	}
+	defer dbfactory.CloseAll()
 	for _, table := range tables {
-		fields, _, err := m.tableFields(table)
+		fields, _, err := m.tableFields(table, dbfactory)
 		if err != nil {
 			return err
 		}
 		var (
-			insert    string
-			suffix    string
-			hasValues bool
+			insert     string
+			suffix     string
+			hasValues  bool
+			totalBytes int
 		)
 		_, _, _, err = m.listData(func(cols []string, row map[string]*sql.NullString) error {
 			if len(insert) == 0 {
@@ -97,17 +105,12 @@ func (m *mySQL) exportDBData(ctx context.Context, noticer notice.Noticer,
 					vals[idx] = key + " = VALUES(" + key + ")"
 				}
 				if exportStyle == `INSERT+UPDATE` {
-					suffix = "\nON DUPLICATE KEY UPDATE " + strings.Join(vals, ", ")
+					suffix = " ON DUPLICATE KEY UPDATE " + strings.Join(vals, ", ")
 				} else {
 					suffix = ""
 				}
 				suffix += ";\n"
-				insert = "INSERT INTO " + quoteCol(table) + " (" + strings.Join(keys, `, `) + ") VALUES"
-
-				_, err = w.Write(com.Str2bytes(insert))
-				if err != nil {
-					return err
-				}
+				insert = "INSERT INTO " + quoteCol(table) + " (" + strings.Join(keys, `, `) + ") VALUES "
 			}
 			var values, sep string
 			for _, col := range cols {
@@ -128,12 +131,17 @@ func (m *mySQL) exportDBData(ctx context.Context, noticer notice.Noticer,
 				}
 				sep = `, `
 			}
-			s := "\n(" + values + ")"
+			s := "(" + values + ")"
 			if !hasValues {
+				totalBytes += len(s)
 				s = insert + s
 				hasValues = true
+			} else if totalBytes > maxInsertBytes {
+				totalBytes = len(s)
+				s = suffix + insert + s
 			} else {
 				s = "," + s
+				totalBytes += len(s)
 			}
 			_, err = w.Write(com.Str2bytes(s))
 			return err
