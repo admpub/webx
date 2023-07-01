@@ -4,9 +4,6 @@ source ${PWD}/inc-version.sh
 #go install github.com/admpub/xgo@latest
 source ${WORKDIR}/install-archiver.sh
 
-cd ..
-go generate
-
 # 回到入口
 cd ${ENTRYDIR}
 

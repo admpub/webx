@@ -1,3 +1,7 @@
+cd ..
+go generate
+cd tool
+
 export DISTPATH="../dist"
 export RELEASEDIR=${DISTPATH}/${NGING_EXECUTOR}_${GOOS}_${GOARCH}
 mkdir ${RELEASEDIR}

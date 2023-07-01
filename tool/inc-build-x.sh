@@ -1,3 +1,8 @@
+# generate
+cd ${PKGPATH}
+go generate
+cd ${ENTRYDIR}
+
 export DISTPATH=${PKGPATH}/dist
 export RELEASEDIR=${DISTPATH}/${NGING_EXECUTOR}_${GOOS}_${GOARCH}
 if [ "$GOARM" != "" ]; then
