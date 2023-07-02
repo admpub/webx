@@ -15,6 +15,7 @@
 package cache
 
 import (
+	"context"
 	"strings"
 
 	"github.com/bradfitz/gomemcache/memcache"
@@ -48,7 +49,7 @@ func (c *MemcacheCacher) Codec() encoding.Codec {
 
 // Put puts value into cache with key and expire time.
 // If expired is 0, it lives forever.
-func (c *MemcacheCacher) Put(key string, val interface{}, expire int64) error {
+func (c *MemcacheCacher) Put(ctx context.Context, key string, val interface{}, expire int64) error {
 	value, err := c.codec.Marshal(val)
 	if err != nil {
 		return err
@@ -59,7 +60,7 @@ func (c *MemcacheCacher) Put(key string, val interface{}, expire int64) error {
 }
 
 // Get gets cached value by given key.
-func (c *MemcacheCacher) Get(key string, value interface{}) error {
+func (c *MemcacheCacher) Get(ctx context.Context, key string, value interface{}) error {
 	item, err := c.c.Get(key)
 	if err != nil {
 		return err
@@ -71,36 +72,42 @@ func (c *MemcacheCacher) Get(key string, value interface{}) error {
 }
 
 // Delete deletes cached value by given key.
-func (c *MemcacheCacher) Delete(key string) error {
+func (c *MemcacheCacher) Delete(ctx context.Context, key string) error {
 	return c.c.Delete(key)
 }
 
 // Incr increases cached int-type value by given key as a counter.
-func (c *MemcacheCacher) Incr(key string) error {
+func (c *MemcacheCacher) Incr(ctx context.Context, key string) error {
 	_, err := c.c.Increment(key, 1)
 	return err
 }
 
 // Decr decreases cached int-type value by given key as a counter.
-func (c *MemcacheCacher) Decr(key string) error {
+func (c *MemcacheCacher) Decr(ctx context.Context, key string) error {
 	_, err := c.c.Decrement(key, 1)
 	return err
 }
 
 // IsExist returns true if cached value exists.
-func (c *MemcacheCacher) IsExist(key string) bool {
+func (c *MemcacheCacher) IsExist(ctx context.Context, key string) (bool, error) {
 	_, err := c.c.Get(key)
-	return err == nil
+	if err != nil {
+		if err == memcache.ErrCacheMiss {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, nil
 }
 
 // Flush deletes all cached data.
-func (c *MemcacheCacher) Flush() error {
+func (c *MemcacheCacher) Flush(ctx context.Context) error {
 	return c.c.FlushAll()
 }
 
 // StartAndGC starts GC routine based on config string settings.
 // AdapterConfig: 127.0.0.1:9090;127.0.0.1:9091
-func (c *MemcacheCacher) StartAndGC(opt cache.Options) error {
+func (c *MemcacheCacher) StartAndGC(ctx context.Context, opt cache.Options) error {
 	c.c = memcache.New(strings.Split(opt.AdapterConfig, ";")...)
 	return nil
 }

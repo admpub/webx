@@ -15,6 +15,7 @@
 package cache
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/webx-top/echo/param"
@@ -33,21 +34,21 @@ func Version() string {
 // Cache is the interface that operates the cache data.
 type Cache interface {
 	// Put puts value into cache with key and expire time.
-	Put(key string, val interface{}, timeout int64) error
+	Put(ctx context.Context, key string, val interface{}, timeout int64) error
 	// Get gets cached value by given key.
-	Get(key string, value interface{}) error
+	Get(ctx context.Context, key string, value interface{}) error
 	// Delete deletes cached value by given key.
-	Delete(key string) error
+	Delete(ctx context.Context, key string) error
 	// Incr increases cached int-type value by given key as a counter.
-	Incr(key string) error
+	Incr(ctx context.Context, key string) error
 	// Decr decreases cached int-type value by given key as a counter.
-	Decr(key string) error
+	Decr(ctx context.Context, key string) error
 	// IsExist returns true if cached value exists.
-	IsExist(key string) bool
+	IsExist(ctx context.Context, key string) (bool, error)
 	// Flush deletes all cached data.
-	Flush() error
+	Flush(ctx context.Context) error
 	// StartAndGC starts GC routine based on config string settings.
-	StartAndGC(opt Options) error
+	StartAndGC(ctx context.Context, opt Options) error
 	Close() error
 	Client() interface{}
 	Codec
@@ -55,20 +56,20 @@ type Cache interface {
 }
 
 type Getter interface {
-	String(key string) string
-	Int(key string) int
-	Uint(key string) uint
-	Int64(key string) int64
-	Uint64(key string) uint64
-	Int32(key string) int32
-	Uint32(key string) uint32
-	Float32(key string) float32
-	Float64(key string) float64
-	Bytes(key string) []byte
-	Map(key string) map[string]interface{}
-	Any(key string) interface{}
-	Mapx(key string) param.Store
-	Slice(key string) []interface{}
+	String(ctx context.Context, key string) string
+	Int(ctx context.Context, key string) int
+	Uint(ctx context.Context, key string) uint
+	Int64(ctx context.Context, key string) int64
+	Uint64(ctx context.Context, key string) uint64
+	Int32(ctx context.Context, key string) int32
+	Uint32(ctx context.Context, key string) uint32
+	Float32(ctx context.Context, key string) float32
+	Float64(ctx context.Context, key string) float64
+	Bytes(ctx context.Context, key string) []byte
+	Map(ctx context.Context, key string) map[string]interface{}
+	Any(ctx context.Context, key string) interface{}
+	Mapx(ctx context.Context, key string) param.Store
+	Slice(ctx context.Context, key string) []interface{}
 }
 
 var DefaultCodec encoding.Codec = json.JSON
@@ -119,19 +120,19 @@ func prepareOptions(options []Options) Options {
 
 // NewCacher creates and returns a new cacher by given adapter name and configuration.
 // It panics when given adapter isn't registered and starts GC automatically.
-func NewCacher(name string, opt Options) (Cache, error) {
+func NewCacher(ctx context.Context, name string, opt Options) (Cache, error) {
 	adapter, ok := adapters[name]
 	if !ok {
 		return nil, fmt.Errorf("cache: unknown adapter '%s'(forgot to import?)", name)
 	}
-	return adapter, adapter.StartAndGC(opt)
+	return adapter, adapter.StartAndGC(ctx, opt)
 }
 
 // Cacher is a middleware that maps a cache.Cache service into the Macaron handler chain.
 // An single variadic cache.Options struct can be optionally provided to configure.
-func Cacher(options ...Options) (Cache, error) {
+func Cacher(ctx context.Context, options ...Options) (Cache, error) {
 	opt := prepareOptions(options)
-	return NewCacher(opt.Adapter, opt)
+	return NewCacher(ctx, opt.Adapter, opt)
 }
 
 var adapters = make(map[string]Cache)

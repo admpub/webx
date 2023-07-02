@@ -15,6 +15,7 @@
 package cache
 
 import (
+	"context"
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
@@ -95,7 +96,7 @@ func (c *FileCacher) filepath(key string) string {
 
 // Put puts value into cache with key and expire time.
 // If expired is 0, it will be deleted by next GC operation.
-func (c *FileCacher) Put(key string, val interface{}, expire int64) error {
+func (c *FileCacher) Put(ctx context.Context, key string, val interface{}, expire int64) error {
 	filename := c.filepath(key)
 
 	item := CacheItemPoolGet()
@@ -131,7 +132,7 @@ func (c *FileCacher) read(key string, value interface{}) (*Item, error) {
 }
 
 // Get gets cached value by given key.
-func (c *FileCacher) Get(key string, value interface{}) error {
+func (c *FileCacher) Get(ctx context.Context, key string, value interface{}) error {
 	item, err := c.read(key, value)
 	if item != nil {
 		defer CacheItemPoolRelease(item)
@@ -151,12 +152,12 @@ func (c *FileCacher) Get(key string, value interface{}) error {
 }
 
 // Delete deletes cached value by given key.
-func (c *FileCacher) Delete(key string) error {
+func (c *FileCacher) Delete(ctx context.Context, key string) error {
 	return os.Remove(c.filepath(key))
 }
 
 // Incr increases cached int-type value by given key as a counter.
-func (c *FileCacher) Incr(key string) error {
+func (c *FileCacher) Incr(ctx context.Context, key string) error {
 	var i int64
 	item, err := c.read(key, &i)
 	if item != nil {
@@ -171,11 +172,11 @@ func (c *FileCacher) Incr(key string) error {
 		return err
 	}
 
-	return c.Put(key, item.Val, item.Expire)
+	return c.Put(ctx, key, item.Val, item.Expire)
 }
 
 // Decr cached int value.
-func (c *FileCacher) Decr(key string) error {
+func (c *FileCacher) Decr(ctx context.Context, key string) error {
 	var i int64
 	item, err := c.read(key, &i)
 	if item != nil {
@@ -190,20 +191,20 @@ func (c *FileCacher) Decr(key string) error {
 		return err
 	}
 
-	return c.Put(key, item.Val, item.Expire)
+	return c.Put(ctx, key, item.Val, item.Expire)
 }
 
 // IsExist returns true if cached value exists.
-func (c *FileCacher) IsExist(key string) bool {
-	return com.IsExist(c.filepath(key))
+func (c *FileCacher) IsExist(ctx context.Context, key string) (bool, error) {
+	return com.IsExist(c.filepath(key)), nil
 }
 
 // Flush deletes all cached data.
-func (c *FileCacher) Flush() error {
+func (c *FileCacher) Flush(ctx context.Context) error {
 	return os.RemoveAll(c.rootPath)
 }
 
-func (c *FileCacher) startGC() {
+func (c *FileCacher) startGC(ctx context.Context) {
 	c.lock.RLock()
 	if c.interval < 1 {
 		c.lock.RUnlock()
@@ -243,11 +244,11 @@ func (c *FileCacher) startGC() {
 		log.Printf("error garbage collecting cache files: %v", err)
 	}
 
-	time.AfterFunc(time.Duration(c.interval)*time.Second, func() { c.startGC() })
+	time.AfterFunc(time.Duration(c.interval)*time.Second, func() { c.startGC(ctx) })
 }
 
 // StartAndGC starts GC routine based on config string settings.
-func (c *FileCacher) StartAndGC(opt Options) error {
+func (c *FileCacher) StartAndGC(ctx context.Context, opt Options) error {
 	c.lock.Lock()
 	c.rootPath = opt.AdapterConfig
 	c.interval = opt.Interval
@@ -262,7 +263,7 @@ func (c *FileCacher) StartAndGC(opt Options) error {
 		return err
 	}
 
-	go c.startGC()
+	go c.startGC(ctx)
 	return nil
 }
 

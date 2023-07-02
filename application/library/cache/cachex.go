@@ -1,6 +1,8 @@
 package cache
 
 import (
+	"context"
+
 	"github.com/admpub/cache/x"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/webx-top/echo"
@@ -53,51 +55,51 @@ func GenOptions(ctx echo.Context, cacheSeconds int64) []x.GetOption {
 }
 
 func xNew(query x.Querier, ttlSeconds int64, args ...string) *x.Cachex {
-	c := Cache(args...)
+	c := Cache(cacheRootContext, args...)
 	return x.New(c, query, ttlSeconds)
 }
 
 // XQuery 获取缓存，如果不存在则执行函数获取数据并缓存【自动避免缓存穿透】
-func XQuery(key string, recv interface{}, query x.Querier, options ...x.GetOption) error {
-	return xNew(query, 0).Get(key, recv, options...)
+func XQuery(ctx context.Context, key string, recv interface{}, query x.Querier, options ...x.GetOption) error {
+	return xNew(query, 0).Get(ctx, key, recv, options...)
 }
 
 // XFunc 获取缓存，如果不存在则执行函数获取数据并缓存【自动避免缓存穿透】
-func XFunc(key string, recv interface{}, fn func() error, options ...x.GetOption) error {
-	return xNew(QueryFunc(fn), 0).Get(key, recv, options...)
+func XFunc(ctx context.Context, key string, recv interface{}, fn func() error, options ...x.GetOption) error {
+	return xNew(QueryFunc(fn), 0).Get(ctx, key, recv, options...)
 }
 
 // Delete 删除缓存
-func Delete(key string, args ...string) error {
-	return Cache(args...).Delete(key)
+func Delete(ctx context.Context, key string, args ...string) error {
+	return Cache(cacheRootContext, args...).Delete(ctx, key)
 }
 
 // Put 设置缓存
-func Put(key string, val interface{}, timeout int64, args ...string) error {
-	return Cache(args...).Put(key, val, timeout)
+func Put(ctx context.Context, key string, val interface{}, timeout int64, args ...string) error {
+	return Cache(cacheRootContext, args...).Put(ctx, key, val, timeout)
 }
 
 // Get 获取缓存
-func Get(key string, recv interface{}, args ...string) error {
-	return Cache(args...).Get(key, recv)
+func Get(ctx context.Context, key string, recv interface{}, args ...string) error {
+	return Cache(cacheRootContext, args...).Get(ctx, key, recv)
 }
 
 // Incr 自增
-func Incr(key string, args ...string) error {
-	return Cache(args...).Incr(key)
+func Incr(ctx context.Context, key string, args ...string) error {
+	return Cache(cacheRootContext, args...).Incr(ctx, key)
 }
 
 // Decr 自减
-func Decr(key string, args ...string) error {
-	return Cache(args...).Decr(key)
+func Decr(ctx context.Context, key string, args ...string) error {
+	return Cache(cacheRootContext, args...).Decr(ctx, key)
 }
 
 // IsExist 是否存在缓存
-func IsExist(key string, args ...string) bool {
-	return Cache(args...).IsExist(key)
+func IsExist(ctx context.Context, key string, args ...string) (bool, error) {
+	return Cache(cacheRootContext, args...).IsExist(ctx, key)
 }
 
 // Flush 删除所有缓存数据
-func Flush(args ...string) error {
-	return Cache(args...).Flush()
+func Flush(ctx context.Context, args ...string) error {
+	return Cache(cacheRootContext, args...).Flush(ctx)
 }

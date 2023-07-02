@@ -15,6 +15,7 @@
 package cache
 
 import (
+	"context"
 	"errors"
 	"reflect"
 	"sync"
@@ -62,7 +63,7 @@ func (c *MemoryCacher) Codec() encoding.Codec {
 
 // Put puts value into cache with key and expire time.
 // If expired is 0, it will be deleted by next GC operation.
-func (c *MemoryCacher) Put(key string, val interface{}, expire int64) error {
+func (c *MemoryCacher) Put(ctx context.Context, key string, val interface{}, expire int64) error {
 	c.lock.Lock()
 	defer c.lock.Unlock()
 
@@ -82,7 +83,7 @@ func (c *MemoryCacher) Put(key string, val interface{}, expire int64) error {
 }
 
 // Get gets cached value by given key.
-func (c *MemoryCacher) Get(key string, value interface{}) error {
+func (c *MemoryCacher) Get(ctx context.Context, key string, value interface{}) error {
 	c.lock.RLock()
 	defer c.lock.RUnlock()
 
@@ -91,14 +92,14 @@ func (c *MemoryCacher) Get(key string, value interface{}) error {
 		return ErrNotFound
 	}
 	if item.hasExpired() {
-		go c.Delete(key)
+		go c.Delete(context.Background(), key)
 		return ErrExpired
 	}
 	return copier.Copy(value, item.val)
 }
 
 // Delete deletes cached value by given key.
-func (c *MemoryCacher) Delete(key string) error {
+func (c *MemoryCacher) Delete(ctx context.Context, key string) error {
 	c.lock.Lock()
 	defer c.lock.Unlock()
 
@@ -107,7 +108,7 @@ func (c *MemoryCacher) Delete(key string) error {
 }
 
 // Incr increases cached int-type value by given key as a counter.
-func (c *MemoryCacher) Incr(key string) (err error) {
+func (c *MemoryCacher) Incr(ctx context.Context, key string) (err error) {
 	c.lock.RLock()
 	defer c.lock.RUnlock()
 
@@ -120,7 +121,7 @@ func (c *MemoryCacher) Incr(key string) (err error) {
 }
 
 // Decr decreases cached int-type value by given key as a counter.
-func (c *MemoryCacher) Decr(key string) (err error) {
+func (c *MemoryCacher) Decr(ctx context.Context, key string) (err error) {
 	c.lock.RLock()
 	defer c.lock.RUnlock()
 
@@ -134,15 +135,15 @@ func (c *MemoryCacher) Decr(key string) (err error) {
 }
 
 // IsExist returns true if cached value exists.
-func (c *MemoryCacher) IsExist(key string) bool {
+func (c *MemoryCacher) IsExist(ctx context.Context, key string) (bool, error) {
 	c.lock.RLock()
 	_, ok := c.items[key]
 	c.lock.RUnlock()
-	return ok
+	return ok, nil
 }
 
 // Flush deletes all cached data.
-func (c *MemoryCacher) Flush() error {
+func (c *MemoryCacher) Flush(ctx context.Context) error {
 	c.lock.Lock()
 	c.items = make(map[string]*MemoryItem)
 	c.lock.Unlock()
@@ -168,7 +169,7 @@ func (c *MemoryCacher) checkExpiration(key string) {
 	c.checkRawExpiration(key)
 }
 
-func (c *MemoryCacher) startGC() {
+func (c *MemoryCacher) startGC(ctx context.Context) {
 	c.lock.Lock()
 	if c.interval < 1 {
 		c.lock.Unlock()
@@ -187,16 +188,16 @@ func (c *MemoryCacher) startGC() {
 	}
 	c.lock.Unlock()
 
-	time.AfterFunc(time.Duration(c.interval)*time.Second, func() { c.startGC() })
+	time.AfterFunc(time.Duration(c.interval)*time.Second, func() { c.startGC(ctx) })
 }
 
 // StartAndGC starts GC routine based on config string settings.
-func (c *MemoryCacher) StartAndGC(opt Options) error {
+func (c *MemoryCacher) StartAndGC(ctx context.Context, opt Options) error {
 	c.lock.Lock()
 	c.interval = opt.Interval
 	c.lock.Unlock()
 
-	go c.startGC()
+	go c.startGC(ctx)
 	return nil
 }
 
@@ -204,7 +205,7 @@ func (c *MemoryCacher) Close() error {
 	c.lock.Lock()
 	c.interval = 0
 	c.lock.Unlock()
-	return c.Flush()
+	return c.Flush(context.Background())
 }
 
 func (c *MemoryCacher) Client() interface{} {

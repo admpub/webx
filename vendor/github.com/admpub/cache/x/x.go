@@ -1,6 +1,7 @@
 package x
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/admpub/cache"
@@ -35,7 +36,7 @@ func New(storage cache.Cache, querier Querier, defaultTTL ...int64) (c *Cachex) 
 }
 
 // Get 获取
-func (c *Cachex) Get(key string, value interface{}, opts ...GetOption) error {
+func (c *Cachex) Get(ctx context.Context, key string, value interface{}, opts ...GetOption) error {
 	if v := reflect.ValueOf(value); v.Kind() != reflect.Ptr || v.IsNil() {
 		panic("value not is non-nil pointer")
 	}
@@ -45,7 +46,7 @@ func (c *Cachex) Get(key string, value interface{}, opts ...GetOption) error {
 	for _, opt := range opts {
 		opt.apply(&options)
 	}
-	return c.get(key, value, options)
+	return c.get(ctx, key, value, options)
 }
 
 const (
@@ -54,7 +55,7 @@ const (
 )
 
 // get ttl:-1 不用缓存; ttl:-2 强制更新缓存
-func (c *Cachex) get(key string, value interface{}, options getOptions) error {
+func (c *Cachex) get(ctx context.Context, key string, value interface{}, options getOptions) error {
 	querier := c.querier
 	if options.querier != nil {
 		querier = options.querier
@@ -83,9 +84,9 @@ func (c *Cachex) get(key string, value interface{}, options getOptions) error {
 		if err != nil {
 			return err
 		}
-		return c.storage.Put(key, value, ttl)
+		return c.storage.Put(ctx, key, value, ttl)
 	}
-	err = c.storage.Get(key, value)
+	err = c.storage.Get(ctx, key, value)
 	switch err {
 	case cache.ErrNotFound, cache.ErrExpired: // 下面查询
 	default:
@@ -98,7 +99,7 @@ func (c *Cachex) get(key string, value interface{}, options getOptions) error {
 	// 不同时发起重复的查询请求——解决缓存失效风暴
 	getValue, getErr, _ := c.sg.Do(key, func() (interface{}, error) {
 		var staled interface{}
-		dErr := c.storage.Get(key, value)
+		dErr := c.storage.Get(ctx, key, value)
 		if dErr == nil {
 			return value, dErr
 		}
@@ -119,7 +120,7 @@ func (c *Cachex) get(key string, value interface{}, options getOptions) error {
 			return value, dErr
 		}
 		// 更新到存储后端
-		dErr = c.storage.Put(key, value, ttl)
+		dErr = c.storage.Put(ctx, key, value, ttl)
 		return value, dErr
 	})
 	if getErr != nil {
@@ -132,14 +133,14 @@ func (c *Cachex) get(key string, value interface{}, options getOptions) error {
 }
 
 // Set 更新
-func (c *Cachex) Set(key string, value interface{}, expire int64) error {
-	return c.storage.Put(key, value, expire)
+func (c *Cachex) Set(ctx context.Context, key string, value interface{}, expire int64) error {
+	return c.storage.Put(ctx, key, value, expire)
 }
 
 // Del 删除
-func (c *Cachex) Del(keys ...string) error {
+func (c *Cachex) Del(ctx context.Context, keys ...string) error {
 	for _, key := range keys {
-		if err := c.storage.Delete(key); err != nil {
+		if err := c.storage.Delete(ctx, key); err != nil {
 			return err
 		}
 	}

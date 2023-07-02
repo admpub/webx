@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"context"
 	"path/filepath"
 
 	"github.com/admpub/cache"
@@ -31,7 +32,7 @@ func AddOptionParser(adapter string, parser func(cache.Options) (cache.Options, 
 	cacheConfigParsers[adapter] = parser
 }
 
-func Cache(args ...string) cache.Cache {
+func Cache(ctx context.Context, args ...string) cache.Cache {
 	if len(args) > 0 {
 		defaultConnectionName = args[0]
 		if len(args) > 1 {
@@ -56,14 +57,21 @@ func Cache(args ...string) cache.Cache {
 	if c == nil {
 		log.Debug(logPrefix, `[`+defaultCacheOptions.Adapter+`] 使用默认实例`)
 		if defaultCacheInstance == nil {
-			defaultCacheInstance, _ = cache.Cacher(*defaultCacheOptions)
+			if ctx == nil {
+				ctx = context.Background()
+			}
+			var err error
+			defaultCacheInstance, err = cache.Cacher(ctx, *defaultCacheOptions)
+			if err != nil {
+				log.Errorf(logPrefix, `[`+defaultCacheOptions.Adapter+`] 使用默认实例错误: %v`, err)
+			}
 		}
 		c = defaultCacheInstance
 	}
 	return c
 }
 
-func CacheNew(opts cache.Options, keys ...string) error {
+func CacheNew(ctx context.Context, opts cache.Options, keys ...string) error {
 	var connectionName string
 	if len(keys) > 0 {
 		connectionName = keys[0]
@@ -109,7 +117,10 @@ func CacheNew(opts cache.Options, keys ...string) error {
 			return err
 		}
 	}
-	val, err := cache.Cacher(opts)
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	val, err := cache.Cacher(ctx, opts)
 	if err != nil {
 		log.Error(logPrefix, color.RedString(`连接失败:`+err.Error()))
 		return err

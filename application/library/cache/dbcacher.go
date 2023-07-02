@@ -1,6 +1,8 @@
 package cache
 
 import (
+	"context"
+
 	"github.com/admpub/cache/x"
 	"github.com/webx-top/db/lib/factory"
 )
@@ -14,18 +16,18 @@ func NewDBCacher() factory.Cacher {
 
 type dbCacher struct{}
 
-func (d *dbCacher) Put(key string, value interface{}, ttlSeconds int64) error {
-	return Cache().Put(key, value, ttlSeconds)
+func (d *dbCacher) Put(ctx context.Context, key string, value interface{}, ttlSeconds int64) error {
+	return Cache(cacheRootContext).Put(ctx, key, value, ttlSeconds)
 }
 
-func (d *dbCacher) Del(key string) error {
-	return Cache().Delete(key)
+func (d *dbCacher) Del(ctx context.Context, key string) error {
+	return Cache(cacheRootContext).Delete(ctx, key)
 }
 
-func (d *dbCacher) Get(key string, value interface{}) error {
-	return Cache().Get(key, value)
+func (d *dbCacher) Get(ctx context.Context, key string, value interface{}) error {
+	return Cache(cacheRootContext).Get(ctx, key, value)
 }
 
-func (d *dbCacher) Do(key string, recv interface{}, fn func() error, ttlSeconds int64) error {
-	return XQuery(key, recv, x.QueryFunc(fn), TTL(ttlSeconds))
+func (d *dbCacher) Do(ctx context.Context, key string, recv interface{}, fn func() error, ttlSeconds int64) error {
+	return XQuery(ctx, key, recv, x.QueryFunc(fn), TTL(ttlSeconds))
 }

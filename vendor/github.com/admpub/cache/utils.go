@@ -15,6 +15,7 @@
 package cache
 
 import (
+	"context"
 	"errors"
 
 	"github.com/webx-top/echo/param"
@@ -28,87 +29,87 @@ type GetAs struct {
 	Cache
 }
 
-func (g GetAs) String(key string) string {
+func (g GetAs) String(ctx context.Context, key string) string {
 	var r string
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Int(key string) int {
+func (g GetAs) Int(ctx context.Context, key string) int {
 	var r int
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Uint(key string) uint {
+func (g GetAs) Uint(ctx context.Context, key string) uint {
 	var r uint
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Int64(key string) int64 {
+func (g GetAs) Int64(ctx context.Context, key string) int64 {
 	var r int64
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Uint64(key string) uint64 {
+func (g GetAs) Uint64(ctx context.Context, key string) uint64 {
 	var r uint64
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Int32(key string) int32 {
+func (g GetAs) Int32(ctx context.Context, key string) int32 {
 	var r int32
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Uint32(key string) uint32 {
+func (g GetAs) Uint32(ctx context.Context, key string) uint32 {
 	var r uint32
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Float32(key string) float32 {
+func (g GetAs) Float32(ctx context.Context, key string) float32 {
 	var r float32
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Float64(key string) float64 {
+func (g GetAs) Float64(ctx context.Context, key string) float64 {
 	var r float64
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Bytes(key string) []byte {
+func (g GetAs) Bytes(ctx context.Context, key string) []byte {
 	var r []byte
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Map(key string) map[string]interface{} {
+func (g GetAs) Map(ctx context.Context, key string) map[string]interface{} {
 	r := map[string]interface{}{}
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Mapx(key string) param.Store {
+func (g GetAs) Mapx(ctx context.Context, key string) param.Store {
 	r := param.Store{}
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Any(key string) interface{} {
+func (g GetAs) Any(ctx context.Context, key string) interface{} {
 	var r interface{}
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 
-func (g GetAs) Slice(key string) []interface{} {
+func (g GetAs) Slice(ctx context.Context, key string) []interface{} {
 	var r []interface{}
-	g.Get(key, &r)
+	g.Get(ctx, key, &r)
 	return r
 }
 

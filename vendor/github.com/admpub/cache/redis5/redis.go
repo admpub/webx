@@ -15,6 +15,7 @@
 package cache
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -48,7 +49,7 @@ func (c *RedisCacher) Codec() encoding.Codec {
 
 // Put puts value into cache with key and expire time.
 // If expired is 0, it lives forever.
-func (c *RedisCacher) Put(key string, val interface{}, expire int64) error {
+func (c *RedisCacher) Put(ctx context.Context, key string, val interface{}, expire int64) error {
 	key = c.prefix + key
 	value, err := c.codec.Marshal(val)
 	if err != nil {
@@ -64,7 +65,7 @@ func (c *RedisCacher) Put(key string, val interface{}, expire int64) error {
 }
 
 // Get gets cached value by given key.
-func (c *RedisCacher) Get(key string, value interface{}) error {
+func (c *RedisCacher) Get(ctx context.Context, key string, value interface{}) error {
 	val, err := c.c.Get(c.prefix + key).Bytes()
 	if err != nil {
 		if err == redis.Nil {
@@ -80,7 +81,7 @@ func (c *RedisCacher) Get(key string, value interface{}) error {
 }
 
 // Delete deletes cached value by given key.
-func (c *RedisCacher) Delete(key string) error {
+func (c *RedisCacher) Delete(ctx context.Context, key string) error {
 	key = c.prefix + key
 	if err := c.c.Del(key).Err(); err != nil {
 		return err
@@ -93,35 +94,41 @@ func (c *RedisCacher) Delete(key string) error {
 }
 
 // Incr increases cached int-type value by given key as a counter.
-func (c *RedisCacher) Incr(key string) error {
-	if !c.IsExist(key) {
+func (c *RedisCacher) Incr(ctx context.Context, key string) error {
+	if exist, err := c.IsExist(ctx, key); !exist {
+		if err != nil {
+			return err
+		}
 		return fmt.Errorf("key '%s' not exist", key)
 	}
 	return c.c.Incr(c.prefix + key).Err()
 }
 
 // Decr decreases cached int-type value by given key as a counter.
-func (c *RedisCacher) Decr(key string) error {
-	if !c.IsExist(key) {
+func (c *RedisCacher) Decr(ctx context.Context, key string) error {
+	if exist, err := c.IsExist(ctx, key); !exist {
+		if err != nil {
+			return err
+		}
 		return fmt.Errorf("key '%s' not exist", key)
 	}
 	return c.c.Decr(c.prefix + key).Err()
 }
 
 // IsExist returns true if cached value exists.
-func (c *RedisCacher) IsExist(key string) bool {
+func (c *RedisCacher) IsExist(ctx context.Context, key string) (bool, error) {
 	if c.c.Exists(c.prefix + key).Val() {
-		return true
+		return true, nil
 	}
 
 	if !c.occupyMode {
 		c.c.HDel(c.hsetName, c.prefix+key)
 	}
-	return false
+	return false, nil
 }
 
 // Flush deletes all cached data.
-func (c *RedisCacher) Flush() error {
+func (c *RedisCacher) Flush(ctx context.Context) error {
 	if c.occupyMode {
 		return c.c.FlushDb().Err()
 	}
@@ -138,7 +145,7 @@ func (c *RedisCacher) Flush() error {
 
 // StartAndGC starts GC routine based on config string settings.
 // AdapterConfig: network=tcp,addr=:6379,password=123456,db=0,pool_size=100,idle_timeout=180,hset_name=Cache,prefix=cache:
-func (c *RedisCacher) StartAndGC(opts cache.Options) error {
+func (c *RedisCacher) StartAndGC(ctx context.Context, opts cache.Options) error {
 	c.hsetName = "Cache"
 	c.occupyMode = opts.OccupyMode
 
