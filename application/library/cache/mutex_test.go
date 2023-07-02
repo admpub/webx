@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"context"
 	"fmt"
 	"sync"
 	"testing"
@@ -11,7 +12,7 @@ import (
 )
 
 func init() {
-	CacheNew(cache.Options{
+	CacheNew(context.Background(), cache.Options{
 		Adapter:       `redis`,
 		AdapterConfig: `network=tcp,addr=127.0.0.1:6379,password=,db=0,pool_size=100,idle_timeout=180,hset_name=Cache,prefix=cache:`,
 	}, `default`)

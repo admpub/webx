@@ -1,6 +1,7 @@
 package sessdata
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/admpub/webx/application/library/cache"
@@ -17,11 +18,11 @@ var (
 )
 
 // ClearPermissionCache 删除用户的权限缓存
-func ClearPermissionCache(customerID uint64) {
+func ClearPermissionCache(ctx context.Context, customerID uint64) {
 	cid := fmt.Sprint(customerID)
-	cache.Delete(PermissionCacheKey + cid)
-	cache.Delete(PermissionCacheKey + cid)
-	cache.Delete(PermissionCacheKey + cid)
+	cache.Delete(ctx, PermissionCacheKey+cid)
+	cache.Delete(ctx, PermissionCacheKey+cid)
+	cache.Delete(ctx, PermissionCacheKey+cid)
 }
 
 // CheckPerm 检查指定路由的权限
@@ -35,7 +36,7 @@ func init() {
 		if customerID == 0 {
 			return nil
 		}
-		ClearPermissionCache(customerID)
+		ClearPermissionCache(context.Background(), customerID)
 		return nil
 	})
 }

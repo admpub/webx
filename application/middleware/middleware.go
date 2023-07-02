@@ -134,7 +134,7 @@ func permCheck(c echo.Context, customer *dbschema.OfficialCustomer) error {
 	cacheTTL := xroleutils.CustomerPermTTL(c)
 	c.SetFunc(`LeftNavigate`, func() nav.List {
 		list := &nav.List{}
-		cache.XFunc(sessdata.LeftNavigateCacheKey+customerID, list, func() error {
+		cache.XFunc(c, sessdata.LeftNavigateCacheKey+customerID, list, func() error {
 			*list = permission.FilterNavigate(c, navigate.LeftNavigate)
 			return nil
 		}, x.TTL(cacheTTL))
@@ -142,7 +142,7 @@ func permCheck(c echo.Context, customer *dbschema.OfficialCustomer) error {
 	})
 	c.SetFunc(`TopNavigate`, func() nav.List {
 		list := &nav.List{}
-		cache.XFunc(sessdata.TopNavigateCacheKey+customerID, list, func() error {
+		cache.XFunc(c, sessdata.TopNavigateCacheKey+customerID, list, func() error {
 			*list = permission.FilterNavigate(c, navigate.TopNavigate)
 			return nil
 		}, x.TTL(cacheTTL))

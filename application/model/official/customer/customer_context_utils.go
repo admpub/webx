@@ -42,7 +42,7 @@ func CustomerPermission(c echo.Context, customers ...*dbschema.OfficialCustomer)
 		}
 		customerID := fmt.Sprint(customer.Id)
 		permission = xrole.NewRolePermission()
-		cache.XFunc(sessdata.PermissionCacheKey+customerID, permission, func() error {
+		cache.XFunc(c, sessdata.PermissionCacheKey+customerID, permission, func() error {
 			permission.Init(CustomerRoles(c, customer))
 			return nil
 		}, x.TTL(CustomerPermTTL(c)))

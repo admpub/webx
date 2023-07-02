@@ -24,12 +24,12 @@ func resetRedisClient() {
 
 func initRedisClient() {
 	defer resetRedsync()
-	rc, ok := Cache(`default`).Client().(*redis.Client)
+	rc, ok := Cache(cacheRootContext, `default`).Client().(*redis.Client)
 	if ok {
 		redisClient = rc
 		return
 	}
-	rc, _ = Cache(`fallback`).Client().(*redis.Client)
+	rc, _ = Cache(cacheRootContext, `fallback`).Client().(*redis.Client)
 	redisClient = rc
 }
 
@@ -43,11 +43,11 @@ func RedisClient() *redis.Client {
 }
 
 func RedisOptions() *redis.Options {
-	opt, ok := Cache(`default`).(redisOptions)
+	opt, ok := Cache(cacheRootContext, `default`).(redisOptions)
 	if ok {
 		return opt.Options()
 	}
-	opt, ok = Cache(`fallback`).(redisOptions)
+	opt, ok = Cache(cacheRootContext, `fallback`).(redisOptions)
 	if ok {
 		return opt.Options()
 	}

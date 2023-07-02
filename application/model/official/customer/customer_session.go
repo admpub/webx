@@ -20,7 +20,7 @@ func (f *Customer) SetSession(customers ...*dbschema.OfficialCustomer) {
 func (f *Customer) UnsetSession() error {
 	err := FireSignOut(f.OfficialCustomer)
 	f.Context().Session().Delete(`customer`)
-	sessdata.ClearPermissionCache(f.OfficialCustomer.Id)
+	sessdata.ClearPermissionCache(f.Context(), f.OfficialCustomer.Id)
 	return err
 }
 
@@ -56,7 +56,7 @@ func (f *Customer) VerifySession(customers ...*dbschema.OfficialCustomer) error 
 		f.Context().Internal().Set(`customer`, detail.OfficialCustomer)
 	}
 	if detail.OfficialCustomer.RoleIds != customer.RoleIds {
-		sessdata.ClearPermissionCache(detail.OfficialCustomer.Id)
+		sessdata.ClearPermissionCache(f.Context(), detail.OfficialCustomer.Id)
 	}
 
 	safeCustomer := f.ClearPasswordData(detail.OfficialCustomer)

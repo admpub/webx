@@ -14,7 +14,7 @@ func Advert(ctx echo.Context) error {
 	typ := ctx.Form(`type`)
 	key := `advert:` + idents
 	data := ctx.Data()
-	err := cache.XFunc(key, data, advert(ctx, data, idents), cache.GenOptions(ctx, 300)...)
+	err := cache.XFunc(ctx, key, data, advert(ctx, data, idents), cache.GenOptions(ctx, 300)...)
 	if err != nil {
 		data.SetError(err)
 	}
