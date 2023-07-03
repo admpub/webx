@@ -10,7 +10,7 @@ require (
 	github.com/RichardKnop/machinery v1.10.6
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/admpub/bindata/v3 v3.2.0
-	github.com/admpub/cache v0.4.0
+	github.com/admpub/cache v0.4.1
 	github.com/admpub/color v1.8.1
 	github.com/admpub/copier v0.1.1
 	github.com/admpub/decimal v1.3.1
