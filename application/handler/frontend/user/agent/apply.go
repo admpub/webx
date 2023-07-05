@@ -45,7 +45,6 @@ func AgentApply(c echo.Context) error {
 
 		m.ApplyLevel = c.Formx(`applyLevel`).Uint()
 		m.Remark = c.Formx(`remark`).String()
-		m.Use(rvM.Trans())
 		if isNew {
 			_, err = m.Add()
 		} else {
