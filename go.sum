@@ -140,6 +140,8 @@ github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAE
 github.com/OpenDNS/vegadns2client v0.0.0-20180418235048-a3fa4a771d87/go.mod h1:iGLljf5n9GjT6kc0HBvyI1nOKnGQbNB66VzSNbK5iks=
 github.com/PaulARoy/azurestoragecache v0.0.0-20170906084534-3c249a3ba788/go.mod h1:lY1dZd8HBzJ10eqKERHn3CU59tfhzcAVb2c0ZhIWSOk=
 github.com/ProtonMail/go-crypto v0.0.0-20210428141323-04723f9f07d7/go.mod h1:z4/9nQmJSSwwds7ejkxaJwO37dru3geImFUdJlaLzQo=
+github.com/PuerkitoBio/purell v1.1.1/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
+github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578/go.mod h1:uGdkoq3SwY9Y+13GIhn11/XLaGBb4BfwItxLd5jeuXE=
 github.com/RichardKnop/logging v0.0.0-20190827224416-1a693bdd4fae h1:DcFpTQBYQ9Ct2d6sC7ol0/ynxc2pO1cpGUM+f4t5adg=
 github.com/RichardKnop/logging v0.0.0-20190827224416-1a693bdd4fae/go.mod h1:rJJ84PyA/Wlmw1hO+xTzV2wsSUon6J5ktg0g8BF2PuU=
 github.com/RichardKnop/machinery v1.10.6 h1:wviOkVLVM9DaNFAOtXEuZsr9d+Okm4VSw7AILVLIhyc=
@@ -1223,10 +1225,10 @@ github.com/neelance/astrewrite v0.0.0-20160511093645-99348263ae86/go.mod h1:kHJE
 github.com/neelance/sourcemap v0.0.0-20151028013722-8c68805598ab/go.mod h1:Qr6/a/Q4r9LP1IltGz7tA7iOK1WonHEYhu1HRBA7ZiM=
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 h1:zYyBkD/k9seD2A7fsi6Oo2LfFZAehjjQMERAvZLEDnQ=
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646/go.mod h1:jpp1/29i3P1S/RLdc7JQKbRpFeM1dOBd8T9ki5s+AY8=
-github.com/nging-plugins/dbmanager v1.3.13 h1:QJcrRX+zY1JmNybWSQ7gOgeYO1PaUn7JKskkyi0017g=
-github.com/nging-plugins/dbmanager v1.3.13/go.mod h1:NKRf+0La7WlF9+LXxJmvuVE1YYn0wGcsczjrZ9PLBgs=
-github.com/nging-plugins/dlmanager v1.3.1 h1:egz9luK3EzSsLG06CskapC0+Tpbasv1179eqsPKiyEE=
-github.com/nging-plugins/dlmanager v1.3.1/go.mod h1:MzIqReIyplJp6Q3cQ5Jo3zX7EFZh5gRLwzSfxbMRYts=
+github.com/nging-plugins/dbmanager v1.4.0 h1:kAgHHR2gmgc+iuTDzv7EgCA0FRn+yd/Abjj10GQzjG0=
+github.com/nging-plugins/dbmanager v1.4.0/go.mod h1:w4ES2AQKOKaZOyQJnsq9brZZEnH6443vUxFIJtQW7Kw=
+github.com/nging-plugins/dlmanager v1.4.0 h1:ZS6PgAqr7JrYNpH5lBd0/MbD6m4rqbi4/3cosb/pqTQ=
+github.com/nging-plugins/dlmanager v1.4.0/go.mod h1:Vas+3moy7AS0K2j8hk/QE03Y957Gzx2E4DbbblwkM0U=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
 github.com/nrdcg/auroradns v1.0.1/go.mod h1:y4pc0i9QXYlFCWrhWrUSIETnZgrf4KuwjDIWmmXo3JI=
 github.com/nrdcg/auroradns v1.1.0/go.mod h1:O7tViUZbAcnykVnrGkXzIJTHoQCHcgalgAe6X1mzHfk=
@@ -1680,8 +1682,8 @@ github.com/webx-top/com v0.9.2/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEG
 github.com/webx-top/com v0.9.4/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEGsM2Q=
 github.com/webx-top/com v0.9.5 h1:pQeoOrTss1z2loUF+NB0Ef+gCX+vnPKzyPC+obuvxhA=
 github.com/webx-top/com v0.9.5/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEGsM2Q=
-github.com/webx-top/db v1.23.19 h1:7BrNz60m7BOJTl6ZfzSsQjwal02YTA/ROdRy8yMUhPE=
-github.com/webx-top/db v1.23.19/go.mod h1:whLbnppnF5zPrjWR2yoxp6of4s2cnh9LQn44wuuteE0=
+github.com/webx-top/db v1.24.3 h1:TDT9tpXYH7F1AsjQd/fw6lo+6ZapteQUO6jjRj7Avrw=
+github.com/webx-top/db v1.24.3/go.mod h1:whLbnppnF5zPrjWR2yoxp6of4s2cnh9LQn44wuuteE0=
 github.com/webx-top/echo v2.22.17+incompatible/go.mod h1:ufVP//GwP1suggBSQW7l8G9XcKxZM+FIfCMElLAQqF8=
 github.com/webx-top/echo v2.26.9+incompatible/go.mod h1:ufVP//GwP1suggBSQW7l8G9XcKxZM+FIfCMElLAQqF8=
 github.com/webx-top/echo v2.30.2+incompatible/go.mod h1:ufVP//GwP1suggBSQW7l8G9XcKxZM+FIfCMElLAQqF8=
