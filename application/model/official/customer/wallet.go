@@ -3,7 +3,6 @@ package customer
 import (
 	"github.com/admpub/decimal"
 	"github.com/webx-top/db"
-	"github.com/webx-top/db/lib/factory"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
@@ -28,12 +27,6 @@ type Wallet struct {
 	Wallet *dbschema.OfficialCustomerWallet
 	Flow   *dbschema.OfficialCustomerWalletFlow
 	base   *base.Base
-}
-
-func (f *Wallet) Use(tx *factory.Transaction) *Wallet {
-	f.Wallet.Use(tx)
-	f.Flow.Use(tx)
-	return f
 }
 
 func (f *Wallet) Add() (pk interface{}, err error) {
@@ -65,7 +58,6 @@ func (f *Wallet) AddRepeatableFlow(flows ...*dbschema.OfficialCustomerWalletFlow
 	)
 
 	m := dbschema.NewOfficialCustomerWalletFlow(f.base.Context)
-	m.Use(f.base.Tx())
 	maxN, err := m.Param(nil, cond.And()).Stat(`MAX`, `number`)
 	if err != nil {
 		return err
@@ -84,8 +76,6 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 	if err != nil {
 		return
 	}
-	f.Wallet.Use(f.base.Tx())
-	flow.Use(f.base.Tx())
 	cond := db.And(
 		db.Cond{`customer_id`: flow.CustomerId},
 		db.Cond{`asset_type`: flow.AssetType},

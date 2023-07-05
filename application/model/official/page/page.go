@@ -23,7 +23,6 @@ type Page struct {
 
 func (f *Page) LayoutList() ([]*LayoutWithBlock, error) {
 	m := dbschema.NewOfficialPageLayout(f.Context())
-	m.Use(f.Trans())
 	list := []*LayoutWithBlock{}
 	_, err := m.ListByOffset(&list, func(r db.Result) db.Result {
 		return r.OrderBy(`sort`, `id`)

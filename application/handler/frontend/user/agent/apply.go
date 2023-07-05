@@ -1,7 +1,6 @@
 package agent
 
 import (
-	"github.com/admpub/nging/v5/application/library/common"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelAgent "github.com/admpub/webx/application/model/official/agent"
 	"github.com/webx-top/db"
@@ -34,7 +33,6 @@ func AgentApply(c echo.Context) error {
 		rvM.RecvMoneyOwner = c.Formx(`recvMoneyOwner`).String()
 		rvM.RecvMoneyAccount = c.Formx(`recvMoneyAccount`).String()
 		rvM.CustomerId = m.CustomerId
-		rvM.Use(common.Tx(c))
 		if isNew {
 			_, err = rvM.Add()
 		} else {

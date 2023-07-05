@@ -61,5 +61,5 @@ func commentArticleAfterAdd(ctx echo.Context, f *dbschema.OfficialCommonComment)
 
 func commentArticleAfterDelete(ctx echo.Context, f *dbschema.OfficialCommonComment) error {
 	newsM := dbschema.NewOfficialCommonArticle(ctx)
-	return newsM.Use(f.Trans()).UpdateField(nil, `comments`, db.Raw(`comments-1`), db.Cond{`id`: f.TargetId})
+	return newsM.UpdateField(nil, `comments`, db.Raw(`comments-1`), db.Cond{`id`: f.TargetId})
 }
