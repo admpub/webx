@@ -78,7 +78,7 @@ github.com/admpub/archiver
 # github.com/admpub/bindata/v3 v3.2.0
 ## explicit; go 1.13
 github.com/admpub/bindata/v3
-# github.com/admpub/cache v0.4.1
+# github.com/admpub/cache v0.4.2
 ## explicit; go 1.14
 github.com/admpub/cache
 github.com/admpub/cache/encoding
