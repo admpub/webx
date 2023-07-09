@@ -1,12 +1,8 @@
 
 source ${PWD}/inc-version.sh
 
-#go install github.com/admpub/xgo@latest
-source ${WORKDIR}/install-archiver.sh
-
 # 回到入口
 cd ${ENTRYDIR}
-
 
 export NGINGEX=
 export BUILDTAGS=

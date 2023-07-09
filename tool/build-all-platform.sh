@@ -1,4 +1,3 @@
-source ${PWD}/install-archiver.sh
 source ${PWD}/inc-version.sh
 
 export NGINGEX=
@@ -54,7 +53,7 @@ source ${PWD}/inc-build.sh
 
 # windows 放到最后
 export NGINGEX=.exe
-export BUILDTAGS=" windll"
+export BUILDTAGS=""
 
 export GOOS=windows
 export GOARCH=386

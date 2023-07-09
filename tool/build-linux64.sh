@@ -1,8 +1,4 @@
-
 source ${PWD}/inc-version.sh
-
-#go get github.com/admpub/xgo
-#source ${WORKDIR}/install-archiver.sh
 
 export TMPDIR=
 
