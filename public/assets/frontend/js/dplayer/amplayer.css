@@ -8,6 +8,9 @@
 	background:red;
 	width: 240px;
 	text-align: center;
+	box-shadow: 1px 1px 5px #222 inset;
+	text-shadow: 1px 1px 2px #666;
+	font-size: 16px;
 }
 .play {
 	display: none;
