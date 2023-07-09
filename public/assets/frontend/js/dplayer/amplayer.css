@@ -2,9 +2,12 @@
 	position:absolute;
 	top:50%;left:50%;
 	margin-left:-120px;
+	margin-top: -16.5px;
 	color:white;
 	padding:5px 10px;
-	background:red
+	background:red;
+	width: 240px;
+	text-align: center;
 }
 .play {
 	display: none;
