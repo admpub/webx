@@ -12,6 +12,7 @@
 	text-shadow: 1px 1px 2px #666;
 	font-size: 16px;
 }
+.play-fail > span{vertical-align:middle}
 .play {
 	display: none;
 	width: 50px;
