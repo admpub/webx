@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    {{- range $k, $c := $.Stored.behaviorList -}}
+    {{- range $k, $c := $.Stored.customerBehaviorList -}}
     <tr>{{$checkedBehavior := call $.Func.PermissionCheckByType $.Stored.permission `behavior` $c.K}}
       <td>
         {{$c.V}}<br />
