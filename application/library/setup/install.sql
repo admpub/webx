@@ -965,6 +965,7 @@ CREATE TABLE `official_customer_u2f` (
   `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '类型',
   `extra` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '扩展设置',
   `step` tinyint unsigned NOT NULL DEFAULT '2' COMMENT '第几步',
+  `precondition` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'password' COMMENT '前置条件(仅step=2时有效),用半角逗号分隔',
   `created` int unsigned NOT NULL DEFAULT '0' COMMENT '绑定时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `customer_u2f_uid_type` (`customer_id`,`type`),
@@ -1178,4 +1179,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-06  2:12:43
+-- Dump completed on 2023-07-14 12:17:50
