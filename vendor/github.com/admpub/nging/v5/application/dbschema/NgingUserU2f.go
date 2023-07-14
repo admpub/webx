@@ -102,14 +102,15 @@ type NgingUserU2f struct {
 	base    factory.Base
 	objects []*NgingUserU2f
 
-	Id      uint64 `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
-	Uid     uint   `db:"uid" bson:"uid" comment:"用户ID" json:"uid" xml:"uid"`
-	Name    string `db:"name" bson:"name" comment:"名称" json:"name" xml:"name"`
-	Token   string `db:"token" bson:"token" comment:"签名" json:"token" xml:"token"`
-	Type    string `db:"type" bson:"type" comment:"类型" json:"type" xml:"type"`
-	Extra   string `db:"extra" bson:"extra" comment:"扩展设置" json:"extra" xml:"extra"`
-	Step    uint   `db:"step" bson:"step" comment:"第几步" json:"step" xml:"step"`
-	Created uint   `db:"created" bson:"created" comment:"绑定时间" json:"created" xml:"created"`
+	Id           uint64 `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
+	Uid          uint   `db:"uid" bson:"uid" comment:"用户ID" json:"uid" xml:"uid"`
+	Name         string `db:"name" bson:"name" comment:"名称" json:"name" xml:"name"`
+	Token        string `db:"token" bson:"token" comment:"签名" json:"token" xml:"token"`
+	Type         string `db:"type" bson:"type" comment:"类型" json:"type" xml:"type"`
+	Extra        string `db:"extra" bson:"extra" comment:"扩展设置" json:"extra" xml:"extra"`
+	Step         uint   `db:"step" bson:"step" comment:"第几步" json:"step" xml:"step"`
+	Precondition string `db:"precondition" bson:"precondition" comment:"除了密码登录外的其它前置条件(仅step=2时有效),用半角逗号分隔" json:"precondition" xml:"precondition"`
+	Created      uint   `db:"created" bson:"created" comment:"绑定时间" json:"created" xml:"created"`
 }
 
 // - base function
@@ -561,6 +562,7 @@ func (a *NgingUserU2f) Reset() *NgingUserU2f {
 	a.Type = ``
 	a.Extra = ``
 	a.Step = 0
+	a.Precondition = ``
 	a.Created = 0
 	return a
 }
@@ -575,6 +577,7 @@ func (a *NgingUserU2f) AsMap(onlyFields ...string) param.Store {
 		r["Type"] = a.Type
 		r["Extra"] = a.Extra
 		r["Step"] = a.Step
+		r["Precondition"] = a.Precondition
 		r["Created"] = a.Created
 		return r
 	}
@@ -594,6 +597,8 @@ func (a *NgingUserU2f) AsMap(onlyFields ...string) param.Store {
 			r["Extra"] = a.Extra
 		case "Step":
 			r["Step"] = a.Step
+		case "Precondition":
+			r["Precondition"] = a.Precondition
 		case "Created":
 			r["Created"] = a.Created
 		}
@@ -618,6 +623,8 @@ func (a *NgingUserU2f) FromRow(row map[string]interface{}) {
 			a.Extra = param.AsString(value)
 		case "step":
 			a.Step = param.AsUint(value)
+		case "precondition":
+			a.Precondition = param.AsString(value)
 		case "created":
 			a.Created = param.AsUint(value)
 		}
@@ -658,6 +665,8 @@ func (a *NgingUserU2f) Set(key interface{}, value ...interface{}) {
 			a.Extra = param.AsString(vv)
 		case "Step":
 			a.Step = param.AsUint(vv)
+		case "Precondition":
+			a.Precondition = param.AsString(vv)
 		case "Created":
 			a.Created = param.AsUint(vv)
 		}
@@ -674,6 +683,7 @@ func (a *NgingUserU2f) AsRow(onlyFields ...string) param.Store {
 		r["type"] = a.Type
 		r["extra"] = a.Extra
 		r["step"] = a.Step
+		r["precondition"] = a.Precondition
 		r["created"] = a.Created
 		return r
 	}
@@ -693,6 +703,8 @@ func (a *NgingUserU2f) AsRow(onlyFields ...string) param.Store {
 			r["extra"] = a.Extra
 		case "step":
 			r["step"] = a.Step
+		case "precondition":
+			r["precondition"] = a.Precondition
 		case "created":
 			r["created"] = a.Created
 		}
