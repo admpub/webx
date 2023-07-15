@@ -1685,8 +1685,9 @@ github.com/webx-top/echo v2.22.17+incompatible/go.mod h1:ufVP//GwP1suggBSQW7l8G9
 github.com/webx-top/echo v2.26.9+incompatible/go.mod h1:ufVP//GwP1suggBSQW7l8G9XcKxZM+FIfCMElLAQqF8=
 github.com/webx-top/echo v2.33.3+incompatible/go.mod h1:ufVP//GwP1suggBSQW7l8G9XcKxZM+FIfCMElLAQqF8=
 github.com/webx-top/echo v2.35.2+incompatible/go.mod h1:ufVP//GwP1suggBSQW7l8G9XcKxZM+FIfCMElLAQqF8=
-github.com/webx-top/echo v2.36.2+incompatible h1:8WISBADxDU8lUmHzVPW9GrPmWG1TcbaSVNMol0V55dA=
 github.com/webx-top/echo v2.36.2+incompatible/go.mod h1:ufVP//GwP1suggBSQW7l8G9XcKxZM+FIfCMElLAQqF8=
+github.com/webx-top/echo v2.37.0+incompatible h1:hn6umH0uYRvMcPEbGrallLmpxvANYBa84bQwtsGSdsE=
+github.com/webx-top/echo v2.37.0+incompatible/go.mod h1:ufVP//GwP1suggBSQW7l8G9XcKxZM+FIfCMElLAQqF8=
 github.com/webx-top/echo-prometheus v1.1.1 h1:Z41F5A7R4pC/oLlQta/1uEZybOfnY1BCUvNC3dM5RZg=
 github.com/webx-top/echo-prometheus v1.1.1/go.mod h1:T4mJg71spjV3J8IJQ+2EN/hQUB+FgWWsSXZCQ0KoalE=
 github.com/webx-top/echo-socket.io v1.1.2 h1:dpGjtJm+YNi4UmtYFf4rlu1/vt0dX6lSYgvAEctqa5g=

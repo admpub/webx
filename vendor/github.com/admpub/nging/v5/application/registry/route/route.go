@@ -99,11 +99,3 @@ func Apply() {
 func RegisterToGroup(groupName string, fn func(echo.RouteRegister), middlewares ...interface{}) {
 	routeRegister.RegisterToGroup(groupName, fn, middlewares...)
 }
-
-func PublicHandler(h interface{}) echo.Handler {
-	return routeRegister.MetaHandler(echo.H{`permission`: `public`}, h)
-}
-
-func GuestHandler(h interface{}) echo.Handler {
-	return routeRegister.MetaHandler(echo.H{`permission`: `guest`}, h)
-}
