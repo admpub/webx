@@ -44,6 +44,7 @@ import (
 	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/nging/v5/application/library/formbuilder"
 	ngingMW "github.com/admpub/nging/v5/application/middleware"
+	"github.com/admpub/nging/v5/application/registry/route"
 )
 
 const (
@@ -197,9 +198,9 @@ func start() {
 		formbuilder.ClearCache()
 		return nil
 	})
-	e.Get(`/favicon.ico`, bootconfig.FaviconHandler)
+	e.Get(`/favicon.ico`, bootconfig.FaviconHandler).SetMetaKV(route.PermGuestKV())
 	i18n.Handler(e, `App.i18n`)
-	debugG := e.Group(`/debug`, ngingMW.DebugPprof)
+	debugG := e.Group(`/debug`, ngingMW.DebugPprof).SetMetaKV(route.PermGuestKV())
 	pprof.RegisterRoute(debugG)
 	Initialize()
 }
