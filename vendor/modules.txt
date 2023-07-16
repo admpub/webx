@@ -256,7 +256,7 @@ github.com/admpub/mysql-schema-sync/internal
 github.com/admpub/mysql-schema-sync/sqlite
 github.com/admpub/mysql-schema-sync/sync
 # github.com/admpub/nging/v5 v5.1.1 => ../../../github.com/admpub/nging
-## explicit; go 1.17
+## explicit; go 1.20
 github.com/admpub/nging/v5/application
 github.com/admpub/nging/v5/application/cmd
 github.com/admpub/nging/v5/application/cmd/bootconfig
