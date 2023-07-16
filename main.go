@@ -40,6 +40,7 @@ import (
 	"github.com/admpub/nging/v5/application/cmd"
 	"github.com/admpub/nging/v5/application/cmd/bootconfig"
 	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/admpub/nging/v5/application/library/license"
 	"github.com/admpub/nging/v5/application/library/module"
 
 	// register
@@ -115,4 +116,8 @@ func initModule() {
 		&dbmanager.Module,
 	)
 	initnavigate.Initialize()
+}
+
+func init() {
+	license.SetProductName(`webx`)
 }
