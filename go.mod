@@ -1,6 +1,6 @@
 module github.com/admpub/webx
 
-go 1.18
+go 1.20
 
 replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
