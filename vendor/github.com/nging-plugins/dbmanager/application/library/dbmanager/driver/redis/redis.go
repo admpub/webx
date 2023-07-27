@@ -32,7 +32,11 @@ import (
 )
 
 func init() {
-	driver.Register(`redis`, &Redis{})
+	driver.Register(`redis`, `Redis`, New)
+}
+
+func New() driver.Driver {
+	return &Redis{}
 }
 
 type Redis struct {
@@ -105,6 +109,10 @@ func (r *Redis) login() (err error) {
 	options = append(options, redis.DialUseTLS(scheme == "rediss"))
 	r.conn, err = redis.Dial("tcp", host, options...)
 	return
+}
+
+func (r *Redis) Logined() bool {
+	return r.conn != nil
 }
 
 func (r *Redis) ListDb() error {

@@ -51,7 +51,7 @@ require (
 	github.com/webx-top/client v0.8.9
 	github.com/webx-top/com v0.9.5
 	github.com/webx-top/db v1.24.4
-	github.com/webx-top/echo v2.37.1+incompatible
+	github.com/webx-top/echo v2.37.3+incompatible
 	github.com/webx-top/echo-prometheus v1.1.1
 	github.com/webx-top/echo-socket.io v1.1.2
 	github.com/webx-top/image v0.1.0
@@ -73,7 +73,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.25.0
-	github.com/nging-plugins/dbmanager v1.4.2
+	github.com/nging-plugins/dbmanager v1.4.11
 	github.com/webx-top/validator v0.2.0
 )
 
@@ -93,6 +93,7 @@ require (
 	github.com/admpub/caddy v1.2.0 // indirect
 	github.com/admpub/ccs-gm v0.0.5 // indirect
 	github.com/admpub/checksum v1.1.0 // indirect
+	github.com/admpub/collate v1.1.0 // indirect
 	github.com/admpub/cron v0.0.1 // indirect
 	github.com/admpub/dgoogauth v0.0.1 // indirect
 	github.com/admpub/email v2.4.1+incompatible // indirect

@@ -18,17 +18,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 package dbmanager
 
 import (
-	"github.com/nging-plugins/dbmanager/application/library/dbmanager/driver"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
+
+	"github.com/nging-plugins/dbmanager/application/library/dbmanager/driver"
 )
 
 type Manager interface {
-	Driver(typeName string) (driver.Driver, error)
-	Run(typeName string, operation string) error
+	Driver() (driver.Driver, error)
+	Run(operation string) error
 	Context() echo.Context
 	Account() *driver.DbAuth
 	GenURL() func(string, ...string) string
 	SetURLGenerator(fn func(string, ...string) string)
+	Logined() (bool, error)
 }
 
 func New(ctx echo.Context, auth *driver.DbAuth) Manager {
@@ -42,6 +45,7 @@ type dbManager struct {
 	context echo.Context
 	dbAuth  *driver.DbAuth
 	genURL  func(string, ...string) string
+	driver  driver.Driver
 }
 
 func (d *dbManager) Context() echo.Context {
@@ -60,22 +64,34 @@ func (d *dbManager) Account() *driver.DbAuth {
 	return d.dbAuth
 }
 
-func (d *dbManager) Driver(typeName string) (driver.Driver, error) {
-	dv, ok := driver.Get(typeName)
-	if ok {
-		dv.Init(d.context, d.dbAuth)
-		return dv, nil
+func (d *dbManager) Driver() (driver.Driver, error) {
+	if d.driver != nil {
+		return d.driver, nil
 	}
-	return nil, d.context.E(`很抱歉，暂时不支持%v`, typeName)
+	info, ok := driver.Get(d.dbAuth.Driver)
+	if ok {
+		d.driver = info.New()
+		d.driver.Init(d.context, d.dbAuth)
+		return d.driver, nil
+	}
+	return nil, d.context.NewError(code.Unsupported, `很抱歉，暂时不支持%v`, d.dbAuth.Driver)
 }
 
-func (d *dbManager) Run(typeName string, operation string) error {
-	drv, err := d.Driver(typeName)
+func (d *dbManager) Logined() (bool, error) {
+	drv, err := d.Driver()
+	if err != nil {
+		return false, err
+	}
+	return drv.Logined(), nil
+}
+
+func (d *dbManager) Run(operation string) error {
+	drv, err := d.Driver()
 	if err != nil {
 		return err
 	}
 	if !drv.IsSupported(operation) {
-		return d.context.E(`很抱歉，不支持此项操作`)
+		return d.context.NewError(code.Unsupported, `很抱歉，不支持此项操作`)
 	}
 	defer drv.SaveResults()
 	drv.SetURLGenerator(d.genURL)
@@ -125,6 +141,6 @@ func (d *dbManager) Run(typeName string, operation string) error {
 	case `analysis`:
 		return drv.Analysis()
 	default:
-		return d.context.E(`很抱歉，不支持此项操作`)
+		return d.context.NewError(code.Unsupported, `很抱歉，不支持此项操作`)
 	}
 }

@@ -19,12 +19,14 @@
 package service
 
 import (
+	"errors"
 	"fmt"
 	stdLog "log"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strconv"
+	"time"
 
 	"github.com/admpub/log"
 	"github.com/admpub/service"
@@ -132,9 +134,9 @@ func (p *program) Start(s service.Service) (err error) {
 	} else {
 		p.fullExec = p.Exec
 	}
-	p.createCmd()
 
-	go p.run()
+	p.createCmd()
+	go p.retryableRun()
 	return nil
 }
 
@@ -164,16 +166,16 @@ func (p *program) Stop(s service.Service) error {
 
 func (p *program) killCmd() {
 	err := com.CloseProcessFromCmd(p.cmd)
-	if err != nil {
+	if err != nil && !errors.Is(err, os.ErrProcessDone) {
 		p.logger.Error(err)
 	}
 	err = com.CloseProcessFromPidFile(p.pidFile)
-	if err != nil {
+	if err != nil && !errors.Is(err, os.ErrProcessDone) {
 		p.logger.Error(p.pidFile+`:`, err)
 	}
 	for _, pidFile := range getPidFiles() {
 		err = com.CloseProcessFromPidFile(pidFile)
-		if err != nil {
+		if err != nil && !errors.Is(err, os.ErrProcessDone) {
 			p.logger.Error(pidFile+`:`, err)
 		}
 	}
@@ -194,18 +196,50 @@ func (p *program) close() {
 	}
 }
 
-func (p *program) run() {
-	p.logger.Infof("Starting %s", p.DisplayName)
-	//return
-	//如果调用的程序停止了，则本服务同时也停止
-	defer p.close()
+func (p *program) run(logPrefix string) error {
+	p.logger.Infof(logPrefix+"Starting %s", p.DisplayName)
 	err := p.cmd.Start()
 	if err == nil {
-		stdLog.Println("APP PID:", p.cmd.Process.Pid)
+		stdLog.Println(logPrefix+"APP PID:", p.cmd.Process.Pid)
 		os.WriteFile(p.pidFile, []byte(strconv.Itoa(p.cmd.Process.Pid)), os.ModePerm)
 		err = p.cmd.Wait()
 	}
 	if err != nil {
-		p.logger.Error("Error running:", err)
+		p.logger.Error(logPrefix+"Error running:", err)
+	}
+	return err
+}
+
+func (p *program) retryableRun() {
+	err := p.run(``)
+	if err == nil {
+		return
+	}
+	defer func() {
+		if err != nil {
+			//如果调用的程序异常停止了，则本服务同时也停止
+			p.close()
+		}
+	}()
+
+	maxRetries := p.MaxRetries
+	if maxRetries <= 0 {
+		maxRetries = DefaultMaxRetries
+	}
+	retryInterval := p.RetryInterval
+	if retryInterval <= 0 {
+		retryInterval = DefaultRetryInterval
+	}
+	wait := time.Second * time.Duration(retryInterval)
+	for i := 1; i < maxRetries; i++ {
+		progress := fmt.Sprintf(`[%d/%d]`, i, maxRetries)
+		p.logger.Infof(progress+"[retry] start %s after %v", p.DisplayName, wait)
+		time.Sleep(wait)
+		p.killCmd()
+		p.createCmd()
+		err = p.run(progress + `[retry]`)
+		if err == nil {
+			return
+		}
 	}
 }

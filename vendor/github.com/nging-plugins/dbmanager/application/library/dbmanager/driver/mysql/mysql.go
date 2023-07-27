@@ -44,7 +44,11 @@ import (
 )
 
 func init() {
-	driver.Register(`mysql`, &mySQL{
+	driver.Register(`mysql`, `MySQL`, New)
+}
+
+func New() driver.Driver {
+	return &mySQL{
 		TriggerOptions: []*TriggerOption{
 			{
 				Type:    `Timing`,
@@ -60,7 +64,7 @@ func init() {
 			},
 		},
 		supportSQL: true,
-	})
+	}
 }
 
 type mySQL struct {
@@ -119,6 +123,10 @@ func connect(dbAuth *driver.DbAuth, dbName ...string) (*factory.Factory, error) 
 	cluster := factory.NewCluster().AddMaster(db)
 	dbfactory.SetCluster(0, cluster)
 	return dbfactory, nil
+}
+
+func (m *mySQL) Logined() bool {
+	return m.db != nil
 }
 
 func (m *mySQL) Login() (err error) {
@@ -1154,7 +1162,7 @@ func (m *mySQL) ListData() error {
 				condition = ` WHERE ` + condition
 				err = m.delete(table, condition, 0)
 			case `export`, `download`:
-				return m.exportData(
+				return m.exportData(nil,
 					save == `download`, fields, table,
 					selectFuncs, selectCols, []string{condition},
 					orderFields, descs, 1, limit, totalRows, 0)
@@ -1184,7 +1192,7 @@ func (m *mySQL) ListData() error {
 		columns []string
 		values  []map[string]*sql.NullString
 	)
-	columns, values, totalRows, err = m.listData(nil, table, selectFuncs, selectCols, wheres, orderFields,
+	columns, values, totalRows, err = m.listData(nil, nil, table, selectFuncs, selectCols, wheres, orderFields,
 		descs, page, limit, totalRows, true, textLength)
 	if err != nil {
 		log.Error(err)

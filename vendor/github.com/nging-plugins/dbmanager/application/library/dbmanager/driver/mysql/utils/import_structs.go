@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/admpub/archiver"
+	"github.com/admpub/collate"
 	"github.com/admpub/log"
 	"github.com/webx-top/com"
 )
@@ -92,6 +93,8 @@ func ParseImportFile(cacheDir string, files []string) (*ImportFile, error) {
 			}
 		}
 	}
+	collate.SortStrings(sqlStructFiles)
+	collate.SortStrings(sqlDataFiles)
 	return &ImportFile{
 		delDirs:     delDirs,
 		StructFiles: sqlStructFiles,
