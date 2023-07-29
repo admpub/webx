@@ -2,19 +2,19 @@
 <div class="form-group">
     <label class="col-sm-2 control-label">{{"网站名称"|$.T}}</label>
     <div class="col-sm-4">
-        <input type="text" class="form-control" name="base[siteName][value]" value="{{$config.siteName.Value}}" placeholder="{{"网站名称"|$.T}}" />
+        <input type="text" class="form-control" name="base[siteName][value]" value="{{$config.siteName.Value}}" placeholder="{{`网站名称`|$.T}}" />
     </div>
     <label class="col-sm-2 control-label">{{"前台网址"|$.T}}
         <strong class="text-danger" data-toggle="tooltip" title="{{`更改后需要重启前台才能生效`|$.T}}">!</strong>
     </label>
     <div class="col-sm-4">
-        <input type="url" class="form-control" name="base[siteURL][value]" value="{{$config.siteURL.Value}}" placeholder="{{"http://"|$.T}}" />
+        <input type="url" class="form-control" name="base[siteURL][value]" value="{{$config.siteURL.Value}}" placeholder="{{`http://`|$.T}}" />
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-2 control-label">{{"网站口号"|$.T}}</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" name="base[siteSlogan][value]" value="{{$config.siteSlogan.Value}}" placeholder="{{"网站口号"|$.T}}" />
+        <input type="text" class="form-control" name="base[siteSlogan][value]" value="{{$config.siteSlogan.Value}}" placeholder="{{`网站口号`|$.T}}" />
     </div>
 </div>
 <div class="form-group">
@@ -88,16 +88,16 @@
     <div class="col-sm-4">
         {{$siteClose := $config.siteClose.Value | Default "0"}}
         <select name="base[siteClose][value]" class="form-control">
-            <option value="0"{{if eq $siteClose "0"}} selected{{end}}>{{"开启网站"|$.T}}</option>
-            <option value="1"{{if eq $siteClose "1"}} selected{{end}}>{{"关闭网站"|$.T}}</option>
-            <option value="2"{{if eq $siteClose "2"}} selected{{end}}>{{"仅供会员访问"|$.T}}</option>
-            <option value="3"{{if eq $siteClose "3"}} selected{{end}}>{{"仅供管理员访问"|$.T}}</option>
+            <option value="0"{{if eq $siteClose `0`}} selected{{end}}>{{"开启网站"|$.T}}</option>
+            <option value="1"{{if eq $siteClose `1`}} selected{{end}}>{{"关闭网站"|$.T}}</option>
+            <option value="2"{{if eq $siteClose `2`}} selected{{end}}>{{"仅供会员访问"|$.T}}</option>
+            <option value="3"{{if eq $siteClose `3`}} selected{{end}}>{{"仅供管理员访问"|$.T}}</option>
         </select>
     </div>
     <label class="col-sm-2 control-label">{{"ICP备案号"|$.T}}</label>
     <div class="col-sm-4">
         <span class="input-group">
-            <input type="text" class="form-control" name="base[siteICPFiling][value]" value="{{$config.siteICPFiling.Value}}" placeholder="{{"粤ICP备12345678号-3"|$.T}}" />
+            <input type="text" class="form-control" name="base[siteICPFiling][value]" value="{{$config.siteICPFiling.Value}}" placeholder="{{`粤ICP备12345678号-3`|$.T}}" />
             <span class="input-group-addon">{{`网址`|$.T}}</span>
             <input type="url" class="form-control" name="base[siteICPURL][value]" value="{{$config.siteICPURL.Value}}" placeholder="https://beian.miit.gov.cn/" />
         </span>
@@ -108,15 +108,15 @@
     <div class="col-sm-4">
         {{$customerRegister := $config.customerRegister.Value | Default "open"}}
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[customerRegister][value]" value="open"{{if eq $customerRegister "open"}} checked{{end}} id="base-customerRegister-open">
+            <input type="radio" name="base[customerRegister][value]" value="open"{{if eq $customerRegister `open`}} checked{{end}} id="base-customerRegister-open">
             <label for="base-customerRegister-open">{{"开放注册"|$.T}}</label>
         </span>
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[customerRegister][value]" value="invitation"{{if eq $customerRegister "invitation"}} checked{{end}} id="base-customerRegister-invitation">
+            <input type="radio" name="base[customerRegister][value]" value="invitation"{{if eq $customerRegister `invitation`}} checked{{end}} id="base-customerRegister-invitation">
             <label for="base-customerRegister-invitation">{{"邀请注册"|$.T}}</label>
         </span>
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[customerRegister][value]" value="close"{{if eq $customerRegister "close"}} checked{{end}} id="base-customerRegister-close">
+            <input type="radio" name="base[customerRegister][value]" value="close"{{if eq $customerRegister `close`}} checked{{end}} id="base-customerRegister-close">
             <label for="base-customerRegister-close">{{"关闭注册"|$.T}}</label>
         </span>
     </div>
@@ -124,15 +124,15 @@
     <div class="col-sm-4">
         {{$comment := $config.comment.Value | Default "open"}}
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[comment][value]" value="open"{{if eq $comment "open"}} checked{{end}} id="base-comment-open">
-            <label for="base-comment-open" data-toggle="tooltip" title="{{`开发评论无需审核`|$.T}}">{{"开放评论(免审)"|$.T}}</label>
+            <input type="radio" name="base[comment][value]" value="open"{{if eq $comment `open`}} checked{{end}} id="base-comment-open">
+            <label for="base-comment-open" data-toggle="tooltip" title="{{`开放评论无需审核`|$.T}}">{{"开放评论(免审)"|$.T}}</label>
         </span>
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[comment][value]" value="review"{{if eq $comment "review"}} checked{{end}} id="base-comment-review">
-            <label for="base-comment-review" data-toggle="tooltip" title="{{`开发评论但需要审核`|$.T}}">{{"开放评论(审)"|$.T}}</label>
+            <input type="radio" name="base[comment][value]" value="review"{{if eq $comment `review`}} checked{{end}} id="base-comment-review">
+            <label for="base-comment-review" data-toggle="tooltip" title="{{`开放评论但需要审核`|$.T}}">{{"开放评论(审)"|$.T}}</label>
         </span>
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[comment][value]" value="close"{{if eq $comment "close"}} checked{{end}} id="base-comment-close">
+            <input type="radio" name="base[comment][value]" value="close"{{if eq $comment `close`}} checked{{end}} id="base-comment-close">
             <label for="base-comment-close">{{"关闭评论"|$.T}}</label>
         </span>
     </div>
@@ -143,11 +143,11 @@
     <div class="col-sm-4">
         {{$customerLogin := $config.customerLogin.Value | Default "open"}}
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[customerLogin][value]" value="open"{{if eq $customerLogin "open"}} checked{{end}} id="base-customerLogin-open">
+            <input type="radio" name="base[customerLogin][value]" value="open"{{if eq $customerLogin `open`}} checked{{end}} id="base-customerLogin-open">
             <label for="base-customerLogin-open">{{"开放登录"|$.T}}</label>
         </span>
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[customerLogin][value]" value="close"{{if eq $customerLogin "close"}} checked{{end}} id="base-customerLogin-close">
+            <input type="radio" name="base[customerLogin][value]" value="close"{{if eq $customerLogin `close`}} checked{{end}} id="base-customerLogin-close">
             <label for="base-customerLogin-close">{{"关闭登录"|$.T}}</label>
         </span>
         <div class="help-block">{{`关闭登录之后，前台用户将无法登录`|$.T}}</div>
@@ -355,20 +355,20 @@
     <div class="col-sm-10">
         {{$showAnnouncement := $config.showAnnouncement.Value | Default "0"}}
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[showAnnouncement][value]" value="1"{{if eq $showAnnouncement "1"}} checked{{end}} id="base-showAnnouncement-1">
+            <input type="radio" name="base[showAnnouncement][value]" value="1"{{if eq $showAnnouncement `1`}} checked{{end}} id="base-showAnnouncement-1">
             <label for="base-showAnnouncement-1">{{"显示公告"|$.T}}</label>
         </span>
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="base[showAnnouncement][value]" value="0"{{if eq $showAnnouncement "0"}} checked{{end}} id="base-showAnnouncement-0">
+            <input type="radio" name="base[showAnnouncement][value]" value="0"{{if eq $showAnnouncement `0`}} checked{{end}} id="base-showAnnouncement-0">
             <label for="base-showAnnouncement-0">{{"不显示公告"|$.T}}</label>
         </span>
         <textarea class="form-control html-editor" name="base[siteAnnouncement][value]" data-upload-url="{{BackendUploadURL `` `group` `base` `key` `siteAnnouncement`}}"
-        action="!{{BackendURL}}/finder?multiple=1" rows="15" placeholder="{{"站点公告"|$.T}}">{{$config.siteAnnouncement.Value}}</textarea>
+        action="!{{BackendURL}}/finder?multiple=1" rows="15" placeholder="{{`站点公告`|$.T}}">{{$config.siteAnnouncement.Value}}</textarea>
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-2 control-label">{{"统计代码"|$.T}}</label>
     <div class="col-sm-10">
-        <textarea class="form-control" style="height:150px" name="base[statCode][value]" placeholder="{{"统计代码"|$.T}}">{{$config.statCode.Value}}</textarea>
+        <textarea class="form-control" style="height:150px" name="base[statCode][value]" placeholder="{{`统计代码`|$.T}}">{{$config.statCode.Value}}</textarea>
     </div>
 </div>
