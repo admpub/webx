@@ -649,6 +649,16 @@ var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
 			Sort:        2000,
 			Disabled:    `N`,
 		},
+		`token`: {
+			Key:         `token`,
+			Label:       `Token`,
+			Description: `socket.io服务令牌`,
+			Value:       ``,
+			Group:       `socketio`,
+			Type:        `text`,
+			Sort:        2000,
+			Disabled:    `N`,
+		},
 	},
 }
 
