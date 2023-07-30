@@ -44,6 +44,9 @@ var RequestChecker engineio.CheckerFunc = func(req *http.Request) (http.Header, 
 		return nil, nil
 	}
 	post := req.Header.Get(`Token`)
+	if len(post) == 0 {
+		post = req.URL.Query().Get(`token`)
+	}
 	if token != post {
 		if log.IsEnabled(log.LevelDebug) {
 			log.Debugf(`[socketIO] invalid token: %q`, post)
