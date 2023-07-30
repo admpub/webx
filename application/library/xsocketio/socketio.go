@@ -9,6 +9,7 @@ import (
 	"github.com/googollee/go-socket.io/engineio"
 	"github.com/webx-top/echo"
 	esi "github.com/webx-top/echo-socket.io"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/middleware"
 )
 
@@ -27,7 +28,11 @@ var onConnect = []func(ctx echo.Context, conn socketio.Conn) error{}
 var onError = []func(ctx echo.Context, conn socketio.Conn, e error){}
 var onDisconnect = []func(ctx echo.Context, conn socketio.Conn, msg string){}
 
-var RequestChecker engineio.CheckerFunc = func(*http.Request) (http.Header, error) {
+var RequestChecker engineio.CheckerFunc = func(req *http.Request) (http.Header, error) {
+	token := common.Setting(`socketio`).String(`token`)
+	if len(token) > 0 && token != req.Header.Get(`Token`) {
+		return nil, echo.NewError(`invalid token`, code.InvalidToken)
+	}
 	return nil, nil
 }
 
