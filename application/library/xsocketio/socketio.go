@@ -13,14 +13,20 @@ import (
 	"github.com/webx-top/echo/middleware"
 )
 
-func RegisterRoute(e echo.RouteRegister) {
+func RegisterRoute(e echo.RouteRegister, s ...func(*middleware.CORSConfig)) {
+	cfg := &middleware.CORSConfig{
+		AllowOrigins: []string{`Token`},
+	}
+	for _, f := range s {
+		f(cfg)
+	}
 	handle := socketIOWrapper()
 	e.Any(`/socket.io/`, func(ctx echo.Context) error {
 		if common.Setting(`socketio`).String(`enabled`) != `1` {
 			return echo.ErrNotFound
 		}
 		return handle(ctx)
-	}, middleware.CORS())
+	}, middleware.CORSWithConfig(*cfg))
 }
 
 var events = []func(esi.IWrapper){}
