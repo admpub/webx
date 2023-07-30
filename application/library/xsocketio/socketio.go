@@ -2,6 +2,7 @@ package xsocketio
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/admpub/log"
 	"github.com/admpub/nging/v5/application/library/common"
@@ -20,7 +21,10 @@ func RegisterRoute(e echo.RouteRegister, s ...func(*middleware.CORSConfig)) {
 	for _, f := range s {
 		f(cfg)
 	}
-	handle := socketIOWrapper("")
+	prefix := e.Prefix()
+	nsp := strings.Trim(prefix, `/`)
+	nsp = strings.ReplaceAll(nsp, `/`, `_`)
+	handle := socketIOWrapper(nsp)
 	e.Any(`/socket.io/`, func(ctx echo.Context) error {
 		if common.Setting(`socketio`).String(`enabled`) != `1` {
 			return echo.ErrNotFound
