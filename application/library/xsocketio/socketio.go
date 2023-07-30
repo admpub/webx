@@ -40,7 +40,15 @@ var onDisconnect = []func(ctx echo.Context, conn socketio.Conn, msg string){}
 
 var RequestChecker engineio.CheckerFunc = func(req *http.Request) (http.Header, error) {
 	token := common.Setting(`socketio`).String(`token`)
-	if len(token) > 0 && token != req.Header.Get(`Token`) {
+	if len(token) == 0 {
+		return nil, nil
+	}
+	post := req.Header.Get(`Token`)
+	if token != post {
+		if log.IsEnabled(log.LevelDebug) {
+			log.Debugf(`[socketIO] invalid token: %q`, post)
+			log.Debugf(`[socketIO] request headers: %+v`, req.Header)
+		}
 		return nil, echo.NewError(`invalid token`, code.InvalidToken)
 	}
 	return nil, nil
