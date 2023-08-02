@@ -334,7 +334,6 @@ github.com/admpub/nging/v5/application/listener/upload
 github.com/admpub/nging/v5/application/listener/upload/file
 github.com/admpub/nging/v5/application/middleware
 github.com/admpub/nging/v5/application/model
-github.com/admpub/nging/v5/application/model/alert
 github.com/admpub/nging/v5/application/model/base
 github.com/admpub/nging/v5/application/model/file
 github.com/admpub/nging/v5/application/model/file/storer
