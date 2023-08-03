@@ -123,6 +123,7 @@ func addMiddleware(e *echo.Echo) {
 		e.SetDebug(true)
 	}
 	e.Use(middleware.Recover())
+	e.Use(xMW.HostChecker())
 	e.Use(ngingMW.MaxRequestBodySize)
 	e.Use(DefaultMiddlewares...)
 	if StaticMW != nil {

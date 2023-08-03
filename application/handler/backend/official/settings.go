@@ -3,6 +3,7 @@ package official
 import (
 	"errors"
 	"net/url"
+	"regexp"
 
 	"github.com/admpub/cache"
 	"github.com/admpub/license_gen/lib"
@@ -95,6 +96,16 @@ var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
 		`siteURL`: {
 			Key:         `siteURL`,
 			Label:       `站点网址`,
+			Description: ``,
+			Value:       ``,
+			Group:       `base`,
+			Type:        `text`,
+			Sort:        1,
+			Disabled:    `N`,
+		},
+		`hostRule`: {
+			Key:         `hostRule`,
+			Label:       `允许指向本站的域名规则正则表达式`,
 			Description: ``,
 			Value:       ``,
 			Group:       `base`,
@@ -916,4 +927,18 @@ func init() {
 		return
 	}
 	config.OnKeySetSettings(`base.siteURL`, updateFrontendURL)
+	config.OnKeySetSettings(`base.hostRule`, func(diff config.Diff) error {
+		key := `frontend.hostRuleRegexp`
+		hostRule := diff.String()
+		if len(hostRule) == 0 {
+			echo.Delete(key)
+			return nil
+		}
+		re, err := regexp.Compile(hostRule)
+		if err != nil {
+			return err
+		}
+		echo.Set(key, re)
+		return nil
+	})
 }
