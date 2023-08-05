@@ -16,7 +16,7 @@ require (
 	github.com/admpub/decimal v1.3.1
 	github.com/admpub/errors v0.8.2
 	github.com/admpub/fasttemplate v0.0.2
-	github.com/admpub/go-download/v2 v2.1.12
+	github.com/admpub/go-download/v2 v2.1.13
 	github.com/admpub/go-hashids v2.0.1+incompatible
 	github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe
 	github.com/admpub/godotenv v1.4.3
