@@ -18,9 +18,17 @@ func AgentLevel(c echo.Context) *dbschema.OfficialCustomerAgentLevel {
 	return agentLevel
 }
 
-// IsAdmin 是否后台管理员
+// IsAdmin 是否是后台管理员或与后台管理员关联的客户
 func IsAdmin(c echo.Context, onlyBackendAdmin ...bool) bool {
 	return AdminUID(c, onlyBackendAdmin...) > 0
+}
+
+// IsBackendAdmin 是否是后台管理元
+func IsBackendAdmin(c echo.Context) bool {
+	if user := User(c); user != nil {
+		return user.Id > 0
+	}
+	return false
 }
 
 // AdminUID 后台管理员用户ID
