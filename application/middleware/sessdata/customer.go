@@ -19,14 +19,17 @@ func AgentLevel(c echo.Context) *dbschema.OfficialCustomerAgentLevel {
 }
 
 // IsAdmin 是否后台管理员
-func IsAdmin(c echo.Context) bool {
-	return AdminUID(c) > 0
+func IsAdmin(c echo.Context, onlyBackendAdmin ...bool) bool {
+	return AdminUID(c, onlyBackendAdmin...) > 0
 }
 
 // AdminUID 后台管理员用户ID
-func AdminUID(c echo.Context) uint {
+func AdminUID(c echo.Context, onlyBackendAdmin ...bool) uint {
 	if user := User(c); user != nil {
 		return user.Id
+	}
+	if len(onlyBackendAdmin) > 0 && onlyBackendAdmin[0] {
+		return 0
 	}
 	if customer := Customer(c); customer != nil {
 		return customer.Uid
