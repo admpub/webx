@@ -51,6 +51,7 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = NewRoot()
+var dumpCli bool
 
 func NewRoot() *cobra.Command {
 	// rootCmd represents the base command when called without any subcommands
@@ -180,11 +181,15 @@ func initCertMagic(c *engine.Config) error {
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
+	if dumpCli {
+		writeReceived()
+	}
 	config.FromCLI().InitFlag(rootCmd.PersistentFlags())
 	Init()
 	if len(rootCmd.Use) == 0 {
 		rootCmd.Use = os.Args[0]
 	}
+
 	if err := rootCmd.Execute(); err != nil {
 		com.ExitOnFailure(err.Error() + "\n")
 	}
@@ -192,6 +197,7 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
+	rootCmd.Flags().BoolVar(&dumpCli, "dumpcli", false, "--dumpcli false")
 }
 
 // initConfig reads in config file and ENV variables if set.

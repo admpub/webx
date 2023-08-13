@@ -257,3 +257,36 @@ func Table(table string) string {
 func ToTable(m sqlbuilder.Name_) string {
 	return FromFile().DB.ToTable(m)
 }
+
+func FixWd() error {
+	if !com.IsWindows {
+		return nil
+	}
+
+	executableFile := filepath.Base(os.Args[0])
+	if strings.HasSuffix(executableFile, `.test.exe`) || strings.HasPrefix(executableFile, os.TempDir()) {
+		return nil
+	}
+
+	// from os.Getwd()
+	executable := filepath.Join(echo.Wd(), executableFile)
+	if com.FileExists(executable) {
+		return nil
+	}
+
+	// from os.Args[0]
+	echo.SetWorkDir(filepath.Dir(os.Args[0]))
+	executable = filepath.Join(echo.Wd(), executableFile)
+	if com.FileExists(executable) {
+		return nil
+	}
+
+	// from os.Executable()
+	var err error
+	executable, err = os.Executable()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	echo.SetWorkDir(filepath.Dir(executable))
+	return nil
+}

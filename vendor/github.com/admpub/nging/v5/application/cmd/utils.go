@@ -23,8 +23,10 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"time"
 
 	"github.com/spf13/cobra"
+	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware"
 
@@ -78,4 +80,18 @@ func Init() {
 
 func Add(cmds ...*cobra.Command) {
 	rootCmd.AddCommand(cmds...)
+}
+
+func writeReceived() {
+	fi, err := os.OpenFile(filepath.Join(filepath.Dir(os.Args[0]), `data`, `logs`, `cli-args.log`), os.O_CREATE|os.O_APPEND|os.O_WRONLY, os.ModePerm)
+	if err != nil {
+		panic(err)
+	}
+	defer fi.Close()
+	fi.WriteString("-----" + time.Now().Format(time.DateTime) + "-----------\\\n")
+	fi.WriteString(`Wd: ` + echo.Wd() + "\n")
+	fi.WriteString(`Args: ` + com.Dump(os.Args, false) + "\n")
+	b, _ := com.JSONEncode(config.FromCLI(), `  `)
+	fi.WriteString(`CliConfig: ` + string(b) + "\n")
+	fi.WriteString("-------------------------------------/\n\n")
 }
