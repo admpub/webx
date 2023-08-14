@@ -3,6 +3,7 @@ package tool
 import (
 	"github.com/webx-top/echo"
 
+	_ "github.com/admpub/nging/v5/application"
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/registry/navigate"
 )
