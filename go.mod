@@ -23,7 +23,7 @@ require (
 	github.com/admpub/imageproxy v0.9.3
 	github.com/admpub/ipfilter v1.0.6
 	github.com/admpub/license_gen v0.1.0
-	github.com/admpub/log v1.3.5
+	github.com/admpub/log v1.3.6
 	github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5
 	github.com/admpub/null v8.0.4+incompatible
 	github.com/admpub/once v0.0.1
