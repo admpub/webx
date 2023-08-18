@@ -30,7 +30,6 @@ import (
 
 	"github.com/admpub/nging/v5/application/dbschema"
 	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/nging/v5/application/library/cron"
 	cronWriter "github.com/admpub/nging/v5/application/library/cron/writer"
 	"github.com/admpub/nging/v5/application/model"
@@ -120,21 +119,28 @@ func Add(ctx echo.Context) error {
 	m := model.NewTask(ctx)
 	if ctx.IsPost() {
 		err = ctx.MustBind(m.NgingTask)
-		if err == nil {
-			m.NotifyEmail = strings.TrimSpace(m.NotifyEmail)
-			m.Command = strings.TrimSpace(m.Command)
-			m.CronSpec = getCronSpec(ctx)
-			m.Disabled = `Y`
-			m.Uid = handler.User(ctx).Id
-			err = checkTaskData(ctx, m.NgingTask)
-			if err == nil {
-				_, err = m.Insert()
-			}
+		if err != nil {
+			goto END
 		}
-		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/task/index`))
+		m.NotifyEmail = strings.TrimSpace(m.NotifyEmail)
+		m.Command = strings.TrimSpace(m.Command)
+		m.CronSpec = getCronSpec(ctx)
+		m.Disabled = `Y`
+		m.Uid = handler.User(ctx).Id
+		err = checkTaskData(ctx, m.NgingTask)
+		if err != nil {
+			goto END
 		}
+		_, err = m.Insert()
+		if err != nil {
+			goto END
+		}
+		err = cron.SaveScriptFile(m.NgingTask)
+		if err != nil {
+			goto END
+		}
+		handler.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(handler.URLFor(`/task/index`))
 	} else {
 		id := ctx.Formx(`copyId`).Uint()
 		if id > 0 {
@@ -145,13 +151,14 @@ func Add(ctx echo.Context) error {
 			}
 		}
 	}
+
+END:
 	mg := model.NewTaskGroup(ctx)
 	if _, e := mg.ListByOffset(nil, nil, 0, -1); e != nil {
 		err = e
 	}
 	ctx.Set(`groupList`, mg.Objects())
 	ctx.Set(`isWindows`, com.IsWindows)
-	ctx.Set(`endOfLineCharacter`, common.If(com.IsWindows, `^`, `\`))
 	ctx.SetFunc(`buildPattern`, buidlPattern)
 	return ctx.Render(`task/edit`, handler.Err(ctx, err))
 }
@@ -190,21 +197,30 @@ func Edit(ctx echo.Context) error {
 	}
 	if ctx.IsPost() {
 		err = ctx.MustBind(m.NgingTask, echo.ExcludeFieldName(`disabled`))
-		if err == nil {
-			m.Id = id
-			m.NotifyEmail = strings.TrimSpace(m.NotifyEmail)
-			m.Command = strings.TrimSpace(m.Command)
-			m.CronSpec = getCronSpec(ctx)
-			err = checkTaskData(ctx, m.NgingTask)
-			if err == nil {
-				err = m.Update(nil, `id`, id)
-			}
+		if err != nil {
+			goto END
 		}
-		if err == nil {
-			handler.SendOk(ctx, ctx.T(`修改成功`))
-			return ctx.Redirect(handler.URLFor(`/task/index`))
+		m.Id = id
+		m.NotifyEmail = strings.TrimSpace(m.NotifyEmail)
+		m.Command = strings.TrimSpace(m.Command)
+		m.CronSpec = getCronSpec(ctx)
+		err = checkTaskData(ctx, m.NgingTask)
+		if err != nil {
+			goto END
 		}
+		err = m.Update(nil, `id`, id)
+		if err != nil {
+			goto END
+		}
+		err = cron.SaveScriptFile(m.NgingTask)
+		if err != nil {
+			goto END
+		}
+		handler.SendOk(ctx, ctx.T(`修改成功`))
+		return ctx.Redirect(handler.URLFor(`/task/index`))
 	}
+
+END:
 	setFormData(ctx, m)
 	mg := model.NewTaskGroup(ctx)
 	if _, e := mg.ListByOffset(nil, nil, 0, -1); e != nil {
@@ -213,7 +229,6 @@ func Edit(ctx echo.Context) error {
 	ctx.Set(`groupList`, mg.Objects())
 	ctx.Set(`activeURL`, `/task/index`)
 	ctx.Set(`isWindows`, com.IsWindows)
-	ctx.Set(`endOfLineCharacter`, common.If(com.IsWindows, `^`, `\`))
 	ctx.Set(`notRecordPrefixFlag`, cronWriter.NotRecordPrefixFlag)
 	ctx.SetFunc(`buildPattern`, buidlPattern)
 	return ctx.Render(`task/edit`, handler.Err(ctx, err))
@@ -229,6 +244,7 @@ func Delete(ctx echo.Context) error {
 		logM := model.NewTaskLog(ctx)
 		err = logM.Delete(nil, db.Cond{`task_id`: id})
 		if err == nil {
+			cron.DeleteScriptFile(id)
 			handler.SendOk(ctx, ctx.T(`操作成功`))
 		} else {
 			handler.SendFail(ctx, err.Error())
