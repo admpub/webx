@@ -67,6 +67,6 @@
 	top: 20px!important;
 	left: auto!important;
 	right: 20px!important;
-	max-width: 200px!important;
-	max-height: 100px!important;
+	max-width: 70px!important;
+	opacity: 0.5;
 }
