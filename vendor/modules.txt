@@ -1307,7 +1307,7 @@ github.com/webx-top/echo-socket.io
 ## explicit
 github.com/webx-top/image
 github.com/webx-top/image/webp
-# github.com/webx-top/pagination v0.2.3
+# github.com/webx-top/pagination v0.2.4
 ## explicit
 github.com/webx-top/pagination
 # github.com/webx-top/poolx v0.0.0-20210912044716-5cfa2d58e380

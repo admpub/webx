@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/echo-prometheus v1.1.1
 	github.com/webx-top/echo-socket.io v1.1.3
 	github.com/webx-top/image v0.1.0
-	github.com/webx-top/pagination v0.2.3
+	github.com/webx-top/pagination v0.2.4
 	github.com/webx-top/validation v0.0.3 // indirect
 	github.com/yanyiwu/gojieba v1.3.0
 	golang.org/x/oauth2 v0.11.0
