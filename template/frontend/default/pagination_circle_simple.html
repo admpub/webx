@@ -2,11 +2,18 @@
 {{- with $.Data -}}
 <ul class="pagination pagination-inverse pagination-circle tx-size-12">
 {{- if .IsPosition -}}
-<li class="page-item active wd-200">
-  <a class="page-link lh-5" style="width:100%;border-radius:50px" href="{{.URL .Position}}" aria-label="Next"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+  {{- if ne `` .Position -}}
+  <li class="page-item wd-100">
+    <a class="page-link lh-5" style="width:100%;border-radius:50px" href="{{.URL ``}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+    {{`第一页`|$.T}}
+    </a>
+  </li>
+  {{- end -}}
+  <li class="page-item active wd-{{if eq `` .Position}}200{{else}}100{{end}}">
+    <a class="page-link lh-5" style="width:100%;border-radius:50px" href="{{.URL .NextPosition}}" aria-label="Next"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
     {{`下一页`|$.T}}
-  </a>
-</li>
+    </a>
+  </li>
 {{- else -}}
   {{- $page := .Page -}}
   {{- if gt $page 1 -}}
