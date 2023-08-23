@@ -1,7 +1,14 @@
 {{Strip}}{{$pjax := $.Form "_pjax"}}
 {{- with $.Data -}}
-{{$page := .Page}}
 <ul class="pagination pagination-inverse pagination-circle tx-size-12">
+{{- if .IsPosition -}}
+<li class="page-item active wd-200">
+  <a class="page-link lh-5" style="width:100%;border-radius:50px" href="{{.URL .Position}}" aria-label="Next"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+    {{`下一页`|$.T}}
+  </a>
+</li>
+{{- else -}}
+  {{- $page := .Page -}}
   {{- if gt $page 1 -}}
     <li class="page-item">
       <a class="page-link lh-5" href="{{$.Data.URL 1}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
@@ -24,6 +31,7 @@
         <i class="fa fa-angle-right"></i>
       </a>
     </li>
+{{- end -}}
 </ul>
 {{- end -}}
 {{/Strip}}
