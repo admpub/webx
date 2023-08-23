@@ -342,9 +342,10 @@
 					}
 				});
 				player.on('loadstart', function () {
-					$(amplayer.elemPrefix()+'video').attr('playsinline', 'true');
-					$(amplayer.elemPrefix()+'video').attr('x5-playsinline', 'true');
-					$(amplayer.elemPrefix()+'video').attr('webkit-playsinline', 'true');
+					var $video=$(amplayer.elemPrefix()+'video');
+					$video.attr('playsinline', 'true');
+					$video.attr('x5-playsinline', 'true');
+					$video.attr('webkit-playsinline', 'true');
 					if (player.video.paused) $(amplayer.elemPrefix()+'.play').show();
 				});
 				player.on('loadeddata', function () {
@@ -387,9 +388,10 @@
 					}
 				});
 				player.on('loadstart', function () {
-					$(amplayer.elemPrefix()+'video').attr('playsinline', 'true');
-					$(amplayer.elemPrefix()+'video').attr('x5-playsinline', 'true');
-					$(amplayer.elemPrefix()+'video').attr('webkit-playsinline', 'true');
+					var $video=$(amplayer.elemPrefix()+'video');
+					$video.attr('playsinline', 'true');
+					$video.attr('x5-playsinline', 'true');
+					$video.attr('webkit-playsinline', 'true');
 					if (player.video.paused) $(amplayer.elemPrefix()+'.play').show();
 				});
 				player.on('loadeddata', function () {
