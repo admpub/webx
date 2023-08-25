@@ -6,6 +6,7 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/param"
 
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/top"
@@ -52,16 +53,28 @@ func (f *Tags) Clean() (err error) {
 	return f.Delete(nil, db.Cond{`num`: 0})
 }
 
-func (f *Tags) IncrNum(group, name string) error {
-	err := f.UpdateField(nil, `num`, db.Raw(`num+1`), db.And(
+func (f *Tags) IncrNum(group, name string, n ...int) error {
+	var _n int
+	if len(n) > 0 {
+		_n = n[0]
+	} else {
+		_n = 1
+	}
+	err := f.UpdateField(nil, `num`, db.Raw(`num+`+param.AsString(_n)), db.And(
 		db.Cond{`name`: name},
 		db.Cond{`group`: group},
 	))
 	return err
 }
 
-func (f *Tags) DecrNum(group string, name ...string) error {
-	err := f.UpdateField(nil, `num`, db.Raw(`num-1`), db.And(
+func (f *Tags) DecrNum(group string, name []string, n ...int) error {
+	var _n int
+	if len(n) > 0 {
+		_n = n[0]
+	} else {
+		_n = 1
+	}
+	err := f.UpdateField(nil, `num`, db.Raw(`num-`+param.AsString(_n)), db.And(
 		db.Cond{`name`: db.In(name)},
 		db.Cond{`group`: group},
 		db.Cond{`num`: db.Gt(0)},
@@ -140,7 +153,7 @@ func (f *Tags) UpdateTags(createMode bool, group string, oldTags []string, postT
 		delTags = oldTags
 	}
 	if !createMode && len(delTags) > 0 { // 在非新增模式删除标签时才减去使用次数
-		err = f.DecrNum(group, delTags...)
+		err = f.DecrNum(group, delTags)
 	}
 	return tags, err
 }

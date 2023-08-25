@@ -41,7 +41,7 @@ func init() {
 		var err error
 		if len(fm.Tags) > 0 {
 			tagsM := official.NewTags(m.Context())
-			err = tagsM.DecrNum(modelArticle.GroupName, strings.Split(fm.Tags, `,`)...)
+			err = tagsM.DecrNum(modelArticle.GroupName, strings.Split(fm.Tags, `,`))
 		}
 		return err
 	}, `official_common_article`)
