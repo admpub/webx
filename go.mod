@@ -73,7 +73,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.25.0
-	github.com/nging-plugins/dbmanager v1.4.12
+	github.com/nging-plugins/dbmanager v1.4.13
 	github.com/webx-top/validator v0.2.0
 )
 
@@ -231,7 +231,7 @@ require (
 	github.com/mrjones/oauth v0.0.0-20190623134757-126b35219450 // indirect
 	github.com/muesli/smartcrop v0.3.0 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/nging-plugins/dlmanager v1.4.0 // indirect
+	github.com/nging-plugins/dlmanager v1.4.2 // indirect
 	github.com/nwaples/rardecode v1.1.3 // indirect
 	github.com/onsi/ginkgo/v2 v2.11.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
