@@ -1,6 +1,6 @@
 module github.com/admpub/webx
 
-go 1.20
+go 1.21.0
 
 replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
@@ -272,7 +272,7 @@ require (
 	github.com/volatiletech/inflect v0.0.1 // indirect
 	github.com/volatiletech/strmangle v0.0.5 // indirect
 	github.com/webx-top/captcha v0.1.0 // indirect
-	github.com/webx-top/chardet v0.0.1 // indirect
+	github.com/webx-top/chardet v0.0.2 // indirect
 	github.com/webx-top/codec v0.3.0 // indirect
 	github.com/webx-top/poolx v0.0.0-20210912044716-5cfa2d58e380 // indirect
 	github.com/webx-top/restyclient v0.0.4 // indirect
