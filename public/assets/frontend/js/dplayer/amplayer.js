@@ -452,13 +452,20 @@
 			play.seek = play.filmRange.playRange.min;
 		}
 		var lastTime = play.take ? amplayer.cookie.get(play.take) : 0;
+		var current = player.video.currentTime;
 		//console.log(play.seek,lastTime);
 		//console.dir(amplayer.options)
 		if (!lastTime) {
+			if(current==play.seek) return;
 			return player.seek(play.seek);
 		}
-		if (player.video.duration - lastTime < 60 || play.seek > lastTime) player.seek(play.seek);
-		else player.seek(lastTime);
+		if (player.video.duration - lastTime < 60 || play.seek > lastTime) {
+			if(current==play.seek) return;
+			player.seek(play.seek);
+		}else{
+			if(current==lastTime) return;
+			player.seek(lastTime);
+		}
 	}
 
 	function applyFilmRange(play, player, current) {
