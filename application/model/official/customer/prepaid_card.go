@@ -6,6 +6,7 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/middleware/tplfunc"
 
 	"github.com/admpub/errors"
@@ -27,14 +28,15 @@ type PrepaidCard struct {
 }
 
 func (f *PrepaidCard) check() error {
+	ctx := f.Context()
 	if f.Uid < 1 {
 		return common.ErrUserNotLoggedIn
 	}
 	if f.Amount < 1 {
-		return f.Context().E(`面值无效，必须大于0`)
+		return ctx.NewError(code.InvalidParameter, `面值无效，必须大于0`).SetZone(`amount`)
 	}
 	if f.SalePrice <= 0 {
-		return f.Context().E(`售价无效，必须大于0`)
+		return ctx.NewError(code.InvalidParameter, `售价无效，必须大于0`).SetZone(`salePrice`)
 	}
 	exists, err := f.Exists(f.Number, f.Id)
 	if err != nil {
@@ -47,38 +49,39 @@ func (f *PrepaidCard) check() error {
 }
 
 func (f *PrepaidCard) UseCard(customerID uint64, number string, password string) error {
+	ctx := f.Context()
 	err := f.Get(nil, db.Cond{`number`: number})
 	if err != nil {
 		if err == db.ErrNoMoreRows {
-			return f.Context().E(`充值卡不存在`)
+			return ctx.NewError(code.DataNotFound, `充值卡不存在`).SetZone(`number`)
 		}
 		return err
 	}
 	if f.Disabled == `Y` {
-		return f.Context().E(`充值卡无效`)
+		return ctx.NewError(code.DataUnavailable, `充值卡无效`).SetZone(`disabled`)
 	}
 	if f.Password != password {
-		return f.Context().E(`充值卡密码错误`)
+		return ctx.NewError(code.InvalidParameter, `充值卡密码错误`).SetZone(`password`)
 	}
 	if f.Used > 0 {
-		return f.Context().E(`充值卡“%v”已经使用过了`, f.Number)
+		return ctx.NewError(code.DataHasExpired, `充值卡“%v”已经使用过了`, f.Number).SetZone(`used`)
 	}
 	now := uint(time.Now().Unix())
 	if f.Start > now {
 		if f.End > 0 {
-			err = errors.New(f.Context().T(`该邀请码只能在“%s - %s”这段时间内使用`,
+			err = errors.New(ctx.T(`该邀请码只能在“%s - %s”这段时间内使用`,
 				tplfunc.TsToDate(`2006/01/02 15:04:05`, f.Start),
 				tplfunc.TsToDate(`2006/01/02 15:04:05`, f.End),
 			))
 		} else {
-			err = errors.New(f.Context().T(`该邀请码只能在“%s”之后使用`,
+			err = errors.New(ctx.T(`该邀请码只能在“%s”之后使用`,
 				tplfunc.TsToDate(`2006/01/02 15:04:05`, f.Start),
 			))
 		}
 		return err
 	}
 	if f.End > 0 && f.End < now {
-		err = f.Context().E(`该邀请码已过期`)
+		err = ctx.NewError(code.DataHasExpired, `该邀请码已过期`).SetZone(`expired`)
 		return err
 	}
 	kvset := echo.H{
