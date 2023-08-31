@@ -34,10 +34,21 @@ func AdminRefreshable(ctx echo.Context, customer *dbschema.OfficialCustomer, ttl
 		return ttl
 	}
 	nocache := ctx.Formx(`nocache`).Bool()
-	if !nocache {
-		return ttl
+	return TTLIf(nocache, TTLFresh, ttl)
+}
+
+func TTLIf(condition bool, a x.GetOption, b x.GetOption) x.GetOption {
+	if condition {
+		return a
 	}
-	return TTLFresh
+	return b
+}
+
+func TTLIfCallback(condition func() bool, a x.GetOption, b x.GetOption) x.GetOption {
+	if condition() {
+		return a
+	}
+	return b
 }
 
 func GenOptions(ctx echo.Context, cacheSeconds int64) []x.GetOption {
