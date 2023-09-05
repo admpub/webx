@@ -483,14 +483,18 @@
 		if (rg.playRange.min > 0 && current < rg.playRange.min) {
 			return player.seek(rg.playRange.min);
 		}
+		if (rg.playRange.max < 0 && (rg.playRange.max*-1) < player.video.duration) rg.playRange.max=player.video.duration+rg.playRange.max;
 		if (rg.playRange.max > 0 && current >= rg.playRange.max) {
 			return amplayer.jump(play.jump);
 		}
 		if (!rg.skipRange) return;
 		for (var i = 0; rg.skipRange.length; i++) {
 			var v = rg.skipRange[i];
-			if (current >= v.min && current < v.max) {
-				return player.seek(v.max);
+			if (current >= v.min) {
+				if (v.max < 0 && (v.max*-1) < player.video.duration) v.max=player.video.duration+v.max;
+				if (current < v.max) {
+					return player.seek(v.max);
+				}
 			}
 		}
 	}
