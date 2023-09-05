@@ -6,6 +6,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/middleware"
 
 	"github.com/admpub/webx/application/dbschema"
 )
@@ -23,7 +24,7 @@ type RouteRewrite struct {
 
 func (f *RouteRewrite) check() error {
 	ctx := f.Context()
-	f.Title = strings.TrimSpace(f.Title)
+	f.Name = strings.TrimSpace(f.Name)
 	f.Route = strings.TrimSpace(f.Route)
 	f.RewriteTo = strings.TrimSpace(f.RewriteTo)
 	if len(f.Route) == 0 {
@@ -38,7 +39,8 @@ func (f *RouteRewrite) check() error {
 	if !strings.HasPrefix(f.RewriteTo, `/`) {
 		f.RewriteTo = "/" + f.RewriteTo
 	}
-	return nil
+	err := middleware.ValidateRewriteRule(f.Route, f.RewriteTo)
+	return err
 }
 
 func (f *RouteRewrite) Add() (pk interface{}, err error) {

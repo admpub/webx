@@ -24,6 +24,10 @@ func init() {
 		g.Route(`GET,POST`, `/frontend/route_page_add`, FrontendRoutePageAdd)
 		g.Route(`GET,POST`, `/frontend/route_page_edit`, FrontendRoutePageEdit)
 		g.Route(`GET,POST`, `/frontend/route_page_delete`, FrontendRoutePageDelete)
+		g.Route(`GET,POST`, `/frontend/route_rewrite`, FrontendRouteRewrite)
+		g.Route(`GET,POST`, `/frontend/route_rewrite_add`, FrontendRouteRewriteAdd)
+		g.Route(`GET,POST`, `/frontend/route_rewrite_edit`, FrontendRouteRewriteEdit)
+		g.Route(`GET,POST`, `/frontend/route_rewrite_delete`, FrontendRouteRewriteDelete)
 	})
 
 	(*navigate.TopNavigate)[0].Children.Add(

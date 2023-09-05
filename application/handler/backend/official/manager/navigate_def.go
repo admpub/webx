@@ -46,22 +46,42 @@ var TopNavigate = navigate.List{
 	},
 	&navigate.Item{
 		Display: true,
-		Name:    `自定义路由页面`,
+		Name:    `自定义页面`,
 		Action:  `frontend/route_page`,
 	},
 	&navigate.Item{
 		Display: false,
-		Name:    `添加路由页面`,
+		Name:    `添加自定义页面`,
 		Action:  `frontend/route_page_add`,
 	},
 	&navigate.Item{
 		Display: false,
-		Name:    `修改路由页面`,
+		Name:    `修改自定义页面`,
 		Action:  `frontend/route_page_edit`,
 	},
 	&navigate.Item{
 		Display: false,
-		Name:    `删除路由页面`,
+		Name:    `删除自定义页面`,
 		Action:  `frontend/route_page_delete`,
+	},
+	&navigate.Item{
+		Display: true,
+		Name:    `自定义网址`,
+		Action:  `frontend/route_rewrite`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    `添加自定义网址`,
+		Action:  `frontend/route_rewrite_add`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    `修改自定义网址`,
+		Action:  `frontend/route_rewrite_edit`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    `删除自定义网址`,
+		Action:  `frontend/route_rewrite_delete`,
 	},
 }

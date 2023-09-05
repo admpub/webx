@@ -105,7 +105,7 @@ type OfficialCommonRouteRewrite struct {
 	Id        uint   `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
 	Route     string `db:"route" bson:"route" comment:"路由原网址" json:"route" xml:"route"`
 	RewriteTo string `db:"rewrite_to" bson:"rewrite_to" comment:"重写为网址" json:"rewrite_to" xml:"rewrite_to"`
-	Title     string `db:"title" bson:"title" comment:"规则标题" json:"title" xml:"title"`
+	Name      string `db:"name" bson:"name" comment:"规则名称" json:"name" xml:"name"`
 	Disabled  string `db:"disabled" bson:"disabled" comment:"是否禁用" json:"disabled" xml:"disabled"`
 	Created   uint   `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
 	Updated   uint   `db:"updated" bson:"updated" comment:"更新时间" json:"updated" xml:"updated"`
@@ -588,7 +588,7 @@ func (a *OfficialCommonRouteRewrite) Reset() *OfficialCommonRouteRewrite {
 	a.Id = 0
 	a.Route = ``
 	a.RewriteTo = ``
-	a.Title = ``
+	a.Name = ``
 	a.Disabled = ``
 	a.Created = 0
 	a.Updated = 0
@@ -601,7 +601,7 @@ func (a *OfficialCommonRouteRewrite) AsMap(onlyFields ...string) param.Store {
 		r["Id"] = a.Id
 		r["Route"] = a.Route
 		r["RewriteTo"] = a.RewriteTo
-		r["Title"] = a.Title
+		r["Name"] = a.Name
 		r["Disabled"] = a.Disabled
 		r["Created"] = a.Created
 		r["Updated"] = a.Updated
@@ -615,8 +615,8 @@ func (a *OfficialCommonRouteRewrite) AsMap(onlyFields ...string) param.Store {
 			r["Route"] = a.Route
 		case "RewriteTo":
 			r["RewriteTo"] = a.RewriteTo
-		case "Title":
-			r["Title"] = a.Title
+		case "Name":
+			r["Name"] = a.Name
 		case "Disabled":
 			r["Disabled"] = a.Disabled
 		case "Created":
@@ -637,8 +637,8 @@ func (a *OfficialCommonRouteRewrite) FromRow(row map[string]interface{}) {
 			a.Route = param.AsString(value)
 		case "rewrite_to":
 			a.RewriteTo = param.AsString(value)
-		case "title":
-			a.Title = param.AsString(value)
+		case "name":
+			a.Name = param.AsString(value)
 		case "disabled":
 			a.Disabled = param.AsString(value)
 		case "created":
@@ -675,8 +675,8 @@ func (a *OfficialCommonRouteRewrite) Set(key interface{}, value ...interface{}) 
 			a.Route = param.AsString(vv)
 		case "RewriteTo":
 			a.RewriteTo = param.AsString(vv)
-		case "Title":
-			a.Title = param.AsString(vv)
+		case "Name":
+			a.Name = param.AsString(vv)
 		case "Disabled":
 			a.Disabled = param.AsString(vv)
 		case "Created":
@@ -693,7 +693,7 @@ func (a *OfficialCommonRouteRewrite) AsRow(onlyFields ...string) param.Store {
 		r["id"] = a.Id
 		r["route"] = a.Route
 		r["rewrite_to"] = a.RewriteTo
-		r["title"] = a.Title
+		r["name"] = a.Name
 		r["disabled"] = a.Disabled
 		r["created"] = a.Created
 		r["updated"] = a.Updated
@@ -707,8 +707,8 @@ func (a *OfficialCommonRouteRewrite) AsRow(onlyFields ...string) param.Store {
 			r["route"] = a.Route
 		case "rewrite_to":
 			r["rewrite_to"] = a.RewriteTo
-		case "title":
-			r["title"] = a.Title
+		case "name":
+			r["name"] = a.Name
 		case "disabled":
 			r["disabled"] = a.Disabled
 		case "created":

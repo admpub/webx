@@ -70,7 +70,7 @@ func FrontendRoutePageAdd(ctx echo.Context) error {
 	}
 
 	ctx.Set(`activeURL`, `/manager/frontend/route_page`)
-	ctx.Set(`title`, ctx.T(`添加路由页面`))
+	ctx.Set(`title`, ctx.T(`添加自定义页面`))
 	ctx.Set(`typeList`, official.RoutePageTypes.Slice())
 	ctx.Set(`methodList`, echo.Methods())
 	ctx.SetFunc(`methodChecked`, func(method string, methods []string) bool {
@@ -121,7 +121,7 @@ func FrontendRoutePageEdit(ctx echo.Context) error {
 	}
 
 	ctx.Set(`activeURL`, `/manager/frontend/route_page`)
-	ctx.Set(`title`, ctx.T(`编辑路由页面`))
+	ctx.Set(`title`, ctx.T(`编辑自定义页面`))
 	ctx.Set(`typeList`, official.RoutePageTypes.Slice())
 	ctx.Set(`methodList`, echo.Methods())
 	ctx.SetFunc(`methodChecked`, func(method string, methods []string) bool {

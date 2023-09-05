@@ -5,6 +5,7 @@ import (
 
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 
 	"github.com/admpub/webx/application/dbschema"
 )
@@ -35,11 +36,11 @@ func (f *RoutePage) check() error {
 	f.Method = strings.Trim(f.Method, `,`)
 	f.Name = strings.TrimSpace(f.Name)
 	if len(f.Name) == 0 {
-		return f.Context().E(`请输入名称`)
+		return f.Context().NewError(code.InvalidParameter, `请输入名称`).SetZone(`name`)
 	}
 	f.Route = strings.TrimSpace(f.Route)
 	if len(f.Route) == 0 {
-		return f.Context().E(`请输入路由网址`)
+		return f.Context().NewError(code.InvalidParameter, `请输入路由网址`).SetZone(`route`)
 	}
 	if !strings.HasPrefix(f.Route, `/`) {
 		f.Route = "/" + f.Route

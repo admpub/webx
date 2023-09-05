@@ -110,6 +110,7 @@ func InitWebServer() {
 	e.Use(xMW.SessionInfo)
 	if config.IsInstalled() {
 		routepage.Apply(e, frontend.GlobalFuncMap())
+		applyRouteRewrite(e)
 	}
 	Apply()
 }
