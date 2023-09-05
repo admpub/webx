@@ -20,7 +20,8 @@
 			"srt2vttConvertApi": "",
 			"container": "",
 			"defaultType": "customHls",
-			"defaultExtName": ".m3u8"
+			"defaultExtName": ".m3u8",
+			"listeners":{}
 		},
 		'secure': window.location.protocol == 'https:',
 		'elemPrefix': function() {
@@ -341,31 +342,7 @@
 						customType: amplayer.player.customType
 					}
 				});
-				player.on('loadstart', function () {
-					var $video=$(amplayer.elemPrefix()+'video');
-					$video.attr('playsinline', 'true');
-					$video.attr('x5-playsinline', 'true');
-					$video.attr('webkit-playsinline', 'true');
-					if (player.video.paused) $(amplayer.elemPrefix()+'.play').show();
-				});
-				player.on('loadeddata', function () {
-					onLoaded(amplayer.options, player);
-				});
-				player.on('timeupdate', function () {
-					applyFilmRange(amplayer.options, player, player.video.currentTime);
-				});
-				player.on('ended', function () {
-					amplayer.jump(amplayer.options.jump);
-				});
-				player.on('pause', function () {
-					$(amplayer.elemPrefix()+'.play').show();
-				});
-				player.on('play', function () {
-					$(amplayer.elemPrefix()+'.play').hide();
-				});
-				player.on('error', function () {
-					//console.dir(arguments)
-				});
+				bindListener(player);
 				$(amplayer.elemPrefix()+'.play').click(function () {
 					player.play();
 				});
@@ -387,28 +364,7 @@
 						pic: c.pics
 					}
 				});
-				player.on('loadstart', function () {
-					var $video=$(amplayer.elemPrefix()+'video');
-					$video.attr('playsinline', 'true');
-					$video.attr('x5-playsinline', 'true');
-					$video.attr('webkit-playsinline', 'true');
-					if (player.video.paused) $(amplayer.elemPrefix()+'.play').show();
-				});
-				player.on('loadeddata', function () {
-					onLoaded(amplayer.options, player);
-				});
-				player.on('timeupdate', function () {
-					applyFilmRange(amplayer.options, player, player.video.currentTime);
-				});
-				player.on('ended', function () {
-					amplayer.jump(amplayer.options.jump);
-				});
-				player.on('pause', function () {
-					$(amplayer.elemPrefix()+'.play').show();
-				});
-				player.on('play', function () {
-					$(amplayer.elemPrefix()+'.play').hide();
-				});
+				bindListener(player);
 				$(amplayer.elemPrefix()+'.play').click(function () {
 					player.play();
 				});
@@ -445,6 +401,47 @@
 			top.location.href = jump;
 		}
 	};
+
+	function callListener(name,thisObj,args) {
+		if (!amplayer.options.listeners) return;
+		if (typeof amplayer.options.listeners[name] != 'function') return;
+		amplayer.options.listeners[name].call(thisObj,args);
+	}
+
+	function bindListener(player) {
+		player.on('loadstart', function () {
+			var $video=$(amplayer.elemPrefix()+'video');
+			$video.attr('playsinline', 'true');
+			$video.attr('x5-playsinline', 'true');
+			$video.attr('webkit-playsinline', 'true');
+			if (player.video.paused) $(amplayer.elemPrefix()+'.play').show();
+			callListener('loadstart',this,arguments)
+		});
+		player.on('loadeddata', function () {
+			onLoaded(amplayer.options, player);
+			callListener('loadeddata',this,arguments)
+		});
+		player.on('timeupdate', function () {
+			applyFilmRange(amplayer.options, player, player.video.currentTime);
+			callListener('timeupdate',this,arguments)
+		});
+		player.on('ended', function () {
+			callListener('ended',this,arguments)
+			amplayer.jump(amplayer.options.jump);
+		});
+		player.on('pause', function () {
+			$(amplayer.elemPrefix()+'.play').show();
+			callListener('pause',this,arguments)
+		});
+		player.on('play', function () {
+			$(amplayer.elemPrefix()+'.play').hide();
+			callListener('play',this,arguments)
+		});
+		player.on('error', function () {
+			//console.dir(arguments)
+			callListener('error',this,arguments)
+		});
+	}
 
 	function onLoaded(play, player) {
 		if (play.live) return;
