@@ -9,8 +9,12 @@
       <div class="d-flex ht-70 align-items-center justify-content-between pd-x-20 pd-lg-x-0">
         <h5 class="tx-size-sm-24 mg-b-0 tx-bold tx-spacing-neg-2">
           <a href="{{FrontendURL}}/" class="tx-white">
-            <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="wd-50 ht-50" alt="{{Config.base.siteName}}">
+            {{- if Config.base.siteLogo -}}
+            <img src="{{Config.base.siteLogo}}" class="ht-50" alt="{{Config.base.siteName}}">
+            {{- else -}}
+            <img src="{{AssetsURL `/images/logo.png`}}" class="wd-50 ht-50" alt="{{Config.base.siteName}}">
             {{Config.base.siteName}}
+            {{- end -}}
           </a>
         </h5>
         <a id="showMenu" href="javascript:;" class="tx-{{$textColor}} hidden-lg-up"><i class="fa fa-navicon tx-size-18"></i></a>

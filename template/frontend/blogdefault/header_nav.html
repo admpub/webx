@@ -5,8 +5,12 @@
                 <span><i class="fas fa-bars"></i></span>
             </div>
             <a href="{{FrontendURL}}/" class="main-logo">
-                <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" alt="{{Config.base.siteName}}" />
+                {{- if Config.base.siteLogo -}}
+                <img src="{{Config.base.siteLogo}}" alt="{{Config.base.siteName}}">
+                {{- else -}}
+                <img src="{{AssetsURL `/images/logo.png`}}" alt="{{Config.base.siteName}}">
                 {{Config.base.siteName}}
+                {{- end -}}
             </a>
         </div>
         <nav class="main-nav">
