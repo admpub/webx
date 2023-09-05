@@ -51,7 +51,7 @@ require (
 	github.com/webx-top/client v0.8.9
 	github.com/webx-top/com v0.9.6
 	github.com/webx-top/db v1.27.0
-	github.com/webx-top/echo v2.38.0+incompatible
+	github.com/webx-top/echo v2.38.1+incompatible
 	github.com/webx-top/echo-prometheus v1.1.1
 	github.com/webx-top/echo-socket.io v1.1.3
 	github.com/webx-top/image v0.1.0
@@ -198,7 +198,6 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-syslog v1.0.0 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
-	github.com/imdario/mergo v0.3.16 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
@@ -287,7 +286,7 @@ require (
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.12.0 // indirect
 	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63 // indirect
-	golang.org/x/image v0.11.0 // indirect
+	golang.org/x/image v0.12.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.12.0 // indirect
 	golang.org/x/net v0.14.0 // indirect
