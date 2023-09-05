@@ -30,7 +30,7 @@ func FrontendRouteList(ctx echo.Context) error {
 	prefix := ctx.Form(`prefix`)
 	size := ctx.Formx(`size`).Int()
 	if size < 1 {
-		size = 20
+		size = 10
 	}
 	var result []string
 	if len(prefix) > 0 {
