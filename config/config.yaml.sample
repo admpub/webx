@@ -44,7 +44,8 @@ sys {
     "0"   : "#default#error/500" #其它所有错误显示的模板
   }
   showExpirationTime    : 0 #显示过期时间：0为始终显示；大于0为距离剩余到期时间多少秒的时候显示(例如3153600表示有效期只剩1年的时候显示)；小于0为不显示
-  sessionName : "WEBXSID"
+  sessionName           : "WEBXSID"
+  disableAutoUpgradeDB  : false
 }
 cookie {
   path     : "/"
@@ -61,4 +62,14 @@ language {
   RulesPath    : ["config/i18n/rules"]
   MessagesPath : ["config/i18n/messages"]
   Reload       : true
+}
+extend {
+  upgradeDB : {
+    mySQLOnlineDDL : false
+  }
+  systemService : {
+    maxRetries    : 10
+    retryInterval : 60
+    options       : {}
+  }
 }
