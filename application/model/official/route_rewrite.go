@@ -31,7 +31,7 @@ func (f *RouteRewrite) check() error {
 		return ctx.NewError(code.InvalidParameter, `请输入路由网址`).SetZone(`route`)
 	}
 	if len(f.RewriteTo) == 0 {
-		return ctx.NewError(code.InvalidParameter, `请输入路由网址`).SetZone(`rewriteTo`)
+		return ctx.NewError(code.InvalidParameter, `请输入自定义网址`).SetZone(`rewriteTo`)
 	}
 	if !strings.HasPrefix(f.Route, `/`) {
 		f.Route = "/" + f.Route
