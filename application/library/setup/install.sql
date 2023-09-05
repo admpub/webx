@@ -524,6 +524,25 @@ CREATE TABLE `official_common_route_page` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `official_common_route_rewrite`
+--
+
+DROP TABLE IF EXISTS `official_common_route_rewrite`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `official_common_route_rewrite` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `route` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '路由原网址',
+  `rewrite_to` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '重写为网址',
+  `title` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '规则标题',
+  `disabled` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'N' COMMENT '是否禁用',
+  `created` int unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated` int unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='网址重写规则';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `official_common_sensitive`
 --
 
@@ -1179,4 +1198,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-14 22:00:49
+-- Dump completed on 2023-09-05 19:16:18
