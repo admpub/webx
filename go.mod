@@ -42,14 +42,14 @@ require (
 	github.com/gosimple/slug v1.13.1
 	github.com/hibiken/asynq v0.24.1
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76
-	github.com/markbates/goth v1.77.0
+	github.com/markbates/goth v1.78.0
 	github.com/prometheus/client_golang v1.16.0
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.4
 	github.com/swaggo/swag v1.16.1
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.8.9
-	github.com/webx-top/com v0.9.6
+	github.com/webx-top/com v0.9.7
 	github.com/webx-top/db v1.27.0
 	github.com/webx-top/echo v2.38.2+incompatible
 	github.com/webx-top/echo-prometheus v1.1.1
@@ -58,7 +58,7 @@ require (
 	github.com/webx-top/pagination v0.2.7
 	github.com/webx-top/validation v0.0.3 // indirect
 	github.com/yanyiwu/gojieba v1.3.0
-	golang.org/x/oauth2 v0.11.0
+	golang.org/x/oauth2 v0.12.0
 	golang.org/x/sync v0.3.0
 	gopkg.in/redis.v5 v5.2.9
 )
@@ -135,7 +135,7 @@ require (
 	github.com/admpub/timeago v1.2.1 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/andybalholm/brotli v1.0.5 // indirect
-	github.com/aws/aws-sdk-go v1.45.2 // indirect
+	github.com/aws/aws-sdk-go v1.45.4 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
@@ -158,7 +158,7 @@ require (
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/garyburd/redigo v1.6.4 // indirect
 	github.com/go-acme/lego/v4 v4.14.0 // indirect
-	github.com/go-errors/errors v1.4.2 // indirect
+	github.com/go-errors/errors v1.5.0 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.0 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/go-openapi/jsonpointer v0.20.0 // indirect
@@ -182,7 +182,7 @@ require (
 	github.com/gomodule/redigo v1.8.9 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20230901174712-0191c66da455 // indirect
+	github.com/google/pprof v0.0.0-20230906154834-20cde9067b3b // indirect
 	github.com/google/s2a-go v0.1.5 // indirect
 	github.com/google/uuid v1.3.1 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.5 // indirect
@@ -245,7 +245,7 @@ require (
 	github.com/prometheus/common v0.44.0 // indirect
 	github.com/prometheus/procfs v0.11.1 // indirect
 	github.com/quic-go/qpack v0.4.0 // indirect
-	github.com/quic-go/qtls-go1-20 v0.3.3 // indirect
+	github.com/quic-go/qtls-go1-20 v0.3.4 // indirect
 	github.com/quic-go/quic-go v0.38.1 // indirect
 	github.com/redis/go-redis/v9 v9.1.0 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
@@ -284,19 +284,19 @@ require (
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
 	go.mongodb.org/mongo-driver v1.12.1 // indirect
 	go.opencensus.io v0.24.0 // indirect
-	golang.org/x/crypto v0.12.0 // indirect
-	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63 // indirect
+	golang.org/x/crypto v0.13.0 // indirect
+	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
 	golang.org/x/image v0.12.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.12.0 // indirect
-	golang.org/x/net v0.14.0 // indirect
+	golang.org/x/net v0.15.0 // indirect
 	golang.org/x/sys v0.12.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
-	golang.org/x/tools v0.12.1-0.20230815132531-74c255bcf846 // indirect
+	golang.org/x/tools v0.13.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/api v0.138.0 // indirect
-	google.golang.org/appengine v1.6.7 // indirect
+	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20230815205213-6bfd019c3878 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20230815205213-6bfd019c3878 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230821184602-ccc8af3d0e93 // indirect
