@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/admpub/log"
 	"github.com/admpub/nging/v5/application/library/config"
@@ -17,8 +18,8 @@ var signals = []os.Signal{
 }
 
 var signalOperations = map[os.Signal][]func(int, engine.Engine){
-	os.Interrupt:    {StopWebServer},
-	syscall.SIGTERM: {StopWebServer},
+	os.Interrupt:    {stopWebServer},
+	syscall.SIGTERM: {stopWebServerForce},
 }
 
 func RegisterSignal(s os.Signal, op ...func(int, engine.Engine)) {
@@ -38,7 +39,17 @@ ROP:
 	}
 }
 
-func StopWebServer(i int, eng engine.Engine) {
+func stopWebServerWithTimeout(eng engine.Engine, d time.Duration) {
+	stopWebServer(0, eng)
+	time.Sleep(d)
+	stopWebServer(1, eng)
+}
+
+func stopWebServerForce(_ int, eng engine.Engine) {
+	stopWebServerWithTimeout(eng, time.Second*5)
+}
+
+func stopWebServer(i int, eng engine.Engine) {
 	if i > 0 {
 		err := eng.Stop()
 		if err != nil {
@@ -59,6 +70,14 @@ func StopWebServer(i int, eng engine.Engine) {
 	}()
 }
 
+func CallSignalOperation(sig os.Signal, i int, eng engine.Engine) {
+	if operations, ok := signalOperations[sig]; ok {
+		for _, operation := range operations {
+			operation(i, eng)
+		}
+	}
+}
+
 func handleSignal(eng engine.Engine) {
 	shutdown := make(chan os.Signal, 1)
 	// ctrl+c信号os.Interrupt
@@ -69,10 +88,6 @@ func handleSignal(eng engine.Engine) {
 	)
 	for i := 0; true; i++ {
 		sig := <-shutdown
-		if operations, ok := signalOperations[sig]; ok {
-			for _, operation := range operations {
-				operation(i, eng)
-			}
-		}
+		CallSignalOperation(sig, i, eng)
 	}
 }
