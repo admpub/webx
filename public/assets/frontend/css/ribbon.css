@@ -1,0 +1,217 @@
+.ribbon {
+  position:absolute;
+  top:.75rem;
+  right:-.25rem;
+  z-index:1;
+  padding:.25rem .75rem;
+  font-size:.625rem;
+  font-weight:600;
+  line-height:1.5rem;
+  color:#fff;
+  text-align:center;
+  text-transform:uppercase;
+  background:#206bc4;
+  border-color:#206bc4;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:2rem;
+  min-width:2rem
+}
+.ribbon:before {
+  position:absolute;
+  right:0;
+  bottom:100%;
+  width:0;
+  height:0;
+  content:"";
+  filter:brightness(70%);
+  border:.125rem solid;
+  border-color:inherit;
+  border-top-color:transparent;
+  border-right-color:transparent
+}
+.ribbon.bg-blue {
+  background:#206bc4;
+  border-color:#206bc4
+}
+.ribbon.bg-blue-lt {
+  background:#3478c9;
+  border-color:#3478c9!important
+}
+.ribbon.bg-azure {
+  background:#4299e1;
+  border-color:#4299e1
+}
+.ribbon.bg-azure-lt {
+  background:#53a2e4;
+  border-color:#53a2e4!important
+}
+.ribbon.bg-indigo {
+  background:#4263eb;
+  border-color:#4263eb
+}
+.ribbon.bg-indigo-lt {
+  background:#5371ed;
+  border-color:#5371ed!important
+}
+.ribbon.bg-purple {
+  background:#ae3ec9;
+  border-color:#ae3ec9
+}
+.ribbon.bg-purple-lt {
+  background:#b54fce;
+  border-color:#b54fce!important
+}
+.ribbon.bg-pink {
+  background:#d6336c;
+  border-color:#d6336c
+}
+.ribbon.bg-pink-lt {
+  background:#da4579;
+  border-color:#da4579!important
+}
+.ribbon.bg-red {
+  background:#d63939;
+  border-color:#d63939
+}
+.ribbon.bg-red-lt {
+  background:#da4b4b;
+  border-color:#da4b4b!important
+}
+.ribbon.bg-orange {
+  background:#f76707;
+  border-color:#f76707
+}
+.ribbon.bg-orange-lt {
+  background:#f8751d;
+  border-color:#f8751d!important
+}
+.ribbon.bg-yellow {
+  background:#f59f00;
+  border-color:#f59f00
+}
+.ribbon.bg-yellow-lt {
+  background:#f6a817;
+  border-color:#f6a817!important
+}
+.ribbon.bg-lime {
+  background:#74b816;
+  border-color:#74b816
+}
+.ribbon.bg-lime-lt {
+  background:#81be2b;
+  border-color:#81be2b!important
+}
+.ribbon.bg-green {
+  background:#2fb344;
+  border-color:#2fb344
+}
+.ribbon.bg-green-lt {
+  background:#42ba55;
+  border-color:#42ba55!important
+}
+.ribbon.bg-teal {
+  background:#0ca678;
+  border-color:#0ca678
+}
+.ribbon.bg-teal-lt {
+  background:#22ae84;
+  border-color:#22ae84!important
+}
+.ribbon.bg-cyan {
+  background:#17a2b8;
+  border-color:#17a2b8
+}
+.ribbon.bg-cyan-lt {
+  background:#2caabe;
+  border-color:#2caabe!important
+}
+.ribbon .icon {
+  width:1.25rem;
+  height:1.25rem;
+  font-size:1.25rem
+}
+.ribbon-top {
+  top:-.25rem;
+  right:.75rem;
+  width:2rem;
+  padding:.5rem 0
+}
+.ribbon-top:before {
+  top:0;
+  right:100%;
+  bottom:auto;
+  border-color:inherit;
+  border-top-color:transparent;
+  border-left-color:transparent
+}
+.ribbon-top.ribbon-start {
+  right:auto;
+  left:.75rem
+}
+.ribbon-top.ribbon-start:before {
+  top:0;
+  right:100%;
+  left:auto
+}
+.ribbon-start {
+  right:auto;
+  left:-.25rem
+}
+.ribbon-start:before {
+  top:auto;
+  bottom:100%;
+  left:0;
+  border-color:inherit;
+  border-top-color:transparent;
+  border-left-color:transparent
+}
+.ribbon-bottom {
+  top:auto;
+  bottom:.75rem
+}
+.ribbon-bookmark {
+  padding-left:.25rem
+}
+.ribbon-bookmark:after {
+  position:absolute;
+  top:0;
+  right:100%;
+  display:block;
+  width:0;
+  height:0;
+  content:"";
+  border:1.25rem solid;
+  border-color:inherit;
+  border-right-width:0;
+  border-left-color:transparent;
+  border-left-width:.5rem
+}
+.ribbon-bookmark.ribbon-left {
+  padding-right:.5rem;
+  padding-left:.5rem
+}
+.ribbon-bookmark.ribbon-bottom.ribbon-start:after,
+.ribbon-bookmark.ribbon-left.ribbon-start:after {
+  right:auto;
+  left:100%;
+  border-right-color:transparent;
+  border-right-width:.5rem;
+  border-left-width:0
+}
+.ribbon-bookmark.ribbon-top {
+  padding-right:0;
+  padding-bottom:.25rem;
+  padding-left:0
+}
+.ribbon-bookmark.ribbon-top:after {
+  top:100%;
+  right:0;
+  left:0;
+  border-color:inherit;
+  border-width:1rem;
+  border-top-width:0;
+  border-bottom-color:transparent;
+  border-bottom-width:.5rem
+}
