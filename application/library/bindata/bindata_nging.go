@@ -62,26 +62,32 @@ func Initialize(callbacks ...func()) {
 		})
 	}
 
-	if echo.String(`LABEL`) != `dev` { // 在开发环境下不启用，避免无法测试bindata真实效果
-		// 在bindata模式，支持优先读取本地的静态资源文件和模板文件，在没有找到的情况下才读取bindata内的文件
+	if echo.String(`LABEL`) != `dev` { // 在开发环境下不启用，避免无法测试 bindata 真实效果
+		// 在 bindata 模式，支持优先读取本地的静态资源文件和模板文件，在没有找到的情况下才读取 bindata 内的文件
 
 		// StaticMW
 
 		fileSystems := xtemplate.NewFileSystems()
-		fileSystems.Register(xtemplate.NewStaticDir(backend.AssetsDir, "/public/assets/"))
-		fileSystems.Register(bindata.StaticAssetFS)
+		fileSystems.Register(xtemplate.NewStaticDir(backend.AssetsDir, "/public/assets/")) // 注册本地文件系统内的文件
+		fileSystems.Register(bindata.StaticAssetFS)                                        // 注册 bindata 打包的文件
 		bootconfig.StaticMW = mwBindata.Static("/public/assets/", fileSystems)
 
 		// Template file manager
 
 		// 后台
-		backendManagers := []driver.Manager{manager.New(), bootconfig.BackendTmplMgr}
+		backendManagers := []driver.Manager{
+			manager.New(),             // 本地文件系统内的模板文件
+			bootconfig.BackendTmplMgr, // bindata 打包的模板文件
+		}
 		backendMultiManager := xtemplate.NewMultiManager(backend.TemplateDir, backendManagers...)
 		log.Debugf(`%s Enabled MultiManager (num: %d)`, color.GreenString(`[backend.renderer]`), len(backendManagers))
 		bootconfig.BackendTmplMgr = backendMultiManager
 
 		// 前台
-		frontendManagers := []driver.Manager{manager.New(), bootconfig.FrontendTmplMgr}
+		frontendManagers := []driver.Manager{
+			manager.New(),              // 本地文件系统内的模板文件
+			bootconfig.FrontendTmplMgr, // bindata 打包的模板文件
+		}
 		frontendMultiManager := xtemplate.NewMultiManager(frontend.TemplateDir, frontendManagers...)
 		log.Debugf(`%s Enabled MultiManager (num: %d)`, color.GreenString(`[frontend.renderer]`), len(frontendManagers))
 		bootconfig.FrontendTmplMgr = frontendMultiManager
