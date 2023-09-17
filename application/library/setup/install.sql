@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.33, for macos12.6 (x86_64)
+-- MySQL dump 10.13  Distrib 8.1.0, for macos12.6 (x86_64)
 --
 -- Host: 127.0.0.1    Database: nging
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.1.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -572,7 +572,8 @@ CREATE TABLE `official_common_tags` (
   `num` bigint unsigned NOT NULL DEFAULT '0' COMMENT '数量',
   `group` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '分组标识',
   `display` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Y' COMMENT '是否显示',
-  PRIMARY KEY (`name`,`group`)
+  PRIMARY KEY (`name`,`group`),
+  KEY `common_tags_group` (`group`,`display`,`num` DESC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='标签库';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1198,4 +1199,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-05 19:59:46
+-- Dump completed on 2023-09-17 15:47:15
