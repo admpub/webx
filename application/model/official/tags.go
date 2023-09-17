@@ -37,11 +37,12 @@ func (f *Tags) Add() (pk interface{}, err error) {
 		if err != db.ErrNoMoreRows {
 			return
 		}
-		f.OfficialCommonTags.Num = 1
 		return f.OfficialCommonTags.Insert()
 	}
 
-	err = f.IncrNum(f.Group, f.Name)
+	if f.Num != 0 {
+		err = f.IncrNum(f.Group, f.Name, int(f.Num))
+	}
 	return
 }
 
