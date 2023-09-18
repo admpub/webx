@@ -343,9 +343,6 @@
 					}
 				});
 				bindListener(player);
-				$(amplayer.elemPrefix()+'.play').click(function () {
-					player.play();
-				});
 				$(amplayer.elemPrefix()+'#video').data('player', player);
 				return player;
 			},
@@ -365,9 +362,6 @@
 					}
 				});
 				bindListener(player);
-				$(amplayer.elemPrefix()+'.play').click(function () {
-					player.play();
-				});
 				$(amplayer.elemPrefix()+'#video').data('player', player);
 				return player;
 			}
@@ -414,7 +408,7 @@
 			$video.attr('playsinline', 'true');
 			$video.attr('x5-playsinline', 'true');
 			$video.attr('webkit-playsinline', 'true');
-			if (player.video.paused) $(amplayer.elemPrefix()+'.play').show();
+			if (player.video.paused) $(amplayer.elemPrefix()+'.amplayer-play').show();
 			callListener('loadstart',this,arguments)
 		});
 		player.on('loadeddata', function () {
@@ -430,16 +424,19 @@
 			amplayer.jump(amplayer.options.jump);
 		});
 		player.on('pause', function () {
-			$(amplayer.elemPrefix()+'.play').show();
+			$(amplayer.elemPrefix()+'.amplayer-play').show();
 			callListener('pause',this,arguments)
 		});
 		player.on('play', function () {
-			$(amplayer.elemPrefix()+'.play').hide();
+			$(amplayer.elemPrefix()+'.amplayer-play').hide();
 			callListener('play',this,arguments)
 		});
 		player.on('error', function () {
 			//console.dir(arguments)
 			callListener('error',this,arguments)
+		});
+		$(amplayer.elemPrefix()+'.amplayer-play').click(function () {
+			player.play();
 		});
 	}
 
