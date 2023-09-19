@@ -431,7 +431,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.5
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.45.11
+# github.com/aws/aws-sdk-go v1.45.12
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -853,8 +853,8 @@ github.com/huichen/sego
 # github.com/inconshreveable/mousetrap v1.1.0
 ## explicit; go 1.18
 github.com/inconshreveable/mousetrap
-# github.com/jlaffaye/ftp v0.0.0-20190624084859-c1312a7102bf
-## explicit
+# github.com/jlaffaye/ftp v0.2.0
+## explicit; go 1.17
 github.com/jlaffaye/ftp
 # github.com/jmespath/go-jmespath v0.4.0
 ## explicit; go 1.14
@@ -872,7 +872,7 @@ github.com/kelseyhightower/envconfig
 ## explicit; go 1.14
 github.com/kisielk/errcheck
 github.com/kisielk/errcheck/errcheck
-# github.com/klauspost/compress v1.16.7
+# github.com/klauspost/compress v1.17.0
 ## explicit; go 1.18
 github.com/klauspost/compress
 github.com/klauspost/compress/flate
