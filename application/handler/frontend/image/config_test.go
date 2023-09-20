@@ -36,7 +36,7 @@ func TestStat(t *testing.T) {
 	}
 	//echo.Dump(cfg)
 	mgr := s3client.New(cfg, 1024000)
-	err = mgr.Connect()
+	_, err = mgr.Connect()
 	if err != nil {
 		panic(err)
 	}

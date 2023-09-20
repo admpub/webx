@@ -3,6 +3,7 @@ package complaint
 import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/formfilter"
 
 	"github.com/admpub/nging/v5/application/handler"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
@@ -35,13 +36,19 @@ func Index(ctx echo.Context) error {
 	return ctx.Render(`official/customer/complaint/index`, handler.Err(ctx, err))
 }
 
+func formFilter() echo.FormDataFilter {
+	return formfilter.Build(
+		formfilter.Exclude(`updated`, `created`, `content`, `targetIdent`, `targetId`, `targetType`, `type`),
+	)
+}
+
 func Edit(ctx echo.Context) error {
 	var err error
 	id := ctx.Formx(`id`).Uint64()
 	m := modelCustomer.NewComplaint(ctx)
 	err = m.Get(nil, db.Cond{`id`: id})
 	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCommonComplaint, echo.ExcludeFieldName(`created`))
+		err = ctx.MustBind(m.OfficialCommonComplaint, formFilter())
 		if err == nil {
 			m.Id = id
 			err = m.Edit(nil, db.Cond{`id`: id})
