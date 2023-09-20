@@ -64,6 +64,7 @@ func Edit(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/official/customer/complaint/index`)
 	ctx.Set(`types`, modelCustomer.ComplaintTypeList())
 	ctx.Set(`targets`, modelCustomer.ComplaintTargetList())
+	ctx.Set(`data`, m.OfficialCommonComplaint)
 	return ctx.Render(`official/customer/complaint/edit`, err)
 }
 

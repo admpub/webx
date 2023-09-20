@@ -17,7 +17,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"投诉类型"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{- $v := $.Form "type"}}
+                  {{- $v := $.Stored.data.Type}}
                   {{- range $k, $t := $.Stored.types}}
                   <div class="radio radio-success radio-inline">
                     <input type="radio" value="{{$t.K}}" id="type-{{$t.K}}" name="type"{{if or (eq $v $t.K) (and (eq $v ``) (eq $k 0))}} checked{{end}} disabled> <label for="type-{{$t.K}}">{{$t.V}}</label>
@@ -26,7 +26,7 @@
                 </div>
                 <label class="col-sm-2 control-label">{{"投诉目标"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{- $v := $.Form "targetType"}}
+                  {{- $v := $.Stored.data.TargetType}}
                   {{- range $k, $t := $.Stored.targets}}
                   <div class="radio radio-success radio-inline">
                     <input type="radio" value="{{$t.K}}" id="targetType-{{$t.K}}" name="targetType"{{if or (eq $v $t.K) (and (eq $v ``) (eq $k 0))}} checked{{end}} disabled> <label for="targetType-{{$t.K}}">{{$t.V}}</label>
@@ -37,11 +37,11 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"目标ID"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="number" class="form-control" name="targetId" value="{{$.Form `targetId`}}" min="0" disabled>
+                    <input type="number" class="form-control" name="targetId" value="{{$.Stored.data.TargetId}}" min="0" disabled>
                 </div>
                 <label class="col-sm-2 control-label">{{"目标标识"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="targetIdent" value="{{$.Form `targetIdent`}}" disabled>
+                    <input type="text" class="form-control" name="targetIdent" value="{{$.Stored.data.TargetIdent}}" disabled>
                 </div>
               </div>
 
