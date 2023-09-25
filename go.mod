@@ -126,6 +126,7 @@ require (
 	github.com/admpub/randomize v0.0.2 // indirect
 	github.com/admpub/realip v0.0.0-20210421084339-374cf5df122d // indirect
 	github.com/admpub/redistore v1.2.1 // indirect
+	github.com/admpub/regexp2 v1.1.7 // indirect
 	github.com/admpub/securecookie v1.1.2 // indirect
 	github.com/admpub/service v0.0.5 // indirect
 	github.com/admpub/sessions v0.1.3 // indirect

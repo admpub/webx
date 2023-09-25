@@ -391,6 +391,10 @@ github.com/admpub/redistore
 github.com/admpub/redsync/v4
 github.com/admpub/redsync/v4/redis
 github.com/admpub/redsync/v4/redis/goredis/v5
+# github.com/admpub/regexp2 v1.1.7
+## explicit
+github.com/admpub/regexp2
+github.com/admpub/regexp2/syntax
 # github.com/admpub/resty/v2 v2.7.1
 ## explicit; go 1.16
 github.com/admpub/resty/v2
