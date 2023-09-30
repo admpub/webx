@@ -29,6 +29,8 @@ type Mutex struct {
 	genValueFunc func() (string, error)
 	value        string
 	until        time.Time
+	shuffle      bool
+	failFast     bool
 
 	pools []redis.Pool
 }
@@ -50,7 +52,7 @@ func (m *Mutex) Until() time.Time {
 
 // Lock locks m. In case it returns an error on failure, you may retry to acquire the lock by calling this method again.
 func (m *Mutex) Lock() error {
-	return m.LockContext(nil)
+	return m.LockContext(context.Background())
 }
 
 // LockContext locks m. In case it returns an error on failure, you may retry to acquire the lock by calling this method again.
@@ -64,13 +66,21 @@ func (m *Mutex) LockContext(ctx context.Context) error {
 		return err
 	}
 
+	var timer *time.Timer
 	for i := 0; i < m.tries; i++ {
 		if i != 0 {
+			if timer == nil {
+				timer = time.NewTimer(m.delayFunc(i))
+			} else {
+				timer.Reset(m.delayFunc(i))
+			}
+
 			select {
 			case <-ctx.Done():
+				timer.Stop()
 				// Exit early if the context is done.
 				return ErrFailed
-			case <-time.After(m.delayFunc(i)):
+			case <-timer.C:
 				// Fall-through when the delay timer completes.
 			}
 		}
@@ -109,7 +119,7 @@ func (m *Mutex) LockContext(ctx context.Context) error {
 
 // Unlock unlocks m and returns the status of unlock.
 func (m *Mutex) Unlock() (bool, error) {
-	return m.UnlockContext(nil)
+	return m.UnlockContext(context.Background())
 }
 
 // UnlockContext unlocks m and returns the status of unlock.
@@ -125,7 +135,7 @@ func (m *Mutex) UnlockContext(ctx context.Context) (bool, error) {
 
 // Extend resets the mutex's expiry and returns the status of expiry extension.
 func (m *Mutex) Extend() (bool, error) {
-	return m.ExtendContext(nil)
+	return m.ExtendContext(context.Background())
 }
 
 // ExtendContext resets the mutex's expiry and returns the status of expiry extension.
@@ -152,7 +162,7 @@ func (m *Mutex) ExtendContext(ctx context.Context) (bool, error) {
 //
 // Deprecated: Use Until instead. See https://github.com/go-redsync/redsync/issues/72.
 func (m *Mutex) Valid() (bool, error) {
-	return m.ValidContext(nil)
+	return m.ValidContext(context.Background())
 }
 
 // ValidContext returns true if the lock acquired through m is still valid. It may
@@ -249,31 +259,47 @@ func (m *Mutex) touch(ctx context.Context, pool redis.Pool, value string, expiry
 
 func (m *Mutex) actOnPoolsAsync(actFn func(redis.Pool) (bool, error)) (int, error) {
 	type result struct {
-		Node   int
-		Status bool
-		Err    error
+		node     int
+		statusOK bool
+		err      error
 	}
 
-	ch := make(chan result)
+	ch := make(chan result, len(m.pools))
 	for node, pool := range m.pools {
 		go func(node int, pool redis.Pool) {
-			r := result{Node: node}
-			r.Status, r.Err = actFn(pool)
+			r := result{node: node}
+			r.statusOK, r.err = actFn(pool)
 			ch <- r
 		}(node, pool)
 	}
-	n := 0
-	var taken []int
-	var err error
+
+	var (
+		n     = 0
+		taken []int
+		err   error
+	)
+
 	for range m.pools {
 		r := <-ch
-		if r.Status {
+		if r.statusOK {
 			n++
-		} else if r.Err != nil {
-			err = multierror.Append(err, &RedisError{Node: r.Node, Err: r.Err})
+		} else if r.err != nil {
+			err = multierror.Append(err, &RedisError{Node: r.node, Err: r.err})
 		} else {
-			taken = append(taken, r.Node)
-			err = multierror.Append(err, &ErrNodeTaken{Node: r.Node})
+			taken = append(taken, r.node)
+			err = multierror.Append(err, &ErrNodeTaken{Node: r.node})
+		}
+
+		if m.failFast {
+			// fast retrun
+			if n >= m.quorum {
+				return n, err
+			}
+
+			// fail fast
+			if len(taken) >= m.quorum {
+				return n, &ErrTaken{Nodes: taken}
+			}
 		}
 	}
 

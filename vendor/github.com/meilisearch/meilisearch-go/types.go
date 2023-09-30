@@ -218,6 +218,7 @@ type TaskResult struct {
 	Limit   int64  `json:"limit"`
 	From    int64  `json:"from"`
 	Next    int64  `json:"next"`
+	Total   int64  `json:"total"`
 }
 
 // Keys allow the user to connect to the Meilisearch instance
@@ -299,6 +300,7 @@ type SearchRequest struct {
 	Offset                int64
 	Limit                 int64
 	AttributesToRetrieve  []string
+	AttributesToSearchOn  []string
 	AttributesToCrop      []string
 	CropLength            int64
 	CropMarker            string
@@ -308,9 +310,11 @@ type SearchRequest struct {
 	MatchingStrategy      string
 	Filter                interface{}
 	ShowMatchesPosition   bool
+	ShowRankingScore      bool
 	Facets                []string
 	PlaceholderSearch     bool
 	Sort                  []string
+	Vector                []float64
 	HitsPerPage           int64
 	Page                  int64
 	IndexUID              string

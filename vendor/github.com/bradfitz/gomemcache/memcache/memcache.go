@@ -1,5 +1,5 @@
 /*
-Copyright 2011 Google Inc.
+Copyright 2011 The gomemcache AUTHORS
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ var (
 
 const (
 	// DefaultTimeout is the default socket read/write timeout.
-	DefaultTimeout = 100 * time.Millisecond
+	DefaultTimeout = 500 * time.Millisecond
 
 	// DefaultMaxIdleConns is the default maximum number of idle connections
 	// kept for any single address.
@@ -132,8 +132,12 @@ func NewFromSelector(ss ServerSelector) *Client {
 // Client is a memcache client.
 // It is safe for unlocked use by multiple concurrent goroutines.
 type Client struct {
-	// DialContext connects to the address on the named network
-	// using the provided context
+	// DialContext connects to the address on the named network using the
+	// provided context.
+	//
+	// To connect to servers using TLS (memcached running with "--enable-ssl"),
+	// use a DialContext func that uses tls.Dialer.DialContext. See this
+	// package's tests as an example.
 	DialContext func(ctx context.Context, network, address string) (net.Conn, error)
 
 	// Timeout specifies the socket read/write timeout.
@@ -171,8 +175,11 @@ type Item struct {
 	// Zero means the Item has no expiration time.
 	Expiration int32
 
-	// Compare and swap ID.
-	casid uint64
+	// CasID is the compare and swap ID.
+	//
+	// It's populated by get requests and then the same value is
+	// required for a CompareAndSwap request to succeed.
+	CasID uint64
 }
 
 // conn is a connection to a server.
@@ -535,7 +542,7 @@ func parseGetResponse(r *bufio.Reader, cb func(*Item)) error {
 // It does not read the bytes of the item.
 func scanGetResponseLine(line []byte, it *Item) (size int, err error) {
 	pattern := "VALUE %s %d %d %d\r\n"
-	dest := []interface{}{&it.Key, &it.Flags, &size, &it.casid}
+	dest := []interface{}{&it.Key, &it.Flags, &size, &it.CasID}
 	if bytes.Count(line, space) == 3 {
 		pattern = "VALUE %s %d %d\r\n"
 		dest = dest[:3]
@@ -618,7 +625,7 @@ func (c *Client) populateOne(rw *bufio.ReadWriter, verb string, item *Item) erro
 	var err error
 	if verb == "cas" {
 		_, err = fmt.Fprintf(rw, "%s %s %d %d %d %d\r\n",
-			verb, item.Key, item.Flags, item.Expiration, len(item.Value), item.casid)
+			verb, item.Key, item.Flags, item.Expiration, len(item.Value), item.CasID)
 	} else {
 		_, err = fmt.Fprintf(rw, "%s %s %d %d %d\r\n",
 			verb, item.Key, item.Flags, item.Expiration, len(item.Value))

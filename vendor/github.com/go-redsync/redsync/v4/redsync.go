@@ -42,6 +42,9 @@ func (r *Redsync) NewMutex(name string, options ...Option) *Mutex {
 	for _, o := range options {
 		o.Apply(m)
 	}
+	if m.shuffle {
+		randomPools(m.pools)
+	}
 	return m
 }
 
@@ -59,6 +62,7 @@ func (f OptionFunc) Apply(mutex *Mutex) {
 }
 
 // WithExpiry can be used to set the expiry of a mutex to the given value.
+// The default is 8s.
 func WithExpiry(expiry time.Duration) Option {
 	return OptionFunc(func(m *Mutex) {
 		m.expiry = expiry
@@ -66,6 +70,7 @@ func WithExpiry(expiry time.Duration) Option {
 }
 
 // WithTries can be used to set the number of times lock acquire is attempted.
+// The default value is 32.
 func WithTries(tries int) Option {
 	return OptionFunc(func(m *Mutex) {
 		m.tries = tries
@@ -73,6 +78,7 @@ func WithTries(tries int) Option {
 }
 
 // WithRetryDelay can be used to set the amount of time to wait between retries.
+// The default value is rand(50ms, 250ms).
 func WithRetryDelay(delay time.Duration) Option {
 	return OptionFunc(func(m *Mutex) {
 		m.delayFunc = func(tries int) time.Duration {
@@ -89,6 +95,7 @@ func WithRetryDelayFunc(delayFunc DelayFunc) Option {
 }
 
 // WithDriftFactor can be used to set the clock drift factor.
+// The default value is 0.01.
 func WithDriftFactor(factor float64) Option {
 	return OptionFunc(func(m *Mutex) {
 		m.driftFactor = factor
@@ -96,6 +103,7 @@ func WithDriftFactor(factor float64) Option {
 }
 
 // WithTimeoutFactor can be used to set the timeout factor.
+// The default value is 0.05.
 func WithTimeoutFactor(factor float64) Option {
 	return OptionFunc(func(m *Mutex) {
 		m.timeoutFactor = factor
@@ -114,5 +122,29 @@ func WithGenValueFunc(genValueFunc func() (string, error)) Option {
 func WithValue(v string) Option {
 	return OptionFunc(func(m *Mutex) {
 		m.value = v
+	})
+}
+
+// WithFailFast can be used to quickly acquire and release the lock.
+// When some Redis servers are blocking, we do not need to wait for responses from all the Redis servers response.
+// As long as the quorum is met, we can assume the lock is acquired. The effect of this parameter is to achieve low
+// latency, avoid Redis blocking causing Lock/Unlock to not return for a long time.
+func WithFailFast(b bool) Option {
+	return OptionFunc(func(m *Mutex) {
+		m.failFast = b
+	})
+}
+
+// WithShufflePools can be used to shuffle Redis pools to reduce centralized access in concurrent scenarios.
+func WithShufflePools(b bool) Option {
+	return OptionFunc(func(m *Mutex) {
+		m.shuffle = b
+	})
+}
+
+// randomPools shuffles Redis pools.
+func randomPools(pools []redis.Pool) {
+	rand.Shuffle(len(pools), func(i, j int) {
+		pools[i], pools[j] = pools[j], pools[i]
 	})
 }
