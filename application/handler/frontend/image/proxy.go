@@ -14,6 +14,7 @@ import (
 	uploadChecker "github.com/admpub/nging/v5/application/registry/upload/checker"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/middleware/tplfunc"
 	"github.com/webx-top/echo/param"
 )
@@ -43,7 +44,7 @@ func Proxy(ctx echo.Context) error {
 		height = width
 	}
 	if width <= 0 || height <= 0 {
-		return ctx.E(`Invalid size`)
+		return ctx.NewError(code.InvalidParameter, `Invalid size`).SetZone(`size`)
 	}
 	var suffix string
 	if len(extension) > 0 {
