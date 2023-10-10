@@ -41,7 +41,7 @@ func (f *Relation) HasGroupLevelByCustomerID(customerID uint64, group string) bo
 }
 
 func (f *Relation) GetGroupLevelByCustomerID(customerID uint64, group string) (*dbschema.OfficialCustomerLevel, error) {
-	row := &dbschema.OfficialCustomerLevel{}
+	row := dbschema.NewOfficialCustomerLevel(f.Context())
 	lvM := dbschema.NewOfficialCustomerLevel(f.Context())
 	p := f.NewParam().SetAlias(`r`).AddJoin(`INNER`, lvM.Name_(), `b`, `b.id=r.level_id`)
 	p.SetArgs(db.And(
