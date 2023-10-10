@@ -75,27 +75,40 @@
                         {{range $k,$v := $.Stored.listData}}
 						<tr>
 							<td>{{$v.Id}}</td>
-							<td class="no-padding-x"><a href="{{FrontendURL}}/u/{{$v.Id}}" target="_blank" class="text-bold"><img style="width:50px;height:50px" src="{{if $v.Avatar}}{{AddSuffix $v.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" onerror="this.src='{{AssetsURL}}/images/user_128.png';" /></a></td>
+							<td class="no-padding-x"><a href="{{FrontendURL}}/u/{{$v.Id}}" target="_blank" class="text-bold"><img style="width:50px;height:50px" src="{{if $v.Avatar}}{{AddSuffix $v.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" onerror="this.src='{{AssetsURL}}/images/user_128.png';" /></a></td>
 							<td>
 								<a href="{{FrontendURL}}/u/{{$v.Id}}" target="_blank" class="text-bold">{{$v.Name}}</a>
 								{{- if eq $v.Online "Y" }}
-								<img src="{{AssetsURL}}/images/state_online.png" alt="Status" data-toggle="tooltip" title="{{"在线"|$.T}}" />
+								<img src="{{AssetsURL}}/images/state_online.png" alt="Status" data-toggle="tooltip" title="{{`在线`|$.T}}" />
 								{{- end -}}
 								<span class="pull-right">
 								{{- if $v.SessionId -}}
-								<a onclick="return confirm('{{$.T `真的要将客户“%s”踢下线吗？` $v.Name}}');" title="{{"将客户踢下线"|$.T}}" data-toggle="tooltip" class="text-red" href="{{BackendURL}}/official/customer/kick?id={{$v.Id}}">[{{`踢下线`|$.T}}]</a>
+								<a onclick="return confirm('{{$.T `真的要将客户“%s”踢下线吗？` $v.Name}}');" title="{{`将客户踢下线`|$.T}}" data-toggle="tooltip" class="text-red" href="{{BackendURL}}/official/customer/kick?id={{$v.Id}}">[{{`踢下线`|$.T}}]</a>
 								{{end}}
-								<a title="{{"查看登录记录"|$.T}}" data-toggle="tooltip" class="text-info" href="{{BackendURL}}/manager/login_log?ownerType=customer&username={{$v.Name}}" target="_blank">[{{`登录记录`|$.T}}]</a>
+								<a title="{{`查看登录记录`|$.T}}" data-toggle="tooltip" class="text-info" href="{{BackendURL}}/manager/login_log?ownerType=customer&username={{$v.Name}}" target="_blank">[{{`登录记录`|$.T}}]</a>
 								</span>
 								<br />
 								{{- if $v.Group}}
-								<span class="label label-info label-xs" data-toggle="tooltip" title="{{`客户组`|$.T}}: {{$v.Group.Name}}">{{$v.Group.Name}}</span>
+								<span class="label-group">
+									<span class="label label-black label-xs">{{`组`|$.T}}</span><span class="label label-info label-xs" data-toggle="tooltip" title="{{$v.Group.Name}}">{{$v.Group.Name}}</span>
+								</span>
 								{{- end}}
 								{{- if $v.Level}}
-								<span class="label label-primary label-xs" data-toggle="tooltip" title="{{`客户等级`|$.T}}: {{$v.Level.Name}}">{{$v.Level.Name}}</span>
+								<span class="label-group">
+									<span class="label label-black label-xs">{{`等级`|$.T}}</span><span class="label label-primary label-xs" data-toggle="tooltip" title="{{$v.Level.Name}} ({{call $.Func.levelGroupName $v.Level.Group}})" style="{{if $v.Level.Color}}color:{{$v.Level.Color}}{{end}};{{if $v.Level.Bgcolor}}background-color:{{$v.Level.Bgcolor}}{{end}}">{{$v.Level.Name}}</span>
+								</span>
+								{{- end}}
+								{{- range $lk,$lv := $v.LevelExtend}}
+								{{- if $lv.Level -}}
+								<span class="label-group">
+									<span class="label label-black label-xs">{{`等级`|$.T}}</span><span class="label label-primary label-xs" data-toggle="tooltip" title="{{$lv.Level.Name}} ({{call $.Func.levelGroupName $lv.Level.Group}})" style="{{if $lv.Level.Color}}color:{{$lv.Level.Color}}{{end}};{{if $lv.Level.Bgcolor}}background-color:{{$lv.Level.Bgcolor}}{{end}}">{{$lv.Level.Name}}</span>
+								</span>
+								{{- end -}}
 								{{- end}}
 								{{- if $v.Agent}}
-								<span class="label label-danger label-xs" data-toggle="tooltip" title="{{`代理等级`|$.T}}: {{$v.Agent.Name}}">{{$v.Agent.Name}}</span>
+								<span class="label-group">
+									<span class="label label-black label-xs">{{`代理`|$.T}}</span><span class="label label-danger label-xs" data-toggle="tooltip" title="{{$v.Agent.Name}}">{{$v.Agent.Name}}</span>
+								</span>
 								{{- end}}
 							</td>
 							<td>{{$v.Description}}</td>

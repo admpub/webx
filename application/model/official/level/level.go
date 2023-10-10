@@ -3,17 +3,16 @@ package level
 import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 
 	"github.com/admpub/webx/application/dbschema"
 )
 
 // GroupList base-基础组,其它名称为扩展组。客户只能有一个基础组等级,可以有多个扩展组等级
-var GroupList = []echo.KV{
-	echo.KV{K: `base`, V: `基础组`},
-}
+var GroupList = echo.NewKVData().Add(`base`, `基础组`)
 
 func AddGroup(k string, v string) {
-	GroupList = append(GroupList, echo.KV{K: k, V: v})
+	GroupList.Add(k, v)
 }
 
 func NewLevel(ctx echo.Context) *Level {
@@ -63,24 +62,17 @@ func (f *Level) Than(
 
 func (f *Level) check() error {
 	if len(f.Group) == 0 {
-		return f.Context().E(`group is required`)
+		return f.Context().NewError(code.InvalidParameter, `group is required`).SetZone(`group`)
 	}
-	var foundGroup bool
-	for _, g := range GroupList {
-		if g.K == f.Group {
-			foundGroup = true
-			break
-		}
-	}
-	if !foundGroup {
+	if !GroupList.Has(f.Group) {
 		var validGroups string
-		for i, g := range GroupList {
+		for i, g := range GroupList.Slice() {
 			if i > 0 {
 				validGroups += `, `
 			}
 			validGroups += g.K + `(` + g.V + `)`
 		}
-		return f.Context().E(`group无效(仅支持: %v)`, validGroups)
+		return f.Context().NewError(code.InvalidParameter, `group无效(仅支持: %v)`, validGroups).SetZone(`group`)
 	}
 	return nil
 }
@@ -111,7 +103,7 @@ func (f *Level) Exists(name string) error {
 		return err
 	}
 	if exists {
-		err = f.Context().E(`等级名称“%s”已经使用过了`, name)
+		err = f.Context().NewError(code.DataAlreadyExists, `等级名称“%s”已经使用过了`, name).SetZone(`name`)
 	}
 	return err
 }
@@ -148,7 +140,7 @@ func (f *Level) ExistsOther(name string, id uint) error {
 		return err
 	}
 	if exists {
-		err = f.Context().E(`等级名称“%s”已经使用过了`, name)
+		err = f.Context().NewError(code.DataAlreadyExists, `等级名称“%s”已经使用过了`, name).SetZone(`name`)
 	}
 	return err
 }
@@ -167,13 +159,7 @@ func (f *Level) ListLevelGroup() ([]*LevelGroup, error) {
 		if group != v.Group {
 			group = v.Group
 			if len(llist) > 0 {
-				title := group
-				for _, g := range GroupList {
-					if g.K == group {
-						title = g.V
-						break
-					}
-				}
+				title := GroupList.Get(group, group)
 				list = append(list, &LevelGroup{
 					Group: group,
 					Title: title,
@@ -186,13 +172,7 @@ func (f *Level) ListLevelGroup() ([]*LevelGroup, error) {
 		llist = append(llist, v)
 	}
 	if len(llist) > 0 {
-		title := group
-		for _, g := range GroupList {
-			if g.K == group {
-				title = g.V
-				break
-			}
-		}
+		title := GroupList.Get(group, group)
 		list = append(list, &LevelGroup{
 			Group: group,
 			Title: title,
@@ -218,12 +198,36 @@ func (f *Level) CanAutoLevelUpByCustomerID(customerID uint64) (*dbschema.Officia
 }
 
 func (f *Level) CanAutoLevelUpByIntegral(integral float64) (*dbschema.OfficialCustomerLevel, error) {
+	return f.CanAutoLevelUpByIntegralAsset(`base`, integral, `integral`)
+}
+
+func (f *Level) CanAutoLevelUpByIntegralAsset(group string, integral float64, asset string) (*dbschema.OfficialCustomerLevel, error) {
 	err := f.Get(func(r db.Result) db.Result {
 		return r.OrderBy(`-score`)
 	}, db.And(
 		db.Cond{`disabled`: `N`},
-		db.Cond{`group`: `base`},
+		db.Cond{`group`: group},
 		db.Cond{`price`: 0},
+		db.Cond{`integral_asset`: asset},
+		db.Cond{`integral_min`: db.Gte(integral)},
+		db.Cond{`integral_max`: db.Lte(integral)},
+	))
+	if err != nil {
+		if err != db.ErrNoMoreRows {
+			return nil, err
+		}
+	}
+	return f.OfficialCustomerLevel, nil
+}
+
+func (f *Level) CanPaymentLevelUpByIntegralAsset(group string, integral float64, asset string) (*dbschema.OfficialCustomerLevel, error) {
+	err := f.Get(func(r db.Result) db.Result {
+		return r.OrderBy(`-score`)
+	}, db.And(
+		db.Cond{`disabled`: `N`},
+		db.Cond{`group`: group},
+		db.Cond{`price`: db.Gt(0)},
+		db.Cond{`integral_asset`: asset},
 		db.Cond{`integral_min`: db.Gte(integral)},
 		db.Cond{`integral_max`: db.Lte(integral)},
 	))

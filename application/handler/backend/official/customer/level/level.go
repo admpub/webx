@@ -28,7 +28,8 @@ func Index(ctx echo.Context) error {
 	ret := handler.Err(ctx, err)
 	list := m.Objects()
 	ctx.Set(`listData`, list)
-	ctx.Set(`groupList`, modelLevel.GroupList)
+	ctx.Set(`groupList`, modelLevel.GroupList.Slice())
+	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)
 	return ctx.Render(`official/customer/level/index`, ret)
 }
 
@@ -69,12 +70,14 @@ func Add(ctx echo.Context) error {
 
 	ctx.Set(`activeURL`, `/official/customer/level/index`)
 	ctx.Set(`title`, ctx.T(`添加等级`))
-	ctx.Set(`groupList`, modelLevel.GroupList)
 	setFormData(ctx, m)
 	return ctx.Render(`official/customer/level/edit`, handler.Err(ctx, err))
 }
 
 func setFormData(ctx echo.Context, m *modelLevel.Level) {
+	ctx.Set(`groupList`, modelLevel.GroupList.Slice())
+	ctx.Set(`assetTypes`, modelCustomer.AssetTypes.Slice())
+
 	roleM := modelCustomer.NewRole(ctx)
 	roleM.ListByOffset(nil, func(r db.Result) db.Result {
 		return r.Select(`id`, `name`, `description`)
@@ -139,7 +142,6 @@ func Edit(ctx echo.Context) error {
 
 	ctx.Set(`activeURL`, `/official/customer/level/index`)
 	ctx.Set(`title`, ctx.T(`编辑等级`))
-	ctx.Set(`groupList`, modelLevel.GroupList)
 	setFormData(ctx, m)
 	return ctx.Render(`official/customer/level/edit`, handler.Err(ctx, err))
 }

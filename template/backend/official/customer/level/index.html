@@ -57,7 +57,7 @@
 							</td>
 							<td><span style="{{if $v.Color}}color:{{$v.Color}}{{end}};{{if $v.Bgcolor}}background-color:{{$v.Bgcolor}}{{end}}">{{$v.Name}}</span></td>
 							<td>{{$v.Group}}</td>
-							<td>{{$v.IntegralMin}}～{{$v.IntegralMax}}</td>
+							<td>{{$v.IntegralMin}}～{{$v.IntegralMax}} (<span data-toggle="tooltip" title="{{`资产类型：`|$.T}}{{call $.Func.assetTypeName $v.IntegralAsset}}">{{call $.Func.assetTypeName $v.IntegralAsset}}</span>)</td>
 							<td>{{$v.Score}}</td>
 							<td>{{$v.Price}}</td>
 							<td>{{$v.Description}}</td>

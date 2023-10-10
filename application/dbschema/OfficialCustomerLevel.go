@@ -102,24 +102,25 @@ type OfficialCustomerLevel struct {
 	base    factory.Base
 	objects []*OfficialCustomerLevel
 
-	Id          uint    `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
-	Name        string  `db:"name" bson:"name" comment:"等级名称" json:"name" xml:"name"`
-	Short       string  `db:"short" bson:"short" comment:"等级简称" json:"short" xml:"short"`
-	Description string  `db:"description" bson:"description" comment:"等级简介" json:"description" xml:"description"`
-	IconImage   string  `db:"icon_image" bson:"icon_image" comment:"图标图片" json:"icon_image" xml:"icon_image"`
-	IconClass   string  `db:"icon_class" bson:"icon_class" comment:"图片class名" json:"icon_class" xml:"icon_class"`
-	Color       string  `db:"color" bson:"color" comment:"颜色" json:"color" xml:"color"`
-	Bgcolor     string  `db:"bgcolor" bson:"bgcolor" comment:"背景色" json:"bgcolor" xml:"bgcolor"`
-	Price       float64 `db:"price" bson:"price" comment:"升级价格(0为免费)" json:"price" xml:"price"`
-	IntegralMin float64 `db:"integral_min" bson:"integral_min" comment:"最小积分" json:"integral_min" xml:"integral_min"`
-	IntegralMax float64 `db:"integral_max" bson:"integral_max" comment:"最大积分" json:"integral_max" xml:"integral_max"`
-	Created     uint    `db:"created" bson:"created" comment:"添加时间" json:"created" xml:"created"`
-	Updated     uint    `db:"updated" bson:"updated" comment:"更新时间" json:"updated" xml:"updated"`
-	Score       int     `db:"score" bson:"score" comment:"分值(分值越大等级越高)" json:"score" xml:"score"`
-	Disabled    string  `db:"disabled" bson:"disabled" comment:"是否(Y/N)禁用" json:"disabled" xml:"disabled"`
-	Extra       string  `db:"extra" bson:"extra" comment:"扩展配置(JSON)" json:"extra" xml:"extra"`
-	Group       string  `db:"group" bson:"group" comment:"扩展组(base-基础组,其它名称为扩展组。客户只能有一个基础组等级,可以有多个扩展组等级)" json:"group" xml:"group"`
-	RoleIds     string  `db:"role_ids" bson:"role_ids" comment:"角色ID(多个用“,”分隔开)" json:"role_ids" xml:"role_ids"`
+	Id            uint    `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
+	Name          string  `db:"name" bson:"name" comment:"等级名称" json:"name" xml:"name"`
+	Short         string  `db:"short" bson:"short" comment:"等级简称" json:"short" xml:"short"`
+	Description   string  `db:"description" bson:"description" comment:"等级简介" json:"description" xml:"description"`
+	IconImage     string  `db:"icon_image" bson:"icon_image" comment:"图标图片" json:"icon_image" xml:"icon_image"`
+	IconClass     string  `db:"icon_class" bson:"icon_class" comment:"图片class名" json:"icon_class" xml:"icon_class"`
+	Color         string  `db:"color" bson:"color" comment:"颜色" json:"color" xml:"color"`
+	Bgcolor       string  `db:"bgcolor" bson:"bgcolor" comment:"背景色" json:"bgcolor" xml:"bgcolor"`
+	Price         float64 `db:"price" bson:"price" comment:"升级价格(0为免费)" json:"price" xml:"price"`
+	IntegralAsset string  `db:"integral_asset" bson:"integral_asset" comment:"当作升级积分的资产" json:"integral_asset" xml:"integral_asset"`
+	IntegralMin   float64 `db:"integral_min" bson:"integral_min" comment:"最小积分" json:"integral_min" xml:"integral_min"`
+	IntegralMax   float64 `db:"integral_max" bson:"integral_max" comment:"最大积分" json:"integral_max" xml:"integral_max"`
+	Created       uint    `db:"created" bson:"created" comment:"添加时间" json:"created" xml:"created"`
+	Updated       uint    `db:"updated" bson:"updated" comment:"更新时间" json:"updated" xml:"updated"`
+	Score         int     `db:"score" bson:"score" comment:"分值(分值越大等级越高)" json:"score" xml:"score"`
+	Disabled      string  `db:"disabled" bson:"disabled" comment:"是否(Y/N)禁用" json:"disabled" xml:"disabled"`
+	Extra         string  `db:"extra" bson:"extra" comment:"扩展配置(JSON)" json:"extra" xml:"extra"`
+	Group         string  `db:"group" bson:"group" comment:"扩展组(base-基础组,其它名称为扩展组。客户只能有一个基础组等级,可以有多个扩展组等级)" json:"group" xml:"group"`
+	RoleIds       string  `db:"role_ids" bson:"role_ids" comment:"角色ID(多个用“,”分隔开)" json:"role_ids" xml:"role_ids"`
 }
 
 // - base function
@@ -340,6 +341,9 @@ func (a *OfficialCustomerLevel) ListByOffset(recv interface{}, mw func(db.Result
 func (a *OfficialCustomerLevel) Insert() (pk interface{}, err error) {
 	a.Created = uint(time.Now().Unix())
 	a.Id = 0
+	if len(a.IntegralAsset) == 0 {
+		a.IntegralAsset = "integral"
+	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
 	}
@@ -368,6 +372,9 @@ func (a *OfficialCustomerLevel) Insert() (pk interface{}, err error) {
 
 func (a *OfficialCustomerLevel) Update(mw func(db.Result) db.Result, args ...interface{}) (err error) {
 	a.Updated = uint(time.Now().Unix())
+	if len(a.IntegralAsset) == 0 {
+		a.IntegralAsset = "integral"
+	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
 	}
@@ -388,6 +395,9 @@ func (a *OfficialCustomerLevel) Update(mw func(db.Result) db.Result, args ...int
 
 func (a *OfficialCustomerLevel) Updatex(mw func(db.Result) db.Result, args ...interface{}) (affected int64, err error) {
 	a.Updated = uint(time.Now().Unix())
+	if len(a.IntegralAsset) == 0 {
+		a.IntegralAsset = "integral"
+	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
 	}
@@ -409,6 +419,9 @@ func (a *OfficialCustomerLevel) Updatex(mw func(db.Result) db.Result, args ...in
 
 func (a *OfficialCustomerLevel) UpdateByFields(mw func(db.Result) db.Result, fields []string, args ...interface{}) (err error) {
 	a.Updated = uint(time.Now().Unix())
+	if len(a.IntegralAsset) == 0 {
+		a.IntegralAsset = "integral"
+	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
 	}
@@ -434,6 +447,9 @@ func (a *OfficialCustomerLevel) UpdateByFields(mw func(db.Result) db.Result, fie
 
 func (a *OfficialCustomerLevel) UpdatexByFields(mw func(db.Result) db.Result, fields []string, args ...interface{}) (affected int64, err error) {
 	a.Updated = uint(time.Now().Unix())
+	if len(a.IntegralAsset) == 0 {
+		a.IntegralAsset = "integral"
+	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
 	}
@@ -471,6 +487,11 @@ func (a *OfficialCustomerLevel) UpdatexField(mw func(db.Result) db.Result, field
 
 func (a *OfficialCustomerLevel) UpdateFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (err error) {
 
+	if val, ok := kvset["integral_asset"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["integral_asset"] = "integral"
+		}
+	}
 	if val, ok := kvset["disabled"]; ok && val != nil {
 		if v, ok := val.(string); ok && len(v) == 0 {
 			kvset["disabled"] = "N"
@@ -501,6 +522,11 @@ func (a *OfficialCustomerLevel) UpdateFields(mw func(db.Result) db.Result, kvset
 
 func (a *OfficialCustomerLevel) UpdatexFields(mw func(db.Result) db.Result, kvset map[string]interface{}, args ...interface{}) (affected int64, err error) {
 
+	if val, ok := kvset["integral_asset"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["integral_asset"] = "integral"
+		}
+	}
 	if val, ok := kvset["disabled"]; ok && val != nil {
 		if v, ok := val.(string); ok && len(v) == 0 {
 			kvset["disabled"] = "N"
@@ -548,6 +574,9 @@ func (a *OfficialCustomerLevel) UpdateValues(mw func(db.Result) db.Result, keysV
 func (a *OfficialCustomerLevel) Upsert(mw func(db.Result) db.Result, args ...interface{}) (pk interface{}, err error) {
 	pk, err = a.Param(mw, args...).SetSend(a).Upsert(func() error {
 		a.Updated = uint(time.Now().Unix())
+		if len(a.IntegralAsset) == 0 {
+			a.IntegralAsset = "integral"
+		}
 		if len(a.Disabled) == 0 {
 			a.Disabled = "N"
 		}
@@ -561,6 +590,9 @@ func (a *OfficialCustomerLevel) Upsert(mw func(db.Result) db.Result, args ...int
 	}, func() error {
 		a.Created = uint(time.Now().Unix())
 		a.Id = 0
+		if len(a.IntegralAsset) == 0 {
+			a.IntegralAsset = "integral"
+		}
 		if len(a.Disabled) == 0 {
 			a.Disabled = "N"
 		}
@@ -636,6 +668,7 @@ func (a *OfficialCustomerLevel) Reset() *OfficialCustomerLevel {
 	a.Color = ``
 	a.Bgcolor = ``
 	a.Price = 0.0
+	a.IntegralAsset = ``
 	a.IntegralMin = 0.0
 	a.IntegralMax = 0.0
 	a.Created = 0
@@ -660,6 +693,7 @@ func (a *OfficialCustomerLevel) AsMap(onlyFields ...string) param.Store {
 		r["Color"] = a.Color
 		r["Bgcolor"] = a.Bgcolor
 		r["Price"] = a.Price
+		r["IntegralAsset"] = a.IntegralAsset
 		r["IntegralMin"] = a.IntegralMin
 		r["IntegralMax"] = a.IntegralMax
 		r["Created"] = a.Created
@@ -691,6 +725,8 @@ func (a *OfficialCustomerLevel) AsMap(onlyFields ...string) param.Store {
 			r["Bgcolor"] = a.Bgcolor
 		case "Price":
 			r["Price"] = a.Price
+		case "IntegralAsset":
+			r["IntegralAsset"] = a.IntegralAsset
 		case "IntegralMin":
 			r["IntegralMin"] = a.IntegralMin
 		case "IntegralMax":
@@ -735,6 +771,8 @@ func (a *OfficialCustomerLevel) FromRow(row map[string]interface{}) {
 			a.Bgcolor = param.AsString(value)
 		case "price":
 			a.Price = param.AsFloat64(value)
+		case "integral_asset":
+			a.IntegralAsset = param.AsString(value)
 		case "integral_min":
 			a.IntegralMin = param.AsFloat64(value)
 		case "integral_max":
@@ -795,6 +833,8 @@ func (a *OfficialCustomerLevel) Set(key interface{}, value ...interface{}) {
 			a.Bgcolor = param.AsString(vv)
 		case "Price":
 			a.Price = param.AsFloat64(vv)
+		case "IntegralAsset":
+			a.IntegralAsset = param.AsString(vv)
 		case "IntegralMin":
 			a.IntegralMin = param.AsFloat64(vv)
 		case "IntegralMax":
@@ -829,6 +869,7 @@ func (a *OfficialCustomerLevel) AsRow(onlyFields ...string) param.Store {
 		r["color"] = a.Color
 		r["bgcolor"] = a.Bgcolor
 		r["price"] = a.Price
+		r["integral_asset"] = a.IntegralAsset
 		r["integral_min"] = a.IntegralMin
 		r["integral_max"] = a.IntegralMax
 		r["created"] = a.Created
@@ -860,6 +901,8 @@ func (a *OfficialCustomerLevel) AsRow(onlyFields ...string) param.Store {
 			r["bgcolor"] = a.Bgcolor
 		case "price":
 			r["price"] = a.Price
+		case "integral_asset":
+			r["integral_asset"] = a.IntegralAsset
 		case "integral_min":
 			r["integral_min"] = a.IntegralMin
 		case "integral_max":

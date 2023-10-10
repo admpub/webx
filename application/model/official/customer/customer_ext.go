@@ -1,16 +1,19 @@
 package customer
 
 import (
-	"github.com/admpub/webx/application/dbschema"
 	"github.com/webx-top/echo/param"
+
+	"github.com/admpub/webx/application/dbschema"
+	modelLevel "github.com/admpub/webx/application/model/official/level"
 )
 
 type CustomerAndGroup struct {
 	*dbschema.OfficialCustomer
-	Group *dbschema.OfficialCommonGroup        `db:"-,relation=id:group_id|gtZero"`
-	Level *dbschema.OfficialCustomerLevel      `db:"-,relation=id:level_id|gtZero"`
-	Agent *dbschema.OfficialCustomerAgentLevel `db:"-,relation=id:agent_level|gtZero"`
-	Roles []*dbschema.OfficialCustomerRole     `db:"-,relation=id:role_ids|notEmpty|split"`
+	Group       *dbschema.OfficialCommonGroup        `db:"-,relation=id:group_id|gtZero"`
+	Level       *dbschema.OfficialCustomerLevel      `db:"-,relation=id:level_id|gtZero"`
+	LevelExtend []*modelLevel.RelationExt            `db:"-" json:",omitempty"`
+	Agent       *dbschema.OfficialCustomerAgentLevel `db:"-,relation=id:agent_level|gtZero"`
+	Roles       []*dbschema.OfficialCustomerRole     `db:"-,relation=id:role_ids|notEmpty|split"`
 }
 
 func (d *CustomerAndGroup) AsMap() param.Store {

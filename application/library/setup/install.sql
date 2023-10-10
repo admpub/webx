@@ -845,6 +845,7 @@ CREATE TABLE `official_customer_level` (
   `color` varchar(20) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '颜色',
   `bgcolor` varchar(20) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '背景色',
   `price` decimal(10,3) unsigned NOT NULL DEFAULT '0.000' COMMENT '升级价格(0为免费)',
+  `integral_asset` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'integral' COMMENT '当作升级积分的资产',
   `integral_min` decimal(30,3) unsigned NOT NULL DEFAULT '0.000' COMMENT '最小积分',
   `integral_max` decimal(30,3) unsigned NOT NULL DEFAULT '0.000' COMMENT '最大积分',
   `created` int unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
@@ -856,8 +857,8 @@ CREATE TABLE `official_customer_level` (
   `role_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '角色ID(多个用“,”分隔开)',
   PRIMARY KEY (`id`),
   KEY `customer_level_group` (`group`),
-  KEY `customer_level_score` (`score`),
-  KEY `customer_level_disabled` (`disabled`)
+  KEY `customer_level_score` (`score` DESC),
+  KEY `customer_level_disabled` (`disabled`,`group`,`price`,`integral_asset`,`integral_min`,`integral_max`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='客户等级';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1199,4 +1200,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-17 15:47:15
+-- Dump completed on 2023-10-10 19:56:07
