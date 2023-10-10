@@ -35,6 +35,28 @@ func (f *Relation) ListByCustomerID(customerID uint64) ([]*dbschema.OfficialCust
 	return f.Objects(), nil
 }
 
+func (f *Relation) HasGroupLevelByCustomerID(customerID uint64, group string) bool {
+	row, err := f.GetGroupLevelByCustomerID(customerID, group)
+	return err == nil && row != nil
+}
+
+func (f *Relation) GetGroupLevelByCustomerID(customerID uint64, group string) (*dbschema.OfficialCustomerLevel, error) {
+	row := &dbschema.OfficialCustomerLevel{}
+	lvM := dbschema.NewOfficialCustomerLevel(f.Context())
+	p := f.NewParam().SetAlias(`r`).AddJoin(`INNER`, lvM.Name_(), `b`, `b.id=r.level_id`)
+	p.SetArgs(db.And(
+		db.Cond{`r.customer_id`: customerID},
+		db.Cond{`r.status`: `success`},
+		db.Or(
+			db.Cond{`r.expired`: 0},
+			db.Cond{`r.expired`: db.Lt(time.Now().Unix())},
+		),
+		db.Cond{`b.group`: group},
+	))
+	err := p.SetCols(`b.*`).SetRecv(row).One()
+	return row, err
+}
+
 func (f *Relation) ListByCustomerIDs(customerIDs []uint64) (map[uint64][]*RelationExt, error) {
 	list := []*RelationExt{}
 	var mw func(db.Result) db.Result
