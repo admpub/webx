@@ -783,6 +783,31 @@ CREATE TABLE `official_customer_following` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `official_customer_group_package`
+--
+
+DROP TABLE IF EXISTS `official_customer_group_package`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `official_customer_group_package` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `group` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户组',
+  `title` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '标题',
+  `description` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '说明',
+  `price` decimal(12,2) unsigned NOT NULL COMMENT '价格',
+  `time_duration` int unsigned NOT NULL DEFAULT '0' COMMENT '时间长度',
+  `time_unit` enum('day','week','month','year','forever') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'forever' COMMENT '时间单位',
+  `sort` int NOT NULL DEFAULT '5000' COMMENT '排序',
+  `disabled` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'N' COMMENT '是否(Y/N)禁用',
+  `recommend` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'N' COMMENT '是否(Y/N)推荐',
+  `sold` int unsigned NOT NULL DEFAULT '0' COMMENT '销量',
+  `created` int unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated` int unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='客户组套餐价格';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `official_customer_invitation`
 --
 
@@ -1200,4 +1225,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-10 19:56:07
+-- Dump completed on 2023-10-11 13:02:11
