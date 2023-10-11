@@ -18,6 +18,7 @@ func NewGroupPackage(ctx echo.Context) *GroupPackage {
 	return m
 }
 
+// GroupPackage 客户组套餐价格
 type GroupPackage struct {
 	*dbschema.OfficialCustomerGroupPackage
 }
