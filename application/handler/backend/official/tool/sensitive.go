@@ -3,6 +3,7 @@ package tool
 import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/library/common"
@@ -86,6 +87,9 @@ func sensitiveEdit(ctx echo.Context) error {
 
 		disabled := ctx.Query(`disabled`)
 		if len(disabled) > 0 {
+			if !common.IsBoolFlag(disabled) {
+				return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
+			}
 			m.Disabled = disabled
 			data := ctx.Data()
 			err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})

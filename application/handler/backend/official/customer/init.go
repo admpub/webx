@@ -7,6 +7,7 @@ import (
 	_ "github.com/admpub/webx/application/handler/backend/official/agent"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/complaint"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/group"
+	_ "github.com/admpub/webx/application/handler/backend/official/customer/group_package"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/invitation"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/level"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/prepaidcard"

@@ -6,6 +6,7 @@ import (
 
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/library/common"
@@ -162,6 +163,9 @@ func CategoryEdit(ctx echo.Context) error {
 	} else if ctx.IsAjax() {
 		disabled := ctx.Query(`disabled`)
 		if len(disabled) > 0 {
+			if !common.IsBoolFlag(disabled) {
+				return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
+			}
 			m.Disabled = disabled
 			data := ctx.Data()
 			err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
@@ -174,6 +178,9 @@ func CategoryEdit(ctx echo.Context) error {
 		}
 		showOnMenu := ctx.Query(`showOnMenu`)
 		if len(showOnMenu) > 0 {
+			if !common.IsBoolFlag(showOnMenu) {
+				return ctx.NewError(code.InvalidParameter, ``).SetZone(`showOnMenu`)
+			}
 			m.ShowOnMenu = showOnMenu
 			data := ctx.Data()
 			err = m.UpdateField(nil, `show_on_menu`, showOnMenu, db.Cond{`id`: id})

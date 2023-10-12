@@ -60,6 +60,30 @@ var LeftNavigate = &navigate.Item{
 			Action:  `level/delete`,
 			Icon:    `remove`,
 		},
+		//group_package
+		{
+			Display: true,
+			Name:    `等级组套餐`,
+			Action:  `group_package/index`,
+		},
+		{
+			Display: false,
+			Name:    `添加套餐`,
+			Action:  `group_package/add`,
+			Icon:    `plus`,
+		},
+		{
+			Display: false,
+			Name:    `修改套餐`,
+			Action:  `group_package/edit`,
+			Icon:    `pencil`,
+		},
+		{
+			Display: false,
+			Name:    `删除套餐`,
+			Action:  `group_package/delete`,
+			Icon:    `remove`,
+		},
 		//wallet
 		{
 			Display: true,

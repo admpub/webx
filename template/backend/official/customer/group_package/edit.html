@@ -1,0 +1,138 @@
+{{Extend "layout"}}
+{{Block "title"}}{{$.Stored.title}}{{/Block}}
+{{Block "breadcrumb"}}
+{{Super}}
+<li><a href="{{BackendURL}}/official/customer/group_package/index">{{"等级组套餐"|$.T}}</a></li>
+<li class="active">{{$.Stored.title}}</li>
+{{/Block}}
+{{Block "head"}}
+<link rel="stylesheet" href="{{AssetsURL}}/js/jquery.uploadPreviewer/css/jquery.uploadPreviewer.min.css?t={{BuildTime}}" type="text/css" />
+<link rel="stylesheet" href="{{AssetsURL}}/js/float/powerFloat.min.css?t={{BuildTime}}" charset="utf-8" />
+<link rel="stylesheet" href="{{AssetsURL}}/js/colorpicker/colorpicker.css?t={{BuildTime}}" charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="{{AssetsURL}}/js/jquery.select2/select2.css" />
+{{/Block}}
+{{Block "main"}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+          <div class="header">							
+            <h3>{{$.Stored.title}}</h3>
+          </div>
+          <div class="content">
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"等级组"|$.T}}</label>
+                <div class="col-sm-8">{{$group := $.Form `group` `base`}}
+                  {{range $k,$v := $.Stored.groupList}}
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="{{$v.K}}" name="group" id="group-{{$v.K}}" {{- if or (and (not $group) (eq $v.K `base`)) (eq $group $v.K)}} checked="checked" {{end}}>
+                    <label for="group-{{$v.K}}">{{$v.V}}</label>
+                  </div>
+                  {{end}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"套餐标题"|$.T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" required name="title" value="{{$.Form `title`}}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"套餐简介"|$.T}}</label>
+                <div class="col-sm-8">
+                    <textarea type="text" class="form-control" name="description" maxlength="2000" placeholder="" data-parsley-trigger="keyup" data-parsley-maxlength="2000" data-parsley-validation-threshold="10" rows="10">{{$.Form `description`}}</textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label required">{{"价格"|$.T}}</label>
+                <div class="col-sm-3">
+                  <span class="input-group">
+                    <input type="number" class="form-control" required name="price" value="{{$.Form `price`}}" min="0.01" step="0.01" placeholder="{{`精确到两位小数`|$.T}}">
+                    <span class="input-group-addon">{{`元`|$.T}}</span>
+                  </span>
+                </div>
+                <label class="col-sm-2 control-label">{{"时长"|$.T}}</label>
+                <div class="col-sm-3">
+                  <span class="input-group">
+                    <input type="number" class="form-control" required name="timeDuration" value="{{$.Form `timeDuration`}}" min="1" step="1" placeholder="{{`不小于0的整数`|$.T}}">
+                    <span class="input-group-addon no-padding no-border" style="min-width:60px">{{$timeUnit := $.Form `timeUnit`}}
+                      <select name="timeUnit" class="form-control" required id="timeUnit">
+                        {{- range $k, $v := $.Stored.timeUnits -}}
+                        <option value="{{$v.K}}"{{if eq $v.K $timeUnit}} selected{{end}}>{{$v.V|$.T}}</option>
+                        {{- end -}}
+                      </select>
+                    </span>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"排序"|$.T}}</label>
+                <div class="col-sm-3">
+                  <input type="number" class="form-control" name="sort" value="{{$.Form `sort`}}" step="1" placeholder="{{`支持负数。采用从小到大排列`|$.T}}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{`是否禁用`|$.T}}</label>
+                <div class="col-sm-3">{{$v := $.Form `disabled` `N`}}
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="Y" name="disabled" id="disabled-Y" {{- if eq $v "Y"}} checked="checked" {{end}}>
+                    <label for="disabled-Y">{{`禁用`|$.T}}</label>
+                  </div>
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="N" name="disabled" id="disabled-N" {{- if eq $v "N"}} checked="checked" {{end}}>
+                    <label for="disabled-N">{{`启用`|$.T}}</label>
+                  </div>
+                </div>
+                <label class="col-sm-2 control-label">{{`是否推荐`|$.T}}</label>
+                <div class="col-sm-3">{{$v := $.Form `recommend` `N`}}
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="Y" name="recommend" id="recommend-Y" {{- if eq $v "Y"}} checked="checked" {{end}}>
+                    <label for="recommend-Y">{{`是`|$.T}}</label>
+                  </div>
+                  <div class="radio radio-primary radio-inline">
+                    <input type="radio" value="N" name="recommend" id="recommend-N" {{- if eq $v "N"}} checked="checked" {{end}}>
+                    <label for="recommend-N">{{`否`|$.T}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-submit-group">
+									<div class="col-sm-9 col-sm-offset-2">
+									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|$.T}}</button>
+									  <button type="reset" class="btn btn-default btn-lg"><i class="fa fa-refresh"></i> {{"重置"|$.T}}</button>
+									</div>
+							</div>
+            </form>
+          </div><!-- /.content -->
+        </div><!-- /.block-flat -->
+    </div>
+</div>
+{{/Block}}
+{{Block "footer"}}
+<script src="{{AssetsURL}}/js/float/powerFloat.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/jquery.uploadPreviewer/jquery.uploadPreviewer.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/colorpicker/colorpicker.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/jquery.select2/select2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+		App.uploadPreviewer("#iconImageFile", {url:'{{BackendUploadURL ``}}'}, function(r){
+			if(r.Code==1) {
+				var fileURL=r.Data.files[0];
+				$('#inputImage').val(fileURL);
+				$('#imagePreviewBtn').removeClass('hidden').children('a').attr('href',fileURL).children('img').attr('src',fileURL);
+			}
+		});
+  $('#inputColor').colorpicker({format: "hex"}).on('changeColor', function(e) {
+    this.style.color = e.color.toString('rgba');
+    this.style.backgroundColor = $('#inputBgColor').val();
+    $('#inputBgColor').css({'color':e.color.toString('rgba'),'background-color':$('#inputBgColor').val()});
+  });
+  $('#inputBgColor').colorpicker({format: "hex"}).on('changeColor', function(e) {
+    this.style.backgroundColor = e.color.toString('rgba');
+    this.style.color = $('#inputColor').val();
+    $('#inputColor').css({'color':$('#inputColor').val(),'background-color':e.color.toString('rgba')});
+  });
+  App.float("#imagePreviewBtn a img");
+  $('#select2roles').select2({width:'100%'});
+});
+</script>
+{{/Block}}

@@ -18,7 +18,7 @@ func NewGroupPackage(ctx echo.Context) *GroupPackage {
 	return m
 }
 
-// GroupPackage 客户组套餐价格
+// GroupPackage 等级组套餐价格
 type GroupPackage struct {
 	*dbschema.OfficialCustomerGroupPackage
 }
@@ -44,6 +44,15 @@ func (u *GroupPackage) Add() (interface{}, error) {
 		return nil, err
 	}
 	return u.OfficialCustomerGroupPackage.Insert()
+}
+
+func (f *GroupPackage) Edit(mw func(db.Result) db.Result, args ...interface{}) error {
+	return f.OfficialCustomerGroupPackage.Update(mw, args...)
+}
+
+func (f *GroupPackage) Delete(mw func(db.Result) db.Result, args ...interface{}) error {
+	err := f.OfficialCustomerGroupPackage.Delete(mw, args...)
+	return err
 }
 
 // ListByGroup 列出某个组的套餐信息
