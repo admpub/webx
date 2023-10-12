@@ -97,13 +97,13 @@ func NewOfficialCustomerGroupPackage(ctx echo.Context) *OfficialCustomerGroupPac
 	return m
 }
 
-// OfficialCustomerGroupPackage 客户组套餐价格
+// OfficialCustomerGroupPackage 等级组套餐价格
 type OfficialCustomerGroupPackage struct {
 	base    factory.Base
 	objects []*OfficialCustomerGroupPackage
 
 	Id           uint    `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
-	Group        string  `db:"group" bson:"group" comment:"客户组" json:"group" xml:"group"`
+	Group        string  `db:"group" bson:"group" comment:"等级组" json:"group" xml:"group"`
 	Title        string  `db:"title" bson:"title" comment:"标题" json:"title" xml:"title"`
 	Description  string  `db:"description" bson:"description" comment:"说明" json:"description" xml:"description"`
 	Price        float64 `db:"price" bson:"price" comment:"价格" json:"price" xml:"price"`
