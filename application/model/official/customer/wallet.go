@@ -97,6 +97,9 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 			// 加款操作
 			f.Wallet.Balance = flow.Amount
 			flow.WalletAmount = f.Wallet.Balance
+			if !AssetTypeIsIgnoreAccumulated(flow.AssetType) {
+				f.Wallet.Accumulated = flow.Amount
+			}
 		} else { // 冻结金额操作
 			if flow.Amount < 0 { // 扣除冻结
 				f.base.Context.Rollback()
@@ -115,9 +118,16 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 			f.base.Context.Rollback()
 			return err
 		}
+		incrAmount := param.AsString(flow.Amount)
+		kvset := echo.H{
+			flow.AmountType: db.Raw(flow.AmountType + `+` + incrAmount),
+		}
 		var amount float64
 		if flow.AmountType == `balance` {
 			amount = f.Wallet.Balance
+			if flow.Amount > 0 && !AssetTypeIsIgnoreAccumulated(flow.AssetType) { // 加款操作时增加累计加款金额
+				kvset.Set(`accumulated`, db.Raw(`accumulated+`+incrAmount))
+			}
 		} else {
 			amount = f.Wallet.Freeze
 		}
@@ -133,8 +143,7 @@ func (f *Wallet) AddFlow(flows ...*dbschema.OfficialCustomerWalletFlow) (err err
 			}
 			return common.ErrBalanceNoEnough
 		}
-		incrAmount := param.AsString(flow.Amount)
-		err = f.Wallet.UpdateField(nil, flow.AmountType, db.Raw(flow.AmountType+`+`+incrAmount), cond)
+		err = f.Wallet.UpdateFields(nil, kvset, cond)
 	}
 	if err != nil {
 		f.base.Context.Rollback()

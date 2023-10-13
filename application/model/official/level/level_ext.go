@@ -1,6 +1,16 @@
 package level
 
-import "github.com/admpub/webx/application/dbschema"
+import (
+	"github.com/admpub/webx/application/dbschema"
+	"github.com/webx-top/echo"
+)
+
+const (
+	LevelStatusActived = `actived`
+	LevelStatusExpired = `expired`
+)
+
+var LevelStatuses = echo.NewKVData().Add(LevelStatusActived, `有效`).Add(LevelStatusExpired, `过期`)
 
 type LevelGroup struct {
 	Group string

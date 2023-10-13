@@ -898,12 +898,18 @@ CREATE TABLE `official_customer_level_relation` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `customer_id` bigint unsigned NOT NULL COMMENT '客户ID',
   `level_id` int unsigned NOT NULL COMMENT '等级ID',
-  `status` enum('unpaid','unconfirmed','reject','success','failure','expired') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'unpaid' COMMENT '状态(unpaid-未付款;unconfirmed-未确认;reject-拒绝;success-成功;failure-失败;expired-已过期)',
+  `status` enum('actived','expired') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'actived' COMMENT '状态(actived-有效;expired-已过期)',
   `reason` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '原因',
   `expired` int unsigned NOT NULL DEFAULT '0' COMMENT '过期时间(0为永不过期)',
+  `accumulated_days` int unsigned NOT NULL DEFAULT '0' COMMENT '累计天数',
+  `last_renewal_at` int unsigned NOT NULL DEFAULT '0' COMMENT '最近续费时间',
   `created` int unsigned NOT NULL COMMENT '创建时间',
   `updated` int unsigned NOT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `customer_level_relation_customer_level` (`customer_id`,`level_id`),
+  KEY `customer_level_relation_status` (`status`,`expired`),
+  KEY `customer_level_relation_updated` (`updated` DESC),
+  KEY `customer_level_relation_last` (`last_renewal_at` DESC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='客户等级关联';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1031,6 +1037,7 @@ CREATE TABLE `official_customer_wallet` (
   `asset_type` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'money' COMMENT '资产类型(money-钱;point-点数;credit-信用分;integral-积分;gold-金币;silver-银币;copper-铜币;experience-经验)',
   `balance` decimal(30,4) unsigned NOT NULL DEFAULT '0.0000' COMMENT '余额',
   `freeze` decimal(30,4) unsigned NOT NULL DEFAULT '0.0000' COMMENT '冻结金额',
+  `accumulated` decimal(30,4) unsigned NOT NULL DEFAULT '0.0000' COMMENT '累计总金额',
   `created` int unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated` int unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`customer_id`,`asset_type`)
@@ -1225,4 +1232,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-12 12:11:01
+-- Dump completed on 2023-10-13 13:33:35

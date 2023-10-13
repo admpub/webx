@@ -23,7 +23,7 @@ type Relation struct {
 func (f *Relation) ListByCustomerID(customerID uint64) ([]*dbschema.OfficialCustomerLevelRelation, error) {
 	_, err := f.ListByOffset(nil, nil, 0, -1, db.And(
 		db.Cond{`customer_id`: customerID},
-		db.Cond{`status`: `success`},
+		db.Cond{`status`: LevelStatusActived},
 		db.Or(
 			db.Cond{`expired`: 0},
 			db.Cond{`expired`: db.Lt(time.Now().Unix())},
@@ -46,7 +46,7 @@ func (f *Relation) GetGroupLevelByCustomerID(customerID uint64, group string) (*
 	p := f.NewParam().SetAlias(`r`).AddJoin(`INNER`, lvM.Name_(), `b`, `b.id=r.level_id`)
 	p.SetArgs(db.And(
 		db.Cond{`r.customer_id`: customerID},
-		db.Cond{`r.status`: `success`},
+		db.Cond{`r.status`: LevelStatusActived},
 		db.Or(
 			db.Cond{`r.expired`: 0},
 			db.Cond{`r.expired`: db.Lt(time.Now().Unix())},
@@ -63,7 +63,7 @@ func (f *Relation) ListByCustomerIDs(customerIDs []uint64) (map[uint64][]*Relati
 	cond := db.NewCompounds()
 	cond.Add(
 		db.Cond{`customer_id`: db.In(customerIDs)},
-		db.Cond{`status`: `success`},
+		db.Cond{`status`: LevelStatusActived},
 		db.Or(
 			db.Cond{`expired`: 0},
 			db.Cond{`expired`: db.Lt(time.Now().Unix())},

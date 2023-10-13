@@ -102,12 +102,13 @@ type OfficialCustomerWallet struct {
 	base    factory.Base
 	objects []*OfficialCustomerWallet
 
-	CustomerId uint64  `db:"customer_id,pk" bson:"customer_id" comment:"客户ID" json:"customer_id" xml:"customer_id"`
-	AssetType  string  `db:"asset_type,pk" bson:"asset_type" comment:"资产类型(money-钱;point-点数;credit-信用分;integral-积分;gold-金币;silver-银币;copper-铜币;experience-经验)" json:"asset_type" xml:"asset_type"`
-	Balance    float64 `db:"balance" bson:"balance" comment:"余额" json:"balance" xml:"balance"`
-	Freeze     float64 `db:"freeze" bson:"freeze" comment:"冻结金额" json:"freeze" xml:"freeze"`
-	Created    uint    `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
-	Updated    uint    `db:"updated" bson:"updated" comment:"更新时间" json:"updated" xml:"updated"`
+	CustomerId  uint64  `db:"customer_id,pk" bson:"customer_id" comment:"客户ID" json:"customer_id" xml:"customer_id"`
+	AssetType   string  `db:"asset_type,pk" bson:"asset_type" comment:"资产类型(money-钱;point-点数;credit-信用分;integral-积分;gold-金币;silver-银币;copper-铜币;experience-经验)" json:"asset_type" xml:"asset_type"`
+	Balance     float64 `db:"balance" bson:"balance" comment:"余额" json:"balance" xml:"balance"`
+	Freeze      float64 `db:"freeze" bson:"freeze" comment:"冻结金额" json:"freeze" xml:"freeze"`
+	Accumulated float64 `db:"accumulated" bson:"accumulated" comment:"累计总金额" json:"accumulated" xml:"accumulated"`
+	Created     uint    `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
+	Updated     uint    `db:"updated" bson:"updated" comment:"更新时间" json:"updated" xml:"updated"`
 }
 
 // - base function
@@ -574,6 +575,7 @@ func (a *OfficialCustomerWallet) Reset() *OfficialCustomerWallet {
 	a.AssetType = ``
 	a.Balance = 0.0
 	a.Freeze = 0.0
+	a.Accumulated = 0.0
 	a.Created = 0
 	a.Updated = 0
 	return a
@@ -586,6 +588,7 @@ func (a *OfficialCustomerWallet) AsMap(onlyFields ...string) param.Store {
 		r["AssetType"] = a.AssetType
 		r["Balance"] = a.Balance
 		r["Freeze"] = a.Freeze
+		r["Accumulated"] = a.Accumulated
 		r["Created"] = a.Created
 		r["Updated"] = a.Updated
 		return r
@@ -600,6 +603,8 @@ func (a *OfficialCustomerWallet) AsMap(onlyFields ...string) param.Store {
 			r["Balance"] = a.Balance
 		case "Freeze":
 			r["Freeze"] = a.Freeze
+		case "Accumulated":
+			r["Accumulated"] = a.Accumulated
 		case "Created":
 			r["Created"] = a.Created
 		case "Updated":
@@ -620,6 +625,8 @@ func (a *OfficialCustomerWallet) FromRow(row map[string]interface{}) {
 			a.Balance = param.AsFloat64(value)
 		case "freeze":
 			a.Freeze = param.AsFloat64(value)
+		case "accumulated":
+			a.Accumulated = param.AsFloat64(value)
 		case "created":
 			a.Created = param.AsUint(value)
 		case "updated":
@@ -656,6 +663,8 @@ func (a *OfficialCustomerWallet) Set(key interface{}, value ...interface{}) {
 			a.Balance = param.AsFloat64(vv)
 		case "Freeze":
 			a.Freeze = param.AsFloat64(vv)
+		case "Accumulated":
+			a.Accumulated = param.AsFloat64(vv)
 		case "Created":
 			a.Created = param.AsUint(vv)
 		case "Updated":
@@ -671,6 +680,7 @@ func (a *OfficialCustomerWallet) AsRow(onlyFields ...string) param.Store {
 		r["asset_type"] = a.AssetType
 		r["balance"] = a.Balance
 		r["freeze"] = a.Freeze
+		r["accumulated"] = a.Accumulated
 		r["created"] = a.Created
 		r["updated"] = a.Updated
 		return r
@@ -685,6 +695,8 @@ func (a *OfficialCustomerWallet) AsRow(onlyFields ...string) param.Store {
 			r["balance"] = a.Balance
 		case "freeze":
 			r["freeze"] = a.Freeze
+		case "accumulated":
+			r["accumulated"] = a.Accumulated
 		case "created":
 			r["created"] = a.Created
 		case "updated":

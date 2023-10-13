@@ -102,14 +102,16 @@ type OfficialCustomerLevelRelation struct {
 	base    factory.Base
 	objects []*OfficialCustomerLevelRelation
 
-	Id         uint64 `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
-	CustomerId uint64 `db:"customer_id" bson:"customer_id" comment:"客户ID" json:"customer_id" xml:"customer_id"`
-	LevelId    uint   `db:"level_id" bson:"level_id" comment:"等级ID" json:"level_id" xml:"level_id"`
-	Status     string `db:"status" bson:"status" comment:"状态(unpaid-未付款;unconfirmed-未确认;reject-拒绝;success-成功;failure-失败;expired-已过期)" json:"status" xml:"status"`
-	Reason     string `db:"reason" bson:"reason" comment:"原因" json:"reason" xml:"reason"`
-	Expired    uint   `db:"expired" bson:"expired" comment:"过期时间(0为永不过期)" json:"expired" xml:"expired"`
-	Created    uint   `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
-	Updated    uint   `db:"updated" bson:"updated" comment:"更新时间" json:"updated" xml:"updated"`
+	Id              uint64 `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
+	CustomerId      uint64 `db:"customer_id" bson:"customer_id" comment:"客户ID" json:"customer_id" xml:"customer_id"`
+	LevelId         uint   `db:"level_id" bson:"level_id" comment:"等级ID" json:"level_id" xml:"level_id"`
+	Status          string `db:"status" bson:"status" comment:"状态(actived-有效;expired-已过期)" json:"status" xml:"status"`
+	Reason          string `db:"reason" bson:"reason" comment:"原因" json:"reason" xml:"reason"`
+	Expired         uint   `db:"expired" bson:"expired" comment:"过期时间(0为永不过期)" json:"expired" xml:"expired"`
+	AccumulatedDays uint   `db:"accumulated_days" bson:"accumulated_days" comment:"累计天数" json:"accumulated_days" xml:"accumulated_days"`
+	LastRenewalAt   uint   `db:"last_renewal_at" bson:"last_renewal_at" comment:"最近续费时间" json:"last_renewal_at" xml:"last_renewal_at"`
+	Created         uint   `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
+	Updated         uint   `db:"updated" bson:"updated" comment:"更新时间" json:"updated" xml:"updated"`
 }
 
 // - base function
@@ -331,7 +333,7 @@ func (a *OfficialCustomerLevelRelation) Insert() (pk interface{}, err error) {
 	a.Created = uint(time.Now().Unix())
 	a.Id = 0
 	if len(a.Status) == 0 {
-		a.Status = "unpaid"
+		a.Status = "actived"
 	}
 	if a.base.Eventable() {
 		err = DBI.Fire("creating", a, nil)
@@ -356,7 +358,7 @@ func (a *OfficialCustomerLevelRelation) Insert() (pk interface{}, err error) {
 func (a *OfficialCustomerLevelRelation) Update(mw func(db.Result) db.Result, args ...interface{}) (err error) {
 	a.Updated = uint(time.Now().Unix())
 	if len(a.Status) == 0 {
-		a.Status = "unpaid"
+		a.Status = "actived"
 	}
 	if !a.base.Eventable() {
 		return a.Param(mw, args...).SetSend(a).Update()
@@ -373,7 +375,7 @@ func (a *OfficialCustomerLevelRelation) Update(mw func(db.Result) db.Result, arg
 func (a *OfficialCustomerLevelRelation) Updatex(mw func(db.Result) db.Result, args ...interface{}) (affected int64, err error) {
 	a.Updated = uint(time.Now().Unix())
 	if len(a.Status) == 0 {
-		a.Status = "unpaid"
+		a.Status = "actived"
 	}
 	if !a.base.Eventable() {
 		return a.Param(mw, args...).SetSend(a).Updatex()
@@ -391,7 +393,7 @@ func (a *OfficialCustomerLevelRelation) Updatex(mw func(db.Result) db.Result, ar
 func (a *OfficialCustomerLevelRelation) UpdateByFields(mw func(db.Result) db.Result, fields []string, args ...interface{}) (err error) {
 	a.Updated = uint(time.Now().Unix())
 	if len(a.Status) == 0 {
-		a.Status = "unpaid"
+		a.Status = "actived"
 	}
 	if !a.base.Eventable() {
 		return a.Param(mw, args...).UpdateByStruct(a, fields...)
@@ -413,7 +415,7 @@ func (a *OfficialCustomerLevelRelation) UpdateByFields(mw func(db.Result) db.Res
 func (a *OfficialCustomerLevelRelation) UpdatexByFields(mw func(db.Result) db.Result, fields []string, args ...interface{}) (affected int64, err error) {
 	a.Updated = uint(time.Now().Unix())
 	if len(a.Status) == 0 {
-		a.Status = "unpaid"
+		a.Status = "actived"
 	}
 	if !a.base.Eventable() {
 		return a.Param(mw, args...).UpdatexByStruct(a, fields...)
@@ -448,7 +450,7 @@ func (a *OfficialCustomerLevelRelation) UpdateFields(mw func(db.Result) db.Resul
 
 	if val, ok := kvset["status"]; ok && val != nil {
 		if v, ok := val.(string); ok && len(v) == 0 {
-			kvset["status"] = "unpaid"
+			kvset["status"] = "actived"
 		}
 	}
 	if !a.base.Eventable() {
@@ -473,7 +475,7 @@ func (a *OfficialCustomerLevelRelation) UpdatexFields(mw func(db.Result) db.Resu
 
 	if val, ok := kvset["status"]; ok && val != nil {
 		if v, ok := val.(string); ok && len(v) == 0 {
-			kvset["status"] = "unpaid"
+			kvset["status"] = "actived"
 		}
 	}
 	if !a.base.Eventable() {
@@ -514,7 +516,7 @@ func (a *OfficialCustomerLevelRelation) Upsert(mw func(db.Result) db.Result, arg
 	pk, err = a.Param(mw, args...).SetSend(a).Upsert(func() error {
 		a.Updated = uint(time.Now().Unix())
 		if len(a.Status) == 0 {
-			a.Status = "unpaid"
+			a.Status = "actived"
 		}
 		if !a.base.Eventable() {
 			return nil
@@ -524,7 +526,7 @@ func (a *OfficialCustomerLevelRelation) Upsert(mw func(db.Result) db.Result, arg
 		a.Created = uint(time.Now().Unix())
 		a.Id = 0
 		if len(a.Status) == 0 {
-			a.Status = "unpaid"
+			a.Status = "actived"
 		}
 		if !a.base.Eventable() {
 			return nil
@@ -592,6 +594,8 @@ func (a *OfficialCustomerLevelRelation) Reset() *OfficialCustomerLevelRelation {
 	a.Status = ``
 	a.Reason = ``
 	a.Expired = 0
+	a.AccumulatedDays = 0
+	a.LastRenewalAt = 0
 	a.Created = 0
 	a.Updated = 0
 	return a
@@ -606,6 +610,8 @@ func (a *OfficialCustomerLevelRelation) AsMap(onlyFields ...string) param.Store 
 		r["Status"] = a.Status
 		r["Reason"] = a.Reason
 		r["Expired"] = a.Expired
+		r["AccumulatedDays"] = a.AccumulatedDays
+		r["LastRenewalAt"] = a.LastRenewalAt
 		r["Created"] = a.Created
 		r["Updated"] = a.Updated
 		return r
@@ -624,6 +630,10 @@ func (a *OfficialCustomerLevelRelation) AsMap(onlyFields ...string) param.Store 
 			r["Reason"] = a.Reason
 		case "Expired":
 			r["Expired"] = a.Expired
+		case "AccumulatedDays":
+			r["AccumulatedDays"] = a.AccumulatedDays
+		case "LastRenewalAt":
+			r["LastRenewalAt"] = a.LastRenewalAt
 		case "Created":
 			r["Created"] = a.Created
 		case "Updated":
@@ -648,6 +658,10 @@ func (a *OfficialCustomerLevelRelation) FromRow(row map[string]interface{}) {
 			a.Reason = param.AsString(value)
 		case "expired":
 			a.Expired = param.AsUint(value)
+		case "accumulated_days":
+			a.AccumulatedDays = param.AsUint(value)
+		case "last_renewal_at":
+			a.LastRenewalAt = param.AsUint(value)
 		case "created":
 			a.Created = param.AsUint(value)
 		case "updated":
@@ -688,6 +702,10 @@ func (a *OfficialCustomerLevelRelation) Set(key interface{}, value ...interface{
 			a.Reason = param.AsString(vv)
 		case "Expired":
 			a.Expired = param.AsUint(vv)
+		case "AccumulatedDays":
+			a.AccumulatedDays = param.AsUint(vv)
+		case "LastRenewalAt":
+			a.LastRenewalAt = param.AsUint(vv)
 		case "Created":
 			a.Created = param.AsUint(vv)
 		case "Updated":
@@ -705,6 +723,8 @@ func (a *OfficialCustomerLevelRelation) AsRow(onlyFields ...string) param.Store 
 		r["status"] = a.Status
 		r["reason"] = a.Reason
 		r["expired"] = a.Expired
+		r["accumulated_days"] = a.AccumulatedDays
+		r["last_renewal_at"] = a.LastRenewalAt
 		r["created"] = a.Created
 		r["updated"] = a.Updated
 		return r
@@ -723,6 +743,10 @@ func (a *OfficialCustomerLevelRelation) AsRow(onlyFields ...string) param.Store 
 			r["reason"] = a.Reason
 		case "expired":
 			r["expired"] = a.Expired
+		case "accumulated_days":
+			r["accumulated_days"] = a.AccumulatedDays
+		case "last_renewal_at":
+			r["last_renewal_at"] = a.LastRenewalAt
 		case "created":
 			r["created"] = a.Created
 		case "updated":

@@ -60,9 +60,10 @@ func init() {
 		K: AssetTypeCredit,
 		V: `信用分`,
 		H: echo.H{
-			`icon`:    `icon ion-heart`,
-			`bg`:      `pink-light`,
-			`comment`: `满分10`,
+			`icon`:              `icon ion-heart`,
+			`bg`:                `pink-light`,
+			`comment`:           `满分10`,
+			`ignoreAccumulated`: true, // 不支持累计历史值
 		},
 	})
 	AssetTypes.AddItem(&echo.KV{
@@ -125,4 +126,13 @@ func AssetTypeList() []*echo.KV {
 		copied = append(copied, assetType)
 	}
 	return copied
+}
+
+// AssetTypeIsIgnoreAccumulated 判断某种资产类型是否不支持累计历史值
+func AssetTypeIsIgnoreAccumulated(assetType string) bool {
+	item := AssetTypes.GetItem(assetType)
+	if item == nil {
+		return false
+	}
+	return item.H.Bool(`ignoreAccumulated`)
 }
