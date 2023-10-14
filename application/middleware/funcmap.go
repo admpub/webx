@@ -20,17 +20,30 @@ package middleware
 
 import (
 	"fmt"
+	"html/template"
 
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/mwutils"
+	"github.com/admpub/webx/application/library/xcommon"
 	"github.com/admpub/webx/application/model/official"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )
 
-var TmplFuncGenerator = mwutils.TmplFuncGenerators{}
+var TmplFuncGenerator = mwutils.TmplFuncGenerators{
+	`Currency`: func(ctx echo.Context) interface{} {
+		return func(v float64, withFlags ...bool) interface{} {
+			return xcommon.HTMLCurrency(ctx, v, withFlags...)
+		}
+	},
+	`CurrencySymbol`: func(ctx echo.Context) interface{} {
+		return func() template.HTML {
+			return xcommon.HTMLCurrencySymbol(ctx)
+		}
+	},
+}
 
 func SetFunc(ctx echo.Context) error {
 	TmplFuncGenerator.Apply(ctx)

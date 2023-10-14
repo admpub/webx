@@ -91,12 +91,12 @@ func SignUp(c echo.Context) error {
 		default: //open
 		}
 		if pass != c.Form(`repassword`) {
-			err = c.E(`两次输入的密码不匹配`)
+			err = c.NewError(code.InvalidParameter, `两次输入的密码不匹配`).SetZone(`repassword`)
 		} else if data := common.VerifyCaptcha(c, frontend.Name, `code`); common.IsFailureCode(data.GetCode()) {
 			if err := SetJWTData(c, m); err != nil {
 				return err
 			}
-			err = c.E(`验证码不正确`)
+			err = c.NewError(code.InvalidParameter, `验证码不正确`).SetZone(`code`)
 			if c.Format() == `json` {
 				return c.JSON(data)
 			}

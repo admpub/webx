@@ -72,6 +72,31 @@ var LeftNavigate = &navigate.List{
 		Children:  &navigate.List{},
 	},
 	{
+		Display:   true,
+		Name:      `会员套餐`,
+		Action:    `membership`,
+		Icon:      `membership iconfont icon-dengji`,
+		Unlimited: true,
+		Children: &navigate.List{
+			{
+				Display:   true,
+				Name:      `会员套餐`,
+				Action:    `index`,
+				Icon:      `membership iconfont icon-dengji`,
+				Unlimited: true,
+				Children:  &navigate.List{},
+			},
+			{
+				Display:   false,
+				Name:      `购买会员套餐`,
+				Action:    `buy`,
+				Icon:      `iconfont icon-xianjinliuliangbiao`,
+				Unlimited: true,
+				Children:  &navigate.List{},
+			},
+		},
+	},
+	{
 		Display: true,
 		Name:    `短链接`,
 		Action:  `short_url`,

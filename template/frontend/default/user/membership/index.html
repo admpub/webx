@@ -1,0 +1,62 @@
+{{Extend "user/base"}}
+{{Block "body"}}
+{{Super}}
+<div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
+  <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"会员套餐"|$.T}}</h5>
+    <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.T}}</a>
+      <span class="breadcrumb-item active">{{"会员套餐"|$.T}}</span>
+    </nav>
+  </div>
+
+<div class="main-body pd-20 pd-b-0-force">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-block bd-0 rounded-0 pd-30 pd-sm-60 pd-xl-y-100">
+                <div class="row justify-content-center">
+                  <div class="col-lg-10">
+                    <div class="card-deck">
+                    {{- range $k, $v := $.Stored.packageList -}}
+                      <div class="card rounded-0 tx-center">
+                        <div class="card-block">
+                          <i class="icon ion-model-s tx-size-100 tx-gray-dark d-block"></i>
+                          <h4 class="tx-inverse mg-b-30 tx-bold">{{$v.Title}}</h4>
+                          <p class="tx-size-sm mg-b-30">{{$v.Description}}</p>
+                        </div><!-- card-block -->
+                        <div class="card-footer pd-b-30 bd-t-0">
+                          <h1 class="mg-b-30 tx-inverse tx-arimo tx-bold">{{Currency $v.Price true}}/{{if gt $v.TimeDuration 1}}{{$v.TimeDuration}}{{end}}{{call $.Func.timeUnitName $v.TimeUnit}}</h1>
+                          <a href="" class="btn bg-gray-dark tx-white tx-size-xs tx-uppercase">Choose Plan</a>
+                        </div><!-- card-footer -->
+                      </div><!-- card -->
+                    {{- end -}}
+                    </div><!-- row -->
+                  </div><!-- col-10 -->
+                </div><!-- row -->
+            </div>
+        </div>
+    </div>
+</div><!-- main-body -->
+
+</div><!-- main -->
+{{/Block}}
+
+{{Block "footer"}}
+<script type="text/html" id="payment-subtype-tpl">
+    <div class="row form-group" id="payment-subtype-switch">
+        <label class="col-sm-2 col-form-label required">{{`<%= label %>`|ToHTML}}</label>
+        <div class="col-sm-8">
+            {{`<% var checked = false; for(var i=0;i < options.length;i++) { var t = options[i]; if(t.disabled) continue; %>`|ToHTML}}
+            <label class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" value="<%= t.value %>" name="subtype"{{`<% if(!checked){ checked = true; %>`|ToHTMLAttr}} checked="checked"{{`<% } %>`|ToHTMLAttr}}>
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">
+                    {{`<%= t.text %>`|ToHTML}}
+                </span>
+            </label>
+            {{`<% } %>`|ToHTML}}
+        </div>
+    </div>
+</script>
+{{Super}}
+{{/Block}}
