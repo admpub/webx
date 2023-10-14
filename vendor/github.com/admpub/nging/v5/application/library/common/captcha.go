@@ -92,13 +92,13 @@ func VerifyCaptcha(ctx echo.Context, hostAlias string, captchaName string, captc
 			ctx.Request().Form().Set(`captchaId`, id)
 		}
 	}
-	code := ctx.Form(captchaName)
-	if len(code) == 0 {
-		return ctx.Data().SetError(ErrCaptchaCodeRequired.SetZone(captchaName))
-	}
 	id := idGet("captchaId")
-	if len(id) == 0 {
+	if len(id) == 0 { // 如果没有 captchaId 字段值，说明前端没有验证码输入框，需要生成验证码参数供前端显示
 		return GenCaptchaError(ctx, hostAlias, captchaName, id, captchaIdent...)
+	}
+	code := ctx.Form(captchaName)
+	if len(code) == 0 { // 验证码为空，说明没有输入验证码
+		return ctx.Data().SetError(ErrCaptchaCodeRequired.SetZone(captchaName))
 	}
 	newId, err := GetCaptchaID(ctx, id)
 	if err != nil {
@@ -111,7 +111,11 @@ func VerifyCaptcha(ctx echo.Context, hostAlias string, captchaName string, captc
 		}
 	}
 	if !tplfunc.CaptchaVerify(code, idGet) {
-		return GenCaptchaError(ctx, hostAlias, captchaName, GenAndRecordCaptchaID(ctx, hdlCaptcha.DefaultOptions), captchaIdent...)
+		return GenCaptchaError(
+			ctx, hostAlias, captchaName,
+			GenAndRecordCaptchaID(ctx, hdlCaptcha.DefaultOptions),
+			captchaIdent...,
+		)
 	}
 	return ctx.Data().SetCode(stdCode.Success.Int())
 }

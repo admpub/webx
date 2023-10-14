@@ -2,6 +2,7 @@ package index
 
 import (
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/middleware/session"
 
 	"github.com/admpub/log"
@@ -196,7 +197,7 @@ func SignIn(c echo.Context) error {
 			if err := SetJWTData(c, m); err != nil {
 				return err
 			}
-			err = c.E(`验证码不正确`)
+			err = c.NewError(code.InvalidParameter, `验证码不正确`).SetZone(`code`)
 			if c.Format() == `json` {
 				return c.JSON(data)
 			}
