@@ -899,14 +899,13 @@ CREATE TABLE `official_customer_level_relation` (
   `customer_id` bigint unsigned NOT NULL COMMENT '客户ID',
   `level_id` int unsigned NOT NULL COMMENT '等级ID',
   `status` enum('actived','expired') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'actived' COMMENT '状态(actived-有效;expired-已过期)',
-  `reason` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '原因',
   `expired` int unsigned NOT NULL DEFAULT '0' COMMENT '过期时间(0为永不过期)',
   `accumulated_days` int unsigned NOT NULL DEFAULT '0' COMMENT '累计天数',
   `last_renewal_at` int unsigned NOT NULL DEFAULT '0' COMMENT '最近续费时间',
   `created` int unsigned NOT NULL COMMENT '创建时间',
   `updated` int unsigned NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  KEY `customer_level_relation_customer_level` (`customer_id`,`level_id`),
+  UNIQUE KEY `customer_level_relation_customer_level` (`customer_id`,`level_id`),
   KEY `customer_level_relation_status` (`status`,`expired`),
   KEY `customer_level_relation_updated` (`updated` DESC),
   KEY `customer_level_relation_last` (`last_renewal_at` DESC)
@@ -1232,4 +1231,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-13 13:33:35
+-- Dump completed on 2023-10-14 19:28:33

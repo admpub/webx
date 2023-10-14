@@ -13,8 +13,36 @@
 <div class="main-body pd-20 pd-b-0-force">
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-block bd-0 rounded-0 pd-30 pd-sm-60 pd-xl-y-100">
-                <div class="row justify-content-center">
+            <div class="card card-block bd-0 rounded-0 pd-30 pd-sm-60 pd-t-0-force">
+                {{- if gt (len $.Stored.groupList) 1 -}}
+                <ul class="nav nav-outline nav-gray d-block d-sm-flex justify-content-center" role="tablist">
+                    {{- range $k, $v := $.Stored.groupList -}}
+                    <li class="nav-item"><a class="nav-link{{if eq $.Stored.group $v.K }} active{{end}}" href="?group={{$v.K}}">{{$v.V}}</a></li>
+                    {{- end -}}
+                </ul>
+                {{- end -}}
+                <div class="row justify-content-center mg-t-30 mg-sm-t-60">
+                  {{- $myLevel := $.Stored.myLevel -}}
+                  {{- if $myLevel -}}
+                  <div class="col-md-10">
+                    <div class="alert alert-info" role="alert">
+                      <h5 class="tx-center">{{`我的套餐`|$.T}}</h5>
+                      <div class="d-flex align-items-center justify-content-start">
+                        <p>
+                          {{- if $myLevel.Level -}}
+                          {{`我的等级：`|$.T}}{{$myLevel.Level.Name}}<br />
+                          {{- end -}}
+                          {{`⏰有效期：`|$.T}}
+                          {{- if gt $myLevel.Expired 0 -}}
+                            {{- (Date $myLevel.Expired).Format "2006-01-02 15:04:05" -}}
+                          {{- else -}}
+                            {{`终身有效`|$.T}}
+                          {{- end -}}
+                        </p>
+                      </div>
+                    </div>
+                    </div>
+                  {{- end -}}
                   <div class="col-lg-10">
                     <div class="card-deck">
                     {{- range $k, $v := $.Stored.packageList -}}
@@ -22,11 +50,14 @@
                         <div class="card-block">
                           <i class="icon ion-model-s tx-size-100 tx-gray-dark d-block"></i>
                           <h4 class="tx-inverse mg-b-30 tx-bold">{{$v.Title}}</h4>
-                          <p class="tx-size-sm mg-b-30">{{$v.Description}}</p>
+                          <p class="tx-size-sm mg-b-30">{{$v.Description|Nl2br}}</p>
                         </div><!-- card-block -->
                         <div class="card-footer pd-b-30 bd-t-0">
-                          <h1 class="mg-b-30 tx-inverse tx-arimo tx-bold">{{Currency $v.Price true}}/{{if gt $v.TimeDuration 1}}{{$v.TimeDuration}}{{end}}{{call $.Func.timeUnitName $v.TimeUnit}}</h1>
-                          <a href="" class="btn bg-gray-dark tx-white tx-size-xs tx-uppercase">Choose Plan</a>
+                          <h1 class="mg-b-30 tx-inverse tx-arimo tx-bold">
+                            {{call $.Func.Currency $v.Price true}}
+                            <small>{{call $.Func.timeUnitSuffix $v.TimeDuration $v.TimeUnit}}</small>
+                         </h1>
+                          <a href="{{FrontendURL}}/user/membership/buy" target="_blank" class="btn bg-gray-dark tx-white tx-size-xs tx-uppercase">{{`立即购买`|$.T}}</a>
                         </div><!-- card-footer -->
                       </div><!-- card -->
                     {{- end -}}

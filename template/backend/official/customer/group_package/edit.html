@@ -74,23 +74,23 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{`是否禁用`|$.T}}</label>
                 <div class="col-sm-3">{{$v := $.Form `disabled` `N`}}
-                  <div class="radio radio-primary radio-inline">
-                    <input type="radio" value="Y" name="disabled" id="disabled-Y" {{- if eq $v "Y"}} checked="checked" {{end}}>
-                    <label for="disabled-Y">{{`禁用`|$.T}}</label>
-                  </div>
-                  <div class="radio radio-primary radio-inline">
-                    <input type="radio" value="N" name="disabled" id="disabled-N" {{- if eq $v "N"}} checked="checked" {{end}}>
+                  <div class="radio radio-success radio-inline">
+                    <input type="radio" value="N" name="disabled" id="disabled-N" {{- if eq $v `N`}} checked="checked" {{end}}>
                     <label for="disabled-N">{{`启用`|$.T}}</label>
+                  </div>
+                  <div class="radio radio-danger radio-inline">
+                    <input type="radio" value="Y" name="disabled" id="disabled-Y" {{- if eq $v `Y`}} checked="checked" {{end}}>
+                    <label for="disabled-Y">{{`禁用`|$.T}}</label>
                   </div>
                 </div>
                 <label class="col-sm-2 control-label">{{`是否推荐`|$.T}}</label>
                 <div class="col-sm-3">{{$v := $.Form `recommend` `N`}}
-                  <div class="radio radio-primary radio-inline">
-                    <input type="radio" value="Y" name="recommend" id="recommend-Y" {{- if eq $v "Y"}} checked="checked" {{end}}>
+                  <div class="radio radio-warning radio-inline">
+                    <input type="radio" value="Y" name="recommend" id="recommend-Y" {{- if eq $v `Y`}} checked="checked" {{end}}>
                     <label for="recommend-Y">{{`是`|$.T}}</label>
                   </div>
                   <div class="radio radio-primary radio-inline">
-                    <input type="radio" value="N" name="recommend" id="recommend-N" {{- if eq $v "N"}} checked="checked" {{end}}>
+                    <input type="radio" value="N" name="recommend" id="recommend-N" {{- if eq $v `N`}} checked="checked" {{end}}>
                     <label for="recommend-N">{{`否`|$.T}}</label>
                   </div>
                 </div>

@@ -106,7 +106,6 @@ type OfficialCustomerLevelRelation struct {
 	CustomerId      uint64 `db:"customer_id" bson:"customer_id" comment:"客户ID" json:"customer_id" xml:"customer_id"`
 	LevelId         uint   `db:"level_id" bson:"level_id" comment:"等级ID" json:"level_id" xml:"level_id"`
 	Status          string `db:"status" bson:"status" comment:"状态(actived-有效;expired-已过期)" json:"status" xml:"status"`
-	Reason          string `db:"reason" bson:"reason" comment:"原因" json:"reason" xml:"reason"`
 	Expired         uint   `db:"expired" bson:"expired" comment:"过期时间(0为永不过期)" json:"expired" xml:"expired"`
 	AccumulatedDays uint   `db:"accumulated_days" bson:"accumulated_days" comment:"累计天数" json:"accumulated_days" xml:"accumulated_days"`
 	LastRenewalAt   uint   `db:"last_renewal_at" bson:"last_renewal_at" comment:"最近续费时间" json:"last_renewal_at" xml:"last_renewal_at"`
@@ -592,7 +591,6 @@ func (a *OfficialCustomerLevelRelation) Reset() *OfficialCustomerLevelRelation {
 	a.CustomerId = 0
 	a.LevelId = 0
 	a.Status = ``
-	a.Reason = ``
 	a.Expired = 0
 	a.AccumulatedDays = 0
 	a.LastRenewalAt = 0
@@ -608,7 +606,6 @@ func (a *OfficialCustomerLevelRelation) AsMap(onlyFields ...string) param.Store 
 		r["CustomerId"] = a.CustomerId
 		r["LevelId"] = a.LevelId
 		r["Status"] = a.Status
-		r["Reason"] = a.Reason
 		r["Expired"] = a.Expired
 		r["AccumulatedDays"] = a.AccumulatedDays
 		r["LastRenewalAt"] = a.LastRenewalAt
@@ -626,8 +623,6 @@ func (a *OfficialCustomerLevelRelation) AsMap(onlyFields ...string) param.Store 
 			r["LevelId"] = a.LevelId
 		case "Status":
 			r["Status"] = a.Status
-		case "Reason":
-			r["Reason"] = a.Reason
 		case "Expired":
 			r["Expired"] = a.Expired
 		case "AccumulatedDays":
@@ -654,8 +649,6 @@ func (a *OfficialCustomerLevelRelation) FromRow(row map[string]interface{}) {
 			a.LevelId = param.AsUint(value)
 		case "status":
 			a.Status = param.AsString(value)
-		case "reason":
-			a.Reason = param.AsString(value)
 		case "expired":
 			a.Expired = param.AsUint(value)
 		case "accumulated_days":
@@ -698,8 +691,6 @@ func (a *OfficialCustomerLevelRelation) Set(key interface{}, value ...interface{
 			a.LevelId = param.AsUint(vv)
 		case "Status":
 			a.Status = param.AsString(vv)
-		case "Reason":
-			a.Reason = param.AsString(vv)
 		case "Expired":
 			a.Expired = param.AsUint(vv)
 		case "AccumulatedDays":
@@ -721,7 +712,6 @@ func (a *OfficialCustomerLevelRelation) AsRow(onlyFields ...string) param.Store 
 		r["customer_id"] = a.CustomerId
 		r["level_id"] = a.LevelId
 		r["status"] = a.Status
-		r["reason"] = a.Reason
 		r["expired"] = a.Expired
 		r["accumulated_days"] = a.AccumulatedDays
 		r["last_renewal_at"] = a.LastRenewalAt
@@ -739,8 +729,6 @@ func (a *OfficialCustomerLevelRelation) AsRow(onlyFields ...string) param.Store 
 			r["level_id"] = a.LevelId
 		case "status":
 			r["status"] = a.Status
-		case "reason":
-			r["reason"] = a.Reason
 		case "expired":
 			r["expired"] = a.Expired
 		case "accumulated_days":

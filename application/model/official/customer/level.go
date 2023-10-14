@@ -6,6 +6,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
+	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	modelLevel "github.com/admpub/webx/application/model/official/level"
 )
@@ -35,6 +36,36 @@ func (f *Level) HasLevel(customerID uint64, levelIds ...interface{}) (bool, erro
 		return false, err
 	}
 	return true, err
+}
+
+func (f *Level) GetByCustomerID(group string, customerID uint64) (result *modelLevel.RelationExt, err error) {
+	levelM := dbschema.NewOfficialCustomerLevel(f.Context())
+	_, err = levelM.ListByOffset(nil, nil, 0, -1, db.And(
+		db.Cond{`group`: group},
+		db.Cond{`disabled`: common.BoolN},
+	))
+	if err != nil {
+		return
+	}
+	rows := levelM.Objects()
+	levelIDs := make([]uint, len(rows))
+	levelMap := map[uint]int{}
+	for i, lv := range rows {
+		levelIDs[i] = lv.Id
+		levelMap[lv.Id] = i
+	}
+	err = f.Get(nil, db.And(
+		db.Cond{`customer_id`: customerID},
+		db.Cond{`level_id`: db.In(levelIDs)},
+	))
+	if err != nil {
+		return
+	}
+	result = &modelLevel.RelationExt{
+		OfficialCustomerLevelRelation: f.OfficialCustomerLevelRelation,
+		Level:                         rows[levelMap[f.LevelId]],
+	}
+	return
 }
 
 func (f *Level) Add() (pk interface{}, err error) {
