@@ -33,7 +33,7 @@
                           {{- if $myLevel.Level -}}
                           <span class="mg-r-20">{{`我的等级：`|$.T}}{{$myLevel.Level.Name}}</span>
                           {{- end -}}
-                          <span>{{`⏰有效期：`|$.T}}
+                          <span>{{`过期时间：`|$.T}}
                           {{- if gt $myLevel.Expired 0 -}}
                             {{- (Date $myLevel.Expired).Format "2006-01-02 15:04:05" -}}
                           {{- else -}}
