@@ -51,7 +51,7 @@ require (
 	github.com/webx-top/client v0.8.9
 	github.com/webx-top/com v1.0.2
 	github.com/webx-top/db v1.27.0
-	github.com/webx-top/echo v2.39.4+incompatible
+	github.com/webx-top/echo v2.39.5+incompatible
 	github.com/webx-top/echo-prometheus v1.1.1
 	github.com/webx-top/echo-socket.io v1.1.3
 	github.com/webx-top/image v0.1.0
@@ -127,7 +127,7 @@ require (
 	github.com/admpub/realip v0.0.0-20210421084339-374cf5df122d // indirect
 	github.com/admpub/redistore v1.2.1 // indirect
 	github.com/admpub/regexp2 v1.1.7 // indirect
-	github.com/admpub/securecookie v1.1.5 // indirect
+	github.com/admpub/securecookie v1.2.0 // indirect
 	github.com/admpub/service v0.0.5 // indirect
 	github.com/admpub/sessions v0.1.3 // indirect
 	github.com/admpub/sockjs-go/v3 v3.0.1 // indirect
@@ -135,7 +135,7 @@ require (
 	github.com/admpub/tail v1.1.0 // indirect
 	github.com/admpub/timeago v1.2.1 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
-	github.com/andybalholm/brotli v1.0.5 // indirect
+	github.com/andybalholm/brotli v1.0.6 // indirect
 	github.com/aws/aws-sdk-go v1.45.25 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -207,7 +207,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kelseyhightower/envconfig v1.4.0 // indirect
 	github.com/kisielk/errcheck v1.6.3 // indirect
-	github.com/klauspost/compress v1.17.0 // indirect
+	github.com/klauspost/compress v1.17.1 // indirect
 	github.com/klauspost/cpuid v1.3.1 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.5 // indirect
 	github.com/klauspost/pgzip v1.2.6 // indirect
