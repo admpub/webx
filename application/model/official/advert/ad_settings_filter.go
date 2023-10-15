@@ -21,10 +21,7 @@ func (f *Filter) GenCond() *db.Compounds {
 	if f.Age > 0 {
 		cond.Add(db.And(
 			db.Cond{`type`: `age`},
-			db.Or(
-				db.Cond{`v_start`: 0},
-				db.Cond{`v_start`: db.Lte(f.Age)},
-			),
+			db.Cond{`v_start`: db.Lte(f.Age)},
 			db.Or(
 				db.Cond{`v_end`: 0},
 				db.Cond{`v_end`: db.Gte(f.Age)},
@@ -34,10 +31,7 @@ func (f *Filter) GenCond() *db.Compounds {
 	if f.NowTS > 0 {
 		cond.Add(db.And(
 			db.Cond{`type`: `time`},
-			db.Or(
-				db.Cond{`v_start`: 0},
-				db.Cond{`v_start`: db.Lte(f.NowTS)},
-			),
+			db.Cond{`v_start`: db.Lte(f.NowTS)},
 			db.Or(
 				db.Cond{`v_end`: 0},
 				db.Cond{`v_end`: db.Gte(f.NowTS)},
