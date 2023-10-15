@@ -215,3 +215,38 @@
   border-bottom-color:transparent;
   border-bottom-width:.5rem
 }
+.flag {
+  position: absolute;
+  height: 1.2em;
+  line-height: 1.2em;
+  text-align: center;
+  width: 74px;
+  background-color: #FF5722;
+  color: #fff;
+}
+.flag-left {
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  left: -18px;
+  top: 9px;
+}
+.flag-small.flag-left{
+  left: -24px;
+  top: 5px;
+}
+.flag-right {
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  right: -18px;
+  top: 9px;
+}
+.flag-small.flag-right{
+  right: -24px;
+  top: 5px;
+}
