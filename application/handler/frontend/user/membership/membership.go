@@ -88,7 +88,7 @@ func Buy(ctx echo.Context) error {
 		err = nil
 	} else {
 		if myLevel.Expired == 0 {
-			//return ctx.NewError(code.Failure, `您已经是终身“%s”，无需再次购买`, modelLevel.GroupList.Get(pkgM.Group))
+			return ctx.NewError(code.Failure, `您已经是终身“%s”，无需再次购买`, modelLevel.GroupList.Get(pkgM.Group))
 		}
 	}
 	m := modelCustomer.NewWallet(ctx)

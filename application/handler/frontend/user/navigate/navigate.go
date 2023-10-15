@@ -76,14 +76,14 @@ var LeftNavigate = &navigate.List{
 		Name:      `会员套餐`,
 		Action:    `membership`,
 		Icon:      `membership iconfont icon-dengji`,
-		Unlimited: true,
+		Unlimited: false,
 		Children: &navigate.List{
 			{
 				Display:   true,
 				Name:      `会员套餐`,
 				Action:    `index`,
 				Icon:      `membership iconfont icon-dengji`,
-				Unlimited: true,
+				Unlimited: false,
 				Children:  &navigate.List{},
 			},
 			{
@@ -91,7 +91,7 @@ var LeftNavigate = &navigate.List{
 				Name:      `购买会员套餐`,
 				Action:    `buy/:packageId`,
 				Icon:      `iconfont icon-xianjinliuliangbiao`,
-				Unlimited: true,
+				Unlimited: false,
 				Children:  &navigate.List{},
 			},
 		},
