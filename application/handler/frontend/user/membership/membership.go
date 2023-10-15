@@ -157,7 +157,11 @@ func Buy(ctx echo.Context) error {
 			goto END
 		}
 		ctx.Commit()
-		return ctx.Redirect(sessdata.URLFor(`/user/membership/index`))
+		next := ctx.Form(`next`)
+		if len(next) == 0 {
+			next = sessdata.URLFor(`/user/membership/index`)
+		}
+		return ctx.Redirect(next)
 	}
 
 END:
