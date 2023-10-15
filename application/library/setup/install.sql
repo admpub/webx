@@ -430,7 +430,14 @@ CREATE TABLE `official_common_message` (
   `reply_id` bigint unsigned NOT NULL DEFAULT '0' COMMENT '回复ID',
   `has_new_reply` tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否(1/0)有新回复',
   `view_progress` tinyint unsigned NOT NULL DEFAULT '0' COMMENT '查看总进度(100为100%)',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `common_message_from` (`customer_a`,`user_a`),
+  KEY `common_message_to_customer` (`customer_b`,`customer_group_id`),
+  KEY `common_message_to_user` (`user_b`,`user_role_id`),
+  KEY `common_message_encrypted` (`encrypted`),
+  KEY `common_message_view_progress` (`view_progress`),
+  KEY `common_message_has_new_reply` (`has_new_reply` DESC),
+  FULLTEXT KEY `common_message_title_content` (`title`,`content`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='站内信';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1231,4 +1238,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-14 19:28:33
+-- Dump completed on 2023-10-15 12:47:04

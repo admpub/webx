@@ -5,7 +5,9 @@ import (
 	"github.com/admpub/nging/v5/application/library/common"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/webx-top/db"
+	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 )
 
@@ -24,22 +26,17 @@ func messageList(c echo.Context) error {
 	if typ == `unread` {
 		onlyUnread = true
 	}
-	var cond db.Compound
+	cond := db.NewCompounds()
 	if len(q) > 0 {
-		cond = db.And(
-			db.Cond{`encrypted`: `N`},
-			db.Or(
-				db.Cond{`title`: db.Like(`%` + q + `%`)},
-				db.Cond{`content`: db.Like(`%` + q + `%`)},
-			),
-		)
+		cond.AddKV(`encrypted`, `N`)
+		cond.From(mysql.SearchField(`~title+content`, q))
 	}
 	var (
 		list []*modelCustomer.MessageWithViewed
 		err  error
 	)
 	//c.Request().Form().Set(`size`, `20`)
-	list, err = m.ListAll(onlyUnread, cond)
+	list, err = m.ListAll(onlyUnread, cond.And())
 	if err != nil {
 		return err
 	}
@@ -50,13 +47,13 @@ func messageList(c echo.Context) error {
 func MessageView(c echo.Context) error {
 	id := c.Paramx(`id`).Uint64()
 	if id < 1 {
-		return c.E(`id无效`)
+		return c.NewError(code.InvalidParameter, `id无效`).SetZone(`id`)
 	}
 	m := modelCustomer.NewMessage(c)
 	err := m.Get(nil, db.Cond{`id`: id})
 	if err != nil {
 		if err != db.ErrNoMoreRows {
-			return c.E(`数据不存在`)
+			return c.NewError(code.DataNotFound, `数据不存在`)
 		}
 		return err
 	}

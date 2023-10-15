@@ -318,12 +318,12 @@ func (f *Message) ListWithViewedByRecipient(viewerID uint64, groupIDs []uint, is
 		cond = append(cond, db.Cond{viewerType + `_b`: viewerID})
 	}
 	if isSystemMessage {
-		cond = append(cond, db.Cond{`user_a`: 0})
 		cond = append(cond, db.Cond{`customer_a`: 0})
+		cond = append(cond, db.Cond{`user_a`: 0})
 	} else {
 		cond = append(cond, db.Or(
-			db.Cond{`user_a`: db.NotEq(0)},
 			db.Cond{`customer_a`: db.NotEq(0)},
+			db.Cond{`user_a`: db.NotEq(0)},
 		))
 	}
 	if onlyUnread {

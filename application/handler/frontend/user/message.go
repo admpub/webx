@@ -2,6 +2,7 @@ package user
 
 import (
 	"github.com/webx-top/db"
+	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
 
 	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
@@ -60,15 +61,10 @@ func messageList(c echo.Context, customer *dbschema.OfficialCustomer, isSystemMe
 	if typ == `unread` {
 		onlyUnread = true
 	}
-	var cond db.Compound
+	cond := db.NewCompounds()
 	if len(q) > 0 {
-		cond = db.And(
-			db.Cond{`encrypted`: `N`},
-			db.Or(
-				db.Cond{`title`: db.Like(`%` + q + `%`)},
-				db.Cond{`content`: db.Like(`%` + q + `%`)},
-			),
-		)
+		cond.AddKV(`encrypted`, `N`)
+		cond.From(mysql.SearchField(`~title+content`, q))
 	}
 	var (
 		list []*modelCustomer.MessageWithViewed
@@ -80,9 +76,9 @@ func messageList(c echo.Context, customer *dbschema.OfficialCustomer, isSystemMe
 		if customer.GroupId > 0 {
 			gids = append(gids, customer.GroupId)
 		}
-		list, err = m.ListWithViewedByRecipient(customer.Id, gids, isSystemMessage, onlyUnread, cond)
+		list, err = m.ListWithViewedByRecipient(customer.Id, gids, isSystemMessage, onlyUnread, cond.And())
 	} else {
-		list, err = m.ListWithViewedBySender(customer.Id, onlyUnread, cond)
+		list, err = m.ListWithViewedBySender(customer.Id, onlyUnread, cond.And())
 	}
 	if err != nil {
 		return err
