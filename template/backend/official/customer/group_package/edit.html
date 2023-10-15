@@ -7,9 +7,6 @@
 {{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.uploadPreviewer/css/jquery.uploadPreviewer.min.css?t={{BuildTime}}" type="text/css" />
-<link rel="stylesheet" href="{{AssetsURL}}/js/float/powerFloat.min.css?t={{BuildTime}}" charset="utf-8" />
-<link rel="stylesheet" href="{{AssetsURL}}/js/colorpicker/colorpicker.css?t={{BuildTime}}" charset="utf-8" />
-<link rel="stylesheet" type="text/css" href="{{AssetsURL}}/js/jquery.select2/select2.css" />
 {{/Block}}
 {{Block "main"}}
 <div class="row">
@@ -66,6 +63,19 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="col-sm-2 control-label">{{"图片图标"|$.T}}</label>
+                <div class="col-sm-8">{{$iconImage := $.Form `iconImage`}}
+                  {{- $.Set `fileInputConfig` (MakeMap `name` `iconImage` `value` $iconImage `subdir` `membership`) -}}
+                  {{Include "_common/file_input" $}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"字体图标"|$.T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="iconClass" value="{{$.Form `iconClass`}}" placeholder="icon ion-model-s">
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="col-sm-2 control-label">{{"排序"|$.T}}</label>
                 <div class="col-sm-3">
                   <input type="number" class="form-control" name="sort" value="{{$.Form `sort`}}" step="1" placeholder="{{`支持负数。采用从小到大排列`|$.T}}">
@@ -108,31 +118,12 @@
 </div>
 {{/Block}}
 {{Block "footer"}}
-<script src="{{AssetsURL}}/js/float/powerFloat.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
 <script src="{{AssetsURL}}/js/jquery.uploadPreviewer/jquery.uploadPreviewer.min.js?t={{BuildTime}}"></script>
-<script src="{{AssetsURL}}/js/colorpicker/colorpicker.min.js?t={{BuildTime}}"></script>
-<script src="{{AssetsURL}}/js/jquery.select2/select2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
-		App.uploadPreviewer("#iconImageFile", {url:'{{BackendUploadURL ``}}'}, function(r){
-			if(r.Code==1) {
-				var fileURL=r.Data.files[0];
-				$('#inputImage').val(fileURL);
-				$('#imagePreviewBtn').removeClass('hidden').children('a').attr('href',fileURL).children('img').attr('src',fileURL);
-			}
-		});
-  $('#inputColor').colorpicker({format: "hex"}).on('changeColor', function(e) {
-    this.style.color = e.color.toString('rgba');
-    this.style.backgroundColor = $('#inputBgColor').val();
-    $('#inputBgColor').css({'color':e.color.toString('rgba'),'background-color':$('#inputBgColor').val()});
-  });
-  $('#inputBgColor').colorpicker({format: "hex"}).on('changeColor', function(e) {
-    this.style.backgroundColor = e.color.toString('rgba');
-    this.style.color = $('#inputColor').val();
-    $('#inputColor').css({'color':$('#inputColor').val(),'background-color':e.color.toString('rgba')});
-  });
-  App.float("#imagePreviewBtn a img");
-  $('#select2roles').select2({width:'100%'});
+  App.editor.fileInput();
 });
 </script>
 {{/Block}}

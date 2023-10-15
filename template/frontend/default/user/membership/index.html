@@ -49,7 +49,11 @@
                     {{- range $k, $v := $.Stored.packageList -}}
                       <div class="card rounded-0 tx-center">
                         <div class="card-block">
-                          <i class="icon ion-model-s tx-size-100 tx-gray-dark d-block"></i>
+                          {{- if $v.IconImage -}}
+                          <div class="mg-b-20 mg-t-20"><img src="{{$v.IconImage}}" alt="{{$v.Title}}"></div>
+                          {{- else -}}
+                          <i class="{{if $v.IconClass}}{{$v.IconClass}}{{else}}icon ion-model-s{{end}} tx-size-100 tx-gray-dark d-block"></i>
+                          {{- end -}}
                           <h4 class="tx-inverse mg-b-30 tx-bold">{{$v.Title}}</h4>
                           <p class="tx-size-sm mg-b-30">{{$v.Description|Nl2br}}</p>
                         </div><!-- card-block -->

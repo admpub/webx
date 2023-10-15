@@ -113,6 +113,8 @@ type OfficialCustomerGroupPackage struct {
 	Disabled     string  `db:"disabled" bson:"disabled" comment:"是否(Y/N)禁用" json:"disabled" xml:"disabled"`
 	Recommend    string  `db:"recommend" bson:"recommend" comment:"是否(Y/N)推荐" json:"recommend" xml:"recommend"`
 	Sold         uint    `db:"sold" bson:"sold" comment:"销量" json:"sold" xml:"sold"`
+	IconImage    string  `db:"icon_image" bson:"icon_image" comment:"图标图片" json:"icon_image" xml:"icon_image"`
+	IconClass    string  `db:"icon_class" bson:"icon_class" comment:"图标class" json:"icon_class" xml:"icon_class"`
 	Created      uint    `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
 	Updated      uint    `db:"updated" bson:"updated" comment:"更新时间" json:"updated" xml:"updated"`
 }
@@ -664,6 +666,8 @@ func (a *OfficialCustomerGroupPackage) Reset() *OfficialCustomerGroupPackage {
 	a.Disabled = ``
 	a.Recommend = ``
 	a.Sold = 0
+	a.IconImage = ``
+	a.IconClass = ``
 	a.Created = 0
 	a.Updated = 0
 	return a
@@ -683,6 +687,8 @@ func (a *OfficialCustomerGroupPackage) AsMap(onlyFields ...string) param.Store {
 		r["Disabled"] = a.Disabled
 		r["Recommend"] = a.Recommend
 		r["Sold"] = a.Sold
+		r["IconImage"] = a.IconImage
+		r["IconClass"] = a.IconClass
 		r["Created"] = a.Created
 		r["Updated"] = a.Updated
 		return r
@@ -711,6 +717,10 @@ func (a *OfficialCustomerGroupPackage) AsMap(onlyFields ...string) param.Store {
 			r["Recommend"] = a.Recommend
 		case "Sold":
 			r["Sold"] = a.Sold
+		case "IconImage":
+			r["IconImage"] = a.IconImage
+		case "IconClass":
+			r["IconClass"] = a.IconClass
 		case "Created":
 			r["Created"] = a.Created
 		case "Updated":
@@ -745,6 +755,10 @@ func (a *OfficialCustomerGroupPackage) FromRow(row map[string]interface{}) {
 			a.Recommend = param.AsString(value)
 		case "sold":
 			a.Sold = param.AsUint(value)
+		case "icon_image":
+			a.IconImage = param.AsString(value)
+		case "icon_class":
+			a.IconClass = param.AsString(value)
 		case "created":
 			a.Created = param.AsUint(value)
 		case "updated":
@@ -795,6 +809,10 @@ func (a *OfficialCustomerGroupPackage) Set(key interface{}, value ...interface{}
 			a.Recommend = param.AsString(vv)
 		case "Sold":
 			a.Sold = param.AsUint(vv)
+		case "IconImage":
+			a.IconImage = param.AsString(vv)
+		case "IconClass":
+			a.IconClass = param.AsString(vv)
 		case "Created":
 			a.Created = param.AsUint(vv)
 		case "Updated":
@@ -817,6 +835,8 @@ func (a *OfficialCustomerGroupPackage) AsRow(onlyFields ...string) param.Store {
 		r["disabled"] = a.Disabled
 		r["recommend"] = a.Recommend
 		r["sold"] = a.Sold
+		r["icon_image"] = a.IconImage
+		r["icon_class"] = a.IconClass
 		r["created"] = a.Created
 		r["updated"] = a.Updated
 		return r
@@ -845,6 +865,10 @@ func (a *OfficialCustomerGroupPackage) AsRow(onlyFields ...string) param.Store {
 			r["recommend"] = a.Recommend
 		case "sold":
 			r["sold"] = a.Sold
+		case "icon_image":
+			r["icon_image"] = a.IconImage
+		case "icon_class":
+			r["icon_class"] = a.IconClass
 		case "created":
 			r["created"] = a.Created
 		case "updated":

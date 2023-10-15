@@ -40,6 +40,7 @@
 							<th style="width:120px"><strong>{{"等级组"|$.T}}</strong></th>
 							<th style="width:80px"><strong>{{"价格"|$.T}}</strong></th>
 							<th style="width:80px"><strong>{{"时长"|$.T}}</strong></th>
+							<th style="width:80px"><strong>{{"销量"|$.T}}</strong></th>
 							<th style="width:130px"><strong>{{"创建时间"|$.T}}</strong></th>
 							<th style="width:130px"><strong>{{"更新时间"|$.T}}</strong></th>
 							<th style="width:120px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
@@ -66,6 +67,7 @@
 								{{- if ne $v.TimeUnit `forever`}}{{$v.TimeDuration}}{{end}}
 								{{call $.Func.timeUnitName $v.TimeUnit -}}
 							</td>
+							<td>{{$v.Sold}}</td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{end}}</td>
 							<td class="text-center">

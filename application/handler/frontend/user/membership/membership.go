@@ -126,7 +126,7 @@ func Buy(ctx echo.Context) error {
 		}
 		myLevelM.Expired = uint(expiresTime.Unix())
 		myLevelM.AccumulatedDays = (myLevelM.Expired - uint(baseTime.Unix())) / 86400
-
+		ctx.Begin()
 		// 钱包余额支付
 		walletM := modelCustomer.NewWallet(ctx)
 		walletM.Flow.CustomerId = customer.Id
@@ -141,14 +141,22 @@ func Buy(ctx echo.Context) error {
 		walletM.Flow.Description = `购买会员套餐: ` + pkgM.Title
 		err = walletM.AddFlow()
 		if err != nil {
+			ctx.Rollback()
 			goto END
 		}
 
 		// 添加会员等级数据
 		_, err = myLevelM.Add()
 		if err != nil {
+			ctx.Rollback()
 			goto END
 		}
+		err = pkgM.IncrSold(pkgM.Id)
+		if err != nil {
+			ctx.Rollback()
+			goto END
+		}
+		ctx.Commit()
 		return ctx.Redirect(sessdata.URLFor(`/user/membership/index`))
 	}
 

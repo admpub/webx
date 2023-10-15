@@ -6,6 +6,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/param"
 
 	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
@@ -64,6 +65,17 @@ func (u *GroupPackage) ListByGroup(group string) error {
 		return r.OrderBy(`sort`, `id`)
 	}, 0, -1, cond.And())
 	return err
+}
+
+func (u *GroupPackage) IncrSold(id uint, n ...int) error {
+	var _n int
+	if len(n) > 0 {
+		_n = n[0]
+	}
+	if _n == 0 {
+		_n = 1
+	}
+	return u.UpdateField(nil, `sold`, db.Raw(`sold+`+param.AsString(_n)), `id`, id)
 }
 
 // ListGroup 列出设置有套餐的组名称

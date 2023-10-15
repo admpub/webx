@@ -19,4 +19,13 @@ func init() {
 		property = listener.NewPropertyWith(fm, db.Cond{`id`: fm.Id})
 		return
 	}, false).SetTable(`official_customer_level`, `icon_image`).ListenDefault()
+
+	// - official_customer_group_package
+	listener.New(func(m factory.Model) (tableID string, content string, property *listener.Property) {
+		fm := m.(*dbschema.OfficialCustomerGroupPackage)
+		tableID = fmt.Sprint(fm.Id)
+		content = fm.IconImage
+		property = listener.NewPropertyWith(fm, db.Cond{`id`: fm.Id})
+		return
+	}, false).SetTable(`official_customer_group_package`, `icon_image`).ListenDefault()
 }
