@@ -1,6 +1,8 @@
 package membership
 
 import (
+	"time"
+
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -63,5 +65,100 @@ func Index(ctx echo.Context) error {
 }
 
 func Buy(ctx echo.Context) error {
-	return ctx.Render(`user/membership/buy`, nil)
+	packageID := ctx.Paramx(`packageId`).Uint()
+	if packageID < 1 {
+		return ctx.NewError(code.InvalidParameter, `参数无效`).SetZone(`packageId`)
+	}
+	pkgM := modelCustomer.NewGroupPackage(ctx)
+	err := pkgM.Get(nil, `id`, packageID)
+	if err != nil {
+		if err == db.ErrNoMoreRows {
+			return ctx.NewError(code.DataNotFound, `套餐不存在`).SetZone(`packageId`)
+		}
+		return err
+	}
+	customer := sessdata.Customer(ctx)
+	myLevelM := modelCustomer.NewLevel(ctx)
+	var myLevel *modelLevel.RelationExt
+	myLevel, err = myLevelM.GetByCustomerID(pkgM.Group, customer.Id)
+	if err != nil {
+		if err != db.ErrNoMoreRows {
+			return err
+		}
+		err = nil
+	} else {
+		if myLevel.Expired == 0 {
+			//return ctx.NewError(code.Failure, `您已经是终身“%s”，无需再次购买`, modelLevel.GroupList.Get(pkgM.Group))
+		}
+	}
+	m := modelCustomer.NewWallet(ctx)
+	var money float64
+	money, err = m.GetBalance(`money`, customer.Id)
+	if err != nil {
+		return err
+	}
+	if ctx.IsPost() {
+		now := time.Now()
+		var baseTime time.Time
+		if myLevel != nil {
+			if myLevel.Expired == 0 {
+				return ctx.NewError(code.Failure, `您已经是终身“%s”，无需再次购买`, modelLevel.GroupList.Get(pkgM.Group))
+			}
+			baseTime = time.Unix(int64(myLevel.Expired), 0)
+			if baseTime.Before(now) {
+				baseTime = now
+			}
+		}
+		expiresTime := pkgM.MakeExpireTime(baseTime)
+		myLevelM.CustomerId = customer.Id
+		if myLevel != nil {
+			myLevelM.LevelId = myLevel.LevelId
+		} else {
+			lvM := modelLevel.NewLevel(ctx)
+			err = lvM.GetMinLevelByGroup(pkgM.Group)
+			if err != nil {
+				if err == db.ErrNoMoreRows {
+					return ctx.NewError(code.DataNotFound, `“%s”尚未配置等级，暂时无法购买`, modelLevel.GroupList.Get(pkgM.Group))
+				}
+				return err
+			}
+			myLevelM.LevelId = lvM.Id
+		}
+		myLevelM.Expired = uint(expiresTime.Unix())
+		myLevelM.AccumulatedDays = (myLevelM.Expired - uint(baseTime.Unix())) / 86400
+
+		// 钱包余额支付
+		walletM := modelCustomer.NewWallet(ctx)
+		walletM.Flow.CustomerId = customer.Id
+		walletM.Flow.AssetType = modelCustomer.AssetTypeMoney
+		walletM.Flow.AmountType = modelCustomer.AmountTypeBalance
+		walletM.Flow.Amount = -pkgM.Price
+		walletM.Flow.SourceType = `buy`
+		walletM.Flow.SourceTable = `official_customer_group_package`
+		walletM.Flow.SourceId = uint64(pkgM.Id)
+		walletM.Flow.TradeNo = ``
+		walletM.Flow.Status = modelCustomer.FlowStatusConfirmed //状态(pending-待确认;confirmed-已确认;canceled-已取消)
+		walletM.Flow.Description = `购买会员套餐: ` + pkgM.Title
+		err = walletM.AddFlow()
+		if err != nil {
+			goto END
+		}
+
+		// 添加会员等级数据
+		_, err = myLevelM.Add()
+		if err != nil {
+			goto END
+		}
+		return ctx.Redirect(sessdata.URLFor(`/user/membership/index`))
+	}
+
+END:
+	ctx.Set(`package`, pkgM.OfficialCustomerGroupPackage)
+	ctx.Set(`myLevel`, myLevel)
+	ctx.Set(`money`, money)
+	ctx.Set(`activeURL`, `/user/membership/index`)
+	ctx.SetFunc(`timeUnitSuffix`, func(n uint, unit string) string {
+		return modelCustomer.GroupPackageTimeUnitSuffix(ctx, n, unit)
+	})
+	return ctx.Render(`user/membership/buy`, handler.Err(ctx, err))
 }

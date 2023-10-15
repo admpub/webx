@@ -74,7 +74,7 @@ func (f *Level) Add() (pk interface{}, err error) {
 		db.Cond{`customer_id`: f.CustomerId},
 		db.Cond{`level_id`: f.LevelId},
 	))
-	if f.Expired > 0 {
+	if f.AccumulatedDays == 0 && f.Expired > 0 {
 		f.AccumulatedDays = (f.Expired - uint(time.Now().Unix())) / 86400
 	}
 	m.Status = modelLevel.LevelStatusActived

@@ -89,7 +89,7 @@ var LeftNavigate = &navigate.List{
 			{
 				Display:   false,
 				Name:      `购买会员套餐`,
-				Action:    `buy`,
+				Action:    `buy/:packageId`,
 				Icon:      `iconfont icon-xianjinliuliangbiao`,
 				Unlimited: true,
 				Children:  &navigate.List{},

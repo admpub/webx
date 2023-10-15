@@ -1,0 +1,71 @@
+{{Extend "user/base"}}
+{{Block "body"}}
+{{Super}}
+{{- $data := $.Stored.package -}}
+<div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
+  <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"会员套餐"|$.T}}</h5>
+    <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+        <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.T}}</a>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/membership/index">{{"会员套餐"|$.T}}</a>
+      <span class="breadcrumb-item active">{{"购买："|$.T}}{{$data.Title}}</span>
+    </nav>
+  </div>
+
+<div class="main-body pd-20 pd-b-0-force">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form form-label-right" method="post" action="{{$.URI}}">
+            <div class="card card-form form-label-right">
+                <div class="card-header">
+                  <h6 class="card-title">{{"购买会员套餐"|$.T}}</h6>
+                </div><!-- card-header -->
+                <div class="card-body">
+                    <div class="row form-group">
+                        <label class="col-sm-2 col-form-label">{{`当前余额`|$.T}}:</label>
+                        <div class="col-sm-8">
+                            <div>
+                                <span class="tx-success tx-bold tx-size-24">{{call $.Func.Currency $.Stored.money true}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-sm-2 col-form-label">{{`会员套餐`|$.T}}:</label>
+                        <div class="col-sm-8">
+                            <div class="form-control-plaintext">
+                                <span>{{$data.Title}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-sm-2 col-form-label">{{`实付金额`|$.T}}:</label>
+                        <div class="col-sm-8">
+                            <div>
+                                <span class="tx-orange tx-bold tx-size-24">{{call $.Func.Currency $data.Price true}}</span>
+                                <small>{{call $.Func.timeUnitSuffix $data.TimeDuration $data.TimeUnit}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                  <div class="row form-group">
+                      <div class="col-sm-8 offset-sm-2">
+                          <input type="hidden" name="next" value="{{$.Form `next`}}">
+                          <button type="submit" class="btn btn-primary">{{`确认购买`|$.T}}</button>
+                          <a href="{{FrontendURL}}/user/membership/index?group={{$data.Group}}" class="btn btn-default tx-inverse">{{`返回`|$.T}}</a>
+                      </div>
+                  </div>
+                </div>
+            </div><!-- .card -->
+            </form>
+        </div>
+    </div>
+</div><!-- main-body -->
+
+
+</div><!-- main -->
+{{/Block}}
+
+{{Block "footer"}}
+{{Super}}
+{{/Block}}

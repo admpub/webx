@@ -25,19 +25,20 @@
                   {{- $myLevel := $.Stored.myLevel -}}
                   {{- if $myLevel -}}
                   <div class="col-md-10">
-                    <div class="alert alert-info" role="alert">
-                      <h5 class="tx-center">{{`我的套餐`|$.T}}</h5>
+                    <div class="alert alert-solid alert-info" role="alert">
                       <div class="d-flex align-items-center justify-content-start">
+                        <i class="icon ion-ios-checkmark alert-icon tx-size-32 mg-t-5 mg-xs-t-0"></i>
                         <p>
+                          <strong class="mg-r-20">{{`我的套餐`|$.T}}</strong>
                           {{- if $myLevel.Level -}}
-                          {{`我的等级：`|$.T}}{{$myLevel.Level.Name}}<br />
+                          <span class="mg-r-20">{{`我的等级：`|$.T}}{{$myLevel.Level.Name}}</span>
                           {{- end -}}
-                          {{`⏰有效期：`|$.T}}
+                          <span>{{`⏰有效期：`|$.T}}
                           {{- if gt $myLevel.Expired 0 -}}
                             {{- (Date $myLevel.Expired).Format "2006-01-02 15:04:05" -}}
                           {{- else -}}
                             {{`终身有效`|$.T}}
-                          {{- end -}}
+                          {{- end -}}</span>
                         </p>
                       </div>
                     </div>
@@ -57,9 +58,19 @@
                             {{call $.Func.Currency $v.Price true}}
                             <small>{{call $.Func.timeUnitSuffix $v.TimeDuration $v.TimeUnit}}</small>
                          </h1>
-                          <a href="{{FrontendURL}}/user/membership/buy" target="_blank" class="btn bg-gray-dark tx-white tx-size-xs tx-uppercase">{{`立即购买`|$.T}}</a>
+                          <a href="{{FrontendURL}}/user/membership/buy/{{$v.Id}}" target="_blank" class="btn bg-gray-dark tx-white tx-size-xs tx-uppercase">{{`立即购买`|$.T}}</a>
                         </div><!-- card-footer -->
                       </div><!-- card -->
+                    {{- else -}}
+                    <div class="alert alert-warning alert-bordered wd-100p" role="alert">
+                      <div class="d-flex align-items-center justify-content-start">
+                        <i class="icon ion-alert-circled alert-icon tx-size-52 tx-warning mg-r-20"></i>
+                        <div class="ml50">
+                          <h5 class="mg-b-2 tx-warning">{{`暂无数据`|$.T}}</h5>
+                          <p class="mg-b-0 tx-gray">{{`网站管理员还没有添加会员套餐`|$.T}}</p>
+                        </div>
+                      </div>
+                    </div>
                     {{- end -}}
                     </div><!-- row -->
                   </div><!-- col-10 -->
@@ -73,21 +84,5 @@
 {{/Block}}
 
 {{Block "footer"}}
-<script type="text/html" id="payment-subtype-tpl">
-    <div class="row form-group" id="payment-subtype-switch">
-        <label class="col-sm-2 col-form-label required">{{`<%= label %>`|ToHTML}}</label>
-        <div class="col-sm-8">
-            {{`<% var checked = false; for(var i=0;i < options.length;i++) { var t = options[i]; if(t.disabled) continue; %>`|ToHTML}}
-            <label class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" value="<%= t.value %>" name="subtype"{{`<% if(!checked){ checked = true; %>`|ToHTMLAttr}} checked="checked"{{`<% } %>`|ToHTMLAttr}}>
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">
-                    {{`<%= t.text %>`|ToHTML}}
-                </span>
-            </label>
-            {{`<% } %>`|ToHTML}}
-        </div>
-    </div>
-</script>
 {{Super}}
 {{/Block}}

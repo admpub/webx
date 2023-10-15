@@ -12,7 +12,7 @@ func init() {
 		// 会员套餐
 		agentG := u.Group(`/membership`)
 		agentG.Route(`GET`, `/index`, Index)
-		agentG.Route(`GET,POST`, `/buy`, Buy)
+		agentG.Route(`GET,POST`, `/buy/:packageId`, Buy)
 	})
 
 }
