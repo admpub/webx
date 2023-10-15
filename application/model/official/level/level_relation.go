@@ -26,7 +26,7 @@ func (f *Relation) ListByCustomerID(customerID uint64) ([]*dbschema.OfficialCust
 		db.Cond{`status`: LevelStatusActived},
 		db.Or(
 			db.Cond{`expired`: 0},
-			db.Cond{`expired`: db.Lt(time.Now().Unix())},
+			db.Cond{`expired`: db.Gt(time.Now().Unix())},
 		),
 	))
 	if err != nil {
@@ -49,7 +49,7 @@ func (f *Relation) GetGroupLevelByCustomerID(customerID uint64, group string) (*
 		db.Cond{`r.status`: LevelStatusActived},
 		db.Or(
 			db.Cond{`r.expired`: 0},
-			db.Cond{`r.expired`: db.Lt(time.Now().Unix())},
+			db.Cond{`r.expired`: db.Gt(time.Now().Unix())},
 		),
 		db.Cond{`b.group`: group},
 	))
@@ -66,7 +66,7 @@ func (f *Relation) ListByCustomerIDs(customerIDs []uint64) (map[uint64][]*Relati
 		db.Cond{`status`: LevelStatusActived},
 		db.Or(
 			db.Cond{`expired`: 0},
-			db.Cond{`expired`: db.Lt(time.Now().Unix())},
+			db.Cond{`expired`: db.Gt(time.Now().Unix())},
 		),
 	)
 	_, err := f.ListByOffset(&list, mw, 0, -1, db.And())

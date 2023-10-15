@@ -23,11 +23,11 @@ func (f *Filter) GenCond() *db.Compounds {
 			db.Cond{`type`: `age`},
 			db.Or(
 				db.Cond{`v_start`: 0},
-				db.Cond{`v_start`: db.Gte(f.Age)},
+				db.Cond{`v_start`: db.Lte(f.Age)},
 			),
 			db.Or(
 				db.Cond{`v_end`: 0},
-				db.Cond{`v_end`: db.Lte(f.Age)},
+				db.Cond{`v_end`: db.Gte(f.Age)},
 			),
 		))
 	}
@@ -36,11 +36,11 @@ func (f *Filter) GenCond() *db.Compounds {
 			db.Cond{`type`: `time`},
 			db.Or(
 				db.Cond{`v_start`: 0},
-				db.Cond{`v_start`: db.Gte(f.NowTS)},
+				db.Cond{`v_start`: db.Lte(f.NowTS)},
 			),
 			db.Or(
 				db.Cond{`v_end`: 0},
-				db.Cond{`v_end`: db.Lte(f.NowTS)},
+				db.Cond{`v_end`: db.Gte(f.NowTS)},
 			),
 		))
 	}

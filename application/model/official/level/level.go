@@ -209,8 +209,8 @@ func (f *Level) CanAutoLevelUpByIntegralAsset(group string, integral float64, as
 		db.Cond{`group`: group},
 		db.Cond{`price`: 0},
 		db.Cond{`integral_asset`: asset},
-		db.Cond{`integral_min`: db.Gte(integral)},
-		db.Cond{`integral_max`: db.Lte(integral)},
+		db.Cond{`integral_min`: db.Lte(integral)},
+		db.Cond{`integral_max`: db.Gte(integral)},
 	))
 	if err != nil {
 		if err != db.ErrNoMoreRows {
@@ -228,8 +228,8 @@ func (f *Level) CanPaymentLevelUpByIntegralAsset(group string, integral float64,
 		db.Cond{`group`: group},
 		db.Cond{`price`: db.Gt(0)},
 		db.Cond{`integral_asset`: asset},
-		db.Cond{`integral_min`: db.Gte(integral)},
-		db.Cond{`integral_max`: db.Lte(integral)},
+		db.Cond{`integral_min`: db.Lte(integral)},
+		db.Cond{`integral_max`: db.Gte(integral)},
 	))
 	if err != nil {
 		if err != db.ErrNoMoreRows {
