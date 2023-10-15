@@ -241,7 +241,7 @@ func (f *Level) CanPaymentLevelUpByIntegralAsset(group string, integral float64,
 
 func (f *Level) GetMinLevelByGroup(group string) error {
 	return f.Get(func(r db.Result) db.Result {
-		return r.OrderBy(`score`)
+		return r.OrderBy(`score`, `integral_min`)
 	}, db.And(
 		db.Cond{`disabled`: `N`},
 		db.Cond{`group`: group},
