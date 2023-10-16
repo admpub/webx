@@ -31,7 +31,7 @@ func init() {
 			db.Cond{`file_num`: db.Gt(0)},
 		))
 		if err != nil {
-			fileM := &dbschemaNG.NgingFile{}
+			fileM := dbschemaNG.NewNgingFile(data.Context())
 			recv := echo.H{}
 			err = fileM.NewParam().SetMW(func(r db.Result) db.Result {
 				return r.Select(db.Raw(`SUM(size) AS c`), db.Raw(`COUNT(1) AS n`))

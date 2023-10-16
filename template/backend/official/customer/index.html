@@ -118,7 +118,7 @@
 								<span class="label label-default label-xs" data-toggle="tooltip" title="{{.Name}}">{{.Name}}</span>
 								{{- end -}}
 							</td>
-							<td>{{`数量`|$.T}}: {{$v.FileNum}}<br />{{`尺寸`|$.T}}: {{FormatByte $v.FileSize}}</td>
+							<td>{{`数量`|$.T}}: <a href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{$v.FileNum}}</a><br />{{`尺寸`|$.T}}: <a href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{FormatByte $v.FileSize}}</a></td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{end}}</td>
 							<td class="text-center label-group">
