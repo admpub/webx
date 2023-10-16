@@ -10,7 +10,7 @@
       <dd class="col-sm-9">{{$customer.Name}}</dd>
       <dt class="col-sm-3 tx-inverse tx-right">{{"用户组"|$.T}}</dt>
       <dd class="col-sm-9">{{if $customer.Group}}{{$customer.Group.Name}}{{else}}{{"普通会员"|$.T}}{{end}}</dd>
-      <dt class="col-sm-3 tx-inverse tx-right">{{"用户组"|$.T}}</dt>
+      <dt class="col-sm-3 tx-inverse tx-right">{{"用户等级"|$.T}}</dt>
       <dd class="col-sm-9">{{if $customer.Level}}{{$customer.Level.Name}}{{else}}-{{end}}</dd>
       {{if $customer.Agent}}
       <dt class="col-sm-3 tx-inverse tx-right">{{"代理等级"|$.T}}</dt>
@@ -27,8 +27,10 @@
       <dd class="col-sm-9">{{$customer.Email|Default $noSet}} {{if eq $customer.EmailBind "Y"}}<i class="fa fa-check tx-success" title="{{`已验证`|$.T}}"></i>{{end}} &nbsp;</dd>
       <dt class="col-sm-3 tx-inverse tx-right">{{"性别"|$.T}}</dt>
       <dd class="col-sm-9">{{if eq $customer.Gender "male"}}{{"男"|$.T}}{{else if eq $customer.Gender "female"}}{{"女"|$.T}}{{else}}{{"保密"|$.T}}{{end}}</dd>
+      {{- if gt $customer.Licenses 0 -}}
       <dt class="col-sm-3 tx-inverse tx-right">{{"购买授权"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.Licenses}} &nbsp;</dd>
+      {{- end -}}
       <dt class="col-sm-3 tx-inverse tx-right">{{"说明"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.Description|Default $noSet|Nl2br}} &nbsp;</dd>
       <dt class="col-sm-3 tx-inverse tx-right">{{"推荐人"|$.T}}</dt>

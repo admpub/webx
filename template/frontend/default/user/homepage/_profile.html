@@ -26,8 +26,10 @@
       <dd class="col-sm-7">{{$customer.Email|Default $noSet}} {{if eq $customer.EmailBind "Y"}}<i class="fa fa-check tx-success" title="{{`已验证`|$.T}}"></i>{{end}} &nbsp;</dd>
       <dt class="col-sm-5 tx-right tx-inverse">{{"性别"|$.T}}</dt>
       <dd class="col-sm-7">{{if eq $customer.Gender "male"}}{{"男"|$.T}}{{else if eq $customer.Gender "female"}}{{"女"|$.T}}{{else}}{{"保密"|$.T}}{{end}}</dd>
+      {{- if gt $customer.Licenses 0 -}}
       <dt class="col-sm-5 tx-right tx-inverse">{{"购买授权"|$.T}}</dt>
       <dd class="col-sm-7">{{$customer.Licenses}} &nbsp;</dd>
+      {{- end -}}
       <dt class="col-sm-5 tx-right tx-inverse">{{"说明"|$.T}}</dt>
       <dd class="col-sm-7">{{$customer.Description|Default $noSet|Nl2br}} &nbsp;</dd>
       <dt class="col-sm-5 tx-right tx-inverse">{{"推荐人"|$.T}}</dt>

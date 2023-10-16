@@ -30,37 +30,38 @@
 <script type="text/javascript">
 $(function(){
 var options = {responsive:true,legend:{position:'top'},animation:{animateScale:true,animateRotate:true}};
+var remainNum = Number('{{Sub $.Stored.uploadConfig.MaxTotalNum $.Stored.profile.FileNum}}');
+if(remainNum<0) remainNum = 0;
 new Chart(document.getElementById('customerFileNumChart'), {
   type: 'pie',
   data: {
     datasets: [{
-      data: [Number('{{$.Stored.profile.FileNum}}'),Number('{{$.Stored.uploadConfig.MaxTotalNum}}')],
+      data: [Number('{{$.Stored.profile.FileNum}}'),remainNum],
       backgroundColor: ['#FF851B','#0074D9'],
       label: '{{`文件数量`|$.T}}'
     }],
-    labels: ['{{`已使用量`|$.T}}','{{`允许数量`|$.T}}']
+    labels: ['{{`已上传数量`|$.T}}','{{`剩余可传数量`|$.T}}']
   },
   options: options
 });
-options.tooltips={
-  callbacks:{
-    label:function(tooltipItem, data) {
-      var label = data.labels[tooltipItem.index] || '';
-      if (label) label += ': ';
-      label += App.formatBytes(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
-      return label;
-    }
-  }
+function tooltipFormat(tooltipItem, data) {
+  var label = data.labels[tooltipItem.index] || '';
+  if (label) label += ': ';
+  label += App.formatBytes(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+  return label;
 }
+options.tooltips={callbacks:{label:tooltipFormat}};
+var remainBytes = Number('{{Sub $.Stored.uploadConfig.MaxTotalSizeBytes $.Stored.profile.FileSize}}');
+if(remainBytes<0) remainBytes = 0;
 new Chart(document.getElementById('customerFileSizeChart'), {
   type: 'pie',
   data: {
     datasets: [{
-      data: [Number('{{$.Stored.profile.FileSize}}'),Number('{{$.Stored.uploadConfig.MaxTotalSizeBytes}}')],
+      data: [Number('{{$.Stored.profile.FileSize}}'),remainBytes],
       backgroundColor: ['#FF851B','#0074D9'],
       label: '{{`空间占用`|$.T}}'
     }],
-    labels: ['{{`使用量`|$.T}}','{{`总空间`|$.T}}']
+    labels: ['{{`使用空间`|$.T}}','{{`剩余空间`|$.T}}']
   },
   options: options
 });
