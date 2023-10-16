@@ -1539,6 +1539,10 @@
     color: #fff;
     border: 0;
   }
+  .form-control + .btn.input-group-btn{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
   
   /*! ########## 3.13 Jumbotron ########## */
   .jumbotron {
