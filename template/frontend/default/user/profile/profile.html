@@ -1,4 +1,7 @@
 {{Extend "user/profile/_homepage"}}
+{{Block "head"}}
+{{Super}}
+{{/Block}}
 {{Block "body"}}
 {{Super}}
 {{$agentLevel := $.Stored.agentLevel}}
@@ -18,4 +21,50 @@
 </div><!-- row -->
     </div><!-- main-body -->
 </div><!-- main -->
+{{/Block}}
+
+{{Block "footer"}}
+{{Super}}
+{{- if $.Stored.uploadConfig -}}
+<script src="{{AssetsXURL}}/js/chart.js/Chart.min.js?t={{BuildTime}}"></script>
+<script type="text/javascript">
+$(function(){
+var options = {responsive:true,legend:{position:'top'},animation:{animateScale:true,animateRotate:true}};
+new Chart(document.getElementById('customerFileNumChart'), {
+  type: 'pie',
+  data: {
+    datasets: [{
+      data: [Number('{{$.Stored.profile.FileNum}}'),Number('{{$.Stored.uploadConfig.MaxTotalNum}}')],
+      backgroundColor: ['#FF851B','#0074D9'],
+      label: '{{`文件数量`|$.T}}'
+    }],
+    labels: ['{{`已使用量`|$.T}}','{{`允许数量`|$.T}}']
+  },
+  options: options
+});
+options.tooltips={
+  callbacks:{
+    label:function(tooltipItem, data) {
+      var label = data.labels[tooltipItem.index] || '';
+      if (label) label += ': ';
+      label += App.formatBytes(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+      return label;
+    }
+  }
+}
+new Chart(document.getElementById('customerFileSizeChart'), {
+  type: 'pie',
+  data: {
+    datasets: [{
+      data: [Number('{{$.Stored.profile.FileSize}}'),Number('{{$.Stored.uploadConfig.MaxTotalSizeBytes}}')],
+      backgroundColor: ['#FF851B','#0074D9'],
+      label: '{{`空间占用`|$.T}}'
+    }],
+    labels: ['{{`使用量`|$.T}}','{{`总空间`|$.T}}']
+  },
+  options: options
+});
+})
+</script>
+{{- end -}}
 {{/Block}}

@@ -74,7 +74,7 @@ func AgentApply(c echo.Context) error {
 			echo.StructToForm(c, rvM.OfficialCustomerAgentRecv, ``, echo.LowerCaseFirstLetter)
 		}
 	}
-	c.Set(`activeURL`, `/user/agent`)
+	c.Set(`activeURL`, `/user/agent/index`)
 	c.Set(`recvMoneyMethods`, modelAgent.RecvMoneyMethod.Slice())
 	levelM := modelAgent.NewAgentLevel(c)
 	levelM.ListByOffset(nil, func(r db.Result) db.Result {

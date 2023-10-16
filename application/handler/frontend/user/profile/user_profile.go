@@ -1,13 +1,19 @@
 package profile
 
 import (
-	mw "github.com/admpub/webx/application/middleware"
 	"github.com/webx-top/echo"
+
+	mw "github.com/admpub/webx/application/middleware"
+	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )
 
 func Profile(c echo.Context) error {
+	profileDetail := mw.CustomerDetail(c)
+	m := modelCustomer.NewCustomer(c)
+	uploadConfig := m.GetUploadConfig(profileDetail.OfficialCustomer)
 	var err error
 	c.Set(`title`, c.T(`个人资料`))
-	c.Set(`profile`, mw.CustomerDetail(c))
+	c.Set(`profile`, profileDetail)
+	c.Set(`uploadConfig`, uploadConfig)
 	return c.Render(`/user/profile/profile`, err)
 }

@@ -2,6 +2,7 @@ package customer
 
 import (
 	ngingdbschema "github.com/admpub/nging/v5/application/dbschema"
+	_ "github.com/admpub/webx/application/library/xrole/xroleupload"
 	"github.com/admpub/webx/application/model/official/customer"
 	"github.com/webx-top/db/lib/factory"
 )

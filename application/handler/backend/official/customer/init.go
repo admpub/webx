@@ -24,5 +24,6 @@ func init() {
 		g.Route(`GET,POST`, `/edit`, Edit)
 		g.Route(`GET,POST`, `/delete`, Delete)
 		g.Route(`GET,POST`, `/kick`, Kick)
+		g.Route(`GET,POST`, `/recount_file`, RecountFile)
 	})
 }

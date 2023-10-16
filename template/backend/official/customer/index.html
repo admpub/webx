@@ -118,7 +118,11 @@
 								<span class="label label-default label-xs" data-toggle="tooltip" title="{{.Name}}">{{.Name}}</span>
 								{{- end -}}
 							</td>
-							<td>{{`数量`|$.T}}: <a href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{$v.FileNum}}</a><br />{{`尺寸`|$.T}}: <a href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{FormatByte $v.FileSize}}</a></td>
+							<td>
+								{{`数量`|$.T}}: <a class="file-num" href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{$v.FileNum}}</a><br />
+								{{`尺寸`|$.T}}: <a class="file-size" href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{FormatByte $v.FileSize 2}}</a><br />
+								<a class="text-warning recount-file-btn" href="javascript:;" data-ajax-accept="json" data-ajax-url="{{BackendURL}}/official/customer/recount_file?id={{$v.Id}}" title="{{`重新统计`|$.T}}" data-toggle="tooltip"><small>{{`重新统计`|$.T}}<i class="fa fa-refresh"></i></small></a> 
+							</td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{end}}</td>
 							<td class="text-center label-group">
@@ -137,4 +141,16 @@
 		</div>				
 	</div>
 </div>
+{{/Block}}
+
+{{Block "footer"}}
+<script type="text/javascript">
+$(function(){
+	$('.recount-file-btn').on('finished',function(event,r){
+		if(!r||typeof(r)!='object'||typeof(r.Data)=='undefined') return;
+		$(this).siblings('.file-size').text(App.formatBytes(r.Data.totalSize));
+		$(this).siblings('.file-num').text(r.Data.totalNum);
+	})
+});
+</script>
 {{/Block}}

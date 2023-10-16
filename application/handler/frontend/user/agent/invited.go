@@ -20,7 +20,7 @@ func InvitedList(ctx echo.Context) error {
 	}, cond))
 	list := m.Objects()
 	ctx.Set(`listData`, list)
-	ctx.Set(`activeURL`, `/user/agent`)
+	ctx.Set(`activeURL`, `/user/agent/index`)
 	ctx.Set(`title`, ctx.T(`我邀请的用户`))
 	return ctx.Render(`/user/agent/invited`, handler.Err(ctx, err))
 }

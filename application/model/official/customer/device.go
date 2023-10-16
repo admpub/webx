@@ -8,10 +8,8 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/library/perm"
 	"github.com/admpub/webx/application/dbschema"
 	multidivicesignin "github.com/admpub/webx/application/library/multidevicesignin"
-	"github.com/admpub/webx/application/library/xrole"
 )
 
 // NewDevice 客户登录设备
@@ -163,17 +161,7 @@ func (f *Device) SignOut(mw func(db.Result) db.Result, args ...interface{}) erro
 }
 
 func (f *Device) CleanCustomer(customer *dbschema.OfficialCustomer, options ...CustomerOption) (err error) {
-	permission := CustomerPermission(f.Context(), customer)
-	if permission == nil {
-		return nil
-	}
-	bev, ok := permission.Get(f.Context(), xrole.CustomerRolePermissionTypeBehavior).(perm.BehaviorPerms)
-	if !ok {
-		return nil
-	}
-	multideviceSignin, ok := bev.Get(multidivicesignin.BehaviorName).Value.(*multidivicesignin.MultideviceSignin)
-	//fmt.Printf("%T\n", permission.PermBehaviors.Get(multidivicesignin.BehaviorName).Value)
-	//echo.Dump(multideviceSignin)
+	multideviceSignin, ok := CustomerRolePermissionForBehavior(f.Context(), multidivicesignin.BehaviorName, customer).(*multidivicesignin.MultideviceSignin)
 	cond := db.NewCompounds()
 	cond.Add(db.Cond{`customer_id`: customer.Id})
 	co := NewCustomerOptions(customer)

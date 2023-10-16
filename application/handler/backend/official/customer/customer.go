@@ -276,3 +276,19 @@ func Kick(ctx echo.Context) error {
 
 	return ctx.Redirect(handler.URLFor(`/official/customer/index`))
 }
+
+func RecountFile(ctx echo.Context) error {
+	data := ctx.Data()
+	id := ctx.Formx(`id`).Uint64()
+	m := modelCustomer.NewCustomer(ctx)
+	err := m.Get(nil, db.Cond{`id`: id})
+	if err != nil {
+		return ctx.JSON(data.SetError(err))
+	}
+	totalNum, totalSize, err := m.RecountFile()
+	if err != nil {
+		return ctx.JSON(data.SetError(err))
+	}
+	data.SetInfo(ctx.T(`统计成功`))
+	return ctx.JSON(data.SetData(echo.H{`totalNum`: totalNum, `totalSize`: totalSize}))
+}

@@ -5,6 +5,7 @@ import (
 
 	uploadClient "github.com/webx-top/client/upload"
 	"github.com/webx-top/com"
+	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
@@ -16,6 +17,7 @@ import (
 	"github.com/admpub/nging/v5/application/registry/upload"
 	"github.com/admpub/nging/v5/application/registry/upload/checker"
 	"github.com/admpub/webx/application/middleware/sessdata"
+	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )
 
 func setUploadURL(ctx echo.Context) error {
@@ -55,6 +57,44 @@ func Upload(ctx echo.Context) error {
 		ctx.Data().SetError(ctx.NewError(code.Unauthenticated, `请先登录`))
 		return ctx.Redirect(sessdata.URLFor(`/sign_in`))
 	}
+	var verfySize func(int64) error
+	if ownerType == `customer` && ctx.Form(`subdir`) != `avatar` {
+		customer := sessdata.Customer(ctx)
+		m := modelCustomer.NewCustomer(ctx)
+		err := m.Get(func(r db.Result) db.Result {
+			return r.Select(`id`, `file_num`, `file_size`)
+		}, `id`, customer.Id)
+		if err != nil {
+			if err == db.ErrNoMoreRows {
+				return ctx.NewError(code.UserNotFound, ``)
+			}
+			return err
+		}
+		cfg := m.GetUploadConfig(customer)
+		if cfg != nil {
+			if m.FileNum+1 > cfg.MaxTotalNum {
+				return ctx.NewError(
+					code.Failure,
+					`上传失败。您的文件数量已满(%s)`,
+					cfg.MaxTotalNum,
+				)
+			}
+			verfySize = func(fileSize int64) error {
+				sz := uint64(fileSize)
+				if sz+m.FileSize > cfg.MaxTotalSizeBytes() {
+					return ctx.NewError(
+						code.Failure,
+						`上传失败。本文件尺寸(%s)加上您已占用空间(%s)超过角色限制(%s)`,
+						com.FormatBytes(fileSize, 2, true),
+						com.FormatBytes(m.FileSize, 2, true),
+						cfg.MaxTotalSize,
+					)
+				}
+				m.FileSize += sz
+				return nil
+			}
+		}
+	}
 	uploadCfg := uploadLibrary.Get()
 	return manager.UploadByOwner(ctx, ownerType, ownerID, func(result *uploadClient.Result) error { // 自动根据文件类型获取最大上传尺寸
 		fileType := result.FileType.String()
@@ -64,6 +104,9 @@ func Upload(ctx echo.Context) error {
 		}
 		if result.FileSize > int64(maxSize) {
 			return fmt.Errorf(`%w: %v`, uploadClient.ErrFileTooLarge, com.FormatBytes(maxSize))
+		}
+		if verfySize != nil {
+			return verfySize(result.FileSize)
 		}
 		return nil
 	})

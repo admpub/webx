@@ -24,7 +24,7 @@ func init() {
 				return h.Handle(c)
 			}
 		})
-		agentG.Route(`GET`, ``, AgentIndex)
+		agentG.Route(`GET`, `/index`, AgentIndex)
 		agentG.Route(`GET,POST`, `/edit`, AgentEdit)
 		agentG.Route(`GET,POST`, `/invited`, InvitedList) // invitations
 		agentG.Route(`GET,POST`, `/apply`, AgentApply)

@@ -36,6 +36,11 @@ var LeftNavigate = &navigate.Item{
 			Name:    `踢下线`,
 			Action:  `kick`,
 		},
+		{
+			Display: false,
+			Name:    `重新统计客户文件`,
+			Action:  `recount_file`,
+		},
 		//level
 		{
 			Display: true,

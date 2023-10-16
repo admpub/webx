@@ -10,7 +10,7 @@
       <a href="{{FrontendURL}}/user/profile/favorites" class="nav-link{{if eq $.Path `/user/profile/favorites`}} active{{end}}">{{"我的收藏"|$.T}}</a>
       <a href="{{FrontendURL}}/user/profile/likes" class="nav-link{{if eq $.Path `/user/profile/likes`}} active{{end}}">{{"我的喜欢"|$.T}}</a> -->
       {{if $customer.Agent}}
-      <a href="{{FrontendURL}}/user/profile/invitations" class="nav-link{{if eq $.Path `/user/profile/invitations`}} active{{end}}">{{"我邀请的"|$.T}}</a>
+      <a href="{{FrontendURL}}/user/agent/invited" class="nav-link{{if eq $.Path `/user/agent/invited`}} active{{end}}">{{"我邀请的"|$.T}}</a>
       {{end}}
       <a href="{{FrontendURL}}/user/profile/settings" class="nav-link{{if eq $.Path `/user/profile/settings`}} active{{end}}">{{"账号设置"|$.T}}</a>
       <a href="{{FrontendURL}}/user/profile/password" class="nav-link{{if eq $.Path `/user/profile/password`}} active{{end}}">{{"修改密码"|$.T}}</a>
