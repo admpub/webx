@@ -16,8 +16,8 @@
 							<select name="online" class="form-control" id="online" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
 								{{$online := $.Form "online"}} 
-								<option value="Y" {{if eq $online "Y"}} selected{{end}}>{{"在线"|$.T}}</option>
-								<option value="N" {{if eq $online "N"}} selected{{end}}>{{"离线"|$.T}}</option>
+								<option value="Y"{{if eq $online `Y`}} selected{{end}}>{{"在线"|$.T}}</option>
+								<option value="N"{{if eq $online `N`}} selected{{end}}>{{"离线"|$.T}}</option>
 							</select>
 							<span class="input-group-addon">{{"客户组"|$.T}}</span>
 							<select name="groupId" class="form-control" id="groupId" onchange="$('#search-form').submit()">{{$groupId := ($.Formx `groupId`).Uint}}
@@ -66,6 +66,7 @@
 							<th style="width:300px"><strong>{{"客户名称"|$.T}}</strong></th>
 							<th><strong>{{"描述"|$.T}}</strong></th>
 							<th><strong>{{"角色"|$.T}}</strong></th>
+							<th><strong>{{"附件"|$.T}}</strong></th>
 							<th style="width:85px"><strong>{{"创建时间"|$.T}}</strong></th>
 							<th style="width:85px"><strong>{{"更新时间"|$.T}}</strong></th>
 							<th style="width:80px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
@@ -117,12 +118,13 @@
 								<span class="label label-default label-xs" data-toggle="tooltip" title="{{.Name}}">{{.Name}}</span>
 								{{- end -}}
 							</td>
+							<td>{{`数量`|$.T}}: {{$v.FileNum}}<br />{{`尺寸`|$.T}}: {{FormatByte $v.FileSize}}</td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{end}}</td>
 							<td class="text-center label-group">
-							<a class="label label-warning" href="{{BackendURL}}/official/customer/wallet/index?customerId={{$v.Id}}" title="{{"资产"|$.T}}" data-toggle="tooltip"><i class="fa fa-money"></i></a>
-							<a class="label label-default" href="{{BackendURL}}/official/customer/add?copyId={{$v.Id}}" title="{{"复制"|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
-							<a class="label label-success" href="{{BackendURL}}/official/customer/edit?id={{$v.Id}}" title="{{"编辑"|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
+							<a class="label label-warning" href="{{BackendURL}}/official/customer/wallet/index?customerId={{$v.Id}}" title="{{`资产`|$.T}}" data-toggle="tooltip"><i class="fa fa-money"></i></a>
+							<a class="label label-default" href="{{BackendURL}}/official/customer/add?copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
+							<a class="label label-success" href="{{BackendURL}}/official/customer/edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
 							<a class="label label-danger" href="{{BackendURL}}/official/customer/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
