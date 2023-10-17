@@ -17,7 +17,7 @@ var CustomerRolePermissionType = echo.NewKVData().
 			OnRender(PermPageOnRender),
 	)).
 	Add(CustomerRolePermissionTypeBehavior, `行为权限`, echo.KVOptX(
-		perm.NewHandle().SetTmpl(`official/customer/role/edit_perm_behavior`).
+		perm.NewHandle().SetTmpl(`official/customer/role/edit_perm_behavior`).SetTmpl(`official/customer/role/edit_perm_behavior_foot`, `foot`).
 			SetGenerator(PermBehaviorGenerator).
 			SetParser(PermBehaviorParser).
 			SetChecker(PermBehaviorChecker).

@@ -258,7 +258,7 @@ github.com/admpub/marmot/miner
 github.com/admpub/mysql-schema-sync/internal
 github.com/admpub/mysql-schema-sync/sqlite
 github.com/admpub/mysql-schema-sync/sync
-# github.com/admpub/nging/v5 v5.2.2-beta2 => ../../../github.com/admpub/nging
+# github.com/admpub/nging/v5 v5.2.2-beta3 => ../../../github.com/admpub/nging
 ## explicit; go 1.21.0
 github.com/admpub/nging/v5/application
 github.com/admpub/nging/v5/application/cmd
