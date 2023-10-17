@@ -45,7 +45,7 @@ const BehaviorName = `upload`
 
 func init() {
 	xrole.Behaviors.Register(BehaviorName, `上传文件`,
-		perm.BehaviorOptFormHelpBlock(`配置上传文件限制。maxTotalNum - 指定客户允许存储的文件最大数量; maxTotalSize - 指定客户允许存储的空间大小(支持的单位有:KB/MB/GB/TB/TB/B),不指定单位时代表单位为B(字节)`),
+		perm.BehaviorOptFormHelpBlock(`配置上传文件限制。maxTotalNum - 指定客户允许存储的文件最大数量; maxTotalSize - 指定客户允许存储的空间大小(支持的单位有:B/KB/MB/GB/TB/PB),不指定单位时代表单位为B(字节)`),
 		perm.BehaviorOptValue(&CustomerUpload{}),
 		perm.BehaviorOptValueInitor(func() interface{} {
 			return &CustomerUpload{}
