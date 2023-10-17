@@ -16,6 +16,17 @@ type CustomerUpload struct {
 	mu                sync.RWMutex
 }
 
+func (c *CustomerUpload) Combine(source interface{}) interface{} {
+	src := source.(*CustomerUpload)
+	if src.MaxTotalNum > c.MaxTotalNum {
+		c.MaxTotalNum = src.MaxTotalNum
+	}
+	if ParseSizeBytes(src.MaxTotalSize) > ParseSizeBytes(c.MaxTotalSize) {
+		c.MaxTotalSize = src.MaxTotalSize
+	}
+	return c
+}
+
 func (c *CustomerUpload) MaxTotalSizeBytes() uint64 {
 	c.mu.RLock()
 	maxTotalSizeBytes := c.maxTotalSizeBytes

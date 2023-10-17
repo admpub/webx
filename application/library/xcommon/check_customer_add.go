@@ -21,6 +21,20 @@ type ConfigCustomerAdd struct {
 	MaxPendingPerDay int64 `json:"maxPendingPerDay"`
 }
 
+func (c *ConfigCustomerAdd) Combine(source interface{}) interface{} {
+	src := source.(*ConfigCustomerAdd)
+	if src.MaxPerDay > c.MaxPerDay {
+		c.MaxPerDay = src.MaxPerDay
+	}
+	if src.MaxPending > c.MaxPending {
+		c.MaxPending = src.MaxPending
+	}
+	if src.MaxPendingPerDay > c.MaxPendingPerDay {
+		c.MaxPendingPerDay = src.MaxPendingPerDay
+	}
+	return c
+}
+
 var (
 	ErrCustomerAddClosed           = errors.New(`已关闭`)
 	ErrCustomerAddMaxPerDay        = errors.New(`已达到今日最大数量`)

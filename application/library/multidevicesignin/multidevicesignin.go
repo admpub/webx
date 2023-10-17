@@ -11,6 +11,20 @@ type MultideviceSignin struct {
 	Unique     string `json:"unique" xml:"unique"`         // 需要限制唯一性的类型
 }
 
+func (a *MultideviceSignin) Combine(source interface{}) interface{} {
+	src := source.(*MultideviceSignin)
+	if src.On && !a.On {
+		a.On = src.On
+	}
+	if src.MaxDevices > a.MaxDevices {
+		a.MaxDevices = src.MaxDevices
+	}
+	if src.Unique != a.Unique {
+		a.Unique = src.Unique
+	}
+	return a
+}
+
 const (
 	UniqueDeviceID = `deviceID`
 	UniquePlatform = `platform`
