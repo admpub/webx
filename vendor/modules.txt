@@ -435,7 +435,7 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.6
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.45.25
+# github.com/aws/aws-sdk-go v1.46.1
 ## explicit; go 1.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -897,7 +897,7 @@ github.com/klauspost/pgzip
 # github.com/leodido/go-urn v1.2.4
 ## explicit; go 1.16
 github.com/leodido/go-urn
-# github.com/lufia/plan9stats v0.0.0-20230326075908-cb1d2100619a
+# github.com/lufia/plan9stats v0.0.0-20231016141302-07b5767bb0ed
 ## explicit; go 1.16
 github.com/lufia/plan9stats
 # github.com/mailru/easyjson v0.7.7
@@ -949,7 +949,7 @@ github.com/maruel/rs
 # github.com/mattn/go-colorable v0.1.13
 ## explicit; go 1.15
 github.com/mattn/go-colorable
-# github.com/mattn/go-isatty v0.0.19
+# github.com/mattn/go-isatty v0.0.20
 ## explicit; go 1.15
 github.com/mattn/go-isatty
 # github.com/mattn/go-runewidth v0.0.15
@@ -958,9 +958,9 @@ github.com/mattn/go-runewidth
 # github.com/mattn/go-sqlite3 v1.14.17
 ## explicit; go 1.16
 github.com/mattn/go-sqlite3
-# github.com/matttproud/golang_protobuf_extensions v1.0.4
-## explicit; go 1.9
-github.com/matttproud/golang_protobuf_extensions/pbutil
+# github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0
+## explicit; go 1.19
+github.com/matttproud/golang_protobuf_extensions/v2/pbutil
 # github.com/meilisearch/meilisearch-go v0.25.1
 ## explicit; go 1.16
 github.com/meilisearch/meilisearch-go
@@ -1086,8 +1086,8 @@ github.com/prometheus/client_golang/prometheus/promhttp
 # github.com/prometheus/client_model v0.5.0
 ## explicit; go 1.19
 github.com/prometheus/client_model/go
-# github.com/prometheus/common v0.44.0
-## explicit; go 1.18
+# github.com/prometheus/common v0.45.0
+## explicit; go 1.20
 github.com/prometheus/common/expfmt
 github.com/prometheus/common/internal/bitbucket.org/ww/goautoneg
 github.com/prometheus/common/model
@@ -1102,7 +1102,7 @@ github.com/quic-go/qpack
 # github.com/quic-go/qtls-go1-20 v0.3.4
 ## explicit; go 1.20
 github.com/quic-go/qtls-go1-20
-# github.com/quic-go/quic-go v0.39.0
+# github.com/quic-go/quic-go v0.39.1
 ## explicit; go 1.20
 github.com/quic-go/quic-go
 github.com/quic-go/quic-go/http3
