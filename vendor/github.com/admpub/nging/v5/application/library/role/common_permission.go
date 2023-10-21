@@ -75,6 +75,7 @@ func (r *CommonPermission) combineBehaviorType(ctx echo.Context, checkeds map[st
 		log.Errorf(`failed to parse permission(%s): %v`, permRule, err)
 		return
 	}
+	r.parsed[permType] = parsed
 	perms, ok := parsed.(perm.BehaviorPerms)
 	if !ok {
 		return
