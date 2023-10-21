@@ -1,5 +1,5 @@
 (function ($) {
-    function lazyloadCategory(that, top, jumpTo, result) {
+    function lazyloadCategory(that, top, jumpTo, result, selected) {
         jumpTo = String(jumpTo);
         var q = /"/g;
         return function (r) {
@@ -9,9 +9,10 @@
                 // id,name,has_child
                 var v = result?result(r.Data.listData[i]):r.Data.listData[i];
                 var a = '<a href="' + jumpTo.replace('{id}',v.id) + '" data-id="' + v.id + '" data-pjax="#pcont" data-keepjs="true" title="'+String(v.name).replace(q,'&quot;')+'">' + v.name + '</a>';
-                var s = '<li>';
+                var c = selected && selected==v.id ? ' class="active"' : '';
+                var s = '<li'+c+'>';
                 if (v.has_child == 'Y') {
-                    s += '<label class="nav-header">';
+                    s += '<label class="nav-header">';//tree-toggler
                     s += '<i class="fa fa-folder-o tree-toggler"></i>';
                     s += a;
                     s += '</label>'
@@ -32,13 +33,13 @@
             }
         }
     }
-    function cateClick(a) {
-        $('.treeview').find('li.current').removeClass('current');
-        $(a).closest('li').addClass('current');
+    function cateClick(container,a) {
+        $(container).find('li.active').removeClass('active');
+        $(a).closest('li').addClass('active');
     }
     function init(container, options){
-        var href = $(this).data('href')||options.href, url = $(this).data('url')||options.url, result = options.result||null;
-        $.get(url, {}, lazyloadCategory(container, true, href, result), 'json');
+        var href = $(this).data('href')||options.href, url = $(this).data('url')||options.url, result = options.result||null, selected = options.selected||'';
+        $.get(url, {}, lazyloadCategory(container, true, href, result, selected), 'json');
         App.treeToggle(null, {
             ajax: function () {
                 var that = this;
@@ -51,7 +52,7 @@
                             parentId: $(that).next('a').data('id') || '',
                         };
                     },
-                    success: lazyloadCategory(that, false, href, result)
+                    success: lazyloadCategory(that, false, href, result, selected)
                 }
             },
         });
@@ -63,8 +64,9 @@
         $(this).each(function(){
             init(this,options);
         });
+        var that=this;
         $(this).on('click','a', function(){
-            cateClick(this);
+            cateClick(that,this);
         });
     };
 })(jQuery);
