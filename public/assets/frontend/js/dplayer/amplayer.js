@@ -381,10 +381,36 @@
 				var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'));
 				if (arr != null) return unescape(arr[2]);
 			},
-			'put': function (urls) {
-				var cookie = urls.replace(/[^a-z0-9]+/ig, '');
-				var cookie = cookie.substring(cookie.length - 32);
-				return cookie;
+			'remove': function (name) {
+				amplayer.cookie.set(name, '', -10);
+			}
+		},
+		'localStorage':{
+			'data': {},
+			'set': function (name, value, days) {
+				if (value === undefined) { return amplayer.localStorage.remove(name) }
+				window.localStorage.setItem(name, JSON.stringify(value))
+				amplayer.localStorage.data[name] = value;
+			},
+			'get': function (name) {
+				if (typeof (amplayer.localStorage.data[name]) != 'undefined') return amplayer.localStorage.data[name];
+				var value = window.localStorage.getItem(name)
+				try { return JSON.parse(value) }
+				catch(e) { return value || undefined }
+			},
+			'remove': function (name) {
+				window.localStorage.removeItem(name);
+			}
+		},
+		'store':{
+			'set': function (name, value, days) {
+				return storer().set(name,value,days);
+			},
+			'get': function (name) {
+				return storer().get(name);
+			},
+			'remove': function (name) {
+				return storer().remove(name);
 			}
 		},
 		'jump': function (jump) {
@@ -395,6 +421,21 @@
 			top.location.href = jump;
 		}
 	};
+
+	var supportedLocalStorage = null;
+	function isLocalStorageNameSupported() {
+		if (supportedLocalStorage !== null) {
+			return supportedLocalStorage;
+		}
+		try { supportedLocalStorage = ('localStorage' in window) }
+		catch(err) { supportedLocalStorage = false }
+		return supportedLocalStorage;
+	}
+
+	function storer(){
+		if(isLocalStorageNameSupported()) return amplayer.localStorage;
+		return amplayer.cookie;
+	}
 
 	function callListener(name,thisObj,args) {
 		if (!amplayer.options.listeners) return;
@@ -445,7 +486,7 @@
 		if (play.autoSkip && play.seek <= 0 && play.filmRange && play.filmRange.playRange.min > 0) {
 			play.seek = play.filmRange.playRange.min;
 		}
-		var lastTime = play.take ? amplayer.cookie.get(play.take) : 0;
+		var lastTime = play.take ? amplayer.store.get(play.take) : 0;
 		var current = player.video.currentTime;
 		//console.log(play.seek,lastTime);
 		//console.dir(amplayer.options)
@@ -471,7 +512,7 @@
 			return player.pause(); // 试看
 		}
 		if (play.live) return; // 直播模式
-		if (play.take) amplayer.cookie.set(play.take, current, 30);
+		if (play.take) amplayer.store.set(play.take, current, 30);
 		if (!play.autoSkip || !play.filmRange) return;
 		var rg = play.filmRange;
 		if (rg.playRange.min > 0 && current < rg.playRange.min) {
