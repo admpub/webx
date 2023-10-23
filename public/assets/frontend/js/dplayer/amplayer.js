@@ -23,7 +23,7 @@
 			"defaultExtName": ".m3u8",
 			"listeners":{}
 		},
-		'secure': window.location.protocol == 'https:',
+		'secure': win.location.protocol == 'https:',
 		'elemPrefix': function() {
 			return (amplayer.options.container?amplayer.options.container+' ':'');
 		},
@@ -103,10 +103,10 @@
 					}, { once: true });
 					//console.log("\n %c Added torrentId %c "+torrentId+" \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 					player.notice(App.i18n.CONNECTING, 5000);
-					var _noticeFixerWatcher = window.setInterval(function () {
+					var _noticeFixerWatcher = win.setInterval(function () {
 						if ($(amplayer.elemPrefix()+'.dplayer-notice').text() == '视频加载失败') {
 							player.notice(App.i18n.CONNECTING, 5000);
-							window.clearInterval(_noticeFixerWatcher);
+							win.clearInterval(_noticeFixerWatcher);
 						}
 					}, 50);
 					var _torrentWatcher = null;
@@ -371,7 +371,7 @@
 			'set': function (name, value, days) {
 				var exp = new Date();
 				exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
-				var cookie = name + '=' + escape(value) + ';path=' + window.location.pathname + ';expires=' + exp.toUTCString() + ';sameSite=Lax';
+				var cookie = name + '=' + escape(value) + ';path=' + win.location.pathname + ';expires=' + exp.toUTCString() + ';sameSite=Lax';
 				if (amplayer.secure) cookie += ';secure=true';
 				document.cookie = cookie;
 				amplayer.cookie.data[name] = value;
@@ -389,17 +389,15 @@
 			'data': {},
 			'set': function (name, value, days) {
 				if (value === undefined) { return amplayer.localStorage.remove(name) }
-				window.localStorage.setItem(name, JSON.stringify(value))
+				win.localStorage.setItem(name, value);
 				amplayer.localStorage.data[name] = value;
 			},
 			'get': function (name) {
 				if (typeof (amplayer.localStorage.data[name]) != 'undefined') return amplayer.localStorage.data[name];
-				var value = window.localStorage.getItem(name)
-				try { return JSON.parse(value) }
-				catch(e) { return value || undefined }
+				return win.localStorage.getItem(name);
 			},
 			'remove': function (name) {
-				window.localStorage.removeItem(name);
+				win.localStorage.removeItem(name);
 			}
 		},
 		'store':{
@@ -427,7 +425,7 @@
 		if (supportedLocalStorage !== null) {
 			return supportedLocalStorage;
 		}
-		try { supportedLocalStorage = ('localStorage' in window) }
+		try { supportedLocalStorage = ('localStorage' in win) }
 		catch(err) { supportedLocalStorage = false }
 		return supportedLocalStorage;
 	}
