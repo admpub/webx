@@ -121,7 +121,7 @@
 							<td>
 								{{`数量`|$.T}}: <a class="file-num" href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{$v.FileNum}}</a><br />
 								{{`尺寸`|$.T}}: <a class="file-size" href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{FormatByte $v.FileSize 2}}</a><br />
-								<a class="text-warning recount-file-btn" href="javascript:;" data-ajax-accept="json" data-ajax-url="{{BackendURL}}/official/customer/recount_file?id={{$v.Id}}" title="{{`重新统计`|$.T}}" data-toggle="tooltip"><small>{{`重新统计`|$.T}}<i class="fa fa-refresh"></i></small></a> 
+								<a class="text-warning recount-file-btn small" href="javascript:;" data-ajax-toggle="1" data-ajax-accept="json" data-ajax-url="{{BackendURL}}/official/customer/recount_file?id={{$v.Id}}" title="{{`重新统计`|$.T}}" data-toggle="tooltip">{{`重新统计`|$.T}}<i class="fa fa-refresh"></i></a> 
 							</td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{end}}</td>
