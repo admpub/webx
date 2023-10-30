@@ -20,6 +20,7 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/defaults"
+	"github.com/webx-top/echo/param"
 )
 
 var (
@@ -137,13 +138,29 @@ func fullBackupStart(cfg dbschema.NgingCloudBackup) error {
 			var operation string
 			dbKey := com.Str2bytes(ppath)
 			cv, err = db.Get(dbKey, nil)
+			var oldValParts []string
 			if err != nil {
 				if err != leveldb.ErrNotFound {
 					return err
 				}
 				operation = model.CloudBackupOperationCreate
+				oldValParts = []string{
+					``,                                    // md5
+					``,                                    // taskStartTime
+					``,                                    // taskEndTime
+					param.AsString(info.ModTime().Unix()), // fileModifyTime
+					param.AsString(info.Size()),           // fileSize
+				}
 			} else {
-				oldMd5 = string(cv)
+				oldValParts = strings.Split(string(cv), `||`)
+				oldMd5 = oldValParts[0]
+				if len(oldValParts) < 5 {
+					temp := make([]string, 5)
+					copy(temp, oldValParts)
+					oldValParts = temp
+				}
+				oldValParts[3] = param.AsString(info.ModTime().Unix())
+				oldValParts[4] = param.AsString(info.Size())
 				operation = model.CloudBackupOperationUpdate
 			}
 			if len(oldMd5) > 0 {
@@ -169,7 +186,7 @@ func fullBackupStart(cfg dbschema.NgingCloudBackup) error {
 			objectName := path.Join(recv.DestPath, strings.TrimPrefix(ppath, sourcePath))
 			startTime := time.Now()
 			defer func() {
-				cloudbackup.RecordLog(ctx, err, &cfg, ppath, objectName, operation, startTime, model.CloudBackupTypeFull)
+				cloudbackup.RecordLog(ctx, err, &cfg, ppath, objectName, operation, startTime, uint64(info.Size()), model.CloudBackupTypeFull)
 			}()
 			var fp *os.File
 			fp, err = os.Open(ppath)
@@ -182,7 +199,8 @@ func fullBackupStart(cfg dbschema.NgingCloudBackup) error {
 				if err != nil {
 					return
 				}
-				err = db.Put(dbKey, com.Str2bytes(md5), nil)
+				oldValParts[0] = md5
+				err = db.Put(dbKey, com.Str2bytes(strings.Join(oldValParts, `||`)), nil)
 				if err != nil {
 					log.Error(err)
 				}

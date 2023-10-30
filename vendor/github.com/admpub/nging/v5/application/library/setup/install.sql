@@ -70,6 +70,7 @@ CREATE TABLE `nging_cloud_backup` (
   `source_path` varchar(200) COLLATE utf8mb4_general_ci NOT NULL COMMENT '源',
   `ignore_rule` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '忽略文件路径(正则表达式)',
   `wait_fill_completed` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'N' COMMENT '是否等待文件填充结束',
+  `min_modify_interval` int unsigned NOT NULL DEFAULT '0' COMMENT '最小修改间隔',
   `ignore_wait_rule` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '忽略等待文件完成的规则',
   `delay` int unsigned NOT NULL DEFAULT '0' COMMENT '延后秒数',
   `storage_engine` enum('s3','sftp','ftp','webdav','smb') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 's3' COMMENT '存储引擎',
@@ -96,7 +97,7 @@ DROP TABLE IF EXISTS `nging_cloud_backup_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nging_cloud_backup_log` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `backup_id` int unsigned NOT NULL DEFAULT '0' COMMENT '云备份规则ID',
   `backup_type` enum('full','change') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'change' COMMENT '备份方式(full-全量备份;change-文件更改时触发的备份)',
   `backup_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '需要备份本地文件',
@@ -104,6 +105,7 @@ CREATE TABLE `nging_cloud_backup_log` (
   `operation` enum('create','update','delete','none') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'none' COMMENT '操作',
   `error` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '错误信息',
   `status` enum('success','failure') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'success' COMMENT '状态',
+  `size` bigint unsigned NOT NULL DEFAULT '0' COMMENT '文件大小(字节)',
   `elapsed` int unsigned NOT NULL DEFAULT '0' COMMENT '消耗时间(毫秒)',
   `created` int unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`),
@@ -573,4 +575,4 @@ CREATE TABLE `nging_user_u2f` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-16 15:35:34
+-- Dump completed on 2023-10-30 17:40:17
