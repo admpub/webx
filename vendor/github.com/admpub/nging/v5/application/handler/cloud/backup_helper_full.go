@@ -35,34 +35,45 @@ func fullBackupIsRunning(id uint) bool {
 	return echo.Bool(key)
 }
 
-func fileFilter(cfg *dbschema.NgingCloudBackup) (func(string) bool, error) {
+func fileFilter(rootPath string, cfg *dbschema.NgingCloudBackup) (func(file string) bool, error) {
 	var (
-		re  *regexp.Regexp
-		err error
+		ignoreRE *regexp.Regexp
+		matchRE  *regexp.Regexp
+		err      error
 	)
 	if len(cfg.IgnoreRule) > 0 {
-		re, err = regexp.Compile(cfg.IgnoreRule)
+		ignoreRE, err = regexp.Compile(cfg.IgnoreRule)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if len(cfg.MatchRule) > 0 {
+		matchRE, err = regexp.Compile(cfg.MatchRule)
 		if err != nil {
 			return nil, err
 		}
 	}
 	return func(file string) bool {
-		switch filepath.Ext(file) {
+		relPath := strings.TrimPrefix(file, rootPath)
+		if len(relPath) == 0 || relPath == `/` || relPath == `\` {
+			return true
+		}
+		switch filepath.Ext(relPath) {
 		case ".swp":
 			return false
 		case ".tmp", ".TMP":
 			return false
-		default:
-			if strings.Contains(file, echo.FilePathSeparator+`.`) { // 忽略所有以点号开头的文件
-				return false
-			}
-			if re != nil {
-				if re.MatchString(file) {
-					return false
-				}
-			}
-			return true
 		}
+		if strings.Contains(relPath, echo.FilePathSeparator+`.`) { // 忽略所有以点号开头的文件
+			return false
+		}
+		if matchRE != nil {
+			return matchRE.MatchString(relPath)
+		}
+		if ignoreRE != nil {
+			return !ignoreRE.MatchString(relPath)
+		}
+		return true
 	}, nil
 }
 
@@ -83,7 +94,7 @@ func fullBackupStart(cfg dbschema.NgingCloudBackup) error {
 		return err
 	}
 	debug := !config.FromFile().Sys.IsEnv(`prod`)
-	filter, err := fileFilter(&cfg)
+	filter, err := fileFilter(sourcePath, &cfg)
 	if err != nil {
 		return err
 	}
@@ -112,7 +123,6 @@ func fullBackupStart(cfg dbschema.NgingCloudBackup) error {
 			}, `id`, recv.Id)
 			return
 		}
-		defer db.Close()
 		fullBackupExit.Store(false)
 		err = filepath.Walk(sourcePath, func(ppath string, info os.FileInfo, err error) error {
 			if err != nil {
@@ -121,11 +131,14 @@ func fullBackupStart(cfg dbschema.NgingCloudBackup) error {
 			if fullBackupExit.Load() {
 				return echo.ErrExit
 			}
-			if info.IsDir() {
+			if !filter(ppath) {
+				if info.IsDir() {
+					return filepath.SkipDir
+				}
 				return nil
 			}
-			if !filter(ppath) {
-				return filepath.SkipDir
+			if info.IsDir() {
+				return nil
 			}
 			var md5 string
 			var (

@@ -140,10 +140,7 @@ func initFileChan() {
 						nowFileModifyTs = fileModifyTs
 						nowFileSize = fileSize
 					}
-					if startTs > 0 {
-						continue
-					}
-					if endTs > 0 && endTs < startTime.Unix()-int64(mf.Config.MinModifyInterval) {
+					if startTs == 0 && endTs > 0 && endTs < startTime.Unix()-int64(mf.Config.MinModifyInterval) {
 						continue
 					}
 				}
