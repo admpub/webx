@@ -1006,7 +1006,7 @@ github.com/muesli/smartcrop/options
 # github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 ## explicit
 github.com/nfnt/resize
-# github.com/nging-plugins/dbmanager v1.4.16
+# github.com/nging-plugins/dbmanager v1.4.21
 ## explicit; go 1.21.0
 github.com/nging-plugins/dbmanager
 github.com/nging-plugins/dbmanager/application/dbschema
@@ -1142,7 +1142,7 @@ github.com/rwcarlsen/goexif/tiff
 # github.com/segmentio/fasthash v1.0.3
 ## explicit; go 1.11
 github.com/segmentio/fasthash/fnv1a
-# github.com/shirou/gopsutil/v3 v3.23.9
+# github.com/shirou/gopsutil/v3 v3.23.10
 ## explicit; go 1.15
 github.com/shirou/gopsutil/v3/common
 github.com/shirou/gopsutil/v3/cpu
@@ -1317,7 +1317,7 @@ github.com/webx-top/echo-socket.io
 ## explicit
 github.com/webx-top/image
 github.com/webx-top/image/webp
-# github.com/webx-top/pagination v0.2.7
+# github.com/webx-top/pagination v0.2.8
 ## explicit
 github.com/webx-top/pagination
 # github.com/webx-top/poolx v0.0.0-20210912044716-5cfa2d58e380

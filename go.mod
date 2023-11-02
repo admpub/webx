@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/echo-prometheus v1.1.1
 	github.com/webx-top/echo-socket.io v1.1.3
 	github.com/webx-top/image v0.1.0
-	github.com/webx-top/pagination v0.2.7
+	github.com/webx-top/pagination v0.2.8
 	github.com/webx-top/validation v0.0.3 // indirect
 	github.com/yanyiwu/gojieba v1.3.0
 	golang.org/x/oauth2 v0.13.0
@@ -73,7 +73,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.25.1
-	github.com/nging-plugins/dbmanager v1.4.16
+	github.com/nging-plugins/dbmanager v1.4.21
 	github.com/webx-top/validator v0.2.0
 )
 
@@ -256,7 +256,7 @@ require (
 	github.com/russross/blackfriday v1.6.0 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/segmentio/fasthash v1.0.3 // indirect
-	github.com/shirou/gopsutil/v3 v3.23.9 // indirect
+	github.com/shirou/gopsutil/v3 v3.23.10 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/smartwalle/crypto4go v1.0.3 // indirect
