@@ -203,6 +203,8 @@ github.com/admpub/gohls/pkg
 github.com/admpub/gohls-server/internal/fileindex
 github.com/admpub/gohls-server/internal/hls
 github.com/admpub/gohls-server/utils
+# github.com/admpub/gohttp v0.0.0-20190322032039-b55c707b8f1e
+## explicit
 # github.com/admpub/gotwilio v0.0.0-20210910030032-9a691aeea447
 ## explicit; go 1.13
 github.com/admpub/gotwilio
