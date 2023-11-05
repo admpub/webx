@@ -11,6 +11,27 @@
   }
 }(function($){
   var cachedLang=null;
+	var htmlEncodeRegexp=/&|<|>| |\'|\"/g,htmlEncodeMapping = {
+		"&":'&amp;',
+		"<":'&lt;',
+		">":'&gt;',
+		" ":'&nbsp;',
+		"'":'&#39;',
+		'"':'&quot;',
+	}
+	var htmlDecodeRegexp=/&amp;|&lt;|&gt;|&nbsp;|&#39;|&quot;/g,htmlDecodeMapping = {
+		'&amp;':"&",
+		'&lt;':"<",
+		'&gt;':">",
+		'&nbsp;':" ",
+		'&#39;':"'",
+		'&quot;':'"',
+	}
+  var textNl2brRegexp=/\n|  |\t/g,textNl2brMapping={
+    "\n":'<br />',
+    "  ":'&nbsp; ',
+    "\t":'&nbsp; &nbsp; ',
+  }
   window.App={
     clientID: {},
     i18n: {
@@ -53,6 +74,18 @@
       }
       return l.encoding;
     },
+		htmlEncode: function(value){
+			if(!value) return value;
+			return String(value).replace(htmlEncodeRegexp, function(v){
+				return htmlEncodeMapping[v];
+			});
+		},
+		htmlDecode: function(value){
+			if(!value) return value;
+			return String(value).replace(htmlDecodeRegexp, function(v){
+				return htmlDecodeMapping[v];
+			});
+		},
     dialog:function(){
       //requirement: https://github.com/aafrontend/bootstrap3-dialog
       return BootstrapDialog;
@@ -100,16 +133,25 @@
       var number = $.gritter.add(options);
       return number;
     },
-    text2html:function(text){
-      return String(text).replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br />').replace(/  /g,'&nbsp; ').replace(/\t/g,'&nbsp; &nbsp; ')
-    },
-    ifTextNl2br:function(text){
-      text=String(text);
-      if(/<[^>]+>/.test(text)) return text;
-      return text.replace(/\n/g,'<br />').replace(/  /g,'&nbsp; ').replace(/\t/g,'&nbsp; &nbsp; ');
-    },
-		htmlEncode: function (html) {
-			return String(html).replace(/&/g,'&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/ /g,'&nbsp;').replace(/\'/g,'&#39;').replace(/\"/g,'&quot;')
+		text2html: function (text, noescape) {
+			text = String(text);
+			if(!noescape) text.replace(/<|>/g, function(v){
+				return v=='<'?'&lt;':'&gt;';
+			});
+			return App.textNl2br(text);
+		},
+		ifTextNl2br: function (text) {
+			text = String(text);
+			if (/<[^>]+>/.test(text)) return text;
+			return App.textNl2br(text);
+		},
+		textNl2br: function (text) {
+			return text.replace(textNl2brRegexp, function(v){
+				return textNl2brMapping[v];
+			});
+		},
+		trimSpace: function (text) {
+			return String(text).replace(/^[\s]+|[\s]+$/g,'');
 		},
     checkedAll: function (ctrl, target) {
       return $(target).not(':disabled').prop('checked', $(ctrl).prop('checked'));
