@@ -108,6 +108,9 @@
       if(/<[^>]+>/.test(text)) return text;
       return text.replace(/\n/g,'<br />').replace(/  /g,'&nbsp; ').replace(/\t/g,'&nbsp; &nbsp; ');
     },
+		htmlEncode: function (html) {
+			return String(html).replace(/&/g,'&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/ /g,'&nbsp;').replace(/\'/g,'&#39;').replace(/\"/g,'&quot;')
+		},
     checkedAll: function (ctrl, target) {
       return $(target).not(':disabled').prop('checked', $(ctrl).prop('checked'));
     },
