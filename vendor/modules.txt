@@ -437,8 +437,8 @@ github.com/admpub/websocket
 # github.com/andybalholm/brotli v1.0.6
 ## explicit; go 1.12
 github.com/andybalholm/brotli
-# github.com/aws/aws-sdk-go v1.46.7
-## explicit; go 1.11
+# github.com/aws/aws-sdk-go v1.47.3
+## explicit; go 1.19
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
 github.com/aws/aws-sdk-go/aws/auth/bearer
@@ -657,7 +657,7 @@ github.com/go-playground/locales/zh
 # github.com/go-playground/universal-translator v0.18.1
 ## explicit; go 1.18
 github.com/go-playground/universal-translator
-# github.com/go-playground/validator/v10 v10.15.5
+# github.com/go-playground/validator/v10 v10.16.0
 ## explicit; go 1.18
 github.com/go-playground/validator/v10
 github.com/go-playground/validator/v10/translations/en
@@ -729,7 +729,7 @@ github.com/gomodule/redigo/redis
 # github.com/google/go-querystring v1.1.0
 ## explicit; go 1.10
 github.com/google/go-querystring/query
-# github.com/google/pprof v0.0.0-20231023181126-ff6d637d2a7b
+# github.com/google/pprof v0.0.0-20231101202521-4ca4178f5c7a
 ## explicit; go 1.19
 github.com/google/pprof/profile
 # github.com/google/s2a-go v0.1.7
@@ -782,14 +782,14 @@ github.com/googollee/go-socket.io/engineio/transport/polling
 github.com/googollee/go-socket.io/engineio/transport/utils
 github.com/googollee/go-socket.io/engineio/transport/websocket
 github.com/googollee/go-socket.io/parser
-# github.com/gorilla/css v1.0.0
-## explicit
+# github.com/gorilla/css v1.0.1
+## explicit; go 1.20
 github.com/gorilla/css/scanner
 # github.com/gorilla/schema v1.2.0
 ## explicit
 github.com/gorilla/schema
-# github.com/gorilla/websocket v1.5.0
-## explicit; go 1.12
+# github.com/gorilla/websocket v1.5.1
+## explicit; go 1.20
 github.com/gorilla/websocket
 # github.com/gosimple/slug v1.13.1
 ## explicit; go 1.11
@@ -950,7 +950,7 @@ github.com/mattn/go-isatty
 # github.com/mattn/go-runewidth v0.0.15
 ## explicit; go 1.9
 github.com/mattn/go-runewidth
-# github.com/mattn/go-sqlite3 v1.14.17
+# github.com/mattn/go-sqlite3 v1.14.18
 ## explicit; go 1.16
 github.com/mattn/go-sqlite3
 # github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0
@@ -1097,7 +1097,7 @@ github.com/quic-go/qpack
 # github.com/quic-go/qtls-go1-20 v0.4.1
 ## explicit; go 1.20
 github.com/quic-go/qtls-go1-20
-# github.com/quic-go/quic-go v0.39.3
+# github.com/quic-go/quic-go v0.40.0
 ## explicit; go 1.20
 github.com/quic-go/quic-go
 github.com/quic-go/quic-go/http3
@@ -1162,7 +1162,7 @@ github.com/smartwalle/crypto4go/pbkdf2
 # github.com/spf13/cast v1.5.1
 ## explicit; go 1.18
 github.com/spf13/cast
-# github.com/spf13/cobra v1.7.0
+# github.com/spf13/cobra v1.8.0
 ## explicit; go 1.15
 github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.5
@@ -1467,7 +1467,7 @@ golang.org/x/image/webp
 ## explicit; go 1.11
 golang.org/x/lint
 golang.org/x/lint/golint
-# golang.org/x/mod v0.13.0
+# golang.org/x/mod v0.14.0
 ## explicit; go 1.18
 golang.org/x/mod/internal/lazyregexp
 golang.org/x/mod/modfile
@@ -1505,8 +1505,8 @@ golang.org/x/oauth2/google/internal/stsexchange
 golang.org/x/oauth2/internal
 golang.org/x/oauth2/jws
 golang.org/x/oauth2/jwt
-# golang.org/x/sync v0.4.0
-## explicit; go 1.17
+# golang.org/x/sync v0.5.0
+## explicit; go 1.18
 golang.org/x/sync/errgroup
 golang.org/x/sync/semaphore
 golang.org/x/sync/singleflight
@@ -1520,8 +1520,8 @@ golang.org/x/sys/windows/registry
 golang.org/x/sys/windows/svc
 golang.org/x/sys/windows/svc/eventlog
 golang.org/x/sys/windows/svc/mgr
-# golang.org/x/text v0.13.0
-## explicit; go 1.17
+# golang.org/x/text v0.14.0
+## explicit; go 1.18
 golang.org/x/text/cases
 golang.org/x/text/collate
 golang.org/x/text/encoding
@@ -1553,8 +1553,8 @@ golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
-# golang.org/x/time v0.3.0
-## explicit
+# golang.org/x/time v0.4.0
+## explicit; go 1.18
 golang.org/x/time/rate
 # golang.org/x/tools v0.14.0
 ## explicit; go 1.18
