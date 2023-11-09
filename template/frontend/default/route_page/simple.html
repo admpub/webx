@@ -1,0 +1,29 @@
+{{Strip}}
+{{Extend "#default#base"}}
+{{Block "title"}}{{$.Stored.title}}{{/Block}}
+{{Block "bodyAttr"}} class="bg-superlight tx-size-sm"{{/Block}}
+
+{{Block "body"}}
+
+{{Include "#default#headsimple"}}
+
+<div class="pd-t-80">
+{{- $.Stored.routePageContent -}}
+</div>
+
+{{- if not $.Stored.ignoreFooter -}}
+{{$.Set `ignorePosAbsoluteBottom` true}}
+{{Include "#default#footer"}}
+{{- end -}}
+
+{{/Block}}
+
+{{Block "footer"}}
+{{- if $.Data -}}
+{{Include "#default#_modal"}}
+<script>
+$(function(){showModal("{{$.Data}}","{{if IsError $.Data}}error{{else if IsOk $.Data}}success{{else}}info{{end}}");});
+</script>
+{{- end -}}
+{{/Block}}
+{{/Strip}}

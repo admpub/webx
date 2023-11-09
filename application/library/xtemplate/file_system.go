@@ -55,6 +55,10 @@ func (f FileSystems) ReadDir(name string) (dirs []fs.FileInfo, err error) {
 			err = nil
 			continue
 		}
+		if fi, err := file.Stat(); err != nil || !fi.IsDir() {
+			file.Close()
+			continue
+		}
 		var _dirs []fs.FileInfo
 		_dirs, err = file.Readdir(-1)
 		file.Close()

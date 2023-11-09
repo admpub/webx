@@ -10,6 +10,7 @@ import (
 
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/webx/application/handler/backend/official/page"
 	"github.com/admpub/webx/application/model/official"
 )
 
@@ -40,6 +41,7 @@ func FrontendRoutePage(ctx echo.Context) error {
 func FrontendRoutePageAdd(ctx echo.Context) error {
 	var err error
 	m := official.NewRoutePage(ctx)
+	templateFiles := page.ListTemplateFileNames(`route_page`)
 	if ctx.IsPost() {
 		err = ctx.MustBind(m.OfficialCommonRoutePage, echo.ExcludeFieldName(`updated`))
 		if err == nil {
@@ -77,6 +79,7 @@ func FrontendRoutePageAdd(ctx echo.Context) error {
 	ctx.SetFunc(`methodChecked`, func(method string, methods []string) bool {
 		return com.InSlice(method, methods)
 	})
+	ctx.Set(`templateFiles`, templateFiles)
 	return ctx.Render(`official/manager/frontend/route_page_edit`, err)
 }
 
@@ -131,6 +134,8 @@ func FrontendRoutePageEdit(ctx echo.Context) error {
 	ctx.SetFunc(`methodChecked`, func(method string, methods []string) bool {
 		return com.InSlice(method, methods)
 	})
+	templateFiles := page.ListTemplateFileNames(`route_page`)
+	ctx.Set(`templateFiles`, templateFiles)
 	return ctx.Render(`official/manager/frontend/route_page_edit`, err)
 }
 

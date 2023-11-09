@@ -7,6 +7,7 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
+	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 )
 
@@ -44,6 +45,9 @@ func (f *RoutePage) check() error {
 	}
 	if !strings.HasPrefix(f.Route, `/`) {
 		f.Route = "/" + f.Route
+	}
+	if f.PageType == `redirect` {
+		f.TemplateEnabled = common.BoolN
 	}
 	return nil
 }

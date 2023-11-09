@@ -15,9 +15,9 @@
 {{- if $.Data -}}
 {{Include "#default#_modal"}}
 <script>
-    $(function(){
-        showModal("{{$.Data}}","{{if IsError $.Data}}error{{else if IsOk $.Data}}success{{else}}info{{end}}");
-    });
+$(function(){
+    showModal("{{$.Data}}","{{if IsError $.Data}}error{{else if IsOk $.Data}}success{{else}}info{{end}}");
+});
 </script>
 {{- end -}}
 {{/Block}}

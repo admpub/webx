@@ -656,8 +656,21 @@
 		},
 		captchaHasError: function(code) {
 			return code >= -11 && code <= -9;
-		}
-  
+		},
+    fixedFooter: function(elem,offset) {
+      var $footer=$(elem);
+      if($footer.length<1)return;
+      var marginTop=$footer.css("marginTop");
+      if(offset==null) offset = $('.pos-fixed-top:first').height();
+      var fixer=function(){
+        var b=$footer.position().top+$footer.height()+offset;
+        var f=$(window).height()-b;
+        if(f>0) $footer.css('margin-top',f+'px');
+        else if(f<0) $footer.css('margin-top',marginTop);
+      }
+      fixer();
+      $(window).on('resize',fixer);
+    }
 };
 return window.App;
 }));

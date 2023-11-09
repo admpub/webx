@@ -102,17 +102,19 @@ type OfficialCommonRoutePage struct {
 	base    factory.Base
 	objects []*OfficialCommonRoutePage
 
-	Id          uint64 `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
-	Name        string `db:"name" bson:"name" comment:"页面名称" json:"name" xml:"name"`
-	Route       string `db:"route" bson:"route" comment:"路由网址" json:"route" xml:"route"`
-	Method      string `db:"method" bson:"method" comment:"路由方法(GET/POST/PUT...)" json:"method" xml:"method"`
-	PageContent string `db:"page_content" bson:"page_content" comment:"页面内容" json:"page_content" xml:"page_content"`
-	PageVars    string `db:"page_vars" bson:"page_vars" comment:"页面变量(JSON)" json:"page_vars" xml:"page_vars"`
-	PageType    string `db:"page_type" bson:"page_type" comment:"页面类型" json:"page_type" xml:"page_type"`
-	PageId      uint   `db:"page_id" bson:"page_id" comment:"页面ID(可选,0为不关联)" json:"page_id" xml:"page_id"`
-	Disabled    string `db:"disabled" bson:"disabled" comment:"是否(Y/N)禁用" json:"disabled" xml:"disabled"`
-	Created     uint   `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
-	Updated     uint   `db:"updated" bson:"updated" comment:"更改时间" json:"updated" xml:"updated"`
+	Id              uint64 `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
+	Name            string `db:"name" bson:"name" comment:"页面名称" json:"name" xml:"name"`
+	Route           string `db:"route" bson:"route" comment:"路由网址" json:"route" xml:"route"`
+	Method          string `db:"method" bson:"method" comment:"路由方法(GET/POST/PUT...)" json:"method" xml:"method"`
+	PageContent     string `db:"page_content" bson:"page_content" comment:"页面内容" json:"page_content" xml:"page_content"`
+	PageVars        string `db:"page_vars" bson:"page_vars" comment:"页面变量(JSON)" json:"page_vars" xml:"page_vars"`
+	PageType        string `db:"page_type" bson:"page_type" comment:"页面类型" json:"page_type" xml:"page_type"`
+	PageId          uint   `db:"page_id" bson:"page_id" comment:"页面ID(可选,0为不关联)" json:"page_id" xml:"page_id"`
+	TemplateEnabled string `db:"template_enabled" bson:"template_enabled" comment:"是否使用模板" json:"template_enabled" xml:"template_enabled"`
+	TemplateFile    string `db:"template_file" bson:"template_file" comment:"模板文件(位于route_page文件夹)" json:"template_file" xml:"template_file"`
+	Disabled        string `db:"disabled" bson:"disabled" comment:"是否(Y/N)禁用" json:"disabled" xml:"disabled"`
+	Created         uint   `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
+	Updated         uint   `db:"updated" bson:"updated" comment:"更改时间" json:"updated" xml:"updated"`
 }
 
 // - base function
@@ -339,6 +341,9 @@ func (a *OfficialCommonRoutePage) Insert() (pk interface{}, err error) {
 	if len(a.PageType) == 0 {
 		a.PageType = "html"
 	}
+	if len(a.TemplateEnabled) == 0 {
+		a.TemplateEnabled = "N"
+	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
 	}
@@ -370,6 +375,9 @@ func (a *OfficialCommonRoutePage) Update(mw func(db.Result) db.Result, args ...i
 	if len(a.PageType) == 0 {
 		a.PageType = "html"
 	}
+	if len(a.TemplateEnabled) == 0 {
+		a.TemplateEnabled = "N"
+	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
 	}
@@ -392,6 +400,9 @@ func (a *OfficialCommonRoutePage) Updatex(mw func(db.Result) db.Result, args ...
 	}
 	if len(a.PageType) == 0 {
 		a.PageType = "html"
+	}
+	if len(a.TemplateEnabled) == 0 {
+		a.TemplateEnabled = "N"
 	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
@@ -416,6 +427,9 @@ func (a *OfficialCommonRoutePage) UpdateByFields(mw func(db.Result) db.Result, f
 	}
 	if len(a.PageType) == 0 {
 		a.PageType = "html"
+	}
+	if len(a.TemplateEnabled) == 0 {
+		a.TemplateEnabled = "N"
 	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
@@ -444,6 +458,9 @@ func (a *OfficialCommonRoutePage) UpdatexByFields(mw func(db.Result) db.Result, 
 	}
 	if len(a.PageType) == 0 {
 		a.PageType = "html"
+	}
+	if len(a.TemplateEnabled) == 0 {
+		a.TemplateEnabled = "N"
 	}
 	if len(a.Disabled) == 0 {
 		a.Disabled = "N"
@@ -489,6 +506,11 @@ func (a *OfficialCommonRoutePage) UpdateFields(mw func(db.Result) db.Result, kvs
 			kvset["page_type"] = "html"
 		}
 	}
+	if val, ok := kvset["template_enabled"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["template_enabled"] = "N"
+		}
+	}
 	if val, ok := kvset["disabled"]; ok && val != nil {
 		if v, ok := val.(string); ok && len(v) == 0 {
 			kvset["disabled"] = "N"
@@ -522,6 +544,11 @@ func (a *OfficialCommonRoutePage) UpdatexFields(mw func(db.Result) db.Result, kv
 	if val, ok := kvset["page_type"]; ok && val != nil {
 		if v, ok := val.(string); ok && len(v) == 0 {
 			kvset["page_type"] = "html"
+		}
+	}
+	if val, ok := kvset["template_enabled"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["template_enabled"] = "N"
 		}
 	}
 	if val, ok := kvset["disabled"]; ok && val != nil {
@@ -572,6 +599,9 @@ func (a *OfficialCommonRoutePage) Upsert(mw func(db.Result) db.Result, args ...i
 		if len(a.PageType) == 0 {
 			a.PageType = "html"
 		}
+		if len(a.TemplateEnabled) == 0 {
+			a.TemplateEnabled = "N"
+		}
 		if len(a.Disabled) == 0 {
 			a.Disabled = "N"
 		}
@@ -587,6 +617,9 @@ func (a *OfficialCommonRoutePage) Upsert(mw func(db.Result) db.Result, args ...i
 		}
 		if len(a.PageType) == 0 {
 			a.PageType = "html"
+		}
+		if len(a.TemplateEnabled) == 0 {
+			a.TemplateEnabled = "N"
 		}
 		if len(a.Disabled) == 0 {
 			a.Disabled = "N"
@@ -659,6 +692,8 @@ func (a *OfficialCommonRoutePage) Reset() *OfficialCommonRoutePage {
 	a.PageVars = ``
 	a.PageType = ``
 	a.PageId = 0
+	a.TemplateEnabled = ``
+	a.TemplateFile = ``
 	a.Disabled = ``
 	a.Created = 0
 	a.Updated = 0
@@ -676,6 +711,8 @@ func (a *OfficialCommonRoutePage) AsMap(onlyFields ...string) param.Store {
 		r["PageVars"] = a.PageVars
 		r["PageType"] = a.PageType
 		r["PageId"] = a.PageId
+		r["TemplateEnabled"] = a.TemplateEnabled
+		r["TemplateFile"] = a.TemplateFile
 		r["Disabled"] = a.Disabled
 		r["Created"] = a.Created
 		r["Updated"] = a.Updated
@@ -699,6 +736,10 @@ func (a *OfficialCommonRoutePage) AsMap(onlyFields ...string) param.Store {
 			r["PageType"] = a.PageType
 		case "PageId":
 			r["PageId"] = a.PageId
+		case "TemplateEnabled":
+			r["TemplateEnabled"] = a.TemplateEnabled
+		case "TemplateFile":
+			r["TemplateFile"] = a.TemplateFile
 		case "Disabled":
 			r["Disabled"] = a.Disabled
 		case "Created":
@@ -729,6 +770,10 @@ func (a *OfficialCommonRoutePage) FromRow(row map[string]interface{}) {
 			a.PageType = param.AsString(value)
 		case "page_id":
 			a.PageId = param.AsUint(value)
+		case "template_enabled":
+			a.TemplateEnabled = param.AsString(value)
+		case "template_file":
+			a.TemplateFile = param.AsString(value)
 		case "disabled":
 			a.Disabled = param.AsString(value)
 		case "created":
@@ -775,6 +820,10 @@ func (a *OfficialCommonRoutePage) Set(key interface{}, value ...interface{}) {
 			a.PageType = param.AsString(vv)
 		case "PageId":
 			a.PageId = param.AsUint(vv)
+		case "TemplateEnabled":
+			a.TemplateEnabled = param.AsString(vv)
+		case "TemplateFile":
+			a.TemplateFile = param.AsString(vv)
 		case "Disabled":
 			a.Disabled = param.AsString(vv)
 		case "Created":
@@ -796,6 +845,8 @@ func (a *OfficialCommonRoutePage) AsRow(onlyFields ...string) param.Store {
 		r["page_vars"] = a.PageVars
 		r["page_type"] = a.PageType
 		r["page_id"] = a.PageId
+		r["template_enabled"] = a.TemplateEnabled
+		r["template_file"] = a.TemplateFile
 		r["disabled"] = a.Disabled
 		r["created"] = a.Created
 		r["updated"] = a.Updated
@@ -819,6 +870,10 @@ func (a *OfficialCommonRoutePage) AsRow(onlyFields ...string) param.Store {
 			r["page_type"] = a.PageType
 		case "page_id":
 			r["page_id"] = a.PageId
+		case "template_enabled":
+			r["template_enabled"] = a.TemplateEnabled
+		case "template_file":
+			r["template_file"] = a.TemplateFile
 		case "disabled":
 			r["disabled"] = a.Disabled
 		case "created":

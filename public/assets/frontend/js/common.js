@@ -1028,6 +1028,7 @@ function commonInit($,App){
     $('form[ajax-submit]').each(function(){
         ajaxForm(this);
     });
+    App.fixedFooter('.footer-fix');
     App.bottomFloat('.auto-bottom-float',0,true);
     App.showRequriedInputStar();
     setNavActive();

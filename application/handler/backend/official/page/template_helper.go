@@ -2,6 +2,7 @@ package page
 
 import (
 	"io"
+	"io/fs"
 	"net/http"
 	"path"
 	"path/filepath"
@@ -9,6 +10,7 @@ import (
 	"sync"
 
 	"github.com/admpub/events"
+	"github.com/admpub/log"
 	"github.com/admpub/nging/v5/application/cmd/bootconfig"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/library/xtemplate"
@@ -135,4 +137,50 @@ func GetTemplateDiskFS() xtemplate.FileSystems {
 func GetEmbedThemes() []*xtemplate.ThemeInfo {
 	embedThemesMx.Do(initEmbedThemes)
 	return embedThemes
+}
+
+func GetAllThemeNames() []string {
+	list := getTemplateList()
+	themes := make([]string, len(list))
+	for i, v := range list {
+		themes[i] = v.Name
+	}
+	return themes
+}
+
+func ListTemplateFiles(dir string, themes ...string) (r []fs.FileInfo) {
+	if len(themes) == 0 {
+		themes = GetAllThemeNames()
+	}
+	unique := map[string]struct{}{}
+	for _, theme := range themes {
+		full := filepath.Join(theme, dir)
+		files, err := GetTemplateDiskFS().ReadDir(full)
+		if err != nil {
+			log.Error(err)
+		}
+		for _, fi := range files {
+			if _, ok := unique[fi.Name()]; ok {
+				continue
+			}
+			unique[fi.Name()] = struct{}{}
+			r = append(r, fi)
+		}
+	}
+	return
+}
+
+func ListTemplateFileNames(dir string, themes ...string) []string {
+	files := ListTemplateFiles(dir, themes...)
+	if len(files) == 0 {
+		return []string{}
+	}
+	names := make([]string, 0, len(files))
+	for _, info := range files {
+		if info.IsDir() {
+			continue
+		}
+		names = append(names, info.Name())
+	}
+	return names
 }

@@ -1,0 +1,15 @@
+{{Strip}}{{Extend "base"}}
+{{Block "title"}}{{$.Stored.title}}{{/Block}}
+{{Block "bodyAttr"}} class="pd-t-70 bg-gray-lightest"{{/Block}}
+{{Block "body"}}
+{{Include "header"}}
+<div class="bb-mainpanel">
+
+{{- $.Stored.routePageContent -}}
+
+{{- if not $.Stored.ignoreFooter -}}
+    {{Include "#default#footer_dark"}}
+{{- end -}}
+</div><!-- bb-mainpanel -->
+{{/Block}}
+{{/Strip}}

@@ -46,6 +46,7 @@
 							<th style="width:100px"><strong>{{"页面类型"|$.T}}</strong></th>
 							<th><strong>{{"路由网址"|$.T}}</strong></th>
 							<th><strong>{{"路由方法"|$.T}}</strong></th>
+							<th style="width:100px"><strong>{{"使用模板"|$.T}}</strong></th>
 							<th style="width:130px"><strong>{{"创建时间"|$.T}}</strong></th>
 							<th style="width:60px"><strong>{{"状态"|$.T}}</strong></th>
 							<th style="width:100px" class="text-right"><strong>{{"操作"|$.T}}</strong></th>
@@ -59,6 +60,7 @@
 							<td>{{call $.Func.typeName $v.PageType}}</td>
 							<td><a href="{{FrontendURL}}{{$v.Route}}" target="_blank">{{$v.Route}}</a></td>
 							<td>{{$v.Method}}</td>
+							<td>{{if and (eq $v.TemplateEnabled `Y`) $v.TemplateFile}}{{`是`|$.T}}{{else}}{{`否`|$.T}}{{end}}</td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 							<td>
 								<div class="checkbox checkbox-success no-margin-y">
@@ -82,7 +84,6 @@
 </div>
 {{/Block}}
 {{Block "footer"}}
-</script>
 <script>
 $(function(){
 	$('#pcont').on('click','#navigate-list-container input.switch-disabled',function(){

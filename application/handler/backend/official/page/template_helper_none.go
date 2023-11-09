@@ -10,7 +10,7 @@ import (
 )
 
 func initTemplateDiskOtherFS() {
-	for _, tmplDir := range xbindata.FrontendTemplateDirs.TmplDirs() {
+	for _, tmplDir := range xbindata.FrontendTemplateDirs.TmplDirs() { // /***/template/frontend
 		templateDiskFS.Register(http.Dir(tmplDir))
 	}
 }

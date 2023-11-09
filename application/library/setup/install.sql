@@ -523,6 +523,8 @@ CREATE TABLE `official_common_route_page` (
   `page_vars` text COLLATE utf8mb4_general_ci NOT NULL COMMENT '页面变量(JSON)',
   `page_type` enum('html','json','text','xml','redirect') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'html' COMMENT '页面类型',
   `page_id` int unsigned NOT NULL DEFAULT '0' COMMENT '页面ID(可选,0为不关联)',
+  `template_enabled` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'N' COMMENT '是否使用模板',
+  `template_file` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '模板文件(位于route_page文件夹)',
   `disabled` enum('Y','N') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'N' COMMENT '是否(Y/N)禁用',
   `created` int unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated` int unsigned NOT NULL DEFAULT '0' COMMENT '更改时间',
@@ -1240,4 +1242,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-15 14:41:03
+-- Dump completed on 2023-11-09 11:49:32

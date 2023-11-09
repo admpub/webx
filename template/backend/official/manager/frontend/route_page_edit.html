@@ -14,7 +14,7 @@
           </div>
           <div class="content">
             {{Include "official/manager/frontend/route_page_tips"}}
-              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              <form id="routePageEditForm" class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"类型"|$.T}}</label>
                 <div class="col-sm-8">
@@ -66,6 +66,28 @@
                     <div class="help-block">{{`JSON格式，如果留空则不会解析页面内容中的模板标签`|$.T}}</div>
                 </div>
               </div>
+              <div class="hide-pageType-redirect form-group">
+                <label class="col-sm-2 control-label">{{"使用模板"|$.T}}</label>
+                <div class="col-sm-3">
+                  {{$v := $.Form "templateEnabled"}}
+                  <div class="radio radio-primary radio-inline"> 
+                    <input type="radio" value="Y" id="templateEnabled-Y" name="templateEnabled"{{if eq $v `Y`}} checked{{end}}><label for="templateEnabled-Y">{{"使用模板"|$.T}}</label> 
+                  </div>
+                  <div class="radio radio-primary radio-inline"> 
+                    <input type="radio" value="N" id="templateEnabled-N" name="templateEnabled"{{if or (eq $v `N`) (eq $v ``)}} checked{{end}}><label for="templateEnabled-N">{{"不用模板"|$.T}}</label>
+                  </div>
+                </div>
+                <label class="col-sm-2 control-label">{{"模板文件"|$.T}}</label>
+                <div class="col-sm-3">
+                  {{$v := $.Form "templateFile"}}
+                  <select name="templateFile" id="templateFile" class="form-control">
+                    <option value="">{{`请选择`|$.T}}</option>
+                    {{- range $k, $tf := $.Stored.templateFiles -}}
+                    <option value="{{$tf}}"{{if eq $tf $v}} selected{{end}}>{{$tf}}</option>
+                    {{- end -}}
+                  </select>
+                </div>
+              </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
@@ -91,4 +113,18 @@
         </div><!-- /.block-flat -->
     </div>
 </div>
+{{/Block}}
+{{Block "footer"}}
+</script>
+<script>
+$(function(){
+	$('#routePageEditForm input[name=pageType]').on('click',function(){
+    var v=$(this).val(),$form=$('#routePageEditForm');
+    $form.find('.hide-pageType-'+v).hide();
+    $form.find('.show-pageType-'+v).show();
+    $form.find('[class^="hide-pageType"]:not(.hide-pageType-'+v+')').show();
+	});
+  $('#routePageEditForm input[name=pageType]:checked').trigger('click');
+});
+</script>
 {{/Block}}
