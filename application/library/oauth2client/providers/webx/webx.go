@@ -90,7 +90,7 @@ func (p *Provider) FetchUser(session goth.Session) (goth.User, error) {
 		Provider:     p.Name(),
 	}
 
-	if user.AccessToken == "" {
+	if len(user.AccessToken) == 0 {
 		// data is not yet retrieved since accessToken is still empty
 		return user, fmt.Errorf("%s cannot get user information without accessToken", p.providerName)
 	}
