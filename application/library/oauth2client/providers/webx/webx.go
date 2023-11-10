@@ -172,7 +172,7 @@ func newConfig(provider *Provider, authURL, tokenURL string, scopes []string) *o
 	return c
 }
 
-// RefreshToken refresh token is not provided by webx
+// RefreshToken refresh token
 func (p *Provider) RefreshToken(refreshToken string) (*oauth2.Token, error) {
 	token := &oauth2.Token{RefreshToken: refreshToken}
 	ts := p.config.TokenSource(goth.ContextForClient(p.Client()), token)
@@ -183,7 +183,7 @@ func (p *Provider) RefreshToken(refreshToken string) (*oauth2.Token, error) {
 	return newToken, err
 }
 
-// RefreshTokenAvailable refresh token is not provided by webx
+// RefreshTokenAvailable refresh token available
 func (p *Provider) RefreshTokenAvailable() bool {
 	return true
 }
