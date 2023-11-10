@@ -499,3 +499,41 @@ nav.friend-links a.nav-link > .img-label > .title{
 
 .card.card-form .card-footer{padding:10px 10px 0 10px;}
 .card.card-table .card-footer{padding:10px;}
+.block-head{
+  border-bottom: 2px solid #333844;
+  display:block; position: relative;
+}
+.block-head .block-title{
+  background: #333844;
+  padding: 10px 15px;
+  border-radius: 8px 8px 0 0;
+  margin: 0; 
+  color: white !important;
+}
+.block-head .block-title .tx-inverse{
+  color: white !important;
+}
+.block-head .block-more,.block-head .block-more a{
+  color: #333;
+}
+.block-head .block-more{
+  position: absolute; right: 10px; z-index: 2; top: 10px
+}
+.block-body{
+  background: #333844;
+  padding: 20px;
+}
+@media (max-width: 576px) {
+  .block-head .block-more,.block-head .block-more a{
+    color: white;
+  }
+}
+.block-head.orange{
+  border-color: orange;
+}
+.block-head.orange .block-title{
+  background: orange;
+}
+.block-body.white {
+  background: white;
+}
