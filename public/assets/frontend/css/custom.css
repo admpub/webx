@@ -1,4 +1,16 @@
 /* common */
+.nowrap{
+  white-space:nowrap !important;
+}
+.wrap,.wrap-only{
+  word-wrap:break-word !important;
+  word-break:normal !important;
+  word-break:break-all !important;
+  white-space:pre-wrap !important;
+}
+.wrap{
+  display:block;
+}
 .bd-gray-light{
   border-color:#f1f1f1 !important;
 }
