@@ -49,7 +49,7 @@ require (
 	github.com/swaggo/swag v1.16.2
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.8.10
-	github.com/webx-top/com v1.2.6
+	github.com/webx-top/com v1.2.8
 	github.com/webx-top/db v1.27.1
 	github.com/webx-top/echo v2.42.6+incompatible
 	github.com/webx-top/echo-prometheus v1.1.1
@@ -137,7 +137,7 @@ require (
 	github.com/admpub/timeago v1.2.1 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/andybalholm/brotli v1.0.6 // indirect
-	github.com/aws/aws-sdk-go v1.47.11 // indirect
+	github.com/aws/aws-sdk-go v1.48.0 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
