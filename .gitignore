@@ -34,11 +34,8 @@ installed2.lock
 /dist/data
 /bindata_assetfs.go
 /config/vhosts/*.conf
-/vendor/github.com/webx-top/echo/handler/oauth2/example/*.db
-/vendor/github.com/webx-top/echo/handler/oauth2/example/*.db.lock
 /.vscode
 /*.db
-/vendor/github.com/admpub/nging/bindata_assetfs.go
 /config/config.yaml
 /config/*.html
 /config/prometheus/data
@@ -58,3 +55,4 @@ nohup.out
 .DS_Store
 /dist/localtest/*/
 .env
+/vendor
