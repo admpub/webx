@@ -39,7 +39,7 @@
     <label class="col-sm-2 control-label">{{"网站LOGO(中)"|$.T}}</label>
     <div class="col-sm-10">
         {{- $.Set `fileInputConfig` (MakeMap `name` `base[siteLogo][value]` `value` $config.siteLogo.Value `urlValues` (URLValues `group` `base` `key` `siteLogo`)) -}}
-        {{Include "_common/file_input" $}}
+        {{Include "common/file_input" $}}
         <div class="help-block">
             {{`指定网站前台LOGO(中等尺寸)`|$.T}}
         </div>
@@ -49,7 +49,7 @@
     <label class="col-sm-2 control-label">{{"网站LOGO(小)"|$.T}}</label>
     <div class="col-sm-10">
         {{- $.Set `fileInputConfig` (MakeMap `name` `base[siteLogoSmall][value]` `value` $config.siteLogoSmall.Value `urlValues` (URLValues `group` `base` `key` `siteLogoSmall`)) -}}
-        {{Include "_common/file_input" $}}
+        {{Include "common/file_input" $}}
         <div class="help-block">
             {{`指定网站前台小尺寸LOGO`|$.T}}
         </div>
@@ -59,7 +59,7 @@
     <label class="col-sm-2 control-label">{{"网站LOGO(大)"|$.T}}</label>
     <div class="col-sm-10">
         {{- $.Set `fileInputConfig` (MakeMap `name` `base[siteLogoLarge][value]` `value` $config.siteLogoLarge.Value `urlValues` (URLValues `group` `base` `key` `siteLogoLarge`)) -}}
-        {{Include "_common/file_input" $}}
+        {{Include "common/file_input" $}}
         <div class="help-block">
             {{`指定网站前台大尺寸LOGO`|$.T}}
         </div>
@@ -69,7 +69,7 @@
     <label class="col-sm-2 control-label">{{"收藏夹图标"|$.T}}</label>
     <div class="col-sm-10">
         {{- $.Set `fileInputConfig` (MakeMap `name` `base[siteFavicon][value]` `value` $config.siteFavicon.Value `urlValues` (URLValues `group` `base` `key` `siteFavicon`)) -}}
-        {{Include "_common/file_input" $}}
+        {{Include "common/file_input" $}}
         <div class="help-block">
             {{`指定网站前台 favicon.ico 图标。不设置的时候使用默认图标`|$.T}}
         </div>

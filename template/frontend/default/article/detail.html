@@ -5,7 +5,7 @@
 {{Block "description"}}{{$.Stored.data.Summary}}{{/Block}}
 {{Block "bodyAttr"}} class="landing-3 pd-t-70 bg-gray-lightest"{{/Block}}
 {{Block "head"}}
-<link rel="stylesheet" href="{{AssetsXURL}}/css/_page/article_detail.css?t={{BuildTime}}" />
+<link rel="stylesheet" href="{{AssetsXURL}}/css/page/article_detail.css?t={{BuildTime}}" />
 {{/Block}}
 {{Block "body"}}
   {{Include "#default#header"}}
@@ -166,7 +166,7 @@
 <script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
 <script type="text/javascript" src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
 <!-- /markdown support -->
-<script type="text/javascript" src="{{AssetsXURL}}/js/_page/article_detail.js?t={{BuildTime}}"></script>
+<script type="text/javascript" src="{{AssetsXURL}}/js/page/article_detail.js?t={{BuildTime}}"></script>
 <script>
 $(function(){
   App.editor.markdownToHTML('#article-content');
@@ -174,6 +174,6 @@ $(function(){
   initPageAllCommentForm();
 });
 </script>
-<!-- <script type="text/javascript" src="{{AssetsXURL}}/js/_page/comment.js?t={{BuildTime}}"></script> -->
+<!-- <script type="text/javascript" src="{{AssetsXURL}}/js/page/comment.js?t={{BuildTime}}"></script> -->
 {{/Block}}
 {{/Strip}}

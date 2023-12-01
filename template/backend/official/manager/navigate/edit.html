@@ -54,7 +54,7 @@
                 <label class="col-sm-2 control-label">{{"封面图片"|$.T}}</label>
                 <div class="col-sm-8">
                     {{- $.Set `fileInputConfig` (MakeMap `name` `cover` `value` ($.Form `cover`) `subdir` `navigate`) -}}
-                    {{Include "_common/file_input" $}}
+                    {{Include "common/file_input" $}}
                 </div>
               </div>
               {{$isAdd := HasSuffix $.URL.Path "/add"}}
