@@ -18,14 +18,11 @@ function initSelectpage(){
         $(this).selectPage({
             showField: showField,
             keyField: keyField,
+            thumbField: thumbField,
             data: url,
             multiple : multiple,
             maxSelectLimit : maxSelectLimit,
             params: function () { return {}; },
-            formatItem: function (row) {
-                if(row[thumbField]) return '<img src="'+row[thumbField]+'" />'+row[showField];
-                return row[showField];
-            },
             eAjaxSuccess: function (d) {
                 var result;
                 if (d && d.Data && d.Data.listData && d.Data.pagination) result = {
