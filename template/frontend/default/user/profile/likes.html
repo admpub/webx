@@ -1,15 +1,15 @@
-{{Extend "user/profile/_homepage"}}
+{{Extend "user/profile/partial_homepage"}}
 {{Block "body"}}
 {{Super}}
 {{$agentLevel := $.Stored.agentLevel}}
 {{$customerGroup := $.Stored.customerGroup}}
  <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
-    {{Include "user/profile/_breadcrumb"}}
+    {{Include "user/profile/partial_breadcrumb"}}
   <div class="main-body pd-20">
 <div class="row">
   <div class="col-lg-12 mg-t-0">
-    {{Include "user/profile/_profile_head"}}
-    {{Include "user/profile/_following"}}
+    {{Include "user/profile/partial_profile_head"}}
+    {{Include "user/profile/partial_following"}}
   </div><!-- col-lg-12 -->
 </div><!-- row -->
     </div><!-- main-body -->

@@ -47,7 +47,7 @@ func _Authentication(ctx echo.Context) error {
 		ctx.Set(`maxPerDay`, maxPerDay)
 		ctx.Set(`remainCount`, remainCount)
 	}
-	b, err := ctx.Fetch(`user/profile/_authentication`, nil)
+	b, err := ctx.Fetch(`user/profile/partial_authentication`, nil)
 	if err != nil {
 		return err
 	}

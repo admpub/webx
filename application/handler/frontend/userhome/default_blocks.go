@@ -20,7 +20,7 @@ func init() {
 		(&dashboard.Block{
 			Title:  `我的文章`,
 			Ident:  `article`,
-			Tmpl:   `article/user/homepage/_article`,
+			Tmpl:   `article/user/homepage/partial_article`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
 			m := ctx.Get(`info`).(*modelCustomer.CustomerAndGroup)
@@ -29,7 +29,7 @@ func init() {
 		(&dashboard.Block{
 			Title:  `个人资料`,
 			Ident:  `profile`,
-			Tmpl:   `user/homepage/_profile`,
+			Tmpl:   `user/homepage/partial_profile`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
 			return nil
@@ -37,7 +37,7 @@ func init() {
 		(&dashboard.Block{
 			Title:  `我关注的`,
 			Ident:  `following`,
-			Tmpl:   `user/homepage/_following`,
+			Tmpl:   `user/homepage/partial_following`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
 			var customerID uint64
@@ -54,7 +54,7 @@ func init() {
 		(&dashboard.Block{
 			Title:  `关注我的`,
 			Ident:  `followers`,
-			Tmpl:   `user/homepage/_following`,
+			Tmpl:   `user/homepage/partial_following`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
 			var customerID uint64
@@ -71,7 +71,7 @@ func init() {
 		(&dashboard.Block{
 			Title:  `我的评论`,
 			Ident:  `comments`,
-			Tmpl:   `user/homepage/_comments`,
+			Tmpl:   `user/homepage/partial_comments`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
 			//TODO: implement
@@ -82,7 +82,7 @@ func init() {
 		(&dashboard.Block{
 			Title:  `我的收藏`,
 			Ident:  `favorites`,
-			Tmpl:   `user/homepage/_favorites`,
+			Tmpl:   `user/homepage/partial_favorites`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
 			//TODO: implement
@@ -93,7 +93,7 @@ func init() {
 		(&dashboard.Block{
 			Title:  `我的喜欢`,
 			Ident:  `likes`,
-			Tmpl:   `user/homepage/_likes`,
+			Tmpl:   `user/homepage/partial_likes`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
 			//TODO: implement
@@ -104,7 +104,7 @@ func init() {
 		(&dashboard.Block{
 			Title:  `发送私信`,
 			Ident:  `msgsend`,
-			Tmpl:   `user/homepage/_msgsend`,
+			Tmpl:   `user/homepage/partial_msgsend`,
 			Footer: ``,
 		}).SetContentGenerator(middleware.SkipCurrentURLPermCheck(middleware.AuthCheck(echo.HandlerFunc(func(ctx echo.Context) error {
 			if ctx.IsPost() {

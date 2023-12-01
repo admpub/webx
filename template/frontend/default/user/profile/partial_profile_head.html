@@ -1,6 +1,6 @@
 {{$customer := $.CustomerDetail}}
 <div class="card card-flat tx-size-sm">
-  {{Include "user/profile/_profile_head_card_top"}}
+  {{Include "user/profile/partial_profile_head_card_top"}}
   <div class="card-footer tx-size-14 d-sm-flex justify-content-sm-center bg-transparent">
     <nav class="nav nav-pills flex-column flex-sm-row">
       <a href="{{FrontendURL}}/user/profile/detail" class="nav-link{{if eq $.Path `/user/profile/detail`}} active{{end}}">{{"个人资料"|$.T}}</a>

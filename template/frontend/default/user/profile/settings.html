@@ -1,4 +1,4 @@
-{{Extend "user/profile/_homepage"}}
+{{Extend "user/profile/partial_homepage"}}
 {{Block "head"}}
 {{Super}}
 {{/Block}}
@@ -8,11 +8,11 @@
 {{$customerGroup := $.Stored.customerGroup}}
 {{$customer := $.Customer}}
  <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
-    {{Include "user/profile/_breadcrumb"}}
+    {{Include "user/profile/partial_breadcrumb"}}
   <div class="main-body pd-20">
 <div class="row">
   <div class="col-lg-12 mg-t-0">
-    {{Include "user/profile/_profile_head"}}
+    {{Include "user/profile/partial_profile_head"}}
     <div class="card card-flat tx-size-sm pd-30 mg-t-20">
         <form class="form form-label-right" method="POST">
             <div class="form-group row">
@@ -20,7 +20,7 @@
               <div class="col-sm-10">
                   <div class="avatar-upload">
                     {{$avatar := $customer.Avatar}}
-                    <img src="{{if $avatar}}{{AddSuffix $avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
+                    <img src="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
                     <input id="fileupload" type="file" name="files[]">
                     <input type="hidden" id="avatar-image" name="avatar-small" value="{{if $avatar}}{{AddSuffix $avatar "_200_200"}}{{end}}" />
                     <input type="hidden" id="avatar-image-original" name="avatar" value="{{$avatar}}" />

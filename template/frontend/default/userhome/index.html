@@ -10,14 +10,14 @@
 {{$operate := $.Stored.operate}}
  <div class="bb-mainpanel">
     <div class="container pd-t-20 pd-b-20">
-    {{Include "#default#user/homepage/_breadcrumb"}}
+    {{Include "#default#user/homepage/partial_breadcrumb"}}
     </div><!-- container -->
     <div class="container pd-b-20">
-    {{Include "#default#user/homepage/_head"}}
-    {{/*Include "#default#user/homepage/_album"*/}}
-    {{/*Include "#default#user/homepage/_player"*/}}
-    {{/*Include "#default#user/homepage/_topic"*/}}
-    {{/*Include "#default#user/homepage/_card_with_tabs"*/}}
+    {{Include "#default#user/homepage/partial_head"}}
+    {{/*Include "#default#user/homepage/partial_album"*/}}
+    {{/*Include "#default#user/homepage/partial_player"*/}}
+    {{/*Include "#default#user/homepage/partial_topic"*/}}
+    {{/*Include "#default#user/homepage/partial_card_with_tabs"*/}}
     {{- $block := $.Stored.block -}}
     {{- $.Fetch $block.Tmpl $ -}}
     </div><!-- container -->

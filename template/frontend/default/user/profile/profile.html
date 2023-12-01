@@ -1,4 +1,4 @@
-{{Extend "user/profile/_homepage"}}
+{{Extend "user/profile/partial_homepage"}}
 {{Block "head"}}
 {{Super}}
 {{/Block}}
@@ -7,16 +7,16 @@
 {{$agentLevel := $.Stored.agentLevel}}
 {{$customerGroup := $.Stored.customerGroup}}
  <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
-    {{Include "user/profile/_breadcrumb"}}
+    {{Include "user/profile/partial_breadcrumb"}}
   <div class="main-body pd-20">
 <div class="row">
   <div class="col-lg-12 mg-t-0">
-    {{Include "user/profile/_profile_head"}}
-    {{/*Include "user/profile/_album"*/}}
-    {{/*Include "user/profile/_player"*/}}
-    {{/*Include "user/profile/_topic"*/}}
-    {{/*Include "user/profile/_card_with_tabs"*/}}
-    {{Include "user/profile/_profile"}}
+    {{Include "user/profile/partial_profile_head"}}
+    {{/*Include "user/profile/partial_album"*/}}
+    {{/*Include "user/profile/partial_player"*/}}
+    {{/*Include "user/profile/partial_topic"*/}}
+    {{/*Include "user/profile/partial_card_with_tabs"*/}}
+    {{Include "user/profile/partial_profile"}}
   </div><!-- col-lg-12 -->
 </div><!-- row -->
     </div><!-- main-body -->

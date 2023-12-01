@@ -1,4 +1,4 @@
-{{Extend "user/profile/_homepage"}}
+{{Extend "user/profile/partial_homepage"}}
 {{Block "head"}}
 {{Super}}
 <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.crop/css/jquery.Jcrop.min.css?t={{BuildTime}}" type="text/css" />
@@ -7,11 +7,11 @@
 {{Super}}
 {{$customer := $.Customer}}
  <div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
-    {{Include "user/profile/_breadcrumb"}}
+    {{Include "user/profile/partial_breadcrumb"}}
   <div class="main-body pd-20">
 <div class="row">
   <div class="col-lg-12 mg-t-0">
-    {{Include "user/profile/_profile_head"}}
+    {{Include "user/profile/partial_profile_head"}}
     <div class="card card-flat tx-size-sm pd-30 mg-t-20">
         <ul class="nav nav-outline nav-gray d-block d-sm-flex justify-content-center mg-b-30" role="tablist">{{$type := $.Form "type"}}
             <li class="nav-item"><a class="nav-link{{if eq $type "email"}} active{{end}}" href="{{FrontendURL}}/user/profile/binding?type=email">{{"绑定邮箱"|$.T}}</a></li>
@@ -19,11 +19,11 @@
             <li class="nav-item"><a class="nav-link{{if eq $type "oauth"}} active{{end}}" href="{{FrontendURL}}/user/profile/binding?type=oauth">{{"绑定社区账号"|$.T}}</a></li>
         </ul>
         {{if eq $type "email"}}
-        {{Include "user/profile/binding/_email"}}
+        {{Include "user/profile/binding/partial_email"}}
         {{else if eq $type "mobile"}}
-        {{Include "user/profile/binding/_mobile"}}
+        {{Include "user/profile/binding/partial_mobile"}}
         {{else}}
-        {{Include "user/profile/binding/_oauth"}}
+        {{Include "user/profile/binding/partial_oauth"}}
         {{end}}
     </div><!-- .card -->
   </div><!-- col-lg-12 -->
