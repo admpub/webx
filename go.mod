@@ -51,7 +51,7 @@ require (
 	github.com/webx-top/client v0.8.10
 	github.com/webx-top/com v1.2.10
 	github.com/webx-top/db v1.27.1
-	github.com/webx-top/echo v2.42.8+incompatible
+	github.com/webx-top/echo v2.42.9+incompatible
 	github.com/webx-top/echo-prometheus v1.1.1
 	github.com/webx-top/echo-socket.io v1.1.3
 	github.com/webx-top/image v0.1.0
@@ -73,7 +73,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.25.1
-	github.com/nging-plugins/dbmanager v1.4.21
+	github.com/nging-plugins/dbmanager v1.4.22
 	github.com/webx-top/validator v0.2.0
 )
 
@@ -109,7 +109,6 @@ require (
 	github.com/admpub/godownloader v2.2.0+incompatible // indirect
 	github.com/admpub/gohls v1.3.3 // indirect
 	github.com/admpub/gohls-server v0.3.7 // indirect
-	github.com/admpub/gohttp v0.0.0-20190322032039-b55c707b8f1e // indirect
 	github.com/admpub/gotwilio v0.0.0-20210910030032-9a691aeea447 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
