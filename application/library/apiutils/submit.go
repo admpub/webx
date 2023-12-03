@@ -22,7 +22,7 @@ func SubmitWithRecv(ctx echo.Context, recv interface{}, apiURL string, formData 
 	request.SetResult(recv).SetHeader(echo.HeaderAccept, echo.MIMEApplicationJSONCharsetUTF8).SetFormDataFromValues(formData)
 	var resp *resty.Response
 	var err error
-	if len(method) > 0 && strings.ToUpper(method[0]) == `GET` {
+	if len(method) > 0 && strings.EqualFold(method[0], `GET`) {
 		resp, err = request.Get(apiURL)
 	} else {
 		resp, err = request.Post(apiURL)
