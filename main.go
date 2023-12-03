@@ -50,7 +50,7 @@ import (
 	_ "github.com/admpub/webx/application"
 	"github.com/admpub/webx/application/initialize/initnavigate"
 
-	//_ "github.com/nging-plugins/open/application/library/oauth2server/initexample"
+	//_ "github.com/nging-plugins/open/application/library/oauth2server/initialize"
 
 	// swagger docs
 	//_ "github.com/nging-plugins/open/application/handler/frontend/swagger"
