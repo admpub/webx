@@ -2,16 +2,18 @@ package oauth
 
 import (
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/webx/application/library/oauthutils"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/markbates/goth"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/handler/oauth2"
+
+	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/admpub/nging/v5/application/model"
+	"github.com/admpub/webx/application/library/oauthutils"
+	"github.com/admpub/webx/application/middleware/sessdata"
+	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )
 
 // 通过oauth登录第三方网站成功之后的处理
@@ -196,7 +198,7 @@ func checkOrUpdateUser(ctx echo.Context, oauthM *modelCustomer.OAuth, ouser *got
 	if customer == nil {
 		co := modelCustomer.NewCustomerOptions(customerM.OfficialCustomer)
 		co.SignInType = `oauth2.` + ouser.Provider
-		err = customerM.FireSignInSuccess(co, modelCustomer.GenerateOptionsFromHeader(ctx)...)
+		err = customerM.FireSignInSuccess(co, model.AuthTypeOauth2, modelCustomer.GenerateOptionsFromHeader(ctx)...)
 	}
 
 	return customerM, err

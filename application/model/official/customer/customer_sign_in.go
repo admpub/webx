@@ -7,6 +7,7 @@ import (
 
 	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/nging/v5/application/library/perm"
+	"github.com/admpub/nging/v5/application/model"
 	multidivicesignin "github.com/admpub/webx/application/library/multidevicesignin"
 	"github.com/admpub/webx/application/library/xrole"
 )
@@ -48,7 +49,7 @@ func (f *Customer) SignIn(user, pass, signInType string, options ...CustomerOpti
 	}
 	err := f.Get(nil, cond.And())
 	if err != nil {
-		loginLogM := f.NewLoginLog(co.Name)
+		loginLogM := f.NewLoginLog(co.Name, model.AuthTypePassword)
 		loginLogM.Errpwd = co.Password
 		if err == db.ErrNoMoreRows {
 			loginLogM.Failmsg = f.Context().T(`用户不存在`)
@@ -65,7 +66,7 @@ func (f *Customer) SignIn(user, pass, signInType string, options ...CustomerOpti
 	if err = f.CheckSignInPassword(co.Password); err != nil {
 		if !echo.IsErrorCode(err, code.UserDisabled) {
 			// 仅记录密码不正确的情况
-			loginLogM := f.NewLoginLog(co.Name)
+			loginLogM := f.NewLoginLog(co.Name, model.AuthTypePassword)
 			loginLogM.OwnerId = f.Id
 			loginLogM.Errpwd = co.Password
 			loginLogM.Failmsg = err.Error()
@@ -74,11 +75,11 @@ func (f *Customer) SignIn(user, pass, signInType string, options ...CustomerOpti
 		}
 		return err
 	}
-	return f.FireSignInSuccess(co, options...)
+	return f.FireSignInSuccess(co, model.AuthTypePassword, options...)
 }
 
-func (f *Customer) FireSignInSuccess(co *CustomerOptions, options ...CustomerOption) (err error) {
-	loginLogM := f.NewLoginLog(co.Name)
+func (f *Customer) FireSignInSuccess(co *CustomerOptions, authType string, options ...CustomerOption) (err error) {
+	loginLogM := f.NewLoginLog(co.Name, authType)
 	loginLogM.OwnerId = f.Id
 	set := echo.H{
 		`login_fails`: 0,

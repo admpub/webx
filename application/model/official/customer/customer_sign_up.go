@@ -4,6 +4,7 @@ import (
 	"github.com/webx-top/echo/param"
 
 	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/admpub/nging/v5/application/model"
 	modelLevel "github.com/admpub/webx/application/model/official/level"
 )
 
@@ -35,10 +36,10 @@ func (f *Customer) SignUp(user, pass, mobile, email string, options ...CustomerO
 		return err
 	}
 
-	return f.FireSignUpSuccess(co, options...)
+	return f.FireSignUpSuccess(co, model.AuthTypePassword, options...)
 }
 
-func (f *Customer) FireSignUpSuccess(co *CustomerOptions, options ...CustomerOption) (err error) {
+func (f *Customer) FireSignUpSuccess(co *CustomerOptions, authType string, options ...CustomerOption) (err error) {
 	integral := config.Setting(`base`, `addExperience`).Float64(`register`)
 	if err = f.AddRewardOnSignUp(integral); err != nil {
 		return err
@@ -62,7 +63,7 @@ func (f *Customer) FireSignUpSuccess(co *CustomerOptions, options ...CustomerOpt
 
 	f.SetSession()
 
-	loginLogM := f.NewLoginLog(co.Name)
+	loginLogM := f.NewLoginLog(co.Name, authType)
 	loginLogM.Success = `Y`
 	loginLogM.AddAndSaveSession()
 	return

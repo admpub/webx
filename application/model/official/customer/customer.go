@@ -198,12 +198,13 @@ func (f *Customer) Edit(mw func(db.Result) db.Result, args ...interface{}) error
 	return err
 }
 
-func (f *Customer) NewLoginLog(username string) *model.LoginLog {
+func (f *Customer) NewLoginLog(username string, authType string) *model.LoginLog {
 	loginLogM := model.NewLoginLog(f.Context())
 	loginLogM.OwnerType = `customer`
 	loginLogM.Username = username
 	loginLogM.Success = `N`
 	loginLogM.SessionId = f.Context().Session().MustID()
+	loginLogM.AuthType = authType
 	return loginLogM
 }
 
