@@ -168,6 +168,9 @@ func newConfig(provider *Provider, authURL, tokenURL string, scopes []string) *o
 	}
 
 	c.Scopes = append(c.Scopes, scopes...)
+	if len(c.Scopes) == 0 {
+		c.Scopes = append(c.Scopes, `profile`)
+	}
 
 	return c
 }
