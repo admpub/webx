@@ -3,7 +3,7 @@
 {{Block "bodyAttr"}} class="bg-white tx-size-sm ht-100p pos-relative"{{/Block}}
 {{Block "body"}}
     {{Include "#default#headsimple"}}
-    {{- $app := getOpenApp -}}
+    {{- $app := call $.Func.getOpenApp -}}
     <div class="ht-100v wd-100p d-flex align-items-center justify-content-center pd-md-t-70 pd-x-20">
       <div class="card pd-25 pd-md-40 rounded-0 wd-450">
         <h5 class="tx-size-md-32 tx-gray-dark tx-center">{{"账号授权"|$.T}}</h5>
