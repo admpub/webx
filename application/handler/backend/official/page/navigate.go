@@ -28,6 +28,12 @@ var LeftNavigate = &navigate.Item{
 		},
 		{
 			Display: false,
+			Name:    `修改模板配置`,
+			Action:  `template_config`,
+			Icon:    `edit`,
+		},
+		{
+			Display: false,
 			Name:    `删除模板`,
 			Action:  `template_delete`,
 		},

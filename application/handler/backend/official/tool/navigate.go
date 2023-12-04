@@ -10,7 +10,7 @@ var TopNavigate = navigate.List{
 	},
 	&navigate.Item{
 		Display: false,
-		Name:    `添加管理`,
+		Name:    `添加地区`,
 		Action:  `area/add`,
 	},
 	&navigate.Item{
@@ -22,6 +22,26 @@ var TopNavigate = navigate.List{
 		Display: false,
 		Name:    `删除地区`,
 		Action:  `area/delete`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    `地区分组管理`,
+		Action:  `area/group_index`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    `添加地区分组`,
+		Action:  `area/group_add`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    `修改地区分组`,
+		Action:  `area/group_edit`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    `删除地区分组`,
+		Action:  `area/group_delete`,
 	},
 	&navigate.Item{
 		Display: true,
