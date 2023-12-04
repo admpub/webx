@@ -1,6 +1,6 @@
 {{Strip}}
             <div class="bg-white rounded wd-md-350 wd-lg-100p">
-              {{Include "#default#_oauth_binding_tips"}}
+              {{Include "#default#partial_oauth_binding_tips"}}
               <div class="pd-y-30 pd-x-25 wd-100p">
                 {{if not $.Stored.oauth}}
                 <h2 class="tx-gray-dark tx-normal tx-center">{{"登录"|$.T}}</h2>
@@ -36,7 +36,7 @@
                 </div>
                 <button class="btn btn-inverse tx-size-sm btn-block"> {{"登入"|$.T}}</button>
               </form>
-                {{Include "#default#_3rd_platform_login"}}
+                {{Include "#default#partial_3rd_platform_login"}}
               </div>
             </div>
 {{/Strip}}

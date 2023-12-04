@@ -3,7 +3,7 @@
   <div class="container ht-100p">
     <div class="row flex-row-reverse ht-100p">
       <div class="col-lg-4 offset-lg-1 d-flex align-items-center justify-content-center">
-        {{Include "#default#_sign_in_form"}}
+        {{Include "#default#partial_sign_in_form"}}
       </div><!-- col-4 -->
       <div class="col-lg-7 mg-t-25 mg-lg-t-0 d-flex align-items-center login-form-left-box">
         {{- if not Config.custom.login -}}
@@ -48,5 +48,5 @@
   </div>
 </div><!-- container-wrapper -->
 
-{{Include "#default#_modal"}}
+{{Include "#default#partial_modal"}}
 {{/Strip}}

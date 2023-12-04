@@ -5,7 +5,7 @@
 {{Include "#default#headsimple"}}
 <div class="wd-100p d-flex align-items-center justify-content-center pd-t-100 pd-x-20">
     <div class="card rounded-0 wd-450">
-        {{Include "#default#_sign_up_form"}}
+        {{Include "#default#partial_sign_up_form"}}
     </div><!-- card -->
 </div><!-- container -->
 {{$.Set `ignorePosAbsoluteBottom` true}}
@@ -13,7 +13,7 @@
 {{/Block}}
 {{Block "footer"}}
 {{- if $.Data -}}
-{{Include "#default#_modal"}}
+{{Include "#default#partial_modal"}}
 <script>
 $(function(){
     showModal("{{$.Data}}","{{if IsError $.Data}}error{{else if IsOk $.Data}}success{{else}}info{{end}}");
