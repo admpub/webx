@@ -126,6 +126,6 @@ func UpdateAccount() error {
 	Default().Config.ClearAccounts()
 	Default().Config.AddAccount(accounts...)
 	Default().Config.GenerateProviders()
-	log.Debug(`Update oauth configuration information`)
+	log.Debug(`update oauth configuration information`)
 	return nil
 }
