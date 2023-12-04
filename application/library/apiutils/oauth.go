@@ -19,7 +19,7 @@ type OauthProvider struct {
 	LoginURL  string `json:"loginURL" xml:"loginURL"`
 }
 
-func OauthProvidersFrom(accounts []*oauth2.Account) []*OauthProvider {
+func OauthProvidersFrom(accounts []oauth2.Account) []*OauthProvider {
 	var providers []*OauthProvider
 	for _, item := range accounts {
 		if !item.On {

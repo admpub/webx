@@ -1,9 +1,8 @@
 package oauthutils
 
 import (
+	"github.com/admpub/goth"
 	"github.com/admpub/log"
-	"github.com/admpub/webx/application/initialize/frontend"
-	"github.com/markbates/goth"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -15,6 +14,8 @@ import (
 	"github.com/admpub/nging/v5/application/library/config"
 	oauthLibrary "github.com/admpub/nging/v5/application/library/oauth"
 	"github.com/admpub/nging/v5/application/registry/settings"
+	"github.com/admpub/webx/application/initialize/frontend"
+	"github.com/admpub/webx/application/library/xcommon"
 	"github.com/coscms/oauth2s/client/goth/providers"
 )
 
@@ -48,8 +49,11 @@ func InitOauth(e *echo.Echo) {
 	if config.IsInstalled() {
 		settings.Init(nil)
 	}
-	host := subdomains.Default.URL(``, frontend.Name)
-	oauth2Config := &oauth2.Config{}
+	host := xcommon.SiteURL(nil)
+	if len(host) == 0 {
+		host = subdomains.Default.URL(``, frontend.Name)
+	}
+	oauth2Config := oauth2.NewConfig()
 	RegisterProvider(oauth2Config)
 
 	if config.IsInstalled() {
@@ -66,8 +70,17 @@ func InitOauth(e *echo.Echo) {
 	defaultOAuth.Wrapper(e, session.Middleware(config.SessionOptions))
 }
 
-func Accounts() []*oauth2.Account {
-	return Default().Config.Accounts
+func Accounts() []oauth2.Account {
+	var accounts []oauth2.Account
+	if Default() == nil {
+		return accounts
+	}
+	Default().Config.RangeAccounts(func(a *oauth2.Account) bool {
+		account := *a
+		accounts = append(accounts, account)
+		return true
+	})
+	return accounts
 }
 
 // FindAccounts 第三方登录平台账号
@@ -103,11 +116,15 @@ func FindAccounts() ([]*oauth2.Account, error) {
 
 // UpdateAccount 第三方登录平台账号
 func UpdateAccount() error {
+	if Default() == nil {
+		return nil
+	}
 	accounts, err := FindAccounts()
 	if err != nil {
 		return err
 	}
-	Default().Config.Accounts = accounts
+	Default().Config.ClearAccounts()
+	Default().Config.AddAccount(accounts...)
 	Default().Config.GenerateProviders()
 	log.Debug(`Update oauth configuration information`)
 	return nil

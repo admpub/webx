@@ -1,13 +1,12 @@
 package oauthutils
 
 import (
+	"github.com/admpub/goth"
 	"github.com/coscms/oauth2s/client/goth/providers"
-	"github.com/markbates/goth"
 	"github.com/webx-top/echo/handler/oauth2"
 
 	// - oauth2 provider
-	//"github.com/markbates/goth/providers/apple"
-	"github.com/markbates/goth/providers/microsoftonline"
+	"github.com/admpub/goth/providers/microsoftonline"
 )
 
 // RegisterProvider 注册Provider

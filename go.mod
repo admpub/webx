@@ -42,7 +42,6 @@ require (
 	github.com/gosimple/slug v1.13.1
 	github.com/hibiken/asynq v0.24.1
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76
-	github.com/markbates/goth v1.78.0
 	github.com/prometheus/client_golang v1.17.0
 	github.com/spf13/cobra v1.8.0
 	github.com/stretchr/testify v1.8.4
@@ -69,6 +68,7 @@ require (
 	github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588
 	github.com/admpub/go-lock v1.3.0
 	github.com/admpub/go-zinc v0.0.8
+	github.com/admpub/goth v0.0.1
 	github.com/admpub/nging/v5 v5.2.2
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
@@ -109,7 +109,6 @@ require (
 	github.com/admpub/godownloader v2.2.0+incompatible // indirect
 	github.com/admpub/gohls v1.3.3 // indirect
 	github.com/admpub/gohls-server v0.3.7 // indirect
-	github.com/admpub/goth v0.0.1 // indirect
 	github.com/admpub/gotwilio v0.0.0-20210910030032-9a691aeea447 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect

@@ -3,7 +3,7 @@ package customer
 import (
 	"strconv"
 
-	"github.com/markbates/goth"
+	"github.com/admpub/goth"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"

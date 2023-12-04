@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 
+	"github.com/admpub/goth"
 	"github.com/admpub/log"
-	"github.com/markbates/goth"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 )

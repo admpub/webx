@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/admpub/goth"
 	"github.com/admpub/marmot/miner"
-	"github.com/markbates/goth"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	stdCode "github.com/webx-top/echo/code"

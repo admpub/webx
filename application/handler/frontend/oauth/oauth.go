@@ -27,7 +27,7 @@ func initOauth(e *echo.Echo) {
 	}
 }
 
-func Accounts() []*oauth2.Account {
+func Accounts() []oauth2.Account {
 	return oauthutils.Accounts()
 }
 
