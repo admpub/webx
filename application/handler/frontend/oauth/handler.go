@@ -145,6 +145,11 @@ func checkOrUpdateUser(ctx echo.Context, oauthM *modelCustomer.OAuth, ouser *got
 
 	// === 已经绑定过 ====================
 
+	if customer != nil && oauthM.CustomerId != customer.Id {
+		err = ctx.NewError(code.DataUnavailable, `此外部账号已经被其他用户绑定`)
+		return customerM, err
+	}
+
 	oauthSet := echo.H{}
 	if ouser.AccessToken != oauthM.AccessToken {
 		oauthSet[`access_token`] = ouser.AccessToken
