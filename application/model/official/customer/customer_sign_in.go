@@ -91,8 +91,10 @@ func (f *Customer) FireSignInSuccess(co *CustomerOptions, authType string, optio
 	}
 	defer func() {
 		ctx.End(err == nil)
-		loginLogM.Failmsg = err.Error()
-		loginLogM.Add()
+		if err != nil {
+			loginLogM.Failmsg = err.Error()
+			loginLogM.Add()
+		}
 	}()
 	if err = f.LevelUpOnSignIn(set); err != nil {
 		return err
