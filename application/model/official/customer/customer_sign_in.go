@@ -94,6 +94,9 @@ func (f *Customer) FireSignInSuccess(co *CustomerOptions, authType string, optio
 		if err != nil {
 			loginLogM.Failmsg = err.Error()
 			loginLogM.Add()
+		} else {
+			loginLogM.Success = `Y`
+			loginLogM.AddAndSaveSession()
 		}
 	}()
 	if err = f.LevelUpOnSignIn(set); err != nil {
@@ -148,9 +151,6 @@ func (f *Customer) FireSignInSuccess(co *CustomerOptions, authType string, optio
 	}
 
 	f.SetSession()
-
-	loginLogM.Success = `Y`
-	loginLogM.AddAndSaveSession()
 	return err
 }
 
