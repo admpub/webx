@@ -20,7 +20,7 @@
       <label class="col-sm-2 control-label">{{"回复消息"|$.T}}</label>
       <div class="col-sm-9">
         <blockquote>
-          <div id="message-content">
+          <div id="message-content" data-contype="{{$data.Contype}}">
           {{- if eq $data.Contype "markdown" -}}
           <div class="markdown-code">{{- OutputContent $data.Content $data.Contype -}}</div>
           {{- else -}}

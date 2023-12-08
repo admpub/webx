@@ -43,7 +43,7 @@
     <!-- <a href="" class="btn btn-outline-secondary rounded-circle btn-icon-sm"><i class="icon ion-android-more-horizontal"></i></a> -->
   </div>
   <div class="card-block tx-size-sm pd-25">
-  <div id="message-content">
+  <div id="message-content" data-contype="{{$data.Contype}}">
     {{- if eq $data.Contype "markdown" -}}
     <div class="markdown-code">{{- OutputContent $data.Content $data.Contype -}}</div>
     {{- else -}}
@@ -60,7 +60,7 @@
       <div class="media-body pd-t-3 tx-size-12">
         <p class="tx-bold mg-b-0 lh-1"><a href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank" class="tx-gray-dark">{{$v.MsgUser.Name}}</a></p>
         <span class="tx-size-11">{{(Ts2time $v.Created).Format "2006-01-02 15:04:05"}}</span>
-        <div class="mg-y-10">
+        <div class="mg-y-10" data-contype="{{$v.Contype}}">
   {{if eq $v.Contype "text"}}
   {{$v.Content|Nl2br}}
   {{else if eq $v.Contype "html"}}

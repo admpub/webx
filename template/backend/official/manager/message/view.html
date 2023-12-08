@@ -19,7 +19,7 @@
             </span>
         </h4>
     </div>
-    <div class="mail" id="message-content">
+    <div class="mail" id="message-content" data-contype="{{$data.Contype}}">
   {{- if eq $data.Contype "markdown" -}}
   <div class="markdown-code">{{- OutputContent $data.Content $data.Contype -}}</div>
   {{- else -}}

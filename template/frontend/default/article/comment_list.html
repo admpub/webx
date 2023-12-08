@@ -31,7 +31,7 @@
             {{end}}
           </small>
 
-          <div class="comment-content mg-b-0{{if eq $v.Contype `markdown`}} markdown-code{{end}}" id="comment-content-{{$v.Id}}">
+          <div class="comment-content mg-b-0{{if eq $v.Contype `markdown`}} markdown-code{{end}}" id="comment-content-{{$v.Id}}" data-contype="{{$v.Contype}}">
             {{if gt $v.ReplyCommentId 0}}
             <div class="reply-head mg-b-10 inline">
             <span class="tx-gray-light tx-light">{{"回复"|$.T}}</span>

@@ -489,9 +489,7 @@ function bindCommentList(box,isReplyList,offsetY) {
         var replyBox=$('#reply-list-box-'+replyId);
         commentList(1,replyBox[0],replyBox.data('url'),true);
     });
-    if(typeof(App.editor)!='undefined'){
-        App.editor.markdownToHTML(box);
-    }
+    attachContype(box);
     box.find('[data-comment-like-id]').on('click',function(){
         var id=$(this).data('comment-like-id'),me=$(this);
         $.post(BASE_URL+'/article/comment_like',{id:id},function(r){
@@ -1015,10 +1013,10 @@ function setNavActive(){
         act.attr('class',className);
     }
 }
-function attachContype(){
+function attachContype(container){
     if(typeof App.editor === 'undefined') return;
-    
-    $('[data-contype]:not([contype-attached])').each(function(){
+    var $container=container?$(container):$(document);
+    $container.find('[data-contype]:not([contype-attached])').each(function(){
         $(this).attr('contype-attached','1');
         var contype=$(this).data('contype');
         switch(contype){

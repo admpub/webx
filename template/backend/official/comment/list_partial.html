@@ -45,7 +45,7 @@
                     {{end}}
                     {{end}}
                 </div><!-- .comment-head -->
-                <div class="comment-body{{if eq $v.Contype `markdown`}} markdown-code{{end}}" id="comment-content-{{$v.Id}}">
+                <div class="comment-body{{if eq $v.Contype `markdown`}} markdown-code{{end}}" id="comment-content-{{$v.Id}}" data-contype="{{$v.Contype}}">
                     {{- OutputContent $v.Content $v.Contype -}}
                 </div><!-- .comment-body -->
                 <div class="comment-foot clearfix" style="margin-top:10px">
