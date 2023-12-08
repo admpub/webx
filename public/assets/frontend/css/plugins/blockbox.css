@@ -594,7 +594,6 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url("../../images/img208.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -603,7 +602,6 @@
   }
   
   .bg-img2 {
-    background-image: url("../../images/img108.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -726,17 +724,5 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-  }
-  
-  .bg-img-1 {
-    background-image: url("../../images/img289.jpg");
-  }
-  
-  .bg-img-2 {
-    background-image: url("../../images/img294.jpg");
-  }
-  
-  .bg-img-3 {
-    background-image: url("../../images/img318.jpg");
   }
   

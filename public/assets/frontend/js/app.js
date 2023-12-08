@@ -662,14 +662,16 @@
       if($footer.length<1)return;
       var marginTop=$footer.css("marginTop");
       if(offset==null) offset = $('.pos-fixed-top:first').height();
-      var fixer=function(){
+      var fixer=function($footer){
         var b=$footer.position().top+$footer.height()+offset;
         var f=$(window).height()-b;
         if(f>0) $footer.css('margin-top',f+'px');
         else if(f<0) $footer.css('margin-top',marginTop);
       }
-      fixer();
-      $(window).on('resize',fixer);
+      fixer($footer);
+      $(window).on('resize',function(){
+        fixer($footer);
+      });
     }
 };
 return window.App;
