@@ -103,7 +103,7 @@
               <footer class="blockquote-footer tx-size-sm">Author</footer>
             </blockquote> -->
             {{end}}
-            <div class="content" id="article-content">
+            <div class="content" id="article-content" data-contype="{{$data.Contype}}">
               {{- if eq $data.Contype "markdown" -}}
               <div class="markdown-code pd-0-force">{{- OutputContent $data.Content $data.Contype -}}</div>
               {{- else -}}
@@ -163,13 +163,12 @@
 {{/Block}}
 {{Block "footer"}}
 <!-- markdown support -->
-<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script type="text/javascript" src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
 <script type="text/javascript" src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
 <!-- /markdown support -->
 <script type="text/javascript" src="{{AssetsXURL}}/js/page/article_detail.js?t={{BuildTime}}"></script>
 <script>
 $(function(){
-  App.editor.markdownToHTML('#article-content');
   bindCommentList($('#comment-list-container'), false, $('#headPanel').height()+90);
   initPageAllCommentForm();
 });

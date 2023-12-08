@@ -1015,23 +1015,42 @@ function setNavActive(){
         act.attr('class',className);
     }
 }
+function attachContype(){
+    if(typeof App.editor === 'undefined') return;
+    
+    $('[data-contype]:not([contype-attached])').each(function(){
+        $(this).attr('contype-attached','1');
+        var contype=$(this).data('contype');
+        switch(contype){
+            case 'markdown':
+            App.editor.markdownToHTML(this);
+            break;
+            case 'html':
+            var $code=$(this).find('pre[class^=language-]');
+            if($code.length>0)App.editor.codeHighlight($code);
+            break;
+        }
+    })
+}
 function commonInit($,App){
     if(window.errorMSG) App.message({title: App.i18n.SYS_INFO, text: App.ifTextNl2br(window.errorMSG), class_name: "danger"});
 	if(window.successMSG) App.message({title: App.i18n.SYS_INFO, text: App.ifTextNl2br(window.successMSG), class_name: "success"});
-    $('[data-toggle="tooltip"]:not(data-original-title)').tooltip();
-    $('[data-following-uid]').each(function(){
-        setFollowStatus(this);
-    });
-    $('textarea[count-words]').on('keyup',function(){
-        countWords(this,$(this).attr('count-words'));
-    }).trigger('keyup');
-    $('form[ajax-submit]').each(function(){
-        ajaxForm(this);
-    });
-    App.fixedFooter('.footer-fix');
-    App.bottomFloat('.auto-bottom-float',0,true);
-    App.showRequriedInputStar();
-    setNavActive();
+    $(function(){
+        $('[data-toggle="tooltip"]:not(data-original-title)').tooltip();
+        $('[data-following-uid]').each(function(){
+            setFollowStatus(this);
+        });
+        $('textarea[count-words]').on('keyup',function(){
+            countWords(this,$(this).attr('count-words'));
+        }).trigger('keyup');
+        $('form[ajax-submit]').each(function(){
+            ajaxForm(this);
+        });
+        App.fixedFooter('.footer-fix');
+        App.bottomFloat('.auto-bottom-float',0,true);
+        App.showRequriedInputStar();
+        setNavActive();attachContype();
+    })
 }
 if (typeof(jQuery) !== 'undefined' && typeof(App) !== 'undefined') {
     commonInit(jQuery,App);
