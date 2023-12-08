@@ -84,28 +84,30 @@ func (f *Customer) FireSignInSuccess(co *CustomerOptions, authType string, optio
 	set := echo.H{
 		`login_fails`: 0,
 	}
-	if err = f.LevelUpOnSignIn(set); err != nil {
+	ctx := f.Context()
+	err = ctx.Begin()
+	if err != nil {
+		return
+	}
+	defer func() {
+		ctx.End(err == nil)
 		loginLogM.Failmsg = err.Error()
 		loginLogM.Add()
+	}()
+	if err = f.LevelUpOnSignIn(set); err != nil {
 		return err
 	}
 	integral := config.Setting(`base`, `addExperience`).Float64(`login`)
 	if err = f.AddRewardOnSignIn(integral); err != nil {
-		loginLogM.Failmsg = err.Error()
-		loginLogM.Add()
 		return err
 	}
 
 	err = f.LinkOAuthUser()
 	if err != nil {
-		loginLogM.Failmsg = err.Error()
-		loginLogM.Add()
 		return err
 	}
 	err = FireSignIn(f.OfficialCustomer)
 	if err != nil {
-		loginLogM.Failmsg = err.Error()
-		loginLogM.Add()
 		return err
 	}
 
@@ -139,8 +141,6 @@ func (f *Customer) FireSignInSuccess(co *CustomerOptions, authType string, optio
 	if len(set) > 0 {
 		err = f.UpdateFields(nil, set, `id`, f.Id)
 		if err != nil {
-			loginLogM.Failmsg = err.Error()
-			loginLogM.Add()
 			return err
 		}
 	}

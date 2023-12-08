@@ -218,20 +218,13 @@ func SignIn(c echo.Context) error {
 				}
 				session.RememberMaxAge(c, maxAge)
 			}
-			err = c.Begin()
-			if err != nil {
-				goto END
-			}
-			m.SetContext(c)
 			err = m.SignIn(name, pass, typi, modelCustomer.GenerateOptionsFromHeader(c, maxAge)...)
 			if err != nil {
-				c.Rollback()
 				if c.Format() != `html` {
 					return err
 				}
 				goto END
 			}
-			c.Commit()
 			data.SetInfo(c.T(`登录成功`))
 			if err := SetJWTData(c, m); err != nil {
 				return err
