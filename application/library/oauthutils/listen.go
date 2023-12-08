@@ -18,9 +18,6 @@ func onChangeFrontendURL(d config.Diff) error {
 	if len(host) == 0 {
 		host = subdomains.Default.URL(``, `frontend`)
 	}
-	if len(host) == 0 {
-		return nil
-	}
 	defaultOAuth.HostURL = host
 	defaultOAuth.Config.RangeAccounts(func(account *oauth2.Account) bool {
 		// 清空生成的网址，以便于在后面的 GenerateProviders() 函数中重新生成新的网址
