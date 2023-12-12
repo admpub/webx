@@ -70,6 +70,14 @@ func StarsSlice(cur float64, max ...int) Stars {
 	return r
 }
 
+func StarsSlice5(cur float64) Stars {
+	return StarsSlice(cur, 5)
+}
+
+func StarsSlicex5(curRating float64, maxRating float64) Stars {
+	return StarsSlicex(curRating, maxRating, 5)
+}
+
 // StarsSlicex 将最大分数按照最大星标数量平分生成星标切片
 func StarsSlicex(curRating float64, maxRating float64, maxStars ...int) Stars {
 	m := 10

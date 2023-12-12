@@ -36,6 +36,8 @@ func init() {
 	tplfunc.TplFuncMap[`Config`] = config.FromDB
 	tplfunc.TplFuncMap[`StarsSlice`] = top.StarsSlice
 	tplfunc.TplFuncMap[`StarsSlicex`] = top.StarsSlicex
+	tplfunc.TplFuncMap[`StarsSlice5`] = top.StarsSlice5
+	tplfunc.TplFuncMap[`StarsSlicex5`] = top.StarsSlicex5
 }
 
 func addGlobalFuncMap(fm map[string]interface{}) map[string]interface{} {
