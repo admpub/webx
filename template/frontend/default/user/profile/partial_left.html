@@ -1,7 +1,7 @@
 <div class="leftpanel pos-fixed-left l-neg-240 l-lg-0 wd-240 bg-white pd-y-10 pd-x-20 d-flex align-items-start flex-column">
-    <div class="logopanel pd-x-10 pd-y-5">
+    <div class="logopanel pd-x-10 pd-y-5 tx-center">{{$userCenterLogo := Config.base.userCenterLogo|Default Config.base.siteLogo}}
       <a href="{{FrontendURL}}/user/index" class="tx-size-24 tx-poppins tx-inverse">
-        <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="wd-50 ht-50" alt="{{Config.base.siteName}}" title="{{Config.base.siteName}}">
+        <img src="{{$userCenterLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="wd-50 ht-50" alt="{{Config.base.siteName}}" title="{{Config.base.siteName}}">
         <strong class="tx-spacing-neg-4" title="{{Config.base.siteName}}{{`用户中心`|$.T}}">{{"用户中心"|$.T}}</strong>
         <small class="tx-small" style="position:absolute;">beta</small>
       </a>

@@ -33,6 +33,16 @@ import (
 
 var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
 	`base`: {
+		`userCenterLogo`: {
+			Key:         `userCenterLogo`,
+			Label:       `用户中心LOGO`,
+			Description: ``,
+			Value:       ``,
+			Group:       `base`,
+			Type:        `image`,
+			Sort:        0,
+			Disabled:    `N`,
+		},
 		`siteLogo`: {
 			Key:         `siteLogo`,
 			Label:       `站点LOGO(中)`,
