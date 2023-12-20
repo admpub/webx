@@ -1364,6 +1364,10 @@
     border-radius: 50px;
   }
   
+  .rounded-30 {
+    border-radius: 30px;
+  }
+  
   /* deprecated */
   .bd-white {
     border: 1px solid #fff;

@@ -27,6 +27,26 @@
     border-bottom-left-radius: 2px;
   }
   
+  .rounded-right-30 {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+  
+  .rounded-left-30 {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+  
+  .rounded-right-50 {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+  
+  .rounded-left-50 {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+  
   .mg-l-240 {
     margin-left: 240px;
   }
@@ -252,39 +272,11 @@
     color: #BDD0E9;
   }
   
-  .bg-pattern {
-    background-image: url("../../images/pattern.png");
-  }
-  
   .img-bg {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-  }
-  
-  .img-bg-band-1 {
-    background-image: url("../../images/img32.jpg");
-  }
-  
-  .img-bg-resto-1 {
-    background-image: url("../../images/img365.jpg");
-  }
-  
-  .img-bg-resto-2 {
-    background-image: url("../../images/img370.jpg");
-  }
-  
-  .img-bg-portfolio-1 {
-    background-image: url("../../images/img392.jpg");
-  }
-  
-  .img-bg-listing-1 {
-    background-image: url("../../images/img412.jpg");
-  }
-  
-  .img-bg-landing-2 {
-    background-image: url("../../images/img442.jpg");
   }
   
   .section-title-outline {
@@ -1359,35 +1351,3 @@
     transition-delay: 0.1s;
   }
   
-  .cb-slideshow li:nth-child(1) span {
-    background-image: url("../../images/placeholder/2340x1560.png");
-  }
-  
-  .cb-slideshow li:nth-child(2) span {
-    background-image: url("../../images/placeholder/2340x1560.png");
-  }
-  
-  .cb-slideshow li:nth-child(3) span {
-    background-image: url("../../images/placeholder/2340x1560.png");
-  }
-  
-  .cb-slideshow li:nth-child(4) span {
-    background-image: url("../../images/placeholder/2340x1560.png");
-  }
-  
-  .cb-slideshow li:nth-child(5) span {
-    background-image: url("../../images/placeholder/2340x1560.png");
-  }
-  
-  .cb-slideshow li:nth-child(6) span {
-    background-image: url("../../images/placeholder/2340x1560.png");
-  }
-  
-  /*
-  .cb-slideshow li:nth-child(1) span { background-image: url('../../images/img383.jpg'); }
-  .cb-slideshow li:nth-child(2) span { background-image: url('../../images/img384.jpg'); }
-  .cb-slideshow li:nth-child(3) span { background-image: url('../../images/img385.jpg'); }
-  .cb-slideshow li:nth-child(4) span { background-image: url('../../images/img386.jpg'); }
-  .cb-slideshow li:nth-child(5) span { background-image: url('../../images/img387.jpg'); }
-  .cb-slideshow li:nth-child(6) span { background-image: url('../../images/img388.jpg'); }
-  */
