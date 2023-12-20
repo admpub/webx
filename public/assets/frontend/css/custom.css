@@ -896,16 +896,10 @@ nav.friend-links a.nav-link>.img-label>.title {
   z-index: 9999;
   position: fixed;
   top: 0;
-  _position: absolute;
-  _bottom: auto;
-  _top: expression(eval(document.documentElement.scrollTop));
 }
 
 .always-bottom {
   z-index: 9999;
   position: fixed;
   bottom: 0;
-  _position: absolute;
-  _bottom: auto;
-  _top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0)));
 }
