@@ -65,6 +65,7 @@ func LevelAdd(ctx echo.Context) error {
 
 	ctx.Set(`activeURL`, `/official/agent/level_index`)
 	ctx.Set(`levelList`, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+	ctx.Set(`title`, ctx.T(`添加代理等级`))
 	levelSetFormData(ctx, m)
 	return ctx.Render(`official/agent/level_edit`, handler.Err(ctx, err))
 }
@@ -135,6 +136,7 @@ func LevelEdit(ctx echo.Context) error {
 
 	ctx.Set(`activeURL`, `/official/agent/level_index`)
 	ctx.Set(`levelList`, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+	ctx.Set(`title`, ctx.T(`修改代理等级`))
 	levelSetFormData(ctx, m)
 	return ctx.Render(`official/agent/level_edit`, handler.Err(ctx, err))
 }
