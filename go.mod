@@ -73,7 +73,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.26.0
-	github.com/nging-plugins/dbmanager v1.5.0
+	github.com/nging-plugins/dbmanager v1.5.1
 	github.com/webx-top/validator v0.2.0
 )
 
