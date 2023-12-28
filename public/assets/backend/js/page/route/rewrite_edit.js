@@ -1,3 +1,4 @@
+(function(){
 function searchRoute(){
     var size = 10;
     $('#input-route').typeahead({hint: true, highlight: true, minLength: 1}, {
@@ -21,6 +22,5 @@ function searchRoute(){
         }, limit: size
     });
 }
-$(function(){
-    searchRoute()
-})
+$(searchRoute);
+})();
