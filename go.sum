@@ -1022,6 +1022,8 @@ github.com/admpub/cache v0.4.2/go.mod h1:i36Y+yPNpJsilP5+FyF9WaWk6VzqdyDqLLBfFph
 github.com/admpub/caddy v1.1.11/go.mod h1:wb4LgV+7tN5tOI+D4pQyjz31wKEziN5TshwZXxEpbbg=
 github.com/admpub/caddy v1.2.0 h1:h/QEww1tat8qIS+uU/SZGV6e0xTM6A1WbcuRS+Vex/M=
 github.com/admpub/caddy v1.2.0/go.mod h1:nsRgNnGjPmLNHo2JEDVsvtAiK/LcZsVDL4KQo1t/dNM=
+github.com/admpub/captcha-go v0.0.1 h1:Vfm3JhXDCD/7jC7Qdnb0dExPu0x2Nr6oIklgdnjCffE=
+github.com/admpub/captcha-go v0.0.1/go.mod h1:CjA3SOt3rYhcFDN0AJI1PXwKQ0dmOl/cxQVBy3kPQYc=
 github.com/admpub/ccs-gm v0.0.5 h1:2ilZC91475lhf+Qxi2dwy6V0Gu7pz0MyZBgnsA7dDIg=
 github.com/admpub/ccs-gm v0.0.5/go.mod h1:OMnUq27FS17xG8jL4Coa4+/NXqPhj/EcKTKEAj606W8=
 github.com/admpub/checksum v1.1.0 h1:ew4BvBAnMQM8tWfnclgQbiA7375Q+79xGqaEqXXyuzw=

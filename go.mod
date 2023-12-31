@@ -91,6 +91,7 @@ require (
 	github.com/admpub/9t v0.0.0-20190605154903-a68069ace5e1 // indirect
 	github.com/admpub/archiver v1.1.4 // indirect
 	github.com/admpub/caddy v1.2.0 // indirect
+	github.com/admpub/captcha-go v0.0.1 // indirect
 	github.com/admpub/ccs-gm v0.0.5 // indirect
 	github.com/admpub/checksum v1.1.0 // indirect
 	github.com/admpub/collate v1.1.0 // indirect

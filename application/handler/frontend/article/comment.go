@@ -20,8 +20,11 @@ func ArticleCommentAdd(c echo.Context) (err error) {
 	if common.IsFailureCode(data.GetCode()) {
 		return c.JSON(data)
 	}
-	cid := common.GetHistoryOrNewCaptchaID(c)
-	data.SetData(common.CaptchaInfo(frontend.Name, `code`, cid))
+	cpt, err := common.GetCaptchaEngine(c)
+	if err != nil {
+		return c.JSON(data.SetError(err))
+	}
+	data.SetData(cpt.MakeData(c, frontend.Name, `code`))
 	if customer == nil {
 		name := c.Form(`name`)
 		pass := c.Form(`password`)
