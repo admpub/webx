@@ -9,7 +9,7 @@
               <form id="sign-in-form" onsubmit="signIn(this,'{{$.GetNextURL}}');return false;">
                 <div class="input-group mg-b-20">
                   <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-person tx-gray-light"></i></span>
-                  <input type="text" name="name" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" placeholder="{{"登录名"|$.T}}" data-toggle="tooltip" title="{{"请输入登录名"|$.T}}" required autofocus="autofocus">
+                  <input type="text" name="name" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" placeholder="{{`登录名`|$.T}}" data-toggle="tooltip" title="{{`请输入登录名`|$.T}}" required autofocus="autofocus">
                 </div><!-- input-group -->
                 <div class="input-group mg-b-20">
                   <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-locked tx-gray-light"></i></span>
@@ -18,7 +18,7 @@
                 <div class="input-group mg-b-20">
                   <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-eye tx-gray-light"></i></span>
                   <input type="text" placeholder="{{`请输入验证码`|$.T}}" value="{{$.Form `code`}}" name="code" required="required" data-toggle="tooltip" title="{{`验证码`|$.T}}" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter">
-                  <span class="input-group-addon pd-0">{{$.CaptchaForm}}</span>
+                  <span class="input-group-addon pd-0">{{$.CaptchaForm ``}}</span>
                 </div>
                 <div class="tx-size-xs mg-b-10">
                   <span class="pull-right">

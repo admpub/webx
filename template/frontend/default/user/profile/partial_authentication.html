@@ -56,8 +56,8 @@
     <label for="auth-input-captcha" class="col-sm-3 col-form-label">{{"图形验证码"|$.T}}:</label>
     <div class="col-sm-9">
       <div class="input-group">
-      <input id="auth-input-captcha" type="text" placeholder="{{"验证码"|$.T}}" value="{{$.Form "code"}}" name="code" required="required" title="{{"验证码"|$.T}}" class="form-control tx-size-14 pd-y-12 bd-color-gray-lighter">
-      <span class="input-group-addon pd-0">{{CaptchaForm}}</span>
+      <input id="auth-input-captcha" type="text" placeholder="{{`验证码`|$.T}}" value="{{$.Form `code`}}" name="code" required="required" title="{{`验证码`|$.T}}" class="form-control tx-size-14 pd-y-12 bd-color-gray-lighter">
+      <span class="input-group-addon pd-0">{{$.CaptchaForm ``}}</span>
       </div>
     </div>
   </div>

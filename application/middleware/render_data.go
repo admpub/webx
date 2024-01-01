@@ -57,8 +57,8 @@ func (r *RenderData) SQLQueryLimit(offset int, limit int, linkID ...int) *common
 	return common.NewSQLQueryLimit(r.ctx, offset, limit, linkID...)
 }
 
-func (r *RenderData) CaptchaForm(args ...interface{}) template.HTML {
-	return common.CaptchaForm(r.ctx, args...)
+func (r *RenderData) CaptchaForm(tmpl string, args ...interface{}) template.HTML {
+	return common.CaptchaForm(r.ctx, tmpl, args...)
 }
 
 func (r *RenderData) TagList(group ...string) []*dbschema.OfficialCommonTags {

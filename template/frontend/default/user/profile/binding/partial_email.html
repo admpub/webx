@@ -4,7 +4,7 @@
               <label for="inputEmail" class="col-sm-2 col-form-label">E-mail:</label>
               <div class="col-sm-4">
                 <div class="input-group">
-                <input type="email" class="form-control" name="email" id="inputEmail" value="{{$customer.Email}}"{{if eq $customer.EmailBind "Y"}} readonly="readonly"{{end}}>
+                <input type="email" class="form-control" name="email" id="inputEmail" value="{{$customer.Email}}"{{if eq $customer.EmailBind `Y`}} readonly="readonly"{{end}}>
                 {{if eq $customer.EmailBind "Y"}}
                 <span class="input-group-addon">{{"已绑定"|$.T}}</span>
                 {{end}}
@@ -14,8 +14,8 @@
               <label for="inputCaptcha" class="col-sm-2 col-form-label">{{"图形验证码"|$.T}}:</label>
               <div class="col-sm-4">
                 <div class="input-group">
-                <input id="inputCaptcha" type="text" placeholder="{{"验证码"|$.T}}" value="{{$.Form "code"}}" name="code" required="required" title="{{"验证码"|$.T}}" class="form-control tx-size-14 pd-y-12 bd-color-gray-lighter">
-                <span class="input-group-addon pd-0">{{CaptchaForm}}</span>
+                <input id="inputCaptcha" type="text" placeholder="{{`验证码`|$.T}}" value="{{$.Form `code`}}" name="code" required="required" title="{{`验证码`|$.T}}" class="form-control tx-size-14 pd-y-12 bd-color-gray-lighter">
+                <span class="input-group-addon pd-0">{{$.CaptchaForm}}</span>
                 </div>
               </div>
             </div>
