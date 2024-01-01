@@ -164,6 +164,84 @@ function renewCaptcha(form,resp){
  * $.ajax(ajaxOptions);
  */
 function captchaDialog(resp,ajaxOptions){
+    if(typeof(resp.Data)=='undefined'||typeof(resp.Data.captchaType)=='undefined'){
+        showMsg({text:resp.Info,type:'error'});
+        return false;
+    }
+    switch(resp.Data.captchaType){
+        case 'api':return apiCaptchaDialog(resp,ajaxOptions);
+        default:return defaultCaptchaDialog(resp,ajaxOptions);
+    }
+}
+function apiCaptchaDialog(resp,ajaxOptions){
+    if(typeof(resp.Data)=='undefined' || typeof(resp.Data.provider)=='undefined'){
+        showMsg({text:resp.Info,type:'error'});
+        return false;
+    }
+    if(typeof(ajaxOptions.postByCaptchaDialog)!='undefined' && ajaxOptions.postByCaptchaDialog){
+        showMsg({text:resp.Info,type:'error'});
+    }
+    var jsURL=resp.Data.jsURL,
+        captchaName=resp.Data.captchaName,captchaIdent=resp.Data.captchaIdent,
+        htmlCode=resp.Data.html,jsInit=resp.Data.jsInit;
+    if(jsURL&&$('script[src="'+jsURL+'"]').length<1){
+        $('body').append('<script src="'+jsURL+'" type="text/javascript"></script>');
+    }
+    var formHTML='<form method="post" id="dialog-retry-captcha">\
+        <div class="form-group mg-b-0" style="position:relative">\
+            <div class="captcha-loading text-center" id="'+resp.Data.locationID+'-loading" style="position:relative"><i class="fa fa-spinner fa-spin"></i> '+App.t('验证加载中，请稍候...')+'</div>\
+            <div style="position:relative;z-index:2;margin-top:-20px;min-height:20px">'+htmlCode+'</div>\
+        </div><!-- form-group -->\
+    </form>';
+    var done=function(dialogRef) {
+        var $form = $('#dialog-retry-captcha');
+        var vcode = $form.find('[name="'+captchaName+'"]').val();
+        var idVal = $form.find('[name="'+captchaIdent+'"]').val();
+        postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, captchaIdent);
+        dialogRef.close();
+    }
+    /*
+    var captchaID=resp.Data.captchaID,jsCallback=resp.Data.jsCallback;
+    if(jsCallback) {
+        eval('window["apiCaptchaCallback'+captchaID+'"]='+jsCallback);
+        var oldDone=done;
+        done=function(d){
+            window["apiCaptchaCallback"+captchaID](function(){
+                oldDone(d)
+            });
+        };
+    }
+    */
+    App.dialog().show({
+        title:App.t('人机验证'),
+        type:'type-primary',
+        size:'size-small',
+        message:formHTML,
+        nl2br:false,
+        closeByBackdrop:false,
+        onshown: function(d){
+            if(jsInit) eval(jsInit);
+            $('#dialog-retry-captcha').on('submit',function(e){
+                e.preventDefault();
+                d.getButton('captchaDialogBtnSubmit').trigger('click');
+            });
+        },
+        buttons: [{
+            id: 'captchaDialogBtnSubmit',
+            label: App.t('提交'),
+            icon: 'fa fa-check',
+            cssClass: 'btn-primary mg-r-10',
+            action: done},{
+            label: App.t('取消'),
+            icon: 'fa fa-times',
+            action: function(dialogRef) {
+                dialogRef.close();
+            }
+        }]
+    });
+    return true;
+}
+function defaultCaptchaDialog(resp,ajaxOptions){
     if(typeof(resp.Data)=='undefined' || typeof(resp.Data.captchaURL)=='undefined'){
         showMsg({text:resp.Info,type:'error'});
         return false;
@@ -206,49 +284,7 @@ function captchaDialog(resp,ajaxOptions){
             action: function(dialogRef) {
                 var vcode = $('#dialog-captcha-code').val();
                 var idVal = $('#dialog-captcha-id').val();
-                var isAjaxForm = ('ajaxFormObject' in ajaxOptions) && ajaxOptions.ajaxFormObject;
-                if(!isAjaxForm || $(ajaxOptions.ajaxFormObject).find('[name="'+resp.Zone+'"]').length<1){
-                    if(!ajaxOptions.data) ajaxOptions.data={};
-                    switch(typeof(ajaxOptions.data)){
-                        case 'string':
-                        ajaxOptions.data+='&'+captchaName+'='+encodeURIComponent(vcode) +'&'+captchaIdent+'='+encodeURIComponent(idVal);
-                        break;
-                        default:
-                        if($.isArray(ajaxOptions.data)){
-                            var existsCode=false,existsIdent=false;
-                            var codeInfo={name:captchaName,value:vcode};
-                            var identInfo={name:captchaIdent,value:idVal};
-                            for(var i=0; i<ajaxOptions.data.length; i++){
-                                if(ajaxOptions.data[i].name==captchaName){
-                                    ajaxOptions.data[i]=codeInfo;
-                                    existsCode=true;
-                                }
-                                if(ajaxOptions.data[i].name==captchaIdent){
-                                    ajaxOptions.data[i]=identInfo;
-                                    existsIdent=true;
-                                }
-                                if(existsIdent && existsCode) break;
-                            }
-                            if(!existsIdent) ajaxOptions.data.push(identInfo);
-                            if(!existsCode) ajaxOptions.data.push(codeInfo);
-                            break;
-                        }
-                        ajaxOptions.data[captchaName] = vcode;
-                        ajaxOptions.data[captchaIdent] = idVal;
-                    }
-                }
-                ajaxOptions.postByCaptchaDialog=true;
-                if(isAjaxForm){
-                    var form=$(ajaxOptions.ajaxFormObject);
-                    var codeIpt=form.find('[name="'+resp.Zone+'"]');
-                    if(codeIpt.length>0){
-                        codeIpt.val(vcode);
-                        form.find('[name="captchaId"]').val(idVal);
-                    }
-                    form.trigger('submit');
-                }else{
-                    $.ajax(ajaxOptions);
-                }
+                postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, captchaIdent);
                 dialogRef.close();
             }
         },{
@@ -260,6 +296,51 @@ function captchaDialog(resp,ajaxOptions){
         }]
     });
     return true;
+}
+function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, captchaIdent){
+    var isAjaxForm = ('ajaxFormObject' in ajaxOptions) && ajaxOptions.ajaxFormObject;
+    if(!isAjaxForm || $(ajaxOptions.ajaxFormObject).find('[name="'+resp.Zone+'"]').length<1){
+        if(!ajaxOptions.data) ajaxOptions.data={};
+        switch(typeof(ajaxOptions.data)){
+            case 'string':
+            ajaxOptions.data+='&'+captchaName+'='+encodeURIComponent(vcode) +'&'+captchaIdent+'='+encodeURIComponent(idVal);
+            break;
+            default:
+            if($.isArray(ajaxOptions.data)){
+                var existsCode=false,existsIdent=false;
+                var codeInfo={name:captchaName,value:vcode};
+                var identInfo={name:captchaIdent,value:idVal};
+                for(var i=0; i<ajaxOptions.data.length; i++){
+                    if(ajaxOptions.data[i].name==captchaName){
+                        ajaxOptions.data[i]=codeInfo;
+                        existsCode=true;
+                    }
+                    if(ajaxOptions.data[i].name==captchaIdent){
+                        ajaxOptions.data[i]=identInfo;
+                        existsIdent=true;
+                    }
+                    if(existsIdent && existsCode) break;
+                }
+                if(!existsIdent) ajaxOptions.data.push(identInfo);
+                if(!existsCode) ajaxOptions.data.push(codeInfo);
+                break;
+            }
+            ajaxOptions.data[captchaName] = vcode;
+            ajaxOptions.data[captchaIdent] = idVal;
+        }
+    }
+    ajaxOptions.postByCaptchaDialog=true;
+    if(isAjaxForm){
+        var form=$(ajaxOptions.ajaxFormObject);
+        var codeIpt=form.find('[name="'+resp.Zone+'"]');
+        if(codeIpt.length>0){
+            codeIpt.val(vcode);
+            form.find('[name="'+captchaIdent+'"]').val(idVal);
+        }
+        form.trigger('submit');
+    }else{
+        $.ajax(ajaxOptions);
+    }
 }
 // 登录
 function signInDialog(callback){
