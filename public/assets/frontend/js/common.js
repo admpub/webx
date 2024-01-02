@@ -657,7 +657,7 @@ function initCommentForm(formElem){
     };
     $(formElem).on('submit', function(event){
         event.preventDefault();
-        f.call(this,arguments);
+        f.apply(this,arguments);
     });
     $(formElem).find('[data-form]:not(:submit)').on('click',f);
 }
