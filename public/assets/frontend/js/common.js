@@ -55,7 +55,7 @@ function signIn(elem,nextURL){
         dataType: 'json',
         success: function(r){
             if(r.Code!=1) {
-                if(App.captchaHasError(r.Code) && $(elem).find('input[name=code]').length<1){ 
+                if(App.captchaHasError(r.Code) && $(elem).find('input[name="'+r.Zone+'"]').length<1){ 
                     return captchaDialog(r,ajaxOptions);
                 }
                 showMsg({text:r.Info,type:'error'});
@@ -89,7 +89,7 @@ function signUp(elem,nextURL){
         dataType: 'json',
         success: function(r){
             if(r.Code!=1) {
-                if(App.captchaHasError(r.Code) && $(elem).find('input[name=code]').length<1){ 
+                if(App.captchaHasError(r.Code) && $(elem).find('input[name="'+r.Zone+'"]').length<1){ 
                     return captchaDialog(r,ajaxOptions);
                 }
                 showMsg({text:r.Info,type:'error'});
@@ -820,7 +820,7 @@ function complaint(elem){
         dataType: 'json',
         success: function(r){
             if(r.Code!=1) {
-                if(App.captchaHasError(r.Code) && $(elem).find('input[name=code]').length<1){ 
+                if(App.captchaHasError(r.Code) && $(elem).find('input[name="'+r.Zone+'"]').length<1){ 
                     return captchaDialog(r,ajaxOptions);
                 }
                 showMsg({text:r.Info,type:'error'});
@@ -987,7 +987,7 @@ function forgotModal(targetElem,onSuccess){
                     dataType: 'json',
                     success: function(r){
                         if(r.Code!=1) {
-                            if(App.captchaHasError(r.Code) && $(elem).find('input[name=code]').length<1){
+                            if(App.captchaHasError(r.Code) && $(elem).find('input[name="'+r.Zone+'"]').length<1){
                                 return captchaDialog(r,ajaxOptions);
                             }
                             showMsg({text:r.Info,type:'error'});
@@ -1037,7 +1037,7 @@ function resetPassword(elem,nextURL){
         dataType: 'json',
         success: function(r){
             if(r.Code!=1) {
-                if(App.captchaHasError(r.Code) && $(elem).find('input[name=code]').length<1){
+                if(App.captchaHasError(r.Code) && $(elem).find('input[name="'+r.Zone+'"]').length<1){
                     return captchaDialog(r,ajaxOptions);
                 }
                 showMsg({text:r.Info,type:'error'});

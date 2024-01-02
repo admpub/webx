@@ -646,13 +646,20 @@
 			if(json!='') $a.html(json);
 		},
 		captchaUpdate: function($form, resp){
-			if(App.captchaHasError(resp.Code) && resp.Data && typeof(resp.Data.captchaIdent) !== 'undefined') {
-				if(false == ($form instanceof jQuery)) $form=$($form);
-				var idElem = $form.find('input#'+resp.Data.captchaIdent);
-				idElem.val(resp.Data.captchaID);
-				idElem.siblings('img').attr('src',resp.Data.captchaURL);
-				if(resp.Data.captchaName) $form.find('input[name="'+resp.Data.captchaName+'"]').focus();
-			}
+			if(!App.captchaHasError(resp.Code) || !resp.Data || typeof(resp.Data.captchaType) === 'undefined') return;
+			if(false == ($form instanceof jQuery)) $form=$($form);
+      switch(resp.Data.captchaType){
+        case 'api':
+          if(resp.Data.jsInit){
+            eval(resp.Data.jsInit);
+          }
+          break;
+        default:
+          var idElem = $form.find('input#'+resp.Data.captchaIdent);
+          idElem.val(resp.Data.captchaID);
+          idElem.siblings('img').attr('src',resp.Data.captchaURL);
+          if(resp.Data.captchaName) $form.find('input[name="'+resp.Data.captchaName+'"]').focus();
+      }
 		},
 		captchaHasError: function(code) {
 			return code >= -11 && code <= -9;
