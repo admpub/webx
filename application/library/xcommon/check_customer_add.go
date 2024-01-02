@@ -37,6 +37,7 @@ func (c *ConfigCustomerAdd) Combine(source interface{}) interface{} {
 
 var (
 	ErrCustomerAddClosed           = errors.New(`已关闭`)
+	ErrCustomerRoleDisabled        = errors.New(`当前角色未开启此功能`)
 	ErrCustomerAddMaxPerDay        = errors.New(`已达到今日最大数量`)
 	ErrCustomerAddMaxPending       = errors.New(`待审核数量已达上限`)
 	ErrCustomerAddMaxPendingPerDay = errors.New(`待审核数量已达今日上限`)
@@ -55,7 +56,7 @@ func CheckRoleCustomerAdd(ctx echo.Context, permission *xrole.RolePermission, be
 		return CheckGlobalCustomerAdd(ctx, customerID, behaviorName, counter)
 	}
 	if roleCfg.MaxPerDay <= 0 {
-		return ErrCustomerAddClosed
+		return ErrCustomerRoleDisabled
 	}
 	todayCount, err := counter.CustomerTodayCount(customerID)
 	if err != nil {

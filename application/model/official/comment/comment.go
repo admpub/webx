@@ -203,6 +203,8 @@ func (f *Comment) checkCustomerAdd(permission *xrole.RolePermission) error {
 		return err
 	}
 	switch err {
+	case xcommon.ErrCustomerRoleDisabled:
+		return f.Context().E(`当前角色不支持发布评论`)
 	case xcommon.ErrCustomerAddClosed:
 		return f.Context().E(`评论功能已关闭`)
 	case xcommon.ErrCustomerAddMaxPerDay:
