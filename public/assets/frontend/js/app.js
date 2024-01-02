@@ -652,9 +652,13 @@
         case 'api':
           if(resp.Data.jsURL && $('script[src="'+resp.Data.jsURL+'"]').length<1){
             $('body').append('<script src="'+resp.Data.jsURL+'" type="text/javascript"></script>');
+            if(resp.Data.jsInit){
+              eval(resp.Data.jsInit);
+            }
+            return;
           }
-          if(resp.Data.jsInit){
-            eval(resp.Data.jsInit);
+          if(resp.Data.jsCallback) {
+            eval('('+resp.Data.jsCallback+')();');
           }
           break;
         default:
