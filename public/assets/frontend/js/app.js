@@ -650,6 +650,9 @@
 			if(false == ($form instanceof jQuery)) $form=$($form);
       switch(resp.Data.captchaType){
         case 'api':
+          if(resp.Data.jsURL && $('script[src="'+resp.Data.jsURL+'"]').length<1){
+            $('body').append('<script src="'+resp.Data.jsURL+'" type="text/javascript"></script>');
+          }
           if(resp.Data.jsInit){
             eval(resp.Data.jsInit);
           }
