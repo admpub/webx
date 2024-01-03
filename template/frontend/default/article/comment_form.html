@@ -44,7 +44,7 @@
               <input type="hidden" name="subtype" id="target-subtype" value="{{$.Stored.targetSubtype}}">
               <input type="hidden" name="type" id="target-type" value="{{$.Stored.targetType}}">
               </div>
-              <button type="button" class="btn btn-inverse tx-size-sm" data-form="#{{if $inModal}}modal-{{end}}comment-post-form">{{"发表评论"|$.T}}{{if $.Stored.needReviewComment}}<br/>({{"需要审核"|$.T}}){{end}}</button>
+              <button type="submit" class="btn btn-inverse tx-size-sm" data-form="#{{if $inModal}}modal-{{end}}comment-post-form">{{"发表评论"|$.T}}{{if $.Stored.needReviewComment}}<br/>({{"需要审核"|$.T}}){{end}}</button>
             </div><!-- form-group -->
           </form>
           {{- end -}}
