@@ -17,26 +17,26 @@ import (
 // JWTMaxLifeTime JWT寿命(单位:秒)
 var JWTMaxLifeTime int64 = 90 * 86400
 
-func (f *Customer) JWTClaims(customers ...*dbschema.OfficialCustomer) *jwt.StandardClaims {
+func (f *Customer) JWTClaims(customers ...*dbschema.OfficialCustomer) *jwt.RegisteredClaims {
 	var customer *dbschema.OfficialCustomer
 	if len(customers) > 0 {
 		customer = customers[0]
 	} else {
 		customer = f.OfficialCustomer
 	}
-	nowTS := time.Now().Unix()
+	now := time.Now()
 	lifetime := config.Setting(`base`).Int64(`jwtMaxLifetime`)
 	if lifetime <= 0 {
 		lifetime = JWTMaxLifeTime
 	}
-	endTS := nowTS + lifetime
-	return &jwt.StandardClaims{
-		Audience:  f.Context().Session().MustID(),
-		ExpiresAt: endTS,
-		Id:        param.AsString(customer.Id),
-		IssuedAt:  nowTS,
+	expires := now.Add(time.Second * time.Duration(lifetime))
+	return &jwt.RegisteredClaims{
+		Audience:  jwt.ClaimStrings{f.Context().Session().MustID()},
+		ExpiresAt: &jwt.NumericDate{Time: expires},
+		ID:        param.AsString(customer.Id),
+		IssuedAt:  &jwt.NumericDate{Time: now},
 		Issuer:    bootconfig.SoftwareName,
-		NotBefore: nowTS,
+		NotBefore: &jwt.NumericDate{Time: now},
 		Subject:   customer.Name,
 	}
 }
@@ -46,7 +46,7 @@ func (f *Customer) JWTSignedString(key interface{}, customers ...*dbschema.Offic
 	if key == nil {
 		key = []byte(config.FromFile().Cookie.HashKey)
 	}
-	return mwJWT.BuildStandardSignedString(claims, key)
+	return mwJWT.BuildRegisteredSignedString(claims, key)
 }
 
 var ErrInvalidSession = errors.New(`invalid session`)
@@ -58,11 +58,11 @@ func (f *Customer) GetByJWT() (*dbschema.OfficialCustomer, error) {
 		return nil, nil
 	}
 	//echo.Dump(token.Claims)
-	claims, ok := token.Claims.(*jwt.StandardClaims)
+	claims, ok := token.Claims.(*jwt.RegisteredClaims)
 	if !ok {
 		return nil, nil
 	}
-	customerID := param.AsUint64(claims.Id)
+	customerID := param.AsUint64(claims.ID)
 	if customerID == 0 {
 		return nil, nil
 	}
@@ -74,15 +74,22 @@ func (f *Customer) GetByJWT() (*dbschema.OfficialCustomer, error) {
 		return nil, fmt.Errorf(`GetByJWT: %w`, err)
 	}
 	if len(claims.Audience) > 0 {
-		if f.SessionId != claims.Audience {
+		var found bool
+		for _, v := range claims.Audience {
+			if f.SessionId == v {
+				found = true
+				break
+			}
+		}
+		if !found {
 			return nil, ErrInvalidSession
 		}
-		if err := f.Context().Session().SetID(claims.Audience); err != nil {
+		if err := f.Context().Session().SetID(f.SessionId); err != nil {
 			return nil, err
 		}
 		sid := f.Context().GetCookie(f.Context().SessionOptions().Name)
 		if len(sid) == 0 {
-			f.Context().SetCookie(f.Context().SessionOptions().Name, claims.Audience)
+			f.Context().SetCookie(f.Context().SessionOptions().Name, f.SessionId)
 		}
 	}
 	customer := f.ClearPasswordData()

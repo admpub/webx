@@ -55,7 +55,7 @@ function signIn(elem,nextURL){
         dataType: 'json',
         success: function(r){
             if(r.Code!=1) {
-                if(App.captchaHasError(r.Code) && $(elem).find('input[name="'+r.Zone+'"]').length<1){ 
+                if(App.captchaHasError(r.Code) && r.Data && typeof(r.Data.captchaName)!='undefined' && r.Data.captchaName && $(elem).find('input[name="'+r.Data.captchaName+'"]').length<1){ 
                     return captchaDialog(r,ajaxOptions);
                 }
                 showMsg({text:r.Info,type:'error'});
@@ -89,7 +89,7 @@ function signUp(elem,nextURL){
         dataType: 'json',
         success: function(r){
             if(r.Code!=1) {
-                if(App.captchaHasError(r.Code) && $(elem).find('input[name="'+r.Zone+'"]').length<1){ 
+                if(App.captchaHasError(r.Code) && r.Data && typeof(r.Data.captchaName)!='undefined' && r.Data.captchaName && $(elem).find('input[name="'+r.Data.captchaName+'"]').length<1){ 
                     return captchaDialog(r,ajaxOptions);
                 }
                 showMsg({text:r.Info,type:'error'});
@@ -299,7 +299,7 @@ function defaultCaptchaDialog(resp,ajaxOptions){
 }
 function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, captchaIdent){
     var isAjaxForm = ('ajaxFormObject' in ajaxOptions) && ajaxOptions.ajaxFormObject;
-    if(!isAjaxForm || $(ajaxOptions.ajaxFormObject).find('[name="'+resp.Zone+'"]').length<1){
+    if(!isAjaxForm || (resp.Zone && $(ajaxOptions.ajaxFormObject).find('[name="'+resp.Zone+'"]').length<1)){
         if(!ajaxOptions.data) ajaxOptions.data={};
         switch(typeof(ajaxOptions.data)){
             case 'string':
@@ -332,7 +332,7 @@ function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, cap
     ajaxOptions.postByCaptchaDialog=true;
     if(isAjaxForm){
         var form=$(ajaxOptions.ajaxFormObject);
-        var codeIpt=form.find('[name="'+resp.Zone+'"]');
+        var codeIpt=form.find('[name="'+captchaName+'"]');
         if(codeIpt.length>0){
             codeIpt.val(vcode);
             form.find('[name="'+captchaIdent+'"]').val(idVal);
@@ -345,7 +345,7 @@ function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, cap
 // 登录
 function signInDialog(callback){
     if($('#modal-sign-in').length>0) return $('#modal-sign-in').modal('show');
-    $.get('/sign_in',{modal:1},function(r){
+    $.get('/sign_in',{modal:1,next:window.location.href},function(r){
         $('body').append(r);
         if(callback!=null && $.isFunction(callback)){
             $('#modal-sign-in-form').data('callback',function(){
@@ -766,7 +766,7 @@ function countWords(a,countElem){
     }
     $(countElem).text(Number($(a).attr('maxlength'))-$(a).val().length);
 }
-function ajaxForm(a){
+function ajaxForm(a,onSuccess,onFailure){
     var opts={
         ajaxFormObject: a,
         type: String($(a).attr('method')).toLowerCase()=='post'?'post':'get',
@@ -774,7 +774,7 @@ function ajaxForm(a){
         data: {},
         url: $(a).attr('action'),
         success: function(r){
-            onAjaxRespond(a,r,opts);
+            onAjaxRespond(a,r,opts,onSuccess,onFailure);
         }
     };
     $(a).ajaxForm(opts);
@@ -786,10 +786,7 @@ function onAjaxRespond(form,r,ajaxOptions,onSuccess,onFailure){
         return showMsg({text:r.Info,type:'success'});
     }
     if(r.Code==App.status.NotLoggedIn){
-        return signInDialog(function(r){
-            r.Zone='code';
-            captchaDialog(r,ajaxOptions);
-        });
+        return signInDialog(function(){});
     }
     if(App.captchaHasError(r.Code)) return captchaDialog(r,ajaxOptions);
     showMsg({text:r.Info,type:'error'});

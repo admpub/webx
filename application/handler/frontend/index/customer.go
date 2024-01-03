@@ -165,21 +165,20 @@ END:
 
 // SignIn 登录
 func SignIn(c echo.Context) error {
+	next := c.Form(`next`)
 	var err error
 	if c.Formx(`modal`).Bool() {
 		tmpl := c.Internal().String(`modalTmpl`)
 		if len(tmpl) == 0 {
-			tmpl = `_modal_sign_in`
+			tmpl = `partial_modal_sign_in`
 		}
 		return c.Render(tmpl, err)
 	}
 
-	next := c.Form(`next`)
 	next = echo.GetOtherURL(c, next)
 	if len(next) == 0 {
 		next = sessdata.URLFor(`/index`)
 	}
-
 	// 已经登录的时候跳过当前页面
 	if !debug && sessdata.Customer(c) != nil {
 		c.Data().SetInfo(c.T(`已经登录过了`))

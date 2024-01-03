@@ -16,9 +16,7 @@
                   <input type="password" name="password" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" placeholder="{{`登录密码`|$.T}}" data-toggle="tooltip" title="{{`请输入登录密码`|$.T}}" required>
                 </div><!-- input-group -->
                 <div class="input-group mg-b-20">
-                  <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-eye tx-gray-light"></i></span>
-                  <input type="text" placeholder="{{`请输入验证码`|$.T}}" value="{{$.Form `code`}}" name="code" required="required" data-toggle="tooltip" title="{{`验证码`|$.T}}" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter">
-                  <span class="input-group-addon pd-0">{{$.CaptchaForm ``}}</span>
+                  {{$.CaptchaForm `#default#default`}}
                 </div>
                 <div class="tx-size-xs mg-b-10">
                   <span class="pull-right">
