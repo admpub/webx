@@ -933,6 +933,8 @@ DROP TABLE IF EXISTS `official_customer_oauth`;
 CREATE TABLE `official_customer_oauth` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `customer_id` bigint unsigned NOT NULL COMMENT '客户ID',
+  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
+  `nick_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
   `union_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'UNION ID',
   `open_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'OPEN ID',
   `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'wechat' COMMENT '类型(例如:wechat/qq/alipay)',
@@ -1242,4 +1244,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-08 22:17:15
+-- Dump completed on 2024-01-05 13:58:58

@@ -104,6 +104,8 @@ type OfficialCustomerOauth struct {
 
 	Id           uint64 `db:"id,omitempty,pk" bson:"id,omitempty" comment:"ID" json:"id" xml:"id"`
 	CustomerId   uint64 `db:"customer_id" bson:"customer_id" comment:"客户ID" json:"customer_id" xml:"customer_id"`
+	Name         string `db:"name" bson:"name" comment:"用户名" json:"name" xml:"name"`
+	NickName     string `db:"nick_name" bson:"nick_name" comment:"昵称" json:"nick_name" xml:"nick_name"`
 	UnionId      string `db:"union_id" bson:"union_id" comment:"UNION ID" json:"union_id" xml:"union_id"`
 	OpenId       string `db:"open_id" bson:"open_id" comment:"OPEN ID" json:"open_id" xml:"open_id"`
 	Type         string `db:"type" bson:"type" comment:"类型(例如:wechat/qq/alipay)" json:"type" xml:"type"`
@@ -593,6 +595,8 @@ func (a *OfficialCustomerOauth) Exists(mw func(db.Result) db.Result, args ...int
 func (a *OfficialCustomerOauth) Reset() *OfficialCustomerOauth {
 	a.Id = 0
 	a.CustomerId = 0
+	a.Name = ``
+	a.NickName = ``
 	a.UnionId = ``
 	a.OpenId = ``
 	a.Type = ``
@@ -612,6 +616,8 @@ func (a *OfficialCustomerOauth) AsMap(onlyFields ...string) param.Store {
 	if len(onlyFields) == 0 {
 		r["Id"] = a.Id
 		r["CustomerId"] = a.CustomerId
+		r["Name"] = a.Name
+		r["NickName"] = a.NickName
 		r["UnionId"] = a.UnionId
 		r["OpenId"] = a.OpenId
 		r["Type"] = a.Type
@@ -631,6 +637,10 @@ func (a *OfficialCustomerOauth) AsMap(onlyFields ...string) param.Store {
 			r["Id"] = a.Id
 		case "CustomerId":
 			r["CustomerId"] = a.CustomerId
+		case "Name":
+			r["Name"] = a.Name
+		case "NickName":
+			r["NickName"] = a.NickName
 		case "UnionId":
 			r["UnionId"] = a.UnionId
 		case "OpenId":
@@ -665,6 +675,10 @@ func (a *OfficialCustomerOauth) FromRow(row map[string]interface{}) {
 			a.Id = param.AsUint64(value)
 		case "customer_id":
 			a.CustomerId = param.AsUint64(value)
+		case "name":
+			a.Name = param.AsString(value)
+		case "nick_name":
+			a.NickName = param.AsString(value)
 		case "union_id":
 			a.UnionId = param.AsString(value)
 		case "open_id":
@@ -715,6 +729,10 @@ func (a *OfficialCustomerOauth) Set(key interface{}, value ...interface{}) {
 			a.Id = param.AsUint64(vv)
 		case "CustomerId":
 			a.CustomerId = param.AsUint64(vv)
+		case "Name":
+			a.Name = param.AsString(vv)
+		case "NickName":
+			a.NickName = param.AsString(vv)
 		case "UnionId":
 			a.UnionId = param.AsString(vv)
 		case "OpenId":
@@ -746,6 +764,8 @@ func (a *OfficialCustomerOauth) AsRow(onlyFields ...string) param.Store {
 	if len(onlyFields) == 0 {
 		r["id"] = a.Id
 		r["customer_id"] = a.CustomerId
+		r["name"] = a.Name
+		r["nick_name"] = a.NickName
 		r["union_id"] = a.UnionId
 		r["open_id"] = a.OpenId
 		r["type"] = a.Type
@@ -765,6 +785,10 @@ func (a *OfficialCustomerOauth) AsRow(onlyFields ...string) param.Store {
 			r["id"] = a.Id
 		case "customer_id":
 			r["customer_id"] = a.CustomerId
+		case "name":
+			r["name"] = a.Name
+		case "nick_name":
+			r["nick_name"] = a.NickName
 		case "union_id":
 			r["union_id"] = a.UnionId
 		case "open_id":
