@@ -244,7 +244,7 @@ require (
 	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/muesli/smartcrop v0.3.0 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/nging-plugins/dlmanager v1.5.2 // indirect
+	github.com/nging-plugins/dlmanager v1.5.3 // indirect
 	github.com/nwaples/rardecode v1.1.3 // indirect
 	github.com/onsi/ginkgo/v2 v2.15.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
