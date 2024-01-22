@@ -1032,8 +1032,7 @@ CREATE TABLE `official_customer_u2f` (
   `precondition` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'password' COMMENT '除了密码登录外的其它前置条件(仅step=2时有效),用半角逗号分隔',
   `created` int unsigned NOT NULL DEFAULT '0' COMMENT '绑定时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `customer_u2f_uid_type` (`customer_id`,`type`),
-  KEY `customer_u2f_step` (`step`)
+  KEY `customer_u2f_uid_typ_stepe` (`customer_id`,`type`,`step`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='两步验证';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1244,4 +1243,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-05 13:58:58
+-- Dump completed on 2024-01-22 13:04:48
