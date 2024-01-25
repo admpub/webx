@@ -48,7 +48,7 @@ require (
 	github.com/swaggo/swag v1.16.2
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.8.10
-	github.com/webx-top/com v1.2.11
+	github.com/webx-top/com v1.2.12
 	github.com/webx-top/db v1.27.1
 	github.com/webx-top/echo v2.42.29+incompatible
 	github.com/webx-top/echo-prometheus v1.1.1
