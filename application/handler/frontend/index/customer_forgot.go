@@ -11,17 +11,22 @@ import (
 	"github.com/admpub/webx/application/library/resetpassword"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 )
 
 // forgotSendCode 重置密码第一步：发送验证码
 func forgotSendCode(c echo.Context) echo.Data {
+	data := c.Data()
 	m := modelCustomer.NewCustomer(c)
 	name := c.Formx(`name`).String()
+	if !com.IsUsername(name) {
+		return data.SetError(c.NewError(code.UserNotFound, `用户名无效`).SetZone(`name`))
+	}
 	account := c.Formx(`account`).String()
 	typ := c.Formx(`type`).String()
-	data := c.Data()
 	if len(name) == 0 {
 		return data.SetError(c.E(`请输入用户名`))
 	}
@@ -64,6 +69,9 @@ func forgotModifyPassword(c echo.Context) echo.Data {
 	m := modelCustomer.NewCustomer(c)
 	data := c.Data()
 	name := c.Formx(`name`).String()
+	if !com.IsUsername(name) {
+		return data.SetError(c.NewError(code.UserNotFound, `用户名无效`).SetZone(`name`))
+	}
 	typ := c.Formx(`type`, `email`).String()
 	vcode := c.Formx(`vcode`).String()
 	if len(name) == 0 {

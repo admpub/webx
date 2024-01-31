@@ -5,11 +5,12 @@ import (
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 )
 
 func emailValidate(c echo.Context, fieldName string, fieldValue string) error {
 	if err := c.Validate(fieldName, fieldValue, `email`); err != nil {
-		return c.E(`E-mail地址不正确`)
+		return c.NewError(code.InvalidParameter, `E-mail地址不正确`).SetZone(fieldName)
 	}
 	return nil
 }

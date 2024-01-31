@@ -1,6 +1,7 @@
 package customer
 
 import (
+	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
@@ -29,14 +30,24 @@ func (f *Customer) SignIn(user, pass, signInType string, options ...CustomerOpti
 		return f.Context().NewError(code.DataStatusIncorrect, `本站已经暂时关闭登录，请稍后再尝试`)
 	}
 	cond := db.NewCompounds()
+	fieldName := `name`
 	switch co.SignInType {
 	case `email`:
+		if _err := f.Context().Validate(fieldName, co.Name, `email`); _err != nil {
+			return f.Context().NewError(code.InvalidParameter, `E-mail格式不正确`).SetZone(fieldName)
+		}
 		cond.AddKV(`email`, co.Name)
 		cond.AddKV(`email_bind`, `Y`)
 	case `mobile`:
+		if _err := f.Context().Validate(fieldName, co.Name, `mobile`); _err != nil {
+			return f.Context().NewError(code.InvalidParameter, `手机号码格式不正确`).SetZone(fieldName)
+		}
 		cond.AddKV(`mobile`, co.Name)
 		cond.AddKV(`mobile_bind`, `Y`)
 	case `name`:
+		if !com.IsUsername(co.Name) {
+			return f.Context().NewError(code.UserNotFound, `用户名无效`).SetZone(fieldName)
+		}
 		cond.AddKV(`name`, co.Name)
 	default:
 		return f.Context().NewError(code.Unsupported, `不支持登录方式: %v`, co.SignInType).SetZone(`type`)

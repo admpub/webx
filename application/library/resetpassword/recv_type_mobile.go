@@ -3,6 +3,7 @@ package resetpassword
 import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 
 	"github.com/admpub/webx/application/handler/frontend/user/profile"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
@@ -10,7 +11,7 @@ import (
 
 func mobileValidate(c echo.Context, fieldName string, fieldValue string) error {
 	if err := c.Validate(fieldName, fieldValue, `mobile`); err != nil {
-		return c.E(`手机号码不正确`)
+		return c.NewError(code.InvalidParameter, `手机号码不正确`).SetZone(fieldName)
 	}
 	return nil
 }
