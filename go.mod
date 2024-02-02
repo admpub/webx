@@ -49,7 +49,7 @@ require (
 	github.com/wangbin/jiebago v0.3.2
 	github.com/webx-top/client v0.8.10
 	github.com/webx-top/com v1.2.12
-	github.com/webx-top/db v1.27.1
+	github.com/webx-top/db v1.27.3
 	github.com/webx-top/echo v2.42.29+incompatible
 	github.com/webx-top/echo-prometheus v1.1.1
 	github.com/webx-top/echo-socket.io v1.1.3
@@ -138,7 +138,7 @@ require (
 	github.com/admpub/timeago v1.2.1 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
-	github.com/aws/aws-sdk-go v1.50.7 // indirect
+	github.com/aws/aws-sdk-go v1.50.9 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
@@ -225,7 +225,7 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
-	github.com/mattn/go-sqlite3 v1.14.20 // indirect
+	github.com/mattn/go-sqlite3 v1.14.21 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.26 // indirect
 	github.com/miekg/dns v1.1.58 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
@@ -260,7 +260,7 @@ require (
 	github.com/russross/blackfriday v1.6.0 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/segmentio/fasthash v1.0.3 // indirect
-	github.com/shirou/gopsutil/v3 v3.23.12 // indirect
+	github.com/shirou/gopsutil/v3 v3.24.1 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/smartwalle/crypto4go v1.0.3 // indirect
