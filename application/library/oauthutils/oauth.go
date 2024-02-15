@@ -7,7 +7,6 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/handler/oauth2"
-	"github.com/webx-top/echo/middleware/session"
 	"github.com/webx-top/echo/subdomains"
 
 	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
@@ -67,7 +66,7 @@ func InitOauth(e *echo.Echo) {
 	defaultOAuth = oauth2.New(host, oauth2Config)
 	defaultOAuth.SetSuccessHandler(SuccessHandler)
 	defaultOAuth.SetBeginAuthHandler(BeginAuthHandler)
-	defaultOAuth.Wrapper(e, session.Middleware(config.SessionOptions))
+	defaultOAuth.Wrapper(e)
 }
 
 func Accounts() []oauth2.Account {
