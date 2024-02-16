@@ -99,7 +99,7 @@ require (
 	github.com/admpub/dgoogauth v0.0.1 // indirect
 	github.com/admpub/email v2.4.1+incompatible // indirect
 	github.com/admpub/fasthttp v0.0.5 // indirect
-	github.com/admpub/fsnotify v1.5.0 // indirect
+	github.com/admpub/fsnotify v1.7.0 // indirect
 	github.com/admpub/gifresize v1.0.2 // indirect
 	github.com/admpub/go-figure v0.0.0-20180619031829-18b2b544842c // indirect
 	github.com/admpub/go-isatty v0.0.11 // indirect

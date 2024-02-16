@@ -1056,8 +1056,9 @@ github.com/admpub/fasthttp v0.0.5 h1:AlMKf0NehBs4ZKv/Ozi4ERetzdgMkyaxFcyAEMp7OiM
 github.com/admpub/fasthttp v0.0.5/go.mod h1:wdZ0vloMGk955KgSHI92b2qsxAcjc9BpOkJAG8V4q6w=
 github.com/admpub/fasttemplate v0.0.2 h1:4bWzI22SlhloBTan+5sKPqk0DxKPcsV0suXBas3EhBk=
 github.com/admpub/fasttemplate v0.0.2/go.mod h1:6LKwJdGgyfuO6pQNJCAd/eZRCCQaCV7yLlJJdzslHaw=
-github.com/admpub/fsnotify v1.5.0 h1:8eYm3SBw3Y4cNt0sQIcWKd0IcsRXNYH9j308GNu66mk=
 github.com/admpub/fsnotify v1.5.0/go.mod h1:2YN7o9RdisXYVueAUsZxjx0Rbsiz6bu6B9XCgovJHY0=
+github.com/admpub/fsnotify v1.7.0 h1:pI04ANljHE5cS3fr+uXMgDG4/Cv3iye40nH/oZE8pB0=
+github.com/admpub/fsnotify v1.7.0/go.mod h1:D9ecq8Ksz5grAhvRRrbN7AdVXnwYx3OxM1+xfjru4+4=
 github.com/admpub/gifresize v1.0.2 h1:aFLkKkdyfyg4OIl84R2xA/q/+itFd/mOlGPnhIAbq8s=
 github.com/admpub/gifresize v1.0.2/go.mod h1:4cJFfCR1yfgyq7lZiQZomEGeR/OVQVPeflN38P0T+M0=
 github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588 h1:OzETPaPe3vghcMkx/J6VpnNFg+Sd8TiQ5L+xaty3vJY=
