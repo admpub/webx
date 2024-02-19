@@ -22,8 +22,9 @@ import (
 
 var (
 	StaticOptions = &middleware.StaticOptions{
-		Root: "",
-		Path: "/public/assets/frontend/",
+		Root:   "",
+		Path:   "/public/assets/frontend/",
+		MaxAge: bootconfig.HTTPCacheMaxAge,
 	}
 	NgingDir             = `../nging`
 	WebxDir              = `../webx`

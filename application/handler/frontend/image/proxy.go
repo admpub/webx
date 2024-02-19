@@ -58,7 +58,7 @@ func Proxy(ctx echo.Context) error {
 			if v, ok := cached.Load(ck); ok {
 				return ctx.ServeCallbackContent(func(ctx echo.Context) (io.Reader, error) {
 					return bytes.NewBuffer(v.([]byte)), nil
-				}, path.Base(ck), time.Unix(0, 0))
+				}, path.Base(ck), time.Unix(0, 0), bootconfig.HTTPCacheMaxAge)
 			}
 		}
 	}
@@ -115,5 +115,5 @@ func Proxy(ctx echo.Context) error {
 			width:               width,
 			height:              height,
 		})
-	}, path.Base(thumbOtherFormatURL), time.Unix(0, 0))
+	}, path.Base(thumbOtherFormatURL), time.Unix(0, 0), bootconfig.HTTPCacheMaxAge)
 }
