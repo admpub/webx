@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/admpub/nging/v5/application/cmd/bootconfig"
 	uploadLibrary "github.com/admpub/nging/v5/application/library/upload"
 	modelFile "github.com/admpub/nging/v5/application/model/file"
 	"github.com/admpub/nging/v5/application/registry/upload"
