@@ -12,6 +12,7 @@ import (
 	"github.com/webx-top/echo/middleware/render/driver"
 
 	"github.com/admpub/log"
+	"github.com/admpub/nging/v5/application/cmd/bootconfig"
 	"github.com/admpub/nging/v5/application/initialize/backend"
 	"github.com/admpub/nging/v5/application/library/bindata"
 	"github.com/admpub/nging/v5/application/library/modal"
