@@ -50,7 +50,7 @@ require (
 	github.com/webx-top/client v0.8.10
 	github.com/webx-top/com v1.2.12
 	github.com/webx-top/db v1.27.5
-	github.com/webx-top/echo v1.6.3
+	github.com/webx-top/echo v1.6.4
 	github.com/webx-top/echo-prometheus v1.1.2
 	github.com/webx-top/echo-socket.io v1.2.0
 	github.com/webx-top/image v0.1.0
@@ -127,7 +127,7 @@ require (
 	github.com/admpub/pester v0.0.0-20200411024648-005672a2bd48 // indirect
 	github.com/admpub/qrcode v0.0.3 // indirect
 	github.com/admpub/randomize v0.0.2 // indirect
-	github.com/admpub/realip v0.1.1 // indirect
+	github.com/admpub/realip v0.1.2 // indirect
 	github.com/admpub/redistore v1.2.1 // indirect
 	github.com/admpub/regexp2 v1.1.7 // indirect
 	github.com/admpub/securecookie v1.3.0 // indirect

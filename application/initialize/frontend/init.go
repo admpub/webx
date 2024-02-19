@@ -64,7 +64,9 @@ func start() {
 
 func InitWebServer() {
 	e := IRegister().Echo().SetPrefix(Prefix)
-	e.RealIPConfig().SetTrustedProxies(config.FromFile().Sys.TrustedProxies)
+	if len(config.FromFile().Sys.TrustedProxies) > 0 {
+		e.RealIPConfig().SetTrustedProxies(config.FromFile().Sys.TrustedProxies)
+	}
 	e.SetRenderDataWrapper(xMW.DefaultRenderDataWrapper)
 	e.SetDefaultExtension(RouteDefaultExtension)
 	if len(config.FromCLI().BackendDomain) > 0 {
