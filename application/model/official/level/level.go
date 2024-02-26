@@ -146,38 +146,32 @@ func (f *Level) ExistsOther(name string, id uint) error {
 }
 
 func (f *Level) ListLevelGroup() ([]*LevelGroup, error) {
-	list := []*LevelGroup{}
+	var list []*LevelGroup
 	_, err := f.ListByOffset(nil, func(r db.Result) db.Result {
 		return r.OrderBy(`group`, `-score`, `id`)
 	}, 0, -1, db.Cond{`disabled`: `N`})
 	if err != nil {
 		return list, err
 	}
-	var group string
-	var llist []*dbschema.OfficialCustomerLevel
+	groupRows := map[string][]*dbschema.OfficialCustomerLevel{}
+	var groups []string
 	for _, v := range f.Objects() {
-		if group != v.Group {
-			group = v.Group
-			if len(llist) > 0 {
-				title := GroupList.Get(group, group)
-				list = append(list, &LevelGroup{
-					Group: group,
-					Title: title,
-					List:  llist,
-				})
-				llist = llist[0:0]
-				continue
-			}
+		_, ok := groupRows[v.Group]
+		if !ok {
+			groups = append(groups, v.Group)
+			groupRows[v.Group] = []*dbschema.OfficialCustomerLevel{v}
+		} else {
+			groupRows[v.Group] = append(groupRows[v.Group], v)
 		}
-		llist = append(llist, v)
 	}
-	if len(llist) > 0 {
+	list = make([]*LevelGroup, len(groups))
+	for index, group := range groups {
 		title := GroupList.Get(group, group)
-		list = append(list, &LevelGroup{
+		list[index] = &LevelGroup{
 			Group: group,
 			Title: title,
-			List:  llist,
-		})
+			List:  groupRows[group],
+		}
 	}
 	return list, err
 }
