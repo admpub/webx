@@ -52,6 +52,11 @@ var (
 )
 
 func init() {
+	config.AddConfigInitor(func(c *config.Config) {
+		c.AddReloader(func(newConfig *config.Config) {
+			c.Sys.ReloadRealIPConfig(&newConfig.Sys, IRegister().Echo().RealIPConfig())
+		})
+	})
 	echo.Set(`FrontendPrefix`, Prefix)
 	bootconfig.OnStart(1, start)
 }
@@ -64,9 +69,7 @@ func start() {
 
 func InitWebServer() {
 	e := IRegister().Echo().SetPrefix(Prefix)
-	if len(config.FromFile().Sys.TrustedProxies) > 0 {
-		e.RealIPConfig().SetTrustedProxies(config.FromFile().Sys.TrustedProxies)
-	}
+	config.FromFile().Sys.SetRealIPParams(IRegister().Echo().RealIPConfig())
 	e.SetRenderDataWrapper(xMW.DefaultRenderDataWrapper)
 	e.SetDefaultExtension(RouteDefaultExtension)
 	if len(config.FromCLI().BackendDomain) > 0 {
