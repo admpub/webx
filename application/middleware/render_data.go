@@ -3,7 +3,9 @@ package middleware
 import (
 	"html/template"
 
+	"github.com/admpub/nging/v5/application/cmd/bootconfig"
 	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/library/license"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/logic/articlelogic"
 	"github.com/admpub/webx/application/model/official"
@@ -78,4 +80,12 @@ func (r *RenderData) CategoryList(limit int, ctype ...string) []*dbschema.Offici
 func (r *RenderData) SubCategoryList(parentId int, limit int, ctype ...string) []*dbschema.OfficialCommonCategory {
 	categories, _ := articlelogic.GetSubCategories(r.ctx, parentId, limit, ctype...)
 	return categories
+}
+
+func (r *RenderData) SoftwareURL() string {
+	return license.ProductURL()
+}
+
+func (r *RenderData) SoftwareName() string {
+	return bootconfig.SoftwareName
 }
