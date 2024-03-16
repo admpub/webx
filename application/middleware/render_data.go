@@ -83,6 +83,9 @@ func (r *RenderData) SubCategoryList(parentId int, limit int, ctype ...string) [
 }
 
 func (r *RenderData) SoftwareURL() string {
+	if license.SkipLicenseCheck {
+		return ``
+	}
 	return license.ProductURL()
 }
 
