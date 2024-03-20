@@ -13,10 +13,10 @@ import (
 	"github.com/webx-top/echo"
 )
 
-func CustomerPermTTL(c echo.Context) cache.TTLNumber {
+func CustomerPermTTL(c echo.Context) int64 {
 	cacheTTL, ok := c.Internal().Get(`customerPermCacheTTL`).(int64)
 	if ok {
-		return cache.TTLNumber(cacheTTL)
+		return cacheTTL
 	}
 	cacheTTL = config.Setting(`base`).Int64(`customerPermCacheTTL`, cache.CacheDisabled)
 	if cacheTTL == 0 {
@@ -25,7 +25,7 @@ func CustomerPermTTL(c echo.Context) cache.TTLNumber {
 		cacheTTL = int64(cache.CacheFresh)
 	}
 	c.Internal().Set(`customerPermCacheTTL`, cacheTTL)
-	return cache.TTLNumber(cacheTTL)
+	return cacheTTL
 }
 
 func CustomerPermission(c echo.Context, customers ...*dbschema.OfficialCustomer) *xrole.RolePermission {

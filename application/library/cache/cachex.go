@@ -9,11 +9,10 @@ import (
 )
 
 type QueryFunc = x.QueryFunc
-type TTLNumber int64
 
 const (
-	CacheDisabled TTLNumber = -1 // 禁用缓存
-	CacheFresh    TTLNumber = -2 // 强制缓存新数据
+	CacheDisabled int64 = -1 // 禁用缓存
+	CacheFresh    int64 = -2 // 强制缓存新数据
 )
 
 var (
@@ -37,7 +36,7 @@ func AdminRefreshable(ctx echo.Context, customer *dbschema.OfficialCustomer, ttl
 	return TTLIf(nocache, Fresh, ttl)
 }
 
-func GetTTLByNumber(ttl TTLNumber, b x.GetOption) x.GetOption {
+func GetTTLByNumber(ttl int64, b x.GetOption) x.GetOption {
 	switch ttl {
 	case CacheDisabled: // 禁用缓存
 		return func(o *x.Options) {
@@ -60,7 +59,7 @@ func GetTTLByNumber(ttl TTLNumber, b x.GetOption) x.GetOption {
 		if ttl <= 0 {
 			return Noop
 		}
-		return TTL(int64(ttl))
+		return TTL(ttl)
 	}
 }
 
