@@ -11,7 +11,6 @@ import (
 	stdCode "github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/subdomains"
 
-	"github.com/admpub/cache/x"
 	"github.com/admpub/log"
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/library/common"
@@ -132,12 +131,13 @@ func permCheck(c echo.Context, customer *dbschema.OfficialCustomer) error {
 	//echo.Dump(permission)
 	customerID := fmt.Sprint(customer.Id)
 	cacheTTL := xroleutils.CustomerPermTTL(c)
+	ttlOpt := cache.GetTTLByNumber(cacheTTL, nil)
 	c.SetFunc(`LeftNavigate`, func() nav.List {
 		list := &nav.List{}
 		cache.XFunc(c, sessdata.LeftNavigateCacheKey+customerID, list, func() error {
 			*list = permission.FilterNavigate(c, navigate.LeftNavigate)
 			return nil
-		}, x.TTL(cacheTTL))
+		}, ttlOpt)
 		return *list
 	})
 	c.SetFunc(`TopNavigate`, func() nav.List {
@@ -145,7 +145,7 @@ func permCheck(c echo.Context, customer *dbschema.OfficialCustomer) error {
 		cache.XFunc(c, sessdata.TopNavigateCacheKey+customerID, list, func() error {
 			*list = permission.FilterNavigate(c, navigate.TopNavigate)
 			return nil
-		}, x.TTL(cacheTTL))
+		}, ttlOpt)
 		return *list
 	})
 	if !c.Internal().Bool(`skipCurrentURLPermCheck`) {

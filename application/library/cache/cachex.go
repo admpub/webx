@@ -8,22 +8,22 @@ import (
 	"github.com/webx-top/echo"
 )
 
-type (
-	QueryFunc = x.QueryFunc
-)
+type QueryFunc = x.QueryFunc
+type TTLNumber int64
 
 const (
-	Disabled = x.Disabled
-	Fresh    = x.Fresh
+	CacheDisabled TTLNumber = -1 // 禁用缓存
+	CacheFresh    TTLNumber = -2 // 强制缓存新数据
 )
 
 var (
 	TTL               = x.TTL
-	TTLFresh          = TTL(x.Fresh)
-	TTLDisabled       = TTL(x.Disabled)
 	Query             = x.Query
 	DisableCacheUsage = x.DisableCacheUsage
 	UseFreshData      = x.UseFreshData
+	Disabled          = DisableCacheUsage(true) // 禁用缓存
+	Fresh             = UseFreshData(true)      // 强制缓存新数据
+	Noop              = func(o *x.Options) {}
 )
 
 func AdminRefreshable(ctx echo.Context, customer *dbschema.OfficialCustomer, ttl x.GetOption) x.GetOption {
@@ -34,19 +34,52 @@ func AdminRefreshable(ctx echo.Context, customer *dbschema.OfficialCustomer, ttl
 		return ttl
 	}
 	nocache := ctx.Formx(`nocache`).Bool()
-	return TTLIf(nocache, TTLFresh, ttl)
+	return TTLIf(nocache, Fresh, ttl)
+}
+
+func GetTTLByNumber(ttl TTLNumber, b x.GetOption) x.GetOption {
+	switch ttl {
+	case CacheDisabled: // 禁用缓存
+		return func(o *x.Options) {
+			if b != nil {
+				b(o)
+			}
+			Disabled(o)
+		}
+	case CacheFresh: // 强制缓存新数据
+		return func(o *x.Options) {
+			if b != nil {
+				b(o)
+			}
+			Fresh(o)
+		}
+	default:
+		if b != nil {
+			return b
+		}
+		if ttl <= 0 {
+			return Noop
+		}
+		return TTL(int64(ttl))
+	}
 }
 
 func TTLIf(condition bool, a x.GetOption, b x.GetOption) x.GetOption {
 	if condition {
-		return a
+		return func(o *x.Options) {
+			b(o)
+			a(o)
+		}
 	}
 	return b
 }
 
 func TTLIfCallback(condition func() bool, a x.GetOption, b x.GetOption) x.GetOption {
 	if condition() {
-		return a
+		return func(o *x.Options) {
+			b(o)
+			a(o)
+		}
 	}
 	return b
 }

@@ -3,7 +3,6 @@ package customer
 import (
 	"fmt"
 
-	"github.com/admpub/cache/x"
 	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/nging/v5/application/library/perm"
 	"github.com/admpub/webx/application/dbschema"
@@ -14,19 +13,19 @@ import (
 	"github.com/webx-top/echo"
 )
 
-func CustomerPermTTL(c echo.Context) int64 {
+func CustomerPermTTL(c echo.Context) cache.TTLNumber {
 	cacheTTL, ok := c.Internal().Get(`customerPermCacheTTL`).(int64)
 	if ok {
-		return cacheTTL
+		return cache.TTLNumber(cacheTTL)
 	}
-	cacheTTL = config.Setting(`base`).Int64(`customerPermCacheTTL`, x.Disabled)
+	cacheTTL = config.Setting(`base`).Int64(`customerPermCacheTTL`, cache.CacheDisabled)
 	if cacheTTL == 0 {
-		cacheTTL = x.Disabled
-	} else if cacheTTL < x.Disabled {
-		cacheTTL = x.Fresh
+		cacheTTL = int64(cache.CacheDisabled)
+	} else if cacheTTL < int64(cache.CacheDisabled) {
+		cacheTTL = int64(cache.CacheFresh)
 	}
 	c.Internal().Set(`customerPermCacheTTL`, cacheTTL)
-	return cacheTTL
+	return cache.TTLNumber(cacheTTL)
 }
 
 func CustomerPermission(c echo.Context, customers ...*dbschema.OfficialCustomer) *xrole.RolePermission {
@@ -46,7 +45,7 @@ func CustomerPermission(c echo.Context, customers ...*dbschema.OfficialCustomer)
 		cache.XFunc(c, sessdata.PermissionCacheKey+customerID, permission, func() error {
 			permission.Init(CustomerRoles(c, customer))
 			return nil
-		}, x.TTL(CustomerPermTTL(c)))
+		}, cache.GetTTLByNumber(CustomerPermTTL(c), nil))
 		c.Internal().Set(`customerPermission`, permission)
 	}
 	return permission

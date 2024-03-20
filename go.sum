@@ -1006,8 +1006,8 @@ github.com/admpub/archiver v1.1.4 h1:HmHvNuvSeIVGvqmpOtA8Mu28BSTPwtri8/TeXxFQXnY
 github.com/admpub/archiver v1.1.4/go.mod h1:lkK4m4K6YOjdhcR63LlMEXC10lXtx/uOCs4FytlYrjk=
 github.com/admpub/bindata/v3 v3.2.0 h1:KF1uhRtdJEpmDYBrzFSZm/lKolLOVV2Wqrivup50aqc=
 github.com/admpub/bindata/v3 v3.2.0/go.mod h1:jOA1tbH70YGa+Q880SMhOxpBf7Yea6O0KWLvAqBITc8=
-github.com/admpub/cache v0.5.0 h1:+bdI+Hp3eVuU3KEZ38P+rpkZuZvSqgKZHAdHubcB4Gc=
-github.com/admpub/cache v0.5.0/go.mod h1:LpOfqOfpx5M+es87JE5osnkzD5VoqgXThrGnKnNT8+0=
+github.com/admpub/cache v0.6.0 h1:3e+D9SSqh5PnQMycXbqvjYRPUksJdbxhJi668rfA1Ss=
+github.com/admpub/cache v0.6.0/go.mod h1:+d/JjrqxGs1wUu7Dj+PrOtiguKAmIrjy4Mx/HBzEEeI=
 github.com/admpub/caddy v1.1.11/go.mod h1:wb4LgV+7tN5tOI+D4pQyjz31wKEziN5TshwZXxEpbbg=
 github.com/admpub/caddy v1.2.6 h1:1Cl8PAAAIz+bJ6N51RHqKywd2ANi+YABw1XsYSipZZs=
 github.com/admpub/caddy v1.2.6/go.mod h1:J3r7HuzUidse50+9JatBBaMCZ8t4vOIsP5+aDouRxac=
@@ -2147,8 +2147,10 @@ github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a/go.mod h1:bCqn
 github.com/redis/go-redis/v9 v9.0.3/go.mod h1:WqMKv5vnQbRuZstUwxQI195wHy+t4PuXDOjzMvcuQHk=
 github.com/redis/go-redis/v9 v9.4.0 h1:Yzoz33UZw9I/mFhx4MNrB6Fk+XHO1VukNcCa1+lwyKk=
 github.com/redis/go-redis/v9 v9.4.0/go.mod h1:hdY0cQFCN4fnSYT6TkisLufl/4W5UIXyv0b/CLO2V2M=
-github.com/redis/rueidis v1.0.28 h1:Txig8OB9lGlAuFL5F7msvt3WE2iH/KRK9ZTCcNXHhdc=
-github.com/redis/rueidis v1.0.28/go.mod h1:5NloBb5TbM1QoWb4jCPY7sjUpUzk3fsG4Ky4Rba+W0w=
+github.com/redis/rueidis v1.0.32 h1:xDVD5G0F4digNm4EOdtjLq+MdIU3arvbQNiL0g4PYn4=
+github.com/redis/rueidis v1.0.32/go.mod h1:g8nPmgR4C68N3abFiOc/gUOSEKw3Tom6/teYMehg4RE=
+github.com/redis/rueidis/rueidiscompat v1.0.32 h1:KD3qS2K3Zz+k68I2lFhHStyycep99SEfFxRs/cKc3qw=
+github.com/redis/rueidis/rueidiscompat v1.0.32/go.mod h1:FeMfQjaJwmAokNoor+Lu1BQFfTSV2w8cOHURoz8AH2M=
 github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec h1:W09IVJc94icq4NjY3clb7Lk8O1qJ8BdBEF8z0ibU0rE=
 github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
