@@ -73,7 +73,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.26.1
-	github.com/nging-plugins/dbmanager v1.5.4
+	github.com/nging-plugins/dbmanager v1.5.6
 	github.com/webx-top/validator v0.3.0
 )
 
@@ -112,7 +112,6 @@ require (
 	github.com/admpub/godownloader v2.2.0+incompatible // indirect
 	github.com/admpub/gohls v1.3.3 // indirect
 	github.com/admpub/gohls-server v0.3.8 // indirect
-	github.com/admpub/gohttp v0.0.0-20190322032039-b55c707b8f1e // indirect
 	github.com/admpub/gotwilio v0.0.0-20210910030032-9a691aeea447 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
