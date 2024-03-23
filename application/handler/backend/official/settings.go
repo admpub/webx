@@ -913,7 +913,7 @@ func init() {
 			return com.JSONEncode(cfg)
 		case `aliyun`:
 			cfg := aliyun.New()
-			cfg.GatewayURL = r.String(`gatewayURL`, cfg.GatewayURL)
+			cfg.RegionId = r.String(`regionId`, cfg.RegionId)
 			cfg.AccessKey = r.String(`accessKey`)
 			cfg.AccessSecret = r.String(`accessSecret`)
 			cfg.SignName = r.String(`signName`) //默认签名

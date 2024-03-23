@@ -37,7 +37,7 @@ require (
 	github.com/chai2010/webp v1.1.1 // indirect
 	github.com/coscms/forms v1.12.2
 	github.com/coscms/oauth2s v0.4.0
-	github.com/coscms/sms v0.0.5
+	github.com/coscms/sms v0.0.7
 	github.com/googollee/go-socket.io v1.7.0
 	github.com/gosimple/slug v1.13.1
 	github.com/hibiken/asynq v0.24.1
@@ -73,7 +73,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.26.1
-	github.com/nging-plugins/dbmanager v1.5.6
+	github.com/nging-plugins/dbmanager v1.5.8
 	github.com/webx-top/validator v0.3.0
 )
 
@@ -85,7 +85,6 @@ require (
 	cloud.google.com/go/pubsub v1.36.1 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
 	gitee.com/admpub/certmagic v0.8.8 // indirect
-	github.com/KenmyZhang/aliyun-communicate v0.0.0-20180308134849-7997edc57454 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/RichardKnop/logging v0.0.0-20190827224416-1a693bdd4fae // indirect
 	github.com/abh/errorutil v1.0.0 // indirect
@@ -112,7 +111,7 @@ require (
 	github.com/admpub/godownloader v2.2.0+incompatible // indirect
 	github.com/admpub/gohls v1.3.3 // indirect
 	github.com/admpub/gohls-server v0.3.8 // indirect
-	github.com/admpub/gotwilio v0.0.0-20210910030032-9a691aeea447 // indirect
+	github.com/admpub/gotwilio v0.0.1 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
 	github.com/admpub/i18n v0.3.0 // indirect
@@ -138,8 +137,9 @@ require (
 	github.com/admpub/tail v1.1.0 // indirect
 	github.com/admpub/timeago v1.2.1 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
+	github.com/aliyun/alibaba-cloud-sdk-go v1.62.699 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
-	github.com/aws/aws-sdk-go v1.51.4 // indirect
+	github.com/aws/aws-sdk-go v1.51.6 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
@@ -243,16 +243,15 @@ require (
 	github.com/nging-plugins/dlmanager v1.5.4 // indirect
 	github.com/nwaples/rardecode v1.1.3 // indirect
 	github.com/onsi/ginkgo/v2 v2.17.0 // indirect
-	github.com/opentracing/opentracing-go v1.2.0 // indirect
+	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/oschwald/maxminddb-golang v1.12.0 // indirect
-	github.com/pborman/uuid v1.2.1 // indirect
 	github.com/phuslu/iploc v1.0.20240203 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/prometheus/client_model v0.6.0 // indirect
-	github.com/prometheus/common v0.50.0 // indirect
+	github.com/prometheus/common v0.51.0 // indirect
 	github.com/prometheus/procfs v0.13.0 // indirect
 	github.com/quic-go/qpack v0.4.0 // indirect
 	github.com/quic-go/quic-go v0.42.0 // indirect
@@ -324,7 +323,7 @@ require (
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	modernc.org/libc v1.46.0 // indirect
+	modernc.org/libc v1.47.0 // indirect
 	modernc.org/mathutil v1.6.0 // indirect
 	modernc.org/memory v1.7.2 // indirect
 	modernc.org/sqlite v1.29.5 // indirect

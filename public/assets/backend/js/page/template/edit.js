@@ -232,7 +232,7 @@ App.editor.codemirror('#console', {
     theme: 'ambiance',
     value: code,
     mode:  "text/html"
-},'xml');
+},'html');
 setTimeout(function(){
     selectFirstTemplateFile();
     var editor=$('#console').data('codemirror');
