@@ -55,17 +55,17 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"页面内容"|$.T}}</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control" name="pageContent" style="resize:vertical" rows="20">{{$.Form "pageContent"}}</textarea>
+                    <textarea class="form-control" id="pageContent" name="pageContent" style="resize:vertical" rows="20">{{$.Form "pageContent"}}</textarea>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"页面变量"|$.T}}</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control" name="pageVars" style="resize:vertical" rows="10">{{$.Form "pageVars"}}</textarea>
+                    <textarea class="form-control" id="pageVars" name="pageVars" style="resize:vertical" rows="10">{{$.Form "pageVars"}}</textarea>
                     <div class="help-block">
                       {{`JSON格式，如果留空则不会解析页面内容中的模板标签`|$.T}}<br />
-                      {{$.T `例如，设置页面变量为 %s，在“页面内容”中就可以使用模板标签 %s 来访问` `<code>{"name":"test"}</code>` ` `<code>{{$.Data.name}}</code>` | ToHTML}} 
+                      {{$.T `例如，设置页面变量为 %s，在“页面内容”中就可以使用模板标签 %s 来访问` `<code>{"name":"test"}</code>` `<code>{{$.Data.name}}</code>` | ToHTML}} 
                     </div>
                 </div>
               </div>
@@ -77,7 +77,7 @@
                     <input type="radio" value="Y" id="templateEnabled-Y" name="templateEnabled"{{if eq $v `Y`}} checked{{end}}><label for="templateEnabled-Y">{{"使用模板"|$.T}}</label> 
                   </div>
                   <div class="radio radio-primary radio-inline"> 
-                    <input type="radio" value="N" id="templateEnabled-N" name="templateEnabled"{{if or (eq $v `N`) (eq $v ``)}} checked{{end}}><label for="templateEnabled-N">{{"不用模板"|$.T}}</label>
+                    <input type="radio" value="N" id="templateEnabled-N" name="templateEnabled"{{if eq $v `N` ``}} checked{{end}}><label for="templateEnabled-N">{{"不用模板"|$.T}}</label>
                   </div>
                 </div>
                 <label class="col-sm-2 control-label">{{"模板文件"|$.T}}</label>
@@ -118,16 +118,7 @@
 </div>
 {{/Block}}
 {{Block "footer"}}
-</script>
-<script>
-$(function(){
-	$('#routePageEditForm input[name=pageType]').on('click',function(){
-    var v=$(this).val(),$form=$('#routePageEditForm');
-    $form.find('.pageType-hide-'+v).hide();
-    $form.find('.pageType-show-'+v).show();
-    $form.find('[class^="pageType-hide"]:not(.pageType-hide-'+v+')').show();
-	});
-  $('#routePageEditForm input[name=pageType]:checked').trigger('click');
-});
-</script>
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/page/manager/route_page/edit.js?t={{BuildTime}}"></script>
 {{/Block}}
