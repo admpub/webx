@@ -47,7 +47,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	github.com/swaggo/swag v1.16.3
 	github.com/wangbin/jiebago v0.3.2
-	github.com/webx-top/client v0.8.10
+	github.com/webx-top/client v0.8.12
 	github.com/webx-top/com v1.2.13
 	github.com/webx-top/db v1.27.5
 	github.com/webx-top/echo v1.6.4
