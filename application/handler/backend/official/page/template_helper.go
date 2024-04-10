@@ -153,23 +153,26 @@ func ListTemplateFiles(dir string, themes ...string) (r []fs.FileInfo) {
 		themes = GetAllThemeNames()
 	}
 	unique := map[string]struct{}{}
+	embedFS := GetTemplateEmbedFS()
 	for _, theme := range themes {
 		full := filepath.Join(theme, dir)
 		files, err := GetTemplateDiskFS().ReadDir(full)
 		if err != nil {
 			log.Error(err)
 		}
-		embedFull := path.Join(templateRoot, theme, dir)
-		embedFile, err := GetTemplateEmbedFS().Open(embedFull)
-		if err != nil {
-			log.Error(err)
-		} else {
-			dirs, _ := embedFile.Readdir(-1)
-			for _, fInfo := range dirs {
-				if fInfo.IsDir() {
-					continue
+		if embedFS != nil {
+			embedFull := path.Join(templateRoot, theme, dir)
+			embedFile, err := embedFS.Open(embedFull)
+			if err != nil {
+				log.Error(err)
+			} else {
+				dirs, _ := embedFile.Readdir(-1)
+				for _, fInfo := range dirs {
+					if fInfo.IsDir() {
+						continue
+					}
+					files = append(files, fInfo)
 				}
-				files = append(files, fInfo)
 			}
 		}
 		for _, fi := range files {
