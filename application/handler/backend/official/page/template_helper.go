@@ -159,6 +159,19 @@ func ListTemplateFiles(dir string, themes ...string) (r []fs.FileInfo) {
 		if err != nil {
 			log.Error(err)
 		}
+		embedFull := path.Join(templateRoot, theme, dir)
+		embedFile, err := GetTemplateEmbedFS().Open(embedFull)
+		if err != nil {
+			log.Error(err)
+		} else {
+			dirs, _ := embedFile.Readdir(-1)
+			for _, fInfo := range dirs {
+				if fInfo.IsDir() {
+					continue
+				}
+				files = append(files, fInfo)
+			}
+		}
 		for _, fi := range files {
 			if _, ok := unique[fi.Name()]; ok {
 				continue

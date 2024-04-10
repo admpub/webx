@@ -250,7 +250,7 @@ func TemplateEdit(ctx echo.Context) error {
 			return ctx.JSON(ctx.Data().SetData(echo.H{`content`: com.Bytes2str(b)}))
 		}
 		if getEmbedFS() == nil {
-			if err != nil && !os.IsNotExist(err) {
+			if !os.IsNotExist(err) {
 				return err
 			}
 			return echo.ErrNotFound
