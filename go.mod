@@ -35,7 +35,7 @@ require (
 	github.com/admpub/useragent v0.0.2
 	github.com/caddy-plugins/ipfilter v1.1.8
 	github.com/coscms/forms v1.12.2
-	github.com/coscms/oauth2s v0.4.0
+	github.com/coscms/oauth2s v0.4.1
 	github.com/coscms/sms v0.0.7
 	github.com/googollee/go-socket.io v1.7.0
 	github.com/gosimple/slug v1.13.1
@@ -266,7 +266,6 @@ require (
 	github.com/shirou/gopsutil/v3 v3.24.3 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
-	github.com/smartwalle/crypto4go v1.0.3 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/streadway/amqp v1.1.0 // indirect
