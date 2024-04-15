@@ -1,7 +1,5 @@
 {{Strip}}{{Extend "base"}}
-{{Block "title"}}
-{{- "文章列表"|$.T}} - {{$.Stored.product.Name|Title}}: {{$.Stored.product.Slogan -}}
-{{/Block}}
+{{Block "title"}}{{- "文章列表"|$.T}} - {{$.Stored.product.Name|Title}}: {{$.Stored.product.Slogan -}}{{/Block}}
 {{Block "keywords"}}{{$.Stored.product.Keywords}}{{/Block}}
 {{Block "description"}}{{$.Stored.product.Summary}}{{/Block}}
 {{Block "bodyAttr"}} class="pd-t-70"{{/Block}}

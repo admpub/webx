@@ -1,6 +1,5 @@
 {{Strip}}{{Extend "base"}}
-{{Block "title"}}
-{{- $.Stored.data.Title}} - {{"文章详情"|$.T -}}{{/Block}}
+{{Block "title"}}{{- $.Stored.data.Title}} - {{"文章详情"|$.T -}}{{/Block}}
 {{Block "keywords"}}{{- "文章详情"|$.T -}},{{$.Stored.data.Title}}{{/Block}}
 {{Block "description"}}{{$.Stored.data.Summary}}{{/Block}}
 {{Block "bodyAttr"}} class="landing-3 pd-t-70 bg-gray-lightest"{{/Block}}
