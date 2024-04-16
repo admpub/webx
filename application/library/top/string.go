@@ -1,12 +1,14 @@
 package top
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/url"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/nging/v5/application/library/config"
@@ -53,6 +55,7 @@ func OutputContent(content string, contypes ...string) interface{} {
 var (
 	hideTagRegex     = regexp.MustCompile(`(?s)(?i)\[hide(\:[^]]+)?\](.*?)\[/hide\]`)
 	parseTagRegex    = regexp.MustCompile(`(?s)(?i)\[parse\](.*?)\[/parse\]`)
+	expiryTagRegex   = regexp.MustCompile(`(?s)(?i)\[expiry(\:[^]]+)?\](.*?)\[/expiry\]`)
 	brTagRegex       = regexp.MustCompile(`(?s)(?i)(^<br[ ]*[/]?>|<br[ ]*[/]?>$)`)
 	defaultMsgOnHide = `此处内容需要评论回复后方可阅读`
 )
@@ -81,8 +84,45 @@ func parseGoTemplateContent(content string, funcMap map[string]interface{}) stri
 		if err != nil {
 			err = echo.ParseTemplateError(err, v)
 			v = err.Error()
+			return v
+		}
+		buf := bytes.NewBuffer(nil)
+		err = t.Execute(buf, nil)
+		if err != nil {
+			v = err.Error()
+		} else {
+			v = buf.String()
 		}
 		return v
+	})
+}
+
+func parseExpiryContent(content string) string {
+	return expiryTagRegex.ReplaceAllStringFunc(content, func(v string) string {
+		if len(v) <= 17 { // [expiry][/expiry]
+			return ``
+		}
+		index := strings.Index(v, `]`)
+		tagStart := v[0:index]
+		v = v[index+1:]
+		v = v[0 : len(v)-9]
+		splited := strings.Split(tagStart, `:`) // expiry:<duration>:<linkTitle>
+		var duration, linkTitle string
+		if len(splited) > 1 {
+			duration = splited[1]
+		}
+		if len(splited) > 2 {
+			linkTitle = splited[2]
+		}
+		result := MakeEncodedURLOrLink(v, duration, linkTitle)
+		switch r := result.(type) {
+		case string:
+			return r
+		case template.HTML:
+			return string(r)
+		default:
+			return fmt.Sprint(r)
+		}
 	})
 }
 
@@ -139,6 +179,7 @@ func HideContent(content string, contype string, hide HideDetector, funcMap map[
 			}
 			return hideStart + msgOnHide + hideEnd
 		}
+		v = parseExpiryContent(v)
 		return showStart + parseGoTemplateContent(v, funcMap) + showEnd
 	})
 	return
@@ -162,6 +203,8 @@ func MakeKVCallback(cb func(k interface{}, v interface{}) error, args ...interfa
 	return
 }
 
+const PrefixEncoded = `encoded:`
+
 func MakeEncodedURL(urlStr string, expiry int64) (string, error) {
 	d := echo.H{`url`: urlStr, `expiry`: expiry}
 	b, err := json.Marshal(d)
@@ -169,29 +212,68 @@ func MakeEncodedURL(urlStr string, expiry int64) (string, error) {
 		return urlStr, err
 	}
 	urlStr = `/article/redirect?url=` +
-		url.QueryEscape(`encoded:`+config.FromFile().Encode256(com.Bytes2str(b))) +
+		url.QueryEscape(PrefixEncoded+config.FromFile().Encode256(com.Bytes2str(b))) +
 		`&expiry=` + param.AsString(expiry)
 	return urlStr, err
+}
+
+func MakeEncodedURLOrLink(url string, expiry interface{}, linkTitle ...string) interface{} {
+	var err error
+	var _expiry int64
+	switch exp := expiry.(type) {
+	case string:
+		if len(exp) > 0 {
+			dur, err := ParseDuration(exp)
+			if err != nil {
+				return err.Error()
+			}
+			_expiry = int64(time.Now().Add(dur).Unix())
+		} else {
+			_expiry = int64(time.Now().AddDate(0, 0, 1).Unix())
+		}
+	case int64:
+		_expiry = exp
+	case uint64:
+		_expiry = int64(exp)
+	case int:
+		_expiry = int64(exp)
+	case uint:
+		_expiry = int64(exp)
+	case time.Duration:
+		_expiry = int64(time.Now().Add(exp).Unix())
+	default:
+		_expiry = int64(time.Now().AddDate(0, 0, 1).Unix())
+	}
+	url = strings.ReplaceAll(url, `&amp;`, `&`)
+	url, err = MakeEncodedURL(url, _expiry)
+	if err != nil {
+		url = err.Error()
+		return url
+	}
+	if len(linkTitle) > 0 && len(linkTitle[0]) > 0 {
+		return template.HTML(`<a href="` + url + `" target="_blank">` + linkTitle[0] + `</a>`)
+	}
+	return url
 }
 
 func ParseEncodedURL(encodedURL string) (string, int64, error) {
 	rawURL := encodedURL
 	var expiry int64
-	if strings.HasPrefix(rawURL, `encoded:`) {
-		rawURL = strings.TrimPrefix(rawURL, `encoded:`)
+	if strings.HasPrefix(rawURL, PrefixEncoded) {
+		rawURL = strings.TrimPrefix(rawURL, PrefixEncoded)
 		rawURL = config.FromFile().Decode256(rawURL)
 		if len(rawURL) == 0 {
-			return ``, expiry, nil
+			return rawURL, expiry, nil
 		}
 		data := echo.H{}
 		jsonBytes := com.Str2bytes(rawURL)
 		err := json.Unmarshal(jsonBytes, &data)
 		if err != nil {
-			return ``, expiry, common.JSONBytesParseError(err, jsonBytes)
+			return rawURL, expiry, common.JSONBytesParseError(err, jsonBytes)
 		}
 		rawURL = data.String(`url`)
 		if len(rawURL) == 0 {
-			return ``, expiry, nil
+			return rawURL, expiry, nil
 		}
 		expiry = data.Int64(`expiry`)
 	}

@@ -2,6 +2,7 @@ package top
 
 import (
 	"html/template"
+	"net/url"
 	"testing"
 	"time"
 
@@ -21,14 +22,16 @@ func TestOutputContent(t *testing.T) {
 }
 
 func TestMakeEncodedURL(t *testing.T) {
-	cfg := config.NewConfig().SetDefaults(``)
-	cfg.AsDefault()
+	config.NewConfig().SetDefaults().AsDefault()
 	expiry := time.Now().Add(time.Hour * 24).Unix()
 	rawURL := `https://coscms.com/download?a=测试&b=1#c`
 	v, err := MakeEncodedURL(rawURL, expiry)
 	assert.NoError(t, err)
 	assert.True(t, len(v) > 0)
-	_rawURL, _expiry, err := ParseEncodedURL(v)
+	t.Logf(`encodedURL: %s`, v)
+	u, err := url.Parse(v)
+	assert.NoError(t, err)
+	_rawURL, _expiry, err := ParseEncodedURL(u.Query().Get(`url`))
 	assert.NoError(t, err)
 	assert.Equal(t, _rawURL, rawURL)
 	assert.Equal(t, _expiry, expiry)

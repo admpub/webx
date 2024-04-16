@@ -29,7 +29,8 @@ func ParseDuration(s string) (time.Duration, error) {
 		if err != nil {
 			return 0, err
 		}
-		return DurationMonth * time.Duration(n), nil
+		return time.Until(time.Now().AddDate(0, int(n), 0)), nil
+		//return DurationMonth * time.Duration(n), nil
 	}
 	switch s[size-1] {
 	case 'd':
