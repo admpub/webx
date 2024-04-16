@@ -10,6 +10,7 @@ import (
 	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
+	"github.com/admpub/webx/application/library/frontend"
 	"github.com/admpub/webx/application/library/top"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelAuthor "github.com/admpub/webx/application/model/author"
@@ -64,7 +65,8 @@ func Detail(c echo.Context) error {
 	if articleM.Display == `N` && (customer == nil || articleM.OwnerType != `customer` || customer.Id != articleM.OwnerId) {
 		return c.NewError(stdCode.DataUnavailable, `此文章不可查看`)
 	}
-	articleM.Content = top.HideContent(articleM.Content, articleM.Contype, modelArticle.GetContentHideDetector(customer, articleM.OfficialCommonArticle), c.Funcs())
+	articleM.Content = top.HideContent(articleM.Content, articleM.Contype, modelArticle.GetContentHideDetector(customer, articleM.OfficialCommonArticle), frontend.GlobalFuncMap())
+	c.PrintFuncs()
 	c.Set(`data`, articleM.OfficialCommonArticle)
 	categories, err := articleM.GetCategories()
 	if err != nil {
