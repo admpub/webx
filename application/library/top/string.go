@@ -1,14 +1,19 @@
 package top
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
+	"net/url"
 	"regexp"
 	"strings"
 
+	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware/tplfunc"
+	"github.com/webx-top/echo/param"
 )
 
 func TrimOverflowText(text string, maxLength int, seperators ...string) string {
@@ -155,4 +160,40 @@ func MakeKVCallback(cb func(k interface{}, v interface{}) error, args ...interfa
 		err = cb(k, nil)
 	}
 	return
+}
+
+func MakeEncodedURL(urlStr string, expiry int64) (string, error) {
+	d := echo.H{`url`: urlStr, `expiry`: expiry}
+	b, err := json.Marshal(d)
+	if err != nil {
+		return urlStr, err
+	}
+	urlStr = `/article/redirect?url=` +
+		url.QueryEscape(`encoded:`+config.FromFile().Encode256(com.Bytes2str(b))) +
+		`&expiry=` + param.AsString(expiry)
+	return urlStr, err
+}
+
+func ParseEncodedURL(encodedURL string) (string, int64, error) {
+	rawURL := encodedURL
+	var expiry int64
+	if strings.HasPrefix(rawURL, `encoded:`) {
+		rawURL = strings.TrimPrefix(rawURL, `encoded:`)
+		rawURL = config.FromFile().Decode256(rawURL)
+		if len(rawURL) == 0 {
+			return ``, expiry, nil
+		}
+		data := echo.H{}
+		jsonBytes := com.Str2bytes(rawURL)
+		err := json.Unmarshal(jsonBytes, &data)
+		if err != nil {
+			return ``, expiry, common.JSONBytesParseError(err, jsonBytes)
+		}
+		rawURL = data.String(`url`)
+		if len(rawURL) == 0 {
+			return ``, expiry, nil
+		}
+		expiry = data.Int64(`expiry`)
+	}
+	return rawURL, expiry, nil
 }
