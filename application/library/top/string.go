@@ -1,11 +1,13 @@
 package top
 
 import (
+	"fmt"
 	"html/template"
 	"regexp"
 	"strings"
 
 	"github.com/webx-top/com"
+	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware/tplfunc"
 )
 
@@ -45,13 +47,41 @@ func OutputContent(content string, contypes ...string) interface{} {
 
 var (
 	hideTagRegex     = regexp.MustCompile(`(?s)(?i)\[hide(\:[^]]+)?\](.*?)\[/hide\]`)
+	parseTagRegex    = regexp.MustCompile(`(?s)(?i)\[parse\](.*?)\[/parse\]`)
 	brTagRegex       = regexp.MustCompile(`(?s)(?i)(^<br[ ]*[/]?>|<br[ ]*[/]?>$)`)
 	defaultMsgOnHide = `此处内容需要评论回复后方可阅读`
 )
 
 type HideDetector func(hideType string, hideContent string, args ...string) (hide bool, msgOnHide string)
 
-func HideContent(content string, contype string, hide HideDetector) (result string) {
+func parseGoTemplateContent(content string, funcMap map[string]interface{}) string {
+	return parseTagRegex.ReplaceAllStringFunc(content, func(v string) string {
+		if len(v) <= 15 { // [parse][/parse]
+			return ``
+		}
+		index := strings.Index(v, `]`)
+		v = v[index+1:]
+		v = v[0 : len(v)-8]
+		name := com.Md5(v)
+		t := template.New(name)
+		if funcMap != nil {
+			t.Funcs(funcMap)
+		}
+		defer func() {
+			if e := recover(); e != nil {
+				v = fmt.Sprintf(`%v`, e)
+			}
+		}()
+		_, err := t.Parse(v)
+		if err != nil {
+			err = echo.ParseTemplateError(err, v)
+			v = err.Error()
+		}
+		return v
+	})
+}
+
+func HideContent(content string, contype string, hide HideDetector, funcMap map[string]interface{}) (result string) {
 
 	if hide == nil {
 		hide = func(hideType string, hideContent string, args ...string) (hide bool, msgOnHide string) {
@@ -104,7 +134,7 @@ func HideContent(content string, contype string, hide HideDetector) (result stri
 			}
 			return hideStart + msgOnHide + hideEnd
 		}
-		return showStart + v + showEnd
+		return showStart + parseGoTemplateContent(v, funcMap) + showEnd
 	})
 	return
 }

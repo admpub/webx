@@ -64,7 +64,7 @@ func Detail(c echo.Context) error {
 	if articleM.Display == `N` && (customer == nil || articleM.OwnerType != `customer` || customer.Id != articleM.OwnerId) {
 		return c.NewError(stdCode.DataUnavailable, `此文章不可查看`)
 	}
-	articleM.Content = top.HideContent(articleM.Content, articleM.Contype, modelArticle.GetContentHideDetector(customer, articleM.OfficialCommonArticle))
+	articleM.Content = top.HideContent(articleM.Content, articleM.Contype, modelArticle.GetContentHideDetector(customer, articleM.OfficialCommonArticle), c.Funcs())
 	c.Set(`data`, articleM.OfficialCommonArticle)
 	categories, err := articleM.GetCategories()
 	if err != nil {
