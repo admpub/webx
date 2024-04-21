@@ -4,7 +4,7 @@ go 1.22
 
 toolchain go1.22.2
 
-replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
+// replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
@@ -70,7 +70,7 @@ require (
 	github.com/admpub/go-lock v1.3.0
 	github.com/admpub/go-zinc v0.0.8
 	github.com/admpub/goth v0.0.1
-	github.com/admpub/nging/v5 v5.3.1
+	github.com/admpub/nging/v5 v5.3.3-pre1
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.26.2
