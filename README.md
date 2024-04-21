@@ -94,9 +94,11 @@ Go语言文章系统、博客系统。
 
 2. 开发过程中的启动步骤
 
-    * 首先执行命令 `go mod vendor` 命令，将所有依赖同步到当前项目的 `vendor` 文件夹中；
-    * 然后再执行 `sudo ./run.sh` (如果是首次执行，则执行 `sudo ./run_first_time.sh`)
+    执行 `sudo ./run.sh` (如果是首次执行，则执行 `sudo ./run_first_time.sh`)
 
+3. 软件编译发布步骤
+    * 先执行命令 `go mod vendor` 命令，将所有依赖同步到当前项目的 `vendor` 文件夹中，因为 go-bindata 程序在嵌入静态文件的时候是从 vendor 文件夹内复制静态文件；
+    * 然后再通过 `cd tool` 命令进入本项目的 tool 文件夹，执行 `./build-linux64.sh` 进行编译和创建压缩包，编译好的压缩包位于 `<项目根目录>/dist` 文件夹内
 
 ## 预览图
 
