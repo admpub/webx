@@ -33,29 +33,31 @@ func RegisterRoute(e echo.RouteRegister, s ...func(*middleware.CORSConfig)) {
 	}, middleware.CORSWithConfig(*cfg))
 }
 
-var events = []func(esi.IWrapper){}
-var onConnect = []func(ctx echo.Context, conn socketio.Conn) error{}
-var onError = []func(ctx echo.Context, conn socketio.Conn, e error){}
-var onDisconnect = []func(ctx echo.Context, conn socketio.Conn, msg string){}
+var (
+	events       = []func(esi.IWrapper){}
+	onConnect    = []func(ctx echo.Context, conn socketio.Conn) error{}
+	onError      = []func(ctx echo.Context, conn socketio.Conn, e error){}
+	onDisconnect = []func(ctx echo.Context, conn socketio.Conn, msg string){}
 
-var RequestChecker engineio.CheckerFunc = func(req *http.Request) (http.Header, error) {
-	token := common.Setting(`socketio`).String(`token`)
-	if len(token) == 0 {
+	RequestChecker engineio.CheckerFunc = func(req *http.Request) (http.Header, error) {
+		token := common.Setting(`socketio`).String(`token`)
+		if len(token) == 0 {
+			return nil, nil
+		}
+		post := req.Header.Get(`Token`)
+		if len(post) == 0 {
+			post = req.URL.Query().Get(`token`)
+		}
+		if token != post {
+			if log.IsEnabled(log.LevelDebug) {
+				log.Debugf(`[socketIO] invalid token: %q`, post)
+				log.Debugf(`[socketIO] request headers: %+v`, req.Header)
+			}
+			return nil, echo.NewError(`invalid token`, code.InvalidToken)
+		}
 		return nil, nil
 	}
-	post := req.Header.Get(`Token`)
-	if len(post) == 0 {
-		post = req.URL.Query().Get(`token`)
-	}
-	if token != post {
-		if log.IsEnabled(log.LevelDebug) {
-			log.Debugf(`[socketIO] invalid token: %q`, post)
-			log.Debugf(`[socketIO] request headers: %+v`, req.Header)
-		}
-		return nil, echo.NewError(`invalid token`, code.InvalidToken)
-	}
-	return nil, nil
-}
+)
 
 func OnEvent(fns ...func(esi.IWrapper)) {
 	events = append(events, fns...)
@@ -74,7 +76,7 @@ func OnDisconnect(fns ...func(ctx echo.Context, conn socketio.Conn, msg string))
 }
 
 func socketIOWrapper(nsp string) *esi.Wrapper {
-	wrapper, _ := esi.NewWrapper(&engineio.Options{
+	wrapper := esi.NewWrapper(&engineio.Options{
 		RequestChecker: RequestChecker,
 	})
 
