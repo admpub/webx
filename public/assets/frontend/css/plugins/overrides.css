@@ -919,6 +919,11 @@
   background-color: #eaecf0;
 }
 
+.accordion .card-header.bg-inverse a.collapsed:hover,
+.accordion .card-header.bg-inverse a.collapsed:focus {
+  background-color: #111;
+}
+
 .accordion .card-block {
   padding-top: 0;
 }
