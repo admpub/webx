@@ -51,14 +51,14 @@ require (
 	github.com/webx-top/client v0.8.13
 	github.com/webx-top/com v1.2.13
 	github.com/webx-top/db v1.27.5
-	github.com/webx-top/echo v1.6.6
+	github.com/webx-top/echo v1.6.9
 	github.com/webx-top/echo-prometheus v1.1.2
-	github.com/webx-top/echo-socket.io v1.2.0
+	github.com/webx-top/echo-socket.io v1.2.2
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.2.8
 	github.com/webx-top/validation v0.0.3 // indirect
 	github.com/yanyiwu/gojieba v1.3.0
-	golang.org/x/oauth2 v0.19.0
+	golang.org/x/oauth2 v0.20.0
 	golang.org/x/sync v0.7.0
 	gopkg.in/redis.v5 v5.2.9
 )
@@ -247,7 +247,7 @@ require (
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/oschwald/maxminddb-golang v1.12.0 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
-	github.com/phuslu/iploc v1.0.20240331 // indirect
+	github.com/phuslu/iploc v1.0.20240501 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
@@ -301,14 +301,14 @@ require (
 	go.opentelemetry.io/otel/metric v1.25.0 // indirect
 	go.opentelemetry.io/otel/trace v1.25.0 // indirect
 	go.uber.org/mock v0.4.0 // indirect
-	golang.org/x/crypto v0.22.0 // indirect
+	golang.org/x/crypto v0.23.0 // indirect
 	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
 	golang.org/x/image v0.15.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.17.0 // indirect
-	golang.org/x/net v0.24.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/net v0.25.0 // indirect
+	golang.org/x/sys v0.20.0 // indirect
+	golang.org/x/text v0.15.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.20.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect

@@ -24,12 +24,12 @@ func RegisterRoute(e echo.RouteRegister, s ...func(*middleware.CORSConfig)) {
 	prefix := e.Prefix()
 	nsp := strings.Trim(prefix, `/`)
 	nsp = strings.ReplaceAll(nsp, `/`, `_`)
-	handle := socketIOWrapper(nsp)
+	socket := SocketIO(nsp)
 	e.Any(`/socket.io/`, func(ctx echo.Context) error {
 		if common.Setting(`socketio`).String(`enabled`) != `1` {
 			return echo.ErrNotFound
 		}
-		return handle(ctx)
+		return socket.Handle(ctx)
 	}, middleware.CORSWithConfig(*cfg))
 }
 
@@ -73,7 +73,7 @@ func OnDisconnect(fns ...func(ctx echo.Context, conn socketio.Conn, msg string))
 	onDisconnect = append(onDisconnect, fns...)
 }
 
-func socketIOWrapper(nsp string) func(ctx echo.Context) error {
+func socketIOWrapper(nsp string) *esi.Wrapper {
 	wrapper, _ := esi.NewWrapper(&engineio.Options{
 		RequestChecker: RequestChecker,
 	})
@@ -107,5 +107,5 @@ func socketIOWrapper(nsp string) func(ctx echo.Context) error {
 		fn(wrapper)
 	}
 
-	return wrapper.HandlerFunc
+	return wrapper
 }
