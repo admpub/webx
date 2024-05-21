@@ -66,7 +66,7 @@ func Detail(c echo.Context) error {
 		return c.NewError(stdCode.DataUnavailable, `此文章不可查看`)
 	}
 	articleM.Content = top.HideContent(articleM.Content, articleM.Contype, modelArticle.GetContentHideDetector(customer, articleM.OfficialCommonArticle), frontend.GlobalFuncMap())
-	c.PrintFuncs()
+	//c.PrintFuncs()
 	c.Set(`data`, articleM.OfficialCommonArticle)
 	categories, err := articleM.GetCategories()
 	if err != nil {
