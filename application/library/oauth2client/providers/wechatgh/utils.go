@@ -10,7 +10,7 @@ import (
 	"github.com/webx-top/echo"
 )
 
-func CheckSignature(signature, timestamp, nonce, token string) bool {
+func MakeSignature(timestamp, nonce, token string) string {
 	arr := []string{timestamp, nonce, token}
 	sort.Strings(arr)
 
@@ -21,7 +21,11 @@ func CheckSignature(signature, timestamp, nonce, token string) bool {
 		b.WriteString(arr[i])
 	}
 
-	return com.Sha1(b.String()) == signature
+	return com.Sha1(b.String())
+}
+
+func CheckSignature(signature, timestamp, nonce, token string) bool {
+	return MakeSignature(timestamp, nonce, token) == signature
 }
 
 func GetServer(ctx echo.Context, cfg *config.Config) *server.Server {
