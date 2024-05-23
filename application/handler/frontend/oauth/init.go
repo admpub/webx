@@ -24,8 +24,16 @@ func init() {
 		initOauth(frontend.IRegister().Echo())
 
 		oauthG := g.Group(oauth2.DefaultPath)
-		mpG := oauthG.Group(`/mp`)                 // 小程序
-		mpG.Route(`GET,POST`, `/wechat`, MPWechat) // 微信小程序
+		g3 := oauthG.Group(`/other`)
+		wechatG := g3.Group(`/wechat`) // 微信 /oauth/other/wechat
+		{
+			wechatG.Route(`GET,POST`, `/mp`, WechatMP) // 微信小程序 /oauth/other/wechat/mp
+
+			//TODO:扫码关注公众号登录
+			//wechatG.Route(`GET,POST`, `/gh`, WechatGH)                  // 微信公众号 /oauth/other/wechat/gh
+			//wechatG.Get(`/gh/callback`, WechatGHCheckSign) // 微信公众号 /oauth/other/wechat/gh/callback
+			//wechatG.Post(`/gh/callback`, WechatGHCallback) // 微信公众号 /oauth/other/wechat/gh/callback
+		}
 	})
 	setup.OnInstalled(onInstalled)
 }

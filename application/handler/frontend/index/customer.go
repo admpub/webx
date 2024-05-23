@@ -165,7 +165,6 @@ END:
 
 // SignIn 登录
 func SignIn(c echo.Context) error {
-	next := c.Form(`next`)
 	var err error
 	if c.Formx(`modal`).Bool() {
 		tmpl := c.Internal().String(`modalTmpl`)
@@ -175,6 +174,7 @@ func SignIn(c echo.Context) error {
 		return c.Render(tmpl, err)
 	}
 
+	next := c.Form(`next`)
 	next = echo.GetOtherURL(c, next)
 	if len(next) == 0 {
 		next = sessdata.URLFor(`/index`)
