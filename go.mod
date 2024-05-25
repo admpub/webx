@@ -2,8 +2,6 @@ module github.com/admpub/webx
 
 go 1.22
 
-toolchain go1.22.2
-
 // replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
 exclude github.com/gomodule/redigo v2.0.0+incompatible
@@ -12,7 +10,7 @@ require (
 	github.com/RichardKnop/machinery v1.10.8
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/admpub/bindata/v3 v3.2.0
-	github.com/admpub/cache v0.6.0
+	github.com/admpub/cache v0.6.1
 	github.com/admpub/color v1.8.1
 	github.com/admpub/copier v0.1.1
 	github.com/admpub/decimal v1.3.1
@@ -187,7 +185,7 @@ require (
 	github.com/go-redsync/redsync/v4 v4.13.0 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
-	github.com/goccy/go-json v0.10.2 // indirect
+	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
@@ -210,7 +208,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-syslog v1.0.0 // indirect
-	github.com/hashicorp/go-version v1.6.0 // indirect
+	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/hirochachacha/go-smb2 v1.1.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jlaffaye/ftp v0.2.0 // indirect

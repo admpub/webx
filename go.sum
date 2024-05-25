@@ -1003,8 +1003,8 @@ github.com/admpub/archiver v1.1.4 h1:HmHvNuvSeIVGvqmpOtA8Mu28BSTPwtri8/TeXxFQXnY
 github.com/admpub/archiver v1.1.4/go.mod h1:lkK4m4K6YOjdhcR63LlMEXC10lXtx/uOCs4FytlYrjk=
 github.com/admpub/bindata/v3 v3.2.0 h1:KF1uhRtdJEpmDYBrzFSZm/lKolLOVV2Wqrivup50aqc=
 github.com/admpub/bindata/v3 v3.2.0/go.mod h1:jOA1tbH70YGa+Q880SMhOxpBf7Yea6O0KWLvAqBITc8=
-github.com/admpub/cache v0.6.0 h1:3e+D9SSqh5PnQMycXbqvjYRPUksJdbxhJi668rfA1Ss=
-github.com/admpub/cache v0.6.0/go.mod h1:+d/JjrqxGs1wUu7Dj+PrOtiguKAmIrjy4Mx/HBzEEeI=
+github.com/admpub/cache v0.6.1 h1:Ie1uvroI2nelI+59NSSPMOK02n92do5ngt+vnxNAXnY=
+github.com/admpub/cache v0.6.1/go.mod h1:6A3TDKFjIBHvPX+lX3buOvn/WxukCKDg56hrx9imKGs=
 github.com/admpub/caddy v1.1.11/go.mod h1:wb4LgV+7tN5tOI+D4pQyjz31wKEziN5TshwZXxEpbbg=
 github.com/admpub/caddy v1.2.6 h1:1Cl8PAAAIz+bJ6N51RHqKywd2ANi+YABw1XsYSipZZs=
 github.com/admpub/caddy v1.2.6/go.mod h1:J3r7HuzUidse50+9JatBBaMCZ8t4vOIsP5+aDouRxac=
@@ -1499,8 +1499,9 @@ github.com/goccy/go-json v0.7.9/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGF
 github.com/goccy/go-json v0.7.10/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
 github.com/goccy/go-json v0.9.11/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
 github.com/goccy/go-json v0.10.0/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
-github.com/goccy/go-json v0.10.2 h1:CrxCmQqYDkv1z7lO7Wbh2HN93uovUHgrECaO5ZrCXAU=
 github.com/goccy/go-json v0.10.2/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
+github.com/goccy/go-json v0.10.3 h1:KZ5WoDbxAIgm2HNbYckL0se1fHD6rz5j4ywS6ebzDqA=
+github.com/goccy/go-json v0.10.3/go.mod h1:oq7eo15ShAhp70Anwd5lgX2pLfOS3QCiwU/PULtXL6M=
 github.com/gofrs/uuid v3.2.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
 github.com/gofrs/uuid v4.0.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
 github.com/gofrs/uuid v4.4.0+incompatible h1:3qXRTX8/NbyulANqlc0lchS1gqAVxRgsuW1YrTJupqA=
@@ -1735,8 +1736,9 @@ github.com/hashicorp/go-syslog v1.0.0/go.mod h1:qPfqrKkXGihmCqbJM2mZgkZGvKG1dFdv
 github.com/hashicorp/go-uuid v1.0.0/go.mod h1:6SBZvOh/SIDV7/2o3Jml5SYk/TvGqwFJ/bN7x4byOro=
 github.com/hashicorp/go-uuid v1.0.1/go.mod h1:6SBZvOh/SIDV7/2o3Jml5SYk/TvGqwFJ/bN7x4byOro=
 github.com/hashicorp/go-uuid v1.0.2/go.mod h1:6SBZvOh/SIDV7/2o3Jml5SYk/TvGqwFJ/bN7x4byOro=
-github.com/hashicorp/go-version v1.6.0 h1:feTTfFNnjP967rlCxM/I9g701jU+RN74YKx2mOkIeek=
 github.com/hashicorp/go-version v1.6.0/go.mod h1:fltr4n8CU8Ke44wwGCBoEymUuxUHl09ZGVZPK5anwXA=
+github.com/hashicorp/go-version v1.7.0 h1:5tqGy27NaOTB8yJKUZELlFAS/LTKJkrmONwQKeRZfjY=
+github.com/hashicorp/go-version v1.7.0/go.mod h1:fltr4n8CU8Ke44wwGCBoEymUuxUHl09ZGVZPK5anwXA=
 github.com/hashicorp/go.net v0.0.1/go.mod h1:hjKkEWcCURg++eb33jQU7oqQcI9XDCnUzHA0oac0k90=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
@@ -2121,10 +2123,10 @@ github.com/redis/go-redis/v9 v9.0.3/go.mod h1:WqMKv5vnQbRuZstUwxQI195wHy+t4PuXDO
 github.com/redis/go-redis/v9 v9.0.5/go.mod h1:WqMKv5vnQbRuZstUwxQI195wHy+t4PuXDOjzMvcuQHk=
 github.com/redis/go-redis/v9 v9.5.1 h1:H1X4D3yHPaYrkL5X06Wh6xNVM/pX0Ft4RV0vMGvLBh8=
 github.com/redis/go-redis/v9 v9.5.1/go.mod h1:hdY0cQFCN4fnSYT6TkisLufl/4W5UIXyv0b/CLO2V2M=
-github.com/redis/rueidis v1.0.32 h1:xDVD5G0F4digNm4EOdtjLq+MdIU3arvbQNiL0g4PYn4=
-github.com/redis/rueidis v1.0.32/go.mod h1:g8nPmgR4C68N3abFiOc/gUOSEKw3Tom6/teYMehg4RE=
-github.com/redis/rueidis/rueidiscompat v1.0.32 h1:KD3qS2K3Zz+k68I2lFhHStyycep99SEfFxRs/cKc3qw=
-github.com/redis/rueidis/rueidiscompat v1.0.32/go.mod h1:FeMfQjaJwmAokNoor+Lu1BQFfTSV2w8cOHURoz8AH2M=
+github.com/redis/rueidis v1.0.37 h1:RBb1s97wcvlK94YZvyh+B/c6zOkc0ssamlfWRGfRlaw=
+github.com/redis/rueidis v1.0.37/go.mod h1:bnbkk4+CkXZgDPEbUtSos/o55i4RhFYYesJ4DS2zmq0=
+github.com/redis/rueidis/rueidiscompat v1.0.37 h1:YDV3B+zYnw08r/oH/WorvLnGb4wedC1Vou3gjnmk5qg=
+github.com/redis/rueidis/rueidiscompat v1.0.37/go.mod h1:vMyMT9TWeL9I4BEIhCODehEbrrnuEGuG6Zp4vJjWH94=
 github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec h1:W09IVJc94icq4NjY3clb7Lk8O1qJ8BdBEF8z0ibU0rE=
 github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
