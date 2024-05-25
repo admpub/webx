@@ -55,7 +55,7 @@ func successHandler(ctx echo.Context) error {
 	var next string
 	_, err = checkOrUpdateUser(ctx, oauthM, ouser, func(ctx echo.Context) (bool, error) {
 		if !ctx.Queryx(`force-create`).Bool() { //绑定用户账号，除非强制指定了自动创建新账号
-			if !fromSession {
+			if !fromSession { // 如果gothUser数据不是来自session，则需要保存到session中以便于用户登录或注册账号后关联oauth数据
 				oauthM.SaveSession(ouser)
 			}
 			fromSession = false
