@@ -20,22 +20,22 @@ var TopNavigate = navigate.List{
 	},
 	&navigate.Item{
 		Display: true,
-		Name:    `菜单管理`,
+		Name:    `前台菜单`,
 		Action:  `navigate/index`,
 	},
 	&navigate.Item{
 		Display: false,
-		Name:    `添加菜单`,
+		Name:    `添加前台菜单`,
 		Action:  `navigate/add`,
 	},
 	&navigate.Item{
 		Display: false,
-		Name:    `修改菜单`,
+		Name:    `修改前台菜单`,
 		Action:  `navigate/edit`,
 	},
 	&navigate.Item{
 		Display: false,
-		Name:    `删除菜单`,
+		Name:    `删除前台菜单`,
 		Action:  `navigate/delete`,
 	},
 	&navigate.Item{
