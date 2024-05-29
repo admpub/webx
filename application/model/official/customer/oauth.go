@@ -8,6 +8,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
+	modelNging "github.com/admpub/nging/v5/application/model"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/oauth2client"
 )
@@ -79,10 +80,7 @@ func (f *OAuth) Edit(mw func(db.Result) db.Result, args ...interface{}) error {
 }
 
 func (f *OAuth) GetByOutUser(user *goth.User) (err error) {
-	var unionID string
-	if v, y := user.RawData[`unionid`]; y {
-		unionID, _ = v.(string)
-	}
+	unionID := modelNging.GetOAuthUnionID(user)
 	return f.Get(nil, db.And(
 		db.Cond{`union_id`: unionID},
 		db.Cond{`open_id`: user.UserID},
@@ -91,14 +89,8 @@ func (f *OAuth) GetByOutUser(user *goth.User) (err error) {
 }
 
 func (f *OAuth) CopyFrom(user *goth.User) *OAuth {
-	var unionID string
-	if v, y := user.RawData[`unionid`]; y {
-		unionID, _ = v.(string)
-	}
-	if v, y := user.RawData[`mobile`]; y {
-		f.Mobile, _ = v.(string)
-	}
-	f.UnionId = unionID
+	f.Mobile = modelNging.GetOAuthMobile(user)
+	f.UnionId = modelNging.GetOAuthUnionID(user)
 	f.OpenId = user.UserID
 	f.Type = user.Provider
 	f.Avatar = user.AvatarURL
