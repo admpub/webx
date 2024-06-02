@@ -523,7 +523,7 @@
 			return player.seek(rg.playRange.min);
 		}
 		var playRangeMax=rg.playRange.max;
-		if (playRangeMax < 0 && (playRangeMax*-1) < player.video.duration) playRangeMax=player.video.duration+playRangeMaxx;
+		if (playRangeMax < 0 && (playRangeMax*-1) < player.video.duration) playRangeMax=player.video.duration+playRangeMax;
 		if (playRangeMax > 0 && current >= playRangeMax) {
 			return amplayer.jump(play.jump);
 		}
