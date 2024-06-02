@@ -175,6 +175,12 @@
 					return client;
 				},
 				'customHls': function (video, player) {
+					var vd=$(amplayer.elemPrefix()+'#video');
+					if(vd.data('hls')){
+						var eventIndex=vd.data('eventIndex');
+						player.trigger('destroy');
+						if(eventIndex !== null) player.off('destroy', eventIndex);
+					}
 					var config = { debug: amplayer.options.debug };
 					var engine = null;
 					if (amplayer.options.p2pEngine == 'p2p-media-loader') {
@@ -288,14 +294,15 @@
 						console.error(msg);
 						$(amplayer.elemPrefix()+'#video').trigger('error', data);
 					});
-					$(amplayer.elemPrefix()+'#video').data('hls', hls);
-					player.on('destroy', function () {
+					vd.data('hls', hls);
+					var eventIndex=player.on('destroy', function () {
 						if(hls){
 							hls.destroy();
 							hls = null;
 						}
 						$(amplayer.elemPrefix()+'#video').data('hls', null);
 					});
+					vd.data('eventIndex', eventIndex);
 					return hls;
 				},
 				'shakaDash':function (video, player) {
