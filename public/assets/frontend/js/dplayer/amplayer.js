@@ -522,8 +522,9 @@
 		if (rg.playRange.min > 0 && current < rg.playRange.min) {
 			return player.seek(rg.playRange.min);
 		}
-		if (rg.playRange.max < 0 && (rg.playRange.max*-1) < player.video.duration) rg.playRange.max=player.video.duration+rg.playRange.max;
-		if (rg.playRange.max > 0 && current >= rg.playRange.max) {
+		var playRangeMax=rg.playRange.max;
+		if (playRangeMax < 0 && (playRangeMax*-1) < player.video.duration) playRangeMax=player.video.duration+playRangeMaxx;
+		if (playRangeMax > 0 && current >= playRangeMax) {
 			return amplayer.jump(play.jump);
 		}
 		if (!rg.skipRange) return;
