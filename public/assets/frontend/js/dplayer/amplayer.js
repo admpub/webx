@@ -298,9 +298,6 @@
 					});
 					return hls;
 				},
-				'customDash':function (video, player) {
-					dashjs.MediaPlayer().create().initialize(video, video.src, false);
-				},
 				'shakaDash':function (video, player) {
 					var src = video.src;
 					var playerShaka = new shaka.Player(video); // 将会修改 video.src
@@ -311,11 +308,13 @@
 				var type = 'auto', urls = String(urls).split('#')[0].split('?')[0], 
 					pos = urls.lastIndexOf('.'), extName = pos>-1?urls.substring(pos).toLowerCase():amplayer.options.defaultExtName;
 				if (urls.substring(0, 7).toLowerCase() == 'magnet:' || extName=='.torrent') {
-					type = 'customWebTorrent';
+					type = 'customWebTorrent'; // webtorrent
 				} else if (extName=='.m3u8') {
-					type = 'customHls';
+					type = 'customHls'; // hls
 				} else if (extName=='.mpd') {
-					type = 'customDash';
+					type = 'dash'; // dash
+				} else if(extName=='.flv'){
+					type = 'flv'; // flv
 				} else if (amplayer.options.defaultType) {
 					type = amplayer.options.defaultType;
 				}
