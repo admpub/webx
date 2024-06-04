@@ -43,10 +43,10 @@ func Index(ctx echo.Context) error {
 		cond.AddKV(`short_url`, shortID)
 	}
 	sorts := common.Sorts(ctx, `official_short_url`, `-id`)
-	_, err = common.NewLister(m.URL, nil, func(r db.Result) db.Result {
+	_, err = common.NewLister(m.OfficialShortUrl, nil, func(r db.Result) db.Result {
 		return r.OrderBy(sorts...)
 	}, cond.And()).Paging(ctx)
-	ctx.Set(`listData`, m.URL.Objects())
+	ctx.Set(`listData`, m.Objects())
 	return ctx.Render(`official/short_url/index`, common.Err(ctx, err))
 }
 
@@ -59,8 +59,8 @@ func Add(ctx echo.Context) error {
 	)
 	m := modelShorturl.NewShortURL(ctx)
 	if ctx.IsPost() {
-		m.URL.OwnerId = uint64(user.Id)
-		if err = applyFormData(ctx, m.URL); err != nil {
+		m.OwnerId = uint64(user.Id)
+		if err = applyFormData(ctx, m.OfficialShortUrl); err != nil {
 			goto END
 		}
 		_, err = m.Add()
@@ -72,12 +72,12 @@ func Add(ctx echo.Context) error {
 	}
 	id = ctx.Formx(`copyId`).Uint64()
 	if id > 0 {
-		err = m.URL.Get(nil, `id`, id)
+		err = m.Get(nil, `id`, id)
 		if err == nil {
-			echo.StructToForm(ctx, m.URL, ``, echo.LowerCaseFirstLetter)
+			echo.StructToForm(ctx, m.OfficialShortUrl, ``, echo.LowerCaseFirstLetter)
 			ctx.Request().Form().Set(`id`, `0`)
-			if m.URL.Expired > 0 {
-				ctx.Request().Form().Set(`expired`, time.Unix(int64(m.URL.Expired), 0).Format(`2006-01-02`))
+			if m.Expired > 0 {
+				ctx.Request().Form().Set(`expired`, time.Unix(int64(m.Expired), 0).Format(`2006-01-02`))
 			}
 		}
 	}
@@ -95,7 +95,7 @@ func Edit(ctx echo.Context) error {
 		return ctx.E(`参数“%s”值无效`, `id`)
 	}
 	m := modelShorturl.NewShortURL(ctx)
-	err := m.URL.Get(nil, `id`, id)
+	err := m.Get(nil, `id`, id)
 	if err != nil {
 		if err == db.ErrNoMoreRows {
 			err = ctx.E(`短网址不存在`)
@@ -103,19 +103,19 @@ func Edit(ctx echo.Context) error {
 		return err
 	}
 	if ctx.IsPost() {
-		if err = applyFormData(ctx, m.URL); err != nil {
+		if err = applyFormData(ctx, m.OfficialShortUrl); err != nil {
 			goto END
 		}
-		err = m.Edit(nil, `id`, m.URL.Id)
+		err = m.Edit(nil, `id`, m.Id)
 		if err != nil {
 			goto END
 		}
 		common.SendOk(ctx, ctx.T(`修改成功`))
 		return ctx.Redirect(handler.URLFor(`/official/short_url/index`))
 	}
-	echo.StructToForm(ctx, m.URL, ``, echo.LowerCaseFirstLetter)
-	if m.URL.Expired > 0 {
-		ctx.Request().Form().Set(`expired`, time.Unix(int64(m.URL.Expired), 0).Format(`2006-01-02`))
+	echo.StructToForm(ctx, m.OfficialShortUrl, ``, echo.LowerCaseFirstLetter)
+	if m.Expired > 0 {
+		ctx.Request().Form().Set(`expired`, time.Unix(int64(m.Expired), 0).Format(`2006-01-02`))
 	}
 
 END:
@@ -131,14 +131,14 @@ func Delete(ctx echo.Context) error {
 		return ctx.E(`参数“%s”值无效`, `id`)
 	}
 	m := modelShorturl.NewShortURL(ctx)
-	err := m.URL.Get(nil, `id`, id)
+	err := m.Get(nil, `id`, id)
 	if err != nil {
 		if err == db.ErrNoMoreRows {
 			err = ctx.E(`短网址不存在`)
 		}
 		return err
 	}
-	err = m.URL.Delete(nil, `id`, id)
+	err = m.Delete(nil, `id`, id)
 	if err != nil {
 		return err
 	}

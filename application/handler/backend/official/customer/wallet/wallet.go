@@ -66,7 +66,7 @@ func Edit(ctx echo.Context) error {
 	}
 	cond.AddKV(`customer_id`, customerID)
 	cond.AddKV(`asset_type`, assetType)
-	err = m.Wallet.Get(nil, cond.And())
+	err = m.Get(nil, cond.And())
 	if err != nil {
 		if err == db.ErrNoMoreRows {
 			err = nil
@@ -114,7 +114,7 @@ func Edit(ctx echo.Context) error {
 			return ctx.Redirect(handler.URLFor(`/official/customer/wallet/index?customerId=` + ctx.Query(`customerId`)))
 		}
 	} else if err == nil {
-		echo.StructToForm(ctx, m.Wallet, ``, echo.LowerCaseFirstLetter)
+		echo.StructToForm(ctx, m.OfficialCustomerWallet, ``, echo.LowerCaseFirstLetter)
 		ctx.Request().Form().Set(`customerId`, fmt.Sprint(customerID))
 		ctx.Request().Form().Set(`assetType`, assetType)
 	}
@@ -125,6 +125,6 @@ END:
 	ctx.Set(`assetTypes`, assetTypes)
 	ctx.Set(`customer`, cs.ClearPasswordData())
 	ctx.Set(`assetType`, assetType)
-	ctx.Set(`assetTypeName`, modelCustomer.AssetTypes.Get(m.Wallet.AssetType))
+	ctx.Set(`assetTypeName`, modelCustomer.AssetTypes.Get(m.AssetType))
 	return ctx.Render(`official/customer/wallet/edit`, err)
 }

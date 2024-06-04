@@ -26,10 +26,10 @@ func List(ctx echo.Context) error {
 		cond.AddKV(`short_url`, shortID)
 	}
 	sorts := common.Sorts(ctx, `official_short_url`, `-id`)
-	_, err = common.NewLister(m.URL, nil, func(r db.Result) db.Result {
+	_, err = common.NewLister(m.OfficialShortUrl, nil, func(r db.Result) db.Result {
 		return r.OrderBy(sorts...)
 	}, cond.And()).Paging(ctx)
-	ctx.Set(`list`, m.URL.Objects())
+	ctx.Set(`list`, m.Objects())
 	return ctx.Render(`short_url/list`, handler.Err(ctx, err))
 }
 
@@ -39,10 +39,10 @@ func Create(ctx echo.Context) error {
 	var err error
 	m := modelShorturl.NewShortURL(ctx)
 	if ctx.IsPost() {
-		m.URL.OwnerId = customer.Id
-		m.URL.OwnerType = `customer`
-		m.URL.LongUrl = ctx.Formx(`url`).String()
-		m.URL.Password = ctx.Formx(`password`).String()
+		m.OwnerId = customer.Id
+		m.OwnerType = `customer`
+		m.LongUrl = ctx.Formx(`url`).String()
+		m.Password = ctx.Formx(`password`).String()
 		_, err = m.Add()
 		if err != nil {
 			goto END
@@ -64,27 +64,27 @@ func Edit(ctx echo.Context) error {
 	}
 	customer := sessdata.Customer(ctx)
 	m := modelShorturl.NewShortURL(ctx)
-	err := m.URL.Get(nil, `id`, id)
+	err := m.Get(nil, `id`, id)
 	if err != nil {
 		if err == db.ErrNoMoreRows {
 			err = ctx.NewError(code.DataNotFound, `短网址不存在`)
 		}
 		return err
 	}
-	if m.URL.OwnerType != `customer` || m.URL.OwnerId != customer.Id {
+	if m.OwnerType != `customer` || m.OwnerId != customer.Id {
 		return ctx.NewError(code.NonPrivileged, `越权操作！您没有权限修改此数据`)
 	}
 	if ctx.IsPost() {
-		m.URL.LongUrl = ctx.Formx(`url`).String()
-		m.URL.Password = ctx.Formx(`password`).String()
-		err = m.Edit(nil, `id`, m.URL.Id)
+		m.LongUrl = ctx.Formx(`url`).String()
+		m.Password = ctx.Formx(`password`).String()
+		err = m.Edit(nil, `id`, m.Id)
 		if err != nil {
 			goto END
 		}
 		common.SendOk(ctx, ctx.T(`修改成功`))
 		return ctx.Redirect(sessdata.URLFor(`/user/short_url/edit/` + fmt.Sprint(id)))
 	}
-	echo.StructToForm(ctx, m.URL, ``, echo.LowerCaseFirstLetter)
+	echo.StructToForm(ctx, m.OfficialShortUrl, ``, echo.LowerCaseFirstLetter)
 	ctx.Request().Form().Set(`url`, ctx.Form(`longUrl`))
 
 END:
@@ -101,14 +101,14 @@ func Delete(ctx echo.Context) error {
 	}
 	customer := sessdata.Customer(ctx)
 	m := modelShorturl.NewShortURL(ctx)
-	err := m.URL.Get(nil, `id`, id)
+	err := m.Get(nil, `id`, id)
 	if err != nil {
 		if err == db.ErrNoMoreRows {
 			err = ctx.NewError(code.DataNotFound, `短网址不存在`)
 		}
 		return err
 	}
-	if m.URL.OwnerType != `customer` || m.URL.OwnerId != customer.Id {
+	if m.OwnerType != `customer` || m.OwnerId != customer.Id {
 		return ctx.NewError(code.NonPrivileged, `越权操作！您没有权限删除此数据`)
 	}
 	return ctx.Redirect(sessdata.URLFor(`/user/short_url/list`))
