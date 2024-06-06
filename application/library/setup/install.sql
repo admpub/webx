@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.1.0, for macos12.6 (x86_64)
+-- MySQL dump 10.13  Distrib 8.3.0, for macos12.6 (x86_64)
 --
 -- Host: 127.0.0.1    Database: nging
 -- ------------------------------------------------------
--- Server version	8.1.0
+-- Server version	8.3.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -204,6 +204,7 @@ CREATE TABLE `official_common_article` (
   `owner_id` bigint unsigned NOT NULL DEFAULT '0' COMMENT '新闻发布者',
   `owner_type` enum('user','customer') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'customer' COMMENT '所有者类型(customer-前台客户;user-后台用户)',
   `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '新闻标题',
+  `keywords` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '关键词',
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '缩略图',
   `image_original` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '原始图',
   `summary` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '摘要',
@@ -251,6 +252,7 @@ CREATE TABLE `official_common_category` (
   `has_child` enum('Y','N') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'N' COMMENT '是否有子分类',
   `level` int unsigned NOT NULL DEFAULT '0' COMMENT '层级',
   `name` varchar(60) COLLATE utf8mb4_general_ci NOT NULL COMMENT '分类名称',
+  `keywords` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '分类页面关键词',
   `description` varchar(200) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '分类说明',
   `cover` varchar(200) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '分类封面图',
   `type` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'article' COMMENT '类型',
@@ -1243,4 +1245,4 @@ CREATE TABLE `official_short_url_visit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-22 13:04:48
+-- Dump completed on 2024-06-06 20:48:01

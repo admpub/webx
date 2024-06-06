@@ -6,21 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
   <meta name="applicable-device" content="pc, mobile">
   {{- if hasAnyBlock "canonical" -}}
-  <link rel="canonical" href="{{Block "canonical"}}{{/Block}}">
+  <link rel="canonical" href="{{Block `canonical`}}{{/Block}}">
   {{- end -}}
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta http-equiv="Cache-Control" content="no-transform">
   <!-- device-setting:end -->
-  <meta name="keywords" content="{{Block "keywords"}}{{Config.base.siteMetaKeywords|Default Config.base.siteName}}{{/Block}}">
-  <meta name="description" content="{{Block "description"}}{{if Config.base.siteMetaKeywords}}{{Config.base.siteMetaKeywords}}{{else}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{end}}{{/Block}}">
+  <meta name="keywords" content="{{Block `keywords`}}{{Config.base.siteMetaKeywords|Default Config.base.siteName}}{{/Block}}">
+  <meta name="description" content="{{Block `description`}}{{if Config.base.siteMetaKeywords}}{{Config.base.siteMetaKeywords}}{{else}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{end}}{{/Block}}">
 <!-- og-tag:start -->
-<meta property="og:type" content="{{Block "type"}}article{{/Block}}" /><!-- 常用值:article、news、book、movie、product… -->
+<meta property="og:type" content="{{Block `type`}}article{{/Block}}" /><!-- 常用值:article、news、book、movie、product… -->
 <meta property="og:site_name" content="{{Config.base.siteName}}" />
-<meta property="og:title" content="{{Block "title"}}{{Config.base.siteName}}{{/Block}}" />
-<meta property="og:description" content="{{Block "description"}}{{Config.base.siteName}}{{/Block}}" />
-<meta property="og:image" content="{{Block "image"}}{{/Block}}" />
-<meta property="og:url" content="{{Block "url"}}{{FrontendURL}}{{$.URI}}{{/Block}}" />
-<meta property="og:release_date" content="{{Block "releaseDate"}}{{Now.Format `2006-01-02`}}{{/Block}}" />
+<meta property="og:title" content="{{Block `title`}}{{Config.base.siteName}}{{/Block}}" />
+<meta property="og:description" content="{{Block `description`}}{{Config.base.siteName}}{{/Block}}" />
+<meta property="og:image" content="{{Block `image`}}{{/Block}}" />
+<meta property="og:url" content="{{Block `url`}}{{FrontendURL}}{{$.URI}}{{/Block}}" />
+<meta property="og:release_date" content="{{Block `releaseDate`}}{{Now.Format `2006-01-02`}}{{/Block}}" />
 <!-- og-tag:end -->
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
   <title>{{Block "title"}}{{Config.base.siteName}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan}}{{end}}{{/Block}}</title>
@@ -41,7 +41,7 @@
   <link href="{{AssetsXURL}}/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   {{Block "headEnd"}}{{/Block}}
 </head>
-<body {{Block "bodyAttr"}}{{/Block}}>
+<body {{Block `bodyAttr`}}{{/Block}}>
 {{Block "body"}}{{/Block}}
 <script src="{{AssetsURL}}/js/compatible.min.js?t={{BuildTime}}" type="text/javascript"></script>
 <script src="{{AssetsURL}}/js/jquery3.6.min.js?t={{BuildTime}}"></script>

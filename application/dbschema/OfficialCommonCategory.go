@@ -107,6 +107,7 @@ type OfficialCommonCategory struct {
 	HasChild    string `db:"has_child" bson:"has_child" comment:"是否有子分类" json:"has_child" xml:"has_child"`
 	Level       uint   `db:"level" bson:"level" comment:"层级" json:"level" xml:"level"`
 	Name        string `db:"name" bson:"name" comment:"分类名称" json:"name" xml:"name"`
+	Keywords    string `db:"keywords" bson:"keywords" comment:"分类页面关键词" json:"keywords" xml:"keywords"`
 	Description string `db:"description" bson:"description" comment:"分类说明" json:"description" xml:"description"`
 	Cover       string `db:"cover" bson:"cover" comment:"分类封面图" json:"cover" xml:"cover"`
 	Type        string `db:"type" bson:"type" comment:"类型" json:"type" xml:"type"`
@@ -691,6 +692,7 @@ func (a *OfficialCommonCategory) Reset() *OfficialCommonCategory {
 	a.HasChild = ``
 	a.Level = 0
 	a.Name = ``
+	a.Keywords = ``
 	a.Description = ``
 	a.Cover = ``
 	a.Type = ``
@@ -712,6 +714,7 @@ func (a *OfficialCommonCategory) AsMap(onlyFields ...string) param.Store {
 		r["HasChild"] = a.HasChild
 		r["Level"] = a.Level
 		r["Name"] = a.Name
+		r["Keywords"] = a.Keywords
 		r["Description"] = a.Description
 		r["Cover"] = a.Cover
 		r["Type"] = a.Type
@@ -736,6 +739,8 @@ func (a *OfficialCommonCategory) AsMap(onlyFields ...string) param.Store {
 			r["Level"] = a.Level
 		case "Name":
 			r["Name"] = a.Name
+		case "Keywords":
+			r["Keywords"] = a.Keywords
 		case "Description":
 			r["Description"] = a.Description
 		case "Cover":
@@ -774,6 +779,8 @@ func (a *OfficialCommonCategory) FromRow(row map[string]interface{}) {
 			a.Level = param.AsUint(value)
 		case "name":
 			a.Name = param.AsString(value)
+		case "keywords":
+			a.Keywords = param.AsString(value)
 		case "description":
 			a.Description = param.AsString(value)
 		case "cover":
@@ -828,6 +835,8 @@ func (a *OfficialCommonCategory) Set(key interface{}, value ...interface{}) {
 			a.Level = param.AsUint(vv)
 		case "Name":
 			a.Name = param.AsString(vv)
+		case "Keywords":
+			a.Keywords = param.AsString(vv)
 		case "Description":
 			a.Description = param.AsString(vv)
 		case "Cover":
@@ -860,6 +869,7 @@ func (a *OfficialCommonCategory) AsRow(onlyFields ...string) param.Store {
 		r["has_child"] = a.HasChild
 		r["level"] = a.Level
 		r["name"] = a.Name
+		r["keywords"] = a.Keywords
 		r["description"] = a.Description
 		r["cover"] = a.Cover
 		r["type"] = a.Type
@@ -884,6 +894,8 @@ func (a *OfficialCommonCategory) AsRow(onlyFields ...string) param.Store {
 			r["level"] = a.Level
 		case "name":
 			r["name"] = a.Name
+		case "keywords":
+			r["keywords"] = a.Keywords
 		case "description":
 			r["description"] = a.Description
 		case "cover":

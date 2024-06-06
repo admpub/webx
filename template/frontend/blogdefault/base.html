@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- =============== PAGE TITLE =============== -->
         <title>{{Block "title"}}{{Config.base.siteName}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan}}{{end}}{{/Block}}</title>
-        <meta name="keywords" content="{{Block "keywords"}}{{Config.base.siteMetaKeywords|Default Config.base.siteName}}{{/Block}}">
-        <meta name="description" content="{{Block "description"}}{{if Config.base.siteMetaKeywords}}{{Config.base.siteMetaKeywords}}{{else}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{end}}{{/Block}}">
+        <meta name="keywords" content="{{Block `keywords`}}{{Config.base.siteMetaKeywords|Default Config.base.siteName}}{{/Block}}">
+        <meta name="description" content="{{Block `description`}}{{if Config.base.siteMetaKeywords}}{{Config.base.siteMetaKeywords}}{{else}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{end}}{{/Block}}">
         <!-- ============= FAVICON ICON ============= -->
         <link rel="shortcut icon" href="{{AssetsXURL}}/blogdefault/img/favicon.ico" />
         <!-- ============= VENDORS CSS ============= -->

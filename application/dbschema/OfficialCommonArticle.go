@@ -112,6 +112,7 @@ type OfficialCommonArticle struct {
 	OwnerId            uint64  `db:"owner_id" bson:"owner_id" comment:"新闻发布者" json:"owner_id" xml:"owner_id"`
 	OwnerType          string  `db:"owner_type" bson:"owner_type" comment:"所有者类型(customer-前台客户;user-后台用户)" json:"owner_type" xml:"owner_type"`
 	Title              string  `db:"title" bson:"title" comment:"新闻标题" json:"title" xml:"title"`
+	Keywords           string  `db:"keywords" bson:"keywords" comment:"关键词" json:"keywords" xml:"keywords"`
 	Image              string  `db:"image" bson:"image" comment:"缩略图" json:"image" xml:"image"`
 	ImageOriginal      string  `db:"image_original" bson:"image_original" comment:"原始图" json:"image_original" xml:"image_original"`
 	Summary            string  `db:"summary" bson:"summary" comment:"摘要" json:"summary" xml:"summary"`
@@ -772,6 +773,7 @@ func (a *OfficialCommonArticle) Reset() *OfficialCommonArticle {
 	a.OwnerId = 0
 	a.OwnerType = ``
 	a.Title = ``
+	a.Keywords = ``
 	a.Image = ``
 	a.ImageOriginal = ``
 	a.Summary = ``
@@ -807,6 +809,7 @@ func (a *OfficialCommonArticle) AsMap(onlyFields ...string) param.Store {
 		r["OwnerId"] = a.OwnerId
 		r["OwnerType"] = a.OwnerType
 		r["Title"] = a.Title
+		r["Keywords"] = a.Keywords
 		r["Image"] = a.Image
 		r["ImageOriginal"] = a.ImageOriginal
 		r["Summary"] = a.Summary
@@ -850,6 +853,8 @@ func (a *OfficialCommonArticle) AsMap(onlyFields ...string) param.Store {
 			r["OwnerType"] = a.OwnerType
 		case "Title":
 			r["Title"] = a.Title
+		case "Keywords":
+			r["Keywords"] = a.Keywords
 		case "Image":
 			r["Image"] = a.Image
 		case "ImageOriginal":
@@ -916,6 +921,8 @@ func (a *OfficialCommonArticle) FromRow(row map[string]interface{}) {
 			a.OwnerType = param.AsString(value)
 		case "title":
 			a.Title = param.AsString(value)
+		case "keywords":
+			a.Keywords = param.AsString(value)
 		case "image":
 			a.Image = param.AsString(value)
 		case "image_original":
@@ -998,6 +1005,8 @@ func (a *OfficialCommonArticle) Set(key interface{}, value ...interface{}) {
 			a.OwnerType = param.AsString(vv)
 		case "Title":
 			a.Title = param.AsString(vv)
+		case "Keywords":
+			a.Keywords = param.AsString(vv)
 		case "Image":
 			a.Image = param.AsString(vv)
 		case "ImageOriginal":
@@ -1053,6 +1062,7 @@ func (a *OfficialCommonArticle) AsRow(onlyFields ...string) param.Store {
 		r["owner_id"] = a.OwnerId
 		r["owner_type"] = a.OwnerType
 		r["title"] = a.Title
+		r["keywords"] = a.Keywords
 		r["image"] = a.Image
 		r["image_original"] = a.ImageOriginal
 		r["summary"] = a.Summary
@@ -1096,6 +1106,8 @@ func (a *OfficialCommonArticle) AsRow(onlyFields ...string) param.Store {
 			r["owner_type"] = a.OwnerType
 		case "title":
 			r["title"] = a.Title
+		case "keywords":
+			r["keywords"] = a.Keywords
 		case "image":
 			r["image"] = a.Image
 		case "image_original":
