@@ -1,6 +1,6 @@
 {{Strip}}{{Extend "#blogdefault#base"}}
 {{Block "title"}}{{- $.Stored.data.Title}} - {{"文章详情"|$.T -}}{{/Block}}
-{{Block "keywords"}}{{- "文章详情"|$.T -}},{{$.Stored.data.Title}}{{/Block}}
+{{Block "keywords"}}{{$.Stored.data.Keywords}}{{/Block}}
 {{Block "description"}}{{$.Stored.data.Summary}}{{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsXURL}}/css/page/article_detail.css?t={{BuildTime}}" />

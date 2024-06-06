@@ -25,6 +25,26 @@
     </div>
 </div>
 <div class="form-group">
+    <label class="col-sm-2 control-label">{{"网站SEO"|$.T}}</label>
+    <div class="col-sm-10">
+        <div class="fieldset bg-fc">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{"关键词"|$.T}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="base[siteMetaKeywords][value]" value="{{$config.siteMetaKeywords.Value}}" placeholder="{{`网站关键词`|$.T}}" onkeyup="this.value=this.value.replace(/，|[,]{2,}/g,',')" />
+                    <div class="help-block">{{`多个关键词之间用半角逗号“,”分隔`|$.T}}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{"简介"|$.T}}</label>
+                <div class="col-sm-10">
+                    <textarea type="text" class="form-control" name="base[siteMetaDescription][value]" placeholder="{{`网站简介`|$.T}}">{{$config.siteMetaDescription.Value}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group">
     <label class="col-sm-2 control-label">{{"素材CDN"|$.T}}</label>
     <div class="col-sm-10">
         <span class="input-group">

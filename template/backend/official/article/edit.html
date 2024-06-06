@@ -51,7 +51,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"文章标题"|$.T}}</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" required name="title" value="{{$.Form "title"}}">
+                    <input type="text" class="form-control" required name="title" value="{{$.Form `title`}}">
                 </div>
               </div>
               <div class="form-group">
@@ -59,14 +59,20 @@
                   <div class="col-sm-8">
                     <div class="avatar-upload">
                       {{$image := $.Form "image"}}
-                      <img src="{{$image|Default (AssetsURL "/images/user_128.png")}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
+                      <img src="{{$image|Default (AssetsURL `/images/user_128.png`)}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
                       <input id="fileupload" type="file" name="files[]">
                       <input type="hidden" id="article-image" name="image" value="{{$image}}" />
-                      <input type="hidden" id="article-image-original" name="imageOriginal" value="{{$.Form "imageOriginal"}}" />
+                      <input type="hidden" id="article-image-original" name="imageOriginal" value="{{$.Form `imageOriginal`}}" />
                       <div id="progress" class="overlay"></div>
                     </div>
                   </div>
                 </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{"关键词"|$.T}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="keywords" value="{{$.Form `keywords`}}">
+                </div>
+              </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"文章摘要"|$.T}}</label>
                 <div class="col-sm-8">
@@ -110,10 +116,10 @@
                   <div class="col-sm-3">
                     {{$v := $.Form "display"}}
                     <div class="radio radio-success radio-inline">
-                        <input type="radio" value="Y" name="display" id="display-Y"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}> <label for="display-Y">{{"显示"|$.T}}</label>
+                        <input type="radio" value="Y" name="display" id="display-Y"{{if eq $v `Y` ``}} checked{{end}}> <label for="display-Y">{{"显示"|$.T}}</label>
                     </div>
                       <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="N" name="display" id="display-N"{{if eq $v "N"}} checked{{end}}> <label for="display-N">{{"隐藏"|$.T}}</label>
+                        <input type="radio" value="N" name="display" id="display-N"{{if eq $v `N`}} checked{{end}}> <label for="display-N">{{"隐藏"|$.T}}</label>
                       </div>
                   </div>
                   <label class="col-sm-2 control-label">{{"售价"|$.T}}</label>
@@ -126,25 +132,25 @@
                   <div class="col-sm-8">
                     {{$closeComment := $.Form "closeComment"}}
                     <div class="radio radio-success radio-inline">
-                      <input type="radio" value="N" name="closeComment" id="closeComment-N"{{if or (eq $closeComment "N") (eq $closeComment "")}} checked{{end}} onclick="$('#comment-settings').removeClass('hide');"> <label for="closeComment-N">{{"允许评论"|$.T}}</label>
+                      <input type="radio" value="N" name="closeComment" id="closeComment-N"{{if eq $closeComment `N` ``}} checked{{end}} onclick="$('#comment-settings').removeClass('hide');"> <label for="closeComment-N">{{"允许评论"|$.T}}</label>
                     </div>
                     <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="Y" name="closeComment" id="closeComment-Y"{{if eq $closeComment "Y"}} checked{{end}} onclick="$('#comment-settings').addClass('hide');"> <label for="closeComment-Y">{{"关闭评论"|$.T}}</label>
+                        <input type="radio" value="Y" name="closeComment" id="closeComment-Y"{{if eq $closeComment `Y`}} checked{{end}} onclick="$('#comment-settings').addClass('hide');"> <label for="closeComment-Y">{{"关闭评论"|$.T}}</label>
                     </div>
 
                     <!-- comment-settings -->
 
-                  <div id="comment-settings" class="fieldset bg-fc{{if eq $closeComment "Y"}} hide{{end}}">
+                  <div id="comment-settings" class="fieldset bg-fc{{if eq $closeComment `Y`}} hide{{end}}">
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">{{"显示评论"|$.T}}</label>
                     <div class="col-sm-8">
                       {{$v := $.Form "commentAutoDisplay"}}
                       <div class="radio radio-success radio-inline">
-                        <input type="radio" value="Y" name="commentAutoDisplay" id="commentAutoDisplay-Y"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}> <label for="commentAutoDisplay-Y">{{"直接显示"|$.T}}</label>
+                        <input type="radio" value="Y" name="commentAutoDisplay" id="commentAutoDisplay-Y"{{if eq $v `Y` ``}} checked{{end}}> <label for="commentAutoDisplay-Y">{{"直接显示"|$.T}}</label>
                       </div>
                       <div class="radio radio-primary radio-inline">
-                          <input type="radio" value="N" name="commentAutoDisplay" id="commentAutoDisplay-N"{{if eq $v "N"}} checked{{end}}> <label for="commentAutoDisplay-N">{{"需要审核"|$.T}}</label>
+                          <input type="radio" value="N" name="commentAutoDisplay" id="commentAutoDisplay-N"{{if eq $v `N`}} checked{{end}}> <label for="commentAutoDisplay-N">{{"需要审核"|$.T}}</label>
                       </div>
                     </div>
                   </div>
@@ -154,7 +160,7 @@
                         {{$v := $.Form "commentAllowUser"}}
                         {{range $i,$r := $.Stored.allowUsers}}
                         <div class="radio radio-success radio-inline">
-                          <input type="radio" value="{{$r.K}}" name="commentAllowUser" id="commentAllowUser-{{$r.K}}"{{if or (eq $v $r.K) (and (eq $v "") (eq $r.K "all") )}} checked{{end}}> <label for="commentAllowUser-{{$r.K}}">{{$r.V}}</label>
+                          <input type="radio" value="{{$r.K}}" name="commentAllowUser" id="commentAllowUser-{{$r.K}}"{{if or (eq $v $r.K) (and (eq $v ``) (eq $r.K `all`) )}} checked{{end}}> <label for="commentAllowUser-{{$r.K}}">{{$r.V}}</label>
                         </div>
                         {{end}}
                       </div>
@@ -168,7 +174,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">{{"标签"|$.T}}</label>
                   <div class="col-sm-8">
-                    <input id="select2tags" name="tags" type="hidden" value="{{$.Form "tags"}}" />
+                    <input id="select2tags" name="tags" type="hidden" value="{{$.Form `tags`}}" />
                   </div>
                 </div>
               <div class="form-group form-submit-group">

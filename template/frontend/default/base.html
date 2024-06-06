@@ -11,8 +11,8 @@
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta http-equiv="Cache-Control" content="no-transform">
   <!-- device-setting:end -->
-  <meta name="keywords" content="{{Block "keywords"}}{{Config.base.siteName}}{{/Block}}">
-  <meta name="description" content="{{Block "description"}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{/Block}}">
+  <meta name="keywords" content="{{Block "keywords"}}{{Config.base.siteMetaKeywords|Default Config.base.siteName}}{{/Block}}">
+  <meta name="description" content="{{Block "description"}}{{if Config.base.siteMetaKeywords}}{{Config.base.siteMetaKeywords}}{{else}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{end}}{{/Block}}">
 <!-- og-tag:start -->
 <meta property="og:type" content="{{Block "type"}}article{{/Block}}" /><!-- 常用值:article、news、book、movie、product… -->
 <meta property="og:site_name" content="{{Config.base.siteName}}" />

@@ -1,8 +1,8 @@
 {{Strip}}{{Extend "base"}}
-{{Block "title"}}{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}} - {{$category.Name}}{{- end -}}{{/Block}}
-{{Block "keywords"}}{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}},{{$category.Name}}{{- end -}}
+{{Block "title"}}{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}} - {{$category.Name}}{{- end -}} - {{Config.base.siteName}}{{/Block}}
+{{Block "keywords"}}{{- range $index, $category := $.Stored.categories}},{{$category.Name}}{{else}}{{Config.base.siteMetaKeywords}}{{- end -}}
 {{/Block}}
-{{Block "description"}}{{/Block}}
+{{Block "description"}}{{Config.base.siteMetaDescription}}{{/Block}}
 {{Block "bodyAttr"}} class="pd-t-70 bg-gray-lightest"{{/Block}}
 {{Block "body"}}
 {{Include "header"}}
