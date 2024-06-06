@@ -1,5 +1,5 @@
 {{Strip}}{{Extend "#blogdefault#base"}}
-{{Block "title"}}{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}} - {{$category.Name}}{{- end -}}{{/Block}}
+{{Block "title"}}{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}} - {{$category.Name}}{{- end -}} - {{Config.base.siteName}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan}}{{end}}{{/Block}}
 {{Block "keywords"}}{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}},{{$category.Name}}{{- end -}}{{/Block}}
 {{Block "description"}}{{/Block}}
 {{Block "body"}}
