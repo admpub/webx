@@ -121,8 +121,8 @@ github.com/admpub/archiver v1.1.4 h1:HmHvNuvSeIVGvqmpOtA8Mu28BSTPwtri8/TeXxFQXnY
 github.com/admpub/archiver v1.1.4/go.mod h1:lkK4m4K6YOjdhcR63LlMEXC10lXtx/uOCs4FytlYrjk=
 github.com/admpub/bindata/v3 v3.2.1 h1:hVCfe0prFX06bn7VyLhuhynFKZ57zIxilMUA1+0jRxI=
 github.com/admpub/bindata/v3 v3.2.1/go.mod h1:jOTPzlb6r3ljvY9XOftVlTfepjG5p+68ZHVJC3N9Xsg=
-github.com/admpub/cache v0.6.1 h1:Ie1uvroI2nelI+59NSSPMOK02n92do5ngt+vnxNAXnY=
-github.com/admpub/cache v0.6.1/go.mod h1:6A3TDKFjIBHvPX+lX3buOvn/WxukCKDg56hrx9imKGs=
+github.com/admpub/cache v0.6.2 h1:vpXjhNvof79cmXJMesjJxYM+rpRamuFLaHIiuHgkyrE=
+github.com/admpub/cache v0.6.2/go.mod h1:Vmn9AM40rIb/sT8UNGPP5solGb0u8W4Dw6Y63+b98No=
 github.com/admpub/caddy v1.1.11/go.mod h1:wb4LgV+7tN5tOI+D4pQyjz31wKEziN5TshwZXxEpbbg=
 github.com/admpub/caddy v1.2.7 h1:voEKwn/f1dcqy5o4uavF02U0jLEJll76qoDGtg9IKEg=
 github.com/admpub/caddy v1.2.7/go.mod h1:Zeu0/sjGrLm4AmSSROQ4vibRINYcppsS5885k1bZsOE=

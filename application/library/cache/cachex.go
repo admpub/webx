@@ -83,6 +83,13 @@ func TTLIfCallback(condition func() bool, a x.GetOption, b x.GetOption) x.GetOpt
 	return b
 }
 
+func AddTTL(a x.GetOption, ttl int64) x.GetOption {
+	return func(o *x.Options) {
+		a(o)
+		o.AddTTL(ttl)
+	}
+}
+
 func GenOptions(ctx echo.Context, cacheSeconds int64) []x.GetOption {
 	nocache := ctx.Formx(`nocache`).Int()
 	opts := []x.GetOption{TTL(cacheSeconds)}
