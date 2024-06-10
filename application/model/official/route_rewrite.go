@@ -39,7 +39,7 @@ func (f *RouteRewrite) check() error {
 	if !strings.HasPrefix(f.RewriteTo, `/`) {
 		f.RewriteTo = "/" + f.RewriteTo
 	}
-	err := middleware.ValidateRewriteRule(f.Route, f.RewriteTo)
+	err := middleware.ValidateRewriteRule(f.Route, f.RewriteTo, false)
 	return err
 }
 
