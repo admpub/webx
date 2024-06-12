@@ -308,9 +308,9 @@
 							case 'bufferNudgeOnStall':
 							//networkError
 							case 'fragLoadError'://离开页面时触发
+								if(!data.fatal) return;
 								msg += data.details;
 								console.warn(msg);
-								if(!data.fatal) return;
 								break;
 							//networkError
 							case 'manifestLoadError':
