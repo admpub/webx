@@ -264,11 +264,11 @@
 					}
 					var recoverDecodingErrorDate,recoverSwapAudioCodecDate, recoverStartLoadDate;
 					hls.on(Hls.Events.ERROR, function (event, data) {
-						var msg = '';
+						var msg = '',autoRecoverMediaError=amplayer.options.autoRecoverMediaError||false;
 						switch (data.type) {
 							case 'mediaError': 
 							msg = '媒体错误';
-	    					if (data.fatal) {
+	    					if (autoRecoverMediaError && data.fatal) {
 								var now=(new Date()).getTime();
 								if (!recoverDecodingErrorDate || now - recoverDecodingErrorDate > 3000) {
 									recoverDecodingErrorDate = now;
@@ -301,6 +301,7 @@
 						msg += ': ';
 						switch (data.details) {
 							//mediaError
+							case 'bufferFullError':
 							case 'bufferSeekOverHole':
 							case 'bufferNudgeOnStall':
 							//networkError
