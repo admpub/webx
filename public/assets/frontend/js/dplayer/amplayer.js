@@ -262,11 +262,36 @@
 							});
 						}
 					}
+					var recoverDecodingErrorDate,recoverSwapAudioCodecDate, recoverStartLoadDate;
 					hls.on(Hls.Events.ERROR, function (event, data) {
 						var msg = '';
 						switch (data.type) {
-							case 'mediaError': msg = '媒体错误'; break;
-							case 'networkError': msg = '网络错误'; break;
+							case 'mediaError': 
+							msg = '媒体错误';
+							var now=(new Date()).getTime();
+							if (!recoverDecodingErrorDate || now - recoverDecodingErrorDate > 3000) {
+								recoverDecodingErrorDate = now;
+								hls.recoverMediaError();
+								return;
+							} 
+							if (!recoverSwapAudioCodecDate || now - recoverSwapAudioCodecDate > 3000) {
+								recoverSwapAudioCodecDate = now;
+								hls.swapAudioCodec();
+								hls.recoverMediaError();
+								return;
+							}
+							break;
+
+							case 'networkError': 
+							msg = '网络错误'; 
+							var now=(new Date()).getTime();
+							if (!recoverStartLoadDate || now - recoverStartLoadDate > 3000) {
+								recoverStartLoadDate  = now;
+								hls.startLoad();
+								return;
+							}
+							break;
+
 							default: msg = data.type;
 						}
 						msg += ': ';
