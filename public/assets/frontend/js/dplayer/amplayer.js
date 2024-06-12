@@ -264,11 +264,12 @@
 					}
 					var recoverDecodingErrorDate,recoverSwapAudioCodecDate, recoverStartLoadDate;
 					hls.on(Hls.Events.ERROR, function (event, data) {
-						var msg = '',autoRecoverMediaError=amplayer.options.autoRecoverMediaError||false;
+						var msg = '';
 						switch (data.type) {
 							case 'mediaError': 
 							msg = '媒体错误';
-	    					if (autoRecoverMediaError && data.fatal) {
+							var autoRecover=amplayer.options.autoRecoverMediaError||false;
+	    					if (autoRecover && data.fatal) {
 								var now=(new Date()).getTime();
 								if (!recoverDecodingErrorDate || now - recoverDecodingErrorDate > 3000) {
 									recoverDecodingErrorDate = now;
@@ -286,7 +287,8 @@
 
 							case 'networkError': 
 							msg = '网络错误'; 
-	    					if (data.fatal) {
+							var autoRecover=amplayer.options.autoRecoverNetworkError||false;
+	    					if (autoRecover && data.fatal) {
 								var now=(new Date()).getTime();
 								if (!recoverStartLoadDate || now - recoverStartLoadDate > 3000) {
 									recoverStartLoadDate  = now;
