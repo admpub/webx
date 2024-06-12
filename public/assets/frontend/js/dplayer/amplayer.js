@@ -310,7 +310,6 @@
 							case 'fragLoadError'://离开页面时触发
 								if(!data.fatal) return;
 								msg += data.details;
-								console.warn(msg);
 								break;
 							//networkError
 							case 'manifestLoadError':
