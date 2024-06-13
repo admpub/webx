@@ -16,7 +16,15 @@
 <div class="form-group">
     <label class="col-sm-2 control-label">{{"Token"|$.T}}</label>
     <div class="col-sm-8">
-        <input type="text" class="form-control" name="socketio[token][value]" id="socketio-token-value" value="{{$config.token.Value}}">
+        <span class="input-group">
+        <input type="password" class="form-control" name="socketio[token][value]" id="socketio-token-value" value="{{$config.token.Value}}" autocomplete="off">
+        <span class="input-group-btn">
+        <a href="javascript:;" data-target="[name='socketio[token][value]']" class="btn btn-default show-password">
+          <i class="fa fa-eye"></i>
+          {{`查看`|$.T}}
+        </a>
+        </span>
+        </span>
         <div class="help-block">{{"设置 SocketIO 的令牌"|$.T}}</div>
     </div><!-- col-sm-8 -->
 </div>
