@@ -24,6 +24,7 @@ type Config struct {
 	MaxMB         int64
 	MaxRetries    int
 	RetryInterval time.Duration
+	DisableChunk  bool
 }
 
 var (
@@ -93,5 +94,11 @@ func OptionsNoticeSender(noticeSender notice.Noticer) Options {
 func OptionsProgress(pro *notice.Progress) Options {
 	return func(c *Config) {
 		c.Progress = pro
+	}
+}
+
+func OptionsDisableChunk(disableChunk bool) Options {
+	return func(c *Config) {
+		c.DisableChunk = disableChunk
 	}
 }

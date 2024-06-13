@@ -61,6 +61,7 @@ func AdvanceDownload(ctx echo.Context, options ...Options) (*uploadClient.Result
 		Client: func() http.Client {
 			return *Client
 		},
+		DisableChunk: config.DisableChunk,
 	}
 	if config.MaxMB > 0 {
 		godlCfg.MaxSize = config.MaxMB * godl.MB

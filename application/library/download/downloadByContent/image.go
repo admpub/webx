@@ -18,6 +18,7 @@ func SyncRemoteImage(
 	articleID string,
 	content string,
 	contentType string,
+	disableChunk ...bool,
 ) (string, error) {
 	images := OutsideImage(content, contentType)
 	if len(images) == 0 {
@@ -41,6 +42,12 @@ func SyncRemoteImage(
 	if cloudStorage.Id > 0 {
 		excludeURLPrefixRegexp = regexp.MustCompile(`(?i)^` + regexp.QuoteMeta(cloudStorage.BaseURL()+`/`))
 	}
+	var _disableChunk bool
+	if len(disableChunk) > 0 {
+		_disableChunk = disableChunk[0]
+	} else {
+		_disableChunk = true
+	}
 	for matched, image := range images {
 		if excludeURLPrefixRegexp != nil && excludeURLPrefixRegexp.MatchString(image) {
 			delete(images, matched)
@@ -55,6 +62,7 @@ func SyncRemoteImage(
 			download.OptionsID(articleID),
 			//download.OptionsCheckDir(true),
 			download.OptionsPrepareData(prepareData),
+			download.OptionsDisableChunk(_disableChunk),
 		)
 		if err != nil {
 			log.Error(image, `: `, err)
