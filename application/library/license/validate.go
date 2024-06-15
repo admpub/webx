@@ -43,16 +43,16 @@ func (v *ValidateResult) UnsignData(publicKey string) (err error) {
 
 func (v *ValidateResult) Validate() error {
 	if v.Result != `OK` {
-		return lib.InvalidLicense
+		return lib.ErrInvalidLicense
 	}
 	if v.Package != license.Package() {
 		log.Warnf(`product package is mismatched: %v != %v`, v.Package, license.Package())
-		return lib.InvalidLicense
+		return lib.ErrInvalidLicense
 	}
 	verNo := strings.SplitN(license.Version(), `-`, 2)[0]
 	if !lib.CheckVersion(verNo, v.Version) {
 		log.Warnf(`version number is mismatched: %v != %v`, v.Version, verNo)
-		return lib.InvalidLicense
+		return lib.ErrInvalidLicense
 	}
 
 	timeUTC := time.Now().UTC()
@@ -61,7 +61,7 @@ func (v *ValidateResult) Validate() error {
 		myDate := timeUTC.Format(`20060102`)
 		if v.Date != myDate {
 			log.Warnf(`system time is mismatched: %v != %v`, v.Date, myDate)
-			return lib.InvalidLicense
+			return lib.ErrInvalidLicense
 		}
 	}
 	publicKey := license.GetOrLoadPublicKey()

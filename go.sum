@@ -222,8 +222,8 @@ github.com/admpub/ipfilter v1.0.6 h1:r+8UGIcmjL6h2KfLRlQaDsa0tR4kLfw/hp2a4+CRLLI
 github.com/admpub/ipfilter v1.0.6/go.mod h1:45m0qCpyx2wyhGMPeEbYmdOUKghgQSMWji7UqgqwGTs=
 github.com/admpub/json5 v0.0.1 h1:ZgD9YKNEpOqjcg553hqi1Zv8f8tNWLjxZrFcoksCRCw=
 github.com/admpub/json5 v0.0.1/go.mod h1:spt0tC/we4imVn3yB/FUuENv2qDJRSi7cxnt+buqWVE=
-github.com/admpub/license_gen v0.1.0 h1:zCHh6dHvEvt12yrOxQ8ivDvIgWKZpGH27eVSyGYDDrI=
-github.com/admpub/license_gen v0.1.0/go.mod h1:wI4uHqEIg4MpTQ2bh92ACusqEKnj+gKYz0MpysAu2oE=
+github.com/admpub/license_gen v0.1.1 h1:y0l/nDrAvqze3YEvw2pRCgeHnpo9/67s9S8NPNn/Lt8=
+github.com/admpub/license_gen v0.1.1/go.mod h1:wI4uHqEIg4MpTQ2bh92ACusqEKnj+gKYz0MpysAu2oE=
 github.com/admpub/log v1.3.3/go.mod h1:rUi3v9wpIDBYbF+X1+5ZRt749HbAcZXVJ5uglU0Cbp4=
 github.com/admpub/log v1.3.6 h1:fvklF0qsrIjpoAuZPKOBw0V7kbyoVAmHgNuoLtlfcA0=
 github.com/admpub/log v1.3.6/go.mod h1:xoQ74l+OC85dML+cPu3uemC/8G/BC2BjIvoxRZ4jT4g=
@@ -235,8 +235,8 @@ github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5 h1:N9+M16t6Pa0zNjy2g
 github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5/go.mod h1:Aim7aOlr/P9OkX0ucuhrzMEUcKOJXErCMS3MDGTBGJc=
 github.com/admpub/mysql-schema-sync v0.2.6 h1:BaL7J2gWguEe9ADQkhp4olnkdBGeePwcCT+lnxxjoC0=
 github.com/admpub/mysql-schema-sync v0.2.6/go.mod h1:LmUAY60w9nQCiGBMjZEBah35kA0fvGZfh0PSwAqPZHE=
-github.com/admpub/nging/v5 v5.3.3-pre9 h1:G9Kt67JJwA3G/atSY5NPfDnXxCT7asuPtujGRbdC9EA=
-github.com/admpub/nging/v5 v5.3.3-pre9/go.mod h1:blsFRAZ0PDD46HaO1M+Lwn6FhUx8c51bz6UgWTlEzPQ=
+github.com/admpub/nging/v5 v5.3.3-pre10 h1:3zd1kHP/XLTdzOuvIvxfP9BjHPSqbyq2lxPpfBp2Rqw=
+github.com/admpub/nging/v5 v5.3.3-pre10/go.mod h1:Qs7EDLvoxt2CGO+0wFfl6n4aT7R6O/aBqjzQb28Cz04=
 github.com/admpub/null v8.0.4+incompatible h1:t7lrTd11PlVE+KGrdffWQTi/oFAyczVQQkmqhzfEOvU=
 github.com/admpub/null v8.0.4+incompatible/go.mod h1:DMV9RC+JZv6AhaX1E62ur1mS7gyGLYRh+r0s8MF7mHA=
 github.com/admpub/once v0.0.1 h1:HiFavms0UQG08iR1cwE8N96StFEkv3Hvy2sjCLZD1dg=

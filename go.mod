@@ -24,7 +24,7 @@ require (
 	github.com/admpub/godotenv v1.4.3
 	github.com/admpub/imageproxy v0.10.0
 	github.com/admpub/ipfilter v1.0.6
-	github.com/admpub/license_gen v0.1.0
+	github.com/admpub/license_gen v0.1.1
 	github.com/admpub/log v1.3.6
 	github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5
 	github.com/admpub/null v8.0.4+incompatible
@@ -70,7 +70,7 @@ require (
 	github.com/admpub/go-lock v1.3.0
 	github.com/admpub/go-zinc v0.0.8
 	github.com/admpub/goth v0.0.4
-	github.com/admpub/nging/v5 v5.3.3-pre9
+	github.com/admpub/nging/v5 v5.3.3-pre10
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.26.3
