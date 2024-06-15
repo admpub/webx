@@ -14,16 +14,15 @@ func TestGenSN(t *testing.T) {
 	}
 	fmt.Println(`sn`, sn) // A3ZJR12RYOO8Q9R
 	test.NotEmpty(t, sn)
+	test.True(t, IsSN(sn))
 
-	if err != nil {
-		panic(err)
-	}
 	sn, err = snCodec.EncodeUint64([]uint64{12345678901234567890})
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println(`sn`, sn)
 	test.NotEmpty(t, sn) // 58Z2XMPY803OORY
+	test.True(t, IsSN(sn))
 }
 
 func TestHideContent1(t *testing.T) {

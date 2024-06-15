@@ -1,6 +1,7 @@
 package top
 
 import (
+	"regexp"
 	"sync"
 
 	"github.com/webx-top/echo"
@@ -18,6 +19,7 @@ var (
 	hashidsOnce          syncOnce.Once
 	snCodec              *hashids.HashID
 	hashidsDefaultPrefix = `A`
+	snRegexp             = regexp.MustCompile(`^[A-Z0-9]{14,}$`)
 )
 
 func init() {
@@ -32,6 +34,10 @@ func NewSNCodec() *hashids.HashID {
 		panic(err)
 	}
 	return codec
+}
+
+func IsSN(v string) bool {
+	return snRegexp.MatchString(v)
 }
 
 // GenSN 生成唯一序列号 (经密码加密)
