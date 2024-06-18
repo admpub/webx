@@ -86,6 +86,7 @@ func Initialize(callbacks ...func()) {
 	if len(StaticOptions.Path) == 0 {
 		StaticOptions.Path = frontend.Prefix + "/public/assets/frontend/"
 	}
+	StaticOptions.TrimPrefix = frontend.Prefix
 	frontend.StaticMW = middleware.Static(StaticOptions)
 	frontend.TemplateDir = filepath.Join(WebxDir, frontend.DefaultTemplateDir) //模板文件夹
 	frontend.AssetsDir = filepath.Join(WebxDir, frontend.DefaultAssetsDir)     //素材文件夹
