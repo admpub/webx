@@ -34,10 +34,10 @@ func SessionInfo(h echo.Handler) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		ppath := c.Request().URL().Path()
 		switch ppath {
-		case handler.FrontendPrefix + `/favicon.ico`:
+		case c.Echo().Prefix() + `/favicon.ico`:
 			return h.Handle(c)
 		default:
-			if strings.HasPrefix(ppath, handler.FrontendPrefix+uploadLibrary.UploadURLPath) {
+			if strings.HasPrefix(ppath, c.Echo().Prefix()+uploadLibrary.UploadURLPath) {
 				return h.Handle(c)
 			}
 		}
@@ -69,7 +69,7 @@ func SessionInfo(h echo.Handler) echo.HandlerFunc {
 				switch path.Base(ppath) {
 				case `sign_up`, `sign_in`, `sign_out`:
 				default:
-					if c.Path() != handler.FrontendPrefix+`/captcha/*` && !strings.HasPrefix(ppath, handler.FrontendPrefix+`/oauth/`) {
+					if c.Path() != c.Echo().Prefix()+`/captcha/*` && !strings.HasPrefix(ppath, c.Echo().Prefix()+`/oauth/`) {
 						return goToSignIn(c)
 					}
 				}
@@ -150,8 +150,8 @@ func permCheck(c echo.Context, customer *dbschema.OfficialCustomer) error {
 	})
 	if !c.Internal().Bool(`skipCurrentURLPermCheck`) {
 		rpath := c.Path()
-		if len(handler.FrontendPrefix) > 0 {
-			rpath = strings.TrimPrefix(rpath, handler.FrontendPrefix)
+		if len(c.Echo().Prefix()) > 0 {
+			rpath = strings.TrimPrefix(rpath, c.Echo().Prefix())
 		}
 		if err := checkPermission(c, customer, permission, rpath); err != nil {
 			return err

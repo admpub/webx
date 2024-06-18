@@ -68,9 +68,9 @@ func Initialize(callbacks ...func()) {
 		// StaticMW
 
 		fileSystems := xtemplate.NewFileSystems()
-		fileSystems.Register(xtemplate.NewStaticDir(backend.AssetsDir, "/public/assets/")) // 注册本地文件系统内的文件
-		fileSystems.Register(bindata.StaticAssetFS)                                        // 注册 bindata 打包的文件
-		bootconfig.StaticMW = mwBindata.Static("/public/assets/", fileSystems)
+		fileSystems.Register(xtemplate.NewStaticDir(backend.AssetsDir, "/public/assets/"))              // 注册本地文件系统内的文件
+		fileSystems.Register(xtemplate.NewFileSystemTrimPrefix(frontend.Prefix, bindata.StaticAssetFS)) // 注册 bindata 打包的文件
+		bootconfig.StaticMW = mwBindata.Static(frontend.Prefix+"/public/assets/", fileSystems)
 
 		// Template file manager
 

@@ -107,6 +107,26 @@ func (f *FileSystems) Register(fileSystem http.FileSystem) {
 	*f = append(*f, fileSystem)
 }
 
+func NewFileSystemTrimPrefix(trimPrefix string, fs http.FileSystem) http.FileSystem {
+	if len(trimPrefix) == 0 {
+		return fs
+	}
+	return fsTrimPrefix{
+		trimPrefix: trimPrefix,
+		fs:         fs,
+	}
+}
+
+type fsTrimPrefix struct {
+	trimPrefix string
+	fs         http.FileSystem
+}
+
+func (f fsTrimPrefix) Open(name string) (file http.File, err error) {
+	name = strings.TrimPrefix(name, f.trimPrefix)
+	return f.fs.Open(name)
+}
+
 func NewStaticDir(dir string, trimPrefix ...string) http.FileSystem {
 	var _trimPrefix string
 	if len(trimPrefix) > 0 {

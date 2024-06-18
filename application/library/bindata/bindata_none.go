@@ -24,7 +24,7 @@ import (
 var (
 	StaticOptions = &middleware.StaticOptions{
 		Root:   "",
-		Path:   "/public/assets/frontend/",
+		Path:   "",
 		MaxAge: bootconfig.HTTPCacheMaxAge,
 	}
 	NgingDir             = `../nging`
@@ -82,6 +82,9 @@ func Initialize(callbacks ...func()) {
 	//注册前台静态资源
 	if len(StaticOptions.Root) == 0 {
 		StaticOptions.Root = filepath.Join(WebxDir, `public/assets/frontend`)
+	}
+	if len(StaticOptions.Path) == 0 {
+		StaticOptions.Path = frontend.Prefix + "/public/assets/frontend/"
 	}
 	frontend.StaticMW = middleware.Static(StaticOptions)
 	frontend.TemplateDir = filepath.Join(WebxDir, frontend.DefaultTemplateDir) //模板文件夹

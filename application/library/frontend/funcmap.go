@@ -3,7 +3,6 @@ package frontend
 import (
 	"sync"
 
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/initialize/backend"
 	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/webx/application/library/top"
@@ -73,7 +72,6 @@ func getAssetsXURL(paths ...string) (r string) {
 }
 
 func getBackendURL(paths ...string) (r string) {
-	r = handler.BackendPrefix
 	for _, ppath := range paths {
 		r += ppath
 	}
@@ -81,7 +79,6 @@ func getBackendURL(paths ...string) (r string) {
 }
 
 func getFrontendURL(paths ...string) (r string) {
-	r = handler.FrontendPrefix
 	for _, ppath := range paths {
 		r += ppath
 	}

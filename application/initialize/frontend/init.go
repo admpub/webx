@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 
 	"github.com/admpub/log"
@@ -41,12 +42,12 @@ const (
 )
 
 var (
-	Prefix             string
+	Prefix             string = os.Getenv(`NGING_FRONTEND_URL_PREFIX`)
 	StaticMW           interface{}
 	TemplateDir        = DefaultTemplateDir //模板文件夹
 	AssetsDir          = DefaultAssetsDir   //素材文件夹
-	AssetsURLPath      = DefaultAssetsURLPath
-	StaticRootURLPath  = `/public/`
+	AssetsURLPath      = Prefix + DefaultAssetsURLPath
+	StaticRootURLPath  = Prefix + `/public/`
 	RendererDo         = func(driver.Driver) {}
 	DefaultMiddlewares = []interface{}{middleware.Log()}
 )
@@ -61,23 +62,21 @@ func init() {
 	bootconfig.OnStart(1, start)
 }
 
-func start() {
-	Prefix = echo.String(`FrontendPrefix`)
+func SetPrefix(prefix string) {
+	Prefix = prefix
+	AssetsURLPath = prefix + DefaultAssetsURLPath
+	StaticRootURLPath = prefix + `/public/`
 	frontend.AssetsURLPath = AssetsURLPath
+}
+
+func start() {
+	SetPrefix(echo.String(`FrontendPrefix`))
 	InitWebServer()
 }
 
 func InitWebServer() {
-	e := IRegister().Echo().SetPrefix(Prefix)
-	config.FromFile().Sys.SetRealIPParams(IRegister().Echo().RealIPConfig())
-	e.SetRenderDataWrapper(xMW.DefaultRenderDataWrapper)
-	e.SetDefaultExtension(RouteDefaultExtension)
-	if len(config.FromCLI().BackendDomain) > 0 {
-		// 如果指定了后台域名则只能用该域名访问后台。此时将其它域名指向前台
-		subdomains.Default.Default = Name // 设置默认(没有匹配到域名的时候)访问的域名别名
-	}
-	siteURL := config.Setting(`base`).String(`siteURL`)
 	var frontendDomain string
+	siteURL := config.Setting(`base`).String(`siteURL`)
 	if len(siteURL) > 0 {
 		info, err := url.Parse(siteURL)
 		if err != nil {
@@ -85,6 +84,14 @@ func InitWebServer() {
 		} else {
 			frontendDomain = info.Scheme + `://` + info.Host
 		}
+	}
+	e := IRegister().Echo().SetPrefix(Prefix)
+	config.FromFile().Sys.SetRealIPParams(IRegister().Echo().RealIPConfig())
+	e.SetRenderDataWrapper(xMW.DefaultRenderDataWrapper)
+	e.SetDefaultExtension(RouteDefaultExtension)
+	if len(config.FromCLI().BackendDomain) > 0 {
+		// 如果指定了后台域名则只能用该域名访问后台。此时将其它域名指向前台
+		subdomains.Default.Default = Name // 设置默认(没有匹配到域名的时候)访问的域名别名
 	}
 	if len(frontendDomain) == 0 {
 		frontendDomain = config.FromCLI().FrontendDomain
