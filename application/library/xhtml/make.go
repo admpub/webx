@@ -10,6 +10,7 @@ import (
 	"github.com/admpub/log"
 	"github.com/admpub/webx/application/library/cache"
 	"github.com/admpub/webx/application/library/xcommon"
+	"github.com/admpub/webx/application/middleware/sessdata"
 	"github.com/admpub/webx/application/registry/route"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/defaults"
@@ -38,6 +39,23 @@ func IsCached(ctx echo.Context, cacheKey string) (bool, error) {
 	if defaults.IsMockContext(ctx) {
 		return false, nil
 	}
+
+	if customer := sessdata.Customer(ctx); customer != nil && customer.Uid > 0 {
+		nocache := ctx.Formx(`nocache`).Int()
+		switch nocache {
+		case 1: // 禁用缓存
+			return false, nil
+		case 2: // 强制缓存新数据
+			if err := Make(http.MethodGet, ctx.Request().URL().Path(), cacheKey); err != nil {
+				return true, err
+			}
+		case 3:
+			if err := Make(http.MethodGet, ctx.Request().URL().Path(), cacheKey); err != nil {
+				return true, err
+			}
+		}
+	}
+
 	var cachedHTML string
 	err := cache.Get(context.Background(), cacheKey, &cachedHTML)
 	if err == nil {
