@@ -46,9 +46,7 @@ func IsCached(ctx echo.Context, cacheKey string) (bool, error) {
 		case 1: // 禁用缓存
 			return false, nil
 		case 2: // 强制缓存新数据
-			if err := Make(http.MethodGet, ctx.Request().URL().Path(), cacheKey); err != nil {
-				return true, err
-			}
+			fallthrough
 		case 3:
 			if err := Make(http.MethodGet, ctx.Request().URL().Path(), cacheKey); err != nil {
 				return true, err
