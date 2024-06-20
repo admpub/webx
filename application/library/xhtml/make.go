@@ -45,3 +45,7 @@ func IsCached(ctx echo.Context, cacheKey string) (bool, error) {
 	}
 	return false, err
 }
+
+func Remove(cacheKey string) error {
+	return cache.Delete(context.Background(), cacheKey)
+}
