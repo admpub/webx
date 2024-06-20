@@ -11,6 +11,8 @@ import (
 	"github.com/admpub/webx/application/library/cache"
 	"github.com/admpub/webx/application/library/xcommon"
 	"github.com/admpub/webx/application/registry/route"
+	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/defaults"
 	test "github.com/webx-top/echo/testing"
 )
 
@@ -30,4 +32,16 @@ func Make(method string, path string, saveAs string, reqRewrite ...func(*http.Re
 		log.Error(err)
 	}
 	return err
+}
+
+func IsCached(ctx echo.Context, cacheKey string) (bool, error) {
+	if defaults.IsMockContext(ctx) {
+		return false, nil
+	}
+	var cachedHTML string
+	err := cache.Get(context.Background(), cacheKey, &cachedHTML)
+	if err == nil {
+		return true, ctx.HTML(cachedHTML)
+	}
+	return false, err
 }
