@@ -16,6 +16,7 @@ func init() {
 		g.Route(`GET,POST`, `/sign_up`, SignUp)
 		g.Route(`GET,POST`, `/sign_in`, SignIn)
 		g.Route(`GET,POST`, `/sign_out`, SignOut)
+		g.Route(`POST`, `/customer_info`, CustomerInfo)
 		g.Route(`GET,POST`, `/forgot`, Forgot)
 		g.Route(`GET,POST`, `/verification/callback/:provider/:recid/:timestamp/:token`, Verification)
 		g.Route(`GET,POST`, `/custom/:page`, Custom)

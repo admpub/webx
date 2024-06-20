@@ -249,3 +249,14 @@ END:
 	c.Set(`forgotURL`, forgotURL)
 	return c.Render(tmpl, handler.Err(c, err))
 }
+
+func CustomerInfo(c echo.Context) error {
+	customer := sessdata.Customer(c)
+	data := c.Data()
+	if customer == nil {
+		data.SetError(c.NewError(code.Unauthenticated, ``))
+	} else {
+		data.SetData(customer.AsRow(`id`, `uid`, `group_id`, `name`, `online`, `gender`, `avatar`, `role_ids`))
+	}
+	return c.JSON(data)
+}
