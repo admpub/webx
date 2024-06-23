@@ -70,11 +70,11 @@ require (
 	github.com/admpub/go-lock v1.3.0
 	github.com/admpub/go-zinc v0.0.8
 	github.com/admpub/goth v0.0.4
-	github.com/admpub/nging/v5 v5.3.3-pre13
+	github.com/admpub/nging/v5 v5.3.3-pre14
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.26.3
-	github.com/nging-plugins/dbmanager v1.5.13
+	github.com/nging-plugins/dbmanager v1.5.14
 	github.com/silenceper/wechat/v2 v2.1.6
 	github.com/webx-top/restyclient v0.0.4
 	github.com/webx-top/validator v0.3.0
@@ -143,7 +143,7 @@ require (
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.62.758 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
-	github.com/aws/aws-sdk-go v1.54.3 // indirect
+	github.com/aws/aws-sdk-go v1.54.6 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
@@ -195,7 +195,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/gomodule/redigo v1.9.2 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20240618054019-d3b898a103f8 // indirect
+	github.com/google/pprof v0.0.0-20240622144329-c177fd99eaa9 // indirect
 	github.com/google/s2a-go v0.1.7 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
@@ -236,7 +236,7 @@ require (
 	github.com/microcosm-cc/bluemonday v1.0.26 // indirect
 	github.com/miekg/dns v1.1.61 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/minio-go/v7 v7.0.71 // indirect
+	github.com/minio/minio-go/v7 v7.0.72 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
