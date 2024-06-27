@@ -49,7 +49,7 @@ var (
 	AssetsURLPath      = Prefix + DefaultAssetsURLPath
 	StaticRootURLPath  = Prefix + `/public/`
 	RendererDo         = func(driver.Driver) {}
-	DefaultMiddlewares = []interface{}{middleware.Log()}
+	DefaultMiddlewares = []interface{}{}
 )
 
 func init() {
@@ -139,7 +139,11 @@ func addMiddleware(e *echo.Echo) {
 	e.Use(middleware.Recover())
 	e.Use(xMW.HostChecker())
 	e.Use(ngingMW.MaxRequestBodySize)
-	e.Use(DefaultMiddlewares...)
+	if len(DefaultMiddlewares) == 0 {
+		e.Use(middleware.LogWithConfig(middleware.LogConfig{Skipper: config.FromFile().Sys.HTTPLogSkipper}))
+	} else {
+		e.Use(DefaultMiddlewares...)
+	}
 	if StaticMW != nil {
 		e.Use(StaticMW)
 	}
