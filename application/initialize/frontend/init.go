@@ -140,7 +140,9 @@ func addMiddleware(e *echo.Echo) {
 	e.Use(xMW.HostChecker())
 	e.Use(ngingMW.MaxRequestBodySize)
 	if len(DefaultMiddlewares) == 0 {
-		e.Use(middleware.LogWithConfig(middleware.LogConfig{Skipper: config.FromFile().Sys.HTTPLogSkipper}))
+		if !config.FromFile().Sys.DisableHTTPLog {
+			e.Use(middleware.Log())
+		}
 	} else {
 		e.Use(DefaultMiddlewares...)
 	}
