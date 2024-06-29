@@ -1,18 +1,25 @@
 {{Strip}}{{$pjax := $.Form "_pjax"}}
 {{- with $.Data -}}
-<ul class="pagination pagination-inverse pagination-circle tx-size-12">
+<ul class="pagination pagination-inverse pagination-circle pagination-circle-group tx-size-12">
 {{- if .IsPosition -}}
-  {{- $isFirst := or (eq .Position ``) (eq .Position `0`) -}}
+  {{- $isFirst := .IsFirst -}}
   {{- if not $isFirst -}}
   <li class="page-item wd-{{if not .HasNext}}200{{else}}100{{end}}">
-    <a class="page-link lh-5" style="width:100%;border-radius:50px" href="{{.URL ``}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+    <a class="page-link lh-5" href="{{.URL ``}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
     {{`第一页`|$.T}}
+    </a>
+  </li>
+  {{- end -}}
+  {{- if .HasPrev -}}
+  <li class="page-item wd-{{if $isFirst}}200{{else}}100{{end}}">
+    <a class="page-link lh-5" href="{{.URL .PrevPosition}}" aria-label="Next"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+    {{`上一页`|$.T}}
     </a>
   </li>
   {{- end -}}
   {{- if .HasNext -}}
   <li class="page-item active wd-{{if $isFirst}}200{{else}}100{{end}}">
-    <a class="page-link lh-5" style="width:100%;border-radius:50px" href="{{.URL .NextPosition}}" aria-label="Next"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+    <a class="page-link lh-5" href="{{.URL .NextPosition}}" aria-label="Next"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
     {{`下一页`|$.T}}
     </a>
   </li>

@@ -2443,6 +2443,10 @@
   margin-left: 5px;
 }
 
+.pagination-circle-group .page-item+.page-item {
+  margin-left: 0;
+}
+
 .pagination-circle .page-item .page-link {
   width: 36px;
   height: 36px;
@@ -2450,6 +2454,21 @@
   padding-left: 0;
   padding-right: 0;
   border-radius: 100%;
+}
+
+.pagination-circle-group .page-item .page-link{
+  width:100%;
+  border-radius:0
+}
+
+.pagination-circle-group .page-item:last-child .page-link{
+  border-bottom-right-radius:50px;
+  border-top-right-radius: 50px;
+}
+
+.pagination-circle-group .page-item:first-child .page-link{
+  border-bottom-left-radius:50px;
+  border-top-left-radius: 50px;
 }
 
 .pagination-circle .page-item.active .page-link {
