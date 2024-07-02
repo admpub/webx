@@ -181,7 +181,16 @@
 						player.trigger('destroy');
 						if(eventIndex !== null) player.off('destroy', eventIndex);
 					}
-					var config = { debug: amplayer.options.debug };
+					var config = $.extend({ 
+						debug: amplayer.options.debug,
+						enableWorker: true,
+						liveBackBufferLength: 15,
+						backBufferLength: 15,
+						liveMaxBackBufferLength: 15,
+						maxBufferSize: 0, 
+						maxBufferLength: 10,
+						liveSyncDurationCount: 1,
+					},amplayer.options.hlsConfig||{});
 					var engine = null;
 					if (amplayer.options.p2pEngine == 'p2p-media-loader') {
 						if (p2pml.hlsjs.Engine.isSupported()) {
