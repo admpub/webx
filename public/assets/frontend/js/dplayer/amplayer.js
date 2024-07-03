@@ -392,7 +392,7 @@
 				switch(type){
 					case 'flv':
 						opts.pluginOptions.flv={
-							mediaDataSource:{},
+							//mediaDataSource:{},
 							config:{
 								isLive:c.live,
 								autoCleanupSourceBuffer:true,
