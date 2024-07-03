@@ -1,3 +1,3 @@
 <script type="text/javascript">//{{$customer := $.Customer}}
-var BASE_URL='{{FrontendURL}}',FRONTEND_URL=BASE_URL,BACKEND_URL='{{BackendURL}}',ASSETS_URL='{{AssetsURL}}',ASSETS_X_URL='{{AssetsXURL}}',LANGUAGE='{{$.Lang}}',/*{{- if $customer -}}*/CUSTOMER={ID:{{- $customer.Id -}},NAME:'{{$customer.Name}}'}/*{{- else -}}*/CUSTOMER={ID:0,NAME:''}/*{{- end -}}*/;
+var BASE_URL='{{FrontendURL}}',FRONTEND_URL=BASE_URL,BACKEND_URL='{{BackendURL}}',ASSETS_URL='{{AssetsURL}}',ASSETS_X_URL='{{AssetsXURL}}',LANGUAGE='{{$.Lang}}',BUILD_TIME='{{BuildTime}}',/*{{- if $customer -}}*/CUSTOMER={ID:{{- $customer.Id -}},NAME:'{{$customer.Name}}'}/*{{- else -}}*/CUSTOMER={ID:0,NAME:''}/*{{- end -}}*/;
 </script>
