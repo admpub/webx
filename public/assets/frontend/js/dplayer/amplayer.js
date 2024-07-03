@@ -190,7 +190,7 @@
 						maxBufferSize: 0, 
 						maxBufferLength: 10,
 						liveSyncDurationCount: 1,
-					},amplayer.options.hlsConfig||{});
+					},player.options.pluginOptions.hls||{});
 					var engine = null;
 					if (amplayer.options.p2pEngine == 'p2p-media-loader') {
 						if (p2pml.hlsjs.Engine.isSupported()) {
@@ -373,7 +373,7 @@
 				var ctn = amplayer.elemPrefix();
 				var elem = ctn?$(ctn).find('video'):null;
 				if(!elem||elem.length<1) elem = document.getElementById('video');
-				var player = new DPlayer({
+				var opts = {
 					container: elem,
 					autoplay: c.autoPlay,
 					live: c.live,
@@ -386,8 +386,32 @@
 						type: type,
 						pic: c.pics,
 						customType: amplayer.player.customType
-					}
-				});
+					},
+					pluginOptions:{}
+				};
+				switch(type){
+					case 'flv':
+						opts.pluginOptions.flv={
+							mediaDataSource:{},
+							config:{
+								isLive:c.live,
+								autoCleanupSourceBuffer:true,
+								autoCleanupMinBackwardDuration:60
+							}
+						};break;
+					case 'hls':
+						opts.pluginOptions.hls={
+							enableWorker: true,
+							liveBackBufferLength: 15,
+							backBufferLength: 15,
+							liveMaxBackBufferLength: 15,
+							maxBufferSize: 0, 
+							maxBufferLength: 10,
+							liveSyncDurationCount: 1,
+						};break;
+				}
+				opts.pluginOptions=$.extend(opts.pluginOptions, c.pluginOptions||{});
+				var player = new DPlayer(opts);
 				bindListener(player);
 				$(amplayer.elemPrefix()+'#video').data('player', player);
 				return player;
