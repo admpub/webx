@@ -13,9 +13,9 @@
 {{- Config.base.siteSlogan -}}
 {{- end -}}
 
-{{- if $.SoftwareURL -}}
+{{- if not $.SkipLicenseCheck -}}
 <br />
-Powered by <a href="{{$.SoftwareURL}}" target="_blank" class="tx-gray">COSCMS</a>
+Powered by <a href="{{OfficialHomepage}}" target="_blank" class="tx-gray">COSCMS</a>
 {{- end -}}
 
 {{Include "#default#announcement"}}

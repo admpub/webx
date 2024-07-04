@@ -89,6 +89,10 @@ func (r *RenderData) SoftwareURL() string {
 	return license.ProductURL()
 }
 
+func (r *RenderData) SkipLicenseCheck() bool {
+	return license.SkipLicenseCheck
+}
+
 func (r *RenderData) SoftwareName() string {
 	return bootconfig.SoftwareName
 }
