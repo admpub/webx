@@ -1,0 +1,3 @@
+{{if not ($.Get `captchaNoIcon`)}}<span class="input-group-addon bg-white bd-r-0"><i class="icon ion-eye tx-gray-light"></i></span>{{else}}{{$.Delete `captchaNoIcon`}}{{end}}
+<input type="text" placeholder="{{`请输入验证码`|$.T}}" value="{{$.Form `code`}}" name="code" required="required" data-toggle="tooltip" title="{{`验证码`|$.T}}" class="form-control tx-size-sm">
+<span class="input-group-addon pd-0">{{$.Data.captchaImage}}</span>
