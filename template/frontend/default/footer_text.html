@@ -13,7 +13,7 @@
 {{- Config.base.siteSlogan -}}
 {{- end -}}
 
-{{- if not $.SkipLicenseCheck -}}
+{{- if not HasFeature `hide-poweredby` -}}
 <br />
 Powered by <a href="{{OfficialHomepage}}" target="_blank" class="tx-gray">COSCMS</a>
 {{- end -}}
