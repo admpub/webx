@@ -474,6 +474,7 @@ END:
 	ctx.Set(`activeURL`, `/official/page/template_index`)
 	ctx.Set(`dirPositions`, dirPositions)
 	ctx.Set(`dirURLs`, dirURLs)
+	ctx.Set(`title`, ctx.T(`模板文件修改`))
 	ctx.SetFunc(`canEdit`, func(file string) bool {
 		return com.InSlice(filepath.Ext(file), canEditExtensions)
 	})
@@ -576,5 +577,6 @@ END:
 	themeLsMu.RUnlock()
 
 	ctx.Set(`fallbacks`, fallbacks)
+	ctx.Set(`title`, ctx.T(`模板配置`))
 	return ctx.Render(`official/page/template_config`, handler.Err(ctx, err))
 }
