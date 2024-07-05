@@ -1,6 +1,6 @@
 {{Strip}}{{$pjax := $.Form "_pjax"}}
 {{- with $.Data -}}
-<ul class="pagination pagination-inverse pagination-circle pagination-circle-group tx-size-12">
+<ul class="pagination pagination-inverse pagination-circle{{if .IsPosition}} pagination-circle-group{{end}} tx-size-12">
 {{- if .IsPosition -}}
   {{- $isFirst := .IsFirst -}}
   {{- if not $isFirst -}}
