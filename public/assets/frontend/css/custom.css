@@ -404,6 +404,8 @@
   -moz-border-radius: 0;
 }
 
+.avatar-upload img.img-svg{min-height:100px;}
+
 .avatar-upload input {
   cursor: pointer;
   direction: ltr;
