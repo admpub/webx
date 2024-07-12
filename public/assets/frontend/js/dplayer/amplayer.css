@@ -16,3 +16,4 @@
 .amplayer-total span{margin-right: 3px;}
 .dplayer-menu{display: none!important}
 .dplayer-logo{top: 20px!important;left: auto!important;right: 20px!important;max-width: 70px!important;opacity:0.5;}
+.dplayer-logo img{min-height:50px;}
