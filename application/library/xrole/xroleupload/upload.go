@@ -26,6 +26,12 @@ func (c *CustomerUpload) Combine(source interface{}) interface{} {
 	if ParseSizeBytes(src.MaxTotalSize) > ParseSizeBytes(c.MaxTotalSize) {
 		c.MaxTotalSize = src.MaxTotalSize
 	}
+	if !c.CanUploadAvatar && src.CanUploadAvatar {
+		c.CanUploadAvatar = src.CanUploadAvatar
+	}
+	if !c.CanUploadSVG && src.CanUploadSVG {
+		c.CanUploadSVG = src.CanUploadSVG
+	}
 	return c
 }
 
