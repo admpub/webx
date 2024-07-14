@@ -15,6 +15,7 @@
     {{Include "user/profile/partial_profile_head"}}
     <div class="card card-flat tx-size-sm pd-30 mg-t-20">
         <form class="form form-label-right" method="POST">
+          {{- if $.Stored.canUploadAvatar -}}
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">{{"头像"|$.T}}:</label>
               <div class="col-sm-10">
@@ -22,12 +23,13 @@
                     {{$avatar := $customer.Avatar}}
                     <img src="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
                     <input id="fileupload" type="file" name="files[]">
-                    <input type="hidden" id="avatar-image" name="avatar-small" value="{{if $avatar}}{{AddSuffix $avatar "_200_200"}}{{end}}" />
+                    <input type="hidden" id="avatar-image" name="avatar-small" value="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{end}}" />
                     <input type="hidden" id="avatar-image-original" name="avatar" value="{{$avatar}}" />
                     <div id="progress" class="overlay"></div>
                   </div>
               </div>
             </div>
+          {{- end -}}
             <div class="form-group row">
               <label for="staticName" class="col-sm-2 col-form-label">{{"用户名"|$.T}}:</label>
               <div class="col-sm-4">

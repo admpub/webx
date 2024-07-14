@@ -10,8 +10,10 @@ import (
 )
 
 type CustomerUpload struct {
-	MaxTotalNum       uint64 `json:"maxTotalNum" xml:"maxTotalNum"`   // 最大总数量
-	MaxTotalSize      string `json:"maxTotalSize" xml:"maxTotalSize"` // 最大总尺寸
+	MaxTotalNum       uint64 `json:"maxTotalNum" xml:"maxTotalNum"`         // 最大总数量
+	MaxTotalSize      string `json:"maxTotalSize" xml:"maxTotalSize"`       // 最大总尺寸
+	CanUploadSVG      bool   `json:"canUploadSVG" xml:"canUploadSVG"`       // 可否上传SVG图片
+	CanUploadAvatar   bool   `json:"canUploadAvatar" xml:"canUploadAvatar"` // 可否上传头像
 	maxTotalSizeBytes null.Uint64
 	mu                sync.RWMutex
 }

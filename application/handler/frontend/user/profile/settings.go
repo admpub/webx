@@ -11,6 +11,8 @@ import (
 
 func Settings(ctx echo.Context) error {
 	customer := xMW.Customer(ctx)
+	m := modelCustomer.NewCustomer(ctx)
+	upCfg := m.GetUploadConfig(customer)
 	var err error
 	if ctx.IsPost() {
 		m := modelCustomer.NewCustomer(ctx)
@@ -45,7 +47,9 @@ func Settings(ctx echo.Context) error {
 		}
 		m.Gender = ctx.Formx(`gender`).String()
 		m.Description = ctx.Formx(`description`).String()
-		m.Avatar = ctx.Formx(`avatar`).String()
+		if upCfg.CanUploadAvatar && len(ctx.FormValues(`avatar`)) > 0 {
+			m.Avatar = ctx.Formx(`avatar`).String()
+		}
 		err = m.Edit(nil, cond)
 		if err == nil {
 			m.SetSession()
@@ -57,5 +61,6 @@ END:
 	ret := handler.Err(ctx, err)
 	ctx.Set(`activeURL`, `/user/profile`)
 	ctx.Set(`title`, ctx.T(`账号设置`))
+	ctx.Set(`canUploadAvatar`, upCfg.CanUploadAvatar)
 	return ctx.Render(`user/profile/settings`, ret)
 }
