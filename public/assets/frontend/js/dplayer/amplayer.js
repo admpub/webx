@@ -338,7 +338,15 @@
 					var eventIndex=player.on('destroy', function () {
 						if(hls){
 							hls.destroy();
+							if(amplayer.options.debug) console.debug('hls destory.')
 							hls = null;
+						}
+						if(engine){
+							if(typeof(engine.destroy)=='function'){
+								engine.destroy();
+								if(amplayer.options.debug) console.debug('p2p engine destory.')
+							}
+							engine = null;
 						}
 						$(amplayer.elemPrefix()+'#video').data('hls', null);
 					});
