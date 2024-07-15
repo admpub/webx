@@ -1,19 +1,27 @@
 (function (win) {
 	var amplayer = {
 		'options': {
+			// player options
 			"autoPlay": true,
+			"screenshot": false,
+			"airplay": true,
+			"chromecast": true,
+			"live": false, // 直播模式
+			"logo": "",
+
+			// video options
+			"urls": "",
+			"pics": "",
+
+			// other options
 			"autoSkip": true,
 			"autoNext": true,
 			"debug": false,
-			"live": false, // 直播模式
 			"trys": 0, // 试看时长 seconds
 			"seek": 0, // 跳过时长 seconds
 			"take": "",
-			"urls": "",
 			"seq": "",
 			"jump": "",
-			"logo": "",
-			"pics": "",
 			"p2pAppId": "",
 			"p2pEngine": "",
 			"p2pConfig": {},
@@ -386,7 +394,9 @@
 					autoplay: c.autoPlay,
 					live: c.live,
 					logo: c.logo,
-					screenshot: true,
+					screenshot: c.screenshot,
+					airplay: c.airplay,
+					chromecast: c.chromecast,
 					p2pAppId: c.p2pAppId,
 					highlight: c.highlight||[],
 					video: {
@@ -426,12 +436,17 @@
 			},
 			'dplayer': function (options) {
 				var c = $.extend(amplayer.options, options || {});
+				var ctn = amplayer.elemPrefix();
+				var elem = ctn?$(ctn).find('video'):null;
+				if(!elem||elem.length<1) elem = document.getElementById('video');
 				var player = new DPlayer({
-					container: document.getElementById('video'),
+					container: elem,
 					autoplay: c.autoPlay,
 					live: c.live,
 					logo: c.logo,
-					screenshot: true,
+					screenshot: c.screenshot,
+					airplay: c.airplay,
+					chromecast: c.chromecast,
 					p2pAppId: c.p2pAppId,
 					highlight: c.highlight||[],
 					video: {
