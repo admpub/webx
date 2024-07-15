@@ -396,7 +396,7 @@
 					logo: c.logo,
 					screenshot: c.screenshot,
 					airplay: c.airplay,
-					chromecast: c.chromecast,
+					chromecast: c.chromecast&&window.chrome&&window.chrome.cast,
 					p2pAppId: c.p2pAppId,
 					highlight: c.highlight||[],
 					video: {
@@ -446,7 +446,7 @@
 					logo: c.logo,
 					screenshot: c.screenshot,
 					airplay: c.airplay,
-					chromecast: c.chromecast,
+					chromecast: c.chromecast&&window.chrome&&window.chrome.cast,
 					p2pAppId: c.p2pAppId,
 					highlight: c.highlight||[],
 					video: {
