@@ -70,7 +70,7 @@ require (
 	github.com/admpub/go-lock v1.3.0
 	github.com/admpub/go-zinc v0.0.8
 	github.com/admpub/goth v0.0.4
-	github.com/admpub/nging/v5 v5.3.3-pre9
+	github.com/admpub/nging/v5 v5.3.3-pre24
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.27.2
@@ -94,6 +94,7 @@ require (
 	github.com/abh/errorutil v1.0.0 // indirect
 	github.com/admpub/9t v0.0.0-20190605154903-a68069ace5e1 // indirect
 	github.com/admpub/archiver v1.1.4 // indirect
+	github.com/admpub/boltstore v1.1.1 // indirect
 	github.com/admpub/caddy v1.2.7 // indirect
 	github.com/admpub/captcha-go v0.0.1 // indirect
 	github.com/admpub/ccs-gm v0.0.5 // indirect
@@ -148,6 +149,7 @@ require (
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
+	github.com/boltdb/bolt v1.3.1 // indirect
 	github.com/boombuler/barcode v1.0.2 // indirect
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
@@ -191,6 +193,7 @@ require (
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
+	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
