@@ -192,11 +192,9 @@
 					var config = $.extend({ 
 						debug: amplayer.options.debug,
 						enableWorker: true,
-						liveBackBufferLength: 15,
-						backBufferLength: 15,
-						liveMaxBackBufferLength: 15,
-						maxBufferSize: 0, 
-						maxBufferLength: 10,
+						maxMaxBufferLength: 100, // seconds (default:600)
+						maxBufferSize: 5*1000*1000, // bytes (default:60M)
+						maxBufferLength: 20, // seconds (default:30)
 						liveSyncDurationCount: 1,
 					},player.options.pluginOptions.hls||{});
 					var engine = null;
