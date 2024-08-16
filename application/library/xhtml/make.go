@@ -35,7 +35,7 @@ func Make(method string, path string, saveAs string, reqRewrite ...func(*http.Re
 	return err
 }
 
-func IsCached(ctx echo.Context, cacheKey string) (bool, error) {
+func IsCached(ctx echo.Context, cacheKey string, urlWithQueryString ...bool) (bool, error) {
 	if defaults.IsMockContext(ctx) {
 		return false, nil
 	}
@@ -48,7 +48,13 @@ func IsCached(ctx echo.Context, cacheKey string) (bool, error) {
 		case 2: // 强制缓存新数据
 			fallthrough
 		case 3:
-			if err := Make(http.MethodGet, ctx.Request().URL().Path(), cacheKey); err != nil {
+			reqURL := ctx.Request().URL().Path()
+			if len(urlWithQueryString) > 0 && urlWithQueryString[0] {
+				if query := ctx.Request().URL().RawQuery(); len(query) > 0 {
+					reqURL += `?` + query
+				}
+			}
+			if err := Make(http.MethodGet, reqURL, cacheKey); err != nil {
 				return true, err
 			}
 		}
