@@ -548,19 +548,39 @@ nav.friend-links {
 
 nav.friend-links a.nav-link {
   line-height: 62px;
-  min-width: 176px;
+  min-width: 172px;
   display: inline-block;
   position: relative;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
+  margin-top: 10px;
   margin-right: 10px;
   text-align: center;
-  padding-bottom: 0;
+  color: white;
+  border-radius: 3px;
+  
+  /* global 94%+ browsers support */
+  background: radial-gradient(ellipse,#EE82EE 0%,#00ADFF 100%); 
+  
+  /* safari 5.1+,chrome 10+ */
+  background: -webkit-radial-gradient(ellipse,#EE82EE 0%,#00ADFF 100%);
+  
+  /* ff 3.6+ */
+  background: -moz-radial-gradient(ellipse,#EE82EE 0%,#00ADFF 100%);
+  
+  /* opera 11.10+ */ 
+  background: -o-radial-gradient(ellipse,#EE82EE 0%,#00ADFF 100%);
+  
+  /* ie 10+ */
+  background: -ms-radial-gradient(ellipse,#EE82EE 0%,#00ADFF 100%);
+}
+
+nav.friend-links a.nav-link:hover{
+  color: white;
+  text-shadow: 0 0 2px rgba(0,0,0,0.8);
 }
 
 nav.friend-links a.nav-link>.img-label {
-  position: absolute;
-  margin-top: 40px;
+  position: absolute;bottom: 0;
   width: 100%;
   display: block;
 }
@@ -571,8 +591,13 @@ nav.friend-links a.nav-link>.img-label>.bg {
   background-color: #000;
   display: block;
   opacity: 0.1;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
-
+nav.friend-links a.nav-link>img{
+  margin-top:-2px;
+  border-radius: 3px;
+}
 nav.friend-links a.nav-link>.img-label>.title {
   position: absolute;
   width: 100%;
@@ -581,6 +606,8 @@ nav.friend-links a.nav-link>.img-label>.title {
   display: block;
   overflow: hidden;
   color: white;
+  text-shadow: 0 0 2px rgba(0,0,0,0.8);
+  z-index: 1;
 }
 
 .select-area-id,
