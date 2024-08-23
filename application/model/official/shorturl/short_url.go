@@ -351,7 +351,9 @@ func (f *ShortURL) GenVisitData(t time.Time) error {
 	f.Visit.Referer = f.Context().Referer()
 	info, err := ip2region.IPInfo(f.Visit.Ip)
 	if err != nil {
-		return err
+		if !ip2region.ErrIsInvalidIP(err) {
+			return err
+		}
 	}
 	if info.ISP == `0` {
 		info.ISP = ``

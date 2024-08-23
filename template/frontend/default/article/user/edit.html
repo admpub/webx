@@ -7,7 +7,7 @@
 {{Block "body"}}
 {{Super}}
 
-<div class="main mg-lg-l-240 pd-y-20 pd-t-70 pd-lg-t-75">
+<div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
     <h5 class="tx-inverse tx-bold mg-b-0">{{$.Stored.title}}</h5>
     <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
@@ -49,7 +49,7 @@
                   <div class="col-sm-8">
                     <div class="avatar-upload">
                       {{$image := $.Form "image"}}
-                      <img src="{{$image|Default (AssetsURL "/images/user_128.png")}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
+                      <img src="{{$image|Default (AssetsURL `/images/user_128.png`)}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
                       <input id="fileupload" type="file" name="files[]">
                       <input type="hidden" id="article-image" name="image" value="{{$image}}" />
                       <input type="hidden" id="article-image-original" name="imageOriginal" value="{{$.Form `imageOriginal`}}" />
