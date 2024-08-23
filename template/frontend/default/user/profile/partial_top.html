@@ -11,7 +11,7 @@
       {{- end -}}
       {{- end -}}
       <div class="input-group input-group-inverse wd-sm-250 wd-md-300 mg-b-20 mg-sm-b-0">
-        <input type="text" class="form-control" id="input-search-keywords" placeholder="Search for..." name="q" value="{{$.Form "q"}}">
+        <input type="text" class="form-control" id="input-search-keywords" placeholder="Search for..." name="q" value="{{$.Form `q`}}">
         <span class="input-group-btn pd-l-1">
           <button class="btn btn-secondary pd-r-15" type="submit"><i class="fa fa-search"></i></button>
         </span>
@@ -29,7 +29,7 @@
         <i class="fa fa-bell tx-size-16"></i>
         <span id="system-msg-count-square" class="pos-absolute t-10 r-10 square-8 bg-pink rounded-circle d-none"></span>
       </a>
-      <a href="javascript:;" class="tx-white nav-link tx-size-13 pd-r-5 pd-md-r-15"><img src="{{if $customer.Avatar}}{{AddSuffix $customer.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" class="rounded-circle wd-32 ht-32" alt="" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';"></a>
+      <a href="javascript:;" class="tx-white nav-link tx-size-13 pd-r-5 pd-md-r-15"><img src="{{if $customer.Avatar}}{{AddSuffix $customer.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" class="rounded-circle wd-32 ht-32" alt="" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';"></a>
       <div class="dropdown">
         <a href="javascript:;" class="nav-link tx-white pd-x-0 tx-size-13" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="hidden-sm-down">{{$customer.Name}}</span><i class="fa fa-angle-down mg-l-5"></i></a>
         <div class="dropdown-menu dropdown-menu-right tx-size-13 mg-t-19 rounded-top-0 shadow-base">
