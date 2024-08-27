@@ -932,3 +932,17 @@ nav.friend-links a.nav-link>.img-label>.title {
   position: fixed;
   bottom: 0;
 }
+
+.customerLV.lv-expired span.badge,
+.customerLV.lv-expired i{
+  background-color:#ddd !important;
+  color:gray !important;
+}
+
+.customerLV.lv-expired img{
+  -webkit-filter: grayscale(100%); 
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(1);opacity:0.6
+}         

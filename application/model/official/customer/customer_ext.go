@@ -9,20 +9,16 @@ import (
 
 type CustomerAndGroup struct {
 	*dbschema.OfficialCustomer
-	Group       *dbschema.OfficialCommonGroup        `db:"-,relation=id:group_id|gtZero"`
-	Level       *dbschema.OfficialCustomerLevel      `db:"-,relation=id:level_id|gtZero"`
-	LevelExtend []*modelLevel.RelationExt            `db:"-" json:",omitempty"`
-	Agent       *dbschema.OfficialCustomerAgentLevel `db:"-,relation=id:agent_level|gtZero"`
-	Roles       []*dbschema.OfficialCustomerRole     `db:"-,relation=id:role_ids|notEmpty|split"`
+	Group  *dbschema.OfficialCommonGroup        `db:"-,relation=id:group_id|gtZero"`
+	Levels []*modelLevel.RelationExt            `db:"-,relation=customer_id:id|gtZero" json:",omitempty"`
+	Agent  *dbschema.OfficialCustomerAgentLevel `db:"-,relation=id:agent_level|gtZero"`
+	Roles  []*dbschema.OfficialCustomerRole     `db:"-,relation=id:role_ids|notEmpty|split"`
 }
 
 func (d *CustomerAndGroup) AsMap() param.Store {
 	m := d.OfficialCustomer.AsMap()
 	if d.Group != nil {
 		m[`Group`] = d.Group.AsMap()
-	}
-	if d.Level != nil {
-		m[`Level`] = d.Level.AsMap()
 	}
 	if d.Agent != nil {
 		m[`Agent`] = d.Agent.AsMap()

@@ -1,0 +1,11 @@
+{{- $detail := . -}}
+{{- $level := .Level -}}
+<span class="customerLV lv-{{$detail.Status}} mg-r-5">
+    {{- if $level.IconClass -}}
+    <i class="customerLV-{{$level.Group}} fa {{$level.IconClass}}"{{if or $level.Color $level.Bgcolor}} style="{{if $level.Color}}color:{{$level.Color}};{{end}}{{if $level.Bgcolor}}background-color:{{$level.Bgcolor}};{{end}}"{{end}} title="{{$level.Name}}"></i>
+    {{- else if $level.IconImage -}}
+    <img class="customerLV-{{$level.Group}}" src="{{$level.IconImage}}" alt="{{$level.Name}}" title="{{$level.Name}}">
+    {{- else -}}
+    <span class="customerLV-{{$level.Group}} badge badge-primary"{{if or $level.Color $level.Bgcolor}} style="{{if $level.Color}}color:{{$level.Color}};{{end}}{{if $level.Bgcolor}}background-color:{{$level.Bgcolor}};{{end}}"{{end}}>{{$level.Name}}</span>
+    {{- end -}}
+</span>

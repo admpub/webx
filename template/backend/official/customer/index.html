@@ -94,12 +94,7 @@
 									<span class="label label-black label-xs">{{`组`|$.T}}</span><span class="label label-info label-xs" data-toggle="tooltip" title="{{$v.Group.Name}}">{{$v.Group.Name}}</span>
 								</span>
 								{{- end}}
-								{{- if $v.Level}}
-								<span class="label-group">
-									<span class="label label-black label-xs">{{`等级`|$.T}}</span><span class="label label-primary label-xs" data-toggle="tooltip" title="{{$v.Level.Name}} ({{call $.Func.levelGroupName $v.Level.Group}})" style="{{if $v.Level.Color}}color:{{$v.Level.Color}}{{end}};{{if $v.Level.Bgcolor}}background-color:{{$v.Level.Bgcolor}}{{end}}">{{$v.Level.Name}}</span>
-								</span>
-								{{- end}}
-								{{- range $lk,$lv := $v.LevelExtend}}
+								{{- range $lk,$lv := $v.Levels}}
 								{{- if $lv.Level -}}
 								<span class="label-group">
 									<span class="label label-black label-xs">{{`等级`|$.T}}</span><span class="label label-primary label-xs" data-toggle="tooltip" title="{{$lv.Level.Name}} ({{call $.Func.levelGroupName $lv.Level.Group}})" style="{{if $lv.Level.Color}}color:{{$lv.Level.Color}}{{end}};{{if $lv.Level.Bgcolor}}background-color:{{$lv.Level.Bgcolor}}{{end}}">{{$lv.Level.Name}}</span>

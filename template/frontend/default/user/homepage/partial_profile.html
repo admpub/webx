@@ -10,7 +10,11 @@
       <dt class="col-sm-5 tx-sm-right tx-inverse">{{"用户组"|$.T}}</dt>
       <dd class="col-sm-7">{{if $customer.Group}}{{$customer.Group.Name}}{{else}}{{"普通会员"|$.T}}{{end}}</dd>
       <dt class="col-sm-5 tx-sm-right tx-inverse">{{"用户等级"|$.T}}</dt>
-      <dd class="col-sm-7">{{if $customer.Level}}{{$customer.Level.Name}}{{else}}-{{end}}</dd>
+      <dd class="col-sm-7">
+        {{- range $ck, $cv := $customer.Levels -}}
+        {{- if $cv.Level -}}{{Include "#default#common/label_level" $cv}}{{- end -}}
+        {{- else -}}-{{end}}
+      </dd>
       {{if $customer.Agent}}
       <dt class="col-sm-5 tx-sm-right tx-inverse">{{"代理等级"|$.T}}</dt>
       <dd class="col-sm-7">{{$customer.Agent.Name}}</dd>

@@ -55,23 +55,6 @@ func Index(ctx echo.Context) error {
 			return sel.Columns(`id`, `name`)
 		})
 	}, cond.And()))
-	if err == nil && len(list) > 0 {
-		relM := modelLevel.NewRelation(ctx)
-		customerIDs := make([]uint64, len(list))
-		customerIDIndexes := make(map[uint64]int, len(list))
-		for k, v := range list {
-			customerIDs[k] = v.Id
-			customerIDIndexes[v.Id] = k
-		}
-		var rels map[uint64][]*modelLevel.RelationExt
-		rels, err = relM.ListByCustomerIDs(customerIDs)
-		if err == nil {
-			for customerID, rows := range rels {
-				k := customerIDIndexes[customerID]
-				list[k].LevelExtend = rows
-			}
-		}
-	}
 	ret := handler.Err(ctx, err)
 	ctx.Set(`listData`, list)
 

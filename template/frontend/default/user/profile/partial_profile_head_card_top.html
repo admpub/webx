@@ -26,15 +26,15 @@
       {{$customer.Name}}
     </h5>
     <p class="mg-b-10">
-      {{if $customer.Group}}
-      <span class="badge badge-info">{{$customer.Group.Name}}</span>
-      {{end}}
-      {{if $customer.Level}}
-      <span class="badge badge-primary">{{$customer.Level.Name}}</span>
-      {{end}}
-      {{if $customer.Agent}}
-      <span class="badge badge-danger">{{$customer.Agent.Name}}</span>
-      {{end}}
+      {{- if $customer.Group -}}
+      <span class="badge badge-info mg-r-5">{{$customer.Group.Name}}</span>
+      {{- end -}}
+      {{- range $ck, $cv := $customer.Levels -}}
+      {{- if $cv.Level -}}{{Include "#default#common/label_level" $cv}}{{- end -}}
+      {{- end -}}
+      {{- if $customer.Agent -}}
+      <span class="badge badge-danger mg-r-5">{{$customer.Agent.Name}}</span>
+      {{- end -}}
     </p>
     <p class="wd-md-500 mg-md-x-auto">{{$customer.Description|Nl2br}}</p>
   </div><!-- card-block -->

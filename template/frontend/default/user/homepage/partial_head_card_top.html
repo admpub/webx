@@ -29,8 +29,8 @@
       {{- if $customer.Group -}}
       <span class="badge badge-info mg-r-5">{{$customer.Group.Name}}</span>
       {{- end -}}
-      {{- if $customer.Level -}}
-      <span class="badge badge-primary mg-r-5">{{$customer.Level.Name}}</span>
+      {{- range $ck, $cv := $customer.Levels -}}
+      {{- if $cv.Level -}}{{Include "#default#common/label_level" $cv}}{{- end -}}
       {{- end -}}
       {{- if $customer.Agent -}}
       <span class="badge badge-danger mg-r-5">{{$customer.Agent.Name}}</span>
