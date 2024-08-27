@@ -8,6 +8,7 @@ import (
 	"github.com/admpub/once"
 	"github.com/admpub/redsync/v4"
 	goredis "github.com/admpub/redsync/v4/redis/goredis/v5"
+	"gopkg.in/redis.v5"
 )
 
 var (
@@ -21,7 +22,10 @@ func resetRedsync() {
 }
 
 func initRedsync() {
-	client := RedisClient()
+	client, _ := Cache(cacheRootContext, `locker`).Client().(*redis.Client)
+	if client == nil {
+		client = RedisClient()
+	}
 	pool := goredis.NewPool(client)
 	redsyncClient = redsync.New(pool)
 }
@@ -40,9 +44,11 @@ func RedsyncClient() *redsync.Redsync {
 // example:
 // mutex := RedisMutex(`goods_1`)
 // err = mutex.Lock(ctx)
-// if err != nil {
-// 	panic(err)
-// }
+//
+//	if err != nil {
+//		panic(err)
+//	}
+//
 // mutex.Unlock(ctx)
 func RedisMutex(key string, options ...redsync.Option) *redsync.Mutex {
 	return RedsyncClient().NewMutex(key, options...)
@@ -192,4 +198,8 @@ func (*mutexRedis) TryLockWithContext(key string, ctx context.Context) (unlock U
 		return nil
 	}
 	return
+}
+
+func (*mutexRedis) Forget(key string) {
+	RedisMutex(key).Unlock()
 }

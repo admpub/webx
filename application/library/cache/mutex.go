@@ -10,27 +10,30 @@ import (
 var ErrFailedToAcquireLock = errors.New("failed to acquire lock")
 
 var (
-	defaultLockType = LockTypeMemory
-	tryLockers      = map[int32]TryLocker{
+	defaultLockType int32 = int32(LockTypeMemory)
+	tryLockers            = map[LockType]TryLocker{
 		LockTypeMemory: &mutexMemory{},
 		LockTypeRedis:  &mutexRedis{},
 	}
 )
 
+type LockType int32
+
 const (
-	LockTypeMemory int32 = iota
+	LockTypeMemory LockType = iota
 	LockTypeRedis
 )
 
-func DefaultLockType() int32 {
-	return atomic.LoadInt32(&defaultLockType)
+func DefaultLockType() LockType {
+	v := atomic.LoadInt32(&defaultLockType)
+	return LockType(v)
 }
 
-func SetDefaultLockType(lockType int32) {
-	atomic.AddInt32(&defaultLockType, lockType)
+func SetDefaultLockType(lockType LockType) {
+	atomic.AddInt32(&defaultLockType, int32(lockType))
 }
 
-func RegisterTryLocker(t int32, fn TryLocker) {
+func RegisterTryLocker(t LockType, fn TryLocker) {
 	tryLockers[t] = fn
 }
 
@@ -40,56 +43,38 @@ type TryLocker interface {
 	TryLock(key string) (unlock UnlockFunc, err error)
 	TryLockWithTimeout(key string, timeout time.Duration) (unlock UnlockFunc, err error)
 	TryLockWithContext(key string, ctx context.Context) (unlock UnlockFunc, err error)
+	Forget(key string)
 }
 
-func Lock(key string, types ...int32) (unlock UnlockFunc, err error) {
-	var t int32
+func GetLocker(types ...LockType) TryLocker {
+	var t LockType
 	if len(types) > 0 {
 		t = types[0]
 	} else {
 		t = DefaultLockType()
 	}
 	if tryLocker, ok := tryLockers[t]; ok {
-		return tryLocker.Lock(key)
+		return tryLocker
 	}
-	return tryLockers[LockTypeMemory].Lock(key)
+	return tryLockers[LockTypeMemory]
 }
 
-func TryLock(key string, types ...int32) (unlock UnlockFunc, err error) {
-	var t int32
-	if len(types) > 0 {
-		t = types[0]
-	} else {
-		t = DefaultLockType()
-	}
-	if tryLocker, ok := tryLockers[t]; ok {
-		return tryLocker.TryLock(key)
-	}
-	return tryLockers[LockTypeMemory].TryLock(key)
+func Lock(key string, types ...LockType) (unlock UnlockFunc, err error) {
+	return GetLocker(types...).Lock(key)
 }
 
-func TryLockWithTimeout(key string, timeout time.Duration, types ...int32) (unlock UnlockFunc, err error) {
-	var t int32
-	if len(types) > 0 {
-		t = types[0]
-	} else {
-		t = DefaultLockType()
-	}
-	if tryLocker, ok := tryLockers[t]; ok {
-		return tryLocker.TryLockWithTimeout(key, timeout)
-	}
-	return tryLockers[LockTypeMemory].TryLockWithTimeout(key, timeout)
+func TryLock(key string, types ...LockType) (unlock UnlockFunc, err error) {
+	return GetLocker(types...).TryLock(key)
 }
 
-func TryLockWithContext(key string, ctx context.Context, types ...int32) (unlock UnlockFunc, err error) {
-	var t int32
-	if len(types) > 0 {
-		t = types[0]
-	} else {
-		t = DefaultLockType()
-	}
-	if tryLocker, ok := tryLockers[t]; ok {
-		return tryLocker.TryLockWithContext(key, ctx)
-	}
-	return tryLockers[LockTypeMemory].TryLockWithContext(key, ctx)
+func TryLockWithTimeout(key string, timeout time.Duration, types ...LockType) (unlock UnlockFunc, err error) {
+	return GetLocker(types...).TryLockWithTimeout(key, timeout)
+}
+
+func TryLockWithContext(key string, ctx context.Context, types ...LockType) (unlock UnlockFunc, err error) {
+	return GetLocker(types...).TryLockWithContext(key, ctx)
+}
+
+func ForgetLock(key string, types ...LockType) {
+	GetLocker(types...).Forget(key)
 }

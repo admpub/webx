@@ -57,3 +57,7 @@ func (*mutexMemory) TryLockWithContext(key string, ctx context.Context) (unlock 
 	}
 	return
 }
+
+func (*mutexMemory) Forget(key string) {
+	mutexGroup.UnlockAndFree(key)
+}
