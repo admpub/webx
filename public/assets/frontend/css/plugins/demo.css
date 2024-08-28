@@ -15,6 +15,15 @@
 .rounded-2 {
   border-radius: 2px;
 }
+.rounded-3 {
+  border-radius: 3px;
+}
+.rounded-4 {
+  border-radius: 4px;
+}
+.rounded-5 {
+  border-radius: 5px;
+}
 
 .rounded-right-2 {
   border-top-right-radius: 2px;
@@ -24,6 +33,36 @@
 .rounded-left-2 {
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
+}
+
+.rounded-right-3 {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.rounded-left-3 {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.rounded-right-4 {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.rounded-left-4 {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.rounded-right-5 {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.rounded-left-5 {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .rounded-right-30 {
