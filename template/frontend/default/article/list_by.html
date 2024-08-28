@@ -24,13 +24,13 @@
         {{- $mod := Eq (Math "mod" $k 2) 0 -}}
         {{if $mod}}
           {{if gt $k 0}}</div><!-- card-deck -->{{end}}
-          <div class="card-deck{{if ge $k 2}} mg-t-20{{end}}">
+          <div class="card-deck{{if ge $k 2}} mg-t-20{{end}}{{if eq $k $end}} wd-100p{{end}}">
         {{end}}
-          <div class="card rounded-0 pd-15">
+          <div class="card pd-15">
             <div class="row flex-sm-row-reverse">
               <div class="col-sm-4">
-                <figure class="effect-shine">
-                  <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}"><img src="{{$v.Image|Default (AssetsXURL `/images/placeholder/default-sm.png`)}}" class="img-fluid wd-100p" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';"></a>
+                <figure class="effect-shine rounded-3">
+                  <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}"><img src="{{$v.Image|Default (AssetsXURL `/images/placeholder/default-sm.png`)}}" class="img-fluid wd-100p rounded-3" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';"></a>
                   <figcaption></figcaption>
                 </figure>
               </div>
@@ -71,6 +71,11 @@
             </div><!-- row -->
           </div><!-- card -->
           {{- if eq $k $end -}}
+          {{if $mod}}
+          <div class="card pd-15 align-items-center justify-content-center">
+            <div class="tx-gray-light">{{`没有了...`|$.T}}</div>
+          </div>
+          {{end}}
           </div><!-- card-deck -->
           {{- end -}}
         {{end}}

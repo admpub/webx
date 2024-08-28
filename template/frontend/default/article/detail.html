@@ -16,7 +16,7 @@
   <div class="container pd-b-40">
     <div class="row row-lg">
       <div class="col-lg-12">
-        <div class="card mg-t-20">
+        <div class="card mg-t-20 bd-0">
           <div class="card-header bg-superlight-x">
             <div class="d-sm-flex justify-content-between align-items-center pd-x-10">
               <div>
@@ -131,7 +131,7 @@
           </div><!-- card-footer-->
         </div><!-- card -->
 
-        <div class="card rounded-0 bg-superlight mg-t-20">
+        <div class="card bg-superlight mg-t-20 bd-0">
           <div class="card-block pd-20 pd-xs-x-30 d-xs-flex justify-content-between align-items-center">
             <h6 class="tx-size-14 tx-bold tx-uppercase tx-inverse mg-b-0">{{"分享这篇文章"|$.T}}</h6>
             <div class="tx-size-20">
@@ -142,7 +142,7 @@
 
         {{if and (eq $data.CloseComment "N") (ne Config.base.comment "close")}}
         <a name="comment-list"></a>
-        <div class="card mg-t-20 pd-x-10">
+        <div class="card mg-t-20 pd-x-10 bd-0">
           <div class="card-header pd-y-20 pd-x-0">
             <a href="javascript:;" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-comment-form">{{"添加评论"|$.T}}</a>
             <h4 class="tx-inverse tx-bold tx-spacing-neg-2 mg-b-0">{{$.T "评论"}} (<span class="comment-count-num">{{$data.Comments}}</span>)</h4>

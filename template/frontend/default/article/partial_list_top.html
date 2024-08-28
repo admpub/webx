@@ -1,11 +1,11 @@
 {{Strip}}{{$sourceInfo := $.Stored.sourceInfo}}
 {{- if and $sourceInfo $sourceInfo.X -}}
     <div class="container-wrapper pd-b-20 pd-t-0 pd-md-t-20">
-      <div class="container pd-y-10 rainbow-bar">
+      <div class="container pd-y-10 rainbow-bar rounded-3">
         <div class="d-md-flex justify-content-between">
           <div>
               {{- $detailURL := $sourceInfo.H.detailURL -}}
-              <a href="{{$detailURL}}"><img src="{{$sourceInfo.H.coverURL|Default (AssetsXURL `/images/83.jpg`)}}" alt="{{$sourceInfo.V}}" class="img-fluid" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';" style="max-width:100px"></a>
+              <a href="{{$detailURL}}"><img src="{{$sourceInfo.H.coverURL|Default (AssetsXURL `/images/83.jpg`)}}" alt="{{$sourceInfo.V}}" class="img-fluid rounded-3" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';" style="max-width:100px"></a>
           </div><!-- col-4 -->
           <div class="pd-md-x-10">
             <h3 class="tx-inverse tx-spacing-neg-2 tx-bold tx-size-30 mg-b-5 mg-t-10 mg-md-t-0">

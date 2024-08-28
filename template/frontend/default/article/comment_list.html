@@ -2,7 +2,7 @@
 {{- $commentList := call $.Func.commentList -}}
 {{if $commentList}}
 {{range $k,$v := $commentList}}
-<div class="card-block pd-y-30 pd-x-0">
+<div class="card-block pd-y-30 pd-x-0 bd-0">
     <div class="media d-block d-sm-flex">
         <a href="javascript:;"><img src="{{if $v.Extra.avatar}}{{AddSuffix $v.Extra.avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="d-flex mg-r-20 rounded-circle wd-48 ht-48 bg-info" alt="{{$v.Extra.name}}"></a>
         <div class="media-body tx-size-sm mg-t-20 mg-sm-t-0">

@@ -62,7 +62,7 @@
                         </div><!-- media-body -->
                         {{- if $v.Image -}}
                         <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
-                            <img src="{{$v.Image}}" class="img-fluid wd-100 mg-l-15" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';">
+                            <img src="{{$v.Image}}" class="img-fluid wd-100 mg-l-15 rounded-3" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';">
                         </a>
                         {{- end -}}
                     </div><!-- media -->
