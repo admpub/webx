@@ -218,10 +218,14 @@ func (a *OfficialCommonArea) Struct_() string {
 }
 
 func (a *OfficialCommonArea) Name_() string {
-	if a.base.Namer() != nil {
-		return WithPrefix(a.base.Namer()(a))
+	b := a
+	if b == nil {
+		b = &OfficialCommonArea{}
 	}
-	return WithPrefix(factory.TableNamerGet(a.Short_())(a))
+	if b.base.Namer() != nil {
+		return WithPrefix(b.base.Namer()(b))
+	}
+	return WithPrefix(factory.TableNamerGet(b.Short_())(b))
 }
 
 func (a *OfficialCommonArea) CPAFrom(source factory.Model) factory.Model {

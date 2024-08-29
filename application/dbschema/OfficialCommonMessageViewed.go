@@ -211,10 +211,14 @@ func (a *OfficialCommonMessageViewed) Struct_() string {
 }
 
 func (a *OfficialCommonMessageViewed) Name_() string {
-	if a.base.Namer() != nil {
-		return WithPrefix(a.base.Namer()(a))
+	b := a
+	if b == nil {
+		b = &OfficialCommonMessageViewed{}
 	}
-	return WithPrefix(factory.TableNamerGet(a.Short_())(a))
+	if b.base.Namer() != nil {
+		return WithPrefix(b.base.Namer()(b))
+	}
+	return WithPrefix(factory.TableNamerGet(b.Short_())(b))
 }
 
 func (a *OfficialCommonMessageViewed) CPAFrom(source factory.Model) factory.Model {
