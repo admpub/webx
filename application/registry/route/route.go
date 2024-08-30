@@ -40,6 +40,10 @@ func MetaHandler(handler interface{}, m echo.H, requests ...interface{}) echo.Ha
 	return routeRegister.MetaHandler(m, handler, requests...)
 }
 
+func MakeHandler(handler interface{}, requests ...interface{}) echo.Handler {
+	return routeRegister.MakeHandler(handler, requests...)
+}
+
 func MetaHandlerWithRequest(handler interface{}, m echo.H, requests interface{}, methods ...string) echo.Handler {
 	return routeRegister.MetaHandlerWithRequest(m, handler, requests, methods...)
 }
@@ -64,7 +68,7 @@ func UseToGroup(groupName string, middlewares ...interface{}) {
 	routeRegister.UseToGroup(groupName, middlewares...)
 }
 
-func Host(hostName string, middlewares ...interface{}) *route.Host {
+func Host(hostName string, middlewares ...interface{}) route.Hoster {
 	return routeRegister.Host(hostName, middlewares...)
 }
 
