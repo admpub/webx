@@ -12,6 +12,7 @@ import (
 	"github.com/admpub/webx/application/library/xcommon"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	"github.com/admpub/webx/application/registry/route"
+	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/defaults"
 	test "github.com/webx-top/echo/testing"
@@ -28,9 +29,15 @@ func Make(method string, path string, saveAs string, reqRewrite ...func(*http.Re
 	if rec.Code != http.StatusOK {
 		return fmt.Errorf(`%w: [%d] %v`, ErrGenerateHTML, rec.Code, rec.Body.String())
 	}
-	err := cache.Put(context.Background(), saveAs, rec.Body.String()+`<!-- Generated at `+time.Now().Format(time.DateTime)+` -->`, 0)
+	body := rec.Body.String()
+	err := cache.Put(context.Background(), saveAs, body+`<!-- Generated at `+time.Now().Format(time.DateTime)+` -->`, 0)
 	if err != nil {
 		log.Error(err)
+	} else {
+		err = cache.Put(context.Background(), saveAs+`.hash`, com.Md5(body), 0)
+		if err != nil {
+			log.Error(err)
+		}
 	}
 	return err
 }
@@ -59,15 +66,24 @@ func IsCached(ctx echo.Context, cacheKey string, urlWithQueryString ...bool) (bo
 			}
 		}
 	}
-
+	var cachedETag string
+	cache.Get(context.Background(), cacheKey+`.hash`, &cachedETag)
+	eTag := ctx.Header(`If-None-Match`)
+	if len(eTag) > 0 && eTag == cachedETag {
+		return true, ctx.NotModified()
+	}
 	var cachedHTML string
 	err := cache.Get(context.Background(), cacheKey, &cachedHTML)
 	if err == nil {
+		if len(cachedETag) > 0 {
+			ctx.Response().Header().Set(`ETag`, cachedETag)
+		}
 		return true, ctx.HTML(cachedHTML)
 	}
 	return false, err
 }
 
 func Remove(cacheKey string) error {
+	cache.Delete(context.Background(), cacheKey+`.hash`)
 	return cache.Delete(context.Background(), cacheKey)
 }
