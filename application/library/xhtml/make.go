@@ -2,6 +2,7 @@ package xhtml
 
 import (
 	"context"
+	"database/sql"
 	"errors"
 	"fmt"
 	"net/http"
@@ -66,17 +67,23 @@ func IsCached(ctx echo.Context, cacheKey string, urlWithQueryString ...bool) (bo
 			}
 		}
 	}
-	var cachedETag string
-	cache.Get(context.Background(), cacheKey+`.hash`, &cachedETag)
+	var cachedETag sql.NullString
+	getHash := func() string {
+		if !cachedETag.Valid {
+			cache.Get(context.Background(), cacheKey+`.hash`, &cachedETag.String)
+			cachedETag.Valid = true
+		}
+		return cachedETag.String
+	}
 	eTag := ctx.Header(`If-None-Match`)
-	if len(eTag) > 0 && eTag == cachedETag {
+	if len(eTag) > 0 && eTag == getHash() {
 		return true, ctx.NotModified()
 	}
 	var cachedHTML string
 	err := cache.Get(context.Background(), cacheKey, &cachedHTML)
 	if err == nil {
-		if len(cachedETag) > 0 {
-			ctx.Response().Header().Set(`ETag`, cachedETag)
+		if len(getHash()) > 0 {
+			ctx.Response().Header().Set(`ETag`, getHash())
 		}
 		return true, ctx.HTML(cachedHTML)
 	}
