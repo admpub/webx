@@ -91,26 +91,28 @@ func Remove(cacheKey string) error {
 }
 
 func ETagCallback(ctx echo.Context, contentEtag func() string, callback func() (string, error), weak ...bool) error {
-	eTag := ctx.Header(`If-None-Match`)
-	if len(eTag) > 0 && strings.TrimPrefix(eTag, `W/`) == `"`+contentEtag()+`"` {
-		return ctx.NotModified()
+	var _weak bool
+	if len(weak) > 0 {
+		_weak = weak[0]
+	}
+	if reqETag := ctx.Header(`If-None-Match`); len(reqETag) > 0 {
+		if _weak {
+			reqETag = strings.TrimPrefix(reqETag, `W/`)
+		}
+		if reqETag == `"`+contentEtag()+`"` {
+			return ctx.NotModified()
+		}
 	}
 	cachedHTML, err := callback()
 	if err != nil {
 		return err
 	}
 	if len(contentEtag()) > 0 {
-		var _weak bool
-		if len(weak) > 0 {
-			_weak = weak[0]
-		} else {
-			_weak = true
+		eTag := `"` + contentEtag() + `"`
+		if _weak { // 弱ETag是指在资源内容发生变化时，ETag值不一定会随之改变的标识符
+			eTag = `W/` + eTag
 		}
-		if _weak {
-			ctx.Response().Header().Set(`ETag`, `W/"`+contentEtag()+`"`)
-		} else {
-			ctx.Response().Header().Set(`ETag`, `"`+contentEtag()+`"`)
-		}
+		ctx.Response().Header().Set(`ETag`, eTag)
 	}
 	return ctx.HTML(cachedHTML)
 }
