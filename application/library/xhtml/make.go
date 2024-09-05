@@ -74,7 +74,7 @@ func IsCached(ctx echo.Context, cacheKey string, urlWithQueryString ...bool) (bo
 			cache.Get(context.Background(), cacheKey+`.hash`, &cachedETag.String)
 			cachedETag.Valid = true
 		}
-		return `"` + cachedETag.String + `"`
+		return cachedETag.String
 	}
 	getContent := func() (string, error) {
 		var cachedHTML string
@@ -92,7 +92,7 @@ func Remove(cacheKey string) error {
 
 func ETagCallback(ctx echo.Context, contentEtag func() string, callback func() (string, error), weak ...bool) error {
 	eTag := ctx.Header(`If-None-Match`)
-	if len(eTag) > 0 && strings.TrimPrefix(eTag, `W/`) == contentEtag() {
+	if len(eTag) > 0 && strings.TrimPrefix(eTag, `W/`) == `"`+contentEtag()+`"` {
 		return ctx.NotModified()
 	}
 	cachedHTML, err := callback()
@@ -107,9 +107,9 @@ func ETagCallback(ctx echo.Context, contentEtag func() string, callback func() (
 			_weak = true
 		}
 		if _weak {
-			ctx.Response().Header().Set(`ETag`, `W/`+contentEtag())
+			ctx.Response().Header().Set(`ETag`, `W/"`+contentEtag()+`"`)
 		} else {
-			ctx.Response().Header().Set(`ETag`, contentEtag())
+			ctx.Response().Header().Set(`ETag`, `"`+contentEtag()+`"`)
 		}
 	}
 	return ctx.HTML(cachedHTML)
