@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/admpub/log"
@@ -73,24 +74,33 @@ func IsCached(ctx echo.Context, cacheKey string, urlWithQueryString ...bool) (bo
 			cache.Get(context.Background(), cacheKey+`.hash`, &cachedETag.String)
 			cachedETag.Valid = true
 		}
-		return cachedETag.String
+		return `"` + cachedETag.String + `"`
 	}
-	eTag := ctx.Header(`If-None-Match`)
-	if len(eTag) > 0 && eTag == getHash() {
-		return true, ctx.NotModified()
+	getContent := func() (string, error) {
+		var cachedHTML string
+		err := cache.Get(context.Background(), cacheKey, &cachedHTML)
+		return cachedHTML, err
 	}
-	var cachedHTML string
-	err := cache.Get(context.Background(), cacheKey, &cachedHTML)
-	if err == nil {
-		if len(getHash()) > 0 {
-			ctx.Response().Header().Set(`ETag`, getHash())
-		}
-		return true, ctx.HTML(cachedHTML)
-	}
-	return false, err
+	err := ETagCallback(ctx, getHash, getContent)
+	return err == nil, err
 }
 
 func Remove(cacheKey string) error {
 	cache.Delete(context.Background(), cacheKey+`.hash`)
 	return cache.Delete(context.Background(), cacheKey)
+}
+
+func ETagCallback(ctx echo.Context, contentEtag func() string, callback func() (string, error)) error {
+	eTag := ctx.Header(`If-None-Match`)
+	if len(eTag) > 0 && strings.TrimPrefix(eTag, `W/`) == contentEtag() {
+		return ctx.NotModified()
+	}
+	cachedHTML, err := callback()
+	if err != nil {
+		return err
+	}
+	if len(contentEtag()) > 0 {
+		ctx.Response().Header().Set(`ETag`, `W/`+contentEtag())
+	}
+	return ctx.HTML(cachedHTML)
 }
