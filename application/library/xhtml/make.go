@@ -90,7 +90,7 @@ func Remove(cacheKey string) error {
 	return cache.Delete(context.Background(), cacheKey)
 }
 
-func ETagCallback(ctx echo.Context, contentEtag func() string, callback func() (string, error)) error {
+func ETagCallback(ctx echo.Context, contentEtag func() string, callback func() (string, error), weak ...bool) error {
 	eTag := ctx.Header(`If-None-Match`)
 	if len(eTag) > 0 && strings.TrimPrefix(eTag, `W/`) == contentEtag() {
 		return ctx.NotModified()
@@ -100,7 +100,17 @@ func ETagCallback(ctx echo.Context, contentEtag func() string, callback func() (
 		return err
 	}
 	if len(contentEtag()) > 0 {
-		ctx.Response().Header().Set(`ETag`, `W/`+contentEtag())
+		var _weak bool
+		if len(weak) > 0 {
+			_weak = weak[0]
+		} else {
+			_weak = true
+		}
+		if _weak {
+			ctx.Response().Header().Set(`ETag`, `W/`+contentEtag())
+		} else {
+			ctx.Response().Header().Set(`ETag`, contentEtag())
+		}
 	}
 	return ctx.HTML(cachedHTML)
 }
