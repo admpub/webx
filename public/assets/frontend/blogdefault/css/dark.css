@@ -24,6 +24,10 @@ h6,
     color: #eee
 }
 
+a {
+  color: white;
+}
+
 .featured-topics-wrapper .featured-topics-card .card-content .post-meta .post-date,
 .post-date,
 .comment,

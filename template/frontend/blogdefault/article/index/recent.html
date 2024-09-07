@@ -38,19 +38,7 @@
                     </div>
                 </div>
                 {{- end -}}
-                <!-- Ad banner -->
-                <div class="widget-ad-banner bg-cover" style="background-image: url('{{AssetsXURL}}/blogdefault/img/recent-post/add-banner2.png')">
-                    <div class="content">
-                        <span class="discount">20% off</span>
-                        <h2 class="heading-primary">Jewelry IWO</h2>
-                        <p class="body-text">Magna incididunt commodo aute consectetur cupida.</p>
-                        <a href="#" class="button icon-button active">
-                            <span>
-                                <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                </div>
+                {{Include "common/sidebar_banner2" (MakeMap `badge` `广告位#3` `title` `虚位以待` `content` `欢迎投放产品信息` `url` `#`)}}
             </div>
             <div class="col-lg-9">
                 <div class="row gy-4 main-post-card-wrapper">

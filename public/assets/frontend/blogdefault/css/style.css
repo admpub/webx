@@ -1076,6 +1076,32 @@ button {
   padding-right: 9px;
 }
 
+.mg-0 {
+  margin: 0;
+}
+
+.pd-0 {
+  padding: 0;
+}
+
+.wd-100p{
+  width: 100%;
+}
+
+.always-bottom{
+  position: fixed;
+  bottom: 0;
+  z-index: 99999;
+}
+
+.alert button.close{
+  border: 0;
+  background-color: transparent;
+  position: absolute;
+  right: 0; top: 0;
+  height: 30px; width: 30px;
+}
+
 .bg-overlay {
   position: relative;
   z-index: 1;
@@ -1801,7 +1827,6 @@ a {
   cursor: pointer;
   font-size: 16px;
   line-height: 28px;
-  color: white;
   font-family: "Oxygen", sans-serif;
   cursor: pointer;
 }
@@ -2557,6 +2582,12 @@ p {
 
 .author span {
   font-weight: 600;
+}
+
+.author .fa {
+  color: #bbb;
+  font-size: 0.9em;
+  margin-right: 3px;
 }
 
 .meta-item {

@@ -27,8 +27,9 @@
                             </h3>
                         </a>
 
-                        <p class="author"> by 
-                            {{if $v.Customer -}}
+                        <p class="author" title="{{`作者`|$.T}}">
+                            <i class="fa fa-user"></i>
+                            {{- if $v.Customer -}}
                             <a href="{{FrontendURL}}/u/{{$v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
                             {{- else if $v.User -}}
                             <span>{{$v.User.Username}}</span>

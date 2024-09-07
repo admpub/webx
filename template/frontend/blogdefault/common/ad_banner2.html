@@ -1,0 +1,26 @@
+{{Strip}}{{- $v := . -}}
+<div class="ad-campaign-2 bg-cover mt-35" style="background-image: url('{{if $v.bgImage}}{{$v.bgImage}}{{else}}{{AssetsXURL}}/blogdefault/img/add-campaign-2.png{{end}}')">
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6">
+            <div class="right-content">
+                <div class="content">
+                    {{- if $v.badge -}}
+                    <span class="discount">{{$v.badge}}</span>
+                    {{- end -}}
+                    {{- if $v.title -}}
+                    <h2 class="heading-primary">{{$v.title}}</h2>
+                    {{- end -}}
+                </div>
+                {{- if $v.url -}}
+                <a href="{{$v.url}}" class="button icon-button active">
+                    <span class="icon">
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                </a>
+                {{- end -}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/Strip}}

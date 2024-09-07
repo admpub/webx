@@ -1,0 +1,27 @@
+{{Strip}}{{- $v := . -}}
+    <!-- Widget ad banner -->
+    {{- if $v.ident -}}
+    <div class="widget-ad-banner">
+    {{(Advert $v.ident).Rand.HTML}}
+    </div>
+    {{- else -}}
+    <div class="widget-ad-banner bg-cover" style="background-image: url('{{if $v.bgImage}}{{$v.bgImage}}{{else}}{{AssetsXURL}}/blogdefault/img/blog/sidebar-add-banner.png{{end}}')">
+        <div class="content">
+            {{- if $v.badge -}}
+            <span class="discount">{{$v.badge}}</span>
+            {{- end -}}
+            {{- if $v.title -}}
+            <h2 class="heading-secondary">{{$v.title}}</h2>
+            {{- end -}}
+            <p class="body-text">{{$v.content}}</p>
+            {{- if $v.url -}}
+            <a href="{{$v.url}}" class="button icon-button active">
+                <span>
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            </a>
+            {{- end -}}
+        </div>
+    </div>
+    {{- end -}}
+{{/Strip}}

@@ -9,9 +9,18 @@ import (
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/logic/articlelogic"
 	"github.com/admpub/webx/application/model/official"
+	modelAdvert "github.com/admpub/webx/application/model/official/advert"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/defaults"
+	"github.com/webx-top/echo/middleware/tplfunc"
 )
+
+func init() {
+	tplfunc.TplFuncMap[`Advert`] = func(idents ...string) interface{} {
+		return modelAdvert.GetAdvertForHTML(defaults.NewMockContext(), idents...)
+	}
+}
 
 var DefaultRenderDataWrapper = func(ctx echo.Context, data interface{}) interface{} {
 	return NewRenderData(ctx, data)
@@ -95,4 +104,8 @@ func (r *RenderData) SkipLicenseCheck() bool {
 
 func (r *RenderData) SoftwareName() string {
 	return bootconfig.SoftwareName
+}
+
+func (r *RenderData) Advert(idents ...string) interface{} {
+	return modelAdvert.GetAdvertForHTML(r.ctx, idents...)
 }

@@ -84,27 +84,7 @@
                         <!-- PAGINATION -->
                         {{($.Stored.pagination.SetNum 1).Render}}
                         <!-- ============= AD CAMPAIGN-2 ============= -->
-                        <div
-                            class="ad-campaign-2 bg-cover mt-35"
-                            style="background-image: url('{{AssetsXURL}}/blogdefault/img/add-campaign-2.png')"
-                        >
-                            <div class="row">
-                                <div class="col-lg-6"></div>
-                                <div class="col-lg-6">
-                                    <div class="right-content">
-                                        <div class="content">
-                                            <span class="discount">20% off</span>
-                                            <h2 class="heading-primary">Home furniture</h2>
-                                        </div>
-                                        <a href="#" class="button icon-button active">
-                                            <span class="icon">
-                                                <i class="fas fa-chevron-right"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{Include "common/ad_banner2" (MakeMap `badge` `广告位#6` `title` `虚位以待` `url` `#`)}}
                     </div>
                     <div class="col-lg-3">
                         {{Include "article/right/right"}}

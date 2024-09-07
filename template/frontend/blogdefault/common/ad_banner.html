@@ -1,0 +1,29 @@
+{{Strip}}{{- $v := . -}}
+<div class="ad-campaign bg-cover" style="background-image: url('{{if $v.bgImage}}{{$v.bgImage}}{{else}}{{AssetsXURL}}/blogdefault/img/add-campaign-1.png{{end}}')">
+    <div class="content-left">
+        {{- if $v.badge -}}
+        <span class="discount">{{$v.badge}}</span>
+        {{- end -}}
+        {{- if $v.title -}}
+        <h3 class="heading-primary mt-10">{{$v.title}}</h3>
+        {{- end -}}
+    </div>
+    <div class="content-right">
+        {{- if $v.subtitle -}}
+        <h4>{{$v.subtitle}}</h4>
+        {{- end -}}
+        <div class="content">
+            <p class="body-text">
+                {{$v.content}}
+            </p>
+            {{- if $v.url -}}
+            <a href="{{$v.url}}" class="button icon-button active">
+                <span class="icon">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            </a>
+            {{- end -}}
+        </div>
+    </div>
+</div>
+{{/Strip}}

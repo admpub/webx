@@ -30,8 +30,9 @@
                         </p>
 
                         <div class="post-meta">
-                            <p class="author">by 
-                                {{if $v.Customer -}}
+                            <p class="author" title="{{`作者`|$.T}}">
+                                <i class="fa fa-user"></i> 
+                                {{- if $v.Customer -}}
                                 <a href="{{FrontendURL}}/u/{{$v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
                                 {{- else if $v.User -}}
                                 <span>{{$v.User.Username}}</span>
@@ -73,27 +74,13 @@
                         </a>
                         {{- end -}}
                     </div>
-                    <div
-                        class="widget-ad-banner two bg-cover"
-                        style="background-image: url('{{AssetsXURL}}/blogdefault/img/blog/sidebar-add-banner.png')"
-                    >
-                        <div class="content">
-                            <span class="discount">20% off</span>
-                            <h2 class="heading-secondary">Home Garden</h2>
-                            <p class="body-text">Magna incididunt commodo aute consectetur cupida.</p>
-                            <a href="#" class="button icon-button active">
-                                <span>
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
+                    {{Include "common/sidebar_banner" (MakeMap `badge` `广告位#5` `title` `虚位以待` `content` `欢迎投放产品信息` `url` `#`)}}
                     <div class="widget-newsletter">
-                        <h3 class="heading-secondary">Newsletter</h3>
-                        <p class="body-text">Want to be always informed?</p>
+                        <h3 class="heading-secondary">{{`邮件订阅`|$.T}}</h3>
+                        <p class="body-text" title="Want to be always informed?">{{`想要随时了解我们的最新动态？`|$.T}}</p>
                         <form>
-                            <input type="text" placeholder="Your email" />
-                            <button class="button button-primary">Subscribe</button>
+                            <input type="email" placeholder="{{`电子邮箱地址`|$.T}}" />
+                            <button class="button button-primary">{{`订阅`|$.T}}</button>
                         </form>
                     </div>
                 </div>

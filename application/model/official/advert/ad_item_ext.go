@@ -1,6 +1,13 @@
 package advert
 
-import "github.com/admpub/webx/application/dbschema"
+import (
+	"strings"
+	"time"
+
+	"github.com/admpub/webx/application/dbschema"
+	"github.com/admpub/webx/application/library/cache"
+	"github.com/webx-top/echo"
+)
 
 type ItemAndPosition struct {
 	*dbschema.OfficialAdItem
@@ -33,50 +40,53 @@ type ItemAndRendered struct {
 	Rendered string
 }
 
-type ItemResponse struct {
-	Content  string `json:"content" xml:"content"`
-	Contype  string `json:"contype" xml:"contype"`
-	URL      string `json:"url" xml:"url"`
-	Start    uint   `json:"start,omitempty" xml:"start,omitempty"`
-	End      uint   `json:"end,omitempty" xml:"end,omitempty"`
-	Width    uint   `json:"width,omitempty" xml:"width,omitempty"`
-	Height   uint   `json:"height,omitempty" xml:"height,omitempty"`
-	Rendered string `json:"rendered,omitempty" xml:"rendered,omitempty"`
+type CachedAdvert struct {
+	List        PositionAdverts
+	RefreshedAt time.Time
 }
 
-func (i *ItemResponse) GetWidth() uint {
-	return i.Width
+func (c *CachedAdvert) GenHTML() *CachedAdvert {
+	c.List.GenHTML()
+	return c
 }
 
-func (i *ItemResponse) GetHeight() uint {
-	return i.Height
-}
-
-func (i *ItemResponse) GetURL() string {
-	return i.URL
-}
-
-func (i *ItemResponse) GetContent() string {
-	return i.Content
-}
-
-func (i *ItemResponse) GetContype() string {
-	return i.Contype
-}
-
-func (i *ItemResponse) GenHTML() *ItemResponse {
-	i.Rendered = Render(i)
-	return i
-}
-
-func NewItemResponse(item *dbschema.OfficialAdItem, position *dbschema.OfficialAdPosition) *ItemResponse {
-	return &ItemResponse{
-		Content: item.Content,
-		Contype: item.Contype,
-		URL:     item.Url,
-		Start:   item.Start,
-		End:     item.End,
-		Width:   position.Width,
-		Height:  position.Height,
+func GetCachedAdvert(ctx echo.Context, idents ...string) (*CachedAdvert, error) {
+	res := &CachedAdvert{}
+	key := `advert:` + strings.Join(idents, `,`)
+	err := cache.XFunc(ctx, key, res, func() error {
+		m := NewAdPosition(ctx)
+		var err error
+		if len(idents) > 0 {
+			res.List, err = m.GetAdvertsByIdent(idents...)
+		}
+		if err != nil {
+			return err
+		}
+		res.RefreshedAt = time.Now()
+		return err
+	}, cache.GenOptions(ctx, 300)...)
+	if err != nil {
+		return nil, err
 	}
+	return res, err
+}
+
+func GetAdvertForHTML(ctx echo.Context, idents ...string) interface{} {
+	sz := len(idents)
+	if sz < 1 {
+		return ItemsResponse{}
+	}
+	cc, err := GetCachedAdvert(ctx, idents...)
+	if err != nil {
+		return ItemsResponse{
+			{Content: err.Error(), Rendered: err.Error()},
+		}
+	}
+	if sz == 1 {
+		for _, item := range cc.List {
+			return item
+		}
+		return ItemsResponse{}
+	}
+	return cc.List
 }

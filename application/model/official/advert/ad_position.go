@@ -126,7 +126,7 @@ func GenAdvertCondition() db.Compounds {
 	}
 }
 
-func (f *AdPosition) GetAdvertsByIdent(idents ...string) (map[string][]*ItemResponse, error) {
+func (f *AdPosition) GetAdvertsByIdent(idents ...string) (PositionAdverts, error) {
 	_, err := f.OfficialAdPosition.ListByOffset(nil, nil, 0, -1, db.And(
 		db.Cond{`ident`: db.In(idents)},
 		db.Cond{`disabled`: `N`},
@@ -143,7 +143,7 @@ func (f *AdPosition) GetAdvertsByIdent(idents ...string) (map[string][]*ItemResp
 	}
 	posIDs := make([]uint64, len(positions))
 	posIDi := map[uint64]*dbschema.OfficialAdPosition{}
-	list := map[string][]*ItemResponse{}
+	list := PositionAdverts{}
 	for idx, pos := range positions {
 		posIDs[idx] = pos.Id
 		posIDi[pos.Id] = pos
@@ -157,7 +157,7 @@ func (f *AdPosition) GetAdvertsByIdent(idents ...string) (map[string][]*ItemResp
 	for _, row := range item.Objects() {
 		pos := posIDi[row.PositionId]
 		if _, ok := list[pos.Ident]; !ok {
-			list[pos.Ident] = []*ItemResponse{}
+			list[pos.Ident] = ItemsResponse{}
 		}
 		list[pos.Ident] = append(list[pos.Ident], NewItemResponse(row, pos))
 	}
