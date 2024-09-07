@@ -52,34 +52,38 @@ func (c *CachedAdvert) GenHTML() *CachedAdvert {
 
 func GetCachedAdvert(ctx echo.Context, idents ...string) (*CachedAdvert, error) {
 	res := &CachedAdvert{}
-	key := `advert:` + strings.Join(idents, `,`)
-	err := cache.XFunc(ctx, key, res, func() error {
-		m := NewAdPosition(ctx)
-		var err error
-		if len(idents) > 0 {
+	if len(idents) > 0 {
+		key := `advert:` + strings.Join(idents, `,`)
+		err := cache.XFunc(ctx, key, res, func() error {
+			m := NewAdPosition(ctx)
+			var err error
 			res.List, err = m.GetAdvertsByIdent(idents...)
-		}
-		if err != nil {
+			if err != nil {
+				return err
+			}
+			res.RefreshedAt = time.Now()
 			return err
+		}, cache.GenOptions(ctx, 300)...)
+		if err != nil {
+			return nil, err
 		}
-		res.RefreshedAt = time.Now()
-		return err
-	}, cache.GenOptions(ctx, 300)...)
-	if err != nil {
-		return nil, err
 	}
-	return res, err
+	if res.List == nil {
+		res.List = PositionAdverts{}
+	}
+	echo.Dump(res)
+	return res, nil
 }
 
 func GetAdvertForHTML(ctx echo.Context, idents ...string) interface{} {
 	sz := len(idents)
-	if sz < 1 {
+	if sz < 1 || (sz == 1 && len(idents[0]) == 0) {
 		return ItemsResponse{}
 	}
 	cc, err := GetCachedAdvert(ctx, idents...)
 	if err != nil {
 		return ItemsResponse{
-			{Content: err.Error(), Rendered: err.Error()},
+			{Rendered: err.Error()},
 		}
 	}
 	if sz == 1 {

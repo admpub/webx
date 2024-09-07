@@ -1,4 +1,11 @@
 {{Strip}}{{- $v := . -}}
+{{- $adIdent := $v.ident | Default `` -}}
+{{- $ad := Advert $adIdent -}}
+{{- if $ad.Valid -}}
+<div class="ad-campaign">
+{{- $ad.Rand.HTML -}}
+</div>
+{{- else -}}
 <div class="ad-campaign bg-cover" style="background-image: url('{{if $v.bgImage}}{{$v.bgImage}}{{else}}{{AssetsXURL}}/blogdefault/img/add-campaign-1.png{{end}}')">
     <div class="content-left">
         {{- if $v.badge -}}
@@ -26,4 +33,5 @@
         </div>
     </div>
 </div>
+{{- end -}}
 {{/Strip}}

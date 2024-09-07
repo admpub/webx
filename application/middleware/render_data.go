@@ -18,7 +18,10 @@ import (
 
 func init() {
 	tplfunc.TplFuncMap[`Advert`] = func(idents ...string) interface{} {
-		return modelAdvert.GetAdvertForHTML(defaults.NewMockContext(), idents...)
+		ctx := defaults.AcquireMockContext()
+		r := modelAdvert.GetAdvertForHTML(ctx, idents...)
+		defaults.ReleaseMockContext(ctx)
+		return r
 	}
 }
 

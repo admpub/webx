@@ -1,8 +1,10 @@
 {{Strip}}{{- $v := . -}}
     <!-- Widget ad banner -->
-    {{- if $v.ident -}}
+    {{- $adIdent := $v.ident | Default `` -}}
+    {{- $ad := Advert $adIdent -}}
+    {{- if $ad.Valid -}}
     <div class="widget-ad-banner">
-    {{(Advert $v.ident).Rand.HTML}}
+    {{- $ad.Rand.HTML -}}
     </div>
     {{- else -}}
     <div class="widget-ad-banner bg-cover" style="background-image: url('{{if $v.bgImage}}{{$v.bgImage}}{{else}}{{AssetsXURL}}/blogdefault/img/blog/sidebar-add-banner.png{{end}}')">
