@@ -25,8 +25,9 @@
                         </a>
                         <div class="post-meta-wrapper">
                             <div class="meta-left">
-                                <p class="author meta-item">{{`作者`|$.T}} 
-                                    {{if $article.Customer -}}
+                                <p class="author meta-item" title="{{`作者`|$.T}}">
+                                    <i class="fa fa-user"></i> 
+                                    {{- if $article.Customer -}}
                                     <a href="{{FrontendURL}}/u/{{$article.Customer.Id}}" class="author-name">{{$article.Customer.Name}}</a>
                                     {{- else if $article.User -}}
                                     <span>{{$article.User.Username}}</span>
