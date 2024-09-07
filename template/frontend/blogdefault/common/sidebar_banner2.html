@@ -9,8 +9,8 @@
 {{- else -}}
 <div class="widget-ad-banner bg-cover" style="background-image: url('{{if $v.bgImage}}{{$v.bgImage}}{{else}}{{AssetsXURL}}/blogdefault/img/recent-post/add-banner2.png{{end}}')">
     <div class="content">
-        {{- if $v.badge -}}
-        <span class="discount">{{$v.badge}}</span>
+        {{- if or $v.ident $v.badge -}}
+        <span class="discount">{{if $v.badge}}{{$v.badge}}{{else}}{{printf `广告位#%s` (ToUpper $v.ident)}}{{end}}</span>
         {{- end -}}
         {{- if $v.title -}}
         <h2 class="heading-primary">{{$v.title}}</h2>

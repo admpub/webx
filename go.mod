@@ -51,7 +51,7 @@ require (
 	github.com/webx-top/client v0.9.4
 	github.com/webx-top/com v1.3.0
 	github.com/webx-top/db v1.27.9
-	github.com/webx-top/echo v1.8.3
+	github.com/webx-top/echo v1.8.4
 	github.com/webx-top/echo-prometheus v1.1.2
 	github.com/webx-top/echo-socket.io v1.3.1
 	github.com/webx-top/image v0.1.1
@@ -70,7 +70,7 @@ require (
 	github.com/admpub/go-lock v1.3.0
 	github.com/admpub/go-zinc v0.0.8
 	github.com/admpub/goth v0.0.4
-	github.com/admpub/nging/v5 v5.3.3-pre27
+	github.com/admpub/nging/v5 v5.3.3-pre28
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.27.2

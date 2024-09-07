@@ -71,7 +71,7 @@ func GetCachedAdvert(ctx echo.Context, idents ...string) (*CachedAdvert, error) 
 	if res.List == nil {
 		res.List = PositionAdverts{}
 	}
-	echo.Dump(res)
+	echo.Dump(echo.H{`idents`: idents, `result`: res})
 	return res, nil
 }
 

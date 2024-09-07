@@ -8,8 +8,8 @@
 {{- else -}}
 <div class="ad-campaign bg-cover" style="background-image: url('{{if $v.bgImage}}{{$v.bgImage}}{{else}}{{AssetsXURL}}/blogdefault/img/add-campaign-1.png{{end}}')">
     <div class="content-left">
-        {{- if $v.badge -}}
-        <span class="discount">{{$v.badge}}</span>
+        {{- if or $v.ident $v.badge -}}
+        <span class="discount">{{if $v.badge}}{{$v.badge}}{{else}}{{printf `广告位#%s` (ToUpper $v.ident)}}{{end}}</span>
         {{- end -}}
         {{- if $v.title -}}
         <h3 class="heading-primary mt-10">{{$v.title}}</h3>
