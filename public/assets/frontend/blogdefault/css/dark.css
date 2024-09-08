@@ -166,6 +166,10 @@ a.meta-item,
     border: none;
 }
 
+.widget-ad-banner,.ad-campaign,.ad-campaign-2{
+    background-color: #38404C;
+}
+
 .modal-body .close,
 .comment-box .comment-author .author-name,
 #reply-comment-blockquote .blockquote a,

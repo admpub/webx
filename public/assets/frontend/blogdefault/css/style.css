@@ -19,9 +19,6 @@ body,
 div,
 span,
 img,
-ol,
-ul,
-li,
 a,
 p,
 h1,
@@ -184,15 +181,6 @@ hr {
   margin: 0;
   padding: 0;
   border-color: #000;
-}
-
-ul {
-  list-style-type: none;
-}
-
-li {
-  list-style: none;
-  position: relative;
 }
 
 a,
@@ -1086,6 +1074,16 @@ button {
 
 .wd-100p{
   width: 100%;
+}
+
+.ht-100p{
+  height: 100%;
+}
+
+.ht-auto{
+  height: auto !important;
+  min-height: auto !important;
+  max-height: auto !important;
 }
 
 .always-bottom{
@@ -2508,12 +2506,17 @@ p {
   height: 6px;
 }
 
+.content-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .widget-ad-banner {
   border-radius: 10px;
   width: 100%;
   min-height: 375px;
   position: relative;
-  background-color: pink;
   margin-top: 20px;
 }
 
@@ -2778,7 +2781,15 @@ a.meta-item{
 .header-wrapper .main-nav {
   position: relative;
 }
-
+.none-style ul,
+.none-style ol,
+.none-style li,
+.metismenu ul,
+.metismenu li,
+.main-nav ul,
+.main-nav li{
+  margin:0;padding:0;list-style:none;
+}
 @media (max-width: 991px) {
   .header-wrapper .main-nav {
     display: none;
@@ -3189,7 +3200,7 @@ a.meta-item{
 .trending-wrapper .trending-card{
   text-shadow: 0 0 5px #555;
 }
-
+.trending-wrapper .trending-card a{color:white}
 @media (max-width: 767px) {
   .hero-wrapper .hero-heading {
     font-size: 48px;
@@ -4118,6 +4129,7 @@ a.meta-item{
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
+  max-width: 100%;
 }
 .blog-list-wrapper .left-content .post-content .post-info{
   width: calc(100% - 60px)
@@ -4291,6 +4303,10 @@ a.meta-item{
 
 .single-post-wrapper .left-content .body-text {
   font-size: 18px;
+}
+
+.single-post-wrapper .left-content .post-content > .content {
+  max-width: 100%;
 }
 
 .single-post-wrapper .left-content .post-content p {
@@ -4636,14 +4652,10 @@ a.meta-item{
 }
 
 .ad-campaign {
-  display: -webkit-box;
-  display: -ms-flexbox;
+  position: relative;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   min-height: 200px;
-  background-color: rebeccapurple;
   border-radius: 15px;
 }
 
@@ -4762,6 +4774,8 @@ a.meta-item{
 .ad-campaign-2 {
   padding: 50px;
   border-radius: 15px;
+  text-align: center;
+  position: relative;
 }
 
 .ad-campaign-2 .right-content {
@@ -4774,6 +4788,7 @@ a.meta-item{
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  text-align: left;
 }
 
 .ad-campaign-2 .discount {
@@ -4798,6 +4813,23 @@ a.meta-item{
     min-width: 40px;
     min-height: 40px;
   }
+}
+
+.widget-ad-banner,.ad-campaign,.ad-campaign-2{
+  background-color: #eee;
+}
+.ad-campaign::after,.ad-campaign-2::after,
+.widget-ad-banner::after{
+  content:"广告";padding:1px 2px;
+  border-radius: 5px 0 10px 0;
+  border:1px solid #ccc;font-size: 11px;right: 0;
+  position: absolute;
+  bottom: 0;
+  height: 15px;
+  line-height: 1em;
+}
+.ad-campaign::after,.ad-campaign-2::after{
+  border-bottom-right-radius: 15px;
 }
 
 .footer-wrapper {
@@ -4971,6 +5003,10 @@ a.meta-item{
   display: block;
   overflow: hidden;
   color: white;
+}
+
+.prettyprint ol{
+  padding-left: revert;
 }
 
 @media (max-width: 1331px) {

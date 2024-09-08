@@ -3,7 +3,7 @@
     {{- $adIdent := $v.ident | Default `` -}}
     {{- $ad := Advert $adIdent -}}
     {{- if $ad.Valid -}}
-    <div class="widget-ad-banner">
+    <div class="widget-ad-banner content-center">
     {{- $ad.Rand.HTML -}}
     </div>
     {{- else -}}

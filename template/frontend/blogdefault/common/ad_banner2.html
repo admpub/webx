@@ -1,7 +1,7 @@
 {{Strip}}{{- $v := . -}}{{- $adIdent := $v.ident | Default `` -}}
 {{- $ad := Advert $adIdent -}}
 {{- if $ad.Valid -}}
-<div class="ad-campaign-2 mt-35">
+<div class="ad-campaign-2 mt-35 content-center">
 {{- $ad.Rand.HTML -}}
 </div>
 {{- else -}}

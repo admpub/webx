@@ -66,12 +66,8 @@
                                         </a>
                                     </div>
                                     <div class="post-content">
-                                        <div class="row">
-                                            
-                                            <h3 class="heading-primary">
-                                                {{$data.Title}}
-                                            </h3>
-                                            
+                                        <div class="content">
+                                            <h3 class="heading-primary">{{$data.Title}}</h3>
                                             <div class="body-text" id="article-content" data-contype="{{$data.Contype}}">
                 {{- if eq $data.Contype "markdown" -}}
                 <div class="markdown-code">{{- OutputContent $data.Content $data.Contype -}}</div>
@@ -79,7 +75,7 @@
                 {{- OutputContent $data.Content $data.Contype -}}
                 {{- end -}}
                                             </div>
-                                        </div>
+                                        </div><!-- content -->
                                     </div>
                                 </div>
                             </div>
