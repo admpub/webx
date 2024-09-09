@@ -1,6 +1,7 @@
-{{Strip}}
+{{Strip}}{{- $themeInfo := call $.Func.ThemeInfo -}}
+{{- $darkMode := $themeInfo.IsColorName `dark` -}} 
 {{/*Include "header_style_blue"*/}}
-{{- $headPanelBg := "info" -}}
+{{- $headPanelBg := If $darkMode "inverse" "info" -}}
 {{- $textColor := "white" -}}
 {{- $logoColor := "white" -}}
 {{- $navbarColor := "white" -}}
