@@ -96,11 +96,15 @@
 
                             {{/*Include "article/detail/authorcard"*/}}
                             
+                            {{- $prevRow := $.Stored.prevRow -}}
+                            {{- $hasPrevArticle := and $prevRow (gt $prevRow.Id 0) -}}
+                            {{- $nextRow := $.Stored.nextRow -}}
+                            {{- $hasNextArticle := and $nextRow (gt $nextRow.Id 0) -}}
+                            {{- if or $hasPrevArticle $hasNextArticle -}}
                             <!-- Post navigation -->
                             <div class="post-navigation">
                                 <div class="nav-prev">
-                                    {{- $prevRow := $.Stored.prevRow -}}
-                                    {{- if and $prevRow (gt $prevRow.Id 0) -}}
+                                    {{- if $hasPrevArticle -}}
                                     <a href="{{FrontendURL}}/article/{{$prevRow.Id}}{{$.Ext}}" class="nav-button">
                                         <span>
                                             <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow-2.png" alt="arrow" />
@@ -116,8 +120,7 @@
                                     {{- end -}}
                                 </div>
                                 <div class="nav-next">
-                                    {{- $nextRow := $.Stored.nextRow -}}
-                                    {{- if and $nextRow (gt $nextRow.Id 0) -}}
+                                    {{- if hasNextArticle -}}
                                     <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{$.Ext}}" class="nav-button">
                                         {{`下一篇文章`|$.T}}
                                         <span>
@@ -133,12 +136,14 @@
                                     {{- end -}}
                                 </div>
                             </div>
+                            {{- end -}}
                             {{- if and (eq $data.CloseComment "N") (ne Config.base.comment "close") -}}
                             <div class="post-comments">
                                <h3 class="heading-secondary">{{`评论`|$.T}} (<span class="comment-count-num">{{$data.Comments}}</span>)</h3>
                                 {{Include "article/comment_list"}}
                                 {{Include "article/comment_form"}}
                             </div>
+                            {{Include "article/comment_form_modal"}}
                             {{- end -}}
                             <!-- ============= AD CAMPAIGN-2 ============= -->
                             {{Include "common/ad_banner2" (MakeMap `ident` `ad7` `title` `虚位以待` `url` `#`)}}
@@ -152,7 +157,6 @@
         </section>
 {{/Block}}
 {{Block "footer"}}
-{{Include "article/comment_form_modal"}}
 <!-- markdown support -->
 <script type="text/javascript" src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
 <script type="text/javascript" src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
