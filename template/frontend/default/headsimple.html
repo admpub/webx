@@ -1,5 +1,6 @@
-{{Strip}}
-    <div class="bg-white pos-fixed t-0 l-0 r-0 shadow-1 z-index-10">
+{{Strip}}{{- $themeInfo := call $.Func.ThemeInfo -}}
+{{- $darkMode := $themeInfo.IsColorName `dark` -}} 
+    <div class="bg-{{if $darkMode}}inverse{{else}}white{{end}} pos-fixed t-0 l-0 r-0 shadow-1 z-index-10">
       <div class="container ht-70 d-flex align-items-center justify-content-between">
         <a href="{{FrontendURL}}/" class="tx-inverse tx-size-24 tx-spacing-neg-2 tx-bold">
           {{- if Config.base.siteLogo -}}
