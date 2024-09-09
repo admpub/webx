@@ -4895,9 +4895,7 @@ a.meta-item{
 }
 
 .footer-wrapper .footer-bottom .footer-bottom-links {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
 }
 
 .footer-wrapper .footer-bottom .footer-bottom-links a,
@@ -4905,10 +4903,6 @@ a.meta-item{
   color: #7a90aa;
   font-size: 14px;
   text-transform: capitalize;
-}
-
-.footer-wrapper .footer-bottom .footer-bottom-links span {
-  margin: 0 10px;
 }
 
 .not-found-wrapper {

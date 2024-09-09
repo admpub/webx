@@ -42,21 +42,21 @@
                 <div class="container">
                     <div class="bottom-content">
                         <div class="bottom-left">
-                            <p>
+                            <div>
                                 &copy; {{Now.Format "2006"}}. All rights By <a href="{{Config.base.siteURL|Default (FrontendURL `/`)}}">{{Config.base.siteName}}</a>.
 {{- if Config.base.statCode -}}<span style="display:none">{{Config.base.statCode|ToHTML}}</span>{{- end -}}
 {{- if Config.base.siteSlogan -}}
 <br />
 {{- Config.base.siteSlogan -}}
 {{- end -}}
-                            </p>
+                            </div>
                         </div>
                         <div class="bottom-right">
                             <div class="footer-bottom-links">
                                 {{- if Config.base.siteICPFiling -}}
                                 <a href="{{Config.base.siteICPURL|Default `https://beian.miit.gov.cn/`}}" target="_blank">{{Config.base.siteICPFiling}}</a>
-                                {{- end -}}
                                 <span>|</span>
+                                {{- end -}}
                                 <a href="#">Terms and conditions</a>
                                 {{- if not (HasFeature `hide-poweredby`) -}}
                                 <br />
