@@ -120,7 +120,7 @@
                                     {{- end -}}
                                 </div>
                                 <div class="nav-next">
-                                    {{- if hasNextArticle -}}
+                                    {{- if $hasNextArticle -}}
                                     <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{$.Ext}}" class="nav-button">
                                         {{`下一篇文章`|$.T}}
                                         <span>
