@@ -562,6 +562,7 @@ function commentList(page,boxElem,url,isReplyList){
  * @param {float} offsetY 
  */
 function bindCommentList(box,isReplyList,offsetY) {
+    if(!box || box.length<1) return;
     if(offsetY===null) offsetY=0;
     if(isReplyList===null) isReplyList=false;
     var replaceState = box.data('replace-state')||false;
@@ -598,6 +599,7 @@ function bindCommentList(box,isReplyList,offsetY) {
  */
 function initCommentForm(formElem){
     if(formElem==null) formElem='#comment-post-form';
+    if($(formElem).length<1) return;
     if($(formElem).data('attached')) return;
     $(formElem).data('attached',true);
     $(formElem).find('[required]').on('keyup blur',function(){
