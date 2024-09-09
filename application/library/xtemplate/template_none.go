@@ -7,7 +7,6 @@ import (
 	"database/sql"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/webx-top/echo"
 )
@@ -22,34 +21,13 @@ func (p *PathFixers) Fix(ctx echo.Context, t *Template, theme string, tmpl strin
 	if mp, ok := t.cachedPathData.get(cacheKey); ok {
 		return mp.String, mp.Valid
 	}
-	var subdir, newTmpl string
-	if len(tmpl) > 3 && strings.HasPrefix(tmpl, startChar) { // #theme#index
-		subdir = tmpl[1:]
-		splited := strings.SplitN(subdir, endChar, 2)
-		subdir = splited[0]
-		if len(splited) > 1 {
-			tmpl = strings.TrimLeft(splited[1], whitespace)
-			subdirAndGroup := strings.SplitN(subdir, groupAtChar, 2) // #theme@group#
-			if len(subdirAndGroup) == 2 {
-				subdir = strings.TrimRight(subdirAndGroup[0], whitespace)
-				group := strings.TrimLeft(subdirAndGroup[1], whitespace)
-				if t, ok := groups[group]; ok {
-					r := t.Handle(ctx, subdir, tmpl)
-					t.cachedPathData.set(cacheKey, sql.NullString{String: r, Valid: true})
-					return r, true
-				}
-			}
+	subdir, newTmpl, group := p.parsePath(theme, tmpl)
+	if len(group) > 0 {
+		if t, ok := groups[group]; ok {
+			r := t.Handle(ctx, subdir, tmpl)
+			t.cachedPathData.set(cacheKey, sql.NullString{String: r, Valid: true})
+			return r, true
 		}
-		if len(theme) == 0 { // 未启用主题
-			subdir, newTmpl = p.splitPath(tmpl)
-		} else {
-			newTmpl = tmpl
-		}
-	} else if len(theme) > 0 {
-		subdir = theme
-		newTmpl = tmpl
-	} else {
-		subdir, newTmpl = p.splitPath(tmpl)
 	}
 	pathFixers, ok := (*p)[subdir]
 	if ok {

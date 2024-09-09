@@ -71,6 +71,34 @@ func (p *PathFixers) splitPath(tmpl string) (subdir string, newTmpl string) {
 	return
 }
 
+func (p *PathFixers) parsePath(theme string, tmpl string) (subdir string, newTmpl string, group string) {
+	if len(tmpl) > 3 && strings.HasPrefix(tmpl, startChar) { // #theme#index
+		subdir = tmpl[1:]
+		splited := strings.SplitN(subdir, endChar, 2)
+		subdir = splited[0]
+		if len(splited) > 1 {
+			tmpl = strings.TrimLeft(splited[1], whitespace)
+			subdirAndGroup := strings.SplitN(subdir, groupAtChar, 2) // #theme@group#
+			if len(subdirAndGroup) == 2 {
+				subdir = strings.TrimRight(subdirAndGroup[0], whitespace)
+				group = strings.TrimLeft(subdirAndGroup[1], whitespace)
+				return
+			}
+		}
+		if len(theme) == 0 { // 未启用主题
+			subdir, newTmpl = p.splitPath(tmpl)
+		} else {
+			newTmpl = tmpl
+		}
+	} else if len(theme) > 0 {
+		subdir = theme
+		newTmpl = tmpl
+	} else {
+		subdir, newTmpl = p.splitPath(tmpl)
+	}
+	return
+}
+
 const (
 	startChar   = `#`
 	endChar     = `#`
