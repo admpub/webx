@@ -31,7 +31,8 @@ func (p *PathFixers) Fix(ctx echo.Context, t *Template, theme string, tmpl strin
 	}
 	pathFixers, ok := (*p)[subdir]
 	if ok {
-		if _tmpl, ok := findPath(t, cacheKey, pathFixers, subdir, newTmpl); ok {
+		if _tmpl, ok := findPath(pathFixers, subdir, newTmpl); ok {
+			t.cachedPathData.set(cacheKey, sql.NullString{String: _tmpl, Valid: true})
 			return _tmpl, ok
 		}
 	}
@@ -49,7 +50,8 @@ func (p *PathFixers) Fix(ctx echo.Context, t *Template, theme string, tmpl strin
 			pathFixers, ok := (*p)[fb]
 			if ok {
 				subdir = fb
-				if _tmpl, ok := findPath(t, cacheKey, pathFixers, subdir, newTmpl); ok {
+				if _tmpl, ok := findPath(pathFixers, subdir, newTmpl); ok {
+					t.cachedPathData.set(cacheKey, sql.NullString{String: _tmpl, Valid: true})
 					return _tmpl, ok
 				}
 			}
@@ -65,12 +67,11 @@ func (p *PathFixers) Fix(ctx echo.Context, t *Template, theme string, tmpl strin
 	return tmpl, false
 }
 
-func findPath(t *Template, cacheKey string, pathFixers []PathFixer, subdir string, newTmpl string) (string, bool) {
+func findPath(pathFixers []PathFixer, subdir string, newTmpl string) (string, bool) {
 	for _, pathFixer := range pathFixers {
 		_tmpl := pathFixer(subdir, newTmpl)
 		fi, err := os.Stat(_tmpl)
 		if err == nil && !fi.IsDir() {
-			t.cachedPathData.set(cacheKey, sql.NullString{String: _tmpl, Valid: true})
 			return _tmpl, true
 		}
 	}

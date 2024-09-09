@@ -34,7 +34,8 @@ func (p *PathFixers) Fix(ctx echo.Context, fs *assetfs.AssetFS, t *Template, the
 
 	dirName := filepath.Base(t.TmplDir)
 
-	if _tmpl, exists := fsFileExists(fs, t, cacheKey, dirName, subdir, tplfile); exists {
+	if _tmpl, exists := fsFileExists(fs, dirName, subdir, tplfile); exists {
+		t.cachedPathData.set(cacheKey, sql.NullString{String: _tmpl, Valid: true})
 		return _tmpl, exists
 	}
 
@@ -45,7 +46,8 @@ func (p *PathFixers) Fix(ctx echo.Context, fs *assetfs.AssetFS, t *Template, the
 				continue
 			}
 
-			if _tmpl, exists := fsFileExists(fs, t, cacheKey, dirName, fb, rawTmpl); exists {
+			if _tmpl, exists := fsFileExists(fs, dirName, fb, rawTmpl); exists {
+				t.cachedPathData.set(cacheKey, sql.NullString{String: _tmpl, Valid: true})
 				return _tmpl, exists
 			}
 		}
@@ -54,12 +56,11 @@ func (p *PathFixers) Fix(ctx echo.Context, fs *assetfs.AssetFS, t *Template, the
 	return tmpl, false
 }
 
-func fsFileExists(fs *assetfs.AssetFS, t *Template, cacheKey string, dirName, subDir, tmpl string) (string, bool) {
+func fsFileExists(fs *assetfs.AssetFS, dirName, subDir, tmpl string) (string, bool) {
 	_tmpl := filepath.Join(t.TmplDir, subDir, tmpl)
 	fi, err := os.Stat(_tmpl)
 	if err == nil && !fi.IsDir() {
 		_tmpl = path.Join(dirName, subDir, tmpl)
-		t.cachedPathData.set(cacheKey, sql.NullString{String: _tmpl, Valid: true})
 		return _tmpl, true
 	}
 	_tmpl = path.Join(dirName, subDir, tmpl)
@@ -69,7 +70,6 @@ func fsFileExists(fs *assetfs.AssetFS, t *Template, cacheKey string, dirName, su
 		fi, err = file.Stat()
 		file.Close()
 		if err == nil && !fi.IsDir() {
-			t.cachedPathData.set(cacheKey, sql.NullString{String: _tmpl, Valid: true})
 			return _tmpl, true
 		}
 	}
