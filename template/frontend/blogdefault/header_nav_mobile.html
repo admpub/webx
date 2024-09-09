@@ -37,15 +37,15 @@
                         <li><a href="{{FrontendURL}}/"{{if eq $.URL.Path `/`}} class="active"{{end}}>{{"首页"|$.T}}</a></li>
                     {{- end -}}
                     </ul>
-                    <a href="contact.html" class="button button-primary mt-20 ml-20 d-inline-block"
-                        >Contact Us
-                        <i class="fas fa-paper-plane"></i>
+                    <a href="{{FrontendURL}}/user/index" class="button button-primary mt-20 ml-20 d-inline-block">
+                        {{`会员中心`|$.T}}
+                        <i class="fas fa-user"></i>
                     </a>
                 </nav>
 
                 <div class="action-bar">
-                    <a href="mailto:{{Config.contact.customerServiceEmail}}"><i class="fal fa-envelope"></i>{{Config.contact.customerServiceEmail}}</a>
-                    <a href="tel:{{Config.contact.customerServiceMobile}}"><i class="fal fa-phone"></i>{{Config.contact.customerServiceMobile}}</a>
+                    {{if Config.contact.customerServiceEmail}}<a href="mailto:{{Config.contact.customerServiceEmail}}"><i class="fal fa-envelope"></i>{{Config.contact.customerServiceEmail}}</a>{{end}}
+                    {{Config.contact.customerServiceMobile}}<a href="tel:{{Config.contact.customerServiceMobile}}"><i class="fal fa-phone"></i>{{Config.contact.customerServiceMobile}}</a>{{end}}
                     <div class="social-icons d-flex">
                         <a href="#">
                             <i class="fab fa-facebook-f"></i>
