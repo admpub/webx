@@ -45,7 +45,7 @@
 
                 <div class="action-bar">
                     {{if Config.contact.customerServiceEmail}}<a href="mailto:{{Config.contact.customerServiceEmail}}"><i class="fal fa-envelope"></i>{{Config.contact.customerServiceEmail}}</a>{{end}}
-                    {{Config.contact.customerServiceMobile}}<a href="tel:{{Config.contact.customerServiceMobile}}"><i class="fal fa-phone"></i>{{Config.contact.customerServiceMobile}}</a>{{end}}
+                    {{if Config.contact.customerServiceMobile}}<a href="tel:{{Config.contact.customerServiceMobile}}"><i class="fal fa-phone"></i>{{Config.contact.customerServiceMobile}}</a>{{end}}
                     <div class="social-icons d-flex">
                         <a href="#">
                             <i class="fab fa-facebook-f"></i>

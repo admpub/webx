@@ -142,7 +142,7 @@ func (t *ThemeInfo) HasColorName(colorName string, notDefault ...bool) bool {
 }
 
 func (t *ThemeInfo) IsColorName(colorName string) bool {
-	return t.ColorName() == colorName
+	return t.ColorName() == colorName || t.CustomConfig.Bool(`dark`)
 }
 
 func (t *ThemeInfo) ColorName() string {
