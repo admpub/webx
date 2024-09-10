@@ -1368,12 +1368,10 @@
   color: #fff;
 }
 
+.custom-control-description{line-height: 30px;}
+
 .custom-checkbox .custom-control-indicator {
   border-radius: 2px;
-}
-
-.custom-control-description {
-  line-height: 1.9;
 }
 
 .custom-file-control-primary::before {
@@ -1835,10 +1833,6 @@
 .input-group-addon .custom-control {
   padding-left: 1rem;
   margin: 0;
-}
-
-.form-group .col-form-label+div .custom-control {
-  margin-top: calc(.625rem - 3px)
 }
 
 .input-group-inverse .form-control {
