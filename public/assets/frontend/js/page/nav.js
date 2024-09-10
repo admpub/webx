@@ -8,7 +8,7 @@ $(function () {
 		$('#navbarMain').superfish();
 	}
 	// animated smooth scroll on target from top menu
-	$('#navbarMain .nav-link[href^="#"]').on('click', function(e){
+	$('#navbarMain a[href^="#"]').on('click', function(e){
 	  //auto hide menu, mobile only
 	  $('#navbarMain').addClass(hideClass);
 	  var target = $(this).attr('href');

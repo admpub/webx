@@ -4,7 +4,6 @@
 {{- $headPanelBg := If $darkMode "inverse" "info" -}}
 {{- $textColor := "white" -}}
 {{- $logoColor := "white" -}}
-{{- $navbarColor := "white" -}}
   <div id="headPanel" class="headpanel bg-{{$headPanelBg}} pos-fixed-top z-index-100 shadow-base">
     <div class="container pd-x-0 pd-lg-x-10 ht-70 d-lg-flex align-items-center justify-content-between">
       <div class="d-flex ht-70 align-items-center justify-content-between pd-x-20 pd-lg-x-0">
@@ -20,7 +19,7 @@
         </h5>
         <a id="showMenu" href="javascript:;" class="tx-{{$textColor}} hidden-lg-up"><i class="fa fa-navicon tx-size-18"></i></a>
       </div>
-      <ul id="navbarMain" class="nav-superfish nav nav-{{$navbarColor}} bg-{{$headPanelBg}} sf-menu{{if $darkMode}} sf-menu-dark{{end}} tx-uppercase tx-size-12 tx-bold tx-spacing-2 hidden-md-down sf-js-enabled sf-arrows shadow-1">
+      <ul id="navbarMain" class="nav-superfish nav sf-menu {{if $darkMode}}nav-active-white sf-menu-dark{{else}}nav-{{$headPanelBg}}{{end}} tx-uppercase tx-size-12 tx-bold tx-spacing-2 hidden-md-down shadow-1">
         {{Include "#default#navigate_list_sf" $}}
       </ul>
       

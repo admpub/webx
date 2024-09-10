@@ -5,7 +5,7 @@
         {{- if eq $v.Direction `X` -}}
         {{- range $key,$sub := $v.FetchChildren -}}
         <li>
-            <a href="{{$sub.Url}}" class="nav-link{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
+            <a href="{{$sub.Url}}"{{if $sub.IsActive}} class="active"{{end}}{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
                 {{$sub.Title}}
                 {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
             </a>
@@ -17,7 +17,7 @@
         {{- end -}}
         {{- else -}}
         <li>
-          <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
+          <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}"{{if $v.IsActive}} class="active"{{end}}{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
               {{$v.Title}}
               {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
             </a>
@@ -26,11 +26,11 @@
         </li>
         {{- end -}}
     {{- else -}}
-        <li><a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
+        <li><a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}"{{if $v.IsActive}} class="active"{{end}}{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
             {{$v.Title}}
             {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
         </a></li>
     {{- end -}}
 {{- else -}}
-        <li><a href="{{FrontendURL}}/" class="nav-link{{if eq $.URL.Path `/`}} active{{end}}">{{"首页"|$.T}}</a></li>
+        <li><a href="{{FrontendURL}}/"{{if eq $.URL.Path `/`}} class="active"{{end}}>{{"首页"|$.T}}</a></li>
 {{- end -}}{{/Strip}}

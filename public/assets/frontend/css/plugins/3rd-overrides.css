@@ -355,12 +355,21 @@
   border: 0;
 }
 
+.sf-menu.nav-info a{
+  color: white;
+  opacity: 0.75;
+}
+
 .sf-menu>li {
   float: none;
 }
 
 .sf-menu>li>a {
   padding: 25px 20px;
+}
+
+.sf-menu.nav-info>li>a:hover{
+  opacity: 1;
 }
 
 .sf-menu ul {
@@ -372,6 +381,10 @@
   font-size: 13px;
   letter-spacing: normal;
   min-width: 180px;
+}
+
+.sf-menu.nav-info ul{
+  background-color: #1695f5;;
 }
 
 .sf-menu ul ul {
@@ -395,6 +408,21 @@
 .sf-menu ul ul li a:focus {
   background-color: #f0f1f4;
   color: #282c35;
+}
+
+.sf-menu-dark.nav-info ul li a,
+.sf-menu-dark.nav-info ul ul li a {
+  color: #989da8;
+}
+
+.sf-menu.nav-info .active,
+.sf-menu.nav-info ul li a:hover,
+.sf-menu.nav-info ul li a:focus,
+.sf-menu.nav-info ul ul li a:hover,
+.sf-menu.nav-info ul ul li a:focus {
+  background-color: #158eeb;
+  color: #fff;
+  opacity: 1;
 }
 
 .sf-arrows .sf-with-ul {
@@ -452,6 +480,9 @@
     right: 0;
     background-color: #fff;
   }
+  .sf-menu.nav-info {
+    background-color: #1695f5;;
+  }
 
   .sf-menu>li>a {
     padding: 12px 20px;
@@ -461,9 +492,9 @@
   .sf-menu>li>a:focus {
     background-color: #eaecf0;
   }
-
-  .nav-white.bg-info.sf-menu>li.sfHover>a {
-    color: #1695f5;
+  .sf-menu.nav-info>li>a:hover,
+  .sf-menu.nav-info>li>a:focus {
+    background-color: #158eeb;
   }
 
   .sf-menu ul {

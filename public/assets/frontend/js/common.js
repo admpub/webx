@@ -1090,7 +1090,7 @@ function setNavActive(){
         }
         if(act.length<1) return;
         if(act.hasClass('nav-link')) return act.addClass('active');
-        act.attr('class',className);
+        act.addClass(className);
     }
 }
 function attachContype(container){
@@ -1127,7 +1127,8 @@ function commonInit($,App){
         App.fixedFooter('.footer-fix');
         App.bottomFloat('.auto-bottom-float',0,true);
         App.showRequriedInputStar();
-        setNavActive();attachContype();
+        setNavActive();
+        attachContype();
     })
 }
 if (typeof(jQuery) !== 'undefined' && typeof(App) !== 'undefined') {

@@ -2087,6 +2087,10 @@
   color: #1695f5;
 }
 
+.nav.nav-active-white .active {
+  color: white;
+}
+
 .nav.nav-active-inverse .active {
   color: #282c35;
 }

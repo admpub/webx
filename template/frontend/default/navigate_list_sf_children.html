@@ -3,7 +3,7 @@
 <ul>
   {{- range $key,$sub := $v.FetchChildren -}}
   <li>
-      <a href="{{$sub.Url}}" class="{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
+      <a href="{{$sub.Url}}"{{if $sub.IsActive}} class="active"{{end}}{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
         {{$sub.Title}}
         {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
       </a>
