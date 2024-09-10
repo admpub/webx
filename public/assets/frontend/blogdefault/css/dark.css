@@ -29,6 +29,7 @@ a {
 }
 
 .featured-topics-wrapper .featured-topics-card .card-content .post-meta .post-date,
+.post-quote,.post-quote a,.post-quote p,
 .post-date,
 .comment,
 .markdown-body,
@@ -36,7 +37,6 @@ a {
     color: #ddd
 }
 
-.hero-wrapper .hero-content .post-card .body-text,
 .widget-ad-banner .body-text,
 .reply .body-text,
 .comment-card.reply h1, 
@@ -86,7 +86,7 @@ a {
 .sidebar-widget .cat-item,
 .friend-links-wrapper a.link-item,
 .recent-post-wrapper .main-post-card,
-.blog-list-wrapper .left-content .post-card,
+.blog-list-wrapper .left-content .post-card,.post-quote,
 .comment-box .comment-author .author-name,
 .modal-content {
     background-color: #38404C;
@@ -97,10 +97,6 @@ a {
 .editormd-html-preview, .editormd-preview-container {
     background-color: transparent;
     box-shadow: none;
-}
-
-.single-post-wrapper .left-content .post-card{
-    background-color: #38404C !important;
 }
 
 .header-wrapper {
@@ -133,6 +129,7 @@ a {
     border-color: #444;
 }
 
+
 .recent-post-wrapper .main-post-card .card-meta,
 .blog-list-wrapper .left-content .card-meta {
     border-color: #777;
@@ -142,6 +139,7 @@ a {
     background-color: #777;
 }
 
+.widget-social-profile .social-link,
 .blog-list-wrapper .pagination-wrapper a,
 .categories-tags a {
     background-color: #38404C;
@@ -165,11 +163,18 @@ a.meta-item,
     background-color: #38404C;
     border: none;
 }
-
 .widget-ad-banner,.ad-campaign,.ad-campaign-2{
     background-color: #38404C;
 }
 
+.footer-wrapper .footer-top{
+    background-color: #38404C;
+    color: #eee !important
+}
+.footer-wrapper .footer-top .categories-tags a{background-color:#495362;}
+
+.footer-wrapper .footer-top .footer-heading,
+.footer-wrapper .footer-top .body-text,
 .modal-body .close,
 .comment-box .comment-author .author-name,
 #reply-comment-blockquote .blockquote a,
@@ -211,5 +216,37 @@ a.meta-item,
     color: #777;
 }
 
+.discussed-post-wrapper .post-card .heading-secondary,
+.discussed-post-wrapper .post-card .post-button,
+.discussed-post-wrapper .post-card .author,
+.discussed-post-wrapper .post-card .body-text,
+.discussed-post-wrapper .post-card .meta-item,
+.hero-wrapper .hero-content .post-card .post-button,
+.hero-wrapper .hero-content .post-card .author,
+.hero-wrapper .hero-content .post-card .body-text,
+.hero-wrapper .hero-content .post-card .meta-item,
 .hero-wrapper .slick-next, .hero-wrapper .slick-prev{color: #eee;}
 .slick-prev::before, .slick-next::before{color:transparent}
+
+.widget-search-box ::placeholder{color:#888}
+.widget-newsletter input,
+.widget-search-box input,
+.header-wrapper .content-right .search-box input,
+.blog-list-wrapper .right-content .widget-search-box input,
+.comment-box .comment-form input, 
+.comment-box .comment-form textarea{
+    background-color: #444 !important;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5) inset;
+    border-color: #212121;
+    color: #ddd
+}
+
+.hero-wrapper .hero-content .post-card .post-button .icon > img,
+#captchaImage{
+    filter:invert(1);
+}
+
+.discussed-post-wrapper .post-card,
+.hero-wrapper .hero-content .post-card{
+    background-color: rgba(0, 0, 0, 0.4);
+}
