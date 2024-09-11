@@ -99,8 +99,7 @@ func main() {
 		os.Rename(`config/install.sql`, `config/install.sql.`+time.Now().Format(`20060102150405.000`))
 	}
 	initnavigate.Initialize()
-	initEnv()
-	webcore.Start(&task.Module, &cloud.Module, &dbmanager.Module)
+	webcore.ReadyStart(initEnv, &task.Module, &cloud.Module, &dbmanager.Module)
 }
 
 func init() {
