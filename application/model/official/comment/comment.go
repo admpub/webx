@@ -12,10 +12,6 @@ import (
 	"github.com/webx-top/pagination"
 
 	"github.com/admpub/log"
-	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/model"
 	"github.com/admpub/null"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/top"
@@ -25,6 +21,10 @@ import (
 	"github.com/admpub/webx/application/middleware/sessdata"
 	"github.com/admpub/webx/application/model/official"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	dbschemaNging "github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/model"
 )
 
 func NewComment(ctx echo.Context) *Comment {
@@ -128,7 +128,7 @@ func (f *Comment) check() (func() error, error) {
 			}
 			f.SetCustomerID(customer.Id)
 		} else {
-			user := handler.User(f.Context())
+			user := backend.User(f.Context())
 			if user == nil {
 				return nil, f.Context().NewError(code.Unauthenticated, `请登录后再评论`)
 			}

@@ -9,10 +9,10 @@ import (
 	"github.com/webx-top/echo/formfilter"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	modelLevel "github.com/admpub/webx/application/model/official/level"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Index(ctx echo.Context) error {
@@ -23,10 +23,10 @@ func Index(ctx echo.Context) error {
 		cond.AddKV(`group`, group)
 	}
 	common.SelectPageCond(ctx, cond, `id`, `name%`)
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond.And()))
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	list := m.Objects()
 	ctx.Set(`listData`, list)
 	ctx.Set(`groupList`, modelLevel.GroupList.Slice())
@@ -55,8 +55,8 @@ func Add(ctx echo.Context) error {
 			}
 			_, err = m.Add()
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/customer/level/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/customer/level/index`))
 			}
 		}
 	} else {
@@ -73,7 +73,7 @@ func Add(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/official/customer/level/index`)
 	ctx.Set(`title`, ctx.T(`添加等级`))
 	setFormData(ctx, m)
-	return ctx.Render(`official/customer/level/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/level/edit`, common.Err(ctx, err))
 }
 
 func setFormData(ctx echo.Context, m *modelLevel.Level) {
@@ -117,8 +117,8 @@ func Edit(ctx echo.Context) error {
 			}
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/customer/level/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/customer/level/index`))
 			}
 		}
 	} else if ctx.IsAjax() {
@@ -148,7 +148,7 @@ func Edit(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/official/customer/level/index`)
 	ctx.Set(`title`, ctx.T(`编辑等级`))
 	setFormData(ctx, m)
-	return ctx.Render(`official/customer/level/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/level/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -156,10 +156,10 @@ func Delete(ctx echo.Context) error {
 	m := modelLevel.NewLevel(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/customer/level/index`))
+	return ctx.Redirect(backend.URLFor(`/official/customer/level/index`))
 }

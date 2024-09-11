@@ -1,7 +1,7 @@
 package profile
 
 import (
-	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/coscms/webcore/library/common"
 	"github.com/admpub/webx/application/handler/frontend/user/binding"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"

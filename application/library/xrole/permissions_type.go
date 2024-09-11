@@ -3,8 +3,8 @@ package xrole
 import (
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/library/perm"
-	"github.com/admpub/nging/v5/application/library/role"
+	"github.com/coscms/webcore/library/perm"
+	"github.com/coscms/webcore/library/role"
 )
 
 var CustomerRolePermissionType = echo.NewKVData().

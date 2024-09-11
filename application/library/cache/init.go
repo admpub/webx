@@ -6,9 +6,9 @@ import (
 	"github.com/admpub/cache"
 	"github.com/admpub/color"
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/library/config/extend"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/config/extend"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db/lib/factory"
 )

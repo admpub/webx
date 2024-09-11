@@ -3,10 +3,10 @@ package manager
 import (
 	"strings"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/model/official"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
@@ -24,7 +24,7 @@ func FrontendRouteRewrite(ctx echo.Context) error {
 
 	list := m.Objects()
 	ctx.Set(`listData`, list)
-	return ctx.Render(`official/manager/frontend/route_rewrite`, handler.Err(ctx, err))
+	return ctx.Render(`official/manager/frontend/route_rewrite`, common.Err(ctx, err))
 }
 
 func FrontendRouteList(ctx echo.Context) error {
@@ -69,8 +69,8 @@ func FrontendRouteRewriteAdd(ctx echo.Context) error {
 			if err != nil {
 				goto END
 			}
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/manager/frontend/route_rewrite`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/manager/frontend/route_rewrite`))
 		}
 	} else {
 		id := ctx.Formx(`copyId`).Uint64()
@@ -106,8 +106,8 @@ func FrontendRouteRewriteEdit(ctx echo.Context) error {
 		if err != nil {
 			goto END
 		}
-		handler.SendOk(ctx, ctx.T(`操作成功`))
-		return ctx.Redirect(handler.URLFor(`/manager/frontend/route_rewrite`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/manager/frontend/route_rewrite`))
 	} else if ctx.IsAjax() {
 		disabled := ctx.Query(`disabled`)
 		if len(disabled) > 0 {
@@ -149,10 +149,10 @@ func FrontendRouteRewriteDelete(ctx echo.Context) error {
 		err = frontend.ResetRouteRewrite()
 	}
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/manager/frontend/route_rewrite`))
+	return ctx.Redirect(backend.URLFor(`/manager/frontend/route_rewrite`))
 }

@@ -1,15 +1,15 @@
 package user
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 )
 
 // MessageUnreadCount 未读消息统计
 func MessageUnreadCount(c echo.Context) error {
-	user := handler.User(c)
+	user := backend.User(c)
 	data := c.Data()
 	m := modelCustomer.NewMessage(c)
 	uid := uint64(user.Id)

@@ -1,9 +1,9 @@
 package article
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/logic/articlelogic"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/echo"
 )
 
@@ -18,5 +18,5 @@ func Tags(ctx echo.Context) error {
 		return err
 	}
 	ctx.Set(`tagList`, tags)
-	return ctx.Render(`article/tags`, handler.Err(ctx, err))
+	return ctx.Render(`article/tags`, common.Err(ctx, err))
 }

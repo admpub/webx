@@ -7,8 +7,8 @@ import (
 
 	godl "github.com/admpub/go-download/v2"
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/cmd/bootconfig"
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/cmd/bootconfig"
+	"github.com/coscms/webcore/library/config"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 )

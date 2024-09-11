@@ -1,7 +1,7 @@
 package articlelogic
 
 import (
-	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/coscms/webcore/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/model/official"
 	modelArticle "github.com/admpub/webx/application/model/official/article"

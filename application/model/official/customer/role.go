@@ -21,7 +21,7 @@ package customer
 import (
 	"strings"
 
-	"github.com/admpub/nging/v5/application/library/perm"
+	"github.com/coscms/webcore/library/perm"
 	"github.com/admpub/webx/application/dbschema"
 	modelLevel "github.com/admpub/webx/application/model/official/level"
 	"github.com/webx-top/db"

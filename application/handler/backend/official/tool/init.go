@@ -3,13 +3,13 @@ package tool
 import (
 	"github.com/webx-top/echo"
 
-	_ "github.com/admpub/nging/v5/application"
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/registry/navigate"
+	_ "github.com/coscms/webcore"
+	"github.com/coscms/webcore/registry/navigate"
+	"github.com/coscms/webcore/registry/route"
 )
 
 func init() {
-	handler.RegisterToGroup(`/tool`, func(g echo.RouteRegister) {
+	route.RegisterToGroup(`/tool`, func(g echo.RouteRegister) {
 		g.Route(`GET,POST`, `/area/index`, AreaIndex)
 		g.Route(`GET,POST`, `/area/edit`, AreaEdit)
 		g.Route(`GET,POST`, `/area/add`, AreaAdd)

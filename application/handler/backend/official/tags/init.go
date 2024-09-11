@@ -1,12 +1,12 @@
 package tags
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
+	"github.com/coscms/webcore/registry/route"
 	"github.com/webx-top/echo"
 )
 
 func init() {
-	handler.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
+	route.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
 		// 总标签
 		g.Route(`GET,POST`, `/tags/index`, Index)
 		//g.Route(`GET,POST`, `/tags/add`, Add)

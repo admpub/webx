@@ -15,12 +15,12 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/subdomains"
 
-	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/library/license"
-	"github.com/admpub/nging/v5/application/registry/settings"
-	"github.com/admpub/nging/v5/application/registry/upload"
+	dbschemaNging "github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/license"
+	"github.com/coscms/webcore/registry/settings"
+	"github.com/coscms/webcore/registry/upload"
 
 	xOAuth "github.com/admpub/webx/application/handler/frontend/oauth"
 	xcache "github.com/admpub/webx/application/library/cache"

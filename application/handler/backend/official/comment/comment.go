@@ -7,9 +7,10 @@ import (
 	"github.com/webx-top/db/lib/sqlbuilder"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
 	modelArticle "github.com/admpub/webx/application/model/official/article"
 	modelComment "github.com/admpub/webx/application/model/official/comment"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Index(ctx echo.Context) error {
@@ -25,7 +26,7 @@ func Index(ctx echo.Context) error {
 	}
 	ctx.Request().Form().Set(`pageSize`, `10`)
 	list := []*modelComment.CommentAndReplyTarget{}
-	p, err := handler.PagingWithLister(ctx, handler.NewLister(m, &list, func(r db.Result) db.Result {
+	p, err := common.PagingWithLister(ctx, common.NewLister(m, &list, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`).Relation(`ReplyTarget`, func(sel sqlbuilder.Selector) sqlbuilder.Selector {
 			if modelComment.NeedWithQuoteComment(ctx) {
 				return sel
@@ -33,8 +34,8 @@ func Index(ctx echo.Context) error {
 			return nil
 		})
 	}, db.And(cond...)))
-	ret := handler.Err(ctx, err)
-	listx, err := m.WithExtra(list, nil, handler.User(ctx), p)
+	ret := common.Err(ctx, err)
+	listx, err := m.WithExtra(list, nil, backend.User(ctx), p)
 	if err != nil {
 		return err
 	}
@@ -81,7 +82,7 @@ func List(ctx echo.Context) error {
 	}
 	ctx.Request().Form().Set(`pageSize`, `10`)
 	list := []*modelComment.CommentAndReplyTarget{}
-	p, err := handler.PagingWithLister(ctx, handler.NewLister(m, &list, func(r db.Result) db.Result {
+	p, err := common.PagingWithLister(ctx, common.NewLister(m, &list, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`).Relation(`ReplyTarget`, func(sel sqlbuilder.Selector) sqlbuilder.Selector {
 			if modelComment.NeedWithQuoteComment(ctx) {
 				return sel
@@ -89,8 +90,8 @@ func List(ctx echo.Context) error {
 			return nil
 		})
 	}, db.And(cond...)))
-	ret := handler.Err(ctx, err)
-	listx, err := m.WithExtra(list, nil, handler.User(ctx), p)
+	ret := common.Err(ctx, err)
+	listx, err := m.WithExtra(list, nil, backend.User(ctx), p)
 	if err != nil {
 		return err
 	}
@@ -117,7 +118,7 @@ func Add(ctx echo.Context) error {
 		return err
 	}
 	m := modelComment.NewComment(ctx)
-	user := handler.User(ctx)
+	user := backend.User(ctx)
 	if ctx.IsPost() {
 		m.TargetType = targetType
 		m.Contype = ctx.Formx(`contype`).String()
@@ -127,8 +128,8 @@ func Add(ctx echo.Context) error {
 		m.ReplyCommentId = ctx.Formx(`replyId`).Uint64()
 		_, err = m.Add()
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/article/comment/index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/article/comment/index`))
 		}
 	} else {
 		id := ctx.Formx(`copyId`).Uint64()
@@ -143,7 +144,7 @@ func Add(ctx echo.Context) error {
 
 	ctx.Set(`activeURL`, `/official/article/comment/index`)
 	ctx.Set(`allowUsers`, modelComment.CommentAllowUsers)
-	return ctx.Render(`official/comment/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/comment/edit`, common.Err(ctx, err))
 }
 
 func Edit(ctx echo.Context) error {
@@ -160,8 +161,8 @@ func Edit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/article/comment/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/article/comment/index`))
 			}
 		}
 	} else if ctx.IsAjax() {
@@ -185,7 +186,7 @@ func Edit(ctx echo.Context) error {
 
 	ctx.Set(`activeURL`, `/official/article/comment/index`)
 	ctx.Set(`allowUsers`, modelComment.CommentAllowUsers)
-	return ctx.Render(`official/comment/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/comment/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -193,10 +194,10 @@ func Delete(ctx echo.Context) error {
 	m := modelComment.NewComment(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/article/comment/index`))
+	return ctx.Redirect(backend.URLFor(`/official/article/comment/index`))
 }

@@ -8,7 +8,7 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/coscms/webcore/library/common"
 	"github.com/admpub/webx/application/dbschema"
 )
 

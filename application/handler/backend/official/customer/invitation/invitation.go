@@ -28,8 +28,9 @@ import (
 	"github.com/webx-top/echo/formfilter"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/handler"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func formFilter() echo.FormDataFilter {
@@ -47,10 +48,10 @@ func Index(ctx echo.Context) error {
 	if len(q) > 0 {
 		cond.AddKV(`code`, q)
 	}
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond.And()))
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	ctx.Set(`listData`, m.Objects())
 	return ctx.Render(`official/customer/invitation/index`, ret)
 }
@@ -67,8 +68,8 @@ func Add(ctx echo.Context) error {
 			_, err = m.Add()
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/customer/invitation/index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/customer/invitation/index`))
 		}
 	} else {
 		ctx.Request().Form().Set(`code`, com.RandomAlphanumeric(16))
@@ -81,7 +82,7 @@ func Add(ctx echo.Context) error {
 		return false
 	})
 	ctx.Set(`title`, ctx.T(`添加邀请码`))
-	return ctx.Render(`official/customer/invitation/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/invitation/edit`, common.Err(ctx, err))
 }
 
 func Edit(ctx echo.Context) error {
@@ -89,8 +90,8 @@ func Edit(ctx echo.Context) error {
 	m := modelCustomer.NewInvitation(ctx)
 	err := m.Get(nil, `id`, id)
 	if err != nil {
-		handler.SendFail(ctx, err.Error())
-		return ctx.Redirect(handler.URLFor(`/official/customer/invitation/index`))
+		common.SendFail(ctx, err.Error())
+		return ctx.Redirect(backend.URLFor(`/official/customer/invitation/index`))
 	}
 	if ctx.IsPost() {
 		err = ctx.MustBind(m.OfficialCustomerInvitation, formFilter())
@@ -102,8 +103,8 @@ func Edit(ctx echo.Context) error {
 			err = m.Edit(nil, `id`, id)
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`修改成功`))
-			return ctx.Redirect(handler.URLFor(`/official/customer/invitation/index`))
+			common.SendOk(ctx, ctx.T(`修改成功`))
+			return ctx.Redirect(backend.URLFor(`/official/customer/invitation/index`))
 		}
 	} else {
 		echo.StructToForm(ctx, m.OfficialCustomerInvitation, ``, echo.LowerCaseFirstLetter)
@@ -135,7 +136,7 @@ func Edit(ctx echo.Context) error {
 		return false
 	})
 	ctx.Set(`title`, ctx.T(`修改邀请码`))
-	return ctx.Render(`official/customer/invitation/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/invitation/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -143,10 +144,10 @@ func Delete(ctx echo.Context) error {
 	m := modelCustomer.NewInvitation(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/customer/invitation/index`))
+	return ctx.Redirect(backend.URLFor(`/official/customer/invitation/index`))
 }

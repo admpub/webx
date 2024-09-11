@@ -1,10 +1,10 @@
 package oauth
 
 import (
-	"github.com/admpub/nging/v5/application/handler/setup"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/library/apiutils"
 	xMW "github.com/admpub/webx/application/middleware"
+	"github.com/coscms/webcore/library/backend"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/handler/oauth2"
 )
@@ -35,5 +35,5 @@ func init() {
 			//wechatG.Post(`/gh/callback`, WechatGHCallback) // 微信公众号 /oauth/other/wechat/gh/callback
 		}
 	})
-	setup.OnInstalled(onInstalled)
+	backend.OnInstalled(onInstalled)
 }

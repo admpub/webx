@@ -7,8 +7,6 @@ import (
 	stdCode "github.com/webx-top/echo/code"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/frontend"
 	"github.com/admpub/webx/application/library/top"
@@ -18,6 +16,7 @@ import (
 	modelArticle "github.com/admpub/webx/application/model/official/article"
 	modelComment "github.com/admpub/webx/application/model/official/comment"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Detail(c echo.Context) error {
@@ -130,7 +129,7 @@ func Detail(c echo.Context) error {
 	prevRow, _ := articleM.PrevRow(articleM.Id, extraCond)
 	c.Set(`prevRow`, prevRow)
 	c.Set(`listURL`, listURL+c.DefaultExtension())
-	return c.Render(`article/`+tmpl, handler.Err(c, err))
+	return c.Render(`article/`+tmpl, common.Err(c, err))
 }
 
 func ArticleListBy(c echo.Context) error {
@@ -186,7 +185,7 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 	c.Set(`listURL`, sessdata.URLFor(`/articlesBy/`+sourceTable+`/`+sourceID))
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
-	return c.Render(`article/list_by`, handler.Err(c, err))
+	return c.Render(`article/list_by`, common.Err(c, err))
 }
 
 func List(c echo.Context) error {
@@ -225,7 +224,7 @@ func List(c echo.Context) error {
 	c.Set(`listURL`, sessdata.URLFor(`/articles`)+c.DefaultExtension())
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
-	return c.Render(`article/list`, handler.Err(c, err))
+	return c.Render(`article/list`, common.Err(c, err))
 }
 
 func Pay(c echo.Context) error {

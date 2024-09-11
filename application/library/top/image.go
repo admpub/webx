@@ -11,7 +11,7 @@ import (
 	"github.com/webx-top/echo/middleware/tplfunc"
 	"github.com/webx-top/echo/subdomains"
 
-	uploadChecker "github.com/admpub/nging/v5/application/registry/upload/checker"
+	uploadChecker "github.com/coscms/webcore/registry/upload/checker"
 )
 
 // TokenURL 带签名网址

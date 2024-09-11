@@ -1,9 +1,9 @@
 package manager
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
@@ -14,7 +14,7 @@ import (
 // MessageIndex 所有消息列表
 func MessageIndex(c echo.Context) error {
 	err := messageList(c)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	return c.Render(`official/manager/message/index`, ret)
 }
 
@@ -60,7 +60,7 @@ func MessageView(c echo.Context) error {
 	m.DecodeContent(m.OfficialCommonMessage)
 	data, err := m.GetWithViewed(m.OfficialCommonMessage)
 	c.Set(`data`, data)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	return c.Render(`official/manager/message/view`, ret)
 }
 
@@ -93,5 +93,5 @@ func MessageDelete(ctx echo.Context) error {
 			common.SendFail(ctx, param.AsString(data.GetInfo()))
 		}
 	}
-	return ctx.Redirect(handler.URLFor(`/manager/message/index`))
+	return ctx.Redirect(backend.URLFor(`/manager/message/index`))
 }

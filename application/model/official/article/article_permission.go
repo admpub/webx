@@ -1,7 +1,7 @@
 package article
 
 import (
-	"github.com/admpub/nging/v5/application/library/perm"
+	"github.com/coscms/webcore/library/perm"
 	"github.com/admpub/webx/application/library/xcommon"
 	"github.com/admpub/webx/application/library/xrole"
 )

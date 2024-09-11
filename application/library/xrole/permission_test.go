@@ -3,7 +3,7 @@ package xrole
 import (
 	"testing"
 
-	"github.com/admpub/nging/v5/application/registry/navigate"
+	"github.com/coscms/webcore/registry/navigate"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/stretchr/testify/assert"
 	"github.com/webx-top/com"

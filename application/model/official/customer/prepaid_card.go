@@ -10,7 +10,7 @@ import (
 	"github.com/webx-top/echo/middleware/tplfunc"
 
 	"github.com/admpub/errors"
-	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/coscms/webcore/library/common"
 	"github.com/admpub/webx/application/dbschema"
 )
 

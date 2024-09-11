@@ -8,7 +8,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	modelNging "github.com/admpub/nging/v5/application/model"
+	modelNging "github.com/coscms/webcore/model"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/oauth2client"
 )

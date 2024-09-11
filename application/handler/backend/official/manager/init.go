@@ -1,14 +1,14 @@
 package manager
 
 import (
+	"github.com/coscms/webcore/registry/route"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/registry/navigate"
+	"github.com/coscms/webcore/registry/navigate"
 )
 
 func init() {
-	handler.RegisterToGroup(`/manager`, func(g echo.RouteRegister) {
+	route.RegisterToGroup(`/manager`, func(g echo.RouteRegister) {
 		g.Route(`GET,POST`, `/message/index`, MessageIndex)
 		g.Route(`GET,POST`, `/message/delete`, MessageDelete)
 		g.Route(`GET,POST`, `/message/view/:id`, MessageView)

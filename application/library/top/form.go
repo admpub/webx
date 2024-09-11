@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 )

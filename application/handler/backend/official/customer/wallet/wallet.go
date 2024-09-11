@@ -6,8 +6,9 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Index(ctx echo.Context) error {
@@ -36,11 +37,11 @@ func Index(ctx echo.Context) error {
 	ctx.Set(`assetType`, assetType)
 	ctx.Set(`customer`, cs.ClearPasswordData())
 	ctx.Set(`activeURL`, `/official/customer/index`)
-	return ctx.Render(`official/customer/wallet/index`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/wallet/index`, common.Err(ctx, err))
 }
 
 func Edit(ctx echo.Context) error {
-	user := handler.User(ctx)
+	user := backend.User(ctx)
 	var (
 		err  error
 		cond = db.NewCompounds()
@@ -110,8 +111,8 @@ func Edit(ctx echo.Context) error {
 			}
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/customer/wallet/index?customerId=` + ctx.Query(`customerId`)))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/customer/wallet/index?customerId=` + ctx.Query(`customerId`)))
 		}
 	} else if err == nil {
 		echo.StructToForm(ctx, m.OfficialCustomerWallet, ``, echo.LowerCaseFirstLetter)

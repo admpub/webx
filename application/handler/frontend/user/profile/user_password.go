@@ -5,7 +5,7 @@ import (
 
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/coscms/webcore/library/common"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )

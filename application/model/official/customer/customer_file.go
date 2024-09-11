@@ -5,7 +5,7 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 
-	dbschemaNG "github.com/admpub/nging/v5/application/dbschema"
+	dbschemaNG "github.com/coscms/webcore/dbschema"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/xrole/xroleupload"
 )

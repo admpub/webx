@@ -4,9 +4,9 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Settings(ctx echo.Context) error {
@@ -58,7 +58,7 @@ func Settings(ctx echo.Context) error {
 	}
 
 END:
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	ctx.Set(`activeURL`, `/user/profile`)
 	ctx.Set(`title`, ctx.T(`账号设置`))
 	ctx.Set(`canUploadAvatar`, upCfg.CanUploadAvatar)

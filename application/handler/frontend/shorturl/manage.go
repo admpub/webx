@@ -3,10 +3,9 @@ package shorturl
 import (
 	"fmt"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelShorturl "github.com/admpub/webx/application/model/official/shorturl"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
@@ -30,7 +29,7 @@ func List(ctx echo.Context) error {
 		return r.OrderBy(sorts...)
 	}, cond.And()).Paging(ctx)
 	ctx.Set(`list`, m.Objects())
-	return ctx.Render(`short_url/list`, handler.Err(ctx, err))
+	return ctx.Render(`short_url/list`, common.Err(ctx, err))
 }
 
 // Create 创建短网址
@@ -53,7 +52,7 @@ func Create(ctx echo.Context) error {
 END:
 	ctx.Set(`activeURL`, `/user/short_url/list`)
 	ctx.Set(`title`, ctx.T(`添加短链接`))
-	return ctx.Render(`short_url/edit`, handler.Err(ctx, err))
+	return ctx.Render(`short_url/edit`, common.Err(ctx, err))
 }
 
 // Edit 修改短网址
@@ -129,5 +128,5 @@ func Analysis(ctx echo.Context) error {
 	}
 	ctx.Set(`lasts`, m.Visit.Objects())
 	ctx.Set(`activeURL`, `/user/short_url/list`)
-	return ctx.Render(`short_url/analysis`, handler.Err(ctx, err))
+	return ctx.Render(`short_url/analysis`, common.Err(ctx, err))
 }

@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"sync"
 
-	uploadLibrary "github.com/admpub/nging/v5/application/library/upload"
+	uploadLibrary "github.com/coscms/webcore/library/upload"
 )
 
 var (

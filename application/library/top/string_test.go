@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/config"
 	"github.com/stretchr/testify/assert"
 )
 

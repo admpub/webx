@@ -4,8 +4,8 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
 )
 
 func FlowIndex(ctx echo.Context) error {
@@ -66,5 +66,5 @@ func FlowIndex(ctx echo.Context) error {
 	ctx.Set(`assetType`, assetType)
 	ctx.Set(`customer`, cs.ClearPasswordData())
 	ctx.Set(`activeURL`, `/official/customer/index`)
-	return ctx.Render(`official/customer/wallet/flow`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/wallet/flow`, common.Err(ctx, err))
 }

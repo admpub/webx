@@ -1,8 +1,8 @@
 package agent
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/dbschema"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/sqlbuilder"
 	"github.com/webx-top/echo"
@@ -65,7 +65,7 @@ func (f *AgentProfile) Edit(mw func(db.Result) db.Result, args ...interface{}) e
 
 func (f *AgentProfile) ListPage(cond *db.Compounds, orderby ...interface{}) ([]*AgentProfileExt, error) {
 	var list []*AgentProfileExt
-	_, err := handler.NewLister(f, &list, func(r db.Result) db.Result {
+	_, err := common.NewLister(f, &list, func(r db.Result) db.Result {
 		return r.Relation(`Customer`, func(sel sqlbuilder.Selector) sqlbuilder.Selector {
 			return sel.Columns(dbschema.DBI.OmitSelect(dbschema.NewOfficialCustomer(f.Context()), `safe_pwd`, `salt`, `password`)...)
 		}).OrderBy(orderby...)

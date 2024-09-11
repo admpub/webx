@@ -1,8 +1,9 @@
 package group
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/model/official"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 )
@@ -14,8 +15,8 @@ func Index(ctx echo.Context) error {
 	if len(t) > 0 {
 		cond[`type`] = t
 	}
-	_, err := handler.PagingWithListerCond(ctx, m, cond)
-	ret := handler.Err(ctx, err)
+	_, err := common.PagingWithListerCond(ctx, m, cond)
+	ret := common.Err(ctx, err)
 	list := m.Objects()
 	tg := make([]*official.GroupAndType, len(list))
 	for k, u := range list {
@@ -54,8 +55,8 @@ func Add(ctx echo.Context) error {
 		if err == nil {
 			_, err = m.Add()
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/customer/group/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/customer/group/index`))
 			}
 		}
 	} else {
@@ -95,8 +96,8 @@ func Edit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/customer/group/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/customer/group/index`))
 			}
 		}
 	} else if err == nil {
@@ -113,10 +114,10 @@ func Delete(ctx echo.Context) error {
 	m := official.NewGroup(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/customer/group/index`))
+	return ctx.Redirect(backend.URLFor(`/official/customer/group/index`))
 }

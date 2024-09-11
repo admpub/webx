@@ -7,8 +7,8 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory"
 
-	"github.com/admpub/nging/v5/application/library/fileupdater/listener"
-	"github.com/admpub/nging/v5/application/registry/upload/thumb"
+	"github.com/coscms/webcore/library/fileupdater/listener"
+	"github.com/coscms/webcore/registry/upload/thumb"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/model/official"
 	modelArticle "github.com/admpub/webx/application/model/official/article"

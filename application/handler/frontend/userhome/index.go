@@ -3,11 +3,11 @@ package userhome
 import (
 	"strings"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/registry/dashboard"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	registryUserhome "github.com/admpub/webx/application/registry/userhome"
 	"github.com/admpub/webx/application/transform/transformCustomer"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/registry/dashboard"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -84,5 +84,5 @@ func Index(ctx echo.Context) error {
 	ctx.Set(`operate`, block.Ident)
 	ctx.Set(`operateName`, block.Title)
 	ctx.Set(`isUserhome`, true)
-	return ctx.Render(`userhome/index`, handler.Err(ctx, err))
+	return ctx.Render(`userhome/index`, common.Err(ctx, err))
 }

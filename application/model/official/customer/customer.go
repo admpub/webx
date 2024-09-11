@@ -10,8 +10,8 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/model"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/model"
 	"github.com/admpub/webx/application/dbschema"
 )
 

@@ -1,12 +1,12 @@
 package comment
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
+	"github.com/coscms/webcore/registry/route"
 	"github.com/webx-top/echo"
 )
 
 func init() {
-	handler.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
+	route.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
 		g = g.Group(`/article`)
 		// 评论列表
 		g.Route(`GET,POST`, `/comment/index`, Index)

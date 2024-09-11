@@ -1,7 +1,7 @@
 package upload
 
 import (
-	"github.com/admpub/nging/v5/application/registry/upload"
+	"github.com/coscms/webcore/registry/upload"
 )
 
 func init() {

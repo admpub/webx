@@ -22,17 +22,18 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/library/xrole"
 	"github.com/admpub/webx/application/library/xrole/xroleutils"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Index(ctx echo.Context) error {
 	m := modelCustomer.NewRole(ctx)
-	_, err := handler.PagingWithLister(ctx, m)
+	_, err := common.PagingWithLister(ctx, m)
 	ctx.Set(`listData`, m.Objects())
-	return ctx.Render(`official/customer/role/index`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/role/index`, common.Err(ctx, err))
 }
 
 func Add(ctx echo.Context) error {
@@ -50,8 +51,8 @@ func Add(ctx echo.Context) error {
 		}
 		ctx.End(err == nil)
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/customer/role/index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/customer/role/index`))
 		}
 	} else {
 		id := ctx.Formx(`copyId`).Uint()
@@ -77,7 +78,7 @@ func Add(ctx echo.Context) error {
 	ctx.Set(`permission`, permission)
 	ctx.Set(`permissionTypes`, xrole.CustomerRolePermissionType.Slice())
 	xroleutils.CustomerRolePermissionTypeFireRender(ctx)
-	return ctx.Render(`official/customer/role/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/role/edit`, common.Err(ctx, err))
 }
 
 func Edit(ctx echo.Context) error {
@@ -85,8 +86,8 @@ func Edit(ctx echo.Context) error {
 	m := modelCustomer.NewRole(ctx)
 	err := m.Get(nil, `id`, id)
 	if err != nil {
-		handler.SendFail(ctx, err.Error())
-		return ctx.Redirect(handler.URLFor(`/official/customer/role/index`))
+		common.SendFail(ctx, err.Error())
+		return ctx.Redirect(backend.URLFor(`/official/customer/role/index`))
 	}
 	if ctx.IsPost() {
 		ctx.Begin()
@@ -102,8 +103,8 @@ func Edit(ctx echo.Context) error {
 		}
 		ctx.End(err == nil)
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`修改成功`))
-			return ctx.Redirect(handler.URLFor(`/official/customer/role/index`))
+			common.SendOk(ctx, ctx.T(`修改成功`))
+			return ctx.Redirect(backend.URLFor(`/official/customer/role/index`))
 		}
 	}
 
@@ -122,7 +123,7 @@ func Edit(ctx echo.Context) error {
 	ctx.Set(`permission`, permission)
 	ctx.Set(`permissionTypes`, xrole.CustomerRolePermissionType.Slice())
 	xroleutils.CustomerRolePermissionTypeFireRender(ctx)
-	return ctx.Render(`official/customer/role/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/role/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -132,10 +133,10 @@ func Delete(ctx echo.Context) error {
 	if err == nil {
 		rpM := modelCustomer.NewRolePermission(ctx)
 		rpM.Delete(nil, `role_id`, id)
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/customer/role/index`))
+	return ctx.Redirect(backend.URLFor(`/official/customer/role/index`))
 }

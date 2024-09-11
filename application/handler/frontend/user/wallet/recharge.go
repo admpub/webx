@@ -5,11 +5,11 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/config"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	registryWallet "github.com/admpub/webx/application/registry/wallet"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
 )
 
 func Recharge(ctx echo.Context) error {
@@ -40,5 +40,5 @@ func Recharge(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/user/wallet`)
 	ctx.Set(`rechargePage`, registryWallet.RechargePage)
 	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)
-	return ctx.Render(`user/wallet/recharge`, handler.Err(ctx, err))
+	return ctx.Render(`user/wallet/recharge`, common.Err(ctx, err))
 }

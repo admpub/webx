@@ -6,14 +6,13 @@ import (
 	"github.com/webx-top/echo/middleware/session"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/library/top"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
 )
 
 // CookieMaxAge 允许设置的Cookie最大有效时长(单位:秒)
@@ -135,7 +134,7 @@ END:
 	}
 	c.Set(`signInURL`, signInURL)
 	c.Set(`registerState`, registerState)
-	return c.Render(tmpl, handler.Err(c, err))
+	return c.Render(tmpl, common.Err(c, err))
 }
 
 // SignOut 退出登录
@@ -247,7 +246,7 @@ END:
 		forgotURL = sessdata.URLFor(`/forgot`)
 	}
 	c.Set(`forgotURL`, forgotURL)
-	return c.Render(tmpl, handler.Err(c, err))
+	return c.Render(tmpl, common.Err(c, err))
 }
 
 func CustomerInfo(c echo.Context) error {

@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware/tplfunc"

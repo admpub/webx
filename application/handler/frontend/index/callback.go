@@ -9,8 +9,8 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/model"
-	uploadChecker "github.com/admpub/nging/v5/application/registry/upload/checker"
+	"github.com/coscms/webcore/model"
+	uploadChecker "github.com/coscms/webcore/registry/upload/checker"
 )
 
 // Verification /verification/callback/:provider/:recid/:timestamp/:token

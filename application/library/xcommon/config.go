@@ -3,8 +3,8 @@ package xcommon
 import (
 	"strings"
 
-	"github.com/admpub/nging/v5/application/initialize/backend"
-	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/coscms/webcore/initialize/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/admpub/webx/application/library/frontend"
 	"github.com/webx-top/echo"
 )

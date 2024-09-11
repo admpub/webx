@@ -3,7 +3,7 @@ package apiutils
 import (
 	"strings"
 
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/config"
 	webxdbschema "github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/xcommon"
 	"github.com/webx-top/db"

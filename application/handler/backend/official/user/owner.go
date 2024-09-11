@@ -1,11 +1,10 @@
 package user
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/model"
 	"github.com/admpub/null"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/model"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/pagination"
@@ -15,7 +14,7 @@ func SelectCustomer(ctx echo.Context) error {
 	m := modelCustomer.NewCustomer(ctx)
 	cond := &db.Compounds{}
 	common.SelectPageCond(ctx, cond, `id`, `name%`)
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.Select(`id`, `name`).OrderBy(`-id`)
 	}, cond.And()))
 	if err != nil {
@@ -30,7 +29,7 @@ func SelectUser(ctx echo.Context) error {
 	common.SelectPageCond(ctx, cond, `id`, `username%`)
 	m := model.NewUser(ctx)
 	listData := []null.StringMap{}
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, &listData, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, &listData, func(r db.Result) db.Result {
 		return r.Select(`id`, db.Raw(`username AS name`)).OrderBy(`-id`)
 	}, cond.And()))
 	if err != nil {

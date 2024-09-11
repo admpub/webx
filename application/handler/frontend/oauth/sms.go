@@ -6,8 +6,8 @@ import (
 	"github.com/webx-top/echo"
 
 	"github.com/admpub/log"
-	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
-	"github.com/admpub/nging/v5/application/registry/settings"
+	dbschemaNging "github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/registry/settings"
 )
 
 // SetSMSConfigs 第三方登录平台账号

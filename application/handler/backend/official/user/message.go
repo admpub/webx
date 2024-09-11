@@ -6,19 +6,19 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/dbschema"
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/model"
 	xschema "github.com/admpub/webx/application/dbschema"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/model"
 )
 
 // MessageInbox 用户消息收件箱
 func MessageInbox(c echo.Context) error {
-	user := handler.User(c)
+	user := backend.User(c)
 	err := messageList(c, user, false, true)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	c.Set(`boxType`, `inbox`)
 	c.Set(`boxTypeName`, c.T(`收件箱`))
 	return c.Render(`official/user/message/list`, ret)
@@ -26,9 +26,9 @@ func MessageInbox(c echo.Context) error {
 
 // MessageOutbox 用户消息发件箱
 func MessageOutbox(c echo.Context) error {
-	user := handler.User(c)
+	user := backend.User(c)
 	err := messageList(c, user, false, false)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	c.Set(`boxType`, `outbox`)
 	c.Set(`boxTypeName`, c.T(`发件箱`))
 	return c.Render(`official/user/message/list`, ret)
@@ -73,16 +73,16 @@ func messageList(c echo.Context, user *dbschema.NgingUser, isSystemMessage bool,
 
 // SystemMessage 用户消息
 func SystemMessage(c echo.Context) error {
-	user := handler.User(c)
+	user := backend.User(c)
 	err := messageList(c, user, true, true)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	c.Set(`boxType`, `system`)
 	c.Set(`boxTypeName`, c.T(`系统消息`))
 	return c.Render(`official/user/message/list`, ret)
 }
 
 func MessageView(c echo.Context) error {
-	user := handler.User(c)
+	user := backend.User(c)
 	id := c.Paramx(`id`).Uint64()
 	if id < 1 {
 		return c.E(`id无效`)
@@ -154,7 +154,7 @@ func MessageView(c echo.Context) error {
 	}
 	c.Set(`replyList`, replyList)
 	c.Set(`msgUser`, msgUser)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	c.Set(`boxType`, boxType)
 	c.Set(`boxTypeName`, boxTypeName)
 	return c.Render(`official/user/message/view`, ret)
@@ -228,7 +228,7 @@ func MessageSendHandler(ctx echo.Context) error {
 func MessageSend(ctx echo.Context, targetUser *dbschema.NgingUser, targetCustomer *xschema.OfficialCustomer) error {
 	replyID := ctx.Formx(`replyId`).Uint64()
 	data := ctx.Data()
-	user := handler.User(ctx)
+	user := backend.User(ctx)
 	if user == nil {
 		return ctx.JSON(data.SetError(common.ErrUserNotLoggedIn))
 	}
@@ -279,7 +279,7 @@ func MessageSend(ctx echo.Context, targetUser *dbschema.NgingUser, targetCustome
 func MessageDelete(ctx echo.Context) error {
 	ids := param.StringSlice(ctx.FormValues(`messageId[]`)).Uint64()
 	data := ctx.Data()
-	user := handler.User(ctx)
+	user := backend.User(ctx)
 	m := modelCustomer.NewMessage(ctx)
 	if ctx.IsPost() {
 		err := m.Delete(db.And(

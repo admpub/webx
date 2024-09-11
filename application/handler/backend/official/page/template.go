@@ -17,12 +17,13 @@ import (
 
 	"github.com/admpub/events"
 	"github.com/admpub/log"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/library/xtemplate"
 )
@@ -460,7 +461,7 @@ EMD:
 	if len(dir) > 0 {
 		dirPositions = strings.Split(strings.Trim(filepath.ToSlash(dir), `/`), `/`)
 		dirURLs = make([]string, len(dirPositions))
-		curURL := handler.URLFor(`/official/page/template_edit`) + `?name=` + url.QueryEscape(name)
+		curURL := backend.URLFor(`/official/page/template_edit`) + `?name=` + url.QueryEscape(name)
 		for index, dirName := range dirPositions {
 			var prefix string
 			if index > 0 {
@@ -478,7 +479,7 @@ END:
 	ctx.SetFunc(`canEdit`, func(file string) bool {
 		return com.InSlice(filepath.Ext(file), canEditExtensions)
 	})
-	return ctx.Render(`official/page/template_edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/page/template_edit`, common.Err(ctx, err))
 }
 
 func TemplateConfig(ctx echo.Context) error {
@@ -531,8 +532,8 @@ func TemplateConfig(ctx echo.Context) error {
 		if current.Name == name {
 			frontend.TmplPathFixers.SetThemeInfo(ctx, themeInfo)
 		}
-		handler.SendOk(ctx, ctx.T(`保存成功`))
-		return ctx.Redirect(handler.URLFor(`/official/page/template_index`))
+		common.SendOk(ctx, ctx.T(`保存成功`))
+		return ctx.Redirect(backend.URLFor(`/official/page/template_index`))
 	}
 	defaultColor = themeInfo.CustomConfig.String(`color`)
 	if len(defaultColor) == 0 && len(themeInfo.Colors) > 0 {
@@ -570,7 +571,7 @@ END:
 		}
 		lite := themeCfg.AsLite()
 		if len(lite.PreviewImage) > 0 {
-			lite.PreviewImage = handler.URLFor(`/official/page/template_index`) + `?op=preview&name=` + lite.Name
+			lite.PreviewImage = backend.URLFor(`/official/page/template_index`) + `?op=preview&name=` + lite.Name
 		}
 		fallbacks = append(fallbacks, lite)
 	}
@@ -578,5 +579,5 @@ END:
 
 	ctx.Set(`fallbacks`, fallbacks)
 	ctx.Set(`title`, ctx.T(`模板配置`))
-	return ctx.Render(`official/page/template_config`, handler.Err(ctx, err))
+	return ctx.Render(`official/page/template_config`, common.Err(ctx, err))
 }

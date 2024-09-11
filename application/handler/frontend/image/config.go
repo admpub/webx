@@ -8,9 +8,9 @@ import (
 
 	imageproxy "github.com/admpub/imageproxy"
 	"github.com/admpub/nging/v5/application/handler/manager"
-	modelFile "github.com/admpub/nging/v5/application/model/file"
-	"github.com/admpub/nging/v5/application/registry/upload/convert"
-	"github.com/admpub/nging/v5/application/registry/upload/driver"
+	modelFile "github.com/coscms/webcore/model/file"
+	"github.com/coscms/webcore/registry/upload/convert"
+	"github.com/coscms/webcore/registry/upload/driver"
 	"github.com/webx-top/echo"
 	"golang.org/x/sync/singleflight"
 )

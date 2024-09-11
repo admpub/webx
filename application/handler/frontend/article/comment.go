@@ -6,12 +6,12 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelComment "github.com/admpub/webx/application/model/official/comment"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func ArticleCommentAdd(c echo.Context) (err error) {
@@ -95,7 +95,7 @@ func articleCommentReplyList(c echo.Context, commentID uint64, urlLayout string,
 	if len(urlLayout) > 0 {
 		p.SetURL(urlLayout)
 	}
-	return cmtM.WithExtra(list, sessdata.Customer(c), handler.User(c), p)
+	return cmtM.WithExtra(list, sessdata.Customer(c), backend.User(c), p)
 }
 
 func ArticleCommentReplyList(c echo.Context) error {
@@ -183,7 +183,7 @@ func articleCommentList(c echo.Context, articleID uint64, articleSN string, targ
 		}
 	}
 
-	rows, err := cmtM.WithExtra(list, sessdata.Customer(c), handler.User(c), p)
+	rows, err := cmtM.WithExtra(list, sessdata.Customer(c), backend.User(c), p)
 	if err != nil {
 		return nil, err
 	}

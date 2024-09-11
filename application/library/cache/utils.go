@@ -6,7 +6,7 @@ import (
 	"github.com/admpub/log"
 	"github.com/webx-top/com"
 
-	"github.com/admpub/nging/v5/application/library/config/extend"
+	"github.com/coscms/webcore/library/config/extend"
 )
 
 func IsDbAccount(v string) bool {

@@ -1,8 +1,9 @@
 package tags
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/model/official"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
@@ -24,10 +25,10 @@ func Index(ctx echo.Context) error {
 	if len(name) > 0 {
 		cond.AddKV(`name`, db.Like(name+`%`))
 	}
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r //.OrderBy(`-id`)
 	}, cond.And()))
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	list := m.Objects()
 	ctx.Set(`listData`, list)
 	return ctx.Render(`official/tags/index`, ret)
@@ -42,15 +43,15 @@ func Add(ctx echo.Context) error {
 			m.Group = ctx.Form(`newGroup`)
 			_, err = m.Add()
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/tags/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/tags/index`))
 			}
 		}
 	}
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
 	ctx.Set(`isEdit`, false)
-	return ctx.Render(`official/tags/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/tags/edit`, common.Err(ctx, err))
 }
 
 func Edit(ctx echo.Context) error {
@@ -72,8 +73,8 @@ func Edit(ctx echo.Context) error {
 			m.Name = name
 			err = m.Edit(nil, db.Cond{`name`: name})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/tags/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/tags/index`))
 			}
 		}
 	} else if ctx.IsAjax() {
@@ -97,7 +98,7 @@ func Edit(ctx echo.Context) error {
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
 	ctx.Set(`isEdit`, true)
-	return ctx.Render(`official/tags/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/tags/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -109,10 +110,10 @@ func Delete(ctx echo.Context) error {
 		db.Cond{`group`: group},
 	))
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/tags/index`))
+	return ctx.Redirect(backend.URLFor(`/official/tags/index`))
 }

@@ -11,15 +11,15 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/nging/v5/application/handler/manager"
 	"github.com/admpub/nging/v5/application/handler/manager/file"
-	"github.com/admpub/nging/v5/application/library/config"
-	uploadLibrary "github.com/admpub/nging/v5/application/library/upload"
-	"github.com/admpub/nging/v5/application/registry/upload"
-	"github.com/admpub/nging/v5/application/registry/upload/checker"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/config"
+	uploadLibrary "github.com/coscms/webcore/library/upload"
+	"github.com/coscms/webcore/registry/upload"
+	"github.com/coscms/webcore/registry/upload/checker"
 )
 
 func setUploadURL(ctx echo.Context) error {
@@ -41,7 +41,7 @@ func OwnerData(ctx echo.Context) (ownerType string, ownerID uint64) {
 	ownerType = `customer`
 	customer := sessdata.Customer(ctx)
 	if customer == nil {
-		user := handler.User(ctx)
+		user := backend.User(ctx)
 		if user != nil {
 			ownerType = `user`
 			ownerID = uint64(user.Id)

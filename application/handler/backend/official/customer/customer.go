@@ -11,13 +11,13 @@ import (
 	"github.com/webx-top/echo/formfilter"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/model/official"
 	modelAgent "github.com/admpub/webx/application/model/official/agent"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	modelLevel "github.com/admpub/webx/application/model/official/level"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Index(ctx echo.Context) error {
@@ -50,12 +50,12 @@ func Index(ctx echo.Context) error {
 		cond.Add(mysql.FindInSet("role_ids", param.AsString(roleId)))
 	}
 	list := []*modelCustomer.CustomerAndGroup{}
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, &list, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, &list, func(r db.Result) db.Result {
 		return r.Select(factory.DBIGet().OmitSelect(m.OfficialCustomer, `password`, `salt`, `safe_pwd`)...).OrderBy(`-id`).Relation(`Roles`, func(sel sqlbuilder.Selector) sqlbuilder.Selector {
 			return sel.Columns(`id`, `name`)
 		})
 	}, cond.And()))
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	ctx.Set(`listData`, list)
 
 	mg := official.NewGroup(ctx)
@@ -120,8 +120,8 @@ func Add(ctx echo.Context) error {
 		if err != nil {
 			goto END
 		}
-		handler.SendOk(ctx, ctx.T(`操作成功`))
-		return ctx.Redirect(handler.URLFor(`/official/customer/index`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/official/customer/index`))
 	}
 	id = ctx.Formx(`copyId`).Uint()
 	if id > 0 {
@@ -137,7 +137,7 @@ END:
 	ctx.Set(`activeURL`, `/official/customer/index`)
 	setFormData(ctx, m)
 	ctx.Set(`isEdit`, false)
-	return ctx.Render(`official/customer/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/edit`, common.Err(ctx, err))
 }
 
 func setFormData(ctx echo.Context, m *modelCustomer.Customer) {
@@ -199,8 +199,8 @@ func Edit(ctx echo.Context) error {
 			}
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/customer/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/customer/index`))
 			}
 		}
 		ctx.Request().Form().Set(`name`, m.Name)
@@ -217,7 +217,7 @@ func Edit(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/official/customer/index`)
 	setFormData(ctx, m)
 	ctx.Set(`isEdit`, true)
-	return ctx.Render(`official/customer/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -225,12 +225,12 @@ func Delete(ctx echo.Context) error {
 	m := modelCustomer.NewCustomer(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/customer/index`))
+	return ctx.Redirect(backend.URLFor(`/official/customer/index`))
 }
 
 // Kick 踢🦶客户下线
@@ -244,20 +244,20 @@ func Kick(ctx echo.Context) error {
 		return err
 	}
 	if len(m.SessionId) == 0 {
-		handler.SendFail(ctx, ctx.T(`此客户没有 session id 记录`))
+		common.SendFail(ctx, ctx.T(`此客户没有 session id 记录`))
 	} else {
 		deviceM := modelCustomer.NewDevice(ctx)
 		err = deviceM.Kick(id)
 		if err == nil {
 			ctx.Session().RemoveID(m.SessionId)
 			m.UpdateField(nil, `session_id`, ``, `id`, id)
-			handler.SendOk(ctx, ctx.T(`操作成功`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
 		} else {
-			handler.SendFail(ctx, err.Error())
+			common.SendFail(ctx, err.Error())
 		}
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/customer/index`))
+	return ctx.Redirect(backend.URLFor(`/official/customer/index`))
 }
 
 func RecountFile(ctx echo.Context) error {

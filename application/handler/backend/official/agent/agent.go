@@ -1,11 +1,12 @@
 package agent
 
 import (
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/nging/v5/application/handler"
 	modelAgent "github.com/admpub/webx/application/model/official/agent"
 )
 
@@ -25,7 +26,7 @@ func Index(ctx echo.Context) error {
 	ctx.Set(`statusList`, modelAgent.ProfileStatus.Slice())
 	ctx.Set(`recvMethodList`, modelAgent.RecvMoneyMethod.Slice())
 	ctx.SetFunc(`getStatusName`, modelAgent.ProfileStatus.Get)
-	return ctx.Render(`official/agent/index`, handler.Err(ctx, err))
+	return ctx.Render(`official/agent/index`, common.Err(ctx, err))
 }
 
 func Add(ctx echo.Context) error {
@@ -46,8 +47,8 @@ func Add(ctx echo.Context) error {
 		}
 		if err == nil {
 			ctx.Commit()
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/agent/index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/agent/index`))
 		}
 		ctx.Rollback()
 	} else {
@@ -74,7 +75,7 @@ func Add(ctx echo.Context) error {
 	lvM.ListByOffset(nil, nil, 0, -1, db.Cond{`disabled`: `N`})
 	ctx.Set(`levelList`, lvM.Objects())
 	ctx.Set(`recvMethodList`, modelAgent.RecvMoneyMethod.Slice())
-	return ctx.Render(`official/agent/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/agent/edit`, common.Err(ctx, err))
 }
 
 func Edit(ctx echo.Context) error {
@@ -101,8 +102,8 @@ func Edit(ctx echo.Context) error {
 		}
 		if err == nil {
 			ctx.Commit()
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/agent/level_index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/agent/level_index`))
 		}
 		ctx.Rollback()
 	} else if err == nil {
@@ -122,7 +123,7 @@ func Edit(ctx echo.Context) error {
 	lvM.ListByOffset(nil, nil, 0, -1, db.Cond{`disabled`: `N`})
 	ctx.Set(`levelList`, lvM.Objects())
 	ctx.Set(`recvMethodList`, modelAgent.RecvMoneyMethod.Slice())
-	return ctx.Render(`official/agent/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/agent/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -136,10 +137,10 @@ func Delete(ctx echo.Context) error {
 	}
 	ctx.End(err == nil)
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/agent/index`))
+	return ctx.Redirect(backend.URLFor(`/official/agent/index`))
 }

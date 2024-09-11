@@ -4,7 +4,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	dbschemaNG "github.com/admpub/nging/v5/application/dbschema"
+	dbschemaNG "github.com/coscms/webcore/dbschema"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )
 

@@ -1,7 +1,6 @@
 package customer
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/webx-top/echo"
 
 	_ "github.com/admpub/webx/application/handler/backend/official/agent"
@@ -13,10 +12,11 @@ import (
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/prepaidcard"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/role"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/wallet"
+	"github.com/coscms/webcore/registry/route"
 )
 
 func init() {
-	handler.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
+	route.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
 		g = g.Group(`/customer`)
 		// 客户管理
 		g.Route(`GET,POST`, `/index`, Index)

@@ -5,8 +5,8 @@ import (
 
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/model"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/model"
 	"github.com/admpub/webx/application/dbschema"
 )
 

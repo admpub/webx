@@ -3,11 +3,12 @@ package prepaidcard
 import (
 	"time"
 
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/nging/v5/application/handler"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 )
 
@@ -37,15 +38,15 @@ func Index(ctx echo.Context) error {
 			cond.AddKV(`used`, 0)
 		}
 	}
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond.And()))
 	ctx.Set(`listData`, m.Objects())
-	return ctx.Render(`official/customer/prepaid_card/index`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/prepaid_card/index`, common.Err(ctx, err))
 }
 
 func Add(ctx echo.Context) error {
-	user := handler.User(ctx)
+	user := backend.User(ctx)
 	var err error
 	if ctx.IsPost() {
 		m := modelCustomer.NewPrepaidCard(ctx)
@@ -55,14 +56,14 @@ func Add(ctx echo.Context) error {
 			err = m.BatchGenerate(user.Id, count, m.Amount, m.SalePrice, m.Start, m.End, m.BgImage)
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/customer/prepaid_card/index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/customer/prepaid_card/index`))
 		}
 	}
 	ctx.Set(`activeURL`, `/official/customer/prepaid_card/index`)
 	ctx.Set(`title`, ctx.T(`添加充值卡`))
 	ctx.Set(`isAdd`, true)
-	return ctx.Render(`official/customer/prepaid_card/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/prepaid_card/edit`, common.Err(ctx, err))
 }
 
 func Edit(ctx echo.Context) error {
@@ -70,8 +71,8 @@ func Edit(ctx echo.Context) error {
 	m := modelCustomer.NewPrepaidCard(ctx)
 	err := m.Get(nil, `id`, id)
 	if err != nil {
-		handler.SendFail(ctx, err.Error())
-		return ctx.Redirect(handler.URLFor(`/official/customer/prepaid_card/index`))
+		common.SendFail(ctx, err.Error())
+		return ctx.Redirect(backend.URLFor(`/official/customer/prepaid_card/index`))
 	}
 	if ctx.IsPost() {
 		err = ctx.MustBind(m.OfficialCustomerPrepaidCard, formFilter())
@@ -80,8 +81,8 @@ func Edit(ctx echo.Context) error {
 			err = m.Edit(nil, `id`, id)
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`修改成功`))
-			return ctx.Redirect(handler.URLFor(`/official/customer/prepaid_card/index`))
+			common.SendOk(ctx, ctx.T(`修改成功`))
+			return ctx.Redirect(backend.URLFor(`/official/customer/prepaid_card/index`))
 		}
 	} else {
 		echo.StructToForm(ctx, m.OfficialCustomerPrepaidCard, ``, echo.LowerCaseFirstLetter)
@@ -99,7 +100,7 @@ func Edit(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/official/customer/prepaid_card/index`)
 	ctx.Set(`title`, ctx.T(`修改充值卡`))
 	ctx.Set(`isAdd`, false)
-	return ctx.Render(`official/customer/prepaid_card/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/prepaid_card/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -107,10 +108,10 @@ func Delete(ctx echo.Context) error {
 	m := modelCustomer.NewPrepaidCard(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/customer/prepaid_card/index`))
+	return ctx.Redirect(backend.URLFor(`/official/customer/prepaid_card/index`))
 }

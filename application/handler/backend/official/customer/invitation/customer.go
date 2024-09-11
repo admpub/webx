@@ -4,8 +4,8 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
 )
 
 func CustomerList(ctx echo.Context) error {
@@ -21,5 +21,5 @@ func CustomerList(ctx echo.Context) error {
 	}
 	list, err := m.ListCustomerWithCode(cond, `-id`)
 	ctx.Set(`listData`, list)
-	return ctx.Render(`official/customer/invitation/customer_list`, handler.Err(ctx, err))
+	return ctx.Render(`official/customer/invitation/customer_list`, common.Err(ctx, err))
 }

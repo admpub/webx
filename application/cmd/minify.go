@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/admpub/imageproxy"
-	"github.com/admpub/nging/v5/application/cmd"
+	"github.com/coscms/webcore/cmd"
 )
 
 var minifyCmd = &cobra.Command{

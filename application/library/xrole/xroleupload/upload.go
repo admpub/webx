@@ -3,7 +3,7 @@ package xroleupload
 import (
 	"sync"
 
-	"github.com/admpub/nging/v5/application/library/perm"
+	"github.com/coscms/webcore/library/perm"
 	"github.com/admpub/null"
 	"github.com/admpub/webx/application/library/xrole"
 	sizeBytes "github.com/webx-top/echo/middleware/bytes"

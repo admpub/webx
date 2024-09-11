@@ -6,8 +6,8 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/library/codec"
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/codec"
+	"github.com/coscms/webcore/library/config"
 	"github.com/admpub/webx/application/handler/frontend/article"
 )
 

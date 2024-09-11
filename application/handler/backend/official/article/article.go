@@ -8,11 +8,11 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/model/official"
 	modelArticle "github.com/admpub/webx/application/model/official/article"
 	modelComment "github.com/admpub/webx/application/model/official/comment"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func articleFormFilter(options ...formfilter.Options) echo.FormDataFilter {
@@ -60,7 +60,7 @@ func Index(ctx echo.Context) error {
 	ctx.Set(`contypes`, modelArticle.Contype.Slice())
 	ctx.SetFunc(`getContypeName`, modelArticle.Contype.Get)
 	ctx.SetFunc(`getSourceTableName`, modelArticle.Source.Get)
-	return ctx.Render(`official/article/index`, handler.Err(ctx, err))
+	return ctx.Render(`official/article/index`, common.Err(ctx, err))
 }
 
 func selectPageSource(ctx echo.Context) error {
@@ -80,7 +80,7 @@ func Add(ctx echo.Context) error {
 	}
 	var err error
 	m := modelArticle.NewArticle(ctx)
-	user := handler.User(ctx)
+	user := backend.User(ctx)
 	if ctx.IsPost() {
 		err = ctx.MustBind(m.OfficialCommonArticle, articleFormFilter())
 		if err == nil {
@@ -88,8 +88,8 @@ func Add(ctx echo.Context) error {
 			m.OwnerType = `user`
 			_, err = m.Add()
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/article/index?sourceId=`) + sourceID + `&sourceTable=` + sourceTable)
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/article/index?sourceId=`) + sourceID + `&sourceTable=` + sourceTable)
 			}
 		}
 	} else {
@@ -107,7 +107,7 @@ func Add(ctx echo.Context) error {
 	ctx.Set(`sourceId`, sourceID)
 	ctx.Set(`sourceTable`, sourceTable)
 	ctx.Set(`contypes`, modelArticle.Contype.Slice())
-	return ctx.Render(`official/article/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/article/edit`, common.Err(ctx, err))
 }
 
 func Edit(ctx echo.Context) error {
@@ -129,8 +129,8 @@ func Edit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/article/index?sourceId=`) + sourceID + `&sourceTable=` + sourceTable)
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/article/index?sourceId=`) + sourceID + `&sourceTable=` + sourceTable)
 			}
 		}
 	} else if ctx.IsAjax() {
@@ -165,7 +165,7 @@ func Edit(ctx echo.Context) error {
 	ctx.Set(`sourceId`, sourceID)
 	ctx.Set(`sourceTable`, sourceTable)
 	ctx.Set(`contypes`, modelArticle.Contype.Slice())
-	return ctx.Render(`official/article/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/article/edit`, common.Err(ctx, err))
 }
 
 func SetArticleFormData(ctx echo.Context, sourceID string, sourceTable string) {
@@ -205,10 +205,10 @@ func Delete(ctx echo.Context) error {
 	m := modelArticle.NewArticle(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/article/index`) + `?sourceId=` + sourceID + `&sourceTable=` + sourceTable)
+	return ctx.Redirect(backend.URLFor(`/official/article/index`) + `?sourceId=` + sourceID + `&sourceTable=` + sourceTable)
 }

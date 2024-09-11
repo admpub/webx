@@ -8,10 +8,10 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/handler/backend/official/page"
 	"github.com/admpub/webx/application/model/official"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func FrontendRoutePage(ctx echo.Context) error {
@@ -35,7 +35,7 @@ func FrontendRoutePage(ctx echo.Context) error {
 	ctx.SetFunc(`typeName`, func(typ string) string {
 		return official.RoutePageTypes.Get(typ)
 	})
-	return ctx.Render(`official/manager/frontend/route_page`, handler.Err(ctx, err))
+	return ctx.Render(`official/manager/frontend/route_page`, common.Err(ctx, err))
 }
 
 func FrontendRoutePageAdd(ctx echo.Context) error {
@@ -48,8 +48,8 @@ func FrontendRoutePageAdd(ctx echo.Context) error {
 			m.Method = strings.Join(ctx.FormxValues(`method[]`), `,`)
 			_, err = m.Add()
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/manager/frontend/route_page`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/manager/frontend/route_page`))
 			}
 		}
 	} else {
@@ -94,8 +94,8 @@ func FrontendRoutePageEdit(ctx echo.Context) error {
 			m.Method = strings.Join(ctx.FormxValues(`method[]`), `,`)
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/manager/frontend/route_page`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/manager/frontend/route_page`))
 			}
 		}
 	} else if ctx.IsAjax() {
@@ -151,10 +151,10 @@ func FrontendRoutePageDelete(ctx echo.Context) error {
 		}
 	}
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/manager/frontend/route_page`))
+	return ctx.Redirect(backend.URLFor(`/manager/frontend/route_page`))
 }

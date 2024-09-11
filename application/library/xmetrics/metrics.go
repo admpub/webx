@@ -1,8 +1,8 @@
 package xmetrics
 
 import (
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/library/config/extend"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/config/extend"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	echoPrometheus "github.com/webx-top/echo-prometheus"

@@ -4,7 +4,7 @@
 package license
 
 import (
-	"github.com/admpub/nging/v5/application/library/license"
+	"github.com/coscms/webcore/library/license"
 )
 
 func init() {

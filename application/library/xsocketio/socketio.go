@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/library/common"
+	"github.com/coscms/webcore/library/common"
 	socketio "github.com/googollee/go-socket.io"
 	"github.com/googollee/go-socket.io/engineio"
 	"github.com/webx-top/echo"

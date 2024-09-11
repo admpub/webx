@@ -6,9 +6,9 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/library/perm"
-	"github.com/admpub/nging/v5/application/model"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/perm"
+	"github.com/coscms/webcore/model"
 	multidivicesignin "github.com/admpub/webx/application/library/multidevicesignin"
 	"github.com/admpub/webx/application/library/xrole"
 )

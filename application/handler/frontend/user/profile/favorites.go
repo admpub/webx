@@ -5,11 +5,10 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
 )
 
 // Favorites 我的收藏
@@ -60,7 +59,7 @@ func Favorites(ctx echo.Context) error {
 		}
 	}
 	ctx.Set(`list`, list)
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	ctx.Set(`isFollowing`, true)
 	ctx.Set(`activeURL`, `/user/profile`)
 	return ctx.Render(`user/profile/favorites`, ret)
@@ -114,7 +113,7 @@ func Likes(ctx echo.Context) error {
 		}
 	}
 	ctx.Set(`list`, list)
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	ctx.Set(`isFollowing`, true)
 	ctx.Set(`activeURL`, `/user/profile`)
 	return ctx.Render(`user/profile/likes`, ret)

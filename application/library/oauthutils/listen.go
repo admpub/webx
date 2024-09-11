@@ -1,7 +1,7 @@
 package oauthutils
 
 import (
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/config"
 	"github.com/webx-top/echo/handler/oauth2"
 	"github.com/webx-top/echo/subdomains"
 )

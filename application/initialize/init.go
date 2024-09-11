@@ -1,11 +1,11 @@
 package initialize
 
 import (
-	"github.com/admpub/nging/v5/application/cmd/bootconfig"
-	_ "github.com/admpub/nging/v5/application/initialize/manager"
-	"github.com/admpub/nging/v5/application/registry/navigate"
 	_ "github.com/admpub/webx/application/initialize/backend"
 	_ "github.com/admpub/webx/application/initialize/frontend"
+	_ "github.com/coscms/webcore"
+	"github.com/coscms/webcore/cmd/bootconfig"
+	"github.com/coscms/webcore/registry/navigate"
 )
 
 var nav = &navigate.List{}

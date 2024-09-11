@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/admpub/godotenv"
-	"github.com/admpub/nging/v5/application/dbschema"
-	"github.com/admpub/nging/v5/application/library/s3manager/s3client"
+	"github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/s3manager/s3client"
 	"github.com/admpub/pp"
 	"github.com/stretchr/testify/assert"
 	"github.com/webx-top/echo"

@@ -1,7 +1,8 @@
 package {{.M.PkgName}}
 
 import (
-	"github.com/admpub/nging/v3/application/library/common"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"

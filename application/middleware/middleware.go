@@ -12,12 +12,11 @@ import (
 	"github.com/webx-top/echo/subdomains"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/library/license"
-	uploadLibrary "github.com/admpub/nging/v5/application/library/upload"
-	nav "github.com/admpub/nging/v5/application/registry/navigate"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/license"
+	uploadLibrary "github.com/coscms/webcore/library/upload"
+	nav "github.com/coscms/webcore/registry/navigate"
 
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/handler/frontend/user/navigate"
@@ -118,7 +117,7 @@ func userCenter(c echo.Context, customer *dbschema.OfficialCustomer) error {
 	err := m.VerifySession(customer)
 	if err != nil {
 		if common.IsUserNotLoggedIn(err) {
-			handler.SendErr(c, err)
+			common.SendErr(c, err)
 			return goToSignIn(c)
 		}
 		return err

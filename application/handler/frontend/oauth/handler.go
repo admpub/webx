@@ -9,8 +9,8 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/handler/oauth2"
 
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/model"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/model"
 	"github.com/admpub/webx/application/library/oauthutils"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"

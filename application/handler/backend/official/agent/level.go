@@ -9,10 +9,10 @@ import (
 	"github.com/webx-top/echo/formfilter"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	modelAgent "github.com/admpub/webx/application/model/official/agent"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func levelFormFilter(options ...formfilter.Options) echo.FormDataFilter {
@@ -28,10 +28,10 @@ func LevelIndex(ctx echo.Context) error {
 	m := modelAgent.NewAgentLevel(ctx)
 	cond := db.Compounds{}
 	common.SelectPageCond(ctx, &cond, `id`, `name%`)
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond.And()))
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	list := m.Objects()
 	ctx.Set(`listData`, list)
 	return ctx.Render(`official/agent/level_index`, ret)
@@ -49,8 +49,8 @@ func LevelAdd(ctx echo.Context) error {
 			_, err = m.Add()
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/agent/level_index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/agent/level_index`))
 		}
 	} else {
 		id := ctx.Formx(`copyId`).Uint()
@@ -67,7 +67,7 @@ func LevelAdd(ctx echo.Context) error {
 	ctx.Set(`levelList`, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 	ctx.Set(`title`, ctx.T(`添加代理等级`))
 	levelSetFormData(ctx, m)
-	return ctx.Render(`official/agent/level_edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/agent/level_edit`, common.Err(ctx, err))
 }
 
 func levelSetFormData(ctx echo.Context, m *modelAgent.AgentLevel) {
@@ -109,8 +109,8 @@ func LevelEdit(ctx echo.Context) error {
 			err = m.Edit(nil, db.Cond{`id`: id})
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/agent/level_index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/agent/level_index`))
 		}
 	} else if ctx.IsAjax() {
 		disabled := ctx.Query(`disabled`)
@@ -138,7 +138,7 @@ func LevelEdit(ctx echo.Context) error {
 	ctx.Set(`levelList`, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 	ctx.Set(`title`, ctx.T(`修改代理等级`))
 	levelSetFormData(ctx, m)
-	return ctx.Render(`official/agent/level_edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/agent/level_edit`, common.Err(ctx, err))
 }
 
 func LevelDelete(ctx echo.Context) error {
@@ -146,10 +146,10 @@ func LevelDelete(ctx echo.Context) error {
 	m := modelAgent.NewAgentLevel(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/agent/level_index`))
+	return ctx.Redirect(backend.URLFor(`/official/agent/level_index`))
 }

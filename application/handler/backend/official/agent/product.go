@@ -8,10 +8,10 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	modelAgent "github.com/admpub/webx/application/model/official/agent"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func productFormFilter() echo.FormDataFilter {
@@ -28,7 +28,7 @@ func ProductIndex(ctx echo.Context) error {
 	m := modelAgent.NewAgentProduct(ctx)
 	cond := db.Cond{}
 	list := []*modelAgent.AgentAndProduct{}
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, &list, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, &list, func(r db.Result) db.Result {
 		return r.Relation(`Agent`, modelCustomer.CusomterSafeFieldsSelector).OrderBy(`-id`)
 	}, cond))
 	if err == nil {
@@ -37,7 +37,7 @@ func ProductIndex(ctx echo.Context) error {
 	ctx.Set(`listData`, list)
 	ctx.Set(`productTableList`, modelAgent.Source.Slice())
 	ctx.SetFunc(`getProductTableName`, modelAgent.Source.Get)
-	return ctx.Render(`official/agent/product_index`, handler.Err(ctx, err))
+	return ctx.Render(`official/agent/product_index`, common.Err(ctx, err))
 }
 
 func selectPageProduct(ctx echo.Context) error {
@@ -61,8 +61,8 @@ func ProductAdd(ctx echo.Context) error {
 			_, err = m.Add()
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/agent/product_index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/agent/product_index`))
 		}
 	} else {
 		id := ctx.Formx(`copyId`).Uint()
@@ -81,7 +81,7 @@ func ProductAdd(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/official/agent/product_index`)
 	ctx.Set(`productTableList`, modelAgent.Source.Slice())
 	ctx.Set(`title`, ctx.T(`添加代理产品`))
-	return ctx.Render(`official/agent/product_edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/agent/product_edit`, common.Err(ctx, err))
 }
 
 func ProductEdit(ctx echo.Context) error {
@@ -102,8 +102,8 @@ func ProductEdit(ctx echo.Context) error {
 			err = m.Edit(nil, db.Cond{`id`: id})
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/agent/product_index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/agent/product_index`))
 		}
 	} else if ctx.IsAjax() {
 		disabled := ctx.Query(`disabled`)
@@ -133,7 +133,7 @@ func ProductEdit(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/official/agent/product_index`)
 	ctx.Set(`productTableList`, modelAgent.Source.Slice())
 	ctx.Set(`title`, ctx.T(`修改代理产品`))
-	return ctx.Render(`official/agent/product_edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/agent/product_edit`, common.Err(ctx, err))
 }
 
 func ProductDelete(ctx echo.Context) error {
@@ -141,10 +141,10 @@ func ProductDelete(ctx echo.Context) error {
 	m := modelAgent.NewAgentProduct(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/agent/product_index`))
+	return ctx.Redirect(backend.URLFor(`/official/agent/product_index`))
 }

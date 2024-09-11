@@ -3,8 +3,8 @@ package customer
 import (
 	"fmt"
 
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/library/perm"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/perm"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/cache"
 	"github.com/admpub/webx/application/library/xrole"

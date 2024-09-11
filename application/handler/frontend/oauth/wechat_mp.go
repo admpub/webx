@@ -1,7 +1,7 @@
 package oauth
 
 import (
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/config"
 	indexHanlder "github.com/admpub/webx/application/handler/frontend/index"
 	wechatmp "github.com/admpub/webx/application/library/thirdparty/login/wechat/mp"
 	"github.com/admpub/webx/application/middleware/sessdata"

@@ -3,8 +3,8 @@ package customer
 import (
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/model"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/model"
 	modelLevel "github.com/admpub/webx/application/model/official/level"
 )
 

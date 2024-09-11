@@ -7,11 +7,11 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/model/official"
 	modelApi "github.com/admpub/webx/application/model/official/api"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 // Index 应用列表
@@ -51,7 +51,7 @@ func formFilter() echo.FormDataFilter {
 
 // Add 创建应用
 func Add(ctx echo.Context) error {
-	user := handler.User(ctx)
+	user := backend.User(ctx)
 	var (
 		err error
 		id  uint64
@@ -72,7 +72,7 @@ func Add(ctx echo.Context) error {
 			goto END
 		}
 		common.SendOk(ctx, ctx.T(`添加成功`))
-		return ctx.Redirect(handler.URLFor(`/official/api/account/index`))
+		return ctx.Redirect(backend.URLFor(`/official/api/account/index`))
 	}
 	id = ctx.Formx(`copyId`).Uint64()
 	if id > 0 {
@@ -120,7 +120,7 @@ func Edit(ctx echo.Context) error {
 			goto END
 		}
 		common.SendOk(ctx, ctx.T(`修改成功`))
-		return ctx.Redirect(handler.URLFor(`/official/api/account/index`))
+		return ctx.Redirect(backend.URLFor(`/official/api/account/index`))
 	} else if ctx.IsAjax() {
 		disabled := ctx.Query(`disabled`)
 		if len(disabled) > 0 {
@@ -170,5 +170,5 @@ func Delete(ctx echo.Context) error {
 		return err
 	}
 	common.SendOk(ctx, ctx.T(`删除成功`))
-	return ctx.Redirect(handler.URLFor(`/official/api/account/index`))
+	return ctx.Redirect(backend.URLFor(`/official/api/account/index`))
 }

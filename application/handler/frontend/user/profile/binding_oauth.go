@@ -1,13 +1,13 @@
 package profile
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/handler/frontend/user/binding"
 	"github.com/admpub/webx/application/library/apiutils"
 	"github.com/admpub/webx/application/library/xcommon"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -62,7 +62,7 @@ func unbindOAuth(ctx echo.Context, customer *modelCustomer.Customer, provider st
 	if err != nil {
 		return err
 	}
-	handler.SendOk(ctx, ctx.T(`操作成功`))
+	common.SendOk(ctx, ctx.T(`操作成功`))
 	return ctx.Redirect(xMW.URLFor(`/user/profile/binding?type=oauth`))
 }
 

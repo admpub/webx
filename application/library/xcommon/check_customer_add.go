@@ -3,8 +3,8 @@ package xcommon
 import (
 	"errors"
 
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/library/perm"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/perm"
 	"github.com/admpub/webx/application/library/xrole"
 	"github.com/webx-top/echo"
 )

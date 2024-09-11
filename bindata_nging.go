@@ -4,7 +4,7 @@
 package main
 
 import (
-	"github.com/admpub/nging/v5/application/library/bindata"
+	"github.com/coscms/webcore/library/bindata"
 	selfBin "github.com/admpub/webx/application/library/bindata"
 )
 

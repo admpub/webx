@@ -10,8 +10,6 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/download/downloadByContent"
 	"github.com/admpub/webx/application/library/top"
@@ -21,6 +19,8 @@ import (
 	"github.com/admpub/webx/application/model/official"
 	"github.com/admpub/webx/application/model/official/agent"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func NewArticle(ctx echo.Context) *Article {
@@ -234,7 +234,7 @@ func (f *Article) IsAllowedComment(customer *dbschema.OfficialCustomer) error {
 		}
 		return OrderQuerier(c, customer, articleM.SourceId, articleM.SourceTable)
 	case `author`:
-		user := handler.User(c)
+		user := backend.User(c)
 		if articleM.OwnerType == `user` {
 			if user == nil || articleM.OwnerId != uint64(user.Id) {
 				customerM := modelCustomer.NewCustomer(c)
@@ -307,7 +307,7 @@ func (f *Article) IsAllowedComment(customer *dbschema.OfficialCustomer) error {
 			return err
 		}
 	case `admin`:
-		user := handler.User(c)
+		user := backend.User(c)
 		if user == nil || user.Id != 1 {
 			return c.E(`很抱歉，本文只有管理员才能评论`)
 		}

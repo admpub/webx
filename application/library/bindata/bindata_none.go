@@ -12,11 +12,11 @@ import (
 	"github.com/webx-top/echo/middleware/render/driver"
 
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/cmd/bootconfig"
-	"github.com/admpub/nging/v5/application/initialize/backend"
-	"github.com/admpub/nging/v5/application/library/bindata"
-	"github.com/admpub/nging/v5/application/library/modal"
-	"github.com/admpub/nging/v5/application/library/ntemplate"
+	"github.com/coscms/webcore/cmd/bootconfig"
+	"github.com/coscms/webcore/initialize/backend"
+	"github.com/coscms/webcore/library/bindata"
+	"github.com/coscms/webcore/library/modal"
+	"github.com/coscms/webcore/library/ntemplate"
 	selfBackend "github.com/admpub/webx/application/initialize/backend"
 	"github.com/admpub/webx/application/initialize/frontend"
 )

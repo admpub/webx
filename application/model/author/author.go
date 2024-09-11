@@ -3,7 +3,7 @@ package author
 import (
 	"fmt"
 
-	modelNging "github.com/admpub/nging/v5/application/model"
+	modelNging "github.com/coscms/webcore/model"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/webx-top/db"

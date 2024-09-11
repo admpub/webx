@@ -8,10 +8,10 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/model/official"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func NavigateIndex(ctx echo.Context) error {
@@ -42,8 +42,8 @@ func NavigateIndex(ctx echo.Context) error {
 		data.SetData(m.Objects())
 		return ctx.JSON(data)
 	}
-	_, err := handler.NewLister(m.OfficialCommonNavigate, nil, queryMW, cond.And()).Paging(ctx)
-	ret := handler.Err(ctx, err)
+	_, err := common.NewLister(m.OfficialCommonNavigate, nil, queryMW, cond.And()).Paging(ctx)
+	ret := common.Err(ctx, err)
 	list := m.Objects()
 	ctx.Set(`listData`, list)
 	ctx.Set(`maxLevel`, official.NavigateMaxLevel)
@@ -96,8 +96,8 @@ func NavigateAdd(ctx echo.Context) error {
 			}
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/manager/navigate/index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
 		}
 	} else {
 		id := ctx.Formx(`copyId`).Uint()
@@ -152,8 +152,8 @@ func NavigateEdit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/manager/navigate/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
 			}
 		}
 	} else if ctx.IsAjax() {
@@ -211,10 +211,10 @@ func NavigateDelete(ctx echo.Context) error {
 	m := official.NewNavigate(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/manager/navigate/index`))
+	return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
 }

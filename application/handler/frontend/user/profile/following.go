@@ -5,11 +5,10 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
 )
 
 // IsFollowed 是否关注过
@@ -117,7 +116,7 @@ func Following(ctx echo.Context) error {
 	err := FollowingBy(ctx, customer.Id)
 	ctx.Set(`activeURL`, `/user/profile`)
 	ctx.Set(`title`, ctx.T(`我关注的用户`))
-	return ctx.Render(`user/profile/following`, handler.Err(ctx, err))
+	return ctx.Render(`user/profile/following`, common.Err(ctx, err))
 }
 
 func FollowingBy(ctx echo.Context, customerID uint64) error {
@@ -174,7 +173,7 @@ func Followers(ctx echo.Context) error {
 	err := FollowersBy(ctx, customer.Id)
 	ctx.Set(`activeURL`, `/user/profile`)
 	ctx.Set(`title`, ctx.T(`关注我的用户`))
-	return ctx.Render(`user/profile/following`, handler.Err(ctx, err))
+	return ctx.Render(`user/profile/following`, common.Err(ctx, err))
 }
 
 func FollowersBy(ctx echo.Context, customerID uint64) error {

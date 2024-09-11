@@ -3,11 +3,10 @@ package article
 import (
 	"strings"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelArticle "github.com/admpub/webx/application/model/official/article"
 	modelComment "github.com/admpub/webx/application/model/official/comment"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 )
@@ -34,7 +33,7 @@ func Index(c echo.Context) error {
 		return articles
 	})
 	c.Set(`listURL`, sessdata.URLFor(`/articles`)+c.DefaultExtension())
-	return c.Render(`article/index`, handler.Err(c, err))
+	return c.Render(`article/index`, common.Err(c, err))
 }
 
 func hotCommentArticles(ctx echo.Context, query string, limit int, offset int) ([]*modelArticle.ArticleWithOwner, error) {

@@ -8,11 +8,11 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	modelLevel "github.com/admpub/webx/application/model/official/level"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Index(ctx echo.Context) error {
@@ -61,7 +61,7 @@ func Index(ctx echo.Context) error {
 	ctx.SetFunc(`timeUnitSuffix`, func(n uint, unit string) string {
 		return modelCustomer.GroupPackageTimeUnitSuffix(ctx, n, unit)
 	})
-	return ctx.Render(`user/membership/index`, handler.Err(ctx, err))
+	return ctx.Render(`user/membership/index`, common.Err(ctx, err))
 }
 
 func Buy(ctx echo.Context) error {
@@ -173,5 +173,5 @@ END:
 	ctx.SetFunc(`timeUnitSuffix`, func(n uint, unit string) string {
 		return modelCustomer.GroupPackageTimeUnitSuffix(ctx, n, unit)
 	})
-	return ctx.Render(`user/membership/buy`, handler.Err(ctx, err))
+	return ctx.Render(`user/membership/buy`, common.Err(ctx, err))
 }

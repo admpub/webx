@@ -5,14 +5,13 @@ import (
 	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
 
-	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/initialize/frontend"
 	xMW "github.com/admpub/webx/application/middleware"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	dbschemaNging "github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/common"
 )
 
 // MessageUnreadCount 未读消息统计
@@ -37,7 +36,7 @@ func MessageUnreadCount(c echo.Context) error {
 func MessageInbox(c echo.Context) error {
 	customer := xMW.Customer(c)
 	err := messageList(c, customer, false, true)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	c.Set(`boxType`, `inbox`)
 	c.Set(`boxTypeName`, c.T(`收件箱`))
 	return c.Render(`/user/message/list`, ret)
@@ -47,7 +46,7 @@ func MessageInbox(c echo.Context) error {
 func MessageOutbox(c echo.Context) error {
 	customer := xMW.Customer(c)
 	err := messageList(c, customer, false, false)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	c.Set(`boxType`, `outbox`)
 	c.Set(`boxTypeName`, c.T(`发件箱`))
 	return c.Render(`/user/message/list`, ret)
@@ -91,7 +90,7 @@ func messageList(c echo.Context, customer *dbschema.OfficialCustomer, isSystemMe
 func SystemMessage(c echo.Context) error {
 	customer := xMW.Customer(c)
 	err := messageList(c, customer, true, true)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	c.Set(`boxType`, `system`)
 	c.Set(`boxTypeName`, c.T(`系统消息`))
 	return c.Render(`/user/message/list`, ret)
@@ -174,7 +173,7 @@ func MessageView(c echo.Context) error {
 	}
 	c.Set(`replyList`, replyList)
 	c.Set(`msgUser`, msgUser)
-	ret := handler.Err(c, err)
+	ret := common.Err(c, err)
 	c.Set(`boxType`, boxType)
 	c.Set(`boxTypeName`, boxTypeName)
 	return c.Render(`/user/message/view`, ret)

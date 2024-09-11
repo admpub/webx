@@ -1,8 +1,8 @@
 package {{.PkgName}}
 
 import (
-	"github.com/admpub/nging/v3/application/handler"
-	"github.com/admpub/nging/v3/application/library/common"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/admpub/webx/application/model/{{.Group}}"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -18,7 +18,7 @@ func {{.H.Name}}Index(ctx echo.Context) error {
 	list, err := m.ListPage(cond, sorts...)
 	ctx.Set(`listData`, list)
 	ctx.Set(`title`, ctx.T(`%v列表`, {{.M.PkgName}}.ObjectName{{.M.Name}}))
-	return ctx.Render(`{{.Group}}/{{.H.TmplName "index"}}`, handler.Err(ctx, err))
+	return ctx.Render(`{{.Group}}/{{.H.TmplName "index"}}`, common.Err(ctx, err))
 }
 
 func {{.H.Name}}Add(ctx echo.Context) error {
@@ -29,8 +29,8 @@ func {{.H.Name}}Add(ctx echo.Context) error {
 		if err == nil {
 			_, err = m.Add()
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/{{.Group}}/{{.H.TmplName "index"}}`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/{{.Group}}/{{.H.TmplName "index"}}`))
 			}
 		}
 	} else {
@@ -61,8 +61,8 @@ func {{.H.Name}}Edit(ctx echo.Context) error {
 			m.{{.M.IDField}} = {{.M.IDField|LowerCaseFirst}}
 			err = m.Edit(nil, db.Cond{`{{.M.IDColumn}}`: {{.M.IDField|LowerCaseFirst}}})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/{{.Group}}/{{.H.TmplName "index"}}`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/{{.Group}}/{{.H.TmplName "index"}}`))
 			}
 		}
 	} {{if and .M.IDColumn (.M.HasAnyFields .M.SwitchableFields)}}else if ctx.IsAjax() {
@@ -105,10 +105,10 @@ func {{.H.Name}}Delete(ctx echo.Context) error {
 		}
 	}
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/{{.Group}}/{{.H.TmplName "index"}}`))
+	return ctx.Redirect(backend.URLFor(`/{{.Group}}/{{.H.TmplName "index"}}`))
 }

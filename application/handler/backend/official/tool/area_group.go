@@ -4,10 +4,10 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/model/official"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func AreaGroupIndex(ctx echo.Context) error {
@@ -36,7 +36,7 @@ func AreaGroupIndex(ctx echo.Context) error {
 
 	ctx.Set(`title`, ctx.T(`地区分组`))
 	ctx.Set(`activeURL`, `/tool/area/index`)
-	return ctx.Render(`official/tool/area/group_index`, handler.Err(ctx, err))
+	return ctx.Render(`official/tool/area/group_index`, common.Err(ctx, err))
 }
 
 func AreaGroupAdd(ctx echo.Context) error {
@@ -55,8 +55,8 @@ func AreaGroupAdd(ctx echo.Context) error {
 			}
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/tool/area/group_index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/tool/area/group_index`))
 		}
 	} else {
 		id := ctx.Formx(`copyId`).Uint()
@@ -85,8 +85,8 @@ func AreaGroupEdit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/tool/area/group_index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/tool/area/group_index`))
 			}
 		}
 	} else if err == nil {
@@ -110,10 +110,10 @@ func AreaGroupDelete(ctx echo.Context) error {
 		}
 	}
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/tool/area/group_index`))
+	return ctx.Redirect(backend.URLFor(`/tool/area/group_index`))
 }

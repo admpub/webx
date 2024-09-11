@@ -11,10 +11,10 @@ import (
 	"github.com/webx-top/echo/middleware/tplfunc"
 	"github.com/webx-top/echo/param"
 
-	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/model"
+	dbschemaNging "github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/model"
 	"github.com/admpub/webx/application/dbschema"
 	"github.com/admpub/webx/application/library/top"
 )

@@ -6,10 +6,10 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	modelShorturl "github.com/admpub/webx/application/model/official/shorturl"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func applyFormData(ctx echo.Context, murl *dbschema.OfficialShortUrl) error {
@@ -31,7 +31,7 @@ func applyFormData(ctx echo.Context, murl *dbschema.OfficialShortUrl) error {
 
 // Index 短网址列表
 func Index(ctx echo.Context) error {
-	//user := handler.User(ctx)
+	//user := backend.User(ctx)
 	var err error
 	m := modelShorturl.NewShortURL(ctx)
 	cond := db.Compounds{
@@ -52,7 +52,7 @@ func Index(ctx echo.Context) error {
 
 // Add 创建短网址
 func Add(ctx echo.Context) error {
-	user := handler.User(ctx)
+	user := backend.User(ctx)
 	var (
 		err error
 		id  uint64
@@ -68,7 +68,7 @@ func Add(ctx echo.Context) error {
 			goto END
 		}
 		common.SendOk(ctx, ctx.T(`添加成功`))
-		return ctx.Redirect(handler.URLFor(`/official/short_url/index`))
+		return ctx.Redirect(backend.URLFor(`/official/short_url/index`))
 	}
 	id = ctx.Formx(`copyId`).Uint64()
 	if id > 0 {
@@ -111,7 +111,7 @@ func Edit(ctx echo.Context) error {
 			goto END
 		}
 		common.SendOk(ctx, ctx.T(`修改成功`))
-		return ctx.Redirect(handler.URLFor(`/official/short_url/index`))
+		return ctx.Redirect(backend.URLFor(`/official/short_url/index`))
 	}
 	echo.StructToForm(ctx, m.OfficialShortUrl, ``, echo.LowerCaseFirstLetter)
 	if m.Expired > 0 {
@@ -143,7 +143,7 @@ func Delete(ctx echo.Context) error {
 		return err
 	}
 	common.SendOk(ctx, ctx.T(`删除成功`))
-	return ctx.Redirect(handler.URLFor(`/official/short_url/index`))
+	return ctx.Redirect(backend.URLFor(`/official/short_url/index`))
 }
 
 // Analysis 用户短网址访问统计

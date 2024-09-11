@@ -5,10 +5,10 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/listener/upload/friendlink"
 	"github.com/admpub/webx/application/model/official"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func FriendlinkFormFilter(options ...formfilter.Options) echo.FormDataFilter {
@@ -22,7 +22,7 @@ func FriendlinkIndex(ctx echo.Context) error {
 	common.SelectPageCond(ctx, cond, `id`, `name%`)
 	list, err := m.ListPage(cond, `-id`)
 	ctx.Set(`listData`, list)
-	return ctx.Render(`official/article/friendlink_index`, handler.Err(ctx, err))
+	return ctx.Render(`official/article/friendlink_index`, common.Err(ctx, err))
 }
 
 func FriendlinkAdd(ctx echo.Context) error {
@@ -33,8 +33,8 @@ func FriendlinkAdd(ctx echo.Context) error {
 		if err == nil {
 			_, err = m.Add()
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/article/friendlink_index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/article/friendlink_index`))
 			}
 		}
 	} else {
@@ -50,7 +50,7 @@ func FriendlinkAdd(ctx echo.Context) error {
 	SetFriendlinkFormData(ctx)
 	ctx.Set(`activeURL`, `/official/article/friendlink_index`)
 	ctx.Set(`title`, ctx.T(`添加链接`))
-	return ctx.Render(`official/article/friendlink_edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/article/friendlink_edit`, common.Err(ctx, err))
 }
 
 func FriendlinkEdit(ctx echo.Context) error {
@@ -67,8 +67,8 @@ func FriendlinkEdit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/article/friendlink_index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/article/friendlink_index`))
 			}
 		}
 	} else if ctx.IsAjax() {
@@ -90,7 +90,7 @@ func FriendlinkEdit(ctx echo.Context) error {
 	SetFriendlinkFormData(ctx)
 	ctx.Set(`activeURL`, `/official/article/friendlink_index`)
 	ctx.Set(`title`, ctx.T(`修改链接`))
-	return ctx.Render(`official/article/friendlink_edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/article/friendlink_edit`, common.Err(ctx, err))
 }
 
 func SetFriendlinkFormData(ctx echo.Context) {
@@ -105,10 +105,10 @@ func FriendlinkDelete(ctx echo.Context) error {
 	m := official.NewFriendlink(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/article/friendlink_index`))
+	return ctx.Redirect(backend.URLFor(`/official/article/friendlink_index`))
 }

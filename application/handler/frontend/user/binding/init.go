@@ -6,8 +6,8 @@ import (
 	"github.com/webx-top/echo"
 
 	"github.com/admpub/log"
-	dbschemaNging "github.com/admpub/nging/v5/application/dbschema"
-	"github.com/admpub/nging/v5/application/library/email"
+	dbschemaNging "github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/email"
 )
 
 func init() {

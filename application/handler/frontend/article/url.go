@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
 	"github.com/admpub/webx/application/library/top"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	"github.com/webx-top/com"

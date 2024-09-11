@@ -8,9 +8,9 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	modelAdvert "github.com/admpub/webx/application/model/official/advert"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Index(ctx echo.Context) error {
@@ -37,7 +37,7 @@ func Index(ctx echo.Context) error {
 		sorts = append(sorts, `-position_id`)
 	}
 	sorts = append(sorts, `sort`, `id`)
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, &list, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, &list, func(r db.Result) db.Result {
 		return r.OrderBy(sorts...)
 	}, cond.And()))
 	for _, row := range list {
@@ -45,7 +45,7 @@ func Index(ctx echo.Context) error {
 	}
 	ctx.Set(`listData`, list)
 	ctx.Set(`contypes`, modelAdvert.Contype.Slice())
-	return ctx.Render(`official/advert/index`, handler.Err(ctx, err))
+	return ctx.Render(`official/advert/index`, common.Err(ctx, err))
 }
 
 func formFilter() echo.FormDataFilter {
@@ -65,8 +65,8 @@ func Add(ctx echo.Context) error {
 			_, err = m.Add()
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/official/advert/index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/official/advert/index`))
 		}
 	} else {
 		id := ctx.Formx(`copyId`).Uint64()
@@ -82,7 +82,7 @@ func Add(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/official/advert/index`)
 	ctx.Set(`isEdit`, false)
 	setFormData(ctx)
-	return ctx.Render(`official/advert/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/advert/edit`, common.Err(ctx, err))
 }
 
 func setFormData(ctx echo.Context) {
@@ -109,8 +109,8 @@ func Edit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/advert/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/advert/index`))
 			}
 		}
 	} else if ctx.IsAjax() {
@@ -145,7 +145,7 @@ func Edit(ctx echo.Context) error {
 	ctx.Set(`activeURL`, `/official/advert/index`)
 	ctx.Set(`isEdit`, true)
 	setFormData(ctx)
-	return ctx.Render(`official/advert/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/advert/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -153,10 +153,10 @@ func Delete(ctx echo.Context) error {
 	m := modelAdvert.NewAdItem(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/advert/index`))
+	return ctx.Redirect(backend.URLFor(`/official/advert/index`))
 }

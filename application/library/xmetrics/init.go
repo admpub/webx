@@ -1,6 +1,6 @@
 package xmetrics
 
-import "github.com/admpub/nging/v5/application/library/config/extend"
+import "github.com/coscms/webcore/library/config/extend"
 
 const Name = `metrics`
 

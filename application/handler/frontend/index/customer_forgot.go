@@ -3,14 +3,13 @@ package index
 import (
 	"net/url"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/model"
 	"github.com/admpub/webx/application/handler/frontend/user/profile"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/library/resetpassword"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/model"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -204,5 +203,5 @@ func Forgot(c echo.Context) error {
 	c.Set(`verifyCodeLength`, profile.VerifyCodeLength())
 	c.Set(`recvTypes`, recvTypes)
 	c.Set(`recvType`, recvType)
-	return c.Render(tmpl, handler.Err(c, err))
+	return c.Render(tmpl, common.Err(c, err))
 }

@@ -11,7 +11,7 @@ import (
 
 	"github.com/admpub/events"
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/cmd/bootconfig"
+	"github.com/coscms/webcore/cmd/bootconfig"
 	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/admpub/webx/application/library/xtemplate"
 	formConfig "github.com/coscms/forms/config"

@@ -1,7 +1,7 @@
 package userhome
 
 import (
-	"github.com/admpub/nging/v5/application/registry/dashboard"
+	"github.com/coscms/webcore/registry/dashboard"
 	"github.com/webx-top/echo"
 )
 

@@ -34,18 +34,16 @@ import (
 
 	_ "github.com/admpub/bindata/v3"
 	"github.com/admpub/log"
+	_ "github.com/admpub/nging/v5/application/handler"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/cmd"
-	"github.com/admpub/nging/v5/application/cmd/bootconfig"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/library/license"
-	"github.com/admpub/nging/v5/application/library/module"
+	"github.com/coscms/webcore"
+	"github.com/coscms/webcore/cmd/bootconfig"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/license"
 
 	// register
-
-	_ "github.com/admpub/nging/v5/application/initialize/manager" // must first
 
 	_ "github.com/admpub/webx/application"
 	"github.com/admpub/webx/application/initialize/initnavigate"
@@ -100,22 +98,9 @@ func main() {
 	if com.FileExists(`config/install.sql`) {
 		os.Rename(`config/install.sql`, `config/install.sql.`+time.Now().Format(`20060102150405.000`))
 	}
-	initModule()
-	initEnv()
-	exec()
-}
-
-func exec() {
-	cmd.Execute()
-}
-
-func initModule() {
-	module.Register(
-		&task.Module,
-		&cloud.Module,
-		&dbmanager.Module,
-	)
 	initnavigate.Initialize()
+	initEnv()
+	webcore.Start(&task.Module, &cloud.Module, &dbmanager.Module)
 }
 
 func init() {

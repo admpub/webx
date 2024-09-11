@@ -3,8 +3,8 @@ package frontend
 import (
 	"sync"
 
-	"github.com/admpub/nging/v5/application/initialize/backend"
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/initialize/backend"
+	"github.com/coscms/webcore/library/config"
 	"github.com/admpub/webx/application/library/top"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	"github.com/webx-top/echo/middleware/tplfunc"

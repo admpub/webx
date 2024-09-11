@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/admpub/goth"
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/config"
 	"github.com/admpub/webx/application/library/cache"
 	"github.com/admpub/webx/application/library/oauth2client/providers/wechatgh"
 	"github.com/admpub/webx/application/library/thirdparty/login/wechat/gh"

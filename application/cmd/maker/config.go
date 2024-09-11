@@ -9,7 +9,7 @@ import (
 	"github.com/webx-top/db/lib/factory"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/registry/navigate"
+	"github.com/coscms/webcore/registry/navigate"
 )
 
 // HandlerConfig Handler配置
@@ -162,7 +162,7 @@ func (r *Route) String() string {
 		sr += route
 	}
 	if len(sr) > 0 {
-		s += "\n\t" + `handler.Register(func(g echo.RouteRegister) {` + sr + "\t" + `})` + "\n"
+		s += "\n\t" + `route.Register(func(g echo.RouteRegister) {` + sr + "\t" + `})` + "\n"
 	}
 	sr = ``
 	for group, routes := range r.GRoutes {
@@ -180,7 +180,7 @@ func (r *Route) String() string {
 			}
 			delete(r.G2Routes, group)
 		}
-		sr += "\n\t" + `handler.RegisterToGroup("/` + group + `", func(g echo.RouteRegister) {` + ss + "\t" + `})` + "\n"
+		sr += "\n\t" + `route.RegisterToGroup("/` + group + `", func(g echo.RouteRegister) {` + ss + "\t" + `})` + "\n"
 	}
 	for group, grpRoutes := range r.G2Routes {
 		var ss string
@@ -190,7 +190,7 @@ func (r *Route) String() string {
 				ss += route
 			}
 		}
-		sr += "\n\t" + `handler.RegisterToGroup("/` + group + `", func(g echo.RouteRegister) {` + ss + "\t" + `})` + "\n"
+		sr += "\n\t" + `route.RegisterToGroup("/` + group + `", func(g echo.RouteRegister) {` + ss + "\t" + `})` + "\n"
 	}
 	s += sr
 	return s

@@ -5,19 +5,19 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	modelPage "github.com/admpub/webx/application/model/official/page"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func Index(ctx echo.Context) error {
 	m := modelPage.New(ctx)
 	cond := db.NewCompounds()
 	common.SelectPageCond(ctx, cond, `id`, `name%`)
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond.And()))
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	list := m.Objects()
 	ctx.Set(`listData`, list)
 	return ctx.Render(`official/page/index`, ret)
@@ -31,8 +31,8 @@ func Add(ctx echo.Context) error {
 		if err == nil {
 			_, err = m.Insert()
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/page/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/page/index`))
 			}
 		}
 	} else {
@@ -48,7 +48,7 @@ func Add(ctx echo.Context) error {
 
 	ctx.Set(`activeURL`, `/official/page/index`)
 	ctx.Set(`title`, ctx.T(`添加页面`))
-	return ctx.Render(`official/page/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/page/edit`, common.Err(ctx, err))
 }
 
 func Edit(ctx echo.Context) error {
@@ -65,8 +65,8 @@ func Edit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Update(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/official/page/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/official/page/index`))
 			}
 		}
 	} else if ctx.IsAjax() {
@@ -95,7 +95,7 @@ func Edit(ctx echo.Context) error {
 
 	ctx.Set(`activeURL`, `/official/page/index`)
 	ctx.Set(`title`, ctx.T(`编辑页面`))
-	return ctx.Render(`official/page/edit`, handler.Err(ctx, err))
+	return ctx.Render(`official/page/edit`, common.Err(ctx, err))
 }
 
 func Delete(ctx echo.Context) error {
@@ -103,10 +103,10 @@ func Delete(ctx echo.Context) error {
 	m := modelPage.New(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/official/page/index`))
+	return ctx.Redirect(backend.URLFor(`/official/page/index`))
 }

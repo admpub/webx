@@ -19,11 +19,11 @@ import (
 	"github.com/webx-top/echo/middleware/tplfunc"
 
 	"github.com/admpub/nging/v5/application/handler/manager"
-	"github.com/admpub/nging/v5/application/library/notice"
-	modelFile "github.com/admpub/nging/v5/application/model/file"
-	"github.com/admpub/nging/v5/application/registry/upload"
-	"github.com/admpub/nging/v5/application/registry/upload/checker"
-	"github.com/admpub/nging/v5/application/registry/upload/driver"
+	"github.com/coscms/webcore/library/notice"
+	modelFile "github.com/coscms/webcore/model/file"
+	"github.com/coscms/webcore/registry/upload"
+	"github.com/coscms/webcore/registry/upload/checker"
+	"github.com/coscms/webcore/registry/upload/driver"
 )
 
 func Download(ctx echo.Context, options ...Options) (*uploadClient.Result, string, error) {

@@ -1,13 +1,12 @@
 package page
 
 import (
+	"github.com/coscms/webcore/registry/route"
 	"github.com/webx-top/echo"
-
-	"github.com/admpub/nging/v5/application/handler"
 )
 
 func init() {
-	handler.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
+	route.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
 		g = g.Group(`/page`)
 
 		// 以下功能暂时没有用到，注释掉

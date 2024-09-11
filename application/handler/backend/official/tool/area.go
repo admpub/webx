@@ -5,9 +5,9 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/model/official"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 )
 
 func AreaIndex(ctx echo.Context) error {
@@ -19,8 +19,8 @@ func AreaIndex(ctx echo.Context) error {
 	queryMW := func(r db.Result) db.Result {
 		return r.OrderBy(`id`)
 	}
-	_, err := handler.NewLister(m.OfficialCommonArea, nil, queryMW, cond.And()).Paging(ctx)
-	ret := handler.Err(ctx, err)
+	_, err := common.NewLister(m.OfficialCommonArea, nil, queryMW, cond.And()).Paging(ctx)
+	ret := common.Err(ctx, err)
 	list := m.Objects()
 	ctx.Set(`listData`, list)
 	if ctx.Form(`select2`) == `1` {
@@ -56,8 +56,8 @@ func AreaAdd(ctx echo.Context) error {
 			}
 		}
 		if err == nil {
-			handler.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(handler.URLFor(`/tool/area/index`))
+			common.SendOk(ctx, ctx.T(`操作成功`))
+			return ctx.Redirect(backend.URLFor(`/tool/area/index`))
 		}
 	} else {
 		id := ctx.Formx(`copyId`).Uint()
@@ -90,8 +90,8 @@ func AreaEdit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Edit(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/tool/area/index`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/tool/area/index`))
 			}
 		}
 	} else if err == nil {
@@ -119,10 +119,10 @@ func AreaDelete(ctx echo.Context) error {
 		}
 	}
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/tool/area/index`))
+	return ctx.Redirect(backend.URLFor(`/tool/area/index`))
 }

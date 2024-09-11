@@ -2,7 +2,7 @@ package oauth
 
 import (
 	"github.com/admpub/log"
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/config"
 	"github.com/admpub/webx/application/library/oauthutils"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/handler/oauth2"

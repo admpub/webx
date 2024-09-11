@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/admpub/nging/v5/application/registry/upload/convert"
+	"github.com/coscms/webcore/registry/upload/convert"
 	"github.com/webx-top/image/webp"
 )
 

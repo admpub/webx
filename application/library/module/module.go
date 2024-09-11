@@ -1,7 +1,7 @@
 package module
 
 import (
-	"github.com/admpub/nging/v5/application/library/module"
+	"github.com/coscms/webcore/library/module"
 )
 
 var Register = module.Register

@@ -1,11 +1,11 @@
 package tool
 
 import (
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/library/search/segment"
 
 	//_ "github.com/admpub/webx/application/library/search/segment/gojieba"
@@ -39,5 +39,5 @@ func Segment(ctx echo.Context) error {
 	}
 	ctx.Set(`modes`, SegmentMode.Slice())
 	ctx.Set(`isInitialized`, segment.IsInitialized())
-	return ctx.Render(`official/tool/segment/index`, handler.Err(ctx, err))
+	return ctx.Render(`official/tool/segment/index`, common.Err(ctx, err))
 }

@@ -1,9 +1,9 @@
 package wallet
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/echo"
 )
 
@@ -38,7 +38,7 @@ func PrepaidCard(ctx echo.Context) error {
 		return err
 	}
 	ctx.Commit()
-	handler.SendOk(ctx, ctx.T(`操作成功`))
+	common.SendOk(ctx, ctx.T(`操作成功`))
 	next := ctx.Form(`next`)
 	if len(next) == 0 {
 		next = `/user/wallet`

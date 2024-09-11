@@ -3,12 +3,12 @@ package profile
 import (
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/model"
 	"github.com/admpub/webx/application/handler/frontend/user/binding"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/model"
 )
 
 func Binding(ctx echo.Context) (err error) {
@@ -50,7 +50,7 @@ func Binding(ctx echo.Context) (err error) {
 		maxPerDay = BindingSendingMaxPerDay(typ)
 		remainCount = BindingSendingRemainCount(ctx, m, typ)
 	}
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	ctx.Set(`activeURL`, `/user/profile`)
 	ctx.Request().Form().Set(`type`, typ)
 	ctx.Set(`objectName`, binder.ObjectName)

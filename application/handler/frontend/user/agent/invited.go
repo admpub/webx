@@ -1,9 +1,9 @@
 package agent
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
 	xMW "github.com/admpub/webx/application/middleware"
 	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 )
@@ -15,12 +15,12 @@ func InvitedList(ctx echo.Context) error {
 	cond := db.Cond{
 		`inviter_id`: customer.Id,
 	}
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m.OfficialCustomer, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m.OfficialCustomer, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond))
 	list := m.Objects()
 	ctx.Set(`listData`, list)
 	ctx.Set(`activeURL`, `/user/agent/index`)
 	ctx.Set(`title`, ctx.T(`我邀请的用户`))
-	return ctx.Render(`/user/agent/invited`, handler.Err(ctx, err))
+	return ctx.Render(`/user/agent/invited`, common.Err(ctx, err))
 }

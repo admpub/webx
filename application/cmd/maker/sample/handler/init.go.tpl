@@ -1,7 +1,7 @@
 package {{.PkgName}}
 
 import (
-	"github.com/admpub/nging/v3/application/handler"
+	"github.com/coscms/webcore/registry/route"
 	"github.com/webx-top/echo"
 )
 

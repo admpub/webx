@@ -3,8 +3,8 @@ package apiutils
 import (
 	"net/url"
 
-	"github.com/admpub/nging/v5/application/library/common"
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
 	"github.com/webx-top/com"
 )
 

@@ -3,10 +3,10 @@ package official
 import (
 	"strings"
 
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
 	"github.com/admpub/webx/application/dbschema"
 )
 
@@ -78,14 +78,14 @@ func (f *AreaGroup) GetWithExt(cond *db.Compounds) (*AreaGroupExt, error) {
 
 func (f *AreaGroup) ListPageWithExt(cond *db.Compounds, sorts ...interface{}) ([]*AreaGroupExt, error) {
 	list := []*AreaGroupExt{}
-	_, err := handler.NewLister(f.OfficialCommonAreaGroup, &list, func(r db.Result) db.Result {
+	_, err := common.NewLister(f.OfficialCommonAreaGroup, &list, func(r db.Result) db.Result {
 		return r.OrderBy(sorts...)
 	}, cond.And()).Paging(f.Context())
 	return list, err
 }
 
 func (f *AreaGroup) ListPage(cond *db.Compounds, sorts ...interface{}) ([]*dbschema.OfficialCommonAreaGroup, error) {
-	_, err := handler.NewLister(f.OfficialCommonAreaGroup, nil, func(r db.Result) db.Result {
+	_, err := common.NewLister(f.OfficialCommonAreaGroup, nil, func(r db.Result) db.Result {
 		return r.OrderBy(sorts...)
 	}, cond.And()).Paging(f.Context())
 	if err != nil {

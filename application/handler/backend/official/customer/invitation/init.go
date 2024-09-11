@@ -1,13 +1,12 @@
 package invitation
 
 import (
+	"github.com/coscms/webcore/registry/route"
 	"github.com/webx-top/echo"
-
-	"github.com/admpub/nging/v5/application/handler"
 )
 
 func init() {
-	handler.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
+	route.RegisterToGroup(`/official`, func(g echo.RouteRegister) {
 		g = g.Group(`/customer`)
 		// 邀请码
 		g.Route(`GET,POST`, `/invitation/index`, Index)

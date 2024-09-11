@@ -5,12 +5,11 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	"github.com/admpub/webx/application/dbschema"
 	hanlderArticle "github.com/admpub/webx/application/handler/backend/official/article"
 	"github.com/admpub/webx/application/middleware/sessdata"
 	modelArticle "github.com/admpub/webx/application/model/official/article"
+	"github.com/coscms/webcore/library/common"
 )
 
 func ListByCustomer(ctx echo.Context, customer *dbschema.OfficialCustomer) error {
@@ -69,7 +68,7 @@ func List(ctx echo.Context) error {
 	list, err := m.ListPage(cond, sorts...)
 	ctx.Set(`list`, list)
 	ctx.SetFunc(`getContypeName`, modelArticle.Contype.Get)
-	return ctx.Render(`article/user/list`, handler.Err(ctx, err))
+	return ctx.Render(`article/user/list`, common.Err(ctx, err))
 }
 
 func applyFormData(ctx echo.Context, m *dbschema.OfficialCommonArticle) {
@@ -112,7 +111,7 @@ END:
 	ctx.Set(`contypes`, modelArticle.Contype.Slice())
 	ctx.Set(`title`, ctx.T(`投稿`))
 	ctx.Set(`isEdit`, false)
-	return ctx.Render(`article/user/edit`, handler.Err(ctx, err))
+	return ctx.Render(`article/user/edit`, common.Err(ctx, err))
 }
 
 // Edit 修改文章

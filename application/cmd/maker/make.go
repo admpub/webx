@@ -16,7 +16,7 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware/tplfunc"
 
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/config"
 )
 
 // Make 生成代码

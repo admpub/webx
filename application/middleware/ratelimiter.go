@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/config"
 	cfgIPFilter "github.com/admpub/webx/application/library/ipfilter"
 	"github.com/webx-top/echo"
 	mwRateLimiter "github.com/webx-top/echo/middleware/ratelimiter"

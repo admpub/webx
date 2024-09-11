@@ -11,7 +11,7 @@ import (
 
 	"github.com/admpub/errors"
 	shortid "github.com/admpub/go-shortid"
-	"github.com/admpub/nging/v5/application/library/ip2region"
+	"github.com/coscms/webcore/library/ip2region"
 	ua "github.com/admpub/useragent"
 	"github.com/admpub/webx/application/dbschema"
 )

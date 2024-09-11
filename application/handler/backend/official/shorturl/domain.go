@@ -1,9 +1,9 @@
 package shorturl
 
 import (
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/common"
 	modelShorturl "github.com/admpub/webx/application/model/official/shorturl"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
@@ -50,7 +50,7 @@ func DomainEdit(ctx echo.Context) error {
 			goto END
 		}
 		common.SendOk(ctx, ctx.T(`修改成功`))
-		return ctx.Redirect(handler.URLFor(`/official/short_url/domain_index`))
+		return ctx.Redirect(backend.URLFor(`/official/short_url/domain_index`))
 	} else if ctx.IsAjax() {
 		disabled := ctx.Query(`disabled`)
 		if len(disabled) > 0 {
@@ -96,5 +96,5 @@ func DomainDelete(ctx echo.Context) error {
 		return err
 	}
 	common.SendOk(ctx, ctx.T(`删除成功`))
-	return ctx.Redirect(handler.URLFor(`/official/short_url/domain_index`))
+	return ctx.Redirect(backend.URLFor(`/official/short_url/domain_index`))
 }
