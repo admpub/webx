@@ -5,20 +5,20 @@ package xtemplate
 
 import (
 	"database/sql"
+	"net/http"
 	"os"
 	"path"
 	"path/filepath"
 
-	assetfs "github.com/admpub/go-bindata-assetfs"
 	"github.com/webx-top/echo"
 )
 
-func (t *Template) Fix(ctx echo.Context, fs *assetfs.AssetFS, theme string, tmpl string) (string, bool) {
+func (t *Template) Fix(ctx echo.Context, fs http.FileSystem, theme string, tmpl string) (string, bool) {
 	return t.PathFixers.Fix(ctx, fs, t, theme, tmpl)
 }
 
 // Fix 模版路径修复
-func (p *PathFixers) Fix(ctx echo.Context, fs *assetfs.AssetFS, t *Template, theme string, tmpl string) (string, bool) {
+func (p *PathFixers) Fix(ctx echo.Context, fs http.FileSystem, t *Template, theme string, tmpl string) (string, bool) {
 	cacheKey := theme + `>` + tmpl
 	if mp, ok := t.cachedPathData.get(cacheKey); ok {
 		return mp.String, mp.Valid
@@ -56,7 +56,7 @@ func (p *PathFixers) Fix(ctx echo.Context, fs *assetfs.AssetFS, t *Template, the
 	return tmpl, false
 }
 
-func fsFileExists(fs *assetfs.AssetFS, tmplDir, dirName, subDir, tmpl string) (string, bool) {
+func fsFileExists(fs http.FileSystem, tmplDir, dirName, subDir, tmpl string) (string, bool) {
 	_tmpl := filepath.Join(tmplDir, subDir, tmpl)
 	fi, err := os.Stat(_tmpl)
 	if err == nil && !fi.IsDir() {

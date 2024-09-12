@@ -4,7 +4,6 @@
 package bindata
 
 import (
-	"path"
 	"strings"
 
 	"github.com/admpub/color"
@@ -14,13 +13,13 @@ import (
 	"github.com/webx-top/echo/middleware/render/driver"
 	"github.com/webx-top/echo/middleware/render/manager"
 
+	selfBackend "github.com/admpub/webx/application/initialize/backend"
+	"github.com/admpub/webx/application/initialize/frontend"
+	"github.com/admpub/webx/application/library/xtemplate"
 	"github.com/coscms/webcore/cmd/bootconfig"
 	"github.com/coscms/webcore/initialize/backend"
 	"github.com/coscms/webcore/library/bindata"
 	"github.com/coscms/webcore/library/modal"
-	selfBackend "github.com/admpub/webx/application/initialize/backend"
-	"github.com/admpub/webx/application/initialize/frontend"
-	"github.com/admpub/webx/application/library/xtemplate"
 )
 
 func Initialize(callbacks ...func()) {
@@ -34,32 +33,10 @@ func Initialize(callbacks ...func()) {
 	backend.AssetsDir = backend.DefaultAssetsDir
 	backend.TemplateDir = backend.DefaultTemplateDir
 	backend.RendererDo = func(renderer driver.Driver) {
-		selfBackend.TmplPathFixers.SetTmplDir(renderer.TmplDir()).SetHandler(func(c echo.Context, theme string, tmpl string) string {
-			var found bool
-			tmpl, found = frontend.TmplPathFixers.Fix(c, bindata.BackendTmplAssetFS, theme, tmpl)
-			if found {
-				return tmpl
-			}
-			return path.Join(`backend`, tmpl)
-		})
-		renderer.SetTmplPathFixer(func(c echo.Context, tmpl string) string {
-			var theme string
-			return selfBackend.TmplPathFixers.Handle(c, theme, tmpl)
-		})
+		frontend.TmplPathFixers.SetCustomFS(bindata.BackendTmplAssetFS).Register(renderer)
 	}
 	frontend.RendererDo = func(renderer driver.Driver) {
-		frontend.TmplPathFixers.SetTmplDir(renderer.TmplDir()).SetHandler(func(c echo.Context, theme string, tmpl string) string {
-			var found bool
-			tmpl, found = frontend.TmplPathFixers.Fix(c, bindata.FrontendTmplAssetFS, theme, tmpl)
-			if found {
-				return tmpl
-			}
-			return path.Join(`frontend`, tmpl)
-		})
-		renderer.SetTmplPathFixer(func(c echo.Context, tmpl string) string {
-			theme := c.Internal().String(`theme`, `default`)
-			return frontend.TmplPathFixers.Handle(c, theme, tmpl)
-		})
+		frontend.TmplPathFixers.SetEnableTheme(true).SetCustomFS(bindata.FrontendTmplAssetFS).Register(renderer)
 	}
 
 	if echo.String(`LABEL`) != `dev` { // 在开发环境下不启用，避免无法测试 bindata 真实效果

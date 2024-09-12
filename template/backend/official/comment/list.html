@@ -18,7 +18,7 @@
     <div class="col-md-12">
         <div class="block-flat no-margin-y">
             <span class="label label-default">{{"评论对象"|$.T}}</span>
-            <a style="font-weight:bold;font-size:18px" href="{{FrontendURL}}/{{$.Stored.targetDetailURL}}" target="_blank" data-toggle="tooltip" title="{{"点击打开详情页面"|$.T}}">
+            <a style="font-weight:bold;font-size:18px" href="{{FrontendURL}}/{{$.Stored.targetDetailURL}}" target="_blank" data-toggle="tooltip" title="{{`点击打开详情页面`|$.T}}">
                 {{$.Stored.data.Title|Default ($.T "无标题")}}
             </a>
             <i class="fa fa-share-square grey"></i>
@@ -32,14 +32,14 @@
           <div class="header" style="height:40px;line-height:30px;">
             <span class="pull-right">
                 <form class="form-horizontal" action="" id="search-form" method="GET">
-                    <input type="hidden" name="targetId" value="{{$.Form "targetId"}}">
-                    <input type="hidden" name="targetType" value="{{$.Form "targetType"}}">
+                    <input type="hidden" name="targetId" value="{{$.Form `targetId`}}">
+                    <input type="hidden" name="targetType" value="{{$.Form `targetType`}}">
 					<div class="input-group">{{$display := $.Form "display"}}
 						<span class="input-group-addon">{{"状态"|$.T}}</span>
 						<select name="display" class="form-control" id="display" onchange="$('#search-form').submit()">
 							<option value=""> - {{"不限"|$.T}} - </option>
-							<option value="Y" {{if eq $display "Y"}} selected{{end}}>{{"显示"|$.T}}</option>
-							<option value="N" {{if eq $display "N"}} selected{{end}}>{{"隐藏"|$.T}}</option>
+							<option value="Y" {{if eq $display `Y`}} selected{{end}}>{{"显示"|$.T}}</option>
+							<option value="N" {{if eq $display `N`}} selected{{end}}>{{"隐藏"|$.T}}</option>
 						</select>
 					</div>
 				</form>
@@ -58,8 +58,8 @@
             <div class="header">
                 <h3>{{"发表评论"|$.T}}</h3>
             </div>
-            <div class="content">
-                <form class="form-horizontal group-border-dashed" action="{{BackendURL}}/official/article/comment/add" id="comment-form" novalidate>{{$targetType := $.Form "targetType"}}
+            <div class="content padding">
+                <form class="form-horizontal" action="{{BackendURL}}/official/article/comment/add" id="comment-form" novalidate>
                     {{Include "official/comment/form"}}
                     <div class="form-group">
                         <div class="col-sm-12">
@@ -94,8 +94,14 @@ function showCommentFormModal(){
 function attachPostReplyModal(){
 $('#modal-comment-form .modal-footer .btn-primary').on('click',function(e){
     e.preventDefault();
-    var $form=$('#modal-comment-form-container');
-    $.post(BACKEND_URL+'/official/article/comment/add',$form.serializeArray(),function(r){
+    var $form=$('#modal-comment-form-container'), data=$form.serializeArray();
+    for(var i=0;i<data.length;i++){
+        if(data[i].name=='modal-contype'){
+            data[i].name='contype';
+            break;
+        }
+    }
+    $.post(BACKEND_URL+'/official/article/comment/add',data,function(r){
         if(r.Code>0){
             commentLoadList();
         }
@@ -105,12 +111,12 @@ $('#modal-comment-form .modal-footer .btn-primary').on('click',function(e){
 }
 function initCommentFormModal(){
     var h=$(window).height();
-    $('#modal-comment-form').css({height:h,width:'100%','max-width':'100%',left:0,top:0,transform:'none'});
+    $('#modal-comment-form').css({transform:'none'});
     var modalBodyHeight = h-150;
-    $('#modal-comment-form').find('.modal-body').css({"height":modalBodyHeight});
-    $('#modal-comment-form-input-container').html($('#tmpl-modal-comment-form').html());
-    $('#modal-content-container').css({"height":modalBodyHeight-100});
-    App.editor.switcher("#modal-comment-form-input-container input[name='contype']", '#modal-comment-content','tinymce');
+    $('#modal-comment-form').find('.modal-body').css({"height":modalBodyHeight})
+    $('#modal-comment-form-container').html($('#tmpl-modal-comment-form').html());
+    $('#modal-comment-content').css({"height":modalBodyHeight-100});
+    App.editor.switcher("#modal-comment-form-container input[name='modal-contype']", '#modal-comment-content','tinymce');
     attachPostReplyModal();
 }
 function commentReply(a){
@@ -147,7 +153,7 @@ function commentLoadList(){
 }
 $(function(){
 initCommentFormModal();
-App.editor.switcher("#comment-form-input-container input[name='contype']", '#comment-content','tinymce');
+App.editor.switcher("#comment-form input[name='contype']", '#comment-content','tinymce');
 $('#comment-form').on('submit',function(e){
     e.preventDefault();
     var $form=$(this);

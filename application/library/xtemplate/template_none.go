@@ -5,13 +5,14 @@ package xtemplate
 
 import (
 	"database/sql"
+	"net/http"
 	"os"
 	"path/filepath"
 
 	"github.com/webx-top/echo"
 )
 
-func (t *Template) Fix(ctx echo.Context, theme string, tmpl string) (string, bool) {
+func (t *Template) Fix(ctx echo.Context, _ http.FileSystem, theme string, tmpl string) (string, bool) {
 	return t.PathFixers.Fix(ctx, t, theme, tmpl)
 }
 

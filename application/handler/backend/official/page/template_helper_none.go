@@ -6,11 +6,11 @@ package page
 import (
 	"net/http"
 
-	xbindata "github.com/admpub/webx/application/library/bindata"
+	"github.com/admpub/webx/application/initialize/frontend"
 )
 
 func initTemplateDiskOtherFS() {
-	for _, tmplDir := range xbindata.FrontendTemplateDirs.TmplDirs() { // /***/template/frontend
+	for _, tmplDir := range frontend.TmplPathFixers.PathAliases.TmplDirs() { // /***/template/frontend
 		templateDiskFS.Register(http.Dir(tmplDir))
 	}
 }

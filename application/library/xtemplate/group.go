@@ -2,17 +2,23 @@ package xtemplate
 
 import (
 	"database/sql"
+	"net/http"
 	"os"
+	"path"
+	"path/filepath"
 	"sync"
 
 	"github.com/admpub/log"
+	"github.com/coscms/webcore/library/ntemplate"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/middleware/render/driver"
 )
 
-func New(kind string) *Template {
+func New(kind string, pa *ntemplate.PathAliases) *Template {
 	return &Template{
 		Kind:            kind,
 		PathFixers:      &PathFixers{},
+		PathAliases:     pa,
 		themeInfo:       &ThemeInfo{Name: `default`},
 		themeMutex:      sync.RWMutex{},
 		themeOnce:       sync.Once{},
@@ -34,9 +40,12 @@ type cachedPathData struct {
 }
 
 type Template struct {
-	handler PathHandle
-	TmplDir string
-	Kind    string
+	handler     PathHandle
+	TmplDir     string
+	Kind        string
+	PathAliases *ntemplate.PathAliases
+	customFS    http.FileSystem
+	enableTheme bool
 	*PathFixers
 	themeInfo       *ThemeInfo
 	themeMutex      sync.RWMutex
@@ -52,6 +61,16 @@ func (t *Template) SetTmplDir(tmplDir string) *Template {
 
 func (t *Template) SetStorer(storer Storer) *Template {
 	t.themeInfoStorer = storer
+	return t
+}
+
+func (t *Template) SetCustomFS(fs http.FileSystem) *Template {
+	t.customFS = fs
+	return t
+}
+
+func (t *Template) SetEnableTheme(enable bool) *Template {
+	t.enableTheme = enable
 	return t
 }
 
@@ -71,6 +90,56 @@ func (t *Template) Handle(ctx echo.Context, theme string, tmpl string) string {
 func (t *Template) SetPathFixers(h *PathFixers) *Template {
 	t.PathFixers = h
 	return t
+}
+
+func (t *Template) ApplyPathAliases() *Template {
+	t.PathAliases.Range(func(prefix, templateDir string) error {
+		log.Debug(`[`+t.Kind+`] `, `Template subfolder "`+prefix+`" is relocated to: `, templateDir)
+		t.AddDir(prefix, templateDir)
+		return nil
+	})
+	return t
+}
+
+func (t *Template) Register(renderer driver.Driver, watchOtherDirs ...string) {
+	hasCustomFS := t.customFS != nil
+	// 设置后台模板路径修正器的修正处理函数
+	t.SetTmplDir(renderer.TmplDir()).SetHandler(func(c echo.Context, theme string, tmpl string) string {
+		var found bool
+		tmpl, found = t.Fix(c, t.customFS, theme, tmpl)
+		if found {
+			return tmpl
+		}
+		if hasCustomFS {
+			return path.Join(t.Kind, tmpl)
+		}
+		if t.enableTheme && len(theme) > 0 {
+			tmpl = theme + `/` + tmpl
+		}
+		return filepath.Join(renderer.TmplDir(), tmpl)
+	})
+
+	// 将后台模板路径修正器与模板渲染引擎关联
+	renderer.SetTmplPathFixer(func(c echo.Context, tmpl string) string {
+		var theme string
+		if t.enableTheme {
+			theme = c.Internal().String(`theme`, `default`)
+		}
+		return t.Handle(c, theme, tmpl)
+	})
+
+	// 关注后台模板路径内的文件改动
+	if !hasCustomFS {
+		for _, watchOtherDir := range watchOtherDirs {
+			if len(watchOtherDir) > 0 {
+				renderer.Manager().AddWatchDir(watchOtherDir)
+			}
+		}
+		for _, templateDir := range t.PathAliases.TmplDirs() {
+			log.Debug(`[`+t.Kind+`] `, `Watch folder: `, templateDir)
+			renderer.Manager().AddWatchDir(templateDir)
+		}
+	}
 }
 
 func (t *Template) ThemeInfo(c echo.Context) *ThemeInfo {

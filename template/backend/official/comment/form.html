@@ -1,17 +1,21 @@
-{{- $prefix := $.Stored.String `comment.form.prefix` -}}
-<div class="form-group" id="{{$prefix}}comment-form-input-container">
+{{- $prefix := $.Get `comment.form.prefix` -}}
+<div class="form-group">
+    <div class="col-sm-12">
     {{- $targetType := $.Form `targetType` -}}
     {{- $contype := $.Form `contype` `markdown` -}}
     {{- range $.Stored.contypes -}}
     <div class="radio radio-primary radio-inline">
-        <input type="radio" value="{{.K}}" name="contype" id="{{$prefix}}comment-contype-{{.K}}"{{if eq $contype .K}} checked{{end}}>
+        <input type="radio" value="{{.K}}" name="{{$prefix}}contype" id="{{$prefix}}comment-contype-{{.K}}"{{if eq $contype .K}} checked{{end}}>
         <label for="{{$prefix}}comment-contype-{{.K}}">{{.V}}</label>
     </div>
     {{- end -}}
-    <div id="{{$prefix}}content-container">
-    <textarea id="{{$prefix}}comment-content" class="form-control" style="height:300px" name="content" action="{{BackendUploadURL ``}}" required></textarea>
     </div>
-    <input type="hidden" name="replyId" id="{{$prefix}}comment-reply-id" value="0">
-    <input type="hidden" name="targetType" id="{{$prefix}}comment-target-type" value="{{$targetType}}">
-    <input type="hidden" name="targetId" id="{{$prefix}}comment-target-id" value="{{if $.Stored.data}}{{$.Stored.data.Id}}{{end}}">
 </div>
+<div class="form-group">
+    <div class="col-sm-12">
+    <div><textarea id="{{$prefix}}comment-content" class="form-control" style="height:300px;" name="content" action="{{BackendUploadURL ``}}" required></textarea></div>
+    </div>
+</div>
+<input type="hidden" name="replyId" id="{{$prefix}}comment-reply-id" value="0">
+<input type="hidden" name="targetType" id="{{$prefix}}comment-target-type" value="{{$targetType}}">
+<input type="hidden" name="targetId" id="{{$prefix}}comment-target-id" value="{{if $.Stored.data}}{{$.Stored.data.Id}}{{end}}">

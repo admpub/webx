@@ -12,27 +12,26 @@ import (
 	"github.com/webx-top/echo/middleware/render/driver"
 
 	"github.com/admpub/log"
+	selfBackend "github.com/admpub/webx/application/initialize/backend"
+	"github.com/admpub/webx/application/initialize/frontend"
 	"github.com/coscms/webcore/cmd/bootconfig"
 	"github.com/coscms/webcore/initialize/backend"
 	"github.com/coscms/webcore/library/bindata"
 	"github.com/coscms/webcore/library/modal"
-	"github.com/coscms/webcore/library/ntemplate"
-	selfBackend "github.com/admpub/webx/application/initialize/backend"
-	"github.com/admpub/webx/application/initialize/frontend"
 )
 
 var (
+	// StaticOptions 前台static中间件选项
 	StaticOptions = &middleware.StaticOptions{
 		Root:   "",
 		Path:   "",
 		MaxAge: bootconfig.HTTPCacheMaxAge,
 	}
-	NgingDir             = `../nging`
-	WebxDir              = `../webx`
-	BackendTemplateDirs  = bindata.PathAliases        //{prefix:templateDir}
-	FrontendTemplateDirs = ntemplate.NewPathAliases() //{prefix:templateDir}
+	NgingDir = `../nging`
+	WebxDir  = `../webx`
 )
 
+// Initialize 后台和前台模板等素材初始化配置
 func Initialize(callbacks ...func()) {
 	backend.AssetsDir = filepath.Join(NgingDir, `public/assets`)
 	backend.TemplateDir = filepath.Join(NgingDir, `template/backend`)
@@ -40,44 +39,23 @@ func Initialize(callbacks ...func()) {
 	if len(callbacks) > 0 && callbacks[0] != nil {
 		callbacks[0]()
 	}
-	bindata.Initialize()
+	bindata.Initialize() // 后台素材初始化配置
 	backendTemplateDir, err := filepath.Abs(filepath.Join(WebxDir, `template/backend`))
 	if err != nil {
 		panic(err)
 	}
 	log.Debug(`[backend] `, `Template subfolder "official" is relocated to: `, backendTemplateDir)
 	selfBackend.TmplPathFixers.AddDir(`official`, backendTemplateDir)
-	BackendTemplateDirs.Range(func(prefix, templateDir string) error {
-		log.Debug(`[backend] `, `Template subfolder "`+prefix+`" is relocated to: `, templateDir)
-		selfBackend.TmplPathFixers.AddDir(prefix, templateDir)
-		return nil
-	})
+
+	// 应用后台模块的文件别名分组到后台模板路径修正器
+	selfBackend.TmplPathFixers.ApplyPathAliases()
+
 	backend.RendererDo = func(renderer driver.Driver) {
-		selfBackend.TmplPathFixers.SetTmplDir(renderer.TmplDir()).SetHandler(func(c echo.Context, theme string, tmpl string) string {
-			var found bool
-			tmpl, found = selfBackend.TmplPathFixers.Fix(c, theme, tmpl)
-			if found {
-				return tmpl
-			}
-			return filepath.Join(renderer.TmplDir(), tmpl)
-		})
-		renderer.SetTmplPathFixer(func(c echo.Context, tmpl string) string {
-			var theme string
-			return selfBackend.TmplPathFixers.Handle(c, theme, tmpl)
-		})
-		renderer.Manager().AddWatchDir(backendTemplateDir)
-		for _, templateDir := range BackendTemplateDirs.TmplDirs() {
-			log.Debug(`[backend] `, `Watch folder: `, templateDir)
-			renderer.Manager().AddWatchDir(templateDir)
-		}
+		selfBackend.TmplPathFixers.Register(renderer, backendTemplateDir)
 	}
 	modal.PathFixer = func(c echo.Context, file string) string {
-		fileNew := strings.TrimPrefix(file, backend.TemplateDir+`/`)
-		newPath, found := selfBackend.TmplPathFixers.Fix(c, ``, fileNew)
-		if found {
-			return newPath
-		}
-		return file
+		file = strings.TrimPrefix(file, backend.TemplateDir+`/`)
+		return selfBackend.TmplPathFixers.Handle(c, ``, file)
 	}
 	//注册前台静态资源
 	if len(StaticOptions.Root) == 0 {
@@ -91,32 +69,13 @@ func Initialize(callbacks ...func()) {
 	frontend.TemplateDir = filepath.Join(WebxDir, frontend.DefaultTemplateDir) //模板文件夹
 	frontend.AssetsDir = filepath.Join(WebxDir, frontend.DefaultAssetsDir)     //素材文件夹
 	frontendTemplateDir := filepath.Join(WebxDir, `template/frontend`)
-	FrontendTemplateDirs.AddAllSubdir(frontendTemplateDir)
-	//FrontendTemplateDirs.Add(`default`, frontendTemplateDir)
-	FrontendTemplateDirs.Range(func(prefix, templateDir string) error {
-		log.Debug(`[frontend] `, `Template subfolder "`+prefix+`" is relocated to: `, templateDir)
-		frontend.TmplPathFixers.AddDir(prefix, templateDir)
-		return nil
-	})
+	frontend.TmplPathFixers.PathAliases.AddAllSubdir(frontendTemplateDir)
+	//frontend.TmplPathFixers.PathAliases.Add(`default`, frontendTemplateDir)
+
+	// 应用前台模块的文件别名分组到前台模板路径修正器
+	frontend.TmplPathFixers.ApplyPathAliases()
+
 	frontend.RendererDo = func(renderer driver.Driver) {
-		frontend.TmplPathFixers.SetTmplDir(renderer.TmplDir()).SetHandler(func(c echo.Context, theme string, tmpl string) string {
-			var found bool
-			tmpl, found = frontend.TmplPathFixers.Fix(c, theme, tmpl)
-			if found {
-				return tmpl
-			}
-			if len(theme) > 0 {
-				tmpl = theme + `/` + tmpl
-			}
-			return filepath.Join(renderer.TmplDir(), tmpl)
-		})
-		renderer.SetTmplPathFixer(func(c echo.Context, tmpl string) string {
-			theme := c.Internal().String(`theme`, `default`)
-			return frontend.TmplPathFixers.Handle(c, theme, tmpl)
-		})
-		for _, templateDir := range FrontendTemplateDirs.TmplDirs() {
-			log.Debug(`[frontend] `, `Watch folder: `, templateDir)
-			renderer.Manager().AddWatchDir(templateDir)
-		}
+		frontend.TmplPathFixers.SetEnableTheme(true).Register(renderer)
 	}
 }

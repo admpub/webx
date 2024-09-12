@@ -1,3 +1,4 @@
+// 模板文件系统、模板文件路径修正器、模板主题配置
 package xtemplate
 
 import (

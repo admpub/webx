@@ -2,7 +2,7 @@
           <ul class="timeline with-avatar">
             {{range $k,$v := $.Stored.listData}}
             <li>
-            <img src="{{if $v.Extra.avatar}}{{AddSuffix $v.Extra.avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="fa" alt="{{$v.Extra.name}}">
+            <img src="{{if $v.Extra.avatar}}{{AddSuffix $v.Extra.avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="fa" alt="{{$v.Extra.name}}">
               <!-- <i class="fa fa-comment"></i> -->
               <!-- <span class="date"></span> -->
               <div class="content">
@@ -51,7 +51,7 @@
                 <div class="comment-foot clearfix" style="margin-top:10px">
                     <div class="pull-right sm-margin-left">
                         <div class="switch" data-on="success" data-on-label="显示" data-off-label="{{`隐藏`|$.T}}">
-                          <input type="checkbox" name="display[{{$v.Id}}]" data-comment-id="{{$v.Id}}"{{if eq $v.Display "Y"}} checked{{end}} value="Y" onchange="commentDisplay(this)">
+                          <input type="checkbox" name="display[{{$v.Id}}]" data-comment-id="{{$v.Id}}"{{if eq $v.Display `Y`}} checked{{end}} value="Y" onchange="commentDisplay(this)">
                         </div>
                     </div>
                     <div class="pull-right sm-margin-left">

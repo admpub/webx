@@ -31,7 +31,7 @@
 					<tbody class="no-border-y" id="tbody-template-list">
                         {{range $k,$v := $.Stored.listData}}
 						<tr>
-							<td class="no-padding-x">
+							<td>
 								<div style="width:100px;height:100px;overflow:hidden;">
 									{{- if $v.Embed -}}
 									<span class="label label-primary" style="position:absolute">{{`内置`|$.T}}</span>
