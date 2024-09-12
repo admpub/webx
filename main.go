@@ -42,6 +42,7 @@ import (
 	"github.com/coscms/webcore/cmd/bootconfig"
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/license"
+	_ "github.com/coscms/webfront"
 
 	// register
 
