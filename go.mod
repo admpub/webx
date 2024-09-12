@@ -69,8 +69,8 @@ require (
 	github.com/admpub/go-lock v1.3.0
 	github.com/admpub/go-zinc v0.0.8
 	github.com/admpub/goth v0.0.4
-	github.com/admpub/nging/v5 v5.3.3-pre40
-	github.com/coscms/webcore v0.0.1
+	github.com/admpub/nging/v5 v5.3.3-pre41
+	github.com/coscms/webcore v0.0.2
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/martinlindhe/base36 v1.1.1
 	github.com/meilisearch/meilisearch-go v0.27.2
