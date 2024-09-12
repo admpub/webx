@@ -6,12 +6,12 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/webx/application/initialize/frontend"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelComment "github.com/admpub/webx/application/model/official/comment"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/initialize/frontend"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelComment "github.com/coscms/webfront/model/official/comment"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func ArticleCommentAdd(c echo.Context) (err error) {

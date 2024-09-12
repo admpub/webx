@@ -6,7 +6,7 @@ import (
 	"github.com/webx-top/echo"
 
 	"github.com/admpub/errors"
-	modelShorturl "github.com/admpub/webx/application/model/official/shorturl"
+	modelShorturl "github.com/coscms/webfront/model/official/shorturl"
 )
 
 // Find 访问短网址

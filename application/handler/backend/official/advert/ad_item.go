@@ -8,9 +8,9 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/formfilter"
 
-	modelAdvert "github.com/admpub/webx/application/model/official/advert"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	modelAdvert "github.com/coscms/webfront/model/official/advert"
 )
 
 func Index(ctx echo.Context) error {

@@ -28,9 +28,9 @@ import (
 	"github.com/webx-top/echo/formfilter"
 	"github.com/webx-top/echo/param"
 
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func formFilter() echo.FormDataFilter {

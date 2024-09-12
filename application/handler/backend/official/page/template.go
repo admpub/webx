@@ -24,8 +24,8 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/webx/application/initialize/frontend"
-	"github.com/admpub/webx/application/library/xtemplate"
+	"github.com/coscms/webfront/initialize/frontend"
+	"github.com/coscms/webfront/library/xtemplate"
 )
 
 func TemplatePreviewImage(ctx echo.Context) error {

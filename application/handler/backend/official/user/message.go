@@ -6,12 +6,12 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 
-	xschema "github.com/admpub/webx/application/dbschema"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/dbschema"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/model"
+	xschema "github.com/coscms/webfront/dbschema"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 // MessageInbox 用户消息收件箱

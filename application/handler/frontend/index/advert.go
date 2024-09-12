@@ -1,7 +1,7 @@
 package index
 
 import (
-	modelAdvert "github.com/admpub/webx/application/model/official/advert"
+	modelAdvert "github.com/coscms/webfront/model/official/advert"
 	"github.com/webx-top/echo"
 )
 

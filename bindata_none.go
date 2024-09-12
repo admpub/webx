@@ -6,7 +6,7 @@ package main
 import (
 	"github.com/coscms/webcore/cmd/bootconfig"
 	"github.com/coscms/webcore/initialize/backend"
-	"github.com/admpub/webx/application/library/bindata"
+	"github.com/coscms/webfront/library/bindata"
 )
 
 func initEnv() {

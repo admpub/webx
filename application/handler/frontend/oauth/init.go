@@ -1,10 +1,10 @@
 package oauth
 
 import (
-	"github.com/admpub/webx/application/initialize/frontend"
-	"github.com/admpub/webx/application/library/apiutils"
-	xMW "github.com/admpub/webx/application/middleware"
 	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webfront/initialize/frontend"
+	"github.com/coscms/webfront/library/apiutils"
+	xMW "github.com/coscms/webfront/middleware"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/handler/oauth2"
 )

@@ -8,10 +8,10 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/formfilter"
 
-	modelAgent "github.com/admpub/webx/application/model/official/agent"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	modelAgent "github.com/coscms/webfront/model/official/agent"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func productFormFilter() echo.FormDataFilter {

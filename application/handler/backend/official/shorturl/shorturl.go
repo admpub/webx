@@ -6,10 +6,10 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/webx/application/dbschema"
-	modelShorturl "github.com/admpub/webx/application/model/official/shorturl"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/dbschema"
+	modelShorturl "github.com/coscms/webfront/model/official/shorturl"
 )
 
 func applyFormData(ctx echo.Context, murl *dbschema.OfficialShortUrl) error {

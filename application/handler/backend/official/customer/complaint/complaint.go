@@ -7,7 +7,7 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func Index(ctx echo.Context) error {

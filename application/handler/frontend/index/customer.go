@@ -6,13 +6,13 @@ import (
 	"github.com/webx-top/echo/middleware/session"
 
 	"github.com/admpub/log"
-	"github.com/admpub/webx/application/dbschema"
-	"github.com/admpub/webx/application/initialize/frontend"
-	"github.com/admpub/webx/application/library/top"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webfront/dbschema"
+	"github.com/coscms/webfront/initialize/frontend"
+	"github.com/coscms/webfront/library/top"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 // CookieMaxAge 允许设置的Cookie最大有效时长(单位:秒)

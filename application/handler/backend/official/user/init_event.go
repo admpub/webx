@@ -5,7 +5,7 @@ import (
 	"github.com/webx-top/echo"
 
 	dbschemaNG "github.com/coscms/webcore/dbschema"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func init() {

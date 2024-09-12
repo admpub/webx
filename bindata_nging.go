@@ -5,7 +5,7 @@ package main
 
 import (
 	"github.com/coscms/webcore/library/bindata"
-	selfBin "github.com/admpub/webx/application/library/bindata"
+	selfBin "github.com/coscms/webfront/library/bindata"
 )
 
 func initEnv() {

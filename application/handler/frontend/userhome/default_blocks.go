@@ -1,14 +1,14 @@
 package userhome
 
 import (
-	"github.com/coscms/webcore/registry/dashboard"
 	userArticle "github.com/admpub/webx/application/handler/frontend/article/user"
 	"github.com/admpub/webx/application/handler/frontend/user"
 	"github.com/admpub/webx/application/handler/frontend/user/profile"
-	"github.com/admpub/webx/application/middleware"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
-	registryUserhome "github.com/admpub/webx/application/registry/userhome"
+	"github.com/coscms/webcore/registry/dashboard"
+	"github.com/coscms/webfront/middleware"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
+	registryUserhome "github.com/coscms/webfront/registry/userhome"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 )

@@ -11,10 +11,10 @@ import (
 
 	"github.com/admpub/events"
 	"github.com/admpub/log"
-	"github.com/coscms/webcore/cmd/bootconfig"
-	"github.com/admpub/webx/application/initialize/frontend"
-	"github.com/admpub/webx/application/library/xtemplate"
 	formConfig "github.com/coscms/forms/config"
+	"github.com/coscms/webcore/cmd/bootconfig"
+	"github.com/coscms/webfront/initialize/frontend"
+	"github.com/coscms/webfront/library/xtemplate"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware/bindata"
 )

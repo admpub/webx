@@ -3,7 +3,7 @@ package index
 import (
 	"github.com/admpub/nging/v5/application/handler/manager"
 	uploadLibrary "github.com/coscms/webcore/library/upload"
-	"github.com/admpub/webx/application/initialize/frontend"
+	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/webx-top/echo"
 )
 

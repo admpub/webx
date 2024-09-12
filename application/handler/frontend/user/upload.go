@@ -13,13 +13,13 @@ import (
 
 	"github.com/admpub/nging/v5/application/handler/manager"
 	"github.com/admpub/nging/v5/application/handler/manager/file"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/config"
 	uploadLibrary "github.com/coscms/webcore/library/upload"
 	"github.com/coscms/webcore/registry/upload"
 	"github.com/coscms/webcore/registry/upload/checker"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func setUploadURL(ctx echo.Context) error {

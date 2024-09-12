@@ -3,11 +3,11 @@ package userhome
 import (
 	"strings"
 
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
-	registryUserhome "github.com/admpub/webx/application/registry/userhome"
-	"github.com/admpub/webx/application/transform/transformCustomer"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/registry/dashboard"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
+	registryUserhome "github.com/coscms/webfront/registry/userhome"
+	"github.com/coscms/webfront/transform/transformCustomer"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"

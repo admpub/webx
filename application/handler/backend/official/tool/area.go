@@ -5,9 +5,9 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
 
-	"github.com/admpub/webx/application/model/official"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/model/official"
 )
 
 func AreaIndex(ctx echo.Context) error {

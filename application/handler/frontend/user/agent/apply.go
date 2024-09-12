@@ -1,8 +1,8 @@
 package agent
 
 import (
-	xMW "github.com/admpub/webx/application/middleware"
-	modelAgent "github.com/admpub/webx/application/model/official/agent"
+	xMW "github.com/coscms/webfront/middleware"
+	modelAgent "github.com/coscms/webfront/model/official/agent"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 )

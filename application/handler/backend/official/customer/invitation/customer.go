@@ -4,8 +4,8 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/common"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func CustomerList(ctx echo.Context) error {

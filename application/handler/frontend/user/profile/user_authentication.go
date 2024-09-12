@@ -1,10 +1,10 @@
 package profile
 
 import (
-	"github.com/coscms/webcore/library/common"
 	"github.com/admpub/webx/application/handler/frontend/user/binding"
-	xMW "github.com/admpub/webx/application/middleware"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/common"
+	xMW "github.com/coscms/webfront/middleware"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/echo"
 )
 

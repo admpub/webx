@@ -9,10 +9,10 @@ import (
 	"github.com/webx-top/echo/formfilter"
 	"github.com/webx-top/echo/param"
 
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
-	modelLevel "github.com/admpub/webx/application/model/official/level"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
+	modelLevel "github.com/coscms/webfront/model/official/level"
 )
 
 func Index(ctx echo.Context) error {

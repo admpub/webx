@@ -4,9 +4,9 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	xMW "github.com/admpub/webx/application/middleware"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/common"
+	xMW "github.com/coscms/webfront/middleware"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func Settings(ctx echo.Context) error {

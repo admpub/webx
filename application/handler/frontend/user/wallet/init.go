@@ -1,7 +1,7 @@
 package wallet
 
 import (
-	"github.com/admpub/webx/application/initialize/frontend"
+	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/webx-top/echo"
 )
 

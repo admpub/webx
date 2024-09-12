@@ -23,10 +23,10 @@ import (
 	"github.com/coscms/webcore/registry/upload"
 
 	xOAuth "github.com/admpub/webx/application/handler/frontend/oauth"
-	xcache "github.com/admpub/webx/application/library/cache"
-	cfgIPFilter "github.com/admpub/webx/application/library/ipfilter"
-	modelApi "github.com/admpub/webx/application/model/official/api"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	xcache "github.com/coscms/webfront/library/cache"
+	cfgIPFilter "github.com/coscms/webfront/library/ipfilter"
+	modelApi "github.com/coscms/webfront/model/official/api"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 
 	modelDBMgr "github.com/nging-plugins/dbmanager/application/model"
 )

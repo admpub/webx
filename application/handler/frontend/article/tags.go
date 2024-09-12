@@ -1,9 +1,9 @@
 package article
 
 import (
-	"github.com/admpub/webx/application/dbschema"
-	"github.com/admpub/webx/application/library/logic/articlelogic"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/dbschema"
+	"github.com/coscms/webfront/library/logic/articlelogic"
 	"github.com/webx-top/echo"
 )
 

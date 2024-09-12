@@ -3,7 +3,7 @@ package manager
 import (
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/webx/application/initialize/frontend"
+	"github.com/coscms/webfront/initialize/frontend"
 )
 
 func FrontendReboot(ctx echo.Context) error {

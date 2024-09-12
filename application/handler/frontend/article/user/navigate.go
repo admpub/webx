@@ -2,11 +2,11 @@ package user
 
 import (
 	"github.com/coscms/webcore/registry/navigate"
-	userNav "github.com/admpub/webx/application/handler/frontend/user/navigate"
+	"github.com/coscms/webfront/initialize/frontend/usernav"
 )
 
 func init() {
-	userNav.LeftNavigate.Add(-1, &navigate.Item{
+	usernav.LeftNavigate.Add(-1, &navigate.Item{
 		Display: true,
 		Name:    `我的文章`,
 		Action:  `article`,

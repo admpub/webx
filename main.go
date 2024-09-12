@@ -45,8 +45,7 @@ import (
 
 	// register
 
-	_ "github.com/admpub/webx/application"
-	"github.com/admpub/webx/application/initialize/initnavigate"
+	"github.com/admpub/webx/application"
 
 	//_ "github.com/nging-plugins/open/application/library/oauth2server/initialize"
 
@@ -55,7 +54,7 @@ import (
 
 	"github.com/admpub/webx/application/handler/frontend/article"
 	"github.com/admpub/webx/application/handler/frontend/index"
-	"github.com/admpub/webx/application/version"
+	"github.com/coscms/webfront/version"
 
 	// module
 	"github.com/admpub/nging/v5/application/handler/cloud"
@@ -98,7 +97,7 @@ func main() {
 	if com.FileExists(`config/install.sql`) {
 		os.Rename(`config/install.sql`, `config/install.sql.`+time.Now().Format(`20060102150405.000`))
 	}
-	initnavigate.Initialize()
+	application.Initialize()
 	webcore.ReadyStart(initEnv, &task.Module, &cloud.Module, &dbmanager.Module)
 }
 

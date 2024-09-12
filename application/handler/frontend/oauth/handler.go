@@ -11,9 +11,9 @@ import (
 
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/model"
-	"github.com/admpub/webx/application/library/oauthutils"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webfront/library/oauthutils"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 // 通过oauth登录第三方网站成功之后的处理

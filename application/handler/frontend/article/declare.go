@@ -4,8 +4,8 @@ import (
 	"github.com/webx-top/echo"
 
 	"github.com/coscms/webcore/library/common"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	"github.com/admpub/webx/application/model/official"
+	"github.com/coscms/webfront/middleware/sessdata"
+	"github.com/coscms/webfront/model/official"
 )
 
 // ClickFlow 表态

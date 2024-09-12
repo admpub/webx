@@ -1,9 +1,9 @@
 package tags
 
 import (
-	"github.com/admpub/webx/application/model/official"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/model/official"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"

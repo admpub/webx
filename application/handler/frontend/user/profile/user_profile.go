@@ -3,8 +3,8 @@ package profile
 import (
 	"github.com/webx-top/echo"
 
-	mw "github.com/admpub/webx/application/middleware"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	mw "github.com/coscms/webfront/middleware"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func Profile(c echo.Context) error {

@@ -1,11 +1,11 @@
 package oauth
 
 import (
-	"github.com/coscms/webcore/library/config"
 	indexHanlder "github.com/admpub/webx/application/handler/frontend/index"
-	wechatmp "github.com/admpub/webx/application/library/thirdparty/login/wechat/mp"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webcore/library/config"
+	wechatmp "github.com/coscms/webfront/library/thirdparty/login/wechat/mp"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/echo"
 	stdCode "github.com/webx-top/echo/code"
 )

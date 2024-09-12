@@ -7,8 +7,8 @@ import (
 
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
-	"github.com/admpub/webx/application/library/top"
-	"github.com/admpub/webx/application/middleware/sessdata"
+	"github.com/coscms/webfront/library/top"
+	"github.com/coscms/webfront/middleware/sessdata"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"

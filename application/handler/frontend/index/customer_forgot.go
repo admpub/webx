@@ -3,13 +3,13 @@ package index
 import (
 	"net/url"
 
-	"github.com/admpub/webx/application/handler/frontend/user/profile"
-	"github.com/admpub/webx/application/initialize/frontend"
-	"github.com/admpub/webx/application/library/resetpassword"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/model"
+	"github.com/coscms/webfront/initialize/frontend"
+	"github.com/coscms/webfront/library/resetpassword"
+	"github.com/coscms/webfront/library/sendmsg"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -200,7 +200,7 @@ func Forgot(c echo.Context) error {
 		signInURL = sessdata.URLFor(`/sign_in`)
 	}
 	c.Set(`signInURL`, signInURL)
-	c.Set(`verifyCodeLength`, profile.VerifyCodeLength())
+	c.Set(`verifyCodeLength`, sendmsg.VerifyCodeLength())
 	c.Set(`recvTypes`, recvTypes)
 	c.Set(`recvType`, recvType)
 	return c.Render(tmpl, common.Err(c, err))

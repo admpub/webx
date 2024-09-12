@@ -7,8 +7,8 @@ import (
 	_ "github.com/admpub/webx/application/handler/frontend/user/membership"
 	_ "github.com/admpub/webx/application/handler/frontend/user/profile"
 	_ "github.com/admpub/webx/application/handler/frontend/user/wallet"
-	"github.com/admpub/webx/application/initialize/frontend"
-	xMW "github.com/admpub/webx/application/middleware"
+	"github.com/coscms/webfront/initialize/frontend"
+	xMW "github.com/coscms/webfront/middleware"
 )
 
 func init() {

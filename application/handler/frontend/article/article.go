@@ -7,16 +7,16 @@ import (
 	stdCode "github.com/webx-top/echo/code"
 
 	"github.com/admpub/log"
-	"github.com/admpub/webx/application/dbschema"
-	"github.com/admpub/webx/application/library/frontend"
-	"github.com/admpub/webx/application/library/top"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelAuthor "github.com/admpub/webx/application/model/author"
-	"github.com/admpub/webx/application/model/official"
-	modelArticle "github.com/admpub/webx/application/model/official/article"
-	modelComment "github.com/admpub/webx/application/model/official/comment"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/dbschema"
+	"github.com/coscms/webfront/library/frontend"
+	"github.com/coscms/webfront/library/top"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelAuthor "github.com/coscms/webfront/model/author"
+	"github.com/coscms/webfront/model/official"
+	modelArticle "github.com/coscms/webfront/model/official/article"
+	modelComment "github.com/coscms/webfront/model/official/comment"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func Detail(c echo.Context) error {

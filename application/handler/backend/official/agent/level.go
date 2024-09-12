@@ -9,10 +9,10 @@ import (
 	"github.com/webx-top/echo/formfilter"
 	"github.com/webx-top/echo/param"
 
-	modelAgent "github.com/admpub/webx/application/model/official/agent"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	modelAgent "github.com/coscms/webfront/model/official/agent"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func levelFormFilter(options ...formfilter.Options) echo.FormDataFilter {

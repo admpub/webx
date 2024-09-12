@@ -1,7 +1,6 @@
-package initnavigate
+package application
 
 import (
-	"github.com/coscms/webcore/registry/navigate"
 	"github.com/admpub/webx/application/handler/backend/official/advert"
 	"github.com/admpub/webx/application/handler/backend/official/agent"
 	"github.com/admpub/webx/application/handler/backend/official/api"
@@ -10,6 +9,8 @@ import (
 	"github.com/admpub/webx/application/handler/backend/official/page"
 	"github.com/admpub/webx/application/handler/backend/official/shorturl"
 	"github.com/admpub/webx/application/handler/backend/official/tags"
+	"github.com/coscms/webcore/registry/navigate"
+	_ "github.com/coscms/webfront/initialize"
 )
 
 func Initialize() {

@@ -5,11 +5,11 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/webx/application/dbschema"
 	hanlderArticle "github.com/admpub/webx/application/handler/backend/official/article"
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelArticle "github.com/admpub/webx/application/model/official/article"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/dbschema"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelArticle "github.com/coscms/webfront/model/official/article"
 )
 
 func ListByCustomer(ctx echo.Context, customer *dbschema.OfficialCustomer) error {

@@ -7,10 +7,10 @@ import (
 	"github.com/webx-top/db/lib/sqlbuilder"
 	"github.com/webx-top/echo"
 
-	modelArticle "github.com/admpub/webx/application/model/official/article"
-	modelComment "github.com/admpub/webx/application/model/official/comment"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	modelArticle "github.com/coscms/webfront/model/official/article"
+	modelComment "github.com/coscms/webfront/model/official/comment"
 )
 
 func Index(ctx echo.Context) error {

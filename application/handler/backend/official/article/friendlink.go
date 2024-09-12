@@ -5,10 +5,10 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/webx/application/listener/upload/friendlink"
-	"github.com/admpub/webx/application/model/official"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/listener/upload/friendlink"
+	"github.com/coscms/webfront/model/official"
 )
 
 func FriendlinkFormFilter(options ...formfilter.Options) echo.FormDataFilter {

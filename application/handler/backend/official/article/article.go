@@ -8,11 +8,11 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
-	"github.com/admpub/webx/application/model/official"
-	modelArticle "github.com/admpub/webx/application/model/official/article"
-	modelComment "github.com/admpub/webx/application/model/official/comment"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/model/official"
+	modelArticle "github.com/coscms/webfront/model/official/article"
+	modelComment "github.com/coscms/webfront/model/official/comment"
 )
 
 func articleFormFilter(options ...formfilter.Options) echo.FormDataFilter {

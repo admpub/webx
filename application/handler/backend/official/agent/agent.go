@@ -7,7 +7,7 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
-	modelAgent "github.com/admpub/webx/application/model/official/agent"
+	modelAgent "github.com/coscms/webfront/model/official/agent"
 )
 
 func formFilter(options ...formfilter.Options) echo.FormDataFilter {

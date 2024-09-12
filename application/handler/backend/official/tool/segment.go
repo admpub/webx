@@ -6,11 +6,11 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/webx/application/library/search/segment"
+	"github.com/coscms/webfront/library/search/segment"
 
-	//_ "github.com/admpub/webx/application/library/search/segment/gojieba"
-	//_ "github.com/admpub/webx/application/library/search/segment/jiebago"
-	_ "github.com/admpub/webx/application/library/search/segment/sego"
+	//_ "github.com/coscms/webfront/library/search/segment/gojieba"
+	//_ "github.com/coscms/webfront/library/search/segment/jiebago"
+	_ "github.com/coscms/webfront/library/search/segment/sego"
 )
 
 var SegmentMode = echo.NewKVData()

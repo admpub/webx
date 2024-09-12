@@ -6,8 +6,9 @@ import (
 	"github.com/webx-top/echo"
 
 	"github.com/coscms/webcore/library/common"
-	xMW "github.com/admpub/webx/application/middleware"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webfront/library/sendmsg"
+	xMW "github.com/coscms/webfront/middleware"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 type StepID int
@@ -116,7 +117,7 @@ func Password(c echo.Context) error {
 			}
 		case `email`:
 			if stepID == StepSend {
-				err = EmailSend(c, m, `modify-password`)
+				err = sendmsg.EmailSend(c, m, `modify-password`)
 				if err != nil {
 					return err
 				}
@@ -136,7 +137,7 @@ func Password(c echo.Context) error {
 			}
 		case `mobile`:
 			if stepID == StepSend {
-				err = MobileSend(c, m, `modify-password`)
+				err = sendmsg.MobileSend(c, m, `modify-password`)
 				if err != nil {
 					return err
 				}

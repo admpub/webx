@@ -1,10 +1,10 @@
 package wallet
 
 import (
-	"github.com/admpub/webx/application/dbschema"
-	xMW "github.com/admpub/webx/application/middleware"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/dbschema"
+	xMW "github.com/coscms/webfront/middleware"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory/pagination"
 	"github.com/webx-top/echo"

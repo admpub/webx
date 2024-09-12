@@ -8,8 +8,8 @@ import (
 	"github.com/webx-top/echo"
 
 	"github.com/coscms/webcore/registry/dashboard"
-	"github.com/admpub/webx/application/dbschema"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
+	"github.com/coscms/webfront/dbschema"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func init() {

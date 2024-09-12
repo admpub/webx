@@ -5,11 +5,11 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
-	xMW "github.com/admpub/webx/application/middleware"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
-	registryWallet "github.com/admpub/webx/application/registry/wallet"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
+	xMW "github.com/coscms/webfront/middleware"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
+	registryWallet "github.com/coscms/webfront/registry/wallet"
 )
 
 func Recharge(ctx echo.Context) error {

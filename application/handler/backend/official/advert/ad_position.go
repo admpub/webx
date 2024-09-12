@@ -5,9 +5,9 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	modelAdvert "github.com/admpub/webx/application/model/official/advert"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	modelAdvert "github.com/coscms/webfront/model/official/advert"
 )
 
 func PositionIndex(ctx echo.Context) error {

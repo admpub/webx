@@ -22,11 +22,11 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/webx/application/library/xrole"
-	"github.com/admpub/webx/application/library/xrole/xroleutils"
-	modelCustomer "github.com/admpub/webx/application/model/official/customer"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/library/xrole"
+	"github.com/coscms/webfront/library/xrole/xroleutils"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func Index(ctx echo.Context) error {

@@ -5,10 +5,10 @@ import (
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
-	"github.com/admpub/webx/application/library/sensitive"
-	modelSensitive "github.com/admpub/webx/application/model/official/sensitive"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/library/sensitive"
+	modelSensitive "github.com/coscms/webfront/model/official/sensitive"
 )
 
 func sensitiveIndex(ctx echo.Context) error {

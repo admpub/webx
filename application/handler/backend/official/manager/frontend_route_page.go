@@ -9,9 +9,9 @@ import (
 	"github.com/webx-top/echo/code"
 
 	"github.com/admpub/webx/application/handler/backend/official/page"
-	"github.com/admpub/webx/application/model/official"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/model/official"
 )
 
 func FrontendRoutePage(ctx echo.Context) error {

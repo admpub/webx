@@ -3,10 +3,10 @@ package article
 import (
 	"strings"
 
-	"github.com/admpub/webx/application/middleware/sessdata"
-	modelArticle "github.com/admpub/webx/application/model/official/article"
-	modelComment "github.com/admpub/webx/application/model/official/comment"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelArticle "github.com/coscms/webfront/model/official/article"
+	modelComment "github.com/coscms/webfront/model/official/comment"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 )

@@ -1,9 +1,9 @@
 package shorturl
 
 import (
-	modelShorturl "github.com/admpub/webx/application/model/official/shorturl"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	modelShorturl "github.com/coscms/webfront/model/official/shorturl"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"

@@ -6,7 +6,7 @@ package page
 import (
 	"net/http"
 
-	"github.com/admpub/webx/application/initialize/frontend"
+	"github.com/coscms/webfront/initialize/frontend"
 )
 
 func initTemplateDiskOtherFS() {

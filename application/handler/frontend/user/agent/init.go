@@ -4,8 +4,8 @@ import (
 	"github.com/webx-top/echo"
 
 	_ "github.com/admpub/webx/application/handler/frontend/user/wallet"
-	"github.com/admpub/webx/application/initialize/frontend"
-	xMW "github.com/admpub/webx/application/middleware"
+	"github.com/coscms/webfront/initialize/frontend"
+	xMW "github.com/coscms/webfront/middleware"
 )
 
 func init() {
