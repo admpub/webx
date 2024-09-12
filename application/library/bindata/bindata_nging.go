@@ -33,7 +33,7 @@ func Initialize(callbacks ...func()) {
 	backend.AssetsDir = backend.DefaultAssetsDir
 	backend.TemplateDir = backend.DefaultTemplateDir
 	backend.RendererDo = func(renderer driver.Driver) {
-		frontend.TmplPathFixers.SetCustomFS(bindata.BackendTmplAssetFS).Register(renderer)
+		selfBackend.TmplPathFixers.SetCustomFS(bindata.BackendTmplAssetFS).Register(renderer)
 	}
 	frontend.RendererDo = func(renderer driver.Driver) {
 		frontend.TmplPathFixers.SetEnableTheme(true).SetCustomFS(bindata.FrontendTmplAssetFS).Register(renderer)

@@ -48,7 +48,7 @@ func Initialize(callbacks ...func()) {
 	selfBackend.TmplPathFixers.AddDir(`official`, backendTemplateDir)
 
 	// 应用后台模块的文件别名分组到后台模板路径修正器
-	selfBackend.TmplPathFixers.ApplyPathAliases()
+	selfBackend.TmplPathFixers.ApplyAliases()
 
 	backend.RendererDo = func(renderer driver.Driver) {
 		selfBackend.TmplPathFixers.Register(renderer, backendTemplateDir)
@@ -73,7 +73,7 @@ func Initialize(callbacks ...func()) {
 	//frontend.TmplPathFixers.PathAliases.Add(`default`, frontendTemplateDir)
 
 	// 应用前台模块的文件别名分组到前台模板路径修正器
-	frontend.TmplPathFixers.ApplyPathAliases()
+	frontend.TmplPathFixers.ApplyAliases()
 
 	frontend.RendererDo = func(renderer driver.Driver) {
 		frontend.TmplPathFixers.SetEnableTheme(true).Register(renderer)

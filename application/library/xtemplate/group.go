@@ -15,6 +15,9 @@ import (
 )
 
 func New(kind string, pa *ntemplate.PathAliases) *Template {
+	if pa == nil {
+		pa = ntemplate.NewPathAliases()
+	}
 	return &Template{
 		Kind:            kind,
 		PathFixers:      &PathFixers{},
@@ -92,13 +95,31 @@ func (t *Template) SetPathFixers(h *PathFixers) *Template {
 	return t
 }
 
-func (t *Template) ApplyPathAliases() *Template {
+func (t *Template) ApplyAliases() *Template {
 	t.PathAliases.Range(func(prefix, templateDir string) error {
 		log.Debug(`[`+t.Kind+`] `, `Template subfolder "`+prefix+`" is relocated to: `, templateDir)
 		t.AddDir(prefix, templateDir)
 		return nil
 	})
 	return t
+}
+
+func (t *Template) AddAlias(alias, tmplDir string) *Template {
+	t.PathAliases.Add(alias, tmplDir)
+	return t
+}
+
+func (t *Template) AddAliasFromAllSubdir(tmplDir string) *Template {
+	t.PathAliases.AddAllSubdir(tmplDir)
+	return t
+}
+
+func (t *Template) TmplDirs() []string {
+	return t.PathAliases.TmplDirs()
+}
+
+func (t *Template) Aliases() []string {
+	return t.PathAliases.Aliases()
 }
 
 func (t *Template) Register(renderer driver.Driver, watchOtherDirs ...string) {

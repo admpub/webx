@@ -10,7 +10,7 @@ import (
 )
 
 func initTemplateDiskOtherFS() {
-	for _, tmplDir := range frontend.TmplPathFixers.PathAliases.TmplDirs() { // /***/template/frontend
+	for _, tmplDir := range frontend.TmplPathFixers.TmplDirs() { // /***/template/frontend
 		templateDiskFS.Register(http.Dir(tmplDir))
 	}
 }
