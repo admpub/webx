@@ -14,11 +14,11 @@ import (
 	"github.com/webx-top/echo/middleware/render/driver"
 )
 
-func New(kind string, pa *ntemplate.PathAliases) *Template {
+func New(kind string, pa *ntemplate.PathAliases, registerToGroup ...bool) *Template {
 	if pa == nil {
 		pa = ntemplate.NewPathAliases()
 	}
-	return &Template{
+	t := &Template{
 		Kind:            kind,
 		PathFixers:      &PathFixers{},
 		PathAliases:     pa,
@@ -28,6 +28,10 @@ func New(kind string, pa *ntemplate.PathAliases) *Template {
 		cachedPathData:  newCachedPathData(),
 		themeInfoStorer: NewFileStore(kind),
 	}
+	if len(registerToGroup) > 0 && registerToGroup[0] {
+		Register(kind, t)
+	}
+	return t
 }
 
 func newCachedPathData() *cachedPathData {
