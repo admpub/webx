@@ -7,8 +7,8 @@ import (
 )
 
 // TmplPathFixers 前台模板文件路径修正器
-var TmplPathFixers = xtemplate.New(`frontend`, ntemplate.NewPathAliases())
+var TmplPathFixers = xtemplate.New(xtemplate.KindFrontend, ntemplate.NewPathAliases())
 
 func init() {
-	xtemplate.Register(`frontend`, TmplPathFixers)
+	xtemplate.Register(xtemplate.KindFrontend, TmplPathFixers)
 }

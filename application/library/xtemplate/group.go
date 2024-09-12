@@ -232,3 +232,11 @@ func Get(group string) *Template {
 	}
 	return nil
 }
+
+func Backend() *Template {
+	return Get(KindBackend)
+}
+
+func Frontend() *Template {
+	return Get(KindFrontend)
+}
