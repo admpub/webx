@@ -1,4 +1,4 @@
-body{background-color: black !important;}
+body{background-color: black !important;}.headpanel{background-color:#323843 !important;}
 .card{background-color: #1a1d23 !important;color: #eee !important;border-color: #333;}
 .card .card-header,
 .card .card-footer,.bg-transparent,
@@ -35,7 +35,7 @@ nav .page-item.disabled .page-link{background-color: transparent !important;}
 .heading-hr::before{color: #555}
 
 .container-wrapper:not(.bg-gray-darker){background-color:#1a1d23;color:#ccc}
-.container-wrapper.bg-superlight,.headpanel{background-color:#323843 !important;}
+.container-wrapper.bg-superlight{background-color:#292f38 !important;}
 .container-wrapper.bg-inverse{background-color:#000 !important;}
 .container-wrapper:not(.bg-gray-darker) .tx-inverse{color: white !important}
 .table td, .table th{border-color: #555;}
