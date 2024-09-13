@@ -34,7 +34,7 @@ func Find(ctx echo.Context) error {
 				err = errors.New(msg[0:pos])
 			}
 			ctx.Set(`title`, cause.Error())
-			return ctx.Render(`short_url/expired`, nil)
+			return ctx.Render(`short_url/expired`, err)
 		}
 		return err
 	}
