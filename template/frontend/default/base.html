@@ -41,7 +41,7 @@
   <link href="{{AssetsXURL}}/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   {{- $themeInfo := call $.Func.ThemeInfo -}}
   {{- if $themeInfo.IsColorName `dark` -}}
-  <link href="{{AssetsXURL}}/css/dark.css?t={{BuildTime}}" rel="stylesheet" />
+  <link href="{{AssetsXURL}}/css/dark.min.css?t={{BuildTime}}" rel="stylesheet" />
   {{- end -}}
   {{Block "headEnd"}}{{/Block}}
 </head>

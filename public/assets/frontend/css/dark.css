@@ -1,12 +1,14 @@
 body{background-color: black !important;}
 .card{background-color: #1a1d23 !important;color: #eee !important;border-color: #333;}
 .card .card-header,
-.card .card-footer{background-color: transparent !important;}
+.card .card-footer,.bg-transparent,
+.editormd-html-preview, .editormd-preview-container{background-color: transparent !important;}
 .card .card-header, .card .card-footer,
 .card .media, nav, nav.bd-t{border-color: #3b4049 !important;}
-.card .tx-inverse{color: #eee !important}
+.card .tx-inverse,.container .tx-inverse,.card-title{color: #eee !important}
 .card .bg-white,.bg-white{background-color: #1f2126 !important;}
 .card .tx-gray-dark, .bg-white .tx-gray-dark{color: #f1f1f1 !important}
+.card .tx-gray,.container .tx-gray:not(.btn){color:#bbb !important}
 .card a:not(.btn){color:#389afc !important}
 .card a:hover{color:#2182e3 !important}
 .form-control,.form-control:focus{background-color: #000;color:#fff}
@@ -31,3 +33,22 @@ nav .page-item.disabled .page-link{background-color: transparent !important;}
 #sectionSignIn{background: #000 !important;}
 .heading-hr::after,
 .heading-hr::before{color: #555}
+
+.container-wrapper:not(.bg-gray-darker){background-color:#1a1d23;color:#ccc}
+.container-wrapper.bg-superlight{background-color:#323843 !important;}
+.container-wrapper.bg-inverse{background-color:#000 !important;}
+.container-wrapper:not(.bg-gray-darker) .tx-inverse{color: white !important}
+.table td, .table th{border-color: #555;}
+
+.markdown-body {color: #ddd}
+.markdown-body table,
+.editormd-html-preview .editormd-toc-menu h1, 
+.editormd-preview-container .editormd-toc-menu h1{color: #666;}
+.markdown-body h1, 
+.markdown-body h2, 
+.markdown-body h3, 
+.markdown-body h4, 
+.markdown-body h5, 
+.markdown-body h6{border-color: #777;}
+
+img.object-fit-cover{filter: invert(1);}
