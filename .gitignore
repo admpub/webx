@@ -47,7 +47,6 @@ debug.log
 /data/nging.pem.pub
 /data/logs/*.txt
 /data/sm2/*
-/application/library/collector/chrome/*.png
 /data/cache/*
 nohup.out
 /public/upload/*
