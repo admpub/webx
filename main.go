@@ -26,7 +26,7 @@
 package main
 
 //go:generate go install github.com/admpub/bindata/v3/go-bindata@latest
-//go:generate go-bindata -fs -o bindata_assetfs.go -prefix "../nging/|vendor/github.com/nging-plugins/dbmanager/" -ignore "\\.(DS_Store|less|scss)$" -minify "\\.(js|css)$" -tags bindata ../nging/public/assets/... ../nging/template/... public/assets/... template/... config/i18n/... vendor/github.com/nging-plugins/dbmanager/template/... vendor/github.com/nging-plugins/dbmanager/public/assets/...
+//go:generate go-bindata -fs -o bindata_assetfs.go -prefix "../nging/|vendor/github.com/nging-plugins/dbmanager/" -ignore "[\\/]combined([\\/].*)?$" -ignore "\\.(DS_Store|less|scss)$" -minify "\\.(js|css)$" -tags bindata ../nging/public/assets/... ../nging/template/... public/assets/... template/... config/i18n/... vendor/github.com/nging-plugins/dbmanager/template/... vendor/github.com/nging-plugins/dbmanager/public/assets/...
 
 import (
 	"os"
