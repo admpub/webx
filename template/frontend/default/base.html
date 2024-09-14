@@ -39,10 +39,12 @@
   <!-- <link href="{{AssetsXURL}}/css/color-orange.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8"> -->
   <link combine="4" href="{{AssetsURL}}/css/form/input-webx/webx.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   <link combine="4" href="{{AssetsXURL}}/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  {{Block "darkCSS"}}
   {{- $themeInfo := call $.Func.ThemeInfo -}}
   {{- if $themeInfo.IsColorName `dark` -}}
   <link href="{{AssetsXURL}}/css/dark.min.css?t={{BuildTime}}" rel="stylesheet" />
   {{- end -}}
+  {{/Block}}
   {{Block "headEnd"}}{{/Block}}
 </head>
 <body {{Block `bodyAttr`}}{{/Block}}>

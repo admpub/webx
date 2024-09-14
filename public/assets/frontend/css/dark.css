@@ -6,11 +6,11 @@ body{background-color: black !important;}.headpanel{background-color:#323843 !im
 .card .card-header, .card .card-footer,
 .card .media, nav, nav.bd-t{border-color: #3b4049 !important;}
 .card .tx-inverse,.container .tx-inverse,.card-title{color: #eee !important}
-.card .bg-white,.bg-white{background-color: #1f2126 !important;}
+.card .bg-white:not(.btn),.bg-white:not(.btn){background-color: #1f2126 !important;}
 .card .tx-gray-dark, .bg-white .tx-gray-dark{color: #f1f1f1 !important}
 .card .tx-gray,.container .tx-gray:not(.btn){color:#bbb !important}
-.card a:not(.btn){color:#389afc !important}
-.card a:hover{color:#2182e3 !important}
+.card a:not(.btn):not(.tx-white):not(.nav-link){color:#389afc}
+.card a:hover{color:#2182e3}
 .form-control,.form-control:focus{background-color: #000;color:#fff}
 .form-control{border-color: #000 !important;}
 p.form-control{background-color: transparent;}
