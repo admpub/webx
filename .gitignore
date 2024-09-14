@@ -51,6 +51,7 @@ debug.log
 /data/cache/*
 nohup.out
 /public/upload/*
+/public/assets/backend/combined
 /public/collect/*
 .DS_Store
 /dist/localtest/*/

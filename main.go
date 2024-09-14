@@ -69,7 +69,7 @@ var (
 	BUILD_ARCH string
 	CLOUD_GOX  string
 	COMMIT     string
-	LABEL      = `dev` //beta/alpha/stable
+	LABEL      = `beta` //beta/alpha/stable
 	VERSION    = `1.0.0`
 	PACKAGE    = `free`
 

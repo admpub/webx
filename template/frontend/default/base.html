@@ -24,21 +24,21 @@
 <!-- og-tag:end -->
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
   <title>{{Block "title"}}{{Config.base.siteName}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan}}{{end}}{{/Block}}</title>
-	<link href="{{AssetsURL}}/css/font-awesome.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
-  <link href="{{AssetsXURL}}/css/Ionicons/css/ionicons.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
-  <link href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
-  <link href="{{AssetsXURL}}/js/superfish/superfish.min.css" rel="stylesheet" charset="utf-8">
+	<link combine href="{{AssetsURL}}/css/font-awesome.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link combine href="{{AssetsXURL}}/css/Ionicons/css/ionicons.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link combine href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link combine href="{{AssetsXURL}}/js/superfish/superfish.min.css" rel="stylesheet" charset="utf-8">
   {{Block "link"}}{{/Block}}
-	<link href="{{AssetsURL}}/js/jquery.gritter/css/jquery.gritter.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8" />
-	<link href="{{AssetsURL}}/js/jquery.gritter/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8" />
-  <link href="{{AssetsURL}}/js/nprogress/nprogress.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
-  <link href="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+	<link combine="2" href="{{AssetsURL}}/js/jquery.gritter/css/jquery.gritter.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8" />
+	<link combine="2" href="{{AssetsURL}}/js/jquery.gritter/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8" />
+  <link combine="2" href="{{AssetsURL}}/js/nprogress/nprogress.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link combine="2" href="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   {{Include "#default#global_js"}}
   {{Block "head"}}{{/Block}}
-  <link id="css-lazyload-end" href="{{AssetsXURL}}/css/frontend.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link combine="4" id="css-lazyload-end" href="{{AssetsXURL}}/css/frontend.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   <!-- <link href="{{AssetsXURL}}/css/color-orange.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8"> -->
-  <link href="{{AssetsURL}}/css/form/input-webx/webx.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
-  <link href="{{AssetsXURL}}/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link combine="4" href="{{AssetsURL}}/css/form/input-webx/webx.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
+  <link combine="4" href="{{AssetsXURL}}/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   {{- $themeInfo := call $.Func.ThemeInfo -}}
   {{- if $themeInfo.IsColorName `dark` -}}
   <link href="{{AssetsXURL}}/css/dark.min.css?t={{BuildTime}}" rel="stylesheet" />
@@ -47,24 +47,24 @@
 </head>
 <body {{Block `bodyAttr`}}{{/Block}}>
 {{Block "body"}}{{/Block}}
-<script src="{{AssetsURL}}/js/compatible.min.js?t={{BuildTime}}" type="text/javascript"></script>
-<script src="{{AssetsURL}}/js/jquery3.6.min.js?t={{BuildTime}}"></script>
-<script src="{{AssetsURL}}/js/jquery.migrate3.4.min.js?t={{BuildTime}}"></script>
-<script src="{{AssetsURL}}/js/jquery.form.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsXURL}}/js/tether/tether.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsXURL}}/js/bootstrap/bootstrap.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsURL}}/js/modernizr.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsURL}}/js/jquery.gritter/js/jquery.gritter.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsURL}}/js/jquery.pjax.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsURL}}/js/nprogress/nprogress.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsXURL}}/js/superfish/hoverIntent.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsXURL}}/js/superfish/superfish.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsXURL}}/js/page/nav.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsURL}}/js/behaviour/sprintf.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsXURL}}/js/app.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{FrontendURL}}/i18n.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{AssetsURL}}/js/scrollLoading.min.js?t={{BuildTime}}"></script>
+<script combine src="{{AssetsURL}}/js/compatible.min.js?t={{BuildTime}}" type="text/javascript"></script>
+<script combine src="{{AssetsURL}}/js/jquery3.6.min.js?t={{BuildTime}}"></script>
+<script combine src="{{AssetsURL}}/js/jquery.migrate3.4.min.js?t={{BuildTime}}"></script>
+<script combine src="{{AssetsURL}}/js/jquery.form.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsXURL}}/js/tether/tether.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsXURL}}/js/bootstrap/bootstrap.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsURL}}/js/modernizr.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsURL}}/js/jquery.gritter/js/jquery.gritter.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsURL}}/js/jquery.pjax.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsURL}}/js/nprogress/nprogress.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsXURL}}/js/superfish/hoverIntent.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsXURL}}/js/superfish/superfish.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsXURL}}/js/page/nav.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsURL}}/js/behaviour/sprintf.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsXURL}}/js/app.min.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{FrontendURL}}/i18n.js?t={{BuildTime}}" type="text/javascript" charset="utf-8"></script>
+<script combine src="{{AssetsURL}}/js/scrollLoading.min.js?t={{BuildTime}}"></script>
 <script>
 window.activeURL={{if $.Stored.Get "activeURL"}}'{{FrontendURL}}{{$.Stored.Get "activeURL"}}'{{else}}null{{end}};window.errorMSG=null;window.successMSG=null;App.lang='{{$.Lang}}';
 {{- if $.Data -}}

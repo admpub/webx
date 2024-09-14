@@ -5,6 +5,7 @@ go 1.23
 toolchain go1.23.0
 
 // replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
+// replace github.com/coscms/webfront => ../../coscms/webfront
 
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
@@ -45,9 +46,9 @@ require (
 	github.com/stretchr/testify v1.9.0
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.4
-	github.com/webx-top/com v1.3.1
+	github.com/webx-top/com v1.3.2
 	github.com/webx-top/db v1.27.9
-	github.com/webx-top/echo v1.9.0
+	github.com/webx-top/echo v1.9.3
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.3.1
@@ -61,8 +62,8 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/nging/v5 v5.3.3-pre41
-	github.com/coscms/webcore v0.0.3
-	github.com/coscms/webfront v0.0.0-20240912093125-29d9f28beef0
+	github.com/coscms/webcore v0.0.4
+	github.com/coscms/webfront v0.0.0-20240914094933-967a777afa4c
 	github.com/nging-plugins/dbmanager v1.6.0
 	github.com/silenceper/wechat/v2 v2.1.6
 )
@@ -257,6 +258,8 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/studio-b12/gowebdav v0.9.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
+	github.com/tdewolff/minify/v2 v2.20.37 // indirect
+	github.com/tdewolff/parse/v2 v2.7.15 // indirect
 	github.com/tidwall/btree v1.7.0 // indirect
 	github.com/tidwall/buntdb v1.3.2 // indirect
 	github.com/tidwall/gjson v1.17.3 // indirect
@@ -300,6 +303,6 @@ require (
 	modernc.org/libc v1.60.1 // indirect
 	modernc.org/mathutil v1.6.0 // indirect
 	modernc.org/memory v1.8.0 // indirect
-	modernc.org/sqlite v1.33.0 // indirect
+	modernc.org/sqlite v1.33.1 // indirect
 	rsc.io/qr v0.2.0 // indirect
 )
