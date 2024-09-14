@@ -463,7 +463,10 @@
 .sf-menu-dark ul ul li a {
   color: #989da8;
 }
-
+.sf-menu-dark.nav-active-white a:hover,
+.sf-menu-dark.nav-active-white a:focus{
+  color: #fff;
+}
 .sf-menu-dark ul li a:hover,
 .sf-menu-dark ul li a:focus,
 .sf-menu-dark ul ul li a:hover,

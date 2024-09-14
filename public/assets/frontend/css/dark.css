@@ -40,15 +40,15 @@ nav .page-item.disabled .page-link{background-color: transparent !important;}
 .container-wrapper:not(.bg-gray-darker) .tx-inverse{color: white !important}
 .table td, .table th{border-color: #555;}
 
-.markdown-body {color: #ddd}
+.markdown-body {color: #ddd !important}
 .markdown-body table,
 .editormd-html-preview .editormd-toc-menu h1, 
-.editormd-preview-container .editormd-toc-menu h1{color: #666;}
+.editormd-preview-container .editormd-toc-menu h1{color: #666 !important;}
 .markdown-body h1, 
 .markdown-body h2, 
 .markdown-body h3, 
 .markdown-body h4, 
 .markdown-body h5, 
-.markdown-body h6{border-color: #777;}
+.markdown-body h6{border-color: #777 !important;}
 
 img.object-fit-cover{filter: invert(1);}
