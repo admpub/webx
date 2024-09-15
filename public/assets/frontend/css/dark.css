@@ -24,7 +24,7 @@ img#captchaImage{filter:invert(1);margin-left:1px;}
 nav .page-item:not(.active):not(.disabled) .page-link{background-color: #3f434d !important;}
 
 .input-group-addon{background-color: #3f434d !important;color: #989da8}
-.input-group-addon.bg-white{background-color: #000 !important;}
+.input-group-addon.bg-white:not(.btn){background-color: #000 !important;}
 nav .page-item.disabled .page-link{background-color: transparent !important;}
 
 .modal-content{background-color:#3a4042}
