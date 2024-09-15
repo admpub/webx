@@ -53,6 +53,6 @@ nohup.out
 /public/assets/backend/combined
 /public/collect/*
 .DS_Store
-/dist/localtest/*/
+/dist/localtest/*
 .env
 /vendor
