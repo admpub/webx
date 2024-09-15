@@ -48,7 +48,7 @@ require (
 	github.com/webx-top/client v0.9.4
 	github.com/webx-top/com v1.3.2
 	github.com/webx-top/db v1.27.9
-	github.com/webx-top/echo v1.9.3
+	github.com/webx-top/echo v1.9.4
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.3.1
@@ -62,7 +62,7 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/nging/v5 v5.3.3-pre42
-	github.com/coscms/webcore v0.1.1
+	github.com/coscms/webcore v0.1.2
 	github.com/coscms/webfront v0.0.0-20240915011222-7cb7600e1af1
 	github.com/nging-plugins/dbmanager v1.6.0
 	github.com/silenceper/wechat/v2 v2.1.6
@@ -75,7 +75,7 @@ require (
 	github.com/abh/errorutil v1.0.0 // indirect
 	github.com/admpub/9t v0.0.0-20190605154903-a68069ace5e1 // indirect
 	github.com/admpub/archiver v1.1.4 // indirect
-	github.com/admpub/boltstore v1.1.1 // indirect
+	github.com/admpub/boltstore v1.1.2 // indirect
 	github.com/admpub/caddy v1.2.7 // indirect
 	github.com/admpub/captcha-go v0.0.1 // indirect
 	github.com/admpub/ccs-gm v0.0.5 // indirect
@@ -134,7 +134,6 @@ require (
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.2 // indirect
-	github.com/boltdb/bolt v1.3.1 // indirect
 	github.com/boombuler/barcode v1.0.2 // indirect
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
@@ -284,6 +283,7 @@ require (
 	github.com/webx-top/validator v0.3.0 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
+	go.etcd.io/bbolt v1.3.11 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	golang.org/x/crypto v0.27.0 // indirect
 	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0 // indirect
