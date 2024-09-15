@@ -32,6 +32,7 @@ installed2.lock
 /dist/ftp.pid
 /dist/webx_*
 /dist/data
+/dist/packed
 /bindata_assetfs.go
 /config/vhosts/*.conf
 /.vscode
