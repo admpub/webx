@@ -40,8 +40,7 @@
   <link combine="4" href="{{AssetsURL}}/css/form/input-webx/webx.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   <link combine="4" href="{{AssetsXURL}}/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   {{Block "darkCSS"}}
-  {{- $themeInfo := call $.Func.ThemeInfo -}}
-  {{- if $themeInfo.IsColorName `dark` -}}
+  {{- if $.ThemeInfo.IsColorName `dark` -}}
   <link href="{{AssetsXURL}}/css/dark.min.css?t={{BuildTime}}" rel="stylesheet" />
   {{- end -}}
   {{/Block}}

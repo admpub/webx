@@ -23,8 +23,7 @@
 
         <!-- ============= MAIN CSS ============= -->
         <link id="css-lazyload-end" rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/style.min.css?t={{BuildTime}}" />
-        {{- $themeInfo := call $.Func.ThemeInfo -}}
-        {{- if $themeInfo.IsColorName `dark` -}}
+        {{- if $.ThemeInfo.IsColorName `dark` -}}
         <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/dark.min.css?t={{BuildTime}}" />
         {{- end -}}
         {{Include "#default#global_js"}}

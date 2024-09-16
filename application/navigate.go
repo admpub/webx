@@ -2,7 +2,6 @@ package application
 
 import (
 	"github.com/admpub/webx/application/handler/backend/official/advert"
-	"github.com/admpub/webx/application/handler/backend/official/agent"
 	"github.com/admpub/webx/application/handler/backend/official/api"
 	"github.com/admpub/webx/application/handler/backend/official/article"
 	"github.com/admpub/webx/application/handler/backend/official/customer"
@@ -18,7 +17,6 @@ func Initialize() {
 		article.LeftNavigate,
 		tags.LeftNavigate,
 		customer.LeftNavigate,
-		agent.LeftNavigate,
 		api.LeftNavigate,
 		shorturl.LeftNavigate,
 		page.LeftNavigate,

@@ -5,7 +5,7 @@ go 1.23
 toolchain go1.23.0
 
 // replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
-// replace github.com/coscms/webfront => ../../coscms/webfront
+replace github.com/coscms/webfront => ../../coscms/webfront
 
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
@@ -47,7 +47,7 @@ require (
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.4
 	github.com/webx-top/com v1.3.2
-	github.com/webx-top/db v1.27.9
+	github.com/webx-top/db v1.27.10
 	github.com/webx-top/echo v1.9.4
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
@@ -62,9 +62,9 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/nging/v5 v5.3.3-pre42
-	github.com/coscms/webcore v0.1.2
+	github.com/coscms/webcore v0.1.3
 	github.com/coscms/webfront v0.0.0-20240915011222-7cb7600e1af1
-	github.com/nging-plugins/dbmanager v1.6.0
+	github.com/nging-plugins/dbmanager v1.6.1
 	github.com/silenceper/wechat/v2 v2.1.6
 )
 

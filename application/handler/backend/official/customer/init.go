@@ -3,7 +3,6 @@ package customer
 import (
 	"github.com/webx-top/echo"
 
-	_ "github.com/admpub/webx/application/handler/backend/official/agent"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/complaint"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/group"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/group_package"

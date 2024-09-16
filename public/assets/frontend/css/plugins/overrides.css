@@ -2354,6 +2354,12 @@
   color: inherit;
 }
 
+.nav-hover-bg-dark>.nav-item>.nav-link:not(.active):hover,
+.nav-hover-bg-dark>.nav-item>.nav-link:not(.active):focus {
+  background-color: #33363e;
+  color: #ccc;
+}
+
 .nav-stacked .nav-link {
   padding-left: 20px;
   padding-right: 20px;

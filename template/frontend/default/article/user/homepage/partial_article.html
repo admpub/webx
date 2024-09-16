@@ -1,3 +1,4 @@
+{{- $isDark := $.ThemeInfo.IsColorName `dark` -}}
 <div class="card bd-0 rounded-0 mg-t-20">
     <div class="card-header bd-b-0 rounded-0 pd-0 bg-superlight">
       <nav class="nav nav-outline nav-gray tx-bold tx-size-13 tx-uppercase pd-sm-x-20 flex-column flex-sm-row">{{$sort := $.Form `sort`}}
@@ -7,7 +8,7 @@
       </nav><!-- nav -->
     </div><!-- card-header -->
     <form method="GET" action="{{$.URL.Path}}">
-    <div class="input-group bd-b">
+    <div class="input-group bd-b{{if $isDark}} bd-color-inverse{{end}}">
         <input type="hidden" name="sort" value="{{$.Form `sort`}}">
         <input type="search" name="q" value="{{$.Form `q`}}" required class="form-control pd-y-20 bd-0 pd-l-30 rounded-left-0" placeholder="{{`搜索文章`|$.T}}">
         <span class="input-group-btn">
@@ -16,7 +17,7 @@
     </div><!-- input-group -->
     </form>
     {{- range $k, $v := $.Stored.list -}}
-    <div class="row mg-0{{if gt $k 0}} bd-t{{end}} hover-bg-gray-xlightest">
+    <div class="row mg-0{{if gt $k 0}} bd-t{{end}} {{if $isDark}}hover-bg-inverse bd-color-inverse{{else}}hover-bg-gray-xlightest{{end}}">
       <div class="col-md-12">
         <div class="media pd-20">
           <a href="{{FrontendURL}}/article/{{$v.Id}}" target="_blank" class="d-flex mg-r-10">

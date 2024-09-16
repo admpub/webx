@@ -17,10 +17,10 @@
                         {{Include "#default#article/list_cardhead"}}
                     </span>
                 </div><!-- card-header -->
-                <div class="media-list">
+                <div class="media-list">{{- $isDark := $.ThemeInfo.IsColorName `dark` -}}
                     {{- $endIndex := Sub (len $.Stored.articles) 1 -}}
                     {{- range $k, $v := $.Stored.articles -}}
-                    <div class="media pd-20 bg-white{{if ne $k $endIndex}} bd-b bd-gray-light{{end}} hover-bg-gray-xlightest">
+                    <div class="media pd-20 bg-white{{if ne $k $endIndex}} bd-b bd-gray-light{{end}} {{if $isDark}}hover-bg-inverse bd-color-inverse{{else}}hover-bg-gray-xlightest{{end}}">
                         <div class="media-body tx-size-md">
                             <span class="pull-right">
                                 {{- if $v.Tags -}}

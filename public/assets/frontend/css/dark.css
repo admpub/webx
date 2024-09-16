@@ -23,7 +23,7 @@ nav .page-item .page-link{
 img#captchaImage{filter:invert(1);margin-left:1px;}
 nav .page-item:not(.active):not(.disabled) .page-link{background-color: #3f434d !important;}
 
-.input-group-addon{background-color: #3f434d !important;color: #989da8}
+.input-group-addon:not(.input-group-img){background-color: #3f434d !important;color: #989da8}
 .input-group-addon.bg-white:not(.btn){background-color: #000 !important;}
 nav .page-item.disabled .page-link{background-color: transparent !important;}
 
@@ -52,3 +52,6 @@ nav .page-item.disabled .page-link{background-color: transparent !important;}
 .markdown-body h6{border-color: #777 !important;}
 
 img.object-fit-cover{filter: invert(1);}
+
+.btn.btn-default.tx-inverse{color:#282c35 !important}
+.form-control-plaintext{color: #ccc}

@@ -15,10 +15,13 @@ import (
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/model/official"
-	modelAgent "github.com/coscms/webfront/model/official/agent"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	modelLevel "github.com/coscms/webfront/model/official/level"
 )
+
+var GetAgentLevelList = func(echo.Context) (interface{}, error) {
+	return nil, nil
+}
 
 func Index(ctx echo.Context) error {
 	groupId := ctx.Formx(`groupId`).Uint()
@@ -68,9 +71,13 @@ func Index(ctx echo.Context) error {
 	lv.ListByOffset(&levelList, nil, 0, -1, db.Cond{`group`: `base`})
 	ctx.Set(`levelList`, levelList)
 
-	alv := modelAgent.NewAgentLevel(ctx)
-	var agentLevelList []*dbschema.OfficialCustomerAgentLevel
-	alv.ListByOffset(&agentLevelList, nil, 0, -1)
+	agentLevelList, err := GetAgentLevelList(ctx)
+	if err != nil {
+		return err
+	}
+	if agentLevelList == nil {
+		agentLevelList = []map[string]interface{}{}
+	}
 	ctx.Set(`agentLevelList`, agentLevelList)
 
 	roleM := modelCustomer.NewRole(ctx)

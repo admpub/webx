@@ -1,7 +1,11 @@
 {{Extend "#default#base"}}
 {{Block "title"}}{{"用户中心"|$.T}}{{/Block}}
 {{Block "head"}}{{/Block}}
-{{Block "headEnd"}}{{/Block}}
+{{Block "headEnd"}}
+{{- if $.ThemeInfo.IsColorName `dark` -}}
+<link href="{{AssetsXURL}}/css/usercenter-dark.min.css?t={{BuildTime}}" rel="stylesheet" />
+{{- end -}}
+{{/Block}}
 {{Block "bodyAttr"}}class="dashboard-1 bg-gray-lightest tx-size-14"{{/Block}}
 {{Block "body"}}
 {{/* Include "user/profile/partial_head" */}}

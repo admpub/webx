@@ -3,7 +3,6 @@ package user
 import (
 	"github.com/webx-top/echo"
 
-	_ "github.com/admpub/webx/application/handler/frontend/user/agent"
 	_ "github.com/admpub/webx/application/handler/frontend/user/membership"
 	_ "github.com/admpub/webx/application/handler/frontend/user/profile"
 	_ "github.com/admpub/webx/application/handler/frontend/user/wallet"
