@@ -4,8 +4,9 @@ go 1.23
 
 toolchain go1.23.0
 
-// replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
-replace github.com/coscms/webfront => ../../coscms/webfront
+replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
+
+// replace github.com/coscms/webfront => ../../coscms/webfront
 
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
@@ -48,7 +49,7 @@ require (
 	github.com/webx-top/client v0.9.4
 	github.com/webx-top/com v1.3.2
 	github.com/webx-top/db v1.27.10
-	github.com/webx-top/echo v1.9.4
+	github.com/webx-top/echo v1.9.9
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.3.1
@@ -61,9 +62,9 @@ require (
 require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
-	github.com/admpub/nging/v5 v5.3.3-pre42
-	github.com/coscms/webcore v0.1.3
-	github.com/coscms/webfront v0.0.0-20240915011222-7cb7600e1af1
+	github.com/admpub/nging/v5 v5.3.3-pre43
+	github.com/coscms/webcore v0.1.4
+	github.com/coscms/webfront v0.0.0-20240916155517-65fe85e76685
 	github.com/nging-plugins/dbmanager v1.6.1
 	github.com/silenceper/wechat/v2 v2.1.6
 )
@@ -133,7 +134,6 @@ require (
 	github.com/aws/aws-sdk-go v1.55.5 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/bits-and-blooms/bitset v1.2.2 // indirect
 	github.com/boombuler/barcode v1.0.2 // indirect
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
