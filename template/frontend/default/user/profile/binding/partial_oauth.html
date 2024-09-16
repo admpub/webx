@@ -2,7 +2,7 @@
         {{- range $k, $v := $.Stored.oAuthProviders -}}
         {{- if $v.Binded -}}
         {{range $key,$account := $v.OAuthUsers}}
-        <div class="list-group-item pd-y-20 tx-center tx-sm-left-force d-block d-sm-flex justify-content-between align-items-center{{if eq $k 0}} rounded-top-0{{end}}">
+        <div class="list-group-item pd-y-20 tx-center tx-sm-left-force d-block d-sm-flex justify-content-between align-items-center">
           <div class="media d-block d-sm-flex">
             <div class="d-block d-sm-flex mg-sm-r-20 wd-55">
               <!-- <img src="http://via.placeholder.com/600x600" class="rounded-circle wd-40" alt="Image"> -->
@@ -26,7 +26,7 @@
         </div><!-- list-group-item -->
         {{end}}
         {{- else -}}
-        <div class="list-group-item pd-y-20 tx-center tx-sm-left-force d-block d-sm-flex justify-content-between align-items-center{{if eq $k 0}} rounded-top-0{{end}}">
+        <div class="list-group-item pd-y-20 tx-center tx-sm-left-force d-block d-sm-flex justify-content-between align-items-center">
           <div class="media d-block d-sm-flex">
             <div class="d-block d-sm-flex mg-sm-r-20 wd-55">
               <!-- <img src="http://via.placeholder.com/600x600" class="rounded-circle wd-40" alt="Image"> -->
