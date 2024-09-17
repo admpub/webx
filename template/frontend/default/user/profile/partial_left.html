@@ -11,10 +11,10 @@
       {{- $activeURL := $.Stored.String "activeURL" "-" -}}
       {{- range $k,$nav := call $.Func.LeftNavigate -}}
       {{- if $nav.Display -}}
-      {{- range $nav.Children -}}
-      {{- if .Display -}}
-      <li class="nav-item">{{$route := printf "/user/%s/%s" $nav.Action .Action}}
-        <a href="{{FrontendURL}}/user/{{$nav.Action}}/{{.Action}}" class="nav-link{{if or (eq $.Path $route) (HasPrefix $route $activeURL)}} active{{end}}"><i class="fa fa-{{$nav.Icon}} tx-center wd-16 mg-r-5"></i> {{.Name}}</a>
+      {{- range $subK, $subNav := $nav.Children -}}
+      {{- if $subNav.Display -}}
+      <li class="nav-item">{{$route := printf "/user/%s/%s" $nav.Action $subNav.Action}}
+        <a href="{{FrontendURL}}/user/{{$nav.Action}}/{{$subNav.Action}}" class="nav-link{{if or (eq $.Path $route) (HasPrefix $route $activeURL)}} active{{end}}"><i class="fa fa-{{$subNav.Icon|Default $nav.Icon}} tx-center wd-16 mg-r-5"></i> {{$subNav.Name}}</a>
       </li>
       {{- end -}}
       {{- else -}}

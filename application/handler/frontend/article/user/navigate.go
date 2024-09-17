@@ -16,7 +16,7 @@ func init() {
 				Display:  true,
 				Name:     `我的文章`,
 				Action:   `list`,
-				Icon:     `table`,
+				Icon:     `file-text-o`,
 				Children: &navigate.List{},
 			},
 			{
