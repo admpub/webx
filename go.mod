@@ -98,7 +98,7 @@ require (
 	github.com/admpub/go-ps v0.0.1 // indirect
 	github.com/admpub/go-reuseport v0.0.4 // indirect
 	github.com/admpub/go-utility v0.0.1 // indirect
-	github.com/admpub/godownloader v2.2.2-0.20240917055040-ac8dad805dee+incompatible // indirect
+	github.com/admpub/godownloader v2.2.2+incompatible // indirect
 	github.com/admpub/gohls v1.3.3 // indirect
 	github.com/admpub/gohls-server v0.3.9 // indirect
 	github.com/admpub/gotwilio v0.0.1 // indirect
@@ -228,7 +228,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/nging-plugins/dlmanager v1.6.1 // indirect
+	github.com/nging-plugins/dlmanager v1.6.2 // indirect
 	github.com/nwaples/rardecode v1.1.3 // indirect
 	github.com/onsi/ginkgo/v2 v2.20.2 // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect

@@ -734,8 +734,8 @@ github.com/admpub/go-utility v0.0.1 h1:/nja86vknCoMYJtMCm8nV+vuBiOf5PU45I5w7XAJU
 github.com/admpub/go-utility v0.0.1/go.mod h1:QZ/OrlUkHyD7Hg8Jj/iPkT6RZuMfYUOp0S4NsaQzRnA=
 github.com/admpub/godotenv v1.4.3 h1:yxoRSi0rVWLNLC1c3v1MBw3At6fBTvTwGrVY/44huaA=
 github.com/admpub/godotenv v1.4.3/go.mod h1:W8zOql4lSgnK6zfI6Le+GXlAaz5ZCj4kZI2wgcjar18=
-github.com/admpub/godownloader v2.2.2-0.20240917055040-ac8dad805dee+incompatible h1:pVxjjmK0FeYrkZNnsLDjksbB4ZoPIvmn3PQ8xbKx3KU=
-github.com/admpub/godownloader v2.2.2-0.20240917055040-ac8dad805dee+incompatible/go.mod h1:ftgrnKg7ptai8E/oJeMA6PqJWR7KkVGU8TgKs0rdhtY=
+github.com/admpub/godownloader v2.2.2+incompatible h1:fcmMzI99/ZjNGGyfFZh0qy+Z72ZsFqmXnw9I3+uqNvY=
+github.com/admpub/godownloader v2.2.2+incompatible/go.mod h1:ftgrnKg7ptai8E/oJeMA6PqJWR7KkVGU8TgKs0rdhtY=
 github.com/admpub/gohls v1.3.3 h1:HvuUCq0aKmRssGiUeJaRYVdzmj1gfbLb45rgg3gTsng=
 github.com/admpub/gohls v1.3.3/go.mod h1:Em6WXBxy8y23mH9cXHT1NwyndZp4sJ7sNJgueMzD5Xk=
 github.com/admpub/gohls-server v0.3.9 h1:PzwocUmCJAYBeJdBxdJUPXjr2h3s/XjIAB+hUldqEA0=
@@ -1561,8 +1561,8 @@ github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 h1:zYyBkD/k9seD2A7fsi6
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646/go.mod h1:jpp1/29i3P1S/RLdc7JQKbRpFeM1dOBd8T9ki5s+AY8=
 github.com/nging-plugins/dbmanager v1.6.2 h1:7Nb442MJmQQcUxs2IrPxFrx/ARRfe3Bmyh9r5Q0w+tQ=
 github.com/nging-plugins/dbmanager v1.6.2/go.mod h1:NICtP1J2+v6PQ8eVaEUikDcmX+V00Wr45KCCaV5V20U=
-github.com/nging-plugins/dlmanager v1.6.1 h1:P2Imas8n12HG3AqmA7Ndq+8a/Q2U3z48NzyHNxARFXk=
-github.com/nging-plugins/dlmanager v1.6.1/go.mod h1:R1zr2lDj9ZTDyR+6Vt6pgZBmSUCjODSPhxkPhxSE7B0=
+github.com/nging-plugins/dlmanager v1.6.2 h1:nlXWQkBQfhn+KfmONXOfCkOSq1IL7QUJ7OitGmiqU5I=
+github.com/nging-plugins/dlmanager v1.6.2/go.mod h1:RkSt/l3Y/3nG+W0by5mZgICqoEvJWY3EGpLwSrK+R2E=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
 github.com/nrdcg/auroradns v1.0.1/go.mod h1:y4pc0i9QXYlFCWrhWrUSIETnZgrf4KuwjDIWmmXo3JI=
 github.com/nrdcg/desec v0.5.0/go.mod h1:2ejvMazkav1VdDbv2HeQO7w+Ta1CGHqzQr27ZBYTuEQ=
