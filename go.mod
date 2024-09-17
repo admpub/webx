@@ -49,7 +49,7 @@ require (
 	github.com/webx-top/client v0.9.4
 	github.com/webx-top/com v1.3.2
 	github.com/webx-top/db v1.27.10
-	github.com/webx-top/echo v1.9.9
+	github.com/webx-top/echo v1.9.11
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.3.1
@@ -63,8 +63,8 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/nging/v5 v5.3.3-pre43
-	github.com/coscms/webcore v0.1.5
-	github.com/coscms/webfront v0.0.0-20240917011535-4e6af2d53f5c
+	github.com/coscms/webcore v0.1.6
+	github.com/coscms/webfront v0.0.0-20240917081434-281dfc7104b0
 	github.com/nging-plugins/dbmanager v1.6.2
 	github.com/silenceper/wechat/v2 v2.1.6
 )
@@ -98,13 +98,13 @@ require (
 	github.com/admpub/go-ps v0.0.1 // indirect
 	github.com/admpub/go-reuseport v0.0.4 // indirect
 	github.com/admpub/go-utility v0.0.1 // indirect
-	github.com/admpub/godownloader v2.2.0+incompatible // indirect
+	github.com/admpub/godownloader v2.2.2-0.20240917055040-ac8dad805dee+incompatible // indirect
 	github.com/admpub/gohls v1.3.3 // indirect
 	github.com/admpub/gohls-server v0.3.9 // indirect
 	github.com/admpub/gotwilio v0.0.1 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
-	github.com/admpub/i18n v0.3.0 // indirect
+	github.com/admpub/i18n v0.3.2 // indirect
 	github.com/admpub/identicon v1.0.2 // indirect
 	github.com/admpub/imaging v1.6.3 // indirect
 	github.com/admpub/ini v1.38.2 // indirect
