@@ -63,8 +63,8 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/nging/v5 v5.3.3-pre43
-	github.com/coscms/webcore v0.1.4
-	github.com/coscms/webfront v0.0.0-20240917002428-bd93c982456e
+	github.com/coscms/webcore v0.1.5
+	github.com/coscms/webfront v0.0.0-20240917011535-4e6af2d53f5c
 	github.com/nging-plugins/dbmanager v1.6.1
 	github.com/silenceper/wechat/v2 v2.1.6
 )
