@@ -34,3 +34,6 @@ cssdalek \
   --word '../public/assets/frontend/js/page/*.js'\
   --word '../public/assets/frontend/js/page/*/*.js'\
   --include-id 'captchaImage' > ../public/assets/frontend/blogdefault/css/style.lite.min.css
+
+
+# class="[^"]*-\{\{if
