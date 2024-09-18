@@ -64,7 +64,7 @@ require (
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/nging/v5 v5.3.3-pre43
 	github.com/coscms/webcore v0.1.7
-	github.com/coscms/webfront v0.0.0-20240918095903-e2eab1de2b58
+	github.com/coscms/webfront v0.0.0-20240918102148-6754d70cd6f6
 	github.com/nging-plugins/dbmanager v1.6.2
 	github.com/silenceper/wechat/v2 v2.1.6
 )
