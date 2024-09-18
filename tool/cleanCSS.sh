@@ -5,6 +5,7 @@ cssdalek \
   --word '../template/frontend/default/*.html'\
   --word '../template/frontend/default/*/*.html'\
   --word '../template/frontend/default/*/*/*.html'\
+  --word '../template/frontend/default/*/*/*/*.html'\
   --word '../public/assets/frontend/js/*.js'\
   --word '../public/assets/frontend/js/superfish/superfish.js'\
   --word '../public/assets/frontend/js/page/*.js'\
