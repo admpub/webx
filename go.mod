@@ -2,13 +2,19 @@ module github.com/admpub/webx
 
 go 1.23
 
-toolchain go1.23.0
+// replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
-replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
+// replace github.com/coscms/webcore => ../../coscms/webcore
 
 // replace github.com/coscms/webfront => ../../coscms/webfront
 
 exclude github.com/gomodule/redigo v2.0.0+incompatible
+
+require (
+	github.com/admpub/nging/v5 v5.3.3-pre44
+	github.com/coscms/webcore v0.1.8
+	github.com/coscms/webfront v0.0.0-20240918141337-cac579b78f4e
+)
 
 require (
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
@@ -62,9 +68,6 @@ require (
 require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
-	github.com/admpub/nging/v5 v5.3.3-pre43
-	github.com/coscms/webcore v0.1.7
-	github.com/coscms/webfront v0.0.0-20240918102148-6754d70cd6f6
 	github.com/nging-plugins/dbmanager v1.6.2
 	github.com/silenceper/wechat/v2 v2.1.6
 )
