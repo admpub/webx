@@ -3,7 +3,7 @@
 <tr class="parent-{{$v.ParentId}}" data-parents="{{$path}}">
 	<td>{{$v.Id}}</td>
 	<td class="category-name{{if eq $v.HasChild `Y`}} clickable{{end}}" data-id="{{$v.Id}}">
-		<i class="fa fa-{{if eq $v.HasChild `Y`}}plus-square-o{{else}}minus-square-o{{end}} category-level-{{$v.Level}} grey"></i>{{$v.Name}}
+		<i class="fa {{if eq $v.HasChild `Y`}}fa-plus-square-o{{else}}fa-minus-square-o{{end}} category-level-{{$v.Level}} grey"></i>{{$v.Name}}
 	</td>
 	<td>{{call $.Func.getTypeName $v.Type $v.Type}}</td>
 	<td>{{$v.Description}}</td>

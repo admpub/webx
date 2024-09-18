@@ -7,7 +7,7 @@
       </a>
     </div><!--logopanel -->
     {{- $themeInfo := call $.Func.ThemeInfo -}}
-    <ul class="nav nav-gray nav-pills nav-hover-bg-{{if $themeInfo.IsColorName `dark`}}dark{{else}}gray-lightest{{end}} flex-column mg-t-20 lh-10 tx-size-13 wd-100p mg-lg-b-auto">
+    <ul class="nav nav-gray nav-pills {{if $themeInfo.IsColorName `dark`}}nav-hover-bg-dark{{else}}nav-hover-bg-gray-lightest{{end}} flex-column mg-t-20 lh-10 tx-size-13 wd-100p mg-lg-b-auto">
       {{- $activeURL := $.Stored.String "activeURL" "-" -}}
       {{- range $k,$nav := call $.Func.LeftNavigate -}}
       {{- if $nav.Display -}}

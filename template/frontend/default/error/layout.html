@@ -7,7 +7,7 @@
 <div class="ht-100v wd-100p d-flex align-items-center justify-content-center pd-x-20">
 	<div class="col-lg-6">
 		<div class="card">
-			<div class="card-status bg-{{if and (gt $.Data.code 400) (lt $.Data.code 500)}}warning{{else}}danger{{end}}"></div>
+			<div class="card-status {{if and (gt $.Data.code 400) (lt $.Data.code 500)}}bg-warning{{else}}bg-danger{{end}}"></div>
 			<div class="card-header bg-superlight-x">
 				<h3 class="card-title mg-b-0 mg-t-5">{{- if $.Data.panic -}}{{`系统异常`|$.T}}{{else}}{{`系统提示`|$.T}}{{- end -}}</h3>
 				<div class="card-options btn-group pull-right">

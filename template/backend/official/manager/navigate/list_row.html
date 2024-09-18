@@ -3,7 +3,7 @@
 <tr class="parent-{{$v.ParentId}}" data-parents="{{$path}}">
 	<td>{{$v.Id}}</td>
 	<td class="navigate-name{{if eq $v.HasChild `Y`}} clickable{{end}}" data-id="{{$v.Id}}">
-		<i class="fa fa-{{if eq $v.HasChild `Y`}}plus-square-o{{else}}minus-square-o{{end}} navigate-level-{{$v.Level}} grey"></i>
+		<i class="fa {{if eq $v.HasChild `Y`}}fa-plus-square-o{{else}}fa-minus-square-o{{end}} navigate-level-{{$v.Level}} grey"></i>
 		{{$v.Title}}
 		{{if $v.Badge}}<sup class="badge badge-sm badge-danger">{{$v.Badge}}</sup>{{end}}
 	</td>
