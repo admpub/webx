@@ -46,8 +46,8 @@ require (
 	github.com/spf13/cobra v1.8.1 // indirect
 	github.com/stretchr/testify v1.9.0
 	github.com/swaggo/swag v1.16.3
-	github.com/webx-top/client v0.9.4
-	github.com/webx-top/com v1.3.2
+	github.com/webx-top/client v0.9.5
+	github.com/webx-top/com v1.3.3
 	github.com/webx-top/db v1.27.10
 	github.com/webx-top/echo v1.9.11
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
@@ -63,8 +63,8 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/nging/v5 v5.3.3-pre43
-	github.com/coscms/webcore v0.1.6
-	github.com/coscms/webfront v0.0.0-20240917081434-281dfc7104b0
+	github.com/coscms/webcore v0.1.7
+	github.com/coscms/webfront v0.0.0-20240918042738-ebb8822884e1
 	github.com/nging-plugins/dbmanager v1.6.2
 	github.com/silenceper/wechat/v2 v2.1.6
 )
