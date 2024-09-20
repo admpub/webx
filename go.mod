@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre44
-	github.com/coscms/webcore v0.1.8
-	github.com/coscms/webfront v0.0.0-20240919062328-7a1911648f51
+	github.com/coscms/webcore v0.1.9
+	github.com/coscms/webfront v0.0.0-20240920034346-fae6349b6783
 )
 
 require (
@@ -48,7 +48,7 @@ require (
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.14.0 // indirect
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76 // indirect
-	github.com/prometheus/client_golang v1.20.3 // indirect
+	github.com/prometheus/client_golang v1.20.4 // indirect
 	github.com/spf13/cobra v1.8.1 // indirect
 	github.com/stretchr/testify v1.9.0
 	github.com/swaggo/swag v1.16.3
@@ -303,7 +303,7 @@ require (
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	modernc.org/libc v1.60.1 // indirect
+	modernc.org/libc v1.61.0 // indirect
 	modernc.org/mathutil v1.6.0 // indirect
 	modernc.org/memory v1.8.0 // indirect
 	modernc.org/sqlite v1.33.1 // indirect
