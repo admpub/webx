@@ -18,10 +18,5 @@
 		<i class="fa fa-arrow-left"></i>
 		{{`回上一页`|$.T}}
 	</a>
-	{{- if eq (call $.Func.Code) -1 -}}
-	<a class="btn btn-success mg-l-10" href="/sign_in?next={{$.RequestURI}}">
-		<i class="fa fa-user"></i>
-		{{`立即登录`|$.T}}
-	</a>
-	{{- end -}}
+	{{Include "#default#error/partial_buttons"}}
 </div>

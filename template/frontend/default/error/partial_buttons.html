@@ -1,0 +1,13 @@
+{{- $errCode := call $.Func.Code -}}
+{{- if eq $errCode -1 -}}
+<a class="btn btn-success mg-l-10" href="/sign_in?next={{$.RequestURI}}">
+    <i class="fa fa-user"></i>
+    {{`立即登录`|$.T}}
+</a>
+{{- end -}}
+{{- range $li, $lv := $.Data.links -}}
+<a class="btn {{if $lv.H.color}}{{$lv.H.color}}{{else}}btn-info{{end}} mg-l-10" href="{{WithURLParams $lv.V `next` $.RequestURI}}">
+    {{if $lv.H.icon}}<i class="fa fa-{{$lv.H.icon}}"></i>{{end}}
+    {{$lv.K|$.T}}
+</a>
+{{- end -}}

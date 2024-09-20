@@ -7,11 +7,11 @@
 	<div class="col-md-6 offset-md-3">
 	  <div class="card card-inverse bg-teal bd-0">
 		<div class="card-block">
-		  <h5 class="card-title"><i class="fa fa-error"></i> 
+		  	<h5 class="card-title"><i class="fa fa-error"></i> 
 			Error</h5>
-		  <h6 class="card-subtitle mb-2 tx-normal mg-b-20"></h6>
-		  <p class="card-text">{{$.Data.content}}</p>
-		  <a class="btn btn-primary btn-rad" href="javascript:;" onclick="backLastPage()">
+		  	<h6 class="card-subtitle mb-2 tx-normal mg-b-20"></h6>
+		  	<p class="card-text">{{$.Data.content}}</p>
+		  	<a class="btn btn-primary btn-rad" href="javascript:;" onclick="backLastPage()">
 				<i class="fa fa-reply"></i>
 				{{"回到上一页"|$.T}}
 			</a>
@@ -19,6 +19,7 @@
 				<i class="fa fa-home"></i>
 				{{"回到首页"|$.T}}
 			</a>
+			{{Include "#default#error/partial_buttons"}}
 		</div>
 		{{Include "#default#error/partial_copyright"}}
 	  </div><!-- card -->
