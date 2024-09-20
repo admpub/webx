@@ -11,9 +11,9 @@ go 1.23
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.3-pre44
-	github.com/coscms/webcore v0.1.9
-	github.com/coscms/webfront v0.0.0-20240920034346-fae6349b6783
+	github.com/admpub/nging/v5 v5.3.3-pre45
+	github.com/coscms/webcore v0.1.10
+	github.com/coscms/webfront v0.0.0-20240920042941-423dbb3f7388
 )
 
 require (
@@ -103,7 +103,7 @@ require (
 	github.com/admpub/go-utility v0.0.1 // indirect
 	github.com/admpub/godownloader v2.2.2+incompatible // indirect
 	github.com/admpub/gohls v1.3.3 // indirect
-	github.com/admpub/gohls-server v0.3.9 // indirect
+	github.com/admpub/gohls-server v0.3.10 // indirect
 	github.com/admpub/gotwilio v0.0.1 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
