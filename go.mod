@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre45
 	github.com/coscms/webcore v0.2.1
-	github.com/coscms/webfront v0.0.0-20240921030834-dac59a4a9a33
+	github.com/coscms/webfront v0.0.0-20240921040143-a210da149ae2
 )
 
 require (
@@ -238,6 +238,7 @@ require (
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
 	github.com/phuslu/iploc v1.0.20240830 // indirect
+	github.com/phuslu/lru v1.0.16 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
