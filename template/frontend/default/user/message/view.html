@@ -16,6 +16,7 @@
 {{$replyList := $.Stored.replyList}}
 {{$msgUser := $.Stored.msgUser}}
 {{$customer := $.Customer}}
+{{- $isDark := $.ThemeInfo.IsColorName `dark` -}}
 <!-- {{AssetsURL}}/images/logo.png -->
 <div class="card card-block pd-0 bd-0 rounded-0 tx-size-sm">
   <div class="card-header pd-25 d-flex justify-content-between align-items-center">
@@ -51,12 +52,12 @@
     {{- end -}}
   </div><!-- #message-content -->
   <h6 class="tx-size-xs tx-uppercase tx-semibold mg-t-20 mg-b-0">{{"消息回复"|$.T}}</h6>
-  <hr class="mg-t-10 bd-color-gray-lightest">
+  <hr class="mg-t-10 {{if $isDark}}bd-color-inverse{{else}}bd-color-gray-lightest{{end}}">
   <div class="media-list lh-3">
     <div id="reply-list-box">
     {{range $k, $v := $replyList}}
     <div class="media{{if gt $k 0}} bd-t pd-t-20{{end}}">
-      <a href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank" class="d-flex mg-r-10"><img src="{{if $v.MsgUser.Avatar}}{{AddSuffix $v.MsgUser.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-32 ht-32 rounded-circle" alt=""></a>
+      <a href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank" class="d-flex mg-r-10"><img src="{{if $v.MsgUser.Avatar}}{{AddSuffix $v.MsgUser.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-32 ht-32 rounded-circle" alt=""></a>
       <div class="media-body pd-t-3 tx-size-12">
         <p class="tx-bold mg-b-0 lh-1"><a href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank" class="tx-gray-dark">{{$v.MsgUser.Name}}</a></p>
         <span class="tx-size-11">{{(Ts2time $v.Created).Format "2006-01-02 15:04:05"}}</span>
@@ -78,7 +79,7 @@
     {{$.Stored.pagination.Render}}
   </div><!-- media-list -->
   <div class="form-group mg-t-20">
-    <input type="text" id="input-reply-content" data-reply-id="{{$data.Id}}" class="form-control tx-size-xs" placeholder="{{"请输入回复内容"|$.T}},{{"按回车键提交"|$.T}}">
+    <input type="text" id="input-reply-content" data-reply-id="{{$data.Id}}" class="form-control tx-size-xs" placeholder="{{`请输入回复内容`|$.T}},{{`按回车键提交`|$.T}}">
   </div><!-- form-group -->
 
   </div><!-- card-block -->

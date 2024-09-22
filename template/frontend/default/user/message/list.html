@@ -28,21 +28,22 @@
         <div class="card-header bd-b-0 rounded-0 pd-0 bg-superlight">
           <nav class="nav nav-outline nav-gray tx-bold tx-size-13 tx-uppercase pd-sm-x-20 flex-column flex-sm-row">{{$type := $.Form "type"}}
             <a href="{{FrontendURL}}/user/message/{{$boxType}}" class="nav-link pd-y-20{{if not $type}} active{{end}}">{{"所有消息"|$.T}}</a>
-            <a href="{{FrontendURL}}/user/message/{{$boxType}}?type=unread" class="nav-link pd-y-20{{if eq $type "unread"}} active{{end}}">{{"未读消息"|$.T}}</a>
+            <a href="{{FrontendURL}}/user/message/{{$boxType}}?type=unread" class="nav-link pd-y-20{{if eq $type `unread`}} active{{end}}">{{"未读消息"|$.T}}</a>
           </nav><!-- nav -->
         </div><!-- card-header -->
+        {{- $isDark := $.ThemeInfo.IsColorName `dark` -}}
         {{if $.Stored.list}}
         <form method="GET">
         <input type="hidden" name="type" value="{{$type}}">
-        <div class="input-group bd-b">
-          <input type="search" class="form-control pd-y-20 bd-0 pd-l-30 rounded-left-0" placeholder="{{"搜索消息"|$.T}}" name="q" value="{{$.Form "q"}}">
+        <div class="input-group bd-b{{if $isDark}} bd-color-inverse{{end}}">
+          <input type="search" class="form-control pd-y-20 bd-0 pd-l-30 rounded-left-0" placeholder="{{`搜索消息`|$.T}}" name="q" value="{{$.Form `q`}}">
           <span class="input-group-btn">
             <button type="submit" class="btn btn-secondary bd-0 rounded-right-0"><i class="fa fa-search"></i></button>
           </span>
         </div><!-- input-group -->
         </form>
         {{range $k, $v := $.Stored.list}}
-        <div class="row mg-0{{if gt $k 0}} bd-t{{end}} bg-superlight-hover">
+        <div class="row mg-0{{if gt $k 0}} bd-t{{end}} {{if $isDark}}hover-bg-inverse bd-color-inverse{{else}}bg-superlight-hover{{end}}">
           <div class="col-md-8 col-lg-9">
             <div class="pd-20">
               <h6 class="mg-b-2 tx-size-sm tx-bold">
@@ -50,11 +51,11 @@
                   <a href="{{FrontendURL}}/user/message/view/{{$boxType}}/{{$v.Id}}" class="{{if $v.IsViewed}}tx-gray-light{{else}}tx-gray-dark{{end}}">{{$v.Title}}</a>
                   {{if not $v.IsViewed}}
                   <span class="tx-size-11 mg-l-5">
-                    <span class="square-8 bg-danger rounded-circle" data-toggle="tooltip" title="{{"未读"|$.T}}"></span>
+                    <span class="square-8 bg-danger rounded-circle" data-toggle="tooltip" title="{{`未读`|$.T}}"></span>
                   </span>
                   {{end}}
                   {{if eq $v.Encrypted "Y"}}
-                  <i class="fa fa-lock tx-success mg-l-5" data-toggle="tooltip" title="{{"加密消息"|$.T}}"></i>
+                  <i class="fa fa-lock tx-success mg-l-5" data-toggle="tooltip" title="{{`加密消息`|$.T}}"></i>
                   {{end}}
               </h6>
               <p class="mg-b-0 tx-size-12">
@@ -65,7 +66,7 @@
           </div><!-- col-9 -->
           <div class="col-md-4 col-lg-3">
             <div class="media pd-20">
-              <a class="d-flex mg-r-10" href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank"><img src="{{if $v.MsgUser.Avatar}}{{AddSuffix $v.MsgUser.Avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-40 ht-40 rounded-circle" alt="Image"></a>
+              <a class="d-flex mg-r-10" href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank"><img src="{{if $v.MsgUser.Avatar}}{{AddSuffix $v.MsgUser.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-40 ht-40 rounded-circle" alt="Image"></a>
               <div class="media-body">
                 <p class="tx-size-sm mg-b-0 tx-bold"><a href="{{FrontendURL}}/u/{{$v.MsgUser.Id}}" target="_blank" class="tx-gray-dark d-block">{{$v.MsgUser.Name}}</a></p>
                 <div class="tx-size-12">{{$v.Created|$.TsHumanize}}</div>
