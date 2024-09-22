@@ -4,6 +4,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 
 	dbschemaNging "github.com/coscms/webcore/dbschema"
 	"github.com/coscms/webcore/library/common"
@@ -247,6 +248,9 @@ func MessageSend(ctx echo.Context, targetCustomer *dbschema.OfficialCustomer) er
 			m.CustomerA = customer.Id
 		} else {
 			m.UserA = user.Id
+		}
+		if m.CustomerB < 1 {
+			return ctx.JSON(data.SetError(ctx.NewError(code.InvalidParameter, `请选择收信人`).SetZone(`customerId`)))
 		}
 		_, err := m.AddData(customer, user)
 		if err != nil {

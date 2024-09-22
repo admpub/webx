@@ -4,6 +4,7 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/dbschema"
@@ -131,6 +132,9 @@ func MessageView(c echo.Context) error {
 		db.Cond{`reply_id`: m.Id},
 		db.Cond{`root_id`: m.Id},
 	)).Paging(c)
+	if err != nil {
+		return err
+	}
 	rows := m.Objects()
 	replyList, err := m.WithViewedByRecipient(rows, uid, `user`)
 	for _, row := range replyList {
@@ -196,7 +200,11 @@ func MessageSendHandler(ctx echo.Context) error {
 		}
 		if err != nil {
 			if err == db.ErrNoMoreRows {
-				return ctx.E(`用户不存在`)
+				if customerID > 0 {
+					return ctx.E(`客户不存在`)
+				} else {
+					return ctx.E(`用户不存在`)
+				}
 			}
 			return err
 		}
@@ -212,6 +220,21 @@ func MessageSendHandler(ctx echo.Context) error {
 				} else {
 					userID = ctx.Formx(`recipientId`).Uint()
 				}
+			}
+			if userID > 0 {
+				err = userM.Get(nil, db.Cond{`id`: userID})
+			} else if customerID > 0 {
+				err = custM.Get(nil, db.Cond{`id`: customerID})
+			}
+			if err != nil {
+				if err == db.ErrNoMoreRows {
+					if userID > 0 {
+						return ctx.E(`用户不存在`)
+					} else {
+						return ctx.E(`客户不存在`)
+					}
+				}
+				return err
 			}
 		}
 		return MessageSend(ctx, userM.NgingUser, custM.OfficialCustomer)
@@ -259,8 +282,11 @@ func MessageSend(ctx echo.Context, targetUser *dbschema.NgingUser, targetCustome
 		if targetUser.Id > 0 {
 			m.UserB = targetUser.Id
 		} else {
-			m.UserB = targetCustomer.Uid
+			m.UserB = targetCustomer.Uid // 管理员给后台管理员X的前台账号发送的消息，允许管理员X在后台查看
 			m.CustomerB = targetCustomer.Id
+		}
+		if m.CustomerB < 1 {
+			return ctx.JSON(data.SetError(ctx.NewError(code.InvalidParameter, `请选择收信人`).SetZone(`customerId`)))
 		}
 		m.UserA = user.Id
 		_, err := m.AddData(nil, user)
