@@ -76,7 +76,7 @@
     </div><!-- media -->
     {{end}}
     </div><!-- #reply-list-box -->
-    {{$.Stored.pagination.Render}}
+    {{$.Stored.pagination.Render `#default#pagination`}}
   </div><!-- media-list -->
   <div class="form-group mg-t-20">
     <input type="text" id="input-reply-content" data-reply-id="{{$data.Id}}" class="form-control tx-size-xs" placeholder="{{`请输入回复内容`|$.T}},{{`按回车键提交`|$.T}}">
