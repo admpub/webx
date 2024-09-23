@@ -19,6 +19,7 @@ jobs:
           
       - name: Make All
         run: |
+          go mod vendor
           cd ./tool && ./build-all-platform.sh && cd ../
 
       - name: Run GoReleaser
