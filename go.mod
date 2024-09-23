@@ -11,7 +11,7 @@ go 1.23
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.3-pre45
+	github.com/admpub/nging/v5 v5.3.3-pre47
 	github.com/coscms/webcore v0.2.3
 	github.com/coscms/webfront v0.0.0-20240923063633-0862b24da648
 )
@@ -68,7 +68,7 @@ require (
 require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
-	github.com/nging-plugins/dbmanager v1.6.2
+	github.com/nging-plugins/dbmanager v1.6.3
 	github.com/silenceper/wechat/v2 v2.1.6
 )
 
@@ -254,6 +254,7 @@ require (
 	github.com/russross/blackfriday v1.6.0 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/segmentio/fasthash v1.0.3 // indirect
+	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/shirou/gopsutil/v3 v3.24.5 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
