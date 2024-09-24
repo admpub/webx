@@ -99,9 +99,10 @@ func main() {
 		os.Rename(`config/install.sql`, `config/install.sql.`+time.Now().Format(`20060102150405.000`))
 	}
 	application.Initialize()
-	webcore.ReadyStart(initEnv, &task.Module, &cloud.Module, &dbmanager.Module)
+	webcore.Start(&task.Module, &cloud.Module, &dbmanager.Module)
 }
 
 func init() {
+	bootconfig.OnStart(0, initEnv)
 	license.SetProductName(`webx`)
 }
