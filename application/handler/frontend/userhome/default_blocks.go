@@ -4,7 +4,7 @@ import (
 	userArticle "github.com/admpub/webx/application/handler/frontend/article/user"
 	"github.com/admpub/webx/application/handler/frontend/user"
 	"github.com/admpub/webx/application/handler/frontend/user/profile"
-	"github.com/coscms/webcore/registry/dashboard"
+	"github.com/coscms/webcore/library/dashboard"
 	"github.com/coscms/webfront/middleware"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"

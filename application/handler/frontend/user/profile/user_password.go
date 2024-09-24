@@ -5,7 +5,7 @@ import (
 
 	"github.com/webx-top/echo"
 
-	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/library/sendmsg"
 	xMW "github.com/coscms/webfront/middleware"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
@@ -55,7 +55,7 @@ func Password(c echo.Context) error {
 	m := modelCustomer.NewCustomer(c)
 	err := m.VerifySession(customer)
 	if err != nil {
-		if common.IsUserNotLoggedIn(err) {
+		if nerrors.IsUserNotLoggedIn(err) {
 			return c.E(`请先登录`)
 		}
 		return err

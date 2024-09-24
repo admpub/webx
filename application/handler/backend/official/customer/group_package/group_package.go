@@ -8,6 +8,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	modelLevel "github.com/coscms/webfront/model/official/level"
 )
@@ -19,7 +20,7 @@ func Index(ctx echo.Context) error {
 	if len(group) > 0 {
 		cond.AddKV(`group`, group)
 	}
-	common.SelectPageCond(ctx, cond, `id`, `title`)
+	nsql.SelectPageCond(ctx, cond, `id`, `title`)
 	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond.And()))

@@ -6,8 +6,10 @@ import (
 	"github.com/webx-top/echo/middleware/session"
 
 	"github.com/admpub/log"
+	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/coscms/webfront/library/top"
@@ -91,7 +93,7 @@ func SignUp(c echo.Context) error {
 		}
 		if pass != c.Form(`repassword`) {
 			err = c.NewError(code.InvalidParameter, `两次输入的密码不匹配`).SetZone(`repassword`)
-		} else if data := common.VerifyCaptcha(c, frontend.Name, `code`); common.IsFailureCode(data.GetCode()) {
+		} else if data := captchabiz.VerifyCaptcha(c, frontend.Name, `code`); nerrors.IsFailureCode(data.GetCode()) {
 			if err := SetJWTData(c, m); err != nil {
 				return err
 			}
@@ -190,8 +192,8 @@ func SignIn(c echo.Context) error {
 		pass := c.Form(`password`)
 		typi := c.Form(`type`)
 
-		data := common.VerifyCaptcha(c, frontend.Name, `code`)
-		if !debug && common.IsFailureCode(data.GetCode()) {
+		data := captchabiz.VerifyCaptcha(c, frontend.Name, `code`)
+		if !debug && nerrors.IsFailureCode(data.GetCode()) {
 			if err := SetJWTData(c, m); err != nil {
 				return err
 			}

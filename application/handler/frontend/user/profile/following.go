@@ -6,6 +6,7 @@ import (
 	"github.com/webx-top/echo"
 
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/dbschema"
 	xMW "github.com/coscms/webfront/middleware"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
@@ -20,7 +21,7 @@ func IsFollowed(ctx echo.Context) error {
 	m.CustomerB = ctx.Formx(`uid`).Uint64()
 	if m.CustomerA < 1 {
 		data.SetURL(xMW.URLFor(`/sign_in`))
-		data.SetError(common.ErrUserNotLoggedIn)
+		data.SetError(nerrors.ErrUserNotLoggedIn)
 		return ctx.JSON(data)
 	}
 	if m.CustomerB < 1 {

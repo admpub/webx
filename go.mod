@@ -2,7 +2,7 @@ module github.com/admpub/webx
 
 go 1.23
 
-// replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
+replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
 // replace github.com/coscms/webcore => ../../coscms/webcore
 
@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre47
-	github.com/coscms/webcore v0.2.3
-	github.com/coscms/webfront v0.0.0-20240924003713-a6a3b577e9da
+	github.com/coscms/webcore v0.3.1-0.20240924101252-20470525eae1
+	github.com/coscms/webfront v0.0.0-20240924102005-affb656234d7
 )
 
 require (
@@ -68,7 +68,7 @@ require (
 require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
-	github.com/nging-plugins/dbmanager v1.6.3
+	github.com/nging-plugins/dbmanager v1.6.4
 	github.com/silenceper/wechat/v2 v2.1.6
 )
 
@@ -231,7 +231,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/nging-plugins/dlmanager v1.6.2 // indirect
+	github.com/nging-plugins/dlmanager v1.6.3 // indirect
 	github.com/nwaples/rardecode v1.1.3 // indirect
 	github.com/onsi/ginkgo/v2 v2.20.2 // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect

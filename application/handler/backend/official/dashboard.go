@@ -7,14 +7,15 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/coscms/webcore/registry/dashboard"
+	"github.com/coscms/webcore/library/dashboard"
+	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webfront/dbschema"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func init() {
 
-	dashboard.CardRegister(
+	httpserver.Backend.Dashboard.Cards.Register(
 		(&dashboard.Card{
 			IconName:  `fa-users`,
 			IconColor: `warning`,

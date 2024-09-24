@@ -8,6 +8,7 @@ import (
 
 	"github.com/admpub/log"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/frontend"
 	"github.com/coscms/webfront/library/top"
@@ -230,7 +231,7 @@ func List(c echo.Context) error {
 func Pay(c echo.Context) error {
 	customer := sessdata.Customer(c)
 	if customer == nil {
-		return common.ErrUserNotLoggedIn
+		return nerrors.ErrUserNotLoggedIn
 	}
 	id := c.Paramx(`id`).Uint64()
 

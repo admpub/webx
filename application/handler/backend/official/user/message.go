@@ -10,6 +10,7 @@ import (
 	"github.com/coscms/webcore/dbschema"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webcore/model"
 	xschema "github.com/coscms/webfront/dbschema"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
@@ -253,7 +254,7 @@ func MessageSend(ctx echo.Context, targetUser *dbschema.NgingUser, targetCustome
 	data := ctx.Data()
 	user := backend.User(ctx)
 	if user == nil {
-		return ctx.JSON(data.SetError(common.ErrUserNotLoggedIn))
+		return ctx.JSON(data.SetError(nerrors.ErrUserNotLoggedIn))
 	}
 	if replyID == 0 {
 		if targetUser.Id > 0 && targetUser.Id == user.Id {

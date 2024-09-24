@@ -13,6 +13,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/model/official"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
@@ -45,7 +46,7 @@ func Index(ctx echo.Context) error {
 	if levelId > 0 {
 		cond.AddKV(`level_id`, levelId)
 	}
-	common.SelectPageCond(ctx, cond, `id`, `name%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `name%`)
 	if len(online) > 0 {
 		cond.AddKV(`online`, online)
 	}

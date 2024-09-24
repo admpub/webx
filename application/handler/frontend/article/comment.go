@@ -7,7 +7,9 @@ import (
 	"github.com/webx-top/echo/code"
 
 	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelComment "github.com/coscms/webfront/model/official/comment"
@@ -16,11 +18,11 @@ import (
 
 func ArticleCommentAdd(c echo.Context) (err error) {
 	customer := sessdata.Customer(c)
-	data := common.VerifyCaptcha(c, frontend.Name, `code`)
-	if common.IsFailureCode(data.GetCode()) {
+	data := captchabiz.VerifyCaptcha(c, frontend.Name, `code`)
+	if nerrors.IsFailureCode(data.GetCode()) {
 		return c.JSON(data)
 	}
-	cpt, err := common.GetCaptchaEngine(c)
+	cpt, err := captchabiz.GetCaptchaEngine(c)
 	if err != nil {
 		return c.JSON(data.SetError(err))
 	}

@@ -1,13 +1,13 @@
 package user
 
 import (
-	"github.com/coscms/webcore/registry/dashboard"
-	"github.com/coscms/webcore/registry/route"
+	"github.com/coscms/webcore/library/dashboard"
+	"github.com/coscms/webcore/library/httpserver"
 	"github.com/webx-top/echo"
 )
 
 func init() {
-	route.RegisterToGroup(`/user`, func(g echo.RouteRegister) {
+	httpserver.Backend.Router.RegisterToGroup(`/user`, func(g echo.RouteRegister) {
 		g.Route(`GET,POST`, `/message/unread_count`, MessageUnreadCount)
 		g.Route(`GET,POST`, `/message/inbox`, MessageInbox)
 		g.Route(`GET,POST`, `/message/outbox`, MessageOutbox)
@@ -17,16 +17,16 @@ func init() {
 		g.Route(`GET,POST`, `/message/send`, MessageSendHandler)
 	})
 
-	dashboard.TopButtonRegister(&dashboard.Button{
+	httpserver.Backend.Dashboard.TopButtons.Register(&dashboard.Button{
 		Tmpl: `official/user/topbutton/message`,
 	})
-	dashboard.TopButtonRegister(&dashboard.Button{
+	httpserver.Backend.Dashboard.TopButtons.Register(&dashboard.Button{
 		Tmpl: `official/user/topbutton/notice`,
 	})
-	dashboard.TopButtonRegister(&dashboard.Button{
+	httpserver.Backend.Dashboard.TopButtons.Register(&dashboard.Button{
 		Tmpl: `official/user/topbutton/home`,
 	})
-	dashboard.GlobalFooterRegister(&dashboard.GlobalFooter{
+	httpserver.Backend.Dashboard.GlobalFooters.Register(&dashboard.GlobalFooter{
 		Tmpl: `official/user/footer/footer`,
 	})
 }

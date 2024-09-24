@@ -7,13 +7,14 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	modelPage "github.com/coscms/webfront/model/official/page"
 )
 
 func BlockIndex(ctx echo.Context) error {
 	m := modelPage.NewBlock(ctx)
 	cond := db.NewCompounds()
-	common.SelectPageCond(ctx, cond, `id`, `name%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `name%`)
 	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond.And()))

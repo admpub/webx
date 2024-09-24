@@ -3,6 +3,7 @@ package user
 import (
 	"github.com/admpub/null"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webcore/model"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/db"
@@ -13,7 +14,7 @@ import (
 func SelectCustomer(ctx echo.Context) error {
 	m := modelCustomer.NewCustomer(ctx)
 	cond := &db.Compounds{}
-	common.SelectPageCond(ctx, cond, `id`, `name%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `name%`)
 	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.Select(`id`, `name`).OrderBy(`-id`)
 	}, cond.And()))
@@ -26,7 +27,7 @@ func SelectCustomer(ctx echo.Context) error {
 
 func SelectUser(ctx echo.Context) error {
 	cond := &db.Compounds{}
-	common.SelectPageCond(ctx, cond, `id`, `username%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `username%`)
 	m := model.NewUser(ctx)
 	listData := []null.StringMap{}
 	_, err := common.PagingWithLister(ctx, common.NewLister(m, &listData, func(r db.Result) db.Result {

@@ -7,6 +7,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webfront/model/official"
 )
 
@@ -15,7 +16,7 @@ func AreaIndex(ctx echo.Context) error {
 	cond := db.NewCompounds()
 	pid := ctx.Formx(`pid`).Uint()
 	cond.AddKV(`pid`, pid)
-	common.SelectPageCond(ctx, cond, `id`, `name%,pinyin%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `name%,pinyin%`)
 	queryMW := func(r db.Result) db.Result {
 		return r.OrderBy(`id`)
 	}

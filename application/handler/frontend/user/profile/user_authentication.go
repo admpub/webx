@@ -2,7 +2,7 @@ package profile
 
 import (
 	"github.com/admpub/webx/application/handler/frontend/user/binding"
-	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nerrors"
 	xMW "github.com/coscms/webfront/middleware"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/echo"
@@ -13,7 +13,7 @@ func _Authentication(ctx echo.Context) error {
 	m := modelCustomer.NewCustomer(ctx)
 	err := m.VerifySession(customer)
 	if err != nil {
-		if common.IsUserNotLoggedIn(err) {
+		if nerrors.IsUserNotLoggedIn(err) {
 			return ctx.E(`请先登录`)
 		}
 		return err

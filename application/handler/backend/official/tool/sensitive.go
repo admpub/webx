@@ -7,6 +7,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webfront/library/sensitive"
 	modelSensitive "github.com/coscms/webfront/model/official/sensitive"
 )
@@ -14,7 +15,7 @@ import (
 func sensitiveIndex(ctx echo.Context) error {
 	m := modelSensitive.NewSensitive(ctx)
 	cond := db.NewCompounds()
-	common.SelectPageCond(ctx, cond, `id`, `words%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `words%`)
 	typ := ctx.Formx(`type`).String()
 	if len(typ) > 0 {
 		cond.AddKV(`type`, typ)

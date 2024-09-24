@@ -7,6 +7,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webfront/listener/upload/friendlink"
 	"github.com/coscms/webfront/model/official"
 )
@@ -19,7 +20,7 @@ func FriendlinkFormFilter(options ...formfilter.Options) echo.FormDataFilter {
 func FriendlinkIndex(ctx echo.Context) error {
 	m := official.NewFriendlink(ctx)
 	cond := &db.Compounds{}
-	common.SelectPageCond(ctx, cond, `id`, `name%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `name%`)
 	list, err := m.ListPage(cond, `-id`)
 	ctx.Set(`listData`, list)
 	return ctx.Render(`official/article/friendlink_index`, common.Err(ctx, err))

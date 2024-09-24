@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/coscms/webcore/library/common"
-	"github.com/coscms/webcore/registry/dashboard"
+	"github.com/coscms/webcore/library/dashboard"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	registryUserhome "github.com/coscms/webfront/registry/userhome"
 	"github.com/coscms/webfront/transform/transformCustomer"

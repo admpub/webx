@@ -12,9 +12,9 @@ import (
 	"github.com/admpub/events"
 	"github.com/admpub/log"
 	formConfig "github.com/coscms/forms/config"
-	"github.com/coscms/webcore/cmd/bootconfig"
+	"github.com/coscms/webcore/library/httpserver"
+	"github.com/coscms/webcore/library/ntemplate"
 	"github.com/coscms/webfront/initialize/frontend"
-	"github.com/coscms/webfront/library/xtemplate"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/middleware/bindata"
 )
@@ -23,19 +23,19 @@ const EventNameFrontendTemplateEdited = `frontend.template.edited`
 
 func init() {
 	echo.OnCallback(EventNameFrontendTemplateEdited, func(e events.Event) error {
-		frontend.TmplPathFixers.ClearCache()
+		httpserver.Frontend.Template.ClearCache()
 		return echo.FireByName(`webx.renderer.cache.clear`)
 	})
 }
 
-func getTemplateInfo(name string) (*xtemplate.ThemeInfo, error) {
+func getTemplateInfo(name string) (*ntemplate.ThemeInfo, error) {
 	if len(name) == 0 {
 		return nil, echo.ErrNotFound
 	}
-	if !xtemplate.IsThemeName(name) {
+	if !ntemplate.IsThemeName(name) {
 		return nil, echo.ErrNotFound
 	}
-	themeInfo := &xtemplate.ThemeInfo{
+	themeInfo := &ntemplate.ThemeInfo{
 		CustomConfig: echo.H{},
 		FormConfig:   make(map[string]formConfig.Config),
 	}
@@ -62,25 +62,25 @@ func getTemplateInfo(name string) (*xtemplate.ThemeInfo, error) {
 
 var (
 	templateRoot    = `/frontend/`
-	templateDiskFS  xtemplate.FileSystems
+	templateDiskFS  ntemplate.FileSystems
 	templateDiskMx  sync.Once
 	templateEmbedFS http.FileSystem
 	templateEmbedMx sync.Once
-	embedThemes     []*xtemplate.ThemeInfo
+	embedThemes     []*ntemplate.ThemeInfo
 	embedThemesMx   sync.Once
 )
 
 func initTemplateDiskFS() {
-	templateDiskFS = xtemplate.NewFileSystems()
+	templateDiskFS = ntemplate.NewFileSystems()
 	templateDiskFS.Register(http.Dir(frontend.DefaultTemplateDir))
 	initTemplateDiskOtherFS()
 }
 
 func initTemplateEmbedFS() {
-	switch mgr := bootconfig.FrontendTmplMgr.(type) {
+	switch mgr := httpserver.Frontend.TmplMgr.(type) {
 	case *bindata.TmplManager:
 		templateEmbedFS = mgr.FileSystem
-	case *xtemplate.MultiManager:
+	case *ntemplate.MultiManager:
 		for _, m := range mgr.GetManagers() {
 			if mgr, ok := m.(*bindata.TmplManager); ok {
 				templateEmbedFS = mgr.FileSystem
@@ -115,7 +115,7 @@ func initEmbedThemes() {
 		if err != nil {
 			continue
 		}
-		themeInfo := &xtemplate.ThemeInfo{
+		themeInfo := &ntemplate.ThemeInfo{
 			Name: dir.Name(),
 		}
 		themeInfo.Decode(b)
@@ -129,12 +129,12 @@ func GetTemplateEmbedFS() http.FileSystem {
 	return templateEmbedFS
 }
 
-func GetTemplateDiskFS() xtemplate.FileSystems {
+func GetTemplateDiskFS() ntemplate.FileSystems {
 	templateDiskMx.Do(initTemplateDiskFS)
 	return templateDiskFS
 }
 
-func GetEmbedThemes() []*xtemplate.ThemeInfo {
+func GetEmbedThemes() []*ntemplate.ThemeInfo {
 	embedThemesMx.Do(initEmbedThemes)
 	return embedThemes
 }

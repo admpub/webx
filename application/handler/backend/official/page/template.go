@@ -19,13 +19,13 @@ import (
 	"github.com/admpub/log"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/httpserver"
+	"github.com/coscms/webcore/library/ntemplate"
+	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
-
-	"github.com/coscms/webfront/initialize/frontend"
-	"github.com/coscms/webfront/library/xtemplate"
 )
 
 func TemplatePreviewImage(ctx echo.Context) error {
@@ -80,8 +80,8 @@ func TemplateEnable(ctx echo.Context) error {
 	if err != nil {
 		return ctx.JSON(data.SetError(err))
 	}
-	var cfg *xtemplate.ThemeInfo
-	cfg, err = frontend.TmplPathFixers.Storer().Get(ctx, name)
+	var cfg *ntemplate.ThemeInfo
+	cfg, err = httpserver.Frontend.Template.Storer().Get(ctx, name)
 	if err != nil {
 		if !os.IsNotExist(err) {
 			return ctx.JSON(data.SetError(err))
@@ -89,34 +89,34 @@ func TemplateEnable(ctx echo.Context) error {
 	} else {
 		themeInfo.CustomConfig.DeepMerge(cfg.CustomConfig)
 	}
-	frontend.TmplPathFixers.SetThemeInfo(ctx, themeInfo)
+	httpserver.Frontend.Template.SetThemeInfo(ctx, themeInfo)
 	return ctx.JSON(data)
 }
 
 var (
-	themeList       []*xtemplate.ThemeInfo
+	themeList       []*ntemplate.ThemeInfo
 	themeLsMu       sync.RWMutex
 	themeLsInitOnce sync.Once
 )
 
-func getTemplateList() []*xtemplate.ThemeInfo {
+func getTemplateList() []*ntemplate.ThemeInfo {
 	var (
 		dirs   []fs.FileInfo
-		list   []*xtemplate.ThemeInfo
+		list   []*ntemplate.ThemeInfo
 		pdirs  = map[string]struct{}{}
-		embeds []*xtemplate.ThemeInfo
+		embeds []*ntemplate.ThemeInfo
 	)
 	dirs, err := GetTemplateDiskFS().ReadDir(`./`)
 	if err != nil && !os.IsNotExist(err) {
 		return list
 	}
-	list = make([]*xtemplate.ThemeInfo, 0, len(dirs))
+	list = make([]*ntemplate.ThemeInfo, 0, len(dirs))
 	embeds = GetEmbedThemes()
 	for _, dir := range dirs {
 		if strings.HasPrefix(dir.Name(), `.`) || !dir.IsDir() {
 			continue
 		}
-		themeInfo := &xtemplate.ThemeInfo{
+		themeInfo := &ntemplate.ThemeInfo{
 			Name: dir.Name(),
 		}
 		infoFile := filepath.Join(dir.Name(), `@info.yaml`)
@@ -163,7 +163,7 @@ func TemplateIndex(ctx echo.Context) error {
 	themeLsMu.Unlock()
 
 	ctx.Set(`listData`, list)
-	ctx.Set(`current`, frontend.TmplPathFixers.ThemeInfo(ctx))
+	ctx.Set(`current`, httpserver.Frontend.Template.ThemeInfo(ctx))
 	return ctx.Render(`official/page/template_index`, nil)
 }
 
@@ -182,7 +182,7 @@ func TemplateEdit(ctx echo.Context) error {
 	if len(name) == 0 {
 		return echo.ErrNotFound
 	}
-	if !xtemplate.IsThemeName(name) {
+	if !ntemplate.IsThemeName(name) {
 		return echo.ErrNotFound
 	}
 	themeDir := name
@@ -414,7 +414,7 @@ func TemplateEdit(ctx echo.Context) error {
 	}
 	var (
 		dirs  []fs.FileInfo
-		ldirs []xtemplate.FileInfo
+		ldirs []ntemplate.FileInfo
 		pdirs = map[string]struct{}{}
 	)
 	if tfs == nil && GetTemplateEmbedFS() != nil {
@@ -435,7 +435,7 @@ func TemplateEdit(ctx echo.Context) error {
 		goto END
 	}
 	for _, d := range dirs {
-		ldirs = append(ldirs, xtemplate.FileInfo{FileInfo: d})
+		ldirs = append(ldirs, ntemplate.FileInfo{FileInfo: d})
 		pdirs[d.Name()] = struct{}{}
 	}
 
@@ -450,13 +450,13 @@ EMD:
 			if _, ok := pdirs[v.Name()]; ok {
 				continue
 			}
-			ldirs = append(ldirs, xtemplate.FileInfo{FileInfo: v, Embed: true})
+			ldirs = append(ldirs, ntemplate.FileInfo{FileInfo: v, Embed: true})
 		}
 	} else if err != nil && !os.IsNotExist(err) {
 		return err
 	}
 
-	sort.Sort(xtemplate.SortFileInfoByFileType(ldirs))
+	sort.Sort(ntemplate.SortFileInfoByFileType(ldirs))
 	ctx.Set(`dirs`, ldirs)
 	if len(dir) > 0 {
 		dirPositions = strings.Split(strings.Trim(filepath.ToSlash(dir), `/`), `/`)
@@ -484,16 +484,16 @@ END:
 
 func TemplateConfig(ctx echo.Context) error {
 	name := ctx.Form(`name`)
-	current := frontend.TmplPathFixers.ThemeInfo(ctx)
+	current := httpserver.Frontend.Template.ThemeInfo(ctx)
 	var (
-		cfg          *xtemplate.ThemeInfo
+		cfg          *ntemplate.ThemeInfo
 		defaultColor string
 	)
 	themeInfo, err := getTemplateInfo(name)
 	if err != nil {
 		goto END
 	}
-	cfg, err = frontend.TmplPathFixers.Storer().Get(ctx, name)
+	cfg, err = httpserver.Frontend.Template.Storer().Get(ctx, name)
 	if err != nil {
 		if !os.IsNotExist(err) {
 			goto END
@@ -525,12 +525,12 @@ func TemplateConfig(ctx echo.Context) error {
 		if themeInfo.Name != `default` {
 			themeInfo.Fallback = append(themeInfo.Fallback, `default`)
 		}
-		err = frontend.TmplPathFixers.Storer().Put(ctx, name, themeInfo)
+		err = httpserver.Frontend.Template.Storer().Put(ctx, name, themeInfo)
 		if err != nil {
 			goto END
 		}
 		if current.Name == name {
-			frontend.TmplPathFixers.SetThemeInfo(ctx, themeInfo)
+			httpserver.Frontend.Template.SetThemeInfo(ctx, themeInfo)
 		}
 		common.SendOk(ctx, ctx.T(`保存成功`))
 		return ctx.Redirect(backend.URLFor(`/official/page/template_index`))
@@ -564,7 +564,7 @@ END:
 	})
 
 	themeLsMu.RLock()
-	fallbacks := make([]xtemplate.ThemeInfoLite, 0, len(themeList))
+	fallbacks := make([]ntemplate.ThemeInfoLite, 0, len(themeList))
 	for _, themeCfg := range themeList {
 		if themeCfg.Name == themeInfo.Name || themeCfg.Name == `default` {
 			continue

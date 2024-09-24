@@ -7,7 +7,9 @@ import (
 	"github.com/webx-top/echo/code"
 
 	dbschemaNging "github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/initialize/frontend"
 	xMW "github.com/coscms/webfront/middleware"
@@ -219,7 +221,7 @@ func MessageSend(ctx echo.Context, targetCustomer *dbschema.OfficialCustomer) er
 	if customer == nil {
 		user, _ = ctx.Session().Get(`user`).(*dbschemaNging.NgingUser)
 		if user == nil {
-			data.SetError(common.ErrUserNotLoggedIn)
+			data.SetError(nerrors.ErrUserNotLoggedIn)
 			return ctx.JSON(data)
 		}
 	} else {
@@ -228,8 +230,8 @@ func MessageSend(ctx echo.Context, targetCustomer *dbschema.OfficialCustomer) er
 		}
 	}
 	if ctx.IsPost() {
-		data = common.VerifyCaptcha(ctx, frontend.Name, `code`)
-		if common.IsFailureCode(data.GetCode()) {
+		data = captchabiz.VerifyCaptcha(ctx, frontend.Name, `code`)
+		if nerrors.IsFailureCode(data.GetCode()) {
 			return ctx.JSON(data)
 		}
 		encrypted := ctx.Form(`encrypted`) == `Y`

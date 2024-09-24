@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/library/top"
 	"github.com/coscms/webfront/middleware/sessdata"
 	"github.com/webx-top/com"
@@ -20,7 +20,7 @@ func Redirect(ctx echo.Context) error {
 	}
 	customer := sessdata.Customer(ctx)
 	if customer == nil {
-		return common.ErrUserNotLoggedIn
+		return nerrors.ErrUserNotLoggedIn
 	}
 	username := customer.Name
 	url := ctx.Query(`url`)

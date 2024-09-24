@@ -6,6 +6,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/model/official"
 )
@@ -13,7 +14,7 @@ import (
 func AreaGroupIndex(ctx echo.Context) error {
 	m := official.NewAreaGroup(ctx)
 	cond := db.NewCompounds()
-	common.SelectPageCond(ctx, cond, `id`, `name%,abbr%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `name%,abbr%`)
 	var err error
 	if ctx.Form(`select2`) == `1` {
 		var list []*dbschema.OfficialCommonAreaGroup

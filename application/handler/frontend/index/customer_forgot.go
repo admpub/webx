@@ -3,7 +3,9 @@ package index
 import (
 	"net/url"
 
+	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webcore/model"
 	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/coscms/webfront/library/resetpassword"
@@ -56,7 +58,7 @@ func forgotSendCode(c echo.Context) echo.Data {
 	if err != nil {
 		return data.SetError(err)
 	}
-	if common.IsCaptchaErrCode(data.GetCode()) {
+	if nerrors.IsCaptchaErrCode(data.GetCode()) {
 		return data
 	}
 	data.SetInfo(c.T(`验证码已经发送到"%v"，请注意查收`, account))
@@ -115,8 +117,8 @@ func forgotModifyPassword(c echo.Context) echo.Data {
 	if err != nil {
 		return data.SetError(err)
 	}
-	data = common.VerifyCaptcha(c, frontend.Name, `code`)
-	if common.IsFailureCode(data.GetCode()) {
+	data = captchabiz.VerifyCaptcha(c, frontend.Name, `code`)
+	if nerrors.IsFailureCode(data.GetCode()) {
 		return data
 	}
 	vm := model.NewCode(c)

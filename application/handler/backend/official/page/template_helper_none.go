@@ -6,11 +6,11 @@ package page
 import (
 	"net/http"
 
-	"github.com/coscms/webfront/initialize/frontend"
+	"github.com/coscms/webcore/library/httpserver"
 )
 
 func initTemplateDiskOtherFS() {
-	for _, tmplDir := range frontend.TmplPathFixers.TmplDirs() { // /***/template/frontend
+	for _, tmplDir := range httpserver.Frontend.Template.TmplDirs() { // /***/template/frontend
 		templateDiskFS.Register(http.Dir(tmplDir))
 	}
 }

@@ -3,7 +3,7 @@ package article
 import (
 	"github.com/webx-top/echo"
 
-	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/middleware/sessdata"
 	"github.com/coscms/webfront/model/official"
 )
@@ -13,7 +13,7 @@ func ClickFlow(c echo.Context, typ string, targetType string) error {
 	customer := sessdata.Customer(c)
 	data := c.Data()
 	if customer == nil {
-		data.SetError(common.ErrUserNotLoggedIn)
+		data.SetError(nerrors.ErrUserNotLoggedIn)
 		return c.JSON(data)
 	}
 	var id interface{}

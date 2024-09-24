@@ -7,6 +7,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webfront/dbschema"
 	modelPage "github.com/coscms/webfront/model/official/page"
 )
@@ -15,7 +16,7 @@ func LayoutIndex(ctx echo.Context) error {
 	m := modelPage.NewLayout(ctx)
 	cond := db.NewCompounds()
 	pageID := ctx.Formx(`pageId`).Uint()
-	common.SelectPageCond(ctx, cond, `id`, `name%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `name%`)
 	var pageData *dbschema.OfficialPage
 	if pageID > 0 {
 		pageM := modelPage.New(ctx)

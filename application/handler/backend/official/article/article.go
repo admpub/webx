@@ -10,6 +10,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webfront/model/official"
 	modelArticle "github.com/coscms/webfront/model/official/article"
 	modelComment "github.com/coscms/webfront/model/official/comment"
@@ -30,7 +31,7 @@ func Index(ctx echo.Context) error {
 	categoryID := ctx.Formx(`categoryId`).Uint()
 	m := modelArticle.NewArticle(ctx)
 	cond := db.NewCompounds()
-	common.SelectPageCond(ctx, cond, `id`, `title%`)
+	nsql.SelectPageCond(ctx, cond, `id`, `title%`)
 	if len(sourceTable) > 0 {
 		if len(sourceID) > 0 {
 			cond.AddKV(`source_id`, sourceID)
