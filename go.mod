@@ -2,7 +2,7 @@ module github.com/admpub/webx
 
 go 1.23
 
-replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
+// replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
 // replace github.com/coscms/webcore => ../../coscms/webcore
 
@@ -11,9 +11,9 @@ replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.3-pre47
-	github.com/coscms/webcore v0.3.1-0.20240924101252-20470525eae1
-	github.com/coscms/webfront v0.0.0-20240924102005-affb656234d7
+	github.com/admpub/nging/v5 v5.3.3-pre48
+	github.com/coscms/webcore v0.3.1
+	github.com/coscms/webfront v0.0.0-20240924110247-6856d7d9c5df
 )
 
 require (
@@ -206,7 +206,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/kisielk/errcheck v1.7.0 // indirect
-	github.com/klauspost/compress v1.17.9 // indirect
+	github.com/klauspost/compress v1.17.10 // indirect
 	github.com/klauspost/cpuid v1.3.1 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.8 // indirect
 	github.com/klauspost/pgzip v1.2.6 // indirect
@@ -223,7 +223,7 @@ require (
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
 	github.com/miekg/dns v1.1.62 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/minio-go/v7 v7.0.76 // indirect
+	github.com/minio/minio-go/v7 v7.0.77 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
