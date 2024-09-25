@@ -29,11 +29,7 @@ tower-app-*
 installed.lock
 installed2.lock
 /mydist
-/dist/config
-/dist/ftp.pid
-/dist/webx_*
-/dist/data
-/dist/packed
+/dist
 /bindata_assetfs.go
 /config/vhosts/*.conf
 /.vscode
