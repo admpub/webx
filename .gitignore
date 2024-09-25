@@ -28,6 +28,7 @@ tower-app-*
 *.pid
 installed.lock
 installed2.lock
+/mydist
 /dist/config
 /dist/ftp.pid
 /dist/webx_*
