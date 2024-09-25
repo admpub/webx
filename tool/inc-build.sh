@@ -5,7 +5,7 @@ cd tool
 export DISTPATH="../dist"
 export OSVERSIONDIR=${NGING_EXECUTOR}_${GOOS}_${GOARCH}
 export RELEASEDIR=${DISTPATH}/${OSVERSIONDIR}
-mkdir ${RELEASEDIR}
+mkdir -p ${RELEASEDIR}
 go build -tags "bindata official${BUILDTAGS}" -ldflags="-X main.BUILD_TIME=${NGING_BUILD} -X main.COMMIT=${NGING_COMMIT} -X main.VERSION=${NGING_VERSION} -X main.LABEL=${NGING_LABEL} -X main.BUILD_OS=${GOOS} -X main.BUILD_ARCH=${GOARCH} -s -w -extldflags '-static'" -o ${RELEASEDIR}/${NGING_EXECUTOR}${NGINGEX} ..
 mkdir ${RELEASEDIR}/data
 mkdir ${RELEASEDIR}/data/logs
