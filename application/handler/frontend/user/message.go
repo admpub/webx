@@ -9,9 +9,9 @@ import (
 	dbschemaNging "github.com/coscms/webcore/dbschema"
 	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/dbschema"
-	"github.com/coscms/webfront/initialize/frontend"
 	xMW "github.com/coscms/webfront/middleware"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
@@ -230,7 +230,7 @@ func MessageSend(ctx echo.Context, targetCustomer *dbschema.OfficialCustomer) er
 		}
 	}
 	if ctx.IsPost() {
-		data = captchabiz.VerifyCaptcha(ctx, frontend.Name, `code`)
+		data = captchabiz.VerifyCaptcha(ctx, httpserver.KindFrontend, `code`)
 		if nerrors.IsFailureCode(data.GetCode()) {
 			return ctx.JSON(data)
 		}
