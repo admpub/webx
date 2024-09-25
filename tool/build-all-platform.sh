@@ -33,22 +33,22 @@ export GOOS=linux
 export GOARCH=arm64
 source ${PWD}/inc-build.sh
 
-export GOOS=linux
-export GOARCH=mips
-source ${PWD}/inc-build.sh
+# export GOOS=linux
+# export GOARCH=mips
+# source ${PWD}/inc-build.sh
 
-export GOOS=linux
-export GOARCH=mips64
-source ${PWD}/inc-build.sh
+# export GOOS=linux
+# export GOARCH=mips64
+# source ${PWD}/inc-build.sh
 
 
-export GOOS=linux
-export GOARCH=mipsle
-source ${PWD}/inc-build.sh
+# export GOOS=linux
+# export GOARCH=mipsle
+# source ${PWD}/inc-build.sh
 
-export GOOS=linux
-export GOARCH=mips64le
-source ${PWD}/inc-build.sh
+# export GOOS=linux
+# export GOARCH=mips64le
+# source ${PWD}/inc-build.sh
 
 
 # windows 放到最后
