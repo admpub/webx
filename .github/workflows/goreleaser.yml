@@ -26,6 +26,6 @@ jobs:
         uses: goreleaser/goreleaser-action@v5
         with:
           version: latest
-          args: release --clean --release-notes=./release.md
+          args: release --release-notes=./release.md
         env:
           GITHUB_TOKEN: ${{ secrets.GPR_TOKEN }}
