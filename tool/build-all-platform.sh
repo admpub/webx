@@ -16,6 +16,10 @@ export GOOS=darwin
 export GOARCH=amd64
 source ${PWD}/inc-build.sh
 
+export GOOS=darwin
+export GOARCH=arm64
+source ${PWD}/inc-build.sh
+
 
 export GOOS=freebsd
 export GOARCH=386
