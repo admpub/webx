@@ -21,6 +21,7 @@ jobs:
         run: |
           go mod vendor
           cd ./tool && ./build-all-platform.sh && cd ../
+          rm -rf ./mydist && mv ./dist ./mydist
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5

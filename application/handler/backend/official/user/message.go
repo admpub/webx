@@ -265,7 +265,7 @@ func MessageSend(ctx echo.Context, targetUser *dbschema.NgingUser, targetCustome
 		}
 	}
 	if ctx.IsPost() {
-		// data = common.VerifyCaptcha(ctx, frontend.Name, `code`)
+		// data = common.VerifyCaptcha(ctx, httpserver.KindFrontend, `code`)
 		// if common.IsFailureCode(data.GetCode()) {
 		// 	return ctx.JSON(data)
 		// }

@@ -28,11 +28,8 @@ tower-app-*
 *.pid
 installed.lock
 installed2.lock
-/dist/config
-/dist/ftp.pid
-/dist/webx_*
-/dist/data
-/dist/packed
+/mydist
+/dist
 /bindata_assetfs.go
 /config/vhosts/*.conf
 /.vscode

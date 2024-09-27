@@ -5,9 +5,9 @@ import (
 
 	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webcore/model"
-	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/coscms/webfront/library/resetpassword"
 	"github.com/coscms/webfront/library/sendmsg"
 	"github.com/coscms/webfront/middleware/sessdata"
@@ -117,7 +117,7 @@ func forgotModifyPassword(c echo.Context) echo.Data {
 	if err != nil {
 		return data.SetError(err)
 	}
-	data = captchabiz.VerifyCaptcha(c, frontend.Name, `code`)
+	data = captchabiz.VerifyCaptcha(c, httpserver.KindFrontend, `code`)
 	if nerrors.IsFailureCode(data.GetCode()) {
 		return data
 	}

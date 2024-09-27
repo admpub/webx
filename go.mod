@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre49
-	github.com/coscms/webcore v0.3.3
-	github.com/coscms/webfront v0.0.0-20240925064603-66b7d0e52acb
+	github.com/coscms/webcore v0.3.9
+	github.com/coscms/webfront v0.0.0-20240926152001-a494f6051d70
 )
 
 require (
@@ -53,9 +53,9 @@ require (
 	github.com/stretchr/testify v1.9.0
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.5
-	github.com/webx-top/com v1.3.4
+	github.com/webx-top/com v1.3.7
 	github.com/webx-top/db v1.27.10
-	github.com/webx-top/echo v1.10.3
+	github.com/webx-top/echo v1.10.6
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.3.1
@@ -184,7 +184,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/gomodule/redigo v1.9.2 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20240910150728-a0b0bb1d4134 // indirect
+	github.com/google/pprof v0.0.0-20240925223930-fa3061bff0bc // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/css v1.0.1 // indirect
 	github.com/gorilla/schema v1.4.1 // indirect

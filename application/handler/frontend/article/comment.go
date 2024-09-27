@@ -9,8 +9,8 @@ import (
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webcore/library/nerrors"
-	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelComment "github.com/coscms/webfront/model/official/comment"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
@@ -18,7 +18,7 @@ import (
 
 func ArticleCommentAdd(c echo.Context) (err error) {
 	customer := sessdata.Customer(c)
-	data := captchabiz.VerifyCaptcha(c, frontend.Name, `code`)
+	data := captchabiz.VerifyCaptcha(c, httpserver.KindFrontend, `code`)
 	if nerrors.IsFailureCode(data.GetCode()) {
 		return c.JSON(data)
 	}
@@ -26,7 +26,7 @@ func ArticleCommentAdd(c echo.Context) (err error) {
 	if err != nil {
 		return c.JSON(data.SetError(err))
 	}
-	data.SetData(cpt.MakeData(c, frontend.Name, `code`))
+	data.SetData(cpt.MakeData(c, httpserver.KindFrontend, `code`))
 	if customer == nil {
 		name := c.Form(`name`)
 		pass := c.Form(`password`)
