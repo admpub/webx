@@ -19,10 +19,10 @@
 <meta property="og:title" content="{{Block `title`}}{{Config.base.siteName}}{{/Block}}" />
 <meta property="og:description" content="{{Block `description`}}{{Config.base.siteName}}{{/Block}}" />
 <meta property="og:image" content="{{Block `image`}}{{/Block}}" />
-<meta property="og:url" content="{{Block `url`}}{{$.RequestURI}}{{/Block}}" />
+<meta property="og:url" content="{{Block `url`}}{{$.FullRequestURI}}{{/Block}}" />
 <meta property="og:release_date" content="{{Block `releaseDate`}}{{Now.Format `2006-01-02`}}{{/Block}}" />
 <!-- og-tag:end -->
-	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="{{$.RootPrefix}}/favicon.ico">
   <title>{{Block "title"}}{{Config.base.siteName}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan}}{{end}}{{/Block}}</title>
 	<link combine href="{{AssetsURL}}/css/font-awesome.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   <link combine href="{{AssetsXURL}}/css/Ionicons/css/ionicons.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">

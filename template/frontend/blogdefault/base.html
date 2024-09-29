@@ -9,7 +9,7 @@
         <meta name="keywords" content="{{Block `keywords`}}{{Config.base.siteMetaKeywords|Default Config.base.siteName}}{{/Block}}">
         <meta name="description" content="{{Block `description`}}{{if Config.base.siteMetaKeywords}}{{Config.base.siteMetaKeywords}}{{else}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{end}}{{/Block}}">
         <!-- ============= FAVICON ICON ============= -->
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="{{$.RootPrefix}}/favicon.ico" />
         <!-- ============= VENDORS CSS ============= -->
         <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/vendors/icons.min.css?t={{BuildTime}}" />
         <link rel="stylesheet" href="{{AssetsXURL}}/blogdefault/css/vendors/slick.min.css?t={{BuildTime}}" />
