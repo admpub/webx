@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre49
-	github.com/coscms/webcore v0.3.11
-	github.com/coscms/webfront v0.0.0-20240930085815-f8e450d2860a
+	github.com/coscms/webcore v0.3.12
+	github.com/coscms/webfront v0.0.0-20241001060234-8f126f8edb76
 )
 
 require (
@@ -53,7 +53,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.5
-	github.com/webx-top/com v1.3.9
+	github.com/webx-top/com v1.3.10
 	github.com/webx-top/db v1.27.11
 	github.com/webx-top/echo v1.10.9
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
