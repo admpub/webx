@@ -147,7 +147,7 @@ function commentLoadList(){
     $.get(window.location.href,{partial:1},function(r){
         var box=$('#comment-list-container');
         box.html(r);
-        App.editor.markdownToHTML(box);
+        App.editor.attachContype(box);
         box.find('.switch:not(.has-switch)').bootstrapSwitch();
     },'html');
 }
@@ -164,8 +164,7 @@ $('#comment-form').on('submit',function(e){
         App.message({text:r.Code>0?LANG_COMMENT_SUCCESS:r.Info,class_name:r.Code>0?'success':'error'});
     },'json');
 });
-    var box=$('#comment-list-container');
-    App.editor.markdownToHTML(box,true);
+App.editor.attachContype($('#comment-list-container'));
 });
 </script>
 {{/Block}}

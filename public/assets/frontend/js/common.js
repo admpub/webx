@@ -1095,20 +1095,7 @@ function setNavActive(){
 }
 function attachContype(container){
     if(typeof App.editor === 'undefined') return;
-    var $container=container?$(container):$(document);
-    $container.find('[data-contype]:not([contype-attached])').each(function(){
-        $(this).attr('contype-attached','1');
-        var contype=$(this).data('contype');
-        switch(contype){
-            case 'markdown':
-            App.editor.markdownToHTML(this);
-            break;
-            case 'html':
-            var $code=$(this).find('pre[class^=language-]');
-            if($code.length>0)App.editor.codeHighlight($code);
-            break;
-        }
-    })
+    App.editor.attachContype(container);
 }
 function commonInit($,App){
     if(window.errorMSG) App.message({title: App.i18n.SYS_INFO, text: App.ifTextNl2br(window.errorMSG), class_name: "danger"});

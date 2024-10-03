@@ -27,7 +27,8 @@ nav .page-item:not(.active):not(.disabled) .page-link{background-color: #3f434d 
 .input-group-addon.bg-white:not(.btn){background-color: #000 !important;}
 nav .page-item.disabled .page-link{background-color: transparent !important;}
 
-.modal-content{background-color:#3a4042}
+.modal-content,.modal-content .card{background-color:#3a4042 !important}
+.modal-title{color:#ddd}
 .modal-header,.modal-footer{border-color: #4a5254 !important;}
 
 #sectionSignIn{background: #000 !important;}

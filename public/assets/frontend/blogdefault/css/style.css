@@ -206,7 +206,13 @@ button {
     max-width: 1350px !important;
   }
 }
-
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+.pd-10{
+  padding: 10px
+}
 /* ------------------------------------------------------------------
     Template All Variables Defined - Value Change with Your's Need
  -------------------------------------------------------------------- */
@@ -1150,11 +1156,6 @@ button {
 
 button {
   border: none;
-}
-
-section {
-  position: relative;
-  z-index: 1;
 }
 
 section.pt-235 {

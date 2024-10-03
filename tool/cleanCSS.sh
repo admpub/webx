@@ -23,7 +23,10 @@ cssdalek \
   --word '../template/frontend/blogdefault/*/*/*.html'\
   --word '../public/assets/frontend/js/*.js'\
   --word '../public/assets/frontend/js/page/*.js'\
-  --word '../public/assets/frontend/js/page/*/*.js' > ../public/assets/frontend/blogdefault/css/vendors/bootstrap.lite.min.css
+  --word '../public/assets/frontend/js/page/*/*.js'\
+  --include-selector ".modal-backdrop"\
+  --include-selector ".modal-backdrop.show"\
+  --include-selector ".modal-backdrop.fade" > ../public/assets/frontend/blogdefault/css/vendors/bootstrap.lite.min.css
 
 cssdalek \
   --css '../public/assets/frontend/blogdefault/css/style.css'\
@@ -33,6 +36,7 @@ cssdalek \
   --word '../public/assets/frontend/js/*.js'\
   --word '../public/assets/frontend/js/page/*.js'\
   --word '../public/assets/frontend/js/page/*/*.js'\
+  --include-selector ".progress-wrap.active-progress"\
   --include-id 'captchaImage' > ../public/assets/frontend/blogdefault/css/style.lite.min.css
 
 
