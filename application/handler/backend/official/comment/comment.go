@@ -1,8 +1,6 @@
 package comment
 
 import (
-	"errors"
-
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/sqlbuilder"
 	"github.com/webx-top/echo"
@@ -109,13 +107,16 @@ func Add(ctx echo.Context) error {
 	if targetID == 0 {
 		return ctx.E(`targetId无效`)
 	}
-	articleM := modelArticle.NewArticle(ctx)
-	err := articleM.Get(nil, `id`, targetID)
-	if err != nil {
-		if err == db.ErrNoMoreRows {
-			err = errors.New(`文章不存在`)
+	tp, ok := modelComment.CommentAllowTypes[targetType]
+	if !ok {
+		return ctx.E(`不支持评论目标: %v`, targetType)
+	}
+	var err error
+	if tp.GetTarget != nil {
+		_, _, _, err = tp.GetTarget(ctx, targetID)
+		if err != nil {
+			return err
 		}
-		return err
 	}
 	m := modelComment.NewComment(ctx)
 	user := backend.User(ctx)
