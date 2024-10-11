@@ -3,6 +3,7 @@ package oauth
 import (
 	"github.com/admpub/log"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webfront/library/oauthutils"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/handler/oauth2"
@@ -19,7 +20,7 @@ func Default() *oauth2.OAuth {
 
 // initOauth 第三方登录
 func initOauth(e *echo.Echo) {
-	oauthutils.InitOauth(e)
+	oauthutils.InitOauth(e, httpserver.SearchEngineNoindex())
 	if config.IsInstalled() {
 		if err := SetSMSConfigs(); err != nil {
 			log.Error(err)

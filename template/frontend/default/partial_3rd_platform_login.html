@@ -7,9 +7,9 @@
                 <div class="heading-hr mg-b-5">{{`用第三方账号登录`|$.T}}</div>
                 {{- range $k, $v := $oauthAccounts -}}
                 {{- if $v.IconImage -}}
-                <a href="{{WithURLParams $v.LoginURL `next` $returnURL}}" title="{{$v.Name}}" data-toggle="tooltip" data-placement="top"><img src="{{$v.IconImage}}" alt="{{$v.Name}}" /></a>
+                <a rel="nofollow" href="{{WithURLParams $v.LoginURL `next` $returnURL}}" title="{{$v.Name}}" data-toggle="tooltip" data-placement="top"><img src="{{$v.IconImage}}" alt="{{$v.Name}}" /></a>
                 {{- else -}}
-                <a href="{{WithURLParams $v.LoginURL `next` $returnURL}}" title="{{$v.Name}}" class="btn btn-xs btn-info btn-icon mg-r-5 mg-b-10 {{$v.WrapClass}}" data-toggle="tooltip" data-placement="top">
+                <a rel="nofollow" href="{{WithURLParams $v.LoginURL `next` $returnURL}}" title="{{$v.Name}}" class="btn btn-xs btn-info btn-icon mg-r-5 mg-b-10 {{$v.WrapClass}}" data-toggle="tooltip" data-placement="top">
                     <i class="{{if $v.IconClass}}{{$v.IconClass}}{{else}}fa fa-{{$v.English}}{{end}}"></i>
                 </a>
                 {{- end -}}
