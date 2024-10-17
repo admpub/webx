@@ -2947,7 +2947,8 @@ ul.c-bredcrumb li,
   float:right;margin-right: 5px;
 }
 
-.header-wrapper .submenu-wrapper .submenu .submenu-link:hover {
+.header-wrapper .submenu-wrapper .submenu .submenu-link:hover,
+.header-wrapper .submenu-wrapper .submenu .submenu-link.active {
   color: #177ef7;
 }
 
@@ -3118,7 +3119,7 @@ ul.c-bredcrumb li,
 .mobile-nav-one-wrapper .mobile-nav .sidebar-nav .metismenu ul ul a {
   padding: 10px 15px 10px 45px;
 }
-
+.mobile-nav-one-wrapper .mobile-nav .sidebar-nav .metismenu a.active,
 .mobile-nav-one-wrapper .mobile-nav .sidebar-nav .metismenu a:hover,
 .mobile-nav-one-wrapper .mobile-nav .sidebar-nav .metismenu a:focus,
 .mobile-nav-one-wrapper .mobile-nav .sidebar-nav .metismenu a:active {

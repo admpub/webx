@@ -14,6 +14,7 @@ cssdalek \
   --include-selector ".sf-menu.nav-info a"\
   --include-selector ".sf-menu.nav-info ul"\
   --include-selector "menu.nav-info ul li a"\
+  --include-selector ".sf-menu.nav-info .active"\
   --include-id 'captchaImage' > ../public/assets/frontend/css/frontend.lite.min.css
 
 cssdalek \
