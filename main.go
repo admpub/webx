@@ -34,7 +34,7 @@ import (
 
 	_ "github.com/admpub/bindata/v3"
 	"github.com/admpub/log"
-	_ "github.com/admpub/nging/v5/application/handler"
+	_ "github.com/admpub/nging/v5/application"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 
