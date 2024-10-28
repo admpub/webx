@@ -425,7 +425,7 @@
       $(window).trigger('scroll');
     },
     getImgNaturalDimensions:function (oImg, callback) {
-      if (!oImg.naturalWidth) { // 现代浏览器
+      if (oImg.naturalWidth) { // 现代浏览器
         callback({w: oImg.naturalWidth, h:oImg.naturalHeight});
         return;
       } 
