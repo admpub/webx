@@ -39,5 +39,6 @@ func Segment(ctx echo.Context) error {
 	}
 	ctx.Set(`modes`, SegmentMode.Slice())
 	ctx.Set(`isInitialized`, segment.IsInitialized())
+	ctx.Set(`engine`, segment.DefaultEngine.Load())
 	return ctx.Render(`official/tool/segment/index`, common.Err(ctx, err))
 }
