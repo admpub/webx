@@ -70,7 +70,10 @@ func successHandler(ctx echo.Context) error {
 	if len(next) == 0 {
 		next, _ = ctx.Session().Get(`next`).(string)
 		if len(next) == 0 {
-			next = sessdata.URLFor(`/index`)
+			next = ctx.Cookie().Get(`next`)
+			if len(next) == 0 {
+				next = sessdata.URLFor(`/index`)
+			}
 		}
 	}
 	return ctx.Redirect(next)
