@@ -68,13 +68,7 @@ func successHandler(ctx echo.Context) error {
 		return err
 	}
 	if len(next) == 0 {
-		next, _ = ctx.Session().Get(`next`).(string)
-		if len(next) == 0 {
-			next = ctx.Cookie().Get(`next`)
-			if len(next) == 0 {
-				next = sessdata.URLFor(`/index`)
-			}
-		}
+		next = common.GetSavedNextURL(ctx, sessdata.URLFor(`/index`))
 	}
 	return ctx.Redirect(next)
 }
