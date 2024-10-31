@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre55
-	github.com/coscms/webcore v0.3.26
-	github.com/coscms/webfront v0.0.0-20241031070723-8905d268c088
+	github.com/coscms/webcore v0.3.27
+	github.com/coscms/webfront v0.0.0-20241031072834-af2495daa9a6
 )
 
 require (
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.5
 	github.com/webx-top/com v1.3.11
 	github.com/webx-top/db v1.27.15
-	github.com/webx-top/echo v1.12.3
+	github.com/webx-top/echo v1.12.4
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.3.1
@@ -262,8 +262,8 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/studio-b12/gowebdav v0.9.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
-	github.com/tdewolff/minify/v2 v2.20.37 // indirect
-	github.com/tdewolff/parse/v2 v2.7.16 // indirect
+	github.com/tdewolff/minify/v2 v2.21.1 // indirect
+	github.com/tdewolff/parse/v2 v2.7.19 // indirect
 	github.com/tidwall/btree v1.7.0 // indirect
 	github.com/tidwall/buntdb v1.3.2 // indirect
 	github.com/tidwall/gjson v1.18.0 // indirect
