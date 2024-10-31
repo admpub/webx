@@ -9,6 +9,7 @@ import (
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/handler/oauth2"
 
+	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/model"
 	"github.com/coscms/webfront/library/oauthutils"
