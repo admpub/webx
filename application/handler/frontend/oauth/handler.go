@@ -155,7 +155,7 @@ func checkOrUpdateUser(ctx echo.Context, oauthM *modelCustomer.OAuth, ouser *got
 	if ouser.RefreshToken != oauthM.RefreshToken {
 		oauthSet[`refresh_token`] = ouser.RefreshToken
 	}
-	if !ouser.ExpiresAt.IsZero() {
+	if !ouser.ExpiresAt.IsZero() && ouser.ExpiresAt.Unix() > 0 {
 		oauthSet[`expired`] = ouser.ExpiresAt.Unix()
 	}
 
