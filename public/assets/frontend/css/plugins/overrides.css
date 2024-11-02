@@ -1835,6 +1835,10 @@
   margin: 0;
 }
 
+label.custom-control{
+  margin-bottom: 0;
+}
+
 .input-group-inverse .form-control {
   background-color: rgba(0, 0, 0, 0.1);
   color: #fff;
