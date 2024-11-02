@@ -1830,13 +1830,13 @@
   padding-bottom: 0.125rem;
 }
 
+label.custom-control{
+  margin-bottom: 0;
+}
+
 .input-group-addon .custom-control {
   padding-left: 1rem;
   margin: 0;
-}
-
-label.custom-control{
-  margin-bottom: 0;
 }
 
 .input-group-inverse .form-control {
