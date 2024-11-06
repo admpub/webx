@@ -8,9 +8,9 @@ import (
 func init() {
 	frontend.RegisterToGroup(`/user`, func(u echo.RouteRegister) {
 		g := u.Group(`/article`)
-		g.Route(`GET,POST`, `/create`, Create)
-		g.Route(`GET,POST`, `/edit/:id`, Edit)
-		g.Get(`/list`, List)
-		g.Route(`GET,POST`, `/delete/:id`, Delete)
+		g.Route(`GET,POST`, `/create`, Create).SetName(`user.article.create`)
+		g.Route(`GET,POST`, `/edit/:id`, Edit).SetName(`user.article.edit`)
+		g.Get(`/list`, List).SetName(`user.article.list`)
+		g.Route(`GET,POST`, `/delete/:id`, Delete).SetName(`user.article.delete`)
 	})
 }

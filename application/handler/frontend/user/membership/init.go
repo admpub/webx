@@ -11,8 +11,8 @@ func init() {
 	frontend.RegisterToGroup(`/user`, func(u echo.RouteRegister) {
 		// 会员套餐
 		agentG := u.Group(`/membership`)
-		agentG.Route(`GET`, `/index`, Index)
-		agentG.Route(`GET,POST`, `/buy/:packageId`, Buy)
+		agentG.Route(`GET`, `/index`, Index).SetName(`user.membership`)
+		agentG.Route(`GET,POST`, `/buy/:packageId`, Buy).SetName(`user.membership.buy`)
 	})
 
 }

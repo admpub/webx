@@ -13,21 +13,21 @@ import (
 func init() {
 	frontend.RegisterToGroup(`/user`, func(u echo.RouteRegister) {
 		// 用户个人
-		u.Route(`GET`, `/index`, Index)
-		u.Route(`GET,POST`, `/message/unread_count`, MessageUnreadCount)
-		u.Route(`GET,POST`, `/message/inbox`, MessageInbox)
-		u.Route(`GET,POST`, `/message/outbox`, MessageOutbox)
-		u.Route(`GET,POST`, `/message/system`, SystemMessage)
-		u.Route(`GET,POST`, `/message/view/:type/:id`, MessageView)
-		u.Route(`GET,POST`, `/message/send`, MessageSendHandler)
+		u.Route(`GET`, `/index`, Index).SetName(`user.index`)
+		u.Route(`GET,POST`, `/message/unread_count`, MessageUnreadCount).SetName(`user.message.unread_count`)
+		u.Route(`GET,POST`, `/message/inbox`, MessageInbox).SetName(`user.message.inbox`)
+		u.Route(`GET,POST`, `/message/outbox`, MessageOutbox).SetName(`user.message.outbox`)
+		u.Route(`GET,POST`, `/message/system`, SystemMessage).SetName(`user.message.system`)
+		u.Route(`GET,POST`, `/message/view/:type/:id`, MessageView).SetName(`user.message.view`)
+		u.Route(`GET,POST`, `/message/send`, MessageSendHandler).SetName(`user.message.send`)
 
 		g := u.Group(`/file`)
 		// 上传
-		g.Route(`POST`, `/upload`, Upload)
+		g.Route(`POST`, `/upload`, Upload).SetName(`user.file.upload`)
 		// 裁剪图片
-		g.Route(`GET,POST`, `/crop`, Crop)
+		g.Route(`GET,POST`, `/crop`, Crop).SetName(`user.file.crop`)
 		// 图片管理
-		g.Route(`GET,POST`, `/finder`, Finder)
+		g.Route(`GET,POST`, `/finder`, Finder).SetName(`user.file.finder`)
 
 	}, xMW.AuthCheck)
 

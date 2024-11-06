@@ -7,6 +7,6 @@ import (
 
 func init() {
 	frontend.RegisterToGroup(`/image`, func(g echo.RouteRegister) {
-		g.Route(`GET`, `/proxy/:token`, Proxy)
+		g.Route(`GET`, `/proxy/:token`, Proxy).SetName(`image.proxy`)
 	})
 }
