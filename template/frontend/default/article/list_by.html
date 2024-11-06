@@ -1,5 +1,5 @@
 {{Strip}}{{Extend "base"}}
-{{Block "title"}}{{- "文章列表"|$.T}} {{if $.Stored.sourceInfo.V}}- {{$.Stored.sourceInfo.V}}{{end}} - {{Super}}{{/Block}}
+{{Block "title"}}{{- "文章列表"|$.T}} {{if $.Stored.sourceInfo.V}}- {{$.Stored.sourceInfo.V}}{{end}}{{/Block}}
 {{Block "keywords"}}{{if $.Stored.sourceInfo.V}},{{$.Stored.sourceInfo.V}}{{end}}{{/Block}}
 {{Block "description"}}{{$.Stored.sourceInfo.V}}{{/Block}}
 {{Block "bodyAttr"}} class="pd-t-70"{{/Block}}
