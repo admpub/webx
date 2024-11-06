@@ -31,7 +31,10 @@ func ClickFlow(c echo.Context, typ string, targetType string) error {
 		}
 		id = targetID
 	} else {
-		targetSN := c.Formx(`sn`).String()
+		targetSN := c.Param(`sn`)
+		if len(targetSN) == 0 {
+			targetSN = c.Formx(`sn`).String()
+		}
 		if len(targetSN) == 0 {
 			data.SetInfo(c.T(`id无效`), 0)
 			return c.JSON(data)
