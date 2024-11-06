@@ -18,13 +18,12 @@ func ClickFlow(c echo.Context, typ string, targetType string) error {
 		return c.JSON(data)
 	}
 	var id interface{}
-	var targetID uint64
-	paramID := c.Param(`id`)
-	if len(paramID) == 0 {
-		paramID = c.Form(`id`)
+	inputID := c.Param(`id`)
+	if len(inputID) == 0 {
+		inputID = c.Form(`id`)
 	}
-	if len(paramID) > 0 {
-		targetID = param.AsUint64(paramID)
+	if len(inputID) > 0 {
+		targetID := param.AsUint64(inputID)
 		if targetID == 0 {
 			data.SetInfo(c.T(`id无效`), 0)
 			return c.JSON(data)
