@@ -7,7 +7,7 @@ import (
 
 func init() {
 	frontend.RegisterToGroup(`/u`, func(g echo.RouteRegister) {
-		g.Route(`GET,POST`, `/:customerId`, Index)
-		g.Route(`GET,POST`, `/:customerId/:operate`, Index)
+		g.Route(`GET,POST`, `/:customerId`, Index).SetName(`user.home`)
+		g.Route(`GET,POST`, `/:customerId/:operate`, Index).SetName(`user.home.page`)
 	})
 }
