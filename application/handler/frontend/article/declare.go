@@ -22,8 +22,9 @@ func ClickFlow(c echo.Context, typ string, targetType string) error {
 	if len(inputID) == 0 {
 		inputID = c.Form(`id`)
 	}
+	var targetID uint64
 	if len(inputID) > 0 {
-		targetID := param.AsUint64(inputID)
+		targetID = param.AsUint64(inputID)
 		if targetID == 0 {
 			data.SetInfo(c.T(`id无效`), 0)
 			return c.JSON(data)
