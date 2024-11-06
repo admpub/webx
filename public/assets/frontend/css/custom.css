@@ -15,6 +15,10 @@
   display: block;
 }
 
+.rounded-circle2 {
+  border-radius: 100px;
+}
+
 .bd-gray-light {
   border-color: #f1f1f1 !important;
 }
