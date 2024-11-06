@@ -2,6 +2,7 @@ package article
 
 import (
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/middleware/sessdata"
@@ -17,21 +18,25 @@ func ClickFlow(c echo.Context, typ string, targetType string) error {
 		return c.JSON(data)
 	}
 	var id interface{}
-	targetID := c.Formx(`id`).Uint64()
-	if targetID == 0 {
-		targetID = c.Paramx(`id`).Uint64()
+	var targetID uint64
+	paramID := c.Param(`id`)
+	if len(paramID) == 0 {
+		paramID = c.Form(`id`)
+	}
+	if len(paramID) > 0 {
+		targetID = param.AsUint64(paramID)
 		if targetID == 0 {
-			targetSN := c.Formx(`sn`).String()
-			if len(targetSN) == 0 {
-				data.SetInfo(c.T(`id无效`), 0)
-				return c.JSON(data)
-			}
-			id = targetSN
-		} else {
-			id = targetID
+			data.SetInfo(c.T(`id无效`), 0)
+			return c.JSON(data)
 		}
-	} else {
 		id = targetID
+	} else {
+		targetSN := c.Formx(`sn`).String()
+		if len(targetSN) == 0 {
+			data.SetInfo(c.T(`id无效`), 0)
+			return c.JSON(data)
+		}
+		id = targetSN
 	}
 	target, ok := official.ClickFlowTargets[targetType]
 	if !ok {
