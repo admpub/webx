@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre55
 	github.com/coscms/webcore v0.3.29
-	github.com/coscms/webfront v0.0.0-20241102055654-86deb177b0d4
+	github.com/coscms/webfront v0.0.0-20241106072334-a4bcb12e7a70
 )
 
 require (
@@ -54,7 +54,7 @@ require (
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.5
 	github.com/webx-top/com v1.3.11
-	github.com/webx-top/db v1.27.15
+	github.com/webx-top/db v1.27.16
 	github.com/webx-top/echo v1.12.4
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
@@ -178,7 +178,7 @@ require (
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
-	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
+	github.com/golang-jwt/jwt/v4 v4.5.1 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/snappy v0.0.4 // indirect
