@@ -18,13 +18,17 @@ func ClickFlow(c echo.Context, typ string, targetType string) error {
 	}
 	var id interface{}
 	targetID := c.Formx(`id`).Uint64()
-	targetSN := c.Formx(`sn`).String()
 	if targetID == 0 {
-		if len(targetSN) > 0 {
+		targetID = c.Paramx(`id`).Uint64()
+		if targetID == 0 {
+			targetSN := c.Formx(`sn`).String()
+			if len(targetSN) == 0 {
+				data.SetInfo(c.T(`id无效`), 0)
+				return c.JSON(data)
+			}
 			id = targetSN
 		} else {
-			data.SetInfo(c.T(`id无效`), 0)
-			return c.JSON(data)
+			id = targetID
 		}
 	} else {
 		id = targetID
