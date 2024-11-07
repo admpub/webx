@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre55
 	github.com/coscms/webcore v0.3.30
-	github.com/coscms/webfront v0.0.0-20241106110636-789f173352ce
+	github.com/coscms/webfront v0.0.0-20241107035151-c1574cd456e2
 )
 
 require (
@@ -54,7 +54,7 @@ require (
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.5
 	github.com/webx-top/com v1.3.13
-	github.com/webx-top/db v1.27.16
+	github.com/webx-top/db v1.27.18
 	github.com/webx-top/echo v1.12.7
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
@@ -68,7 +68,7 @@ require (
 require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
-	github.com/nging-plugins/dbmanager v1.6.6
+	github.com/nging-plugins/dbmanager v1.6.7
 	github.com/silenceper/wechat/v2 v2.1.7
 )
 
@@ -184,7 +184,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/gomodule/redigo v1.9.2 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20241029153458-d1b30febd7db // indirect
+	github.com/google/pprof v0.0.0-20241101162523-b92577c0c142 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/css v1.0.1 // indirect
 	github.com/gorilla/schema v1.4.1 // indirect
@@ -237,7 +237,7 @@ require (
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
-	github.com/phuslu/iploc v1.0.20240930 // indirect
+	github.com/phuslu/iploc v1.0.20241031 // indirect
 	github.com/phuslu/lru v1.0.16 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
