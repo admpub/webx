@@ -7,7 +7,7 @@
 {{/Block}}
 {{Block "head"}}
 {{- range $k, $v := $.Stored.permissionTypes -}}
-{{- if call $.Func.IsValidPermHandler $v.X -}}
+{{- if call $.IsValid $v.X -}}
 {{- $head := $v.X.Tmpl `head` -}}
 {{- if $head -}}
 {{$.Fetch $head $}}
@@ -34,7 +34,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"角色名"|$.T}}</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" required name="name" value="{{$.Form "name"}}">
+                    <input type="text" class="form-control" required name="name" value="{{$.Form `name`}}">
                 </div>
               </div>
               <div class="form-group">
@@ -48,11 +48,11 @@
                 <div class="col-sm-9">
                   {{$v := $.Form "disabled"}}
                   <span class="radio radio-success radio-inline">
-                      <input type="radio" value="N" name="disabled"{{if or (eq $v "N") (eq $v "")}} checked{{end}} id="disabled-N"> 
+                      <input type="radio" value="N" name="disabled"{{if eq $v `N` ``}} checked{{end}} id="disabled-N"> 
                       <label for="disabled-N">{{"启用"|$.T}}</label>
                   </span>
                   <span class="radio radio-danger radio-inline">
-                    <input type="radio" value="Y" name="disabled"{{if eq $v "Y"}} checked{{end}} id="disabled-Y"> 
+                    <input type="radio" value="Y" name="disabled"{{if eq $v `Y`}} checked{{end}} id="disabled-Y"> 
                     <label for="disabled-Y">{{"禁用"|$.T}}</label>
                   </span>
                 </div>
@@ -62,11 +62,11 @@
                 <div class="col-sm-9">
                   {{$v := $.Form "isDefault" "N"}}
                   <span class="radio radio-primary radio-inline">
-                    <input type="radio" value="N" name="isDefault"{{if eq $v "N"}} checked{{end}} id="isDefault-N"> 
+                    <input type="radio" value="N" name="isDefault"{{if eq $v `N`}} checked{{end}} id="isDefault-N"> 
                     <label for="isDefault-N">{{"非默认"|$.T}}</label>
                   </span>
                   <span class="radio radio-success radio-inline">
-                    <input type="radio" value="Y" name="isDefault"{{if eq $v "Y"}} checked{{end}} id="isDefault-Y"> 
+                    <input type="radio" value="Y" name="isDefault"{{if eq $v `Y`}} checked{{end}} id="isDefault-Y"> 
                     <label for="isDefault-Y">{{"默认角色"|$.T}}</label>
                   </span>
                   <div class="help-block">{{`设置为默认角色后，新用户注册时将默认赋予此角色。只能设置一个角色为默认角色`|$.T}}</div>
@@ -78,14 +78,14 @@
                   <div class="tab-container">
                     <ul class="nav nav-tabs">
                       {{- range $k, $v := $.Stored.permissionTypes -}}
-                      {{- if call $.Func.IsValidPermHandler $v.X -}}
+                      {{- if call $.IsValid $v.X -}}
                       <li{{if eq $k 0}} class="active"{{end}}><a href="#perm-tab-{{$v.K}}" data-toggle="tab">{{$v.V}}</a></li>
                       {{- end -}}
                       {{- end -}}
                     </ul>
                     <div class="tab-content" id="perm-settings">
                       {{- range $k, $v := $.Stored.permissionTypes -}}
-                      {{- if call $.Func.IsValidPermHandler $v.X -}}
+                      {{- if call $.IsValid $v.X -}}
                       <div class="tab-pane{{if eq $k 0}} active{{end}}" id="perm-tab-{{$v.K}}">
                       {{$.Fetch $v.X.Tmpl $}}
                       </div>
@@ -110,7 +110,7 @@
 {{/Block}}
 {{Block "footer"}}
 {{- range $k, $v := $.Stored.permissionTypes -}}
-{{- if call $.Func.IsValidPermHandler $v.X -}}
+{{- if call $.IsValid $v.X -}}
 {{- $foot := $v.X.Tmpl `foot` -}}
 {{- if $foot -}}
 {{$.Fetch $foot $}}
