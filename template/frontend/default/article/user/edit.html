@@ -144,7 +144,7 @@ $(function(){
   App.editor.switcher("input[name='contype']", '#content','tinymce');
   var tagList={{$.Stored.tagList|JSONEncode|ToJS}};
   //App.select2.tags('#select2tags',tagList);
-  App.select2.select('#select2tags',{multiple:true,data:tagList});
+  App.select2.select('#select2tags',{multiple:true,data:tagList||[]});
 });
 </script>
 {{/Block}}
