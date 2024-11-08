@@ -26,27 +26,15 @@
       </div><!-- card-header -->
       <div class="card-body card-body-pd-lg">
             <form class="form form-label-right" method="POST">
-              <div class="form-group row">
-                <label for="categoryId" class="col-sm-2 col-form-label">{{"分类"|$.T}}:</label>
-                <div class="col-sm-8">
-                  {{$v := ($.Formx "categoryId").Uint}}
-                  <select name="categoryId" class="form-control" id="categoryId">
-                    <option value=""></option>
-                    {{range $k, $c := $.Stored.categoryList}}
-                    <option value="{{$c.Id}}"{{if eq $c.Id $v}} selected="selected"{{end}}>{{$c.Name}}</option>
-                    {{end}}
-                  </select>
-                </div>
-              </div>
                 <div class="form-group row">
-                  <label for="input-title" class="col-sm-2 col-form-label">{{"标题"|$.T}}:</label>
-                  <div class="col-sm-8">
+                  <label for="input-title" class="col-md-2 col-form-label">{{"标题"|$.T}}:</label>
+                  <div class="col-md-8">
                     <input type="text" class="form-control" required id="input-title" name="title" value="{{$.Form `title`}}">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">{{"封面图"|$.T}}:</label>
-                  <div class="col-sm-8">
+                  <label class="col-md-2 col-form-label">{{"封面图"|$.T}}:</label>
+                  <div class="col-md-8">
                     <div class="avatar-upload">
                       {{$image := $.Form "image"}}
                       <img src="{{$image|Default (AssetsURL `/images/user_128.png`)}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
@@ -58,14 +46,14 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="input-summary" class="col-sm-2 col-form-label">{{"摘要"|$.T}}:</label>
-                  <div class="col-sm-8">
+                  <label for="input-summary" class="col-md-2 col-form-label">{{"摘要"|$.T}}:</label>
+                  <div class="col-md-8">
                     <textarea class="form-control" name="summary" id="input-summary" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-validation-threshold="10">{{$.Form "summary"}}</textarea>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">{{"编辑器"|$.T}}:</label>
-                  <div class="col-sm-8">
+                  <label class="col-md-2 col-form-label">{{"编辑器"|$.T}}:</label>
+                  <div class="col-md-8">
                     {{$contype := $.Form `contype` `html`}}
                     {{- range $.Stored.contypes -}}
                     <label class="custom-control custom-radio">
@@ -79,8 +67,8 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">{{"内容"|$.T}}:</label>
-                  <div class="col-sm-8">
+                  <label class="col-md-2 col-form-label">{{"内容"|$.T}}:</label>
+                  <div class="col-md-8">
                     <label class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" value="1" name="syncRemoteImage" id="syncRemoteImage"{{if eq ($.Form `syncRemoteImage`) `1`}} checked{{end}}>
                       <span class="custom-control-indicator"></span>
@@ -102,13 +90,23 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="select2tags" class="col-sm-2 col-form-label">{{"标签"|$.T}}:</label>
-                  <div class="col-sm-8">
+                  <label for="categoryId" class="col-md-2 col-form-label">{{"分类"|$.T}}:</label>
+                  <div class="col-md-3">
+                    {{- $v := ($.Formx "categoryId").Uint -}}
+                    <select name="categoryId" class="form-control" id="categoryId">
+                      <option value=""></option>
+                      {{- range $k, $c := $.Stored.categoryList -}}
+                      <option value="{{$c.Id}}"{{if eq $c.Id $v}} selected="selected"{{end}}>{{$c.Name}}</option>
+                      {{- end -}}
+                    </select>
+                  </div>
+                  <label for="select2tags" class="col-md-2 col-form-label">{{"标签"|$.T}}:</label>
+                  <div class="col-md-3">
                     <input id="select2tags" name="tags" type="hidden" value="{{$.Form `tags`}}" />
                   </div>
                 </div>
                 <div class="form-group row">
-                  <div class="col-sm-10 mg-t-5 offset-sm-2">
+                  <div class="col-md-10 mg-t-5 offset-sm-2">
                       <button type="submit" class="btn btn-primary">
                         <i class="fa fa-save"></i>
                         {{"保存"|$.T}}
