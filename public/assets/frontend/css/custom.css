@@ -41,6 +41,16 @@
   background-color: #a1a1a1
 }
 
+.label-gray {
+  background-color: #eee;
+  color: #999;
+}
+
+.label-gray:hover{
+  background-color: #ddd;
+  color: #999;
+}
+
 .label i {
   font-size: 100% !important;
   color: inherit !important;
