@@ -44,7 +44,7 @@
             <div class="cmt-cont{{if eq $v.Contype `markdown`}} markdown-code{{end}}">{{- OutputContent $v.Content $v.Contype -}}</div>
           </div>
           {{if and (not $.Stored.flat) (not $.Stored.isReply)}}
-          <div id="reply-list-box-{{$v.Id}}" data-url="/article/comment_reply_list?commentId={{$v.Id}}"></div>
+          <div id="reply-list-box-{{$v.Id}}" data-url="{{FrontendURL}}/article/comment_reply_list?commentId={{$v.Id}}"></div>
           {{end}}
         </div><!-- media-body -->
     </div><!-- media -->
