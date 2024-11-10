@@ -79,13 +79,14 @@ func ClickFlow(c echo.Context, typ string, targetType string, canCancel ...bool)
 				if after != nil {
 					err = after(typ, true)
 				}
+				data.SetData(echo.H{`cancel`: true}, code.Success.Int())
 			}
 		}
 	}
 	if err != nil {
 		data.SetError(err)
 	} else {
-		data.SetInfo(c.T(`表态成功`))
+		data.SetInfo(c.T(`表态成功`), code.Success.Int())
 	}
 	return c.JSON(data)
 }
