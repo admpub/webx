@@ -130,6 +130,7 @@ func Collect(c echo.Context, targetType string, canCancel ...bool) error {
 	if len(inputID) == 0 {
 		inputID = c.Form(`id`)
 	}
+	var id interface{}
 	var targetID uint64
 	if len(inputID) > 0 {
 		targetID = param.AsUint64(inputID)
@@ -137,21 +138,48 @@ func Collect(c echo.Context, targetType string, canCancel ...bool) error {
 			data.SetInfo(c.T(`id无效`), 0)
 			return c.JSON(data)
 		}
+		id = targetID
 	} else {
-		data.SetInfo(c.T(`id无效`), 0)
+		targetSN := c.Param(`sn`)
+		if len(targetSN) == 0 {
+			targetSN = c.Formx(`sn`).String()
+		}
+		if len(targetSN) == 0 {
+			data.SetInfo(c.T(`id无效`), 0)
+			return c.JSON(data)
+		}
+		id = targetSN
+	}
+	target, ok := official.CollectionTargets[targetType]
+	if !ok {
+		return c.E(`不支持的目标类型: %s`, targetType)
+	}
+	after, idGetter, err := target.Do(c, id)
+	if err != nil {
+		data.SetError(err)
 		return c.JSON(data)
+	}
+	if idGetter != nil {
+		targetID = idGetter()
 	}
 	collectionM := official.NewCollection(c)
 	collectionM.TargetType = targetType
 	collectionM.TargetId = targetID
 	collectionM.CustomerId = customer.Id
-	_, err := collectionM.Add()
+	_, err = collectionM.Add()
 	if err != nil {
 		if len(canCancel) > 0 && canCancel[0] && echo.IsErrorCode(err, code.RepeatOperation) {
 			err = collectionM.DelByTargetOwner(targetType, targetID, collectionM.CustomerId)
 			if err == nil {
+				if after != nil {
+					err = after(true)
+				}
 				data.SetData(echo.H{`cancel`: true}, code.Success.Int())
 			}
+		}
+	} else {
+		if after != nil {
+			err = after()
 		}
 	}
 	if err != nil {

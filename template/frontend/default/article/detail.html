@@ -59,7 +59,7 @@
 
                     <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`发布日期`|$.T}}">
                     <i class="fa fa-clock-o tx-gray-lighter"></i>
-                    <span class="d-inline-block" title="{{(Date $data.Created).Format "2006-01-02"}}">{{(Date $data.Created).Format ($.T "2006年1月2日")}}</span>
+                    <span class="d-inline-block" title="{{(Date $data.Created).Format `2006-01-02`}}">{{(Date $data.Created).Format ($.T "2006年1月2日")}}</span>
                     </span>
 
                     <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`浏览次数`|$.T}}">
@@ -77,9 +77,15 @@
                     {{- end -}}
 
                     <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`点赞数量`|$.T}}">
-                      <a href="javascript:;" class="{{if and $clickFlow (eq $clickFlow.Type `like`)}}tx-success{{else}}tx-gray-light{{end}} hover-success d-inline-block mg-r-25" id="declare-like" data-article-id="{{$data.Id}}">
+                      <a href="javascript:;" class="{{if and $clickFlow (eq $clickFlow.Type `like`)}}tx-success{{else}}tx-gray-light{{end}} hover-success d-inline-block" id="declare-like" data-article-id="{{$data.Id}}">
                         <i class="fa fa-thumbs-up tx-gray-lighter"></i>
                         <span id="article-likes">{{$data.Likes}}</span>
+                      </a>
+                    </span>
+                    <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`点赞数量`|$.T}}">
+                      <a href="javascript:;" class="{{if $.Stored.favorited}}tx-success{{else}}tx-gray-light{{end}} hover-success d-inline-block" id="collect-article" data-article-id="{{$data.Id}}">
+                        <i class="fa fa-star tx-gray-lighter"></i>
+                        <span>{{if $.Stored.favorited}}{{`已收藏`|$.T}}{{else}}{{`收藏`|$.T}}{{end}}</span>
                       </a>
                     </span>
                   </div><!-- d-flex -->

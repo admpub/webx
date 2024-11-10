@@ -107,18 +107,17 @@ func Detail(c echo.Context) error {
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
 
-	// 文章点赞记录
-	clickFlowM := official.NewClickFlow(c)
-	var (
-		ownerID   uint64
-		ownerType string
-	)
+	clickFlowM := official.NewClickFlow(c) // 文章点赞记录
+	var favorited bool
 	if customer != nil {
-		ownerID = customer.Id
-		ownerType = `customer`
+		ownerID := customer.Id
+		ownerType := `customer`
+		clickFlowM.Find(`article`, articleM.Id, ownerID, ownerType)
+		collectionM := official.NewCollection(c) // 文章收藏记录
+		favorited, _ = collectionM.Exists(`article`, articleM.Id, ownerID)
 	}
-	clickFlowM.Find(`article`, articleM.Id, ownerID, ownerType)
 	c.Set(`clickFlow`, clickFlowM.OfficialCommonClickFlow)
+	c.Set(`favorited`, favorited)
 
 	// 是否允许评论
 	c.Set(`disabledCommentMessage`, articleM.IsAllowedComment(customer))

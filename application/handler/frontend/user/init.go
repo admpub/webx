@@ -21,6 +21,12 @@ func init() {
 		u.Route(`GET,POST`, `/message/view/:type/:id`, MessageView).SetName(`user.message.view`)
 		u.Route(`GET,POST`, `/message/send`, MessageSendHandler).SetName(`user.message.send`)
 
+		// 个人收藏夹
+		favoriteG := u.Group(`/favorite`)
+		favoriteG.Route(`GET`, `/index`, favoriteList).SetName(`user.favorite`)
+		favoriteG.Route(`GET,POST`, `/delete`, favoriteDelete).SetName(`user.favorite.delete`)
+
+		// 个人文件
 		g := u.Group(`/file`)
 		// 上传
 		g.Route(`POST`, `/upload`, Upload).SetName(`user.file.upload`)

@@ -1,0 +1,85 @@
+{{Extend "user/base"}}
+{{Block "body"}}
+{{Super}}
+
+<div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
+  <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的收藏"|$.T}}</h5>
+    <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.T}}</a>
+      <span class="breadcrumb-item active">{{"我的收藏"|$.T}}</span>
+    </nav>
+  </div>
+
+  <div class="main-body pd-20">
+<div class="row">
+    <div class="col-lg-2 mg-t-0">
+        <div class="pd-10 bg-white ht-100p">
+          <ul class="nav nav-pills nav-gray nav-hover-bg-gray-lightest flex-column">{{$type := $.Form `type` `article`}}
+            {{- range $name, $target := $.Stored.targets -}}
+            <li class="nav-item">
+                <a class="nav-link{{if eq $type $name}} active active-info{{end}}" href="{{FrontendURL}}/user/favorite/index?type={{$name}}">{{$target.Title|$.T}}</a>
+            </li>
+            {{- end -}}
+          </ul>
+        </div><!-- pd-10 -->
+    </div><!-- col-sm-2 -->
+  <div class="col-lg-10 mg-t-0">
+    <div class="card card-table">
+      <div class="card-header">
+        <h6 class="card-title">{{"我的收藏"|$.T}}</h6>
+      </div><!-- card-header -->
+      <div class="table-responsive">
+      <table class="table table-hover">
+        <thead sort-current="{{$.Form `sort`}}">
+          <tr>
+            <th>{{"名称"|$.T}}</th>
+            <th style="width:90px" sort="-visited">{{"最近访问"|$.T}}</th>
+            <th style="width:90px" sort="-views">{{"访问次数"|$.T}}</th>
+            <th style="width:90px">{{"创建时间"|$.T}}</th>
+            <th class="tx-center" style="width:160px">{{"操作"|$.T}}</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-showurls">
+          {{range $k, $v := $.Stored.list}}
+          <tr>
+            <td>
+              <a href="{{$v.URL}}" target="_blank" class="tx-inverse tx-size-14 tx-medium d-block">
+                {{$v.Title}}
+              </a>
+            </td>
+            <td class="valign-middle">{{if gt $v.Visited 0}}{{(Date $v.Visited).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</td>
+            <td class="valign-middle">{{$v.Views}}</td>
+            <td class="valign-middle">{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
+            <td class="valign-middle tx-center">
+              <div class="btn-group">
+              <a href="{{FrontendURL}}/user/favorite/delete?id={{$v.Id}}" class="btn btn-outline-danger btn-xs" onclick="return confirm('{{`确定要删除吗？`|$.T}}');">
+                <i class="fa fa-trash"></i>
+                {{"删除"|$.T}}
+              </a>
+              </div><!-- /.btn-group -->
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+      </div><!-- table-responsive -->
+      <div class="card-footer auto-bottom-float">
+        {{$.Stored.pagination.Render `#default#pagination`}}
+      </div><!-- card-footer -->
+      
+    </div><!-- card -->
+  </div><!-- col-6 -->
+</div><!-- row -->
+    </div><!-- main-body -->
+</div><!-- main -->
+{{/Block}}
+
+{{Block "footer"}}
+{{Super}}
+<script>
+$(function(){
+  App.tableSorting();
+});
+</script>
+{{/Block}}

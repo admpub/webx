@@ -27,6 +27,22 @@ $(function(){
             }
         });
     });
+    $('#collect-article').on('click',function(){
+        var id=$(this).data('article-id'),me=$(this);
+        $.post(BASE_URL+'/article/collect',{id:id},function(r){
+            if(r.Code<1){
+                App.message({text:r.Info,type:"error"});
+                return;
+            }
+            if(r.Data && r.Data.cancel){
+                me.removeClass('tx-success').addClass('tx-gray-light');
+                me.children('span').text(App.t('收藏'));
+            }else{
+                me.removeClass('tx-gray-light').addClass('tx-success');
+                me.children('span').text(App.t('已收藏'));
+            }
+        });
+    });
     $('#article-content').on('click','[data-article-payment]',function(){
         var id = $(this).data('article-payment');
         var price = $(this).data('article-price');

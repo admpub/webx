@@ -15,6 +15,7 @@ func init() {
 		g.Route(`GET`, `/articles`, List).SetName(`article.list`)
 		g.Route(`POST`, `/article/like`, ArticleLike).SetName(`article.like`)
 		g.Route(`POST`, `/article/hate`, ArticleHate).SetName(`article.hate`)
+		g.Route(`POST`, `/article/collect`, ArticleCollect).SetName(`article.collect`)
 		g.Route(`POST`, `/article/comment_add`, ArticleCommentAdd).SetName(`article.comment.add`)
 		g.Route(`GET`, `/article/comment_list`, ArticleCommentList).SetName(`article.comment.list`)
 		g.Route(`GET`, `/article/comment_reply_list`, ArticleCommentReplyList).SetName(`article.comment.replyList`)
