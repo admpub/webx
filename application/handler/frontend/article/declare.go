@@ -81,6 +81,8 @@ func ClickFlow(c echo.Context, typ string, targetType string, canCancel ...bool)
 				}
 				data.SetData(echo.H{`cancel`: true}, code.Success.Int())
 			}
+		} else if echo.IsErrorCode(err, code.DataAlreadyExists) {
+			data.SetData(echo.H{`hasOther`: true})
 		}
 	}
 	if err != nil {
