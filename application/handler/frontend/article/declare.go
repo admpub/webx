@@ -93,12 +93,12 @@ func ClickFlow(c echo.Context, typ string, targetType string, canCancel ...bool)
 	return c.JSON(data)
 }
 
-// ArticleLike 新闻:喜欢
+// ArticleLike 文章:喜欢
 func ArticleLike(c echo.Context) error {
 	return ClickFlow(c, `like`, `article`)
 }
 
-// ArticleHate 新闻:不喜欢
+// ArticleHate 文章:不喜欢
 func ArticleHate(c echo.Context) error {
 	return ClickFlow(c, `hate`, `article`)
 }
@@ -111,4 +111,53 @@ func CommentLike(c echo.Context) error {
 // CommentHate 评论:不喜欢
 func CommentHate(c echo.Context) error {
 	return ClickFlow(c, `hate`, `comment`)
+}
+
+// ArticleLike 文章:收藏
+func ArticleCollect(c echo.Context) error {
+	return Collect(c, `article`, true)
+}
+
+// Collect 收藏
+func Collect(c echo.Context, targetType string, canCancel ...bool) error {
+	customer := sessdata.Customer(c)
+	data := c.Data()
+	if customer == nil {
+		data.SetError(nerrors.ErrUserNotLoggedIn)
+		return c.JSON(data)
+	}
+	inputID := c.Param(`id`)
+	if len(inputID) == 0 {
+		inputID = c.Form(`id`)
+	}
+	var targetID uint64
+	if len(inputID) > 0 {
+		targetID = param.AsUint64(inputID)
+		if targetID == 0 {
+			data.SetInfo(c.T(`id无效`), 0)
+			return c.JSON(data)
+		}
+	} else {
+		data.SetInfo(c.T(`id无效`), 0)
+		return c.JSON(data)
+	}
+	collectionM := official.NewCollection(c)
+	collectionM.TargetType = targetType
+	collectionM.TargetId = targetID
+	collectionM.CustomerId = customer.Id
+	_, err := collectionM.Add()
+	if err != nil {
+		if len(canCancel) > 0 && canCancel[0] && echo.IsErrorCode(err, code.RepeatOperation) {
+			err = collectionM.DelByTargetOwner(targetType, targetID, collectionM.CustomerId)
+			if err == nil {
+				data.SetData(echo.H{`cancel`: true}, code.Success.Int())
+			}
+		}
+	}
+	if err != nil {
+		data.SetError(err)
+	} else {
+		data.SetInfo(c.T(`收藏成功`), code.Success.Int())
+	}
+	return c.JSON(data)
 }
