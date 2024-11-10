@@ -2,6 +2,7 @@ package article
 
 import (
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/nerrors"
@@ -10,7 +11,7 @@ import (
 )
 
 // ClickFlow 表态
-func ClickFlow(c echo.Context, typ string, targetType string) error {
+func ClickFlow(c echo.Context, typ string, targetType string, canCancel ...bool) error {
 	customer := sessdata.Customer(c)
 	data := c.Data()
 	if customer == nil {
@@ -70,6 +71,15 @@ func ClickFlow(c echo.Context, typ string, targetType string) error {
 	if err == nil {
 		if after != nil {
 			err = after(typ)
+		}
+	} else {
+		if len(canCancel) > 0 && canCancel[0] && echo.IsErrorCode(err, code.RepeatOperation) {
+			err = clickFlowM.DelByTargetOwner(targetType, targetID, clickFlowM.OwnerId, clickFlowM.OwnerType)
+			if err == nil {
+				if after != nil {
+					err = after(typ, true)
+				}
+			}
 		}
 	}
 	if err != nil {
