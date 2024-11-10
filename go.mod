@@ -11,9 +11,9 @@ go 1.23
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.3-pre56
-	github.com/coscms/webcore v0.3.33-0.20241108040228-a99b73620c3a
-	github.com/coscms/webfront v0.0.0-20241110042918-ef5f6db8b35d
+	github.com/admpub/nging/v5 v5.3.3-pre57
+	github.com/coscms/webcore v0.4.0
+	github.com/coscms/webfront v0.0.0-20241110064128-7251e73c9667
 )
 
 require (
@@ -54,21 +54,21 @@ require (
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.5
 	github.com/webx-top/com v1.3.17
-	github.com/webx-top/db v1.27.19
+	github.com/webx-top/db v1.28.0
 	github.com/webx-top/echo v1.12.7
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.3.1
 	github.com/webx-top/validation v0.0.3 // indirect
 	golang.org/x/oauth2 v0.23.0 // indirect
-	golang.org/x/sync v0.8.0
+	golang.org/x/sync v0.9.0
 	gopkg.in/redis.v5 v5.2.9 // indirect
 )
 
 require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
-	github.com/nging-plugins/dbmanager v1.6.7
+	github.com/nging-plugins/dbmanager v1.7.0
 	github.com/silenceper/wechat/v2 v2.1.7
 )
 
@@ -231,7 +231,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/nging-plugins/dlmanager v1.6.4 // indirect
+	github.com/nging-plugins/dlmanager v1.7.0 // indirect
 	github.com/nwaples/rardecode v1.1.3 // indirect
 	github.com/onsi/ginkgo/v2 v2.21.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
@@ -291,14 +291,14 @@ require (
 	go.etcd.io/bbolt v1.3.11 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/mock v0.5.0 // indirect
-	golang.org/x/crypto v0.28.0 // indirect
+	golang.org/x/crypto v0.29.0 // indirect
 	golang.org/x/exp v0.0.0-20241009180824-f66d83c29e7c // indirect
 	golang.org/x/image v0.21.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.21.0 // indirect
-	golang.org/x/net v0.30.0 // indirect
-	golang.org/x/sys v0.26.0 // indirect
-	golang.org/x/text v0.19.0 // indirect
+	golang.org/x/net v0.31.0 // indirect
+	golang.org/x/sys v0.27.0 // indirect
+	golang.org/x/text v0.20.0 // indirect
 	golang.org/x/tools v0.26.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
 	google.golang.org/protobuf v1.35.1 // indirect
