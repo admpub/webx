@@ -12,7 +12,8 @@
   </div>
 
   <div class="main-body pd-20">
-<div class="row">
+<div class="row">{{$len := len $.Stored.targets}}
+    {{- if gt $len 1 -}}
     <div class="col-lg-2 mg-t-0">
         <div class="pd-10 bg-white ht-100p">
           <ul class="nav nav-pills nav-gray nav-hover-bg-gray-lightest flex-column">{{$type := $.Form `type` `article`}}
@@ -24,7 +25,8 @@
           </ul>
         </div><!-- pd-10 -->
     </div><!-- col-sm-2 -->
-  <div class="col-lg-10 mg-t-0">
+    {{- end -}}
+  <div class="{{if gt $len 1}}col-lg-10{{else}}col-lg-12{{end}} mg-t-0">
     <div class="card card-table">
       <div class="card-header">
         <h6 class="card-title">{{"我的收藏"|$.T}}</h6>
@@ -33,24 +35,49 @@
       <table class="table table-hover">
         <thead sort-current="{{$.Form `sort`}}">
           <tr>
-            <th>{{"名称"|$.T}}</th>
+            <th>{{"标题"|$.T}}</th>
             <th style="width:90px" sort="-visited">{{"最近访问"|$.T}}</th>
             <th style="width:90px" sort="-views">{{"访问次数"|$.T}}</th>
-            <th style="width:90px">{{"创建时间"|$.T}}</th>
-            <th class="tx-center" style="width:160px">{{"操作"|$.T}}</th>
+            <th class="tx-center" style="width:85px">{{"操作"|$.T}}</th>
           </tr>
         </thead>
         <tbody id="tbody-showurls">
           {{range $k, $v := $.Stored.list}}
           <tr>
-            <td>
-              <a href="{{$v.URL}}" target="_blank" class="tx-inverse tx-size-14 tx-medium d-block">
-                {{$v.Title}}
-              </a>
+            <td class="d-flex">
+                {{$targetName := (index $.Stored.targets $v.TargetType).Title}}
+                {{- if $v.URL -}}
+                {{if $v.Extra.thumb}}
+                <a href="{{URLByName `user.favorite.go` $v.Id}}" target="_blank" class="mg-r-5">
+                    <img src="{{$v.Extra.thumb|Default (AssetsXURL `/images/background/img442.jpg`)}}" onerror="this.onerror=null; this.src='{{AssetsXURL}}/images/background/img442.jpg';" class="wd-55 ht-55" alt="{{$v.Title}}">
+                </a>
+                {{end}}
+                <p>
+                    <a href="{{URLByName `user.favorite.go` $v.Id}}" target="_blank" class="tx-inverse tx-size-14 tx-medium d-block">
+                        {{- $v.Title -}}
+                    </a>
+                    <small>
+                        <span class="badge badge-default tx-normal">{{$targetName}}</span> 
+                        {{`收藏于`|$.T}} {{(Date $v.Created).Format "2006-01-02 15:04:05"}}
+                    </small>
+                </p>
+                {{- else -}}
+                {{if $v.Extra.thumb}}
+                <img src="{{$v.Extra.thumb|Default (AssetsXURL `/images/background/img442.jpg`)}}" onerror="this.onerror=null; this.src='{{AssetsXURL}}/images/background/img442.jpg';" class="wd-55 ht-55" alt="{{$v.Title}}">
+                {{end}}
+                <p>
+                    <span class="tx-inverse tx-size-14 tx-medium d-block">
+                        {{- $v.Title -}}
+                    </span>
+                    <small>
+                        <span class="badge badge-default tx-normal">{{$targetName}}</span> 
+                        {{`收藏于`|$.T}} {{(Date $v.Created).Format "2006-01-02 15:04:05"}}
+                    </small>
+                </p>
+                {{- end -}}
             </td>
             <td class="valign-middle">{{if gt $v.Visited 0}}{{(Date $v.Visited).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</td>
             <td class="valign-middle">{{$v.Views}}</td>
-            <td class="valign-middle">{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
             <td class="valign-middle tx-center">
               <div class="btn-group">
               <a href="{{FrontendURL}}/user/favorite/delete?id={{$v.Id}}" class="btn btn-outline-danger btn-xs" onclick="return confirm('{{`确定要删除吗？`|$.T}}');">

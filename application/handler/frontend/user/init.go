@@ -25,6 +25,7 @@ func init() {
 		favoriteG := u.Group(`/favorite`)
 		favoriteG.Route(`GET`, `/index`, favoriteList).SetName(`user.favorite`)
 		favoriteG.Route(`GET,POST`, `/delete`, favoriteDelete).SetName(`user.favorite.delete`)
+		favoriteG.Route(`GET,POST`, `/go/:id`, favoriteGo).SetName(`user.favorite.go`)
 
 		// 个人文件
 		g := u.Group(`/file`)
