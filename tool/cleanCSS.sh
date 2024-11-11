@@ -19,6 +19,7 @@ cssdalek \
 
 cssdalek \
   --css '../public/assets/frontend/blogdefault/css/vendors/bootstrap.min.css'\
+  --word '../public/assets/frontend/js/bootstrap/bootstrap.js'\
   --word '../template/frontend/blogdefault/*.html'\
   --word '../template/frontend/blogdefault/*/*.html'\
   --word '../template/frontend/blogdefault/*/*/*.html'\
@@ -31,6 +32,7 @@ cssdalek \
 
 cssdalek \
   --css '../public/assets/frontend/blogdefault/css/style.css'\
+  --word '../public/assets/frontend/js/bootstrap/bootstrap.js'\
   --word '../template/frontend/blogdefault/*.html'\
   --word '../template/frontend/blogdefault/*/*.html'\
   --word '../template/frontend/blogdefault/*/*/*.html'\
