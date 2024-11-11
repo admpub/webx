@@ -5,6 +5,7 @@ import (
 
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
+	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/formfilter"
 
@@ -52,6 +53,10 @@ func Index(ctx echo.Context) error {
 	tag := ctx.Formx(`tag`).String()
 	if len(tag) > 0 {
 		cond.Add(m.TagCond(tag))
+	}
+	query := ctx.Form(`q`)
+	if len(query) > 0 {
+		cond.From(mysql.SearchField(`~title`, query))
 	}
 	list, err := m.ListPage(cond, `-id`)
 	ctx.Set(`listData`, list)

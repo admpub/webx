@@ -28,7 +28,8 @@ func favoriteList(ctx echo.Context) error {
 	default:
 		sorts = append(sorts, `-id`)
 	}
-	list, err := m.ListPage(targetType, customer.Id, sorts...)
+	title := ctx.Formx(`q`).String()
+	list, err := m.ListPage(targetType, customer.Id, title, sorts...)
 	ctx.Set(`list`, list)
 	ctx.Set(`targets`, official.CollectionTargets)
 	return ctx.Render(`/user/favorite/list`, common.Err(ctx, err))

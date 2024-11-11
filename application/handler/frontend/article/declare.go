@@ -154,16 +154,16 @@ func Collect(c echo.Context, targetType string, canCancel ...bool) error {
 	if !ok {
 		return c.E(`不支持的目标类型: %s`, targetType)
 	}
-	after, idGetter, err := target.Do(c, id)
+	after, idAndTitleGetter, err := target.Do(c, id)
 	if err != nil {
 		data.SetError(err)
 		return c.JSON(data)
 	}
-	if idGetter != nil {
-		targetID = idGetter()
-	}
 	collectionM := official.NewCollection(c)
 	collectionM.TargetType = targetType
+	if idAndTitleGetter != nil {
+		targetID, collectionM.Title = idAndTitleGetter()
+	}
 	collectionM.TargetId = targetID
 	collectionM.CustomerId = customer.Id
 	_, err = collectionM.Add()

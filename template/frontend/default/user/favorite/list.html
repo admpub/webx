@@ -54,8 +54,11 @@
                 {{end}}
                 <p>
                     <a href="{{URLByName `user.favorite.go` $v.Id}}" target="_blank" class="tx-inverse tx-size-14 tx-medium d-block">
-                        {{- $v.Title -}}
+                      {{- $v.OfficialCommonCollection.Title|Default $v.Title -}}
                     </a>
+                    {{- if and $v.OfficialCommonCollection.Title (ne $v.OfficialCommonCollection.Title $v.Title) -}}
+                    <em class="d-block">{{`新标题`|$.T}}: {{$v.Title}}</em>
+                    {{- end -}}
                     <small>
                         <span class="badge badge-default tx-normal">{{$targetName}}</span> 
                         {{`收藏于`|$.T}} {{(Date $v.Created).Format "2006-01-02 15:04:05"}}

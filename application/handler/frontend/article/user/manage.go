@@ -2,6 +2,7 @@ package user
 
 import (
 	"github.com/webx-top/db"
+	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 
@@ -31,7 +32,7 @@ func listFilterer(ctx echo.Context, cond *db.Compounds, m *modelArticle.Article)
 	categoryID := ctx.Formx(`categoryId`).Uint()
 	title := ctx.Formx(`q`).String()
 	if len(title) > 0 {
-		cond.AddKV(`title`, title)
+		cond.Add(mysql.SearchField(`~title`, title))
 	}
 	if categoryID > 0 {
 		cond.Add(db.Or(

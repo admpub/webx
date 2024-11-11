@@ -141,6 +141,7 @@ func ArticleListBy(c echo.Context) error {
 
 func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...uint) error {
 	tag := c.Query(`tag`)
+	query := c.Form(`q`)
 	articleM := modelArticle.NewArticle(c)
 	articleM.SourceId = sourceID
 	articleM.SourceTable = sourceTable
@@ -161,6 +162,9 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 	}
 	if len(tag) > 0 {
 		cond.Add(articleM.TagCond(tag))
+	}
+	if len(query) > 0 {
+		cond.From(mysql.SearchField(`~title`, query))
 	}
 	c.Request().Form().Set(`pageSize`, `20`)
 	articles, err := articleM.ListPageSimple(cond)
@@ -211,7 +215,7 @@ func List(c echo.Context) error {
 		cond.Add(articleM.TagCond(tag))
 	}
 	if len(query) > 0 {
-		cond.From(mysql.SearchField(`title`, query))
+		cond.From(mysql.SearchField(`~title`, query))
 	}
 	c.Request().Form().Set(`pageSize`, `20`)
 	articles, err := articleM.ListPageSimple(cond)
