@@ -162,14 +162,72 @@
         if (showNumElem) $(showNumElem).text($(target + ':checked').length);
       });
     },
-    attachAjaxURL:function(){
-      $(document).on('click','[data-ajax-url]',function(){
-        var url=$(this).data('ajax-url'),title=$(this).attr('title');
-        if(!title)title=$(this).text();
-        $.get(url,{},function(r){
-          App.message({title:title,text:r,time:5000,sticky:false});
-        },'html');
-      });
+    attachAjaxURL:function(elem){
+			if (elem == null) elem = document;
+			$(elem).on('click', '[data-ajax-url]', function () {
+				var a = $(this), confirmMsg = a.data('ajax-confirm');
+				if(a.data('processing')){
+					alert(App.t('Processing, please wait for the operation to complete'));
+					return;
+				}
+				if(confirmMsg && !confirm(confirmMsg)) return;
+				a.data('processing',true);
+				var url = a.data('ajax-url'), method = a.data('ajax-method') || 'get', params = a.data('ajax-params') || {}, title = a.attr('title')||App.i18n.SYS_INFO, accept = a.data('ajax-accept') || 'html', target = a.data('ajax-target'), callback = a.data('ajax-callback'), toggle = a.data('ajax-toggle'), onsuccess = a.data('ajax-onsuccess'), reload = a.data('ajax-reload') || false;
+				if (!title) title = a.text();
+				var fa = a.children('.fa');
+				var hasIcon = toggle && fa.length>0;
+				if (hasIcon){
+					fa.addClass('fa-spin')
+				}else{
+					App.loading('show');
+				}
+				a.trigger('processing');
+				if (typeof params === "function") params = params.apply(this, arguments);
+				//params = App.setClientID(params);
+				$[method](url, params || {}, function (r) {
+					a.data('processing',false);
+					a.trigger('finished',arguments);
+					if (hasIcon){
+						fa.removeClass('fa-spin');
+					}else{
+						App.loading('hide');
+					}
+					if (callback) return callback.apply(this, arguments);
+					if (target) {
+						var data;
+						if (accept == 'json') {
+							if (r.Code != 1) {
+								return App.message({ title: title, text: r.Info, type: 'error', time: 5000, sticky: false });
+							}
+							data = r.Data;
+						} else {
+							data = r;
+						}
+						$(target).html(data);
+						a.trigger('partial.loaded', arguments);
+						$(target).trigger('partial.loaded', arguments);
+						if(onsuccess) window.setTimeout(onsuccess,0);
+						return;
+					}
+					if(r.Code == 1){
+						if(onsuccess) window.setTimeout(onsuccess,2000);
+						if(reload) window.setTimeout(function(){window.location.reload()},2000);
+					}
+					if (accept == 'json') {
+						return App.message({ title: title, text: r.Info, type: r.Code == 1 ? 'success' : 'error', time: 5000, sticky: false });
+					}
+					App.message({ title: title, text: r, time: 5000, sticky: false });
+				}, accept).error(function (xhr, status, info) {
+					a.data('processing',false);
+					a.trigger('finished',arguments);
+					if (hasIcon){
+						fa.removeClass('fa-spin');
+					}else{
+						App.loading('hide');
+					}
+					App.message({ title: title, text: xhr.responseText, type: 'error', time: 5000, sticky: false });
+				});
+			});
     },
     attachPjax:function(elem,callbacks,timeout){
       if(!$.support.pjax)return;
