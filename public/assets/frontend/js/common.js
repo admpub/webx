@@ -170,8 +170,66 @@ function captchaDialog(resp,ajaxOptions){
     }
     switch(resp.Data.captchaType){
         case 'api':return apiCaptchaDialog(resp,ajaxOptions);
+        case 'go':return goCaptchaDialog(resp,ajaxOptions);
         default:return defaultCaptchaDialog(resp,ajaxOptions);
     }
+}
+function goCaptchaDialog(resp,ajaxOptions){
+    if(typeof(resp.Data)=='undefined' || typeof(resp.Data.driver)=='undefined'){
+        showMsg({text:resp.Info,type:'error'});
+        return false;
+    }
+    if(typeof(ajaxOptions.postByCaptchaDialog)!='undefined' && ajaxOptions.postByCaptchaDialog){
+        showMsg({text:resp.Info,type:'error'});
+    }
+    var captchaName=resp.Data.captchaName,
+        htmlCode=resp.Data.html
+        jsInit=resp.Data.jsInit;
+    for(var i=0;i<resp.Data.cssURLs.length;i++){
+        var cssURL=resp.Data.cssURLs[i];
+        if(cssURL&&$('link[href*="'+cssURL+'"]').length<1){
+            $('head').append('<link rel="stylesheet" href="'+ASSETS_URL+cssURL+'?t='+BUILD_TIME+'">');
+        }
+    }
+    for(var i=0;i<resp.Data.jsURLs.length;i++){
+        var jsURL=resp.Data.jsURLs[i];
+        if(jsURL&&$('script[src*="'+jsURL+'"]').length<1){
+            $('body').append('<script src="'+ASSETS_URL+jsURL+'?t='+BUILD_TIME+'" type="text/javascript"></script>');
+        }
+    }
+    var formHTML='<form method="post" id="dialog-retry-captcha">\
+        '+htmlCode+'\
+    </form>';
+    var done=function(dialogRef) {
+        var $form = $('#dialog-retry-captcha');
+        var vcode = $form.find('[name="'+captchaName+'"]').val();
+        postCaptchaDialogData(resp, ajaxOptions, vcode, null, captchaName, null);
+        dialogRef.close();
+    }
+    App.dialog().show({
+        title:App.t('行为验证'),
+        type:'type-primary',
+        size:'size-small',
+        message:formHTML,
+        nl2br:false,
+        closeByBackdrop:false,
+        onshown: function(d){
+            if(jsInit) eval(jsInit);
+        },
+        buttons: [{
+            id: 'captchaDialogBtnSubmit',
+            label: App.t('提交'),
+            icon: 'fa fa-check',
+            cssClass: 'btn-primary mg-r-10',
+            action: done},{
+            label: App.t('取消'),
+            icon: 'fa fa-times',
+            action: function(dialogRef) {
+                dialogRef.close();
+            }
+        }]
+    });
+    return true;
 }
 function apiCaptchaDialog(resp,ajaxOptions){
     if(typeof(resp.Data)=='undefined' || typeof(resp.Data.provider)=='undefined'){
@@ -303,30 +361,35 @@ function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, cap
         if(!ajaxOptions.data) ajaxOptions.data={};
         switch(typeof(ajaxOptions.data)){
             case 'string':
-            ajaxOptions.data+='&'+captchaName+'='+encodeURIComponent(vcode) +'&'+captchaIdent+'='+encodeURIComponent(idVal);
+            ajaxOptions.data+='&'+captchaName+'='+encodeURIComponent(vcode);
+            if(captchaIdent) ajaxOptions.data+='&'+captchaIdent+'='+encodeURIComponent(idVal);
             break;
             default:
             if($.isArray(ajaxOptions.data)){
                 var existsCode=false,existsIdent=false;
                 var codeInfo={name:captchaName,value:vcode};
-                var identInfo={name:captchaIdent,value:idVal};
+                var identInfo=captchaIdent?{name:captchaIdent,value:idVal}:null;
                 for(var i=0; i<ajaxOptions.data.length; i++){
                     if(ajaxOptions.data[i].name==captchaName){
                         ajaxOptions.data[i]=codeInfo;
                         existsCode=true;
                     }
-                    if(ajaxOptions.data[i].name==captchaIdent){
-                        ajaxOptions.data[i]=identInfo;
-                        existsIdent=true;
+                    if(captchaIdent){
+                        if(ajaxOptions.data[i].name==captchaIdent){
+                            ajaxOptions.data[i]=identInfo;
+                            existsIdent=true;
+                        }
+                        if(existsIdent && existsCode) break;
+                    }else{
+                        if(existsCode) break;
                     }
-                    if(existsIdent && existsCode) break;
                 }
-                if(!existsIdent) ajaxOptions.data.push(identInfo);
+                if(!existsIdent&&identInfo) ajaxOptions.data.push(identInfo);
                 if(!existsCode) ajaxOptions.data.push(codeInfo);
                 break;
             }
             ajaxOptions.data[captchaName] = vcode;
-            ajaxOptions.data[captchaIdent] = idVal;
+            if(captchaIdent)ajaxOptions.data[captchaIdent] = idVal;
         }
     }
     ajaxOptions.postByCaptchaDialog=true;
@@ -335,7 +398,7 @@ function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, cap
         var codeIpt=form.find('[name="'+captchaName+'"]');
         if(codeIpt.length>0){
             codeIpt.val(vcode);
-            form.find('[name="'+captchaIdent+'"]').val(idVal);
+            if(captchaIdent) form.find('[name="'+captchaIdent+'"]').val(idVal);
         }
         form.trigger('submit');
     }else{

@@ -2,9 +2,9 @@ module github.com/admpub/webx
 
 go 1.23
 
-// replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
+replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
-// replace github.com/coscms/webcore => ../../coscms/webcore
+replace github.com/coscms/webcore => ../../coscms/webcore
 
 // replace github.com/coscms/webfront => ../../coscms/webfront
 
@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre57
-	github.com/coscms/webcore v0.4.0
-	github.com/coscms/webfront v0.0.0-20241111074920-4573c3a36b6b
+	github.com/coscms/webcore v0.4.4
+	github.com/coscms/webfront v0.0.0-20241113152606-8b3d813076fa
 )
 
 require (
@@ -93,6 +93,7 @@ require (
 	github.com/admpub/fsnotify v1.7.0 // indirect
 	github.com/admpub/gifresize v1.0.2 // indirect
 	github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588 // indirect
+	github.com/admpub/go-captcha/v2 v2.0.2 // indirect
 	github.com/admpub/go-figure v0.0.0-20180619031829-18b2b544842c // indirect
 	github.com/admpub/go-isatty v0.0.11 // indirect
 	github.com/admpub/go-lock v1.3.0 // indirect
@@ -141,6 +142,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
+	github.com/coscms/captcha v0.0.0-20241113151227-32493bf463a1 // indirect
 	github.com/coscms/go-imgparse v0.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/davidbyttow/govips/v2 v2.15.0 // indirect
@@ -286,6 +288,7 @@ require (
 	github.com/webx-top/restyclient v0.0.5 // indirect
 	github.com/webx-top/tagfast v0.0.1 // indirect
 	github.com/webx-top/validator v0.3.0 // indirect
+	github.com/wenlng/go-captcha-assets v1.0.1 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	go.etcd.io/bbolt v1.3.11 // indirect
@@ -293,7 +296,7 @@ require (
 	go.uber.org/mock v0.5.0 // indirect
 	golang.org/x/crypto v0.29.0 // indirect
 	golang.org/x/exp v0.0.0-20241009180824-f66d83c29e7c // indirect
-	golang.org/x/image v0.21.0 // indirect
+	golang.org/x/image v0.22.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.21.0 // indirect
 	golang.org/x/net v0.31.0 // indirect
