@@ -1,14 +1,16 @@
+{{Strip}}
 <input type="hidden" name="{{$.Data.captchaName}}" id="captchago-{{$.Data.captchaID}}" value="" /><!-- class="wg-cap-static"  -->
 {{- if eq $.Data.driver `click` -}}
-{{Include "captcha/go/partial_click"}}
+{{Include "#@backend#captcha/go/partial_click"}}
 {{- else if eq $.Data.driver `rotate` -}}
-{{Include "captcha/go/partial_rotate"}}
+{{Include "#@backend#captcha/go/partial_rotate"}}
 {{- else if eq $.Data.driver `slide` -}}
     {{- if eq $.Data.type `region` -}}
-    {{Include "captcha/go/partial_slide_region"}}
+    {{Include "#@backend#captcha/go/partial_slide_region"}}
     {{- else -}}
-    {{Include "captcha/go/partial_slide_basic"}}
+    {{Include "#@backend#captcha/go/partial_slide_basic"}}
     {{- end -}}
 {{- else -}}
-{{Include "captcha/go/partial_click"}}
+{{Include "#@backend#captcha/go/partial_click"}}
 {{- end -}}
+{{/Strip}}
