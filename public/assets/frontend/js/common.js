@@ -214,6 +214,8 @@ function goCaptchaDialog(resp,ajaxOptions){
         nl2br:false,
         closeByBackdrop:false,
         onshown: function(d){
+            var $input = $('#dialog-retry-captcha').find('[name="'+captchaName+'"]');
+            if(!$input.hasClass('wg-cap-static')) $input.addClass('wg-cap-static');
             if(jsInit) eval(jsInit);
         },
         buttons: [{

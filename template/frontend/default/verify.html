@@ -14,6 +14,7 @@
         <p class="tx-size-xs mg-t-30 mg-b-0 tx-center">{{"无法获取"|$.T}}? <a href="{{FrontendURL}}/sign_up">{{"换一个账号登录"|$.T}}</a></p>
       </div><!-- card -->
     </div><!-- container -->
+    {{- $.Set `ignorePosAbsoluteBottom` true -}}
     {{Include "#default#footer"}}
 {{/Block}}
 {{/Strip}}

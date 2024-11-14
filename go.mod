@@ -4,16 +4,16 @@ go 1.23
 
 replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
-replace github.com/coscms/webcore => ../../coscms/webcore
+// replace github.com/coscms/webcore => ../../coscms/webcore
 
 // replace github.com/coscms/webfront => ../../coscms/webfront
 
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.3-pre57
-	github.com/coscms/webcore v0.4.4
-	github.com/coscms/webfront v0.0.0-20241113152606-8b3d813076fa
+	github.com/admpub/nging/v5 v5.3.3-pre58
+	github.com/coscms/webcore v0.4.5
+	github.com/coscms/webfront v0.0.0-20241114085652-30cfe7261b64
 )
 
 require (
@@ -55,12 +55,12 @@ require (
 	github.com/webx-top/client v0.9.5
 	github.com/webx-top/com v1.3.17
 	github.com/webx-top/db v1.28.0
-	github.com/webx-top/echo v1.12.7
+	github.com/webx-top/echo v1.12.9
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.3.1
 	github.com/webx-top/validation v0.0.3 // indirect
-	golang.org/x/oauth2 v0.23.0 // indirect
+	golang.org/x/oauth2 v0.24.0 // indirect
 	golang.org/x/sync v0.9.0
 	gopkg.in/redis.v5 v5.2.9 // indirect
 )
@@ -142,7 +142,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/coscms/captcha v0.0.0-20241113151227-32493bf463a1 // indirect
+	github.com/coscms/captcha v0.0.1 // indirect
 	github.com/coscms/go-imgparse v0.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/davidbyttow/govips/v2 v2.15.0 // indirect
