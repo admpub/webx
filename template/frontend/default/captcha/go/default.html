@@ -11,7 +11,5 @@
 
 {{- end -}}
 {{Include "#default#captcha/go/partial_main"}}
-<script>
-{{Include "#default#captcha/go/partial_jsinit"}}
-</script>
+<script>(function(){var init = {{Include "#default#captcha/go/partial_jsinit"}};document.readyState=='complete' ? init() : window.addEventListener('load', init);})();</script>
 {{/Strip}}

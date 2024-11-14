@@ -11,7 +11,7 @@ replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.3-pre58
+	github.com/admpub/nging/v5 v5.3.3-pre59
 	github.com/coscms/webcore v0.5.3
 	github.com/coscms/webfront v0.0.0-20241114111857-3fcc80294b93
 )

@@ -216,7 +216,13 @@ function goCaptchaDialog(resp,ajaxOptions){
         onshown: function(d){
             var $input = $('#dialog-retry-captcha').find('[name="'+captchaName+'"]');
             if(!$input.hasClass('wg-cap-static')) $input.addClass('wg-cap-static');
-            if(jsInit) eval(jsInit);
+            if(jsInit) {
+                eval('var initCaptchaGo='+jsInit);
+                initCaptchaGo(function(){
+                    App.message({text:App.t('验证成功'),type:'success'});
+                    done(d);
+                });
+            }
         },
         buttons: [{
             id: 'captchaDialogBtnSubmit',
