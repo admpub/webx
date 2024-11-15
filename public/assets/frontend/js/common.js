@@ -45,7 +45,7 @@ function hideModal(){
  * @param {string} nextURL 
  */
 function signIn(elem,nextURL){
-    var cc=checkSubmitBtnWithCloser(a);
+    var cc=checkSubmitBtnWithCloser(elem);
     if(cc.submited)return;
     if(nextURL==null) nextURL=window.location.href;
     var data=$(elem).serializeArray();
@@ -84,7 +84,7 @@ function signIn(elem,nextURL){
  * @param {string} nextURL 
  */
 function signUp(elem,nextURL){
-    var cc=checkSubmitBtnWithCloser(a);
+    var cc=checkSubmitBtnWithCloser(elem);
     if(cc.submited)return;
     if(nextURL==null) nextURL=window.location.href;
     var data=$(elem).serializeArray();
