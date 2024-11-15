@@ -11,9 +11,9 @@ go 1.23
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.3-pre59
-	github.com/coscms/webcore v0.5.5
-	github.com/coscms/webfront v0.0.0-20241114143946-d2701da1f7e2
+	github.com/admpub/nging/v5 v5.3.3-pre60
+	github.com/coscms/webcore v0.5.6
+	github.com/coscms/webfront v0.0.0-20241115061105-d052d7338b0b
 )
 
 require (
@@ -142,7 +142,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/coscms/captcha v0.0.1 // indirect
+	github.com/coscms/captcha v0.1.0 // indirect
 	github.com/coscms/go-imgparse v0.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/davidbyttow/govips/v2 v2.15.0 // indirect
