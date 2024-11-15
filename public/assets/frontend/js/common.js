@@ -166,6 +166,7 @@ function renewCaptcha(form,resp){
 function captchaDialog(resp,ajaxOptions){
     if(typeof(resp.Data)=='undefined'||typeof(resp.Data.captchaType)=='undefined'){
         showMsg({text:resp.Info,type:'error'});
+        closeLoadingFunction(ajaxOptions);
         return false;
     }
     switch(resp.Data.captchaType){
@@ -174,9 +175,13 @@ function captchaDialog(resp,ajaxOptions){
         default:return defaultCaptchaDialog(resp,ajaxOptions);
     }
 }
+function closeLoadingFunction(r){
+    if(r&&typeof(r)=='object'&&typeof(r.close)=='function') r.close();
+}
 function goCaptchaDialog(resp,ajaxOptions){
     if(typeof(resp.Data)=='undefined' || typeof(resp.Data.driver)=='undefined'){
         showMsg({text:resp.Info,type:'error'});
+        closeLoadingFunction(ajaxOptions);
         return false;
     }
     if(typeof(ajaxOptions.postByCaptchaDialog)!='undefined' && ajaxOptions.postByCaptchaDialog){
@@ -205,6 +210,7 @@ function goCaptchaDialog(resp,ajaxOptions){
         var vcode = $form.find('[name="'+captchaName+'"]').val();
         postCaptchaDialogData(resp, ajaxOptions, vcode, null, captchaName, null);
         dialogRef.close();
+        closeLoadingFunction(ajaxOptions);
     }
     App.dialog().show({
         title: App.t('行为验证'),
@@ -214,7 +220,6 @@ function goCaptchaDialog(resp,ajaxOptions){
         nl2br:false,
         // closeByBackdrop:false,
         onshown: function(d){
-            console.dir(d)
             d.$modalDialog.css({"max-width":"340px"});
             d.$modalBody.css({"padding":0});
             var $input = $('#dialog-retry-captcha').find('[name="'+captchaName+'"]');
@@ -227,6 +232,8 @@ function goCaptchaDialog(resp,ajaxOptions){
                 });
                 d.$modalBody.find('.wg-cap-wrap').css({"border":0,"border-top-left-radius":0,"border-top-right-radius":0});
             }
+        },onhide: function(d){
+            closeLoadingFunction(ajaxOptions);
         }/*,
         buttons: [{
             id: 'captchaDialogBtnSubmit',
@@ -246,6 +253,7 @@ function goCaptchaDialog(resp,ajaxOptions){
 function apiCaptchaDialog(resp,ajaxOptions){
     if(typeof(resp.Data)=='undefined' || typeof(resp.Data.provider)=='undefined'){
         showMsg({text:resp.Info,type:'error'});
+        closeLoadingFunction(ajaxOptions);
         return false;
     }
     if(typeof(ajaxOptions.postByCaptchaDialog)!='undefined' && ajaxOptions.postByCaptchaDialog){
@@ -269,6 +277,7 @@ function apiCaptchaDialog(resp,ajaxOptions){
         var idVal = $form.find('[name="'+captchaIdent+'"]').val();
         postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, captchaIdent);
         dialogRef.close();
+        closeLoadingFunction(ajaxOptions);
     }
     /*
     var captchaID=resp.Data.captchaID,jsCallback=resp.Data.jsCallback;
@@ -295,6 +304,8 @@ function apiCaptchaDialog(resp,ajaxOptions){
                 e.preventDefault();
                 d.getButton('captchaDialogBtnSubmit').trigger('click');
             });
+        },onhide: function(d){
+            closeLoadingFunction(ajaxOptions);
         },
         buttons: [{
             id: 'captchaDialogBtnSubmit',
@@ -306,6 +317,7 @@ function apiCaptchaDialog(resp,ajaxOptions){
             icon: 'fa fa-times',
             action: function(dialogRef) {
                 dialogRef.close();
+                closeLoadingFunction(ajaxOptions);
             }
         }]
     });
@@ -314,6 +326,7 @@ function apiCaptchaDialog(resp,ajaxOptions){
 function defaultCaptchaDialog(resp,ajaxOptions){
     if(typeof(resp.Data)=='undefined' || typeof(resp.Data.captchaURL)=='undefined'){
         showMsg({text:resp.Info,type:'error'});
+        closeLoadingFunction(ajaxOptions);
         return false;
     }
     if(typeof(ajaxOptions.postByCaptchaDialog)!='undefined' && ajaxOptions.postByCaptchaDialog){
@@ -345,6 +358,8 @@ function defaultCaptchaDialog(resp,ajaxOptions){
                 e.preventDefault();
                 d.getButton('captchaDialogBtnSubmit').trigger('click');
             });
+        },onhide: function(d){
+            closeLoadingFunction(ajaxOptions);
         },
         buttons: [{
             id: 'captchaDialogBtnSubmit',
@@ -356,12 +371,14 @@ function defaultCaptchaDialog(resp,ajaxOptions){
                 var idVal = $('#dialog-captcha-id').val();
                 postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, captchaIdent);
                 dialogRef.close();
+                closeLoadingFunction(ajaxOptions);
             }
         },{
             label: App.t('取消'),
             icon: 'fa fa-times',
             action: function(dialogRef) {
                 dialogRef.close();
+                closeLoadingFunction(ajaxOptions);
             }
         }]
     });
@@ -418,10 +435,11 @@ function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, cap
     }
 }
 // 登录
-function signInDialog(callback){
+function signInDialog(callback,r){
     if($('#modal-sign-in').length>0) return $('#modal-sign-in').modal('show');
     $.get('/sign_in',{modal:1,next:window.location.href},function(r){
         $('body').append(r);
+        closeLoadingFunction(r);
         if(callback!=null && $.isFunction(callback)){
             $('#modal-sign-in-form').data('callback',function(){
                 $('#modal-sign-in').modal('hide');
@@ -432,7 +450,9 @@ function signInDialog(callback){
         $('#modal-sign-in').on('shown.bs.modal',function(){
             $('#modal-sign-in-form').find('input[name="name"]').focus();
         });
-    },'html');
+    },'html').fail(function(){
+        closeLoadingFunction(r);
+    });
 }
 /**
  * 输入验证码
@@ -844,14 +864,28 @@ function countWords(a,countElem){
     $(countElem).text(Number($(a).attr('maxlength'))-$(a).val().length);
 }
 function ajaxForm(a,onSuccess,onFailure){
+    var $submit = $(a).find(':submit'),close=function(){};
+    if($submit.length>0){
+        if($submit.prop('disabled'))return;
+        var $icon=$submit.children('.fa');
+        $submit.prop('disabled',true);
+        if($icon.length>0)$icon.addClass('fa-refresh fa-spin');
+        close=function(){
+            $submit.prop('disabled',false);
+            if($icon.length>0)$icon.removeClass('fa-refresh fa-spin');
+        };
+    }
     var opts={
         ajaxFormObject: a,
         type: String($(a).attr('method')).toLowerCase()=='post'?'post':'get',
         dataType: 'json',
         data: {},
         url: $(a).attr('action'),
+        close: close,
         success: function(r){
             onAjaxRespond(a,r,opts,onSuccess,onFailure);
+        },error: function(xhr){
+            close();
         }
     };
     $(a).ajaxForm(opts);
@@ -860,15 +894,17 @@ function onAjaxRespond(form,r,ajaxOptions,onSuccess,onFailure){
     if(r.Code==1){
         renewCaptcha(form,r);
         if(onSuccess!=null&&$.isFunction(onSuccess)) onSuccess(r);
+        closeLoadingFunction(ajaxOptions);
         return showMsg({text:r.Info,type:'success'});
     }
     if(r.Code==App.status.NotLoggedIn){
-        return signInDialog(function(){});
+        return signInDialog(function(){},ajaxOptions);
     }
     if(App.captchaHasError(r.Code)) return captchaDialog(r,ajaxOptions);
     showMsg({text:r.Info,type:'error'});
     renewCaptcha(form,r);
     if(onFailure!=null&&$.isFunction(onFailure)) onFailure(r);
+    closeLoadingFunction(ajaxOptions);
 }
 function hasScroll(el, direction) {
     var eleScroll = (!direction || direction === 'vertical') ? 'scrollTop' : 'scrollLeft';
@@ -884,7 +920,7 @@ function hasScroll(el, direction) {
  * 投诉
  * @param {string|object} elem
  */
-function complaint(elem){
+function complaint(elem,close){
     var data=$(elem).serializeArray();
     var url=$(elem).attr('action')||BASE_URL+'/complaint';
     var ajaxOptions={
@@ -892,19 +928,24 @@ function complaint(elem){
         type: 'POST',
         data: data,
         dataType: 'json',
+        close: close,
         success: function(r){
             if(r.Code!=1) {
                 if(App.captchaHasError(r.Code) && $(elem).find('input[name="'+r.Zone+'"]').length<1){ 
                     return captchaDialog(r,ajaxOptions);
                 }
+                close();
                 showMsg({text:r.Info,type:'error'});
                 return renewCaptcha(elem,r);
             }
+            close();
             showMsg({text:r.Info,type:'success'});
             var callback=$(elem).data('callback');
             if(callback && $.isFunction(callback)) return callback.apply(this,arguments);
         },
-        error: function(xhr){}
+        error: function(xhr){
+            close();
+        }
     };
     $.ajax(ajaxOptions);
 }
@@ -947,7 +988,7 @@ function complaintModal(targetElem,onSuccess){
           ipt.select();
           $('#dialog-complaint-form').on('submit',function(e){
               e.preventDefault();
-              d.getButton('complaintFormBtn').trigger('click');
+              d.getButton('complaintFormBtnSubmit').trigger('click');
           });
         },
         buttons: [{
@@ -956,6 +997,8 @@ function complaintModal(targetElem,onSuccess){
             icon: 'fa fa-check',
             cssClass: 'btn-primary mg-r-10',
             action: function(dialogRef) {
+                var $submit = $('#complaintFormBtnSubmit'),$icon=$submit.children('.fa');
+                if($submit.prop('disabled'))return;
                 var ipt=$('#dialog-input-complaint-content');
                 var val=$.trim(ipt.val());
                 if(val==''){
@@ -969,7 +1012,13 @@ function complaintModal(targetElem,onSuccess){
                       if(onSuccess!=null) return onSuccess.apply(this,arguments);
                     }
                 });
-                complaint('#dialog-complaint-form');
+                $submit.prop('disabled',true);
+                $icon.addClass('fa-refresh fa-spin');
+                var close=function(){
+                    $submit.prop('disabled',false);
+                    $icon.removeClass('fa-refresh fa-spin');
+                };
+                complaint('#dialog-complaint-form',close);
             }
         },{
             label: App.t('取消'),
@@ -1031,6 +1080,14 @@ function forgotModal(targetElem,onSuccess){
             icon: 'fa fa-check',
             cssClass: 'btn-primary mg-r-10',
             action: function(dialogRef) {
+                var $submit = $('#recvRecoverCodeFormBtn'),$icon=$submit.children('.fa');
+                if($submit.prop('disabled'))return;
+                $submit.prop('disabled',true);
+                $icon.addClass('fa-refresh fa-spin');
+                var close=function(){
+                    $submit.prop('disabled',false);
+                    $icon.removeClass('fa-refresh fa-spin');
+                };
                 var names = ['name', 'account'];
                 for (var i = 0; i<names.length; i++) {
                     var name = names[i];
@@ -1050,6 +1107,7 @@ function forgotModal(targetElem,onSuccess){
                         }
                         showMsg({text:msg,type:'warning'});
                         ipt.focus();
+                        close();
                         return;
                     }
                     ipt.val(val);
@@ -1059,11 +1117,13 @@ function forgotModal(targetElem,onSuccess){
                     type: 'POST',
                     data: $(elem).serializeArray(),
                     dataType: 'json',
+                    close: close,
                     success: function(r){
                         if(r.Code!=1) {
                             if(App.captchaHasError(r.Code) && $(elem).find('input[name="'+r.Zone+'"]').length<1){
                                 return captchaDialog(r,ajaxOptions);
                             }
+                            close();
                             showMsg({text:r.Info,type:'error'});
                             return renewCaptcha(elem,r);
                         }
@@ -1076,8 +1136,11 @@ function forgotModal(targetElem,onSuccess){
                             onSuccess.apply($(elem),arguments);
                         }
                         dialogRef.close();
+                        close();
                     },
-                    error: function(xhr){}
+                    error: function(xhr){
+                        close();
+                    }
                 };
                 $.ajax(ajaxOptions);
             }
