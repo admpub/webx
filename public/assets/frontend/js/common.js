@@ -207,13 +207,16 @@ function goCaptchaDialog(resp,ajaxOptions){
         dialogRef.close();
     }
     App.dialog().show({
-        title:App.t('行为验证'),
+        title: App.t('行为验证'),
         type:'type-primary',
         size:'size-small',
         message:formHTML,
         nl2br:false,
-        closeByBackdrop:false,
+        // closeByBackdrop:false,
         onshown: function(d){
+            console.dir(d)
+            d.$modalDialog.css({"max-width":"340px"});
+            d.$modalBody.css({"padding":0});
             var $input = $('#dialog-retry-captcha').find('[name="'+captchaName+'"]');
             if(!$input.hasClass('wg-cap-static')) $input.addClass('wg-cap-static');
             if(jsInit) {
@@ -222,8 +225,9 @@ function goCaptchaDialog(resp,ajaxOptions){
                     App.message({text:App.t('验证成功'),type:'success'});
                     done(d);
                 });
+                d.$modalBody.find('.wg-cap-wrap').css({"border":0,"border-top-left-radius":0,"border-top-right-radius":0});
             }
-        },
+        }/*,
         buttons: [{
             id: 'captchaDialogBtnSubmit',
             label: App.t('提交'),
@@ -235,7 +239,7 @@ function goCaptchaDialog(resp,ajaxOptions){
             action: function(dialogRef) {
                 dialogRef.close();
             }
-        }]
+        }]*/
     });
     return true;
 }
