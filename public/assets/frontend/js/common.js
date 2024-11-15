@@ -45,6 +45,8 @@ function hideModal(){
  * @param {string} nextURL 
  */
 function signIn(elem,nextURL){
+    var cc=checkSubmitBtnWithCloser(a);
+    if(cc.submited)return;
     if(nextURL==null) nextURL=window.location.href;
     var data=$(elem).serializeArray();
     var url=$(elem).attr('action')||BASE_URL+'/sign_in';
@@ -53,14 +55,17 @@ function signIn(elem,nextURL){
         type: 'POST',
         data: data,
         dataType: 'json',
+        close: cc.close,
         success: function(r){
             if(r.Code!=1) {
                 if(App.captchaHasError(r.Code) && r.Data && typeof(r.Data.captchaName)!='undefined' && r.Data.captchaName && $(elem).find('input[name="'+r.Data.captchaName+'"]').length<1){ 
                     return captchaDialog(r,ajaxOptions);
                 }
+                cc.close()
                 showMsg({text:r.Info,type:'error'});
                 return renewCaptcha(elem,r);
             }
+            cc.close()
             showMsg({text:r.Info,type:'success'});
             var callback=$(elem).data('callback');
             if(callback && $.isFunction(callback)) return callback.apply(this,arguments);
@@ -69,7 +74,7 @@ function signIn(elem,nextURL){
                 window.location.href=nextURL;
             },2000);
         },
-        error: function(xhr){}
+        error: function(xhr){cc.close()}
     };
     $.ajax(ajaxOptions);
 }
@@ -79,6 +84,8 @@ function signIn(elem,nextURL){
  * @param {string} nextURL 
  */
 function signUp(elem,nextURL){
+    var cc=checkSubmitBtnWithCloser(a);
+    if(cc.submited)return;
     if(nextURL==null) nextURL=window.location.href;
     var data=$(elem).serializeArray();
     var url=$(elem).attr('action')||BASE_URL+'/sign_up';
@@ -87,14 +94,17 @@ function signUp(elem,nextURL){
         type: 'POST',
         data: data,
         dataType: 'json',
+        close: cc.close,
         success: function(r){
             if(r.Code!=1) {
                 if(App.captchaHasError(r.Code) && r.Data && typeof(r.Data.captchaName)!='undefined' && r.Data.captchaName && $(elem).find('input[name="'+r.Data.captchaName+'"]').length<1){ 
                     return captchaDialog(r,ajaxOptions);
                 }
+                cc.close();
                 showMsg({text:r.Info,type:'error'});
                 return renewCaptcha(elem,r);
             }
+            cc.close();
             showMsg({text:r.Info,type:'success'});
             var callback=$(elem).data('callback');
             if(callback && $.isFunction(callback)) return callback.apply(this,arguments);
@@ -103,7 +113,7 @@ function signUp(elem,nextURL){
                 window.location.href=nextURL;
             },2000);
         },
-        error: function(xhr){}
+        error: function(xhr){cc.close()}
     };
     $.ajax(ajaxOptions);
 }
@@ -863,10 +873,11 @@ function countWords(a,countElem){
     }
     $(countElem).text(Number($(a).attr('maxlength'))-$(a).val().length);
 }
-function ajaxForm(a,onSuccess,onFailure){
+
+function checkSubmitBtnWithCloser(a){
     var $submit = $(a).find(':submit'),close=function(){};
     if($submit.length>0){
-        if($submit.prop('disabled'))return;
+        if($submit.prop('disabled')) return {submited:true,close:close};
         var $icon=$submit.children('.fa');
         $submit.prop('disabled',true);
         if($icon.length>0)$icon.addClass('fa-refresh fa-spin');
@@ -875,17 +886,22 @@ function ajaxForm(a,onSuccess,onFailure){
             if($icon.length>0)$icon.removeClass('fa-refresh fa-spin');
         };
     }
+    return {submited:false,close:close};
+}
+function ajaxForm(a,onSuccess,onFailure){
+    var cc=checkSubmitBtnWithCloser(a);
+    if(cc.submited)return;
     var opts={
         ajaxFormObject: a,
         type: String($(a).attr('method')).toLowerCase()=='post'?'post':'get',
         dataType: 'json',
         data: {},
         url: $(a).attr('action'),
-        close: close,
+        close: cc.close,
         success: function(r){
             onAjaxRespond(a,r,opts,onSuccess,onFailure);
         },error: function(xhr){
-            close();
+            cc.close();
         }
     };
     $(a).ajaxForm(opts);
