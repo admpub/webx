@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre64
-	github.com/coscms/webcore v0.5.11-0.20241115160810-1dead80fe129
-	github.com/coscms/webfront v0.0.0-20241115160922-e55b75e6d92f
+	github.com/coscms/webcore v0.5.11
+	github.com/coscms/webfront v0.0.0-20241116044012-936c9d9087d5
 )
 
 require (
@@ -93,7 +93,7 @@ require (
 	github.com/admpub/fsnotify v1.7.0 // indirect
 	github.com/admpub/gifresize v1.0.2 // indirect
 	github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588 // indirect
-	github.com/admpub/go-captcha/v2 v2.0.3 // indirect
+	github.com/admpub/go-captcha/v2 v2.0.4 // indirect
 	github.com/admpub/go-figure v0.0.0-20180619031829-18b2b544842c // indirect
 	github.com/admpub/go-isatty v0.0.11 // indirect
 	github.com/admpub/go-lock v1.3.0 // indirect
@@ -142,7 +142,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/coscms/captcha v0.1.1 // indirect
+	github.com/coscms/captcha v0.1.2 // indirect
 	github.com/coscms/go-imgparse v0.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/davidbyttow/govips/v2 v2.15.0 // indirect
