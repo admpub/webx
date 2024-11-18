@@ -32,6 +32,9 @@
     "  ":'&nbsp; ',
     "\t":'&nbsp; &nbsp; ',
   }
+	function getJQueryObject(a){
+		return (a instanceof jQuery) ? a : $(a);
+	}
   window.App={
     clientID: {},
     i18n: {
@@ -80,6 +83,7 @@
 				return htmlEncodeMapping[v];
 			});
 		},
+		getJQueryObject: getJQueryObject,
 		htmlDecode: function(value){
 			if(!value) return value;
 			return String(value).replace(htmlDecodeRegexp, function(v){
