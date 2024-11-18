@@ -16,22 +16,20 @@
               <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"标签名称"|$.T}}</label>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                     {{if not $.Stored.isEdit}}
                     <input type="text" class="form-control" required name="name" value="{{$.Form `name`}}">
                     {{else}}
                     <span class="form-control no-border">{{$.Form "name"}}</span>
                     {{end}}
                 </div>
-              </div>
-              <div class="form-group">
                 <label class="col-sm-2 control-label">{{"标签分组"|$.T}}</label>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                   <span class="input-group">
                     <input type="hidden" class="form-control" name="group" value="{{$.Form `group`}}">
                     <input type="text" class="form-control" name="newGroup" value="{{$.Form `newGroup` ($.Form `group`)}}">
-                    <span class="input-group-addon">
-                      <select class="form-control" onchange="$(this).parent().prev().val(this.value)">{{$group := $.Form `group`}}
+                    <span class="input-group-addon no-padding no-border">
+                      <select class="form-control" onchange="$(this).parent().prev().val(this.value)" style="min-width:100px">{{$group := $.Form `group`}}
                         <option value="">- {{`请选择`|$.T}} -</option>
                         {{- range $k, $v := $.Stored.groups -}}
                         <option value="{{$v.K}}"{{if eq $v.K $group}} selected{{end}}>{{$v.V}}</option>

@@ -60,10 +60,11 @@ func Edit(ctx echo.Context) error {
 	name := ctx.Form(`name`)
 	group := ctx.Form(`group`)
 	m := official.NewTags(ctx)
-	err = m.Get(nil, db.And(
+	cond := db.And(
 		db.Cond{`name`: name},
 		db.Cond{`group`: group},
-	))
+	)
+	err = m.Get(nil, cond)
 	if err != nil {
 		return err
 	}
@@ -72,7 +73,11 @@ func Edit(ctx echo.Context) error {
 		if err == nil {
 			m.Group = ctx.Form(`newGroup`)
 			m.Name = name
-			err = m.Edit(nil, db.Cond{`name`: name})
+			m.Display = common.GetBoolFlag(ctx.Form(`display`))
+			err = m.UpdateFields(nil, echo.H{
+				`group`:   m.Group,
+				`display`: m.Display,
+			}, cond)
 			if err == nil {
 				common.SendOk(ctx, ctx.T(`操作成功`))
 				return ctx.Redirect(backend.URLFor(`/official/tags/index`))
@@ -83,7 +88,7 @@ func Edit(ctx echo.Context) error {
 		if len(display) > 0 {
 			m.Display = display
 			data := ctx.Data()
-			err = m.UpdateField(nil, `display`, display, db.Cond{`name`: name})
+			err = m.UpdateField(nil, `display`, display, cond)
 			if err != nil {
 				data.SetError(err)
 				return ctx.JSON(data)
