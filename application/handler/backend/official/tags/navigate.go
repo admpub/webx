@@ -14,14 +14,12 @@ var LeftNavigate = &navigate.Item{
 			Name:    `标签管理`,
 			Action:  `index`,
 		},
-		/* 标签为自动添加
 		{
 			Display: true,
-			Name:          `添加标签`,
-			Action:        `add`,
-			Icon:          `plus`,
+			Name:    `添加标签`,
+			Action:  `add`,
+			Icon:    `plus`,
 		},
-		*/
 		{
 			Display: false,
 			Name:    `修改标签`,

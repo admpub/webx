@@ -18,7 +18,7 @@
                 <label class="col-sm-2 control-label">{{"标签名称"|$.T}}</label>
                 <div class="col-sm-8">
                     {{if not $.Stored.isEdit}}
-                    <input type="text" class="form-control" required name="name" value="{{$.Form "name"}}">
+                    <input type="text" class="form-control" required name="name" value="{{$.Form `name`}}">
                     {{else}}
                     <span class="form-control no-border">{{$.Form "name"}}</span>
                     {{end}}
@@ -27,8 +27,19 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"标签分组"|$.T}}</label>
                 <div class="col-sm-8">
+                  <span class="input-group">
                     <input type="hidden" class="form-control" name="group" value="{{$.Form `group`}}">
                     <input type="text" class="form-control" name="newGroup" value="{{$.Form `newGroup` ($.Form `group`)}}">
+                    <span class="input-group-addon">
+                      <select class="form-control" onchange="$(this).parent().prev().val(this.value)">{{$group := $.Form `group`}}
+                        <option value="">- {{`请选择`|$.T}} -</option>
+                        {{- range $k, $v := $.Stored.groups -}}
+                        <option value="{{$v.K}}"{{if eq $v.K $group}} selected{{end}}>{{$v.V}}</option>
+                        {{- end -}}
+                      </select>
+                    </span>
+                  </span>
+                  <div class="help-block">{{`选择或输入分组`|$.T}}</div>
                 </div>
               </div>
               <div class="form-group">
@@ -36,10 +47,12 @@
                   <div class="col-sm-8">
                     {{$v := $.Form "display"}}
                     <div class="radio radio-success radio-inline">
-                        <input type="radio" value="Y" name="display" id="display-Y"{{if or (eq $v "Y") (eq $v "")}} checked{{end}}> <label for="display-Y">{{"显示"|$.T}}</label>
+                        <input type="radio" value="Y" name="display" id="display-Y"{{if eq $v `Y` ``}} checked{{end}}> 
+                        <label for="display-Y">{{"显示"|$.T}}</label>
                     </div>
                       <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="N" name="display" id="display-N"{{if eq $v "N"}} checked{{end}}> <label for="display-N">{{"隐藏"|$.T}}</label>
+                        <input type="radio" value="N" name="display" id="display-N"{{if eq $v `N`}} checked{{end}}> 
+                        <label for="display-N">{{"隐藏"|$.T}}</label>
                       </div>
                   </div>
                 </div>

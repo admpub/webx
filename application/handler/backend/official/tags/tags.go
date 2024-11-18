@@ -50,6 +50,7 @@ func Add(ctx echo.Context) error {
 	}
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
+	ctx.Set(`groups`, official.TagGroups.Slice())
 	ctx.Set(`isEdit`, false)
 	return ctx.Render(`official/tags/edit`, common.Err(ctx, err))
 }
@@ -97,6 +98,7 @@ func Edit(ctx echo.Context) error {
 	}
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
+	ctx.Set(`groups`, official.TagGroups.Slice())
 	ctx.Set(`isEdit`, true)
 	return ctx.Render(`official/tags/edit`, common.Err(ctx, err))
 }
