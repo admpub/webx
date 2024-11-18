@@ -53,7 +53,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.5
-	github.com/webx-top/com v1.3.17
+	github.com/webx-top/com v1.3.19
 	github.com/webx-top/db v1.28.0
 	github.com/webx-top/echo v1.12.10
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
