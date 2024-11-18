@@ -33,7 +33,7 @@
     "\t":'&nbsp; &nbsp; ',
   }
 	function getJQueryObject(a){
-		return (a instanceof jQuery) ? a : $(a);
+		return (typeof(a)=='object' && a instanceof jQuery) ? a : $(a);
 	}
   window.App={
     clientID: {},
