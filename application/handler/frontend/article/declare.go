@@ -44,15 +44,19 @@ func ClickFlow(c echo.Context, typ string, targetType string, canCancel ...bool)
 	}
 	target, ok := official.ClickFlowTargets[targetType]
 	if !ok {
-		return c.E(`不支持的目标类型: %s`, targetType)
+		return c.NewError(code.Unsupported, `不支持的目标类型: %s`, targetType)
 	}
-	after, idGetter, err := target.Do(c, id)
+	after, infoGetter, err := target.Do(c, id)
 	if err != nil {
 		data.SetError(err)
 		return c.JSON(data)
 	}
-	if idGetter != nil {
-		targetID = idGetter()
+	if infoGetter != nil {
+		info := infoGetter()
+		targetID = info.ID
+		if info.AuthorID > 0 && customer.Id == info.AuthorID {
+			return c.NewError(code.Unsupported, `操作失败：您不能对自己发布的内容进行此项操作`).SetZone(`type`)
+		}
 	}
 	clickFlowM := official.NewClickFlow(c)
 	clickFlowM.TargetType = targetType
@@ -66,7 +70,7 @@ func ClickFlow(c echo.Context, typ string, targetType string, canCancel ...bool)
 	case `hate`:
 		_, err = clickFlowM.Add()
 	default:
-		err = c.E(`类型无效`)
+		err = c.NewError(code.InvalidParameter, `类型无效: %s`, typ)
 	}
 	if err == nil {
 		if after != nil {
