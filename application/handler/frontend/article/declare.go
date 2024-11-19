@@ -53,7 +53,9 @@ func ClickFlow(c echo.Context, typ string, targetType string, canCancel ...bool)
 	}
 	if infoGetter != nil {
 		info := infoGetter()
-		targetID = info.ID
+		if info.ID > 0 {
+			targetID = info.ID
+		}
 		if info.AuthorID > 0 && customer.Id == info.AuthorID {
 			return c.NewError(code.Unsupported, `操作失败：您不能对自己发布的内容进行此项操作`).SetZone(`type`)
 		}
@@ -158,15 +160,19 @@ func Collect(c echo.Context, targetType string, canCancel ...bool) error {
 	if !ok {
 		return c.E(`不支持的目标类型: %s`, targetType)
 	}
-	after, idAndTitleGetter, err := target.Do(c, id)
+	after, infoGetter, err := target.Do(c, id)
 	if err != nil {
 		data.SetError(err)
 		return c.JSON(data)
 	}
 	collectionM := official.NewCollection(c)
 	collectionM.TargetType = targetType
-	if idAndTitleGetter != nil {
-		targetID, collectionM.Title = idAndTitleGetter()
+	if infoGetter != nil {
+		info := infoGetter()
+		if info.ID > 0 {
+			targetID = info.ID
+		}
+		collectionM.Title = info.Title
 	}
 	collectionM.TargetId = targetID
 	collectionM.CustomerId = customer.Id
