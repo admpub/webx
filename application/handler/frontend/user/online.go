@@ -76,5 +76,5 @@ func makeNotice(msgGetter func(context.Context) ([]byte, error)) func(c *websock
 func resetClientCount() {
 	ctx := defaults.NewMockContext()
 	m := modelCustomer.NewOnline(ctx)
-	m.ResetClientCount()
+	m.ResetClientCount(true)
 }

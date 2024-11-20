@@ -319,7 +319,8 @@
       }
       return url;
     },
-    websocket:function(showmsg,url,onopen){
+    websocket:function(showmsg,url,onopen,onclose){
+      if(!('WebSocket' in window)) return;
       url = App.wsURL(url);
     	var ws = new WebSocket(url);
     	ws.onopen = function(evt) {
@@ -328,13 +329,12 @@
     	};
     	ws.onclose = function(evt) {
     	    console.log('Websocket Server is disconnected');
+          if (onclose != null && typeof onclose === "function") onclose.apply(this, arguments);
     	};
     	ws.onmessage = function(evt) {
-    	    showmsg(evt.data);
+    	    if(showmsg) showmsg(evt.data);
     	};
-    	ws.onerror = function(evt) {
-    	    console.dir(evt);
-    	};
+    	//ws.onerror = function(evt) {console.dir(evt);};
       if(onopen!=null&&typeof(onopen)=='object'){
         ws=$.extend({},ws,onopen);
       }

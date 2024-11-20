@@ -1270,9 +1270,21 @@ function commonInit($,App){
         App.showRequriedInputStar();
         setNavActive();
         attachContype();
-        App.websocket(function(message){
-            console.log('websocket:',message)
-        },FRONTEND_URL+'/user/notice')
+        if(typeof(CUSTOMER)=='object' && ('ID' in CUSTOMER) && CUSTOMER.ID>0){
+            var retries=0,connectWS=function(onopen){
+                var ws = App.websocket(function(message){}, FRONTEND_URL + '/user/notice', onopen, function(){
+                    if(typeof(CUSTOMER)=='object' && (`ID` in CUSTOMER) && CUSTOMER.ID>0){
+                        window.setTimeout(function(){
+                            retries++;
+                            try {ws.close();} catch (_) {}
+                            connectWS(function(){retries=0;});
+                        },5000*(retries+1));
+                    }
+                });
+                return ws;
+            };
+            connectWS();
+        }
     })
 }
 if (typeof(jQuery) !== 'undefined' && typeof(App) !== 'undefined') {

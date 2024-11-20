@@ -67,13 +67,20 @@ func Index(ctx echo.Context) error {
 		if len(customerIDs) > 0 {
 			onlineM := modelCustomer.NewOnline(ctx)
 			exists := onlineM.IsOnlineCustomerIDs(customerIDs)
+			customerIDs = customerIDs[0:0]
 			for index, row := range list {
 				if exists[row.Id] {
 					row.Online = `Y`
-				}else{
+				} else {
+					if row.Online == `Y` {
+						customerIDs = append(customerIDs, row.Id)
+					}
 					row.Online = `N`
 				}
 				list[index] = row
+			}
+			if len(customerIDs) > 0 {
+				m.OfficialCustomer.UpdateField(nil, `online`, `N`, `id`, db.In(customerIDs))
 			}
 		}
 	}

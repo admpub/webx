@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"html/template"
 
+	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
+	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/dashboard"
 	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webfront/dbschema"
@@ -25,11 +27,18 @@ func init() {
 		}).SetContentGenerator(func(ctx echo.Context) interface{} {
 			custMdl := modelCustomer.NewCustomer(ctx)
 			total, _ := custMdl.Count(nil)
+			html := com.String(total)
+			html += ` <span class="label-group">`
 			agents, _ := custMdl.Count(nil, db.Cond{`agent_level`: db.NotEq(0)})
-			if agents < 1 {
-				return total
+			var labelClass string
+			if agents > 0 {
+				labelClass = ` label-xs`
+				html += fmt.Sprintf(`<a class="label label-danger`+labelClass+`" href="%s">%s:%d</a><br />`, `javascript:;`, ctx.T(`代理商`), agents)
 			}
-			return template.HTML(fmt.Sprintf(`%d <a class="label label-danger" href="%s">%s:%d</a>`, total, `javascript:;`, ctx.T(`代理商`), agents))
+			onlineCount, _ := custMdl.Count(nil, db.Cond{`online`: `Y`})
+			html += fmt.Sprintf(`<a class="label label-success`+labelClass+`" href="%s">%s:%d</a>`, backend.URLFor(`/official/customer/index`)+`?online=Y`, ctx.T(`在线`), onlineCount)
+			html += `</span>`
+			return template.HTML(html)
 		}),
 		(&dashboard.Card{
 			IconName:  `fa-leaf`,

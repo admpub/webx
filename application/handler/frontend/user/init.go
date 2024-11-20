@@ -46,6 +46,8 @@ func init() {
 		if !config.IsInstalled() {
 			return
 		}
-		go resetClientCount()
+		if !config.FromFile().Extend.Bool(`disableAutoResetClientCount`) {
+			go resetClientCount()
+		}
 	})
 }
