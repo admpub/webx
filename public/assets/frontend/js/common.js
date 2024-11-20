@@ -1270,6 +1270,9 @@ function commonInit($,App){
         App.showRequriedInputStar();
         setNavActive();
         attachContype();
+        App.websocket(function(message){
+            console.log('websocket:',message)
+        },FRONTEND_URL+'/user/notice')
     })
 }
 if (typeof(jQuery) !== 'undefined' && typeof(App) !== 'undefined') {

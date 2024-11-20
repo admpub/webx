@@ -6,12 +6,16 @@ import (
 	_ "github.com/admpub/webx/application/handler/frontend/user/membership"
 	_ "github.com/admpub/webx/application/handler/frontend/user/profile"
 	_ "github.com/admpub/webx/application/handler/frontend/user/wallet"
+	"github.com/coscms/webcore/cmd/bootconfig"
+	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webfront/initialize/frontend"
 	xMW "github.com/coscms/webfront/middleware"
+	ws "github.com/webx-top/echo/handler/websocket"
 )
 
 func init() {
 	frontend.RegisterToGroup(`/user`, func(u echo.RouteRegister) {
+		ws.New("/notice", makeNotice(nil)).Wrapper(u)
 		// 用户个人
 		u.Route(`GET`, `/index`, Index).SetName(`user.index`)
 		u.Route(`GET,POST`, `/message/unread_count`, MessageUnreadCount).SetName(`user.message.unread_count`)
@@ -38,4 +42,10 @@ func init() {
 
 	}, xMW.AuthCheck)
 
+	bootconfig.OnStart(-1, func() {
+		if !config.IsInstalled() {
+			return
+		}
+		go resetClientCount()
+	})
 }

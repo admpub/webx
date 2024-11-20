@@ -59,6 +59,24 @@ func Index(ctx echo.Context) error {
 			return sel.Columns(`id`, `name`)
 		})
 	}, cond.And()))
+	if err == nil {
+		customerIDs := make([]uint64, len(list))
+		for index, row := range list {
+			customerIDs[index] = row.Id
+		}
+		if len(customerIDs) > 0 {
+			onlineM := modelCustomer.NewOnline(ctx)
+			exists := onlineM.IsOnlineCustomerIDs(customerIDs)
+			for index, row := range list {
+				if exists[row.Id] {
+					row.Online = `Y`
+				}else{
+					row.Online = `N`
+				}
+				list[index] = row
+			}
+		}
+	}
 	ret := common.Err(ctx, err)
 	ctx.Set(`listData`, list)
 
