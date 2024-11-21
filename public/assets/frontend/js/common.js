@@ -1275,6 +1275,9 @@ function commonInit($,App){
             CUSTOMER.ID=r.Data.id;
             CUSTOMER.NAME=r.Data.name;
             App.notifyListen(FRONTEND_URL + '/user/notice');
+            if(typeof(App.onCustomterInfo)=='function'){
+                App.onCustomterInfo(r.Data)
+            }
         });
     })
 }
