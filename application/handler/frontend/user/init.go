@@ -9,13 +9,14 @@ import (
 	"github.com/coscms/webcore/cmd/bootconfig"
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webfront/initialize/frontend"
+	"github.com/coscms/webfront/library/xnotice"
 	xMW "github.com/coscms/webfront/middleware"
-	ws "github.com/webx-top/echo/handler/websocket"
 )
 
 func init() {
+	xnotice.RegsterCmder()
 	frontend.RegisterToGroup(`/user`, func(u echo.RouteRegister) {
-		ws.New("/notice", makeNotice(nil)).Wrapper(u)
+		xnotice.RegisterRoute(u)
 		// 用户个人
 		u.Route(`GET`, `/index`, Index).SetName(`user.index`)
 		u.Route(`GET,POST`, `/message/unread_count`, MessageUnreadCount).SetName(`user.message.unread_count`)
@@ -47,7 +48,7 @@ func init() {
 			return
 		}
 		if !config.FromFile().Extend.Bool(`disableAutoResetClientCount`) {
-			go resetClientCount()
+			go xnotice.ResetClientCount()
 		}
 	})
 }

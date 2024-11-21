@@ -15,6 +15,7 @@ import (
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webfront/dbschema"
+	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/coscms/webfront/model/official"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	modelLevel "github.com/coscms/webfront/model/official/level"
@@ -69,7 +70,7 @@ func Index(ctx echo.Context) error {
 			exists := onlineM.IsOnlineCustomerIDs(customerIDs)
 			customerIDs = customerIDs[0:0]
 			for index, row := range list {
-				if exists[row.Id] {
+				if exists[row.Id] || frontend.Notify.IsOnline(row.Name) {
 					row.Online = `Y`
 				} else {
 					if row.Online == `Y` {

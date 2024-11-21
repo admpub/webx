@@ -1271,23 +1271,7 @@ function commonInit($,App){
         setNavActive();
         attachContype();
         if(typeof(CUSTOMER)=='object' && ('ID' in CUSTOMER) && CUSTOMER.ID>0){
-            var retries=0,connectWS=function(onopen){
-                var ws = App.websocket(function(message){}, FRONTEND_URL + '/user/notice', onopen, function(){
-                    if(typeof(CUSTOMER)=='object' && (`ID` in CUSTOMER) && CUSTOMER.ID>0){
-                        $.post(FRONTEND_URL+'/customer_info',{},function(r){
-                            if(r.Code!=1) return;
-                            if(r.Data.online!='Y') return;
-                            window.setTimeout(function(){
-                                retries++;
-                                try {ws.close();} catch (_) {}
-                                connectWS(function(){retries=0;});
-                            },5000*(retries+1));
-                        });
-                    }
-                });
-                return ws;
-            };
-            connectWS();
+            App.notifyListen(FRONTEND_URL + '/user/notice');
         }
     })
 }

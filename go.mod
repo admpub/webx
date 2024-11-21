@@ -11,9 +11,9 @@ go 1.23
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.3-pre64
-	github.com/coscms/webcore v0.5.15
-	github.com/coscms/webfront v0.0.0-20241121072656-b22f1c15a93b
+	github.com/admpub/nging/v5 v5.3.3-pre65
+	github.com/coscms/webcore v0.6.0
+	github.com/coscms/webfront v0.0.0-20241121130405-985f5588fc2c
 )
 
 require (
@@ -68,7 +68,6 @@ require (
 require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
-	github.com/admpub/websocket v1.0.4
 	github.com/nging-plugins/dbmanager v1.7.0
 	github.com/silenceper/wechat/v2 v2.1.7
 )
@@ -133,6 +132,7 @@ require (
 	github.com/admpub/sonyflake v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
 	github.com/admpub/timeago v1.2.2 // indirect
+	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.47 // indirect
 	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/aws/aws-sdk-go v1.55.5 // indirect
@@ -200,6 +200,7 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-syslog v1.0.0 // indirect
 	github.com/hashicorp/go-version v1.7.0 // indirect
+	github.com/hibiken/asynq v0.25.0 // indirect
 	github.com/hirochachacha/go-smb2 v1.1.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jlaffaye/ftp v0.2.0 // indirect
@@ -250,8 +251,10 @@ require (
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
 	github.com/quic-go/quic-go v0.48.1 // indirect
+	github.com/redis/go-redis/v9 v9.7.0 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
+	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/russross/blackfriday v1.6.0 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
@@ -302,6 +305,7 @@ require (
 	golang.org/x/net v0.31.0 // indirect
 	golang.org/x/sys v0.27.0 // indirect
 	golang.org/x/text v0.20.0 // indirect
+	golang.org/x/time v0.8.0 // indirect
 	golang.org/x/tools v0.27.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
 	google.golang.org/protobuf v1.35.2 // indirect
