@@ -1270,9 +1270,12 @@ function commonInit($,App){
         App.showRequriedInputStar();
         setNavActive();
         attachContype();
-        if(typeof(CUSTOMER)=='object' && ('ID' in CUSTOMER) && CUSTOMER.ID>0){
+        $.post(FRONTEND_URL+'/customer_info',{},function(r){
+            if(r.Code!=1) return;
+            CUSTOMER.ID=r.Data.id;
+            CUSTOMER.NAME=r.Data.name;
             App.notifyListen(FRONTEND_URL + '/user/notice');
-        }
+        });
     })
 }
 if (typeof(jQuery) !== 'undefined' && typeof(App) !== 'undefined') {
