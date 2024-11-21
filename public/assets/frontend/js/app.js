@@ -353,6 +353,7 @@
         switch(m.mode){
           case '-':
           break;
+
           case 'element':
           var c=$('#notify-element-'+m.type);
           if(c.length<1){
@@ -380,6 +381,7 @@
           c.append('<li>'+message+'</li>');
           messageCount[m.mode]++;
           break;
+
           case 'modal':
           var c=$('#notify-modal-'+m.type);
           if(c.length<1){
@@ -432,6 +434,7 @@
           }
           messageCount[m.mode]++;
           break;
+          
           case 'notify':
           default:
             if('notify'!=m.mode) m.mode='notify';

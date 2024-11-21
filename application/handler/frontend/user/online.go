@@ -28,21 +28,15 @@ func makeNotice(msgGetter func(context.Context) ([]byte, error)) func(c *websock
 		}
 		//push(writer)
 		if msgGetter != nil {
-			stdCtx, stdCancel := context.WithCancel(context.Background())
-			defer stdCancel()
 			go func() {
 				for {
-					select {
-					case <-stdCtx.Done():
+					message, err := msgGetter(ctx)
+					if err != nil {
+						ctx.Logger().Error(err.Error())
+						c.Close()
 						return
-					default:
-						message, err := msgGetter(stdCtx)
-						if err != nil {
-							ctx.Logger().Error(err.Error())
-							return
-						}
-						c.WriteMessage(websocket.TextMessage, message)
 					}
+					c.WriteMessage(websocket.TextMessage, message)
 				}
 			}()
 		}
