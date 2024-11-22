@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre65
-	github.com/coscms/webcore v0.6.2
-	github.com/coscms/webfront v0.0.0-20241122101557-4ea065e685b5
+	github.com/coscms/webcore v0.6.4
+	github.com/coscms/webfront v0.0.0-20241122110330-844a66f96b26
 )
 
 require (
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.5
 	github.com/webx-top/com v1.3.19
 	github.com/webx-top/db v1.28.1
-	github.com/webx-top/echo v1.13.0
+	github.com/webx-top/echo v1.13.1
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.1
 	github.com/webx-top/pagination v0.3.1
@@ -148,7 +148,7 @@ require (
 	github.com/coscms/session-boltstore v0.0.0-20241122060137-861b57ff0116 // indirect
 	github.com/coscms/session-mysqlstore v0.0.0-20241122060432-e4161cb8f12f // indirect
 	github.com/coscms/session-redisstore v0.0.0-20241122060113-0376b64193ac // indirect
-	github.com/coscms/session-sqlitestore v0.0.2 // indirect
+	github.com/coscms/session-sqlitestore v0.0.3 // indirect
 	github.com/coscms/session-sqlstore v0.0.0-20241122060049-76e1eb3fbdc2 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/davidbyttow/govips/v2 v2.15.0 // indirect
