@@ -46,6 +46,7 @@ debug.log
 /data/logs/*.txt
 /data/sm2/*
 /data/cache/*
+/data/temp
 nohup.out
 /public/upload/*
 /public/assets/backend/combined
