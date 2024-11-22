@@ -5,12 +5,12 @@
             <div class="panel no-radius panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title no-margin">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#cache-adapterconfig-accordion" href="#cache-adapterconfig-collapseOne">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#cache-adapterconfig-accordion" href="#cache-adapterconfig-collapse1">
                       <i class="fa fa-angle-right"></i> {{`Redis`|$.T}}
                   </a>
                 </h4>
               </div>
-              <div id="cache-adapterconfig-collapseOne" class="panel-collapse collapse">
+              <div id="cache-adapterconfig-collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
                     <pre>network=tcp,addr=:6379,password=123456,db=0,pool_size=100,idle_timeout=180,hset_name=Cache,prefix=cache:</pre>
                     <ol>
@@ -29,12 +29,27 @@
             <div class="panel no-radius panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title no-margin">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#cache-adapterconfig-accordion" href="#cache-adapterconfig-collapseTwo">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#cache-adapterconfig-accordion" href="#cache-adapterconfig-collapse2">
+                    <i class="fa fa-angle-right"></i> {{`SQLite`|$.T}}
+                  </a>
+                </h4>
+              </div>
+              <div id="cache-adapterconfig-collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <pre>./data/cache/temp/cache.db</pre>
+                    {{`指定 SQLite 数据库文件的保存路径`|$.T}}
+                </div>
+              </div>
+            </div>
+            <div class="panel no-radius panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title no-margin">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#cache-adapterconfig-accordion" href="#cache-adapterconfig-collapse3">
                     <i class="fa fa-angle-right"></i> {{`File`|$.T}}
                   </a>
                 </h4>
               </div>
-              <div id="cache-adapterconfig-collapseTwo" class="panel-collapse collapse">
+              <div id="cache-adapterconfig-collapse3" class="panel-collapse collapse">
                 <div class="panel-body">
                     <pre>./data/cache/temp</pre>
                     {{`指定缓存文件的保存路径`|$.T}}

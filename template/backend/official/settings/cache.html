@@ -20,6 +20,7 @@ function onSelectCacheAdapter(a){
     var parent=selAcc.parent('span.input-group-addon');
     if (value=='redis') {
         parent.show();
+        parent.prev('input').attr('type', 'hidden');
     }else{
         parent.hide();
         parent.prev('input').attr('type', 'text');

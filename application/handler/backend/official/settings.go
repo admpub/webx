@@ -725,7 +725,7 @@ func init() {
 		dbaM := modelDBMgr.NewDbAccount(ctx)
 		dbaM.ListByOffset(nil, nil, 0, -1, db.Cond{`engine`: `redis`})
 		ctx.Set(`dbAccounts`, dbaM.Objects())
-		ctx.Set(`cacheAdapters`, []string{`redis`, `file`})
+		ctx.Set(`cacheAdapters`, []string{`redis`, `sqlite`, `file`})
 		ctx.SetFunc(`isDbAccount`, xcache.IsDbAccount)
 		return nil
 	}))
