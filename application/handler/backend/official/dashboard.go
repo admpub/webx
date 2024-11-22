@@ -12,7 +12,6 @@ import (
 	"github.com/coscms/webcore/library/dashboard"
 	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webfront/dbschema"
-	"github.com/coscms/webfront/initialize/frontend"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
@@ -37,7 +36,6 @@ func init() {
 				html += fmt.Sprintf(`<a class="label label-danger`+labelClass+`" href="%s">%s:%d</a><br />`, `javascript:;`, ctx.T(`代理商`), agents)
 			}
 			onlineCount, _ := custMdl.Count(nil, db.Cond{`online`: `Y`})
-			onlineCount += int64(frontend.Notify.Count())
 			html += fmt.Sprintf(`<a class="label label-success`+labelClass+`" href="%s">%s:%d</a>`, backend.URLFor(`/official/customer/index`)+`?online=Y`, ctx.T(`在线`), onlineCount)
 			html += `</span>`
 			return template.HTML(html)
