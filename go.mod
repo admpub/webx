@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre65
-	github.com/coscms/webcore v0.6.9
-	github.com/coscms/webfront v0.0.0-20241124133049-6201063fd910
+	github.com/coscms/webcore v0.6.11
+	github.com/coscms/webfront v0.0.0-20241124162743-01c6ed254fb1
 )
 
 require (
@@ -43,7 +43,7 @@ require (
 	github.com/admpub/sensitive v0.0.0-20230925121413-6c7ffc3addbb // indirect
 	github.com/admpub/useragent v0.0.2 // indirect
 	github.com/caddy-plugins/ipfilter v1.1.8 // indirect
-	github.com/coscms/forms v1.13.3
+	github.com/coscms/forms v1.13.6
 	github.com/coscms/oauth2s v0.4.1 // indirect
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.14.0 // indirect
