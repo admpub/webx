@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre65
-	github.com/coscms/webcore v0.6.6
-	github.com/coscms/webfront v0.0.0-20241124064433-1882db9e9d8c
+	github.com/coscms/webcore v0.6.8
+	github.com/coscms/webfront v0.0.0-20241124115851-c3e76a8c8b6a
 )
 
 require (
@@ -43,7 +43,7 @@ require (
 	github.com/admpub/sensitive v0.0.0-20230925121413-6c7ffc3addbb // indirect
 	github.com/admpub/useragent v0.0.2 // indirect
 	github.com/caddy-plugins/ipfilter v1.1.8 // indirect
-	github.com/coscms/forms v1.12.2
+	github.com/coscms/forms v1.13.2
 	github.com/coscms/oauth2s v0.4.1 // indirect
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.14.0 // indirect
@@ -117,7 +117,7 @@ require (
 	github.com/admpub/json5 v0.0.1 // indirect
 	github.com/admpub/mahonia v0.0.0-20151019004008-c528b747d92d // indirect
 	github.com/admpub/mail v0.0.0-20170408110349-d63147b0317b // indirect
-	github.com/admpub/map2struct v0.1.2 // indirect
+	github.com/admpub/map2struct v0.1.3 // indirect
 	github.com/admpub/mysql-schema-sync v0.2.6 // indirect
 	github.com/admpub/oauth2/v4 v4.0.2 // indirect
 	github.com/admpub/pester v0.0.0-20200411024648-005672a2bd48 // indirect
