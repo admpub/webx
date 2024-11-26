@@ -20,7 +20,7 @@
         <div class="card bd-0 rounded-0{{if not $v.Image}} card-inverse bg-indigo{{end}}">
             <!-- bg-indigo/bg-info -->
           {{if $v.Image}}
-          <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
+          <a href="{{URLByName `article.detail` $v.Id}}">
             <figure class="effect-shine">
               <img class="img-fluid wd-100p rounded-3" src="{{$v.Image}}" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
               <figcaption></figcaption>
@@ -33,7 +33,7 @@
               <i class="fa fa-circle tx-size-8 mg-x-10 tx-gray-lighter"></i>
               <span class="d-inline-block">{{(Date $v.Created).Format ($.T "2006年1月2日")}}</span>
             </div><!-- d-flex -->
-            <h6 class="lh-5 mg-t-10 mg-b-0"><a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="{{if not $v.Image}}tx-white{{else}}tx-inverse{{end}}">{{$v.Title}}</a></h6>
+            <h6 class="lh-5 mg-t-10 mg-b-0"><a href="{{URLByName `article.detail` $v.Id}}" class="{{if not $v.Image}}tx-white{{else}}tx-inverse{{end}}">{{$v.Title}}</a></h6>
             {{if not $v.Image}}
             <p class="tx-size-xs mg-b-30">{{$v.Summary}}</p>
             {{end}}

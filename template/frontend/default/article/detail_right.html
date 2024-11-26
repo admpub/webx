@@ -6,7 +6,7 @@
       <div class="list-group list-group-transparent">
         {{range $k,$v := $.Stored.newsList}}
         <div class="list-group-item d-block">
-          <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="tx-gray-dark tx-medium lh-4 tx-size-sm">{{$v.Title}}</a>
+          <a href="{{URLByName `article.detail` $v.Id}}" class="tx-gray-dark tx-medium lh-4 tx-size-sm">{{$v.Title}}</a>
           <span class="tx-size-xs tx-gray-light d-block mg-t-5">{{(Date $v.Created).Format (printf "%s%s" ($.T "2006年1月2日") " 15:04")}}</span>
         </div>
         {{end}}

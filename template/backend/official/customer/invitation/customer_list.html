@@ -32,7 +32,7 @@
 										<td>{{$v.Id}}</td>
 										<td>{{if $v.Invitation}}{{$v.Invitation.Code}}{{else}}-{{end}}</td>
 										<td>
-                                            {{if $v.Customer}}<a href="{{FrontendURL}}/u/{{$v.Customer.Id}}" target="_blank">{{$v.Customer.Name}}{{else}}-{{end}}
+                                            {{if $v.Customer}}<a href="{{FrontendURLByName `user.home` $v.Customer.Id}}" target="_blank">{{$v.Customer.Name}}{{else}}-{{end}}
 										</td>
 										<td>
 											{{$v.Created|DateFormat "2006-01-02 15:04:05"}}

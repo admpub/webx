@@ -33,7 +33,7 @@
                             {{- range $k, $v := $.Stored.articles -}}
                             <div class="post-card">
                                 {{- if $v.Image -}}
-                                <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
+                                <a href="{{URLByName `article.detail` $v.Id}}">
                                     <img src="{{$v.ImageOriginal}}" class="card-thumb bg-cover" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" style="min-height:300px;height:300px">
                                 </a>
                                 {{- end -}}
@@ -44,7 +44,7 @@
                                             <span class="category">{{$v.Category.Name}}</span>
                                             {{- end -}}
                                             {{- if $v.Customer -}}
-                                            <a href="{{FrontendURL}}/u/{{$v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
+                                            <a href="{{URLByName `user.home` $v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
                                             {{- else if $v.User -}}
                                             <span class="author-name">{{$v.User.Username}}</span>
                                             {{- else -}}
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="post-content">
                                         <div class="post-info">
-                                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
+                                            <a href="{{URLByName `article.detail` $v.Id}}">
                                                 <h3 class="heading-primary">
                                                     {{$v.Title}}
                                                 </h3>
@@ -71,7 +71,7 @@
                                                 {{$v.Summary}}
                                             </p>
                                         </div>
-                                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="button icon-button">
+                                        <a href="{{URLByName `article.detail` $v.Id}}" class="button icon-button">
                                             <span class="icon">
                                                 <i class="fas fa-chevron-right"></i>
                                             </span>

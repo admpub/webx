@@ -15,7 +15,7 @@
                     <div class="container">
                         <div class="hero-content">
                             <div>
-                                <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}"><h1 class="hero-heading">
+                                <a href="{{URLByName `article.detail` $v.Id}}"><h1 class="hero-heading">
                                     {{$v.Title}}
                                 </h1></a>
                                 <div class="post-card">
@@ -30,7 +30,7 @@
                                             <p class="author meta-item" title="{{`作者`|$.T}}">
                                                 <i class="fa fa-user"></i> 
                                                 {{- if $v.Customer -}}
-                                                <a href="{{FrontendURL}}/u/{{$v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
+                                                <a href="{{URLByName `user.home` $v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
                                                 {{- else if $v.User -}}
                                                 <span>{{$v.User.Username}}</span>
                                                 {{- else -}}
@@ -43,7 +43,7 @@
                                                 {{$v.Comments}}
                                             </span>
                                         </div>
-                                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="button post-button">
+                                        <a href="{{URLByName `article.detail` $v.Id}}" class="button post-button">
                                             <span class="icon">
                                                 <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                                             </span>

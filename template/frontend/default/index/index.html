@@ -49,7 +49,7 @@
                 {{range $k,$v:=Stored.articles}}
                 <div class="card bd-0 rounded-0 mg-b-30">
                     {{if $v.Image}}
-                    <a href="{{FrontendURL}}/article/{{$v.Id}}" target="_blank">
+                    <a href="{{URLByName `article.detail` $v.Id}}" target="_blank">
                         <figure class="effect-shine">
                             <img class="img-fluid wd-100p" src="{{$v.Image}}" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
                             <figcaption></figcaption>
@@ -61,7 +61,7 @@
                             <span class="d-inline-block tx-pink tx-medium">Food</span>
                             <span class="d-inline-block">{{(Date $v.Created).Format ($.T "2006年1月2日")}}</span>
                         </div><!-- d-flex -->
-                        <h6 class="lh-5 mg-b-15 tx-merriweather"><a href="{{FrontendURL}}/article/{{$v.Id}}" class="tx-inverse">{{$v.Title}}</a></h6>
+                        <h6 class="lh-5 mg-b-15 tx-merriweather"><a href="{{URLByName `article.detail` $v.Id}}" class="tx-inverse">{{$v.Title}}</a></h6>
                         <p class="mg-b-20">{{$v.Summary}}</p>
 
                         <div class="tx-size-sm d-flex justify-content-start align-items-center">

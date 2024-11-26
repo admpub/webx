@@ -41,7 +41,7 @@
         </div>
     </div>
     {{if not $.Stored.flat}}
-    <div id="reply-list-box-{{$v.Id}}" data-url="/article/comment_reply_list?commentId={{$v.Id}}"></div>
+    <div id="reply-list-box-{{$v.Id}}" data-url="{{URLByName `article.comment.replyList`}}?commentId={{$v.Id}}"></div>
     {{end}}
     {{- end -}}
 {{- if $commentList -}}

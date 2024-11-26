@@ -19,7 +19,7 @@
        </div><!-- d-flex -->
      </div>
    {{- else -}}
-  <form class="comment-form" action="/article/comment_add" method="POST" id="{{if $inModal}}modal-{{end}}comment-post-form">
+  <form class="comment-form" action="{{URLByName `article.comment.add`}}" method="POST" id="{{if $inModal}}modal-{{end}}comment-post-form">
       <div class="row">
         {{- if $.Customer -}}{{$customer := $.Customer}}
         <div class="col-md-7">

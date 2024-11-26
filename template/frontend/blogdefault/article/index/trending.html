@@ -21,7 +21,7 @@
                         {{- if $v.Category -}}
                         <span class="category"> {{$v.Category.Name}} </span>
                         {{- end -}}
-                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
+                        <a href="{{URLByName `article.detail` $v.Id}}">
                             <h3 class="heading-primary">
                                 {{$v.Title}}
                             </h3>
@@ -30,7 +30,7 @@
                         <p class="author" title="{{`作者`|$.T}}">
                             <i class="fa fa-user"></i>
                             {{- if $v.Customer -}}
-                            <a href="{{FrontendURL}}/u/{{$v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
+                            <a href="{{URLByName `user.home` $v.Customer.Id}}" class="author-name">{{$v.Customer.Name}}</a>
                             {{- else if $v.User -}}
                             <span>{{$v.User.Username}}</span>
                             {{- else -}}
@@ -38,7 +38,7 @@
                             {{- end -}}
                         </p>
 
-                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="button icon-button">
+                        <a href="{{URLByName `article.detail` $v.Id}}" class="button icon-button">
                             <span class="icon">
                                 <i class="fas fa-chevron-right"></i>
                             </span>

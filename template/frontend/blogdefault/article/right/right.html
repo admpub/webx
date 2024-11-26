@@ -13,7 +13,7 @@
     {{- range $k, $v := $relationList -}}
     <div class="recent-post-card">
         {{- if $v.Image -}}
-        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="card-thumb bg-cover"><img class="card-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
+        <a href="{{URLByName `article.detail` $v.Id}}" class="card-thumb bg-cover"><img class="card-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
         {{- end -}}
         <div class="card-content">
             <div class="post-meta">
@@ -26,7 +26,7 @@
                     {{$v.Comments}}
                 </span>
             </div>
-            <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
+            <a href="{{URLByName `article.detail` $v.Id}}">
                 <h3 class="heading-secondary">
                     {{$v.Title}}
                 </h3>
@@ -56,10 +56,10 @@
         {{- range $k, $v := $relationList -}}
         <div class="widget-category">
             {{- if $v.Image -}}
-            <a class="cat-thumb bg-cover" href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}"><img class="cat-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
+            <a class="cat-thumb bg-cover" href="{{URLByName `article.detail` $v.Id}}"><img class="cat-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
             {{- end -}}
             <div class="cat-content">
-                <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
+                <a href="{{URLByName `article.detail` $v.Id}}">
                     <h4 class="cat-title">{{$v.Title}}</h4></a
                 >
                 <div class="cat-meta">

@@ -20,7 +20,7 @@
     <div class="row mg-0{{if gt $k 0}} bd-t{{end}} {{if $isDark}}hover-bg-inverse bd-color-inverse{{else}}hover-bg-gray-xlightest{{end}}">
       <div class="col-md-12">
         <div class="media pd-20">
-          <a href="{{FrontendURL}}/article/{{$v.Id}}" target="_blank" class="d-flex mg-r-10">
+          <a href="{{URLByName `article.detail` $v.Id}}" target="_blank" class="d-flex mg-r-10">
             <img src="{{$v.Image|Default (AssetsXURL `/images/placeholder/default-sm.jpg`)}}" class="wd-60" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL `/images/placeholder/default-sm.jpg`}}';">
           </a>
           <div class="media-body">
@@ -36,7 +36,7 @@
                 </small>
                 {{- end -}}
             </span>
-            <p class="tx-size-sm mg-b-0 tx-bold"><a href="{{FrontendURL}}/article/{{$v.Id}}" target="_blank" class="tx-gray-dark d-block">{{$v.Title}}</a></p>
+            <p class="tx-size-sm mg-b-0 tx-bold"><a href="{{URLByName `article.detail` $v.Id}}" target="_blank" class="tx-gray-dark d-block">{{$v.Title}}</a></p>
             <div class="tx-size-12">
                 <span class="d-block d-sm-inline">{{`创建于`|$.T}}: {{(Date $v.Created).Format "2006-01-02"}}</span>
                 <span class="d-block d-sm-inline mg-sm-l-10">{{`最后更新`|$.T}}: {{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02"}}{{else}}{{(Date $v.Created).Format "2006-01-02"}}{{end}}</span>

@@ -5,7 +5,7 @@
       <a href="{{FrontendURL}}/user/profile/following" class="tx-gray"><span class="tx-inverse tx-semibold">{{$customer.Following}}</span> Following</a>
     </div>
     <div class="hidden-xss-down">
-      <a href="{{FrontendURL}}/u/{{$customer.Id}}" target="_blank" class="tx-gray mg-r-15 lh-1 d-inline-block" data-toggle="tooltip" title="{{"打开我的主页"|$.T}}"><i class="fa fa-home lh-1"></i></a>
+      <a href="{{URLByName `user.home` $customer.Id}}" target="_blank" class="tx-gray mg-r-15 lh-1 d-inline-block" data-toggle="tooltip" title="{{`打开我的主页`|$.T}}"><i class="fa fa-home lh-1"></i></a>
       <div class="dropdown d-inline-block">  
           <a href="javascript:;" class="tx-gray lh-1" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h lh-1"></i></a>
           <div class="dropdown-menu dropdown-menu-right tx-size-13 rounded-top-0 shadow-base" aria-labelledby="dropdownMenuLink2">

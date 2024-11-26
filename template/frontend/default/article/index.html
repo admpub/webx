@@ -41,7 +41,7 @@
                                 </span>
                                 {{- end -}}
                             </span>
-                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" class="tx-medium tx-size-20">{{$v.Title}}</a>
+                            <a href="{{URLByName `article.detail` $v.Id}}" class="tx-medium tx-size-20">{{$v.Title}}</a>
                             <p class="tx-gray-light mg-b-5 d-block">
                                 {{$v.Summary}}
                             </p>
@@ -61,7 +61,7 @@
                             </div>
                         </div><!-- media-body -->
                         {{- if $v.Image -}}
-                        <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
+                        <a href="{{URLByName `article.detail` $v.Id}}">
                             <img src="{{$v.Image}}" class="img-fluid wd-100 mg-l-15 rounded-3" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';">
                         </a>
                         {{- end -}}

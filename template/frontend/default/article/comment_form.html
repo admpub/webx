@@ -23,7 +23,7 @@
                 </div><!-- d-flex -->
               </div>
             {{- else -}}
-            <form action="/article/comment_add" method="POST" id="{{if $inModal}}modal-{{end}}comment-post-form">
+            <form action="{{URLByName `article.comment.add`}}" method="POST" id="{{if $inModal}}modal-{{end}}comment-post-form">
             <div class="form-group row row-sm">
             {{- if $.Customer -}}
             {{Include "#default#article/comment_form_customer"}}

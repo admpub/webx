@@ -38,7 +38,7 @@
       <dt class="col-sm-3 tx-inverse tx-sm-right">{{"说明"|$.T}}</dt>
       <dd class="col-sm-9">{{$customer.Description|Default $noSet|Nl2br}} &nbsp;</dd>
       <dt class="col-sm-3 tx-inverse tx-sm-right">{{"推荐人"|$.T}}</dt>
-      <dd class="col-sm-9">{{if gt $customer.InviterId 0}}<a href="{{FrontendURL}}/u/{{$customer.InviterId}}" target="_blank">{{$customer.InviterId}}</a>{{else}}{{"无"|$.T}}{{end}} &nbsp;</dd>
+      <dd class="col-sm-9">{{if gt $customer.InviterId 0}}<a href="{{URLByName `user.home` $customer.InviterId}}" target="_blank">{{$customer.InviterId}}</a>{{else}}{{"无"|$.T}}{{end}} &nbsp;</dd>
     </dl>
   </div>
   <div class="col-md-6">

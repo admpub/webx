@@ -20,7 +20,7 @@
                         {{- if $article.Category -}}
                         <span class="category"> {{$article.Category.Name}} </span>
                         {{- end -}}
-                        <a href="{{FrontendURL}}/article/{{$article.Id}}{{$.Ext}}">
+                        <a href="{{URLByName `article.detail` $article.Id}}">
                             <h3 class="heading-secondary">{{$article.Title}}</h3>
                         </a>
                         <div class="post-meta-wrapper">
@@ -28,7 +28,7 @@
                                 <p class="author meta-item" title="{{`作者`|$.T}}">
                                     <i class="fa fa-user"></i> 
                                     {{- if $article.Customer -}}
-                                    <a href="{{FrontendURL}}/u/{{$article.Customer.Id}}" class="author-name">{{$article.Customer.Name}}</a>
+                                    <a href="{{URLByName `user.home` $article.Customer.Id}}" class="author-name">{{$article.Customer.Name}}</a>
                                     {{- else if $article.User -}}
                                     <span>{{$article.User.Username}}</span>
                                     {{- else -}}
@@ -41,7 +41,7 @@
                                     {{$article.Comments}}
                                 </span>
                             </div>
-                            <a href="{{FrontendURL}}/article/{{$article.Id}}{{$.Ext}}" class="button post-button">
+                            <a href="{{URLByName `article.detail` $article.Id}}" class="button post-button">
                                 <span class="icon">
                                     <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                                 </span>
@@ -85,10 +85,10 @@
                     {{- if gt $k 0 -}}
                     <div class="widget-category">
                         {{- if $v.Image -}}
-                        <a class="cat-thumb bg-cover" href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}"><img class="card-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
+                        <a class="cat-thumb bg-cover" href="{{URLByName `article.detail` $v.Id}}"><img class="card-thumb bg-cover" src="{{$v.Image}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';" alt="{{$v.Title}}"></a>
                         {{- end -}}
                         <div class="cat-content">
-                            <a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}">
+                            <a href="{{URLByName `article.detail` $v.Id}}">
                                 <h4 class="cat-title">{{$v.Title}}</h4></a
                             >
                             <div class="cat-meta">

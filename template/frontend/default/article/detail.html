@@ -121,13 +121,13 @@
                 {{- $prevRow := $.Stored.prevRow -}}
                 {{- if and $prevRow (gt $prevRow.Id 0) -}}
                 <i class="fa fa-arrow-left"></i>
-                <a data-toggle="tooltip" title="{{`上一篇：`|$.T}}{{$prevRow.Title}}" href="{{FrontendURL}}/article/{{$prevRow.Id}}{{$.Ext}}">{{$prevRow.Title}}</a>
+                <a data-toggle="tooltip" title="{{`上一篇：`|$.T}}{{$prevRow.Title}}" href="{{URLByName `article.detail` $prevRow.Id}}">{{$prevRow.Title}}</a>
                 {{- end -}}
               </div>
               <div class="col-md-5 tx-right">
                 {{- $nextRow := $.Stored.nextRow -}}
                 {{- if and $nextRow (gt $nextRow.Id 0) -}}
-                <a data-toggle="tooltip" title="{{`下一篇：`|$.T}}{{$nextRow.Title}}" href="{{FrontendURL}}/article/{{$nextRow.Id}}{{$.Ext}}">{{$nextRow.Title}}</a>
+                <a data-toggle="tooltip" title="{{`下一篇：`|$.T}}{{$nextRow.Title}}" href="{{URLByName `article.detail` $nextRow.Id}}">{{$nextRow.Title}}</a>
                 <i class="fa fa-arrow-right"></i>
                 {{- end -}}
               </div>
@@ -151,7 +151,7 @@
             <a href="javascript:;" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-comment-form">{{"添加评论"|$.T}}</a>
             <h4 class="tx-inverse tx-bold tx-spacing-neg-2 mg-b-0">{{$.T "评论"}} (<span class="comment-count-num">{{$data.Comments}}</span>)</h4>
           </div><!-- card-header -->
-          <!-- <div id="comment-list-container" data-url="{{FrontendURL}}/article/comment_list?id={{$data.Id}}&flat=true"></div> -->
+          <!-- <div id="comment-list-container" data-url="{{URLByName `article.comment.list`}}?id={{$data.Id}}&flat=true"></div> -->
           <div id="comment-list-container" data-replace-state="1">{{Include "#default#article/comment_list"}}</div>
         </div><!-- card -->
         {{Include "#default#article/comment_form_modal"}}

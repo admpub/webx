@@ -60,9 +60,9 @@
                         {{range $k,$v := $.Stored.listData}}
 						<tr>
 							<td>{{$v.Id}}</td>
-							<td class="no-padding text-middle"><a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" target="_blank"><img style="width:50px;height:50px" src="{{$v.Image|Default (AssetsURL `/images/user_128.png`)}}" onerror="this.src='{{AssetsURL}}/images/user_128.png';" /></a></td>
+							<td class="no-padding text-middle"><a href="{{FrontendURLByName `article.detail` $v.Id}}" target="_blank"><img style="width:50px;height:50px" src="{{$v.Image|Default (AssetsURL `/images/user_128.png`)}}" onerror="this.src='{{AssetsURL}}/images/user_128.png';" /></a></td>
 							<td>
-								<a href="{{FrontendURL}}/article/{{$v.Id}}{{$.Ext}}" target="_blank" class="text-bold">{{$v.Title}}</a>
+								<a href="{{FrontendURLByName `article.detail` $v.Id}}" target="_blank" class="text-bold">{{$v.Title}}</a>
 								{{- if $v.Tags -}}
 								{{- range $index, $tagName := Split $v.Tags "," -}}
 								<a href="{{BackendURL}}/official/article/index{{$.Ext}}?tag={{$tagName}}">

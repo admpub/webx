@@ -105,14 +105,14 @@
                             <div class="post-navigation">
                                 <div class="nav-prev">
                                     {{- if $hasPrevArticle -}}
-                                    <a href="{{FrontendURL}}/article/{{$prevRow.Id}}{{$.Ext}}" class="nav-button">
+                                    <a href="{{URLByName `article.detail` $prevRow.Id}}" class="nav-button">
                                         <span>
                                             <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow-2.png" alt="arrow" />
                                         </span>
                                         {{`上一篇文章`|$.T}}
                                     </a>
                                     <div class="nav-post">
-                                        <a href="{{FrontendURL}}/article/{{$prevRow.Id}}{{$.Ext}}">
+                                        <a href="{{URLByName `article.detail` $prevRow.Id}}">
                                             <h3 class="heading-tertiary">{{$prevRow.Title}}</h3>
                                         </a>
                                         <span class="date body-text">{{(Date $prevRow.Created).Format ($.T "2006年1月2日")}}</span>
@@ -121,14 +121,14 @@
                                 </div>
                                 <div class="nav-next">
                                     {{- if $hasNextArticle -}}
-                                    <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{$.Ext}}" class="nav-button">
+                                    <a href="{{URLByName `article.detail` $nextRow.Id}}" class="nav-button">
                                         {{`下一篇文章`|$.T}}
                                         <span>
                                             <img src="{{AssetsXURL}}/blogdefault/img/icons/long-arrow.png" alt="arrow" />
                                         </span>
                                     </a>
                                     <div class="nav-post">
-                                        <a href="{{FrontendURL}}/article/{{$nextRow.Id}}{{$.Ext}}">
+                                        <a href="{{URLByName `article.detail` $nextRow.Id}}">
                                             <h3 class="heading-tertiary">{{$nextRow.Title}}</h3>
                                         </a>
                                         <span class="date body-text">{{(Date $nextRow.Created).Format ($.T "2006年1月2日")}}</span>

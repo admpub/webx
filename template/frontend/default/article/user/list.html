@@ -42,10 +42,10 @@
           {{range $k, $v := $.Stored.list}}
           <tr>
             <td class="pd-l-20">
-                <a href="{{FrontendURL}}/article/{{$v.Id}}" target="_blank"><img src="{{$v.Image|Default (AssetsXURL `/images/background/img442.jpg`)}}" onerror="this.onerror=null; this.src='{{AssetsXURL}}/images/background/img442.jpg';" class="wd-55 ht-55" alt="{{$v.Title}}"></a>
+                <a href="{{URLByName `article.detail` $v.Id}}" target="_blank"><img src="{{$v.Image|Default (AssetsXURL `/images/background/img442.jpg`)}}" onerror="this.onerror=null; this.src='{{AssetsXURL}}/images/background/img442.jpg';" class="wd-55 ht-55" alt="{{$v.Title}}"></a>
             </td>
             <td>
-              <a href="{{FrontendURL}}/article/{{$v.Id}}" target="_blank" class="tx-inverse tx-size-14 tx-medium">
+              <a href="{{URLByName `article.detail` $v.Id}}" target="_blank" class="tx-inverse tx-size-14 tx-medium">
                 {{- if eq $v.Display "Y" -}}
                 <span class="square-8 bg-success mg-r-5 rounded-circle" data-toggle="tooltip" title="{{`已发布`|$.T}}"></span>
                 {{- else -}}
@@ -55,7 +55,7 @@
               </a>
               {{- if $v.Tags -}}
               {{- range $index, $tagName := Split $v.Tags "," -}}
-              <a href="{{FrontendURL}}/user/article/list?tag={{$tagName}}">
+              <a href="{{URLByName `user.article.list`}}?tag={{$tagName}}">
                 <span class="label label-default label-xs label-hover-primary">{{$tagName}}</span>
               </a>
               {{- end -}}
@@ -64,7 +64,7 @@
               <br /><small>
               {{- range $index, $category := $v.Categories -}}
               {{- if gt $index 0 -}}<i class="fa fa-angle-right wd-10 text-center"></i>{{- end -}}
-              <a href="{{FrontendURL}}/user/article/list?categoryId={{$category.Id}}">{{$category.Name}}</a>
+              <a href="{{URLByName `user.article.list`}}?categoryId={{$category.Id}}">{{$category.Name}}</a>
               {{- end -}}
               </small>
               {{- end -}}
