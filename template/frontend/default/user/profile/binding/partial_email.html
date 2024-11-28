@@ -12,12 +12,7 @@
                 <small id="emailHelp" class="form-text text-muted">{{"如果已经绑定，必须取消原有绑定之后才能绑定新地址"|$.T}}</small>
               </div>
               <label for="inputCaptcha" class="col-sm-2 col-form-label">{{"图形验证码"|$.T}}:</label>
-              <div class="col-sm-4">
-                <div class="input-group">
-                <input id="inputCaptcha" type="text" placeholder="{{`验证码`|$.T}}" value="{{$.Form `code`}}" name="code" required="required" title="{{`验证码`|$.T}}" class="form-control tx-size-14 pd-y-12 bd-color-gray-lighter">
-                <span class="input-group-addon pd-0">{{$.CaptchaForm ``}}</span>
-                </div>
-              </div>
+              <div class="col-sm-4">{{$.CaptchaForm `#default#usercenter`}}</div>
             </div>
             <!-- <div class="form-group row">
               <label for="inputEmail" class="col-sm-2 col-form-label">

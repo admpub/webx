@@ -13,7 +13,7 @@ func init() {
 		p.Route(`GET,POST`, `/detail`, Profile).SetName(`user.profile`)
 		p.Route(`GET,POST`, `/settings`, Settings).SetName(`user.profile.settings`)
 		p.Route(`GET,POST`, `/password`, Password).SetName(`user.profile.password`)
-		p.Route(`GET,POST`, `/partial_authentication`, _Authentication)
+		p.Route(`GET,POST`, `/_authentication`, _Authentication)
 		p.Route(`GET,POST`, `/binding`, Binding).SetName(`user.profile.binding`)
 		p.Route(`POST`, `/follow`, Follow).SetName(`user.profile.follow`)
 		p.Route(`POST`, `/unfollow`, Unfollow).SetName(`user.profile.unfollow`)
