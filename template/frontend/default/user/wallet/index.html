@@ -3,7 +3,7 @@
 {{Super}}
 <style type="text/css">
 .abs-top5{position:absolute;top:3px}
-.iconwrap+.asset-value{min-width:calc(100% - 50px);padding-left:20px}
+.iconwrap+.asset-value{min-width:calc(100% - 50px);padding-left:10px}
 </style>
 {{/Block}}
 {{Block "body"}}
@@ -19,11 +19,11 @@
   </div>
 
   <div class="main-body pd-20">
-        <div class="row">
+        <div class="row tx-size-13">
           {{- range $k,$v := $.Stored.assetTypes -}}
           {{- $asset := index $.Stored.assets $v.K -}}
           <div class="col-md-6 col-xl-3 mg-b-20">
-            <div class="card pd-20 bd-0">
+            <div class="card pd-10 pd-t-20 bd-0">
               <div class="{{if $v.H.icon}}d-flex justify-content-between align-items-center{{else}}d-block{{end}}">
                 {{- if $v.H.icon -}}
                 <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="iconwrap bg-{{$v.H.bg|Default `warning`}} rounded icon-32">
@@ -39,10 +39,10 @@
                     {{- $v.X.Render $asset.Balance -}}
                   </div>
                   {{- else -}}
-                  <h2 class="tx-inverse tx-arimo tx-bold mg-b-0">
+                  <h4 class="tx-inverse tx-arimo tx-bold mg-b-0">
                     {{- if $v.H.symbol}}{{$v.H.symbol|ToHTML}}{{end -}}
                     {{- $asset.Balance -}}
-                  </h2>
+                  </h4>
                   {{- end -}}
                   {{- if and (eq $v.K `money`) Config.base.recharge.On -}}
                   <a href="{{FrontendURL}}/user/wallet/recharge" class="btn btn-xs btn-pink tx-size-xs pd-y-0 pd-x-5" data-toggle="tooltip" title="{{`点击充值`|$.T}}" target="_blank">{{`充值`|$.T}}</a>
@@ -121,7 +121,7 @@
       </table>
       </div><!-- table-responsive -->
       <div class="card-footer">
-        {{$.Stored.pagination.Render `#default#pagination`}}
+        {{($.Stored.pagination.SetNum 5).Render `#default#pagination`}}
       </div><!-- card-footer -->
       
     </div><!-- card -->
