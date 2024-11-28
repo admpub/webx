@@ -3,7 +3,7 @@
 {{Super}}
 <style type="text/css">
 .abs-top5{position:absolute;top:3px}
-.asset-value{min-width:calc(100% - 50px);padding-left:20px}
+.iconwrap+.asset-value{min-width:calc(100% - 50px);padding-left:20px}
 </style>
 {{/Block}}
 {{Block "body"}}
@@ -25,9 +25,11 @@
           <div class="col-md-6 col-xl-3 mg-b-20">
             <div class="card pd-20 bd-0">
               <div class="d-flex justify-content-between align-items-center">
+                {{- if $v.H.icon -}}
                 <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="iconwrap bg-{{$v.H.bg|Default `warning`}} rounded icon-32">
                   <i class="tx-white {{$v.H.icon}}"></i>
                 </a>
+                {{- end -}}
                 <div class="asset-value">{{$comment := $v.H.comment}}
                   <div class="abs-top5">
                     <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="tx-size-xs tx-gray-light">{{$v.V}}{{if $comment}}({{$comment}}){{end}}</a>
