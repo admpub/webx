@@ -24,7 +24,7 @@
           {{- $asset := index $.Stored.assets $v.K -}}
           <div class="col-md-6 col-xl-3 mg-b-20">
             <div class="card pd-20 bd-0">
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="{{if $v.H.icon}}d-flex justify-content-between align-items-center{{else}}d-block{{end}}">
                 {{- if $v.H.icon -}}
                 <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="iconwrap bg-{{$v.H.bg|Default `warning`}} rounded icon-32">
                   <i class="tx-white {{$v.H.icon}}"></i>
@@ -34,24 +34,26 @@
                   <div class="abs-top5">
                     <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="tx-size-xs tx-gray-light">{{$v.V}}{{if $comment}}({{$comment}}){{end}}</a>
                   </div>
+                  {{- if $v.X -}}
+                  <div class="d-flex justify-content-between align-items-center">
+                    {{- $v.X.Render $asset.Balance -}}
+                  </div>
+                  {{- else -}}
                   <h2 class="tx-inverse tx-arimo tx-bold mg-b-0">
                     {{- if $v.H.symbol}}{{$v.H.symbol|ToHTML}}{{end -}}
-                    {{- if $v.X -}}
-                    {{- $v.X.Render $asset.Balance -}}
-                    {{- else -}}
                     {{- $asset.Balance -}}
-                    {{- end -}}
                   </h2>
+                  {{- end -}}
                   {{- if and (eq $v.K `money`) Config.base.recharge.On -}}
                   <a href="{{FrontendURL}}/user/wallet/recharge" class="btn btn-xs btn-pink tx-size-xs pd-y-0 pd-x-5" data-toggle="tooltip" title="{{`点击充值`|$.T}}" target="_blank">{{`充值`|$.T}}</a>
                   {{- end -}}
                   {{- if gt $asset.Freeze 0.0 -}}
                   <span class="tx-size-xs tx-gray-light">
                     {{- `冻结`|$.T}}:
-                    {{if $v.H.symbol}}{{$v.H.symbol|ToHTML}}{{end -}}
                     {{- if $v.X -}}
                     {{- $v.X.Render $asset.Freeze -}}
                     {{- else -}}
+                    {{if $v.H.symbol}}{{$v.H.symbol|ToHTML}}{{end -}}
                     {{- $asset.Freeze -}}
                     {{- end -}}
                   </span>
