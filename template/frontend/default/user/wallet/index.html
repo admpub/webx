@@ -34,8 +34,8 @@
                   </div>
                   <h2 class="tx-inverse tx-arimo tx-bold mg-b-0">
                     {{- if $v.H.symbol}}{{$v.H.symbol|ToHTML}}{{end -}}
-                    {{- if $v.H.formatter -}}
-                    {{- call $v.H.formatter $asset.Balance -}}
+                    {{- if and $v.X (HasImplemented $v.X `RenderDataContext`) -}}
+                    {{- $.RenderData $v.X $asset.Balance -}}
                     {{- else -}}
                     {{- $asset.Balance -}}
                     {{- end -}}
@@ -47,8 +47,8 @@
                   <span class="tx-size-xs tx-gray-light">
                     {{- `冻结`|$.T}}:
                     {{if $v.H.symbol}}{{$v.H.symbol|ToHTML}}{{end -}}
-                    {{- if $v.H.formatter -}}
-                    {{- call $v.H.formatter $asset.Freeze -}}
+                    {{- if and $v.X (HasImplemented $v.X `RenderDataContext`) -}}
+                    {{- $.RenderData $v.X $asset.Freeze -}}
                     {{- else -}}
                     {{- $asset.Freeze -}}
                     {{- end -}}
