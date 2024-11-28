@@ -1897,8 +1897,8 @@ p {
 
 .progress-wrap::after {
   position: absolute;
-  font-family: "Font Awesome 5 Pro";
-  content: "\f062";
+  font-family: "FontAwesome";
+  content: "\f176";
   text-align: center;
   line-height: 50px;
   font-size: 26px;
@@ -4629,7 +4629,9 @@ ul.c-bredcrumb li,
 .comment-box .comment-form .input-group>input.form-control{
   width: 1%;
 }
-
+.comment-box .comment-form .captcha-wrap input.form-control{
+  border-radius: 10px 0 0 10px !important;
+}
 .comment-box .comment-form .input-group>.input-group-addon>img{
   border-radius: 0 10px 10px 0;
 }

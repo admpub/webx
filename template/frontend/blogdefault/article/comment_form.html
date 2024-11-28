@@ -28,12 +28,7 @@
             <p class="form-control author-name">{{$customer.Name}}</p>
             </div>
         </div>
-        <div class="col-md-5">
-          <div class="input-group">
-            <input type="text" name="code" placeholder="{{`请输入验证码`|$.T}}" required="required" class="form-control" />
-            <span class="input-group-addon" style="padding:0">{{$.CaptchaForm ``}}</span>
-          </div>
-        </div>
+        <div class="col-md-5 captcha-wrap">{{$.CaptchaForm `#default#comment`}}</div>
         {{- else -}}
           <div class="col-md-4">
               <input type="text" name="name" placeholder="{{`请输入您的用户名`|$.T}}" required="required" class="form-control" />
@@ -41,12 +36,7 @@
           <div class="col-md-4">
               <input type="password" name="password" placeholder="{{`请输入您的密码`|$.T}}" required="required" class="form-control" />
           </div>
-          <div class="col-md-4">
-            <div class="input-group">
-              <input type="text" name="code" placeholder="{{`请输入验证码`|$.T}}" required="required" class="form-control" />
-              <span class="input-group-addon" style="padding:0">{{$.CaptchaForm ``}}</span>
-            </div>
-          </div>
+          <div class="col-md-4 captcha-wrap">{{$.CaptchaForm `#default#comment`}}</div>
           {{- end -}}
           <div class="col-12">
               <textarea name="content" placeholder="{{`请输入您的评论`|$.T}}" required="required" class="form-control"></textarea>

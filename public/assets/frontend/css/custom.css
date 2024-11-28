@@ -15,6 +15,14 @@
   display: block;
 }
 
+.pull-right {
+  float:right !important
+}
+
+.pull-left {
+  float:left !important
+}
+
 .rounded-circle2 {
   border-radius: 100px;
 }
