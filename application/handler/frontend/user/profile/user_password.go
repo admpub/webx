@@ -3,6 +3,7 @@ package profile
 import (
 	"errors"
 
+	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
 	"github.com/coscms/webcore/library/nerrors"
@@ -88,7 +89,6 @@ func Password(c echo.Context) error {
 		stepID, ok := PasswordModifyStepIDs[step]
 		if !ok {
 			stepID = StepInit
-			step = stepID.String()
 		}
 		data := c.Data()
 		genRespData := func() echo.H {
@@ -104,6 +104,12 @@ func Password(c echo.Context) error {
 				oldPwd := c.Formx(`oldPwd`).String()
 				if len(oldPwd) == 0 {
 					return errors.New(`请输入旧密码`)
+				}
+				err = m.Get(func(r db.Result) db.Result {
+					return r.Select(`id`, `salt`, `disabled`, `password`)
+				}, `id`, customer.Id)
+				if err != nil {
+					return err
 				}
 				err = m.CheckSignInPassword(oldPwd)
 				if err != nil {
