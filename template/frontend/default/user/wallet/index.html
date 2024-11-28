@@ -34,9 +34,9 @@
                   <div class="abs-top5">
                     <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="tx-size-xs tx-gray-light">{{$v.V}}{{if $comment}}({{$comment}}){{end}}</a>
                   </div>
-                  {{- if $v.X -}}
+                  {{- if and $v.X (HasImplemented $v.X `RenderContextWithData`) -}}
                   <div class="d-flex justify-content-between align-items-center">
-                    {{- $.RenderData.RenderData $v.X $asset.Balance -}}
+                    {{- $.RenderWithData $v.X $asset.Balance -}}
                   </div>
                   {{- else -}}
                   <h4 class="tx-inverse tx-arimo tx-bold mg-b-0">
@@ -50,8 +50,8 @@
                   {{- if gt $asset.Freeze 0.0 -}}
                   <span class="tx-size-xs tx-gray-light">
                     {{- `冻结`|$.T}}:
-                    {{- if $v.X -}}
-                    {{- $v.X.Render $asset.Freeze -}}
+                    {{- if and $v.X (HasImplemented $v.X `RenderContextWithData`) -}}
+                    {{- $.RenderWithData $v.X $asset.Freeze -}}
                     {{- else -}}
                     {{if $v.H.symbol}}{{$v.H.symbol|ToHTML}}{{end -}}
                     {{- $asset.Freeze -}}
