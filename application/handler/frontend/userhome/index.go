@@ -81,6 +81,9 @@ func Index(ctx echo.Context) error {
 	if err = block.Ready(ctx); err != nil {
 		return err
 	}
+	if ctx.Internal().Bool(`handler.exit`) {
+		return err
+	}
 	ctx.Set(`block`, block)
 	ctx.Set(`operate`, block.Ident)
 	ctx.Set(`operateName`, block.Title)
