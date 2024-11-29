@@ -7,10 +7,8 @@ import (
 	"github.com/coscms/webcore/library/dashboard"
 	"github.com/coscms/webfront/middleware"
 	"github.com/coscms/webfront/middleware/sessdata"
-	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	registryUserhome "github.com/coscms/webfront/registry/userhome"
 	"github.com/webx-top/echo"
-	"github.com/webx-top/echo/param"
 )
 
 func init() {
@@ -23,7 +21,7 @@ func init() {
 			Tmpl:   `article/user/homepage/partial_article`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
-			m := ctx.Get(`info`).(*modelCustomer.CustomerAndGroup)
+			m := Homeowner(ctx)
 			return userArticle.ListByCustomer(ctx, m.OfficialCustomer)
 		}),
 		(&dashboard.Block{
@@ -40,15 +38,7 @@ func init() {
 			Tmpl:   `user/homepage/partial_following`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
-			var customerID uint64
-			switch m := ctx.Get(`info`).(type) {
-			case *modelCustomer.CustomerAndGroup:
-				customerID = m.OfficialCustomer.Id
-			case param.Store:
-				customerID = m.Uint64(`id`)
-			default:
-				return echo.ErrNotFound
-			}
+			customerID := Homeowner(ctx).Id
 			return profile.FollowingBy(ctx, customerID)
 		}),
 		(&dashboard.Block{
@@ -57,15 +47,7 @@ func init() {
 			Tmpl:   `user/homepage/partial_following`,
 			Footer: ``,
 		}).SetContentGenerator(func(ctx echo.Context) error {
-			var customerID uint64
-			switch m := ctx.Get(`info`).(type) {
-			case *modelCustomer.CustomerAndGroup:
-				customerID = m.OfficialCustomer.Id
-			case param.Store:
-				customerID = m.Uint64(`id`)
-			default:
-				return echo.ErrNotFound
-			}
+			customerID := Homeowner(ctx).Id
 			return profile.FollowersBy(ctx, customerID)
 		}),
 		(&dashboard.Block{
@@ -111,7 +93,7 @@ func init() {
 				if err := sessdata.CheckPerm(ctx, `/user/message/send`); err != nil {
 					return err
 				}
-				m := ctx.Get(`info`).(*modelCustomer.CustomerAndGroup)
+				m := Homeowner(ctx)
 				return user.MessageSend(ctx, m.OfficialCustomer)
 			}
 			return nil

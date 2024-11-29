@@ -60,6 +60,7 @@ func Index(ctx echo.Context) error {
 	} else {
 		ctx.Set(`info`, detail)
 	}
+	ctx.Internal().Set(`homeowner`, detail)
 	blocks := registryUserhome.BlockAll(ctx)
 	var block *dashboard.Block
 	if len(operate) > 0 {
@@ -85,4 +86,8 @@ func Index(ctx echo.Context) error {
 	ctx.Set(`operateName`, block.Title)
 	ctx.Set(`isUserhome`, true)
 	return ctx.Render(`userhome/index`, common.Err(ctx, err))
+}
+
+func Homeowner(ctx echo.Context) *modelCustomer.CustomerAndGroup {
+	return ctx.Internal().Get(`homeowner`).(*modelCustomer.CustomerAndGroup)
 }
