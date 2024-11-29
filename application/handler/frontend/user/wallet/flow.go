@@ -1,6 +1,8 @@
 package wallet
 
 import (
+	"html/template"
+
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webfront/dbschema"
 	xMW "github.com/coscms/webfront/middleware"
@@ -22,6 +24,12 @@ func Flow(ctx echo.Context) error {
 	}
 	if len(assetType) > 0 {
 		cond.AddKV(`asset_type`, assetType)
+		formatter := modelCustomer.MakeAssetAmountFormatter(ctx, assetType)
+		ctx.SetFunc(`formatAnyAssetAmount`, func(assetType string, amount float64) template.HTML {
+			return formatter(amount)
+		})
+	} else {
+		ctx.SetFunc(`formatAnyAssetAmount`, modelCustomer.MakeAnyAssetAmountFormatter(ctx))
 	}
 	pagination.SetPageDefaultSize(ctx, 20)
 	_, err := common.NewLister(flowM, nil, func(r db.Result) db.Result {

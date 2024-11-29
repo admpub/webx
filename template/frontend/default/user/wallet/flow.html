@@ -44,13 +44,13 @@
             </td>
             <td>
               {{if gt $v.Amount $zeroAmt}}
-              <span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i>{{$v.Amount}}</span>
+              <span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i>{{call $.Func.formatAnyAssetAmount $v.AssetType $v.Amount}}</span>
               {{else}}
-              <span class="tx-danger"><i class="icon ion-android-arrow-down mg-r-5"></i>{{$v.Amount}}</span>
+              <span class="tx-danger"><i class="icon ion-android-arrow-down mg-r-5"></i>{{call $.Func.formatAnyAssetAmount $v.AssetType $v.Amount}}</span>
               {{end}}
             </td>
             <td>
-              {{$v.WalletAmount}}
+              {{call $.Func.formatAnyAssetAmount $v.AssetType $v.WalletAmount}}
             </td>
             <td class="valign-middle tx-right">
               {{call $.Func.assetTypeName $v.AssetType}}

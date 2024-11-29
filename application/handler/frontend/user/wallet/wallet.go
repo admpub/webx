@@ -28,5 +28,6 @@ func Index(ctx echo.Context) error {
 	ctx.Set(`list`, flowM.Objects())
 	ctx.Set(`activeURL`, `/user/wallet`)
 	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)
+	ctx.SetFunc(`formatAnyAssetAmount`, modelCustomer.MakeAnyAssetAmountFormatter(ctx))
 	return ctx.Render(`user/wallet/index`, common.Err(ctx, err))
 }
