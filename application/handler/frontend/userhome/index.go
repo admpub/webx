@@ -81,7 +81,7 @@ func Index(ctx echo.Context) error {
 	if err = block.Ready(ctx); err != nil {
 		return err
 	}
-	if ctx.Internal().Bool(`handler.exit`) {
+	if ctx.Internal().Bool(`handler.end`) {
 		return err
 	}
 	ctx.Set(`block`, block)
@@ -93,4 +93,8 @@ func Index(ctx echo.Context) error {
 
 func Homeowner(ctx echo.Context) *modelCustomer.CustomerAndGroup {
 	return ctx.Internal().Get(`homeowner`).(*modelCustomer.CustomerAndGroup)
+}
+
+func EndHandler(ctx echo.Context) {
+	ctx.Internal().Set(`handler.end`, true)
 }

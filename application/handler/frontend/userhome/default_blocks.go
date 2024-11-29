@@ -94,7 +94,7 @@ func init() {
 					return err
 				}
 				m := Homeowner(ctx)
-				ctx.Internal().Set(`handler.exit`, true)
+				EndHandler(ctx)
 				return user.MessageSend(ctx, m.OfficialCustomer)
 			}
 			return nil
