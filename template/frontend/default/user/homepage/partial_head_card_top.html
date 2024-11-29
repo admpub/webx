@@ -2,15 +2,15 @@
 {{- $customer := $.Stored.info -}}
 <div class="card-header pd-y-30 d-flex justify-content-between align-items-center bg-transparent">
     <div class="tx-size-xs tx-size-xs-14">
-      <a href="{{URLByName `user.home.page $customer.Id `followers`}}" class="tx-gray mg-r-10"><span class="tx-inverse tx-semibold">{{$customer.Followers}}</span> Followers</a>
-      <a href="{{URLByName `user.home.page $customer.Id `following`}}" class="tx-gray"><span class="tx-inverse tx-semibold">{{$customer.Following}}</span> Following</a>
+      <a href="{{URLByName `user.home.page` $customer.Id `followers`}}" class="tx-gray mg-r-10"><span class="tx-inverse tx-semibold">{{$customer.Followers}}</span> Followers</a>
+      <a href="{{URLByName `user.home.page` $customer.Id `following`}}" class="tx-gray"><span class="tx-inverse tx-semibold">{{$customer.Following}}</span> Following</a>
     </div>
     <div class="hidden-xss-down">
-      <a href="{{URLByName `user.home.page $customer.Id `msgsend`}}" data-toggle="tooltip" title="{{`私信`|$.T}}" class="tx-gray mg-r-15 lh-1 d-inline-block"><i class="fa fa-envelope-o lh-1"></i></a>
+      <a href="{{URLByName `user.home.page` $customer.Id `msgsend`}}" data-toggle="tooltip" title="{{`私信`|$.T}}" class="tx-gray mg-r-15 lh-1 d-inline-block"><i class="fa fa-envelope-o lh-1"></i></a>
       <div class="dropdown d-inline-block">  
           <a href="javascript:;" class="tx-gray lh-1" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h lh-1"></i></a>
           <div class="dropdown-menu dropdown-menu-right tx-size-13 rounded-top-0 shadow-base" aria-labelledby="dropdownMenuLink2">
-              <a class="dropdown-item" href="{{URLByName `user.home.page $customer.Id `report`}}">{{"举报"|$.T}}</a>
+              <a class="dropdown-item" href="{{URLByName `user.home.page` $customer.Id `report`}}">{{"举报"|$.T}}</a>
           </div><!-- /.dropdown-menu -->
       </div><!-- /.dropdown -->
     </div>
