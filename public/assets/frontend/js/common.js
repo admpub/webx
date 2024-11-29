@@ -889,15 +889,31 @@ function checkSubmitBtnWithCloser(a){
     return {submited:false,close:close};
 }
 function ajaxForm(a,onSuccess,onFailure){
-    var cc=checkSubmitBtnWithCloser(a);
-    if(cc.submited)return;
+    var $submit = $(a).find(':submit'),close=function(){};
+    if($submit.length>0){
+        close=function(){
+            $submit.prop('disabled',false);
+            var $icon=$submit.children('.fa');
+            if($icon.length>0)$icon.removeClass('fa-refresh fa-spin');
+        };
+    }
     var opts={
         ajaxFormObject: a,
         type: String($(a).attr('method')).toLowerCase()=='post'?'post':'get',
         dataType: 'json',
         data: {},
         url: $(a).attr('action'),
-        close: cc.close,
+        close: close,
+        beforeSubmit:function(){
+            var $submit = $(a).find(':submit');
+            if($submit.length>0){
+                if($submit.prop('disabled')) return false;
+                $submit.prop('disabled',true);
+                var $icon=$submit.children('.fa');
+                if($icon.length>0)$icon.addClass('fa-refresh fa-spin');
+            }
+            return true
+        },
         success: function(r){
             onAjaxRespond(a,r,opts,onSuccess,onFailure);
         },error: function(xhr){
