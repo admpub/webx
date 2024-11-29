@@ -37,44 +37,44 @@
           </tr>
         </thead>
         <tbody>{{$zeroAmt := Float64 0}}
-          {{range $k, $v := $.Stored.list}}
+          {{- range $k, $v := $.Stored.list -}}
           <tr>
             <td class="valign-middle" id="wallet-flow-{{$v.Id}}" title="{{(Date $v.Created).Format `2006-01-02 15:04:05`}}">
-              {{$.TimeAgo $v.Created `now`}}
+              {{- $.TimeAgo $v.Created `now` -}}
             </td>
             <td>
-              {{if gt $v.Amount $zeroAmt}}
+              {{- if gt $v.Amount $zeroAmt}}
               <span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i>{{call $.Func.formatAnyAssetAmount $v.AssetType $v.Amount}}</span>
-              {{else}}
+              {{- else}}
               <span class="tx-danger"><i class="icon ion-android-arrow-down mg-r-5"></i>{{call $.Func.formatAnyAssetAmount $v.AssetType $v.Amount}}</span>
-              {{end}}
+              {{- end}}
             </td>
             <td>
-              {{call $.Func.formatAnyAssetAmount $v.AssetType $v.WalletAmount}}
+              {{- call $.Func.formatAnyAssetAmount $v.AssetType $v.WalletAmount -}}
             </td>
             <td class="valign-middle tx-right">
-              {{call $.Func.assetTypeName $v.AssetType}}
+              {{- call $.Func.assetTypeName $v.AssetType -}}
             </td>
             <td>
-              {{$v.Description}}
+              {{- $v.Description -}}
             </td>
             <td class="valign-middle">
-              {{if eq $v.Status "pending"}}
+              {{- if eq $v.Status "pending"}}
                 <span class="tx-size-11 d-block"><span class="square-8 bg-warning mg-r-5 rounded-circle"></span> {{"待确认"|$.T}}</span>
-              {{else if eq $v.Status "confirmed"}}
+              {{- else if eq $v.Status "confirmed"}}
                 <span class="tx-size-11 d-block"><span class="square-8 bg-success mg-r-5 rounded-circle"></span> {{"已生效"|$.T}}</span>
-              {{else if eq $v.Status "canceled"}}
+              {{- else if eq $v.Status "canceled"}}
                 <span class="tx-size-11 d-block"><span class="square-8 bg-gray-light mg-r-5 rounded-circle"></span> {{"已取消"|$.T}}</span>
-              {{else}}
-              {{end}}
+              {{- else}}
+              {{- end}}
             </td>
           </tr>
-          {{end}}
+          {{- end -}}
         </tbody>
       </table>
       </div><!-- table-responsive -->
       <div class="card-footer auto-bottom-float">
-        {{$.Stored.pagination.Render `#default#pagination`}}
+        {{- $.Stored.pagination.Render `#default#pagination` -}}
       </div><!-- card-footer -->
       
     </div><!-- card -->

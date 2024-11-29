@@ -985,12 +985,15 @@ nav.friend-links a.nav-link>.img-label>.title {
   -o-filter: grayscale(100%);
   filter: grayscale(1);opacity:0.6
 }
-.coin-yuanbao{color:orange;font-size:2rem;position:relative;}
-.coin-gold{color:gold;font-size:2rem;position:relative;}
-.coin-silver{color:silver;font-size:2rem;position:relative;}
-.coin-copper{color:rgb(186,110,64);font-size:2rem;position:relative;}
-.coin-icon+span{font-size:1.3rem}
-i>sub{
+i.coin-yuanbao{color:orange;}
+i.coin-gold{color:gold;}
+i.coin-silver{color:silver;}
+i.coin-copper{color:rgb(186,110,64);}
+i.coin-icon{vertical-align:middle;}
+i.coin-icon+span{vertical-align:middle;}
+.asset-value i.coin-icon{font-size:2rem;position:relative}
+.asset-value i.coin-icon+span{font-size:1.3rem}
+.asset-value i.coin-icon>sub{
   font-size: 9px;
   position: absolute;
   bottom: 6px;
