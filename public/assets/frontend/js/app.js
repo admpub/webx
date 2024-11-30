@@ -343,8 +343,8 @@
     notifyListen:function(notifyURL){
       if(notifyURL==null) notifyURL='/user/notice';
       var messageCount={notify:0,element:0,modal:0},
-      messageMax={notify:20,element:50,modal:50},retries=0;
-      var ws = App.websocket(function(message){
+      messageMax={notify:20,element:50,modal:50},retries=0,
+      websocketHandle=function(message){
         //console.dir(message);
         var m=$.parseJSON(message);
         if(typeof(App.clientID['notify'])=='undefined'){
@@ -457,20 +457,27 @@
             messageCount[m.mode]++;
           break;
         }
-      },notifyURL,null,function(){
-        if(typeof(CUSTOMER)=='object' && ('ID' in CUSTOMER) && CUSTOMER.ID>0){
+      },
+			connect=function(onopen){
+        var ws = App.websocket(websocketHandle,notifyURL,onopen,function(){
+            if(!( typeof(CUSTOMER)=='object' && ('ID' in CUSTOMER) )) return;
+            var reconnect=function(){
+              window.setTimeout(function(){
+                retries++;
+                try {if(ws)ws.close();} catch (_) {}
+                connect(function(){retries=0;});
+              },5000*(retries+1));
+            };
             $.post(FRONTEND_URL+'/customer_info',{},function(r){
-                if(r.Code!=1) return;
-                if(r.Data.online!='Y') return;
-                window.setTimeout(function(){
-                    retries++;
-                    try {ws.close();} catch (_) {}
-                    connectWS(function(){retries=0;});
-                },5000*(retries+1));
+              if(r.Code!=1&&r.Code!=App.status.NotLoggedIn) return;
+              reconnect()
+            }).error(function(){
+              reconnect()
             });
-        }
-      });
-      return ws;
+        });
+        return ws;
+      };
+      connect();
     },
     bottomFloat:function (elems, top, autoWith) {
         if ($(elems).length<1) return;
