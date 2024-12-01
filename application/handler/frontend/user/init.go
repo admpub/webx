@@ -19,12 +19,14 @@ func init() {
 		xnotice.RegisterRoute(u)
 		// 用户个人
 		u.Route(`GET`, `/index`, Index).SetName(`user.index`)
-		u.Route(`GET,POST`, `/message/unread_count`, MessageUnreadCount).SetName(`user.message.unread_count`)
-		u.Route(`GET,POST`, `/message/inbox`, MessageInbox).SetName(`user.message.inbox`)
-		u.Route(`GET,POST`, `/message/outbox`, MessageOutbox).SetName(`user.message.outbox`)
-		u.Route(`GET,POST`, `/message/system`, SystemMessage).SetName(`user.message.system`)
-		u.Route(`GET,POST`, `/message/view/:type/:id`, MessageView).SetName(`user.message.view`)
-		u.Route(`GET,POST`, `/message/send`, MessageSendHandler).SetName(`user.message.send`)
+
+		messageG := u.Group(`/message`)
+		messageG.Route(`GET,POST`, `/unread_count`, MessageUnreadCount).SetName(`user.message.unread_count`)
+		messageG.Route(`GET,POST`, `/inbox`, MessageInbox).SetName(`user.message.inbox`)
+		messageG.Route(`GET,POST`, `/outbox`, MessageOutbox).SetName(`user.message.outbox`)
+		messageG.Route(`GET,POST`, `/system`, SystemMessage).SetName(`user.message.system`)
+		messageG.Route(`GET,POST`, `/view/:type/:id`, MessageView).SetName(`user.message.view`)
+		messageG.Route(`GET,POST`, `/send`, MessageSendHandler).SetName(`user.message.send`)
 
 		// 个人收藏夹
 		favoriteG := u.Group(`/favorite`)
