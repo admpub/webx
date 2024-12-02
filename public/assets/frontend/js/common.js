@@ -153,20 +153,31 @@ function renewCaptcha(form,resp){
 function signInByQRCode(){
     $.post(FRONTEND_URL+'/qrcode/sign_in',{},function(r){
         if(r.Code!=1)return App.message({text:r.Info,type:'error'});
-        showQRCodeSignInDialog(r.Data.qrcode);
+        showQRCodeSignInDialog(r.Data.qrcode,r.Data.expires);
     },'json').error(function(){
         return App.message({text:App.t('网络错误'),type:'error'});
     })
 }
-function showQRCodeSignInDialog(qrcode){
+function showQRCodeSignInDialog(qrcode,expires){
     var t=null;
     App.dialog().show({
         title: App.t('扫码登录'),
-        message:'<img src="'+FRONTEND_URL+'/qrcode?data='+qrcode+'" />',
+        message:'<img src="'+FRONTEND_URL+'/qrcode?data='+qrcode+'" /><br /><div style="text-align:center">'+
+        App.t('过期时间: %s',expires)+'</div>',
         nl2br:false,
         closeByBackdrop:false,
         onshow: function(d){
           d.$modalDialog.css({"max-width":"330px"});
+          d.$modalDialog.find('img').off('click').on('click',function(){
+            var $img=$(this);
+            $.post(FRONTEND_URL+'/qrcode/sign_in',{},function(r){
+                if(r.Code!=1)return App.message({text:r.Info,type:'error'});
+                $img.attr('src',FRONTEND_URL+'/qrcode?data='+r.Data.qrcode);
+                $img.siblings('div').text(App.t('过期时间: %s',r.Data.expires));
+            },'json').error(function(){
+                return App.message({text:App.t('网络错误'),type:'error'});
+            })
+          })
         },
         onshown: function(d){
             t=setInterval(function(){

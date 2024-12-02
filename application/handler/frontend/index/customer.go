@@ -1,6 +1,8 @@
 package index
 
 import (
+	"time"
+
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
@@ -267,8 +269,10 @@ func CustomerInfo(c echo.Context) error {
 }
 
 func qrcodeSignIn(ctx echo.Context) error {
+	expireTime := time.Now().Add(time.Minute * 10)
 	signInData := &user.QRSignIn{
 		SessionID: ctx.Session().MustID(),
+		Expires:   expireTime.Unix(),
 		Environment: sessionguard.Environment{
 			UserAgent: ctx.Request().UserAgent(),
 		},
@@ -280,5 +284,8 @@ func qrcodeSignIn(ctx echo.Context) error {
 	}
 	qrcode := config.FromFile().Encode256(plaintext)
 	qrcode = com.URLSafeBase64(qrcode, true)
-	return ctx.JSON(ctx.Data().SetData(echo.H{`qrcode`: qrcode}))
+	return ctx.JSON(ctx.Data().SetData(echo.H{
+		`qrcode`:  qrcode,
+		`expires`: expireTime.Format(time.DateTime),
+	}))
 }

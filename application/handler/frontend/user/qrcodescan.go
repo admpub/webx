@@ -2,6 +2,7 @@ package user
 
 import (
 	"strings"
+	"time"
 
 	"github.com/admpub/sessions"
 	"github.com/coscms/webcore/library/config"
@@ -17,6 +18,7 @@ import (
 
 type QRSignIn struct {
 	SessionID string
+	Expires   int64 // 数据过期时间戳(秒)
 	sessionguard.Environment
 }
 
@@ -36,6 +38,9 @@ func qrcodeScan(ctx echo.Context) error {
 		err := com.JSONDecodeString(plaintext, &signInData)
 		if err != nil {
 			return err
+		}
+		if signInData.Expires < time.Now().Unix() {
+			return ctx.NewError(code.DataHasExpired, `二维码已经过期`).SetZone(`data`)
 		}
 		sessStore := ss.Get(ctx.SessionOptions().Engine)
 		if sessStore == nil {
