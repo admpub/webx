@@ -271,8 +271,9 @@ func CustomerInfo(c echo.Context) error {
 func qrcodeSignIn(ctx echo.Context) error {
 	expireTime := time.Now().Add(time.Minute * 10)
 	signInData := &user.QRSignIn{
-		SessionID: ctx.Session().MustID(),
-		Expires:   expireTime.Unix(),
+		SessionID:     ctx.Session().MustID(),
+		SessionMaxAge: CookieMaxAge,
+		Expires:       expireTime.Unix(),
 		Environment: sessionguard.Environment{
 			UserAgent: ctx.Request().UserAgent(),
 		},

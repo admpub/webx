@@ -13,12 +13,14 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/middleware/session"
 	ss "github.com/webx-top/echo/middleware/session/engine"
 )
 
 type QRSignIn struct {
-	SessionID string
-	Expires   int64 // 数据过期时间戳(秒)
+	SessionID     string `json:"sID"`
+	SessionMaxAge int    `json:"sAge"`
+	Expires       int64  `json:"dExp"` // 数据过期时间戳(秒)
 	sessionguard.Environment
 }
 
@@ -60,7 +62,8 @@ func qrcodeScan(ctx echo.Context) error {
 		co := modelCustomer.NewCustomerOptions(nil)
 		co.Name = customer.Name
 		co.SignInType = `qrcode`
-		err = customerM.FireSignInSuccess(co, co.SignInType, modelCustomer.GenerateOptionsFromHeader(ctx)...)
+		session.RememberMaxAge(ctx, signInData.SessionMaxAge)
+		err = customerM.FireSignInSuccess(co, co.SignInType, modelCustomer.GenerateOptionsFromHeader(ctx, signInData.SessionMaxAge)...)
 		if err != nil {
 			return err
 		}
