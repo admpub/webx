@@ -1,16 +1,20 @@
 package index
 
 import (
+	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/middleware/session"
 
 	"github.com/admpub/log"
+	"github.com/admpub/webx/application/handler/frontend/user"
 	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/httpserver"
+	"github.com/coscms/webcore/library/ip2region"
 	"github.com/coscms/webcore/library/nerrors"
+	"github.com/coscms/webcore/library/sessionguard"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/top"
 	"github.com/coscms/webfront/middleware/sessdata"
@@ -260,4 +264,21 @@ func CustomerInfo(c echo.Context) error {
 		data.SetData(customer.AsRow(`id`, `uid`, `group_id`, `name`, `online`, `gender`, `avatar`, `role_ids`))
 	}
 	return c.JSON(data)
+}
+
+func qrcodeSignIn(ctx echo.Context) error {
+	signInData := &user.QRSignIn{
+		SessionID: ctx.Session().MustID(),
+		Environment: sessionguard.Environment{
+			UserAgent: ctx.Request().UserAgent(),
+		},
+	}
+	signInData.Environment.Location, _ = ip2region.IPInfo(ctx.RealIP())
+	plaintext, err := com.JSONEncodeToString(signInData)
+	if err != nil {
+		return err
+	}
+	qrcode := config.FromFile().Encode256(plaintext)
+	qrcode = com.URLSafeBase64(qrcode, true)
+	return ctx.JSON(ctx.Data().SetData(echo.H{`qrcode`: qrcode}))
 }

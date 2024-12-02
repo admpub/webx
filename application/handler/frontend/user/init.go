@@ -8,6 +8,7 @@ import (
 	_ "github.com/admpub/webx/application/handler/frontend/user/wallet"
 	"github.com/coscms/webcore/cmd/bootconfig"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/coscms/webfront/library/xnotice"
 	xMW "github.com/coscms/webfront/middleware"
@@ -42,6 +43,10 @@ func init() {
 		g.Route(`GET,POST`, `/crop`, Crop).SetName(`user.file.crop`)
 		// 图片管理
 		g.Route(`GET,POST`, `/finder`, Finder).SetName(`user.file.finder`)
+
+		// 二维码
+		qrcodeG := u.Group(`/qrcode`)
+		qrcodeG.Route(`GET,POST`, `/scan`, qrcodeScan).SetName(`user.qrcode.scan`).SetMetaKV(httpserver.PermPublicKV())
 
 	}, xMW.AuthCheck)
 

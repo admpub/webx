@@ -23,6 +23,8 @@
                     <a href="{{$.WithNextURL $.Stored.forgotURL}}">{{"找回密码"|$.T}}</a> 
                     |
                     <a href="{{$.WithNextURL $.Stored.signUpURL}}">{{"创建账号"|$.T}}</a>
+                    |
+                    <a href="javascript:;" onclick="signInByQRCode()">{{"二维码登录"|$.T}}</a>
                   </span>
                 <label class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="remember-duration" value="forever" name="remember">

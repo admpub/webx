@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre67
 	github.com/coscms/webcore v0.6.18
-	github.com/coscms/webfront v0.0.0-20241202104330-10e5fa4e4790
+	github.com/coscms/webfront v0.0.0-20241202131933-21b3eddc63ad
 )
 
 require (
@@ -68,6 +68,7 @@ require (
 require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
+	github.com/admpub/sessions v0.2.3
 	github.com/nging-plugins/dbmanager v1.7.0
 	github.com/silenceper/wechat/v2 v2.1.7
 )
@@ -129,7 +130,6 @@ require (
 	github.com/admpub/safesvg v0.0.8 // indirect
 	github.com/admpub/securecookie v1.3.0 // indirect
 	github.com/admpub/service v0.0.5 // indirect
-	github.com/admpub/sessions v0.2.3 // indirect
 	github.com/admpub/sockjs-go/v3 v3.0.1 // indirect
 	github.com/admpub/sonyflake v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect

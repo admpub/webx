@@ -17,6 +17,7 @@ func init() {
 		g.Route(`GET,POST`, `/sign_in`, SignIn).SetName(`sign_in`)
 		g.Route(`GET,POST`, `/sign_out`, SignOut).SetName(`sign_out`)
 		g.Route(`POST`, `/customer_info`, CustomerInfo).SetName(`customer_info`)
+		g.Route(`POST`, `/qrcode/sign_in`, qrcodeSignIn).SetName(`qrcode_sign_in`)
 		g.Route(`GET,POST`, `/forgot`, Forgot).SetName(`forgot`)
 		g.Route(`GET,POST`, `/verification/callback/:provider/:recid/:timestamp/:token`, Verification)
 		g.Route(`GET,POST`, `/custom/:page`, Custom).SetName(`custom`)

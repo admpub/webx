@@ -148,7 +148,43 @@ function closeMsg(){
 function renewCaptcha(form,resp){
     if(form==null) return;
     App.captchaUpdate(form,resp);
-};
+}
+// 二维码登录
+function signInByQRCode(){
+    $.post(FRONTEND_URL+'/qrcode/sign_in',{},function(r){
+        if(r.Code!=1)return App.message({text:r.Info,type:'error'});
+        showQRCodeSignInDialog(r.Data.qrcode);
+    },'json').error(function(){
+        return App.message({text:App.t('网络错误'),type:'error'});
+    })
+}
+function showQRCodeSignInDialog(qrcode){
+    var t=null;
+    App.dialog().show({
+        title: App.t('扫码登录'),
+        message:'<img src="'+FRONTEND_URL+'/qrcode?data='+qrcode+'" />',
+        nl2br:false,
+        closeByBackdrop:false,
+        onshow: function(d){
+          d.$modalDialog.css({"max-width":"330px"});
+        },
+        onshown: function(d){
+            t=setInterval(function(){
+                $.post(FRONTEND_URL+'/customer_info',{},function(r){
+                    if(r.Code==App.status.NotLoggedIn) return;
+                    clearInterval(t);
+                    if(r.Code==1){
+                        App.message({text:App.t('登录成功')})
+                    }
+                },'json').error(function(){
+                    clearInterval(t);
+                })
+            },2000)
+        },onhide: function(d){
+            if(t)clearInterval(t);
+        }
+    });
+}
 /**
  * 显示图片验证码输入框
  * @param {object} resp ajax响应json对象
