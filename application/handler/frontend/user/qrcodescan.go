@@ -55,7 +55,7 @@ func qrcodeScan(ctx echo.Context) error {
 		co := modelCustomer.NewCustomerOptions(nil)
 		co.Name = customer.Name
 		co.SignInType = `qrcode`
-		err = customerM.FireSignInSuccess(co, co.SignInType)
+		err = customerM.FireSignInSuccess(co, co.SignInType, modelCustomer.GenerateOptionsFromHeader(ctx)...)
 		if err != nil {
 			return err
 		}

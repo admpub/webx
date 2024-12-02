@@ -174,7 +174,11 @@ function showQRCodeSignInDialog(qrcode){
                     if(r.Code==App.status.NotLoggedIn) return;
                     clearInterval(t);
                     if(r.Code==1){
-                        App.message({text:App.t('登录成功')})
+                        App.message({text:App.t('登录成功')});
+                        setTimeout(function(){
+                            d.close();
+                            window.location.reload();
+                        },2000)
                     }
                 },'json').error(function(){
                     clearInterval(t);
