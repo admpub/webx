@@ -14,9 +14,7 @@ import (
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/httpserver"
-	"github.com/coscms/webcore/library/ip2region"
 	"github.com/coscms/webcore/library/nerrors"
-	"github.com/coscms/webcore/library/sessionguard"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/top"
 	"github.com/coscms/webfront/middleware/sessdata"
@@ -274,11 +272,17 @@ func qrcodeSignIn(ctx echo.Context) error {
 		SessionID:     ctx.Session().MustID(),
 		SessionMaxAge: CookieMaxAge,
 		Expires:       expireTime.Unix(),
-		Environment: sessionguard.Environment{
-			UserAgent: ctx.Request().UserAgent(),
-		},
+		IPAddress:     ctx.RealIP(),
+		UserAgent:     ctx.Request().UserAgent(),
+		Platform:      ctx.Header(`X-Platform`),
+		Scense:        ctx.Header(`X-Scense`),
+		DeviceNo:      ctx.Header(`X-Device-Id`),
 	}
-	signInData.Environment.Location, _ = ip2region.IPInfo(ctx.RealIP())
+	if len(signInData.Scense) > 0 {
+		signInData.Scense = `qrcode_` + signInData.Scense
+	} else {
+		signInData.Scense = `qrcode_` + modelCustomer.DefaultDeviceScense
+	}
 	plaintext, err := com.JSONEncodeToString(signInData)
 	if err != nil {
 		return err

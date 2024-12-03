@@ -6,7 +6,6 @@ import (
 
 	"github.com/admpub/sessions"
 	"github.com/coscms/webcore/library/config"
-	"github.com/coscms/webcore/library/sessionguard"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/com"
@@ -21,7 +20,11 @@ type QRSignIn struct {
 	SessionID     string `json:"sID"`
 	SessionMaxAge int    `json:"sAge"`
 	Expires       int64  `json:"dExp"` // 数据过期时间戳(秒)
-	sessionguard.Environment
+	IPAddress     string `json:"ip"`
+	UserAgent     string `json:"ua"`
+	Platform      string `json:"pf"`
+	Scense        string `json:"ss"`
+	DeviceNo      string `json:"dn"`
 }
 
 func qrcodeScan(ctx echo.Context) error {
@@ -46,7 +49,7 @@ func qrcodeScan(ctx echo.Context) error {
 		}
 		sessStore := ss.Get(ctx.SessionOptions().Engine)
 		if sessStore == nil {
-			return ctx.NewError(code.Unsupported, `不支持session存储引擎: %s`, ctx.SessionOptions().Engine)
+			return ctx.NewError(code.Unsupported, `不支持 session 存储引擎: %s`, ctx.SessionOptions().Engine)
 		}
 
 		// sign-in
@@ -63,7 +66,15 @@ func qrcodeScan(ctx echo.Context) error {
 		co.Name = customer.Name
 		co.SignInType = `qrcode`
 		session.RememberMaxAge(ctx, signInData.SessionMaxAge)
-		err = customerM.FireSignInSuccess(co, co.SignInType, modelCustomer.GenerateOptionsFromHeader(ctx, signInData.SessionMaxAge)...)
+
+		err = customerM.FireSignInSuccess(co, co.SignInType,
+			modelCustomer.CustomerPlatform(signInData.Platform),
+			modelCustomer.CustomerScense(signInData.Scense),
+			modelCustomer.CustomerDeviceNo(signInData.DeviceNo),
+			modelCustomer.CustomerMaxAgeSeconds(signInData.SessionMaxAge),
+			modelCustomer.CustomerSessionID(signInData.SessionID),
+			modelCustomer.CustomerIPAddress(signInData.IPAddress),
+		)
 		if err != nil {
 			return err
 		}
@@ -73,7 +84,6 @@ func qrcodeScan(ctx echo.Context) error {
 		session := sessions.NewSession(sessStore, tmpCookieName)
 		session.IsNew = false
 		session.ID = signInData.SessionID
-		session.Values[`customer_env`] = &signInData.Environment
 		session.Values[`customer`] = &customerCopy
 		err = sessStore.Save(ctx, session)
 		if err != nil {
