@@ -15,17 +15,35 @@
   <div class="main-body pd-20">
 <div class="row">
   <div class="col-lg-12 mg-t-0">
-    <div class="card card-table">
+    <div class="card">
       <div class="card-header">
         <h6 class="card-title">{{"扫码二维码"|$.T}}</h6>
       </div><!-- card-header -->
-      <div><style>#qr-reader{border:0 !important;}</style>
-        <div id="qr-reader" style="border:0 !important"></div>
-        <div id="qr-reader-results"></div>
+      <div class="card-block">
+      <style>#qr-reader{border:0 !important;}</style>
+      <div id="qr-reader"></div>
       </div>
     </div><!-- card -->
   </div><!-- col-6 -->
+  <div class="col-lg-12 mg-t-20">
+    <div class="card">
+      <div class="card-header">
+        <span class="pull-right">
+          <a href="javascript:;" class="btn btn-default btn-xs hidden" id="btn-copy-qrcode" data-target-name="{{`扫码结果`|$.T}}" data-clipboard-target="#qr-reader-results">
+            <i class="fa fa-copy"></i>
+            {{`复制`|$.T}}
+          </a>
+        </span>
+        <h6 class="card-title mg-b-0">{{"扫码结果"|$.T}}</h6>
+      </div><!-- card-header -->
+      <div>
+      <div class="card-block">
+        <div id="qr-reader-results" class="card-text"></div>
+      </div>
+    </div><!-- card -->
+  </div>
 </div><!-- row -->
+
     </div><!-- main-body -->
 </div><!-- main -->
 {{/Block}}
@@ -33,17 +51,36 @@
 {{Block "footer"}}
 {{Super}}
 <script src="{{AssetsXURL}}/js/qrcode/html5-qrcode.min.js" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/clipboard/clipboard.min.js" charset="utf-8"></script>
+<script src="{{AssetsURL}}/js/clipboard/utils.js" charset="utf-8"></script>
 <script>
-//var resultContainer = document.getElementById('qr-reader-results');
+$(function(){
+var resultContainer = document.getElementById('qr-reader-results');
 function onScanSuccess(decodedText, decodedResult) {
     $.post(FRONTEND_URL+'/user/qrcode/scan',{data:decodedText},function(r){
-        if(r.Code!=1)return App.message({text:r.Info,type:'error'});
+        if(r.Code!=1){
+          if(r.Code==-101){
+            resultContainer.innerText=decodedText
+            if(decodedText){
+              $('#btn-copy-qrcode.hidden').removeClass('hidden');
+            }else{
+              $('#btn-copy-qrcode:not(.hidden)').addClass('hidden')
+            }
+            return;
+          }
+
+          resultContainer.innerText=r.Info
+          $('#btn-copy-qrcode:not(.hidden)').addClass('hidden')
+          return App.message({text:r.Info,type:'error'});
+        }
+        resultContainer.innerText=r.Info
+        $('#btn-copy-qrcode:not(.hidden)').addClass('hidden')
         return App.message({text:r.Info,type:'success'});
     },'json')
 }
-var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {fps: 10, qrbox: 250, cameraPermissionTitle: function(){
-    return "Test";
-}});
+var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {fps: 10, qrbox: 250, isShowingInfoIcon: false});
 html5QrcodeScanner.render(onScanSuccess);
+attachCopy('#btn-copy-qrcode');
+})
 </script>
 {{/Block}}
