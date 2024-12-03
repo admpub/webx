@@ -97,6 +97,7 @@ func qrcodeScan(ctx echo.Context) error {
 		}
 		session.Values[`customer_env`] = sEnv
 		session.Values[`customer`] = &customerCopy
+		session.Values[`deviceInfo`] = &co.DeviceInfo
 
 		err = sessStore.Save(ctx, session)
 		if err != nil {
