@@ -5,7 +5,7 @@ function clearTimeoutT(){
   clearTimeout(t);t=null;
 }
 function onScanSuccess(decodedText, decodedResult) {
-  if(lastDecodedText===decodedText) return;
+  if(!decodedText||lastDecodedText===decodedText) return;
   lastDecodedText=decodedText;
   clearTimeoutT();
   t=setTimeout(function(){lastDecodedText=''},5000);
@@ -13,13 +13,8 @@ function onScanSuccess(decodedText, decodedResult) {
       if(r.Code!=1){
         if(r.Code==-101){
           resultContainer.innerText=decodedText
-          if(decodedText){
-            $('#btn-copy-qrcode.hidden').removeClass('hidden');
-            App.message({text:App.t('识别成功'),type:'success'});
-          }else{
-            $('#btn-copy-qrcode:not(.hidden)').addClass('hidden')
-            clearTimeoutT();
-          }
+          $('#btn-copy-qrcode.hidden').removeClass('hidden');
+          App.message({text:App.t('识别成功'),type:'success'});
           return;
         }
 
@@ -38,7 +33,7 @@ function onScanSuccess(decodedText, decodedResult) {
   });
 }
 function onScanFailure(error) { 
-  lastDecodedText='';
+  //lastDecodedText='';
 }
 var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {fps: 10, qrbox: 250, isShowingInfoIcon: false});
 html5QrcodeScanner.render(onScanSuccess,onScanFailure);
