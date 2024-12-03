@@ -91,6 +91,7 @@ func qrcodeScan(ctx echo.Context) error {
 
 		// set session values
 		ipInfo, _ := ip2region.IPInfo(signInData.IPAddress)
+		ip2region.ClearZero(&ipInfo)
 		sEnv := &sessionguard.Environment{
 			UserAgent: signInData.UserAgent,
 			Location:  ipInfo,
