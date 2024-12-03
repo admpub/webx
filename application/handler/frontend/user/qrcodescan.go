@@ -6,6 +6,8 @@ import (
 
 	"github.com/admpub/sessions"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/ip2region"
+	"github.com/coscms/webcore/library/sessionguard"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/com"
@@ -84,7 +86,16 @@ func qrcodeScan(ctx echo.Context) error {
 		session := sessions.NewSession(sessStore, tmpCookieName)
 		session.IsNew = false
 		session.ID = signInData.SessionID
+
+		// set session values
+		ipInfo, _ := ip2region.IPInfo(signInData.IPAddress)
+		sEnv := &sessionguard.Environment{
+			UserAgent: signInData.UserAgent,
+			Location:  ipInfo,
+		}
+		session.Values[`customer_env`] = sEnv
 		session.Values[`customer`] = &customerCopy
+
 		err = sessStore.Save(ctx, session)
 		if err != nil {
 			return err
