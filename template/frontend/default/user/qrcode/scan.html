@@ -63,6 +63,7 @@ function onScanSuccess(decodedText, decodedResult) {
             resultContainer.innerText=decodedText
             if(decodedText){
               $('#btn-copy-qrcode.hidden').removeClass('hidden');
+              App.message({text:App.t('识别成功'),type:'success'});
             }else{
               $('#btn-copy-qrcode:not(.hidden)').addClass('hidden')
             }
