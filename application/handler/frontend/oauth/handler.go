@@ -205,7 +205,8 @@ func checkOrUpdateUser(ctx echo.Context, oauthM *modelCustomer.OAuth, ouser *got
 	if customer == nil {
 		co := modelCustomer.NewCustomerOptions(customerM.OfficialCustomer)
 		co.SignInType = `oauth2.` + ouser.Provider
-		err = customerM.FireSignInSuccess(co, model.AuthTypeOauth2, modelCustomer.GenerateOptionsFromHeader(ctx)...)
+		co.ApplyOptions(modelCustomer.GenerateOptionsFromHeader(ctx)...)
+		err = customerM.FireSignInSuccess(co, model.AuthTypeOauth2)
 	}
 
 	return customerM, err

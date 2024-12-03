@@ -46,6 +46,7 @@ func qrcodeScan(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
+		//echo.Dump(echo.H{`qrcodeScan`: signInData})
 		if signInData.Expires < time.Now().Unix() {
 			return ctx.NewError(code.DataHasExpired, `二维码已经过期`).SetZone(`data`)
 		}
@@ -67,9 +68,7 @@ func qrcodeScan(ctx echo.Context) error {
 		co := modelCustomer.NewCustomerOptions(nil)
 		co.Name = customer.Name
 		co.SignInType = `qrcode`
-		session.RememberMaxAge(ctx, signInData.SessionMaxAge)
-
-		err = customerM.FireSignInSuccess(co, co.SignInType,
+		co.ApplyOptions(
 			modelCustomer.CustomerPlatform(signInData.Platform),
 			modelCustomer.CustomerScense(signInData.Scense),
 			modelCustomer.CustomerDeviceNo(signInData.DeviceNo),
@@ -77,6 +76,9 @@ func qrcodeScan(ctx echo.Context) error {
 			modelCustomer.CustomerSessionID(signInData.SessionID),
 			modelCustomer.CustomerIPAddress(signInData.IPAddress),
 		)
+		session.RememberMaxAge(ctx, signInData.SessionMaxAge)
+
+		err = customerM.FireSignInSuccess(co, co.SignInType)
 		if err != nil {
 			return err
 		}
@@ -101,7 +103,7 @@ func qrcodeScan(ctx echo.Context) error {
 			return err
 		}
 		ctx.SetCookie(tmpCookieName, ``, -1)
-		return ctx.JSON(ctx.Data().SetInfo(ctx.T(`操作成功`)))
+		return ctx.JSON(ctx.Data().SetInfo(ctx.T(`扫码登录操作成功`)))
 	}
 	return ctx.Render(`user/qrcode/scan`, nil)
 }

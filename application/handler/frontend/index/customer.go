@@ -15,7 +15,6 @@ import (
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webcore/library/nerrors"
-	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/top"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
@@ -147,24 +146,31 @@ END:
 func SignOut(c echo.Context) error {
 	m := modelCustomer.NewCustomer(c)
 	deviceM := modelCustomer.NewDevice(c)
-	var err error
-	var copied dbschema.OfficialCustomer
 	customer := sessdata.Customer(c)
 	if customer == nil {
-		goto END
+		return c.Redirect(sessdata.URLFor(`/sign_in`))
 	}
-	copied = *customer
+	copied := *customer
 	m.OfficialCustomer = &copied
 	m.SetContext(c)
 	deviceM.SessionId = c.Session().ID()
 	deviceM.CustomerId = customer.Id
-	err = deviceM.CleanCustomer(customer, modelCustomer.GenerateOptionsFromHeader(c)...)
+	co := modelCustomer.NewCustomerOptions(customer)
+	deviceInfo := modelCustomer.GetDeviceInfo(c)
+	if deviceInfo == nil {
+		co.ApplyOptions(modelCustomer.GenerateOptionsFromHeader(c)...)
+	} else {
+		co.ApplyOptions(modelCustomer.CustomerDeviceInfo(*deviceInfo))
+	}
+	err := deviceM.CleanCustomer(customer, co)
 	if err != nil {
 		log.Error(err)
 	}
-	m.UnsetSession()
-
-END:
+	err = m.UnsetSession()
+	if err != nil {
+		log.Error(err)
+	}
+	co.UnsetSession(c)
 	return c.Redirect(sessdata.URLFor(`/sign_in`))
 }
 
@@ -283,6 +289,7 @@ func qrcodeSignIn(ctx echo.Context) error {
 	} else {
 		signInData.Scense = `qrcode_` + modelCustomer.DefaultDeviceScense
 	}
+	//echo.Dump(echo.H{`qrcodeSignIn`: signInData})
 	plaintext, err := com.JSONEncodeToString(signInData)
 	if err != nil {
 		return err
