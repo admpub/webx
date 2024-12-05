@@ -40,10 +40,7 @@ function qrboxFunction(viewfinderWidth, viewfinderHeight) {
   var minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
   var qrboxSize = Math.floor(minEdgeSize * 0.7);
   qrboxSize = Math.min(250,qrboxSize);
-  return {
-      width: qrboxSize,
-      height: qrboxSize
-  };
+  return {width: qrboxSize,height: qrboxSize};
 }
 var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {fps: 10, qrbox: qrboxFunction, isShowingInfoIcon: false});
 html5QrcodeScanner.render(onScanSuccess,onScanFailure);
