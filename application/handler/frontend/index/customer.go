@@ -289,15 +289,15 @@ func qrcodeSignIn(ctx echo.Context) error {
 	} else {
 		signInData.Scense = `qrcode_` + modelCustomer.DefaultDeviceScense
 	}
-	//echo.Dump(echo.H{`qrcodeSignIn`: signInData})
 	plaintext, err := com.JSONEncodeToString(signInData)
 	if err != nil {
 		return err
 	}
 	qrcode := config.FromFile().Encode256(plaintext)
 	qrcode = com.URLSafeBase64(qrcode, true)
+	//echo.Dump(echo.H{`qrcodeSignIn`: signInData, `length`: len(qrcode)}) // length: 363
 	return ctx.JSON(ctx.Data().SetData(echo.H{
-		`qrcode`:  qrcode,
+		`qrcode`:  `coscms:signin:` + qrcode,
 		`expires`: expireTime.Format(time.DateTime),
 	}))
 }

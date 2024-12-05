@@ -4,20 +4,19 @@ function clearTimeoutT(){
   if(!t) return; 
   clearTimeout(t);t=null;
 }
-function onScanSuccess(decodedText, decodedResult) {
+function onScanSuccess(decodedText) {
   if(!decodedText||lastDecodedText===decodedText) return;
   lastDecodedText=decodedText;
   clearTimeoutT();
   t=setTimeout(function(){lastDecodedText=''},5000);
+  if(!String(decodedText).startsWith('coscms:')){
+    resultContainer.innerText=decodedText
+    $('#btn-copy-qrcode.hidden').removeClass('hidden');
+    App.message({text:App.t('识别成功'),type:'success'});
+    return;
+  }
   $.post(FRONTEND_URL+'/user/qrcode/scan',{data:decodedText},function(r){
       if(r.Code!=1){
-        if(r.Code==-101){
-          resultContainer.innerText=decodedText
-          $('#btn-copy-qrcode.hidden').removeClass('hidden');
-          App.message({text:App.t('识别成功'),type:'success'});
-          return;
-        }
-
         resultContainer.innerText=r.Info
         $('#btn-copy-qrcode:not(.hidden)').addClass('hidden')
         lastDecodedText='';
@@ -42,7 +41,7 @@ function qrboxFunction(viewfinderWidth, viewfinderHeight) {
   qrboxSize = Math.min(250,qrboxSize);
   return {width: qrboxSize,height: qrboxSize};
 }
-var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {fps: 10, qrbox: qrboxFunction, isShowingInfoIcon: false});
-html5QrcodeScanner.render(onScanSuccess,onScanFailure);
+var scanner = new Html5QrcodeScanner("qr-reader", {fps: 10, qrbox: qrboxFunction, rememberLastUsedCamera: true});
+scanner.render(onScanSuccess,onScanFailure);
 attachCopy('#btn-copy-qrcode');
 })
