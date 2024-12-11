@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre68
 	github.com/coscms/webcore v0.6.22
-	github.com/coscms/webfront v0.0.0-20241211100104-bd8aaa340dd1
+	github.com/coscms/webfront v0.0.0-20241211145451-d724a4db0a08
 )
 
 require (
@@ -70,14 +70,12 @@ require (
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.2.3
 	github.com/nging-plugins/dbmanager v1.7.0
-	github.com/shamaton/msgpack v1.2.1
 	github.com/silenceper/wechat/v2 v2.1.7
 )
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	gitee.com/admpub/certmagic v0.8.8 // indirect
-	github.com/DATA-DOG/go-sqlmock v1.5.2 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/abh/errorutil v1.0.0 // indirect
 	github.com/admpub/9t v0.0.0-20190605154903-a68069ace5e1 // indirect

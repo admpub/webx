@@ -5,16 +5,18 @@ import (
 	"time"
 
 	"github.com/admpub/sessions"
-	"github.com/coscms/webcore/library/config"
-	"github.com/coscms/webcore/library/ip2region"
-	"github.com/coscms/webcore/library/sessionguard"
-	"github.com/coscms/webfront/middleware/sessdata"
-	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/middleware/session"
 	ss "github.com/webx-top/echo/middleware/session/engine"
+
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/ip2region"
+	"github.com/coscms/webcore/library/sessionguard"
+	"github.com/coscms/webfront/library/qrsignin"
+	"github.com/coscms/webfront/middleware/sessdata"
+	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
 func qrcodeScan(ctx echo.Context) error {
@@ -56,7 +58,7 @@ func RegisterQRCodeDecoder(name string, decoder func(ctx echo.Context, encrypted
 
 func qrcodeSignIn(ctx echo.Context, encrypted string) error {
 	caseName := config.FromFile().Extend.GetStore(`QRCodeSignIn`).String(`case`)
-	cs := GetQRSignInCase(caseName)
+	cs := qrsignin.Get(caseName)
 	signInData, err := cs.Decode(ctx, encrypted)
 	if err != nil {
 		return err
