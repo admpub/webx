@@ -3,7 +3,6 @@ package index
 import (
 	"time"
 
-	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/middleware/session"
@@ -274,27 +273,13 @@ func CustomerInfo(c echo.Context) error {
 
 func qrcodeSignIn(ctx echo.Context) error {
 	expireTime := time.Now().Add(time.Minute * 10)
-	signInData := &user.QRSignIn{
-		SessionID:     ctx.Session().MustID(),
-		SessionMaxAge: CookieMaxAge,
-		Expires:       expireTime.Unix(),
-		IPAddress:     ctx.RealIP(),
-		UserAgent:     ctx.Request().UserAgent(),
-		Platform:      ctx.Header(`X-Platform`),
-		Scense:        ctx.Header(`X-Scense`),
-		DeviceNo:      ctx.Header(`X-Device-Id`),
-	}
-	if len(signInData.Scense) > 0 {
-		signInData.Scense = `qrcode_` + signInData.Scense
-	} else {
-		signInData.Scense = `qrcode_` + modelCustomer.DefaultDeviceScense
-	}
-	plaintext, err := com.JSONEncodeToString(signInData)
+	signInData := user.NewQRSignIn(ctx, CookieMaxAge, expireTime)
+	caseName := config.FromFile().Extend.GetStore(`QRCodeSignIn`).String(`case`)
+	cs := user.GetQRSignInCase(caseName)
+	qrcode, err := cs.Encode(ctx, signInData)
 	if err != nil {
 		return err
 	}
-	qrcode := config.FromFile().Encode256(plaintext)
-	qrcode = com.URLSafeBase64(qrcode, true)
 	//echo.Dump(echo.H{`qrcodeSignIn`: signInData, `length`: len(qrcode)}) // length: 363
 	return ctx.JSON(ctx.Data().SetData(echo.H{
 		`qrcode`:  `coscms:signin:` + qrcode,

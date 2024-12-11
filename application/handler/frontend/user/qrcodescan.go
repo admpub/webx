@@ -10,24 +10,12 @@ import (
 	"github.com/coscms/webcore/library/sessionguard"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
-	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/middleware/session"
 	ss "github.com/webx-top/echo/middleware/session/engine"
 )
-
-type QRSignIn struct {
-	SessionID     string `json:"sID"`
-	SessionMaxAge int    `json:"sAge"`
-	Expires       int64  `json:"dExp"` // 数据过期时间戳(秒)
-	IPAddress     string `json:"ip"`
-	UserAgent     string `json:"ua"`
-	Platform      string `json:"pf"`
-	Scense        string `json:"ss"`
-	DeviceNo      string `json:"dn"`
-}
 
 func qrcodeScan(ctx echo.Context) error {
 	if ctx.IsPost() {
@@ -67,13 +55,9 @@ func RegisterQRCodeDecoder(name string, decoder func(ctx echo.Context, encrypted
 }
 
 func qrcodeSignIn(ctx echo.Context, encrypted string) error {
-	encrypted = com.URLSafeBase64(encrypted, false)
-	plaintext := config.FromFile().Decode256(encrypted)
-	if len(plaintext) == 0 {
-		return ctx.NewError(code.InvalidParameter, `解密失败`).SetZone(`data`)
-	}
-	signInData := &QRSignIn{}
-	err := com.JSONDecodeString(plaintext, &signInData)
+	caseName := config.FromFile().Extend.GetStore(`QRCodeSignIn`).String(`case`)
+	cs := GetQRSignInCase(caseName)
+	signInData, err := cs.Decode(ctx, encrypted)
 	if err != nil {
 		return err
 	}
