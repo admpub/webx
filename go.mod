@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre68
-	github.com/coscms/webcore v0.6.22
-	github.com/coscms/webfront v0.0.0-20241211154358-b308a429f864
+	github.com/coscms/webcore v0.6.23
+	github.com/coscms/webfront v0.0.0-20241212071237-9043f9b1ee4c
 )
 
 require (
@@ -29,7 +29,7 @@ require (
 	github.com/admpub/go-hashids v2.0.1+incompatible // indirect
 	github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe // indirect
 	github.com/admpub/godotenv v1.4.3
-	github.com/admpub/imageproxy v0.10.0
+	github.com/admpub/imageproxy v0.10.1
 	github.com/admpub/ipfilter v1.0.6 // indirect
 	github.com/admpub/license_gen v0.1.1
 	github.com/admpub/log v1.3.6
@@ -182,7 +182,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
-	github.com/goccy/go-json v0.10.3 // indirect
+	github.com/goccy/go-json v0.10.4 // indirect
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
@@ -192,7 +192,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/gomodule/redigo v1.9.2 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20241206021119-61a79c692802 // indirect
+	github.com/google/pprof v0.0.0-20241210010833-40e02aabc2ad // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/css v1.0.1 // indirect
 	github.com/gorilla/schema v1.4.1 // indirect
@@ -303,8 +303,8 @@ require (
 	go.etcd.io/bbolt v1.3.11 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/mock v0.5.0 // indirect
-	golang.org/x/crypto v0.30.0 // indirect
-	golang.org/x/exp v0.0.0-20241204233417-43b7b7cde48d // indirect
+	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/exp v0.0.0-20241210194714-1829a127f884 // indirect
 	golang.org/x/image v0.23.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.22.0 // indirect
