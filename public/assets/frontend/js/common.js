@@ -281,8 +281,8 @@ function goCaptchaDialog(resp,ajaxOptions){
         nl2br:false,
         // closeByBackdrop:false,
         onshown: function(d){
-            d.$modalDialog.css({"max-width":"340px"});
-            d.$modalBody.css({"padding":0});
+            d.$modalDialog.css({"max-width":"340px","width":"340px"});
+            if(d.$modalBody.length>0) d.$modalBody[0].style.setProperty("padding", "0px", "important");
             var $input = $('#dialog-retry-captcha').find('[name="'+captchaName+'"]');
             if(!$input.hasClass('wg-cap-static')) $input.addClass('wg-cap-static');
             if(jsInit) {
