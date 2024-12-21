@@ -33,6 +33,7 @@ func Index(ctx echo.Context) error {
 	ctx.Set(`groupList`, modelLevel.GroupList.Slice())
 	ctx.SetFunc(`levelGroupName`, modelLevel.GroupList.Get)
 	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)
+	ctx.SetFunc(`amountTypeName`, modelLevel.AmountTypes.Get)
 	return ctx.Render(`official/customer/level/index`, ret)
 }
 
@@ -80,6 +81,7 @@ func Add(ctx echo.Context) error {
 func setFormData(ctx echo.Context, m *modelLevel.Level) {
 	ctx.Set(`groupList`, modelLevel.GroupList.Slice())
 	ctx.Set(`assetTypes`, modelCustomer.AssetTypes.Slice())
+	ctx.Set(`amountTypes`, modelLevel.AmountTypes.Slice())
 
 	roleM := modelCustomer.NewRole(ctx)
 	roleM.ListByOffset(nil, func(r db.Result) db.Result {
