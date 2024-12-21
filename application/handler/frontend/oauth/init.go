@@ -1,12 +1,14 @@
 package oauth
 
 import (
+	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/handler/oauth2"
+
 	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webfront/initialize/frontend"
 	"github.com/coscms/webfront/library/apiutils"
 	xMW "github.com/coscms/webfront/middleware"
-	"github.com/webx-top/echo"
-	"github.com/webx-top/echo/handler/oauth2"
 )
 
 func init() {
@@ -20,10 +22,10 @@ func init() {
 		})
 	})
 	frontend.Register(func(g echo.RouteRegister) {
-		g.Route(`GET,POST`, `/oauth_sign_in`, SignIn)
+		g.Route(`GET,POST`, `/oauth_sign_in`, SignIn).SetMetaKV(httpserver.PermGuestKV())
 		initOauth(frontend.IRegister().Echo())
 
-		oauthG := g.Group(oauth2.DefaultPath)
+		oauthG := g.Group(oauth2.DefaultPath).SetMetaKV(httpserver.PermGuestKV())
 		g3 := oauthG.Group(`/other`)
 		wechatG := g3.Group(`/wechat`) // 微信 /oauth/other/wechat
 		{
