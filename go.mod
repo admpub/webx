@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre70
 	github.com/coscms/webcore v0.6.29
-	github.com/coscms/webfront v0.0.0-20241224061808-c978da1ef4ee
+	github.com/coscms/webfront v0.0.0-20241225065342-d46687d38372
 )
 
 require (
@@ -87,7 +87,7 @@ require (
 	github.com/admpub/checksum v1.1.0 // indirect
 	github.com/admpub/collate v1.1.0 // indirect
 	github.com/admpub/confl v0.2.4 // indirect
-	github.com/admpub/cove v0.0.0-20241122083715-bed56dafdfee // indirect
+	github.com/admpub/cove v0.0.0-20241224063114-4fdd53c948a6 // indirect
 	github.com/admpub/cron v0.1.1 // indirect
 	github.com/admpub/dgoogauth v0.0.1 // indirect
 	github.com/admpub/email v2.4.1+incompatible // indirect
