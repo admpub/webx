@@ -379,6 +379,8 @@
 					type = 'dash'; // dash
 				} else if(extName=='.flv'){
 					type = 'flv'; // flv
+				} else if(extName=='.mp4' || extName=='.mp3' || extName=='.webm' || extName=='.ogg'){
+					type = 'normal';
 				} else if (amplayer.options.defaultType) {
 					type = amplayer.options.defaultType;
 				}
