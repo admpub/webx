@@ -12,10 +12,11 @@ func FlowIndex(ctx echo.Context) error {
 	m := modelCustomer.NewWallet(ctx)
 	cond := db.NewCompounds()
 	customerID := ctx.Formx(`customerId`).Uint64()
-	cs := modelCustomer.NewCustomer(ctx)
+	customer := modelCustomer.CustomerBase{}
 	if customerID > 0 {
 		cond.AddKV(`customer_id`, customerID)
-		err := cs.Get(nil, `id`, customerID)
+		cs := modelCustomer.NewCustomer(ctx)
+		err := cs.Param(nil, `id`, customerID).SetRecv(&customer).One()
 		if err != nil {
 			if err == db.ErrNoMoreRows {
 				return ctx.E(`客户信息不存在(ID: %v)`, customerID)
@@ -64,7 +65,7 @@ func FlowIndex(ctx echo.Context) error {
 	assetTypes := modelCustomer.AssetTypeList()
 	ctx.Set(`assetTypes`, assetTypes)
 	ctx.Set(`assetType`, assetType)
-	ctx.Set(`customer`, cs.ClearPasswordData())
+	ctx.Set(`customer`, customer)
 	ctx.Set(`activeURL`, `/official/customer/index`)
 	return ctx.Render(`official/customer/wallet/flow`, common.Err(ctx, err))
 }
