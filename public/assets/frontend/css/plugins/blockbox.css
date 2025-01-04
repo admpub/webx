@@ -451,6 +451,10 @@
   transform: translateX(240px);
 }
 
+.bb-rightpanel.no-pos-top{
+  padding: 10px 25px;
+}
+
 .bb-rightpanel .menu-right {
   display: block !important;
   padding-bottom: 25px;
