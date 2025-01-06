@@ -9,17 +9,19 @@
                 // id,name,has_child
                 var v = result?result(r.Data.listData[i]):r.Data.listData[i];
                 var a = '<a href="' + jumpTo.replace('{id}',v.id) + '" data-id="' + v.id + '" data-pjax="#pcont" data-keepjs="true" title="'+String(v.name).replace(q,'&quot;')+'">' + v.name + '</a>';
-                var c = selected && selected==v.id ? ' class="active"' : '';
+                var active = selected && selected==v.id;
+                var c = active ? ' class="active"' : '';
+                var icon = active ? 'fa-folder-open-o' : 'fa-folder-o';
                 var s = '<li'+c+'>';
                 if (v.has_child == 'Y') {
                     s += '<label class="nav-header">';//tree-toggler
-                    s += '<i class="fa fa-folder-o tree-toggler"></i>';
+                    s += '<i class="fa '+icon+' tree-toggler"></i>';
                     s += a;
                     s += '</label>'
                     s += '<ul class="nav nav-list tree"></ul>'
                 } else {
                     s += '<label class="nav-header">';
-                    s += '<i class="fa fa-folder-open-o"></i>';
+                    s += '<i class="fa '+icon+'"></i>';
                     s += a;
                     s += '</label>'
                 }
@@ -34,8 +36,9 @@
         }
     }
     function cateClick(container,a) {
-        $(container).find('li.active').removeClass('active');
+        $(container).find('li.active').removeClass('active').find('i.fa-folder-open-o').removeClass('fa-folder-open-o').addClass('fa-folder-o');
         $(a).closest('li').addClass('active');
+        $(a).prev('i.fa-folder-o').removeClass('fa-folder-o').addClass('fa-folder-open-o');
     }
     function init(container, options){
         var href = $(this).data('href')||options.href, url = $(this).data('url')||options.url, result = options.result||null, selected = options.selected||'';
