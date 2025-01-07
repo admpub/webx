@@ -969,10 +969,10 @@ github.com/coscms/session-sqlstore v0.0.0-20241206070659-19aaf21e7876 h1:THLILM0
 github.com/coscms/session-sqlstore v0.0.0-20241206070659-19aaf21e7876/go.mod h1:fkbU1N2At0fP38do0UvwcPN/6RXBlxoMQ2agI5JXVkk=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.6.36 h1:1Q/2X2XIF6YancSDCZ//EEW4DrVfUAVwafDBYeZ6SPs=
-github.com/coscms/webcore v0.6.36/go.mod h1:scLh5t7Qn1bXDSOtroJrnR58S/LsEkLrOzD9DVexjq0=
-github.com/coscms/webfront v0.0.0-20250106143128-0dfbd52bc2e2 h1:Xi49X77nHIGtKqeLcZl+aacWn8FIRoDgT83oP69NEA0=
-github.com/coscms/webfront v0.0.0-20250106143128-0dfbd52bc2e2/go.mod h1:V1WSAKkflGEeq6+Gvn8M7ncsbOJua0FOTgXl7KwkiOw=
+github.com/coscms/webcore v0.6.39 h1:kV+ciqS3VG1JQrGK13gvOHGgPYZK5dThrPBsCQ9xwOc=
+github.com/coscms/webcore v0.6.39/go.mod h1:scLh5t7Qn1bXDSOtroJrnR58S/LsEkLrOzD9DVexjq0=
+github.com/coscms/webfront v0.0.0-20250107104238-84bf5dc17988 h1:vsbwi9RDvyAMcRj3P+F6jnqxoxwaJUyiiH70f0rgDLk=
+github.com/coscms/webfront v0.0.0-20250107104238-84bf5dc17988/go.mod h1:C6lPJIj/xePSeg6qAQWkEzPezF0B35nBC65FtgRqfdw=
 github.com/cpu/goacmedns v0.1.1/go.mod h1:MuaouqEhPAHxsbqjgnck5zeghuwBP1dLnPoobeGqugQ=
 github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d/go.mod h1:maD7wRr/U5Z6m/iR4s+kqSMx2CaBsrgA7czyZG/E6dU=
 github.com/cpuguy83/go-md2man/v2 v2.0.0/go.mod h1:maD7wRr/U5Z6m/iR4s+kqSMx2CaBsrgA7czyZG/E6dU=
