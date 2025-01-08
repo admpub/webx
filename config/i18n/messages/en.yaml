@@ -22,8 +22,8 @@
 2006年1月2日 : "January 2, 2006"
 "<无>" : "<None>"
 API密钥 : "API Key"
-"API账号“%s”已经停用" : 'API account " %s" has been deactivated'
-"API账号“%s”没找到" : 'API account " %s" not found'
+"API账号“%s”已经停用" : 'API account "%s" has been deactivated'
+"API账号“%s”没找到" : 'API account "%s" not found'
 API账号没找到 : "API account not found"
 APP绑定 : "APP binding"
 "ATTACH queries are not supported." : "ATTACH queries are not supported."
@@ -41,7 +41,7 @@ CORS规则 : "CORS rule"
 "E-mail" : "E-mail"
 "E-mail地址" : "E-mail Address"
 "E-mail地址“%s”已经存在" : 'E-mail address "%s" already exists'
-"E-mail地址“%s”已被其他账号绑定" : 'The E-mail address " %s" has been bound to another account'
+"E-mail地址“%s”已被其他账号绑定" : 'The E-mail address "%s" has been bound to another account'
 "E-mail地址不正确" : "The E-mail address is incorrect"
 "E-mail格式不正确" : "E-mail address is not formatted correctly"
 Email : "Email"
@@ -140,7 +140,7 @@ topic不能为空 : "Topic cannot be empty"
 unionId不一致 : "Inconsistent unionId"
 unionId不正确 : "unionId is incorrect"
 webhook时有效 : "Valid when webhook"
-"“%s”尚未配置等级，暂时无法购买" : '" %s" has not been configured with level and cannot be purchased temporarily'
+"“%s”尚未配置等级，暂时无法购买" : '"%s" has not been configured with level and cannot be purchased temporarily'
 "【系统】" : "[System]"
 "一般以关键字“begin”开始，“end”结束" : "Start with the keyword “begin” and “end”"
 上一步 : "Previous"
@@ -183,7 +183,7 @@ webhook时有效 : "Valid when webhook"
 '下载图片 "' : 'Download pictures "'
 不可修改你自己的权限 : "You cannot modify your own permissions"
 不可删除你自己 : "You cannot delete yourself"
-"不存id为“%d”的文章" : 'No articles with id " %d" are saved'
+"不存id为“%d”的文章" : 'No articles with id "%d" are saved'
 "不存在ID为“%d”的数据" : "No data with ID '%d' exists"
 "不存在日志分类: %s" : "No log classification exists: %s"
 不小于0的整数 : "An integer not less than 0"
@@ -199,7 +199,7 @@ webhook时有效 : "Valid when webhook"
 "不支持的操作: %s" : "Unsupported operation: %s"
 "不支持的操作: %v" : "Unsupported operations: %v"
 "不支持的数据库类型: %v" : "Unsupported database types: %v"
-"不支持的数据操作“%s”" : "Unsupported data operation ' %s'"
+"不支持的数据操作“%s”" : "Unsupported data operation '%s'"
 "不支持的目标类型: %s" : "Unsupported target type: %s"
 "不支持的类型: %s" : "Unsupported type: %s"
 "不支持的类型: %v" : "Unsupported types: %v"
@@ -438,7 +438,7 @@ webhook时有效 : "Valid when webhook"
 元数据列表 : "Metadata list"
 元数据类型 : "Metadata Type "
 充值 : "recharge"
-"充值卡“%v”已经使用过了" : 'The recharge card " %v" has been used'
+"充值卡“%v”已经使用过了" : 'The recharge card "%v" has been used'
 充值卡不存在 : "The recharge card does not exist"
 充值卡列表 : "List of recharge cards"
 充值卡卡号 : "recharge card number"
@@ -480,7 +480,7 @@ webhook时有效 : "Valid when webhook"
 "关闭登录之后，前台用户将无法登录" : "After logging in is turned off, front desk users will not be able to log in"
 关闭网站 : "Closing the website"
 关闭评论 : "Close Comments"
-"其中，匹配标识如要指定正则表达式，请添加前缀<code>regexp:</code>" : "Among them, if you want to specify a regular expression, add the prefix<code>regexp:</code>"
+"其中，匹配标识如要指定正则表达式，请添加前缀<code>regexp:</code>" : "Among them, if you want to specify a regular expression, add the prefix <code>regexp:</code>"
 其他数据 : "other data"
 其它产品 : "other products"
 其它设置 : "Other settings"
@@ -490,7 +490,7 @@ webhook时有效 : "Valid when webhook"
 内容加密 : "content encryption"
 内容格式 : "content format"
 内置 : "built-in"
-"内置文件“%s”不存在" : "Built-in file ' %s' does not exist"
+"内置文件“%s”不存在" : "Built-in file '%s' does not exist"
 内置模板 : "built-in templates"
 内置默认 : "built-in default"
 再输入一次登录密码 : "Enter your login password again"
@@ -521,7 +521,7 @@ webhook时有效 : "Valid when webhook"
 分类不存在 : "page doesn't exist"
 分类列表 : "category list"
 分类名称 : "classification name"
-"分类名称“%s”已经使用过了" : 'Classification name " %s" has been used'
+"分类名称“%s”已经使用过了" : 'Classification name "%s" has been used'
 分类名称不能为空 : "Classification name cannot be empty"
 分类图片 : "Category pictures"
 分类管理 : "classification management"
@@ -655,7 +655,7 @@ webhook时有效 : "Valid when webhook"
 "参数%q的值无效" : "Invalid value for parameter %q"
 参数name的值无效 : "The value of parameter name is invalid"
 参数uid无效 : "Invalid parameter uid"
-"参数“%s”不能为空" : "Parameter ' %s' cannot be empty"
+"参数“%s”不能为空" : "Parameter '%s' cannot be empty"
 "参数“%s”值无效" : "Invalid value for parameter '%s'"
 参数无效 : "parameter is invalid"
 "参数错误: %s" : "Parameter error: %s"
@@ -702,7 +702,7 @@ webhook时有效 : "Valid when webhook"
 只显示错误 : "Only show the error"
 可以把sql文件拖到这里来进行上传哦 : "You can drag the SQL file here to upload it"
 可以把文件拖到这里来进行上传哦 : "You can drag the file here to upload Oh"
-"可以用<code>$1</code>来代表路由中第一个占位符所表示的内容。$2则代表路由中第二个占位符所表示的内容，依此类推。最大支持到<code>$9</code>" : "You can use<code>$1</code> to represent what the first placeholder in the route represents.$ 2 represents what the second placeholder in the route represents, and so on. Maximum support up<code>to $9</code>"
+"可以用<code>$1</code>来代表路由中第一个占位符所表示的内容。$2则代表路由中第二个占位符所表示的内容，依此类推。最大支持到<code>$9</code>" : "You can use <code>$1</code> to represent what the first placeholder in the route represents.$ 2 represents what the second placeholder in the route represents, and so on. Maximum support up to <code>$9</code>"
 可删 : "Can be deleted"
 可用余额 : "available balance"
 可用次数 : "Available times"
@@ -885,7 +885,7 @@ webhook时有效 : "Valid when webhook"
 实例数量 : "Number of instances"
 客户 : "customers"
 客户ID : "Customer ID"
-"客户“%s”的会话环境发生改变，需要重新登录" : 'The session environment of customer " %s" has changed and needs to login again'
+"客户“%s”的会话环境发生改变，需要重新登录" : 'The session environment of customer "%s" has changed and needs to login again'
 客户不存在 : "Customer does not exist"
 "客户信息不存在(ID: %v)" : "Customer information does not exist (ID: %v)"
 客户列表 : "Customer List"
@@ -1006,9 +1006,9 @@ webhook时有效 : "Valid when webhook"
 "广告位:" : "Advertising space:"
 广告位列表 : "Advertising space list"
 广告位名称 : "Advertising space name"
-"广告位名称“%s”已经存在" : 'The ad slot name " %s" already exists'
+"广告位名称“%s”已经存在" : 'The ad slot name "%s" already exists'
 广告位名称不能为空 : "Advertising space name cannot be blank"
-"广告位唯一标识“%s”已经存在" : 'The unique ad space identifier " %s" already exists'
+"广告位唯一标识“%s”已经存在" : 'The unique ad space identifier "%s" already exists'
 广告位标识 : "Advertising space logo"
 广告位标识不能为空 : "Advertising space identifier cannot be empty"
 广告位管理 : "Advertising space management"
@@ -1110,8 +1110,8 @@ webhook时有效 : "Valid when webhook"
 "您已经支付过了，请不要重复购买" : "You have already paid, please do not buy again"
 您已经收藏过了 : "You have already collected it"
 "您已经是登录状态了, 无需注册" : "You are already logged in, no need to register"
-"您已经是终身“%s”，无需再次购买" : 'You are already " %s" for life, no need to buy again'
-"您已经有“%v”个链接正在处理中，请等待处理通过后再添加新链接" : 'You already have " %v" links being processed. Please wait for the processing to pass before adding new links'
+"您已经是终身“%s”，无需再次购买" : 'You are already "%s" for life, no need to buy again'
+"您已经有“%v”个链接正在处理中，请等待处理通过后再添加新链接" : 'You already have "%v" links being processed. Please wait for the processing to pass before adding new links'
 "您已经绑定成功。" : "You have already bound successfully."
 您已经表态过其它观点 : "You have expressed other views"
 您已经表过态了 : "You've made your point."
@@ -1159,8 +1159,8 @@ webhook时有效 : "Valid when webhook"
 '手机号"%s"格式不正确' : "The phone number '%s' is not in the correct format"
 手机号或邮箱地址 : "Mobile phone number or email address"
 手机号码 : "phone number"
-"手机号码“%s”已经存在" : 'Mobile phone number " %s" already exists'
-"手机号码“%s”已被其他账号绑定" : 'The mobile phone number " %s" has been bound to another account'
+"手机号码“%s”已经存在" : 'Mobile phone number "%s" already exists'
+"手机号码“%s”已被其他账号绑定" : 'The mobile phone number "%s" has been bound to another account'
 手机号码不正确 : "Incorrect mobile phone number"
 手机号码格式不正确 : "Incorrect cell phone number format"
 打包 : "pack"
@@ -1190,7 +1190,7 @@ webhook时有效 : "Valid when webhook"
 "投稿失败。您的待审核文章数量已达上限，请等待审核通过后再投稿" : "Submission failed. Your number of articles to be reviewed has reached the upper limit. Please wait for approval before submitting"
 "投稿失败。您的账号已达到今日最大投稿数量" : "Submission failed. Your account has reached the maximum number of submissions today"
 投诉QQ : "Complaint QQ"
-"投诉《%s》" : 'Complaint " %s"'
+"投诉《%s》" : 'Complaint "%s"'
 投诉人 : "complainant"
 投诉内容 : "complaint content"
 投诉列表 : "complaint list"
@@ -1261,7 +1261,7 @@ webhook时有效 : "Valid when webhook"
 操作 : "Operating"
 操作受限 : "Restricted operation"
 "操作失败！分类超过最大层数: %d" : "Operation failed! Classification exceeds the maximum number of layers: %d"
-"操作失败！域名“%v”已经被加入黑名单。如有疑问，请联系我们" : 'Operation failed! The domain name " %v" has been blacklisted. If you have any questions, please contact us'
+"操作失败！域名“%v”已经被加入黑名单。如有疑问，请联系我们" : 'Operation failed! The domain name "%v" has been blacklisted. If you have any questions, please contact us'
 "操作失败！菜单超过最大层数: %d" : "Operation failed! Menu exceeds the maximum number of floors: %d"
 "操作失败：您不能对自己发布的内容进行此项操作" : "Operation failed: You cannot perform this operation on the content you published"
 操作字段 : "Operation field"
@@ -1332,10 +1332,10 @@ webhook时有效 : "Valid when webhook"
 数量限制 : "Quantity limit"
 整数 : "integer"
 文件 : "File"
-"文件“%s”不存在或不属于当前项目" : "File ' %s' does not exist or does not belong to the current project"
-"文件“%s”尚未保存，此时切换到其它界面将会丢失已更改内容，确定要放弃未保存的内容吗？" : 'The file " %s" has not been saved yet. If you switch to another interface at this time, the changed content will be lost. Are you sure you want to discard the unsaved content?'
-"文件“%s”已经存在" : "File ' %s' already exists"
-"文件“%s”已经存在，确定要覆盖吗？" : 'The file " %s" already exists. Are you sure you want to overwrite it?'
+"文件“%s”不存在或不属于当前项目" : "File '%s' does not exist or does not belong to the current project"
+"文件“%s”尚未保存，此时切换到其它界面将会丢失已更改内容，确定要放弃未保存的内容吗？" : 'The file "%s" has not been saved yet. If you switch to another interface at this time, the changed content will be lost. Are you sure you want to discard the unsaved content?'
+"文件“%s”已经存在" : "File '%s' already exists"
+"文件“%s”已经存在，确定要覆盖吗？" : 'The file "%s" already exists. Are you sure you want to overwrite it?'
 "文件上传中，请稍候..." : "File uploading, please wait"
 文件上传出错 : "File upload error"
 文件上传成功 : "File uploaded successfully"
@@ -1818,7 +1818,7 @@ webhook时有效 : "Valid when webhook"
 真实姓名 : "Real name"
 "真的要删除“%v”吗？" : "Really want to delete “%v”?"
 "真的要删除吗？" : "Really want to delete?"
-"真的要将客户“%s”踢下线吗？" : 'Do you really want to kick customer " %s" offline?'
+"真的要将客户“%s”踢下线吗？" : 'Do you really want to kick customer "%s" offline?'
 "真的要将用户“%s”踢下线吗？" : "Are you sure you want to kick user '%s' off the line?"
 "真的要退出登录吗？" : "Do you really want to log out?"
 短信 : "short message"
@@ -1827,8 +1827,8 @@ webhook时有效 : "Valid when webhook"
 短信发送频率 : "SMS sending frequency"
 短信验证码 : "SMS Captcha"
 短网址不存在 : "The short URL does not exist"
-"短网址名称“%s”已经使用过了" : 'The short URL name " %s" has been used'
-"短网址名称“%s”已经存在" : 'The short URL name " %s" already exists'
+"短网址名称“%s”已经使用过了" : 'The short URL name "%s" has been used'
+"短网址名称“%s”已经存在" : 'The short URL name "%s" already exists'
 短链接 : "short link"
 短链接列表 : "Short link list"
 短链接管理 : "Short link management"
@@ -1863,7 +1863,7 @@ webhook时有效 : "Valid when webhook"
 "确认要删除吗？一旦删除将会同时删除该评论下的所有回复，并且不可恢复。" : "Are you sure you want to delete it? Once deleted, all replies under the comment will be deleted at the same time and cannot be restored."
 确认购买 : "Verified Purchase"
 "示例：" : "Example:"
-"禁止在广告位标识“%s”中使用“,”，请修改" : 'It is prohibited to use "," in the advertising space logo " %s". Please modify it'
+"禁止在广告位标识“%s”中使用“,”，请修改" : 'It is prohibited to use "," in the advertising space logo "%s". Please modify it'
 禁用 : "Disabled"
 离线 : "off-line"
 私信 : "private letter"
@@ -1905,7 +1905,7 @@ webhook时有效 : "Valid when webhook"
 等级分值 : "Level score"
 等级列表 : "Level list"
 等级名称 : "Level name"
-"等级名称“%s”已经使用过了" : 'The grade name " %s" has been used'
+"等级名称“%s”已经使用过了" : 'The grade name "%s" has been used'
 等级积分 : "status points"
 等级简称 : "grade abbreviation"
 等级管理 : "level management"
@@ -1986,10 +1986,10 @@ webhook时有效 : "Valid when webhook"
 编辑自定义页面 : "Edit custom pages"
 编辑页面 : "edit page"
 缩写 : "abbreviation"
-"缩写“%s-%s”已存在" : 'The abbreviation " %s-%s" already exists'
+"缩写“%s-%s”已存在" : 'The abbreviation "%s-%s" already exists'
 网址 : "website"
 "网址已存在: %s" : "The URL already exists: %s"
-"网址已经于“%s”过期" : 'The website has expired on " %s"'
+"网址已经于“%s”过期" : 'The website has expired on "%s"'
 网址已经失效 : "The website has expired"
 网址或域名已经存在 : "The URL or domain name already exists"
 网址无效 : "Invalid URL"
@@ -2364,8 +2364,8 @@ webhook时有效 : "Valid when webhook"
 通过 : "by"
 邀请注册 : "Invite to register"
 邀请码 : "Invitation code"
-"邀请码“%s”已经使用过了" : 'The invitation code " %s" has been used'
-"邀请码“%s”已经达到最大使用次数" : 'The invitation code " %s" has reached the maximum number of uses'
+"邀请码“%s”已经使用过了" : 'The invitation code "%s" has been used'
+"邀请码“%s”已经达到最大使用次数" : 'The invitation code "%s" has reached the maximum number of uses'
 邀请码不存在 : "The invitation code does not exist"
 邀请码不能为空 : "The invitation code can not be empty"
 邀请码列表 : "List of invitation codes"
