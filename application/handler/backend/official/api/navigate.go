@@ -1,31 +1,34 @@
 package api
 
-import "github.com/coscms/webcore/library/navigate"
+import (
+	"github.com/coscms/webcore/library/navigate"
+	"github.com/webx-top/echo"
+)
 
 var LeftNavigate = &navigate.Item{
 	Display: true,
-	Name:    `外部接口`,
+	Name:    echo.T(`外部接口`),
 	Action:  `official/api`,
 	Icon:    `plane`,
 	Children: &navigate.List{
 		{
 			Display: true,
-			Name:    `接口账号`,
+			Name:    echo.T(`接口账号`),
 			Action:  `account/index`,
 		},
 		{
 			Display: false,
-			Name:    `添加账号`,
+			Name:    echo.T(`添加账号`),
 			Action:  `account/add`,
 		},
 		{
 			Display: false,
-			Name:    `修改账号`,
+			Name:    echo.T(`修改账号`),
 			Action:  `account/edit/:id`,
 		},
 		{
 			Display: false,
-			Name:    `删除账号`,
+			Name:    echo.T(`删除账号`),
 			Action:  `account/delete/:id`,
 		},
 	},

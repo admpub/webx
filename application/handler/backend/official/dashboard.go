@@ -22,7 +22,7 @@ func init() {
 			IconName:  `fa-users`,
 			IconColor: `warning`,
 			Short:     `CUSTOMER`,
-			Name:      `客户数量`,
+			Name:      echo.T(`客户数量`),
 			Summary:   ``,
 		}).SetContentGenerator(func(ctx echo.Context) interface{} {
 			custMdl := modelCustomer.NewCustomer(ctx)
@@ -44,7 +44,7 @@ func init() {
 			IconName:  `fa-leaf`,
 			IconColor: `success`,
 			Short:     `ARTICLES`,
-			Name:      `文章数量`,
+			Name:      echo.T(`文章数量`),
 			Summary:   ``,
 		}).SetContentGenerator(func(ctx echo.Context) interface{} {
 			m := dbschema.NewOfficialCommonArticle(ctx)
@@ -55,7 +55,7 @@ func init() {
 			IconName:  `fa-comments`,
 			IconColor: `primary`,
 			Short:     `COMMENT`,
-			Name:      `评论数量`,
+			Name:      echo.T(`评论数量`),
 			Summary:   ``,
 		}).SetContentGenerator(func(ctx echo.Context) interface{} {
 			m := dbschema.NewOfficialCommonComment(ctx)
@@ -70,7 +70,7 @@ func init() {
 			IconName:  `fa-warning`,
 			IconColor: `danger`,
 			Short:     `COMPLAINT`,
-			Name:      `客户投诉`,
+			Name:      echo.T(`客户投诉`),
 			Summary:   ``,
 		}).SetContentGenerator(func(ctx echo.Context) interface{} {
 			m := dbschema.NewOfficialCommonComplaint(ctx)
