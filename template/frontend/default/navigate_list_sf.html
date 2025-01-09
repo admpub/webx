@@ -6,7 +6,7 @@
         {{- range $key,$sub := $v.FetchChildren -}}
         <li>
             <a href="{{$sub.Url}}"{{if $sub.IsActive}} class="active"{{end}}{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
-                {{$sub.Title}}
+                {{$sub.Title|$.T|UpperCaseFirst}}
                 {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
             </a>
             {{- if $sub.HasChildren -}}
@@ -18,7 +18,7 @@
         {{- else -}}
         <li>
           <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}"{{if $v.IsActive}} class="active"{{end}}{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
-              {{$v.Title}}
+              {{$v.Title|$.T|UpperCaseFirst}}
               {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
             </a>
             {{- $.Set `navigateListSfChildren` $v -}}
@@ -27,7 +27,7 @@
         {{- end -}}
     {{- else -}}
         <li><a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}"{{if $v.IsActive}} class="active"{{end}}{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
-            {{$v.Title}}
+            {{$v.Title|$.T|UpperCaseFirst}}
             {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
         </a></li>
     {{- end -}}
