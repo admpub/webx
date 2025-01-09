@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre71
 	github.com/coscms/webcore v0.6.39
-	github.com/coscms/webfront v0.0.0-20250107104238-84bf5dc17988
+	github.com/coscms/webfront v0.0.0-20250109062532-6c84ab3fd687
 )
 
 require (
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.5
 	github.com/webx-top/com v1.3.20
 	github.com/webx-top/db v1.28.2
-	github.com/webx-top/echo v1.14.2
+	github.com/webx-top/echo v1.14.4
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.1
@@ -110,7 +110,7 @@ require (
 	github.com/admpub/gotwilio v0.0.1 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
-	github.com/admpub/i18n v0.3.2 // indirect
+	github.com/admpub/i18n v0.4.3 // indirect
 	github.com/admpub/identicon v1.0.2 // indirect
 	github.com/admpub/imaging v1.6.3 // indirect
 	github.com/admpub/ini v1.38.2 // indirect
@@ -303,12 +303,12 @@ require (
 	go.etcd.io/bbolt v1.3.11 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/mock v0.5.0 // indirect
-	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/exp v0.0.0-20250103183323-7d7fa50e5329 // indirect
 	golang.org/x/image v0.23.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.22.0 // indirect
-	golang.org/x/net v0.33.0 // indirect
+	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/time v0.9.0 // indirect
