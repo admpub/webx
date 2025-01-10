@@ -1,3 +1,5 @@
+"#short#其它功能" : "Other"
+"#short#内容管理" : "CMS"
 "%d楼" : "%dF"
 "%s主页" : "%s Homepage"
 "%s参数值“%s”无效" : "Invalid %s parameter value '%s'"
@@ -1497,7 +1499,6 @@ webhook时有效 : "Valid when webhook"
 "未设置App密钥获取方式！不支持获取App密钥" : "App key acquisition method has not been set! Getting App keys is not supported"
 未读 : "unread"
 未读消息 : "unread message"
-"#paging#首页" : "First page"
 末页 : "Last page"
 本地 : "Local"
 本地模式 : "local mode"
@@ -1849,7 +1850,10 @@ webhook时有效 : "Valid when webhook"
 "确定要删除文件“%s”吗？" : "Are you sure you want to delete the file '%s'?"
 "确定要删除用户“%v@%v”吗？" : "Are you sure you want to delete user “%v@%v”?"
 "确定要删除选中的这些消息码？" : "Are you sure you want to delete these selected message codes?"
-"确定要强制退出全部任务吗？\n本操作将会彻底退出任务处理功能。\n\n可以通过点击“继续历史任务”按钮，重新开启" : 'Are you sure you want to force exit all tasks?\nThis operation will completely exit the task processing function.\n\nYou can restart it by clicking the "Continue Historical Task" button'
+"确定要强制退出全部任务吗？\n本操作将会彻底退出任务处理功能。\n\n可以通过点击“继续历史任务”按钮，重新开启" : '''Are you sure you want to force exit all tasks?
+This operation will completely exit the task processing function.
+
+You can restart it by clicking the "Continue Historical Task" button'''
 "确定要清空所有的数据吗？" : "Are you sure you want to empty all the data?"
 "确定要清空数据“%v”中的数据吗？" : "Are you sure you want to empty the data in data'v'?"
 "确定要解除绑定%s?" : "Are you sure you want to unbind %s?"
@@ -2086,10 +2090,13 @@ webhook时有效 : "Valid when webhook"
 解码 : "decode"
 解绑 : "Unbind"
 触发器 : "Trigger"
-"警告！本操作很危险！！！\n请确认您已经备份过目标数据库。\n确定要现在执行同步操作吗？" : "Warning! This operation is dangerous!!!\\ nPlease confirm that you have backed up the target database.\\ nAre you sure you want to perform synchronization now?"
+"警告！本操作很危险！！！\n请确认您已经备份过目标数据库。\n确定要现在执行同步操作吗？" : '''Warning! This operation is dangerous!!!
+Please confirm that you have backed up the target database.
+Are you sure you want to perform synchronization now?'''
 警报专题 : "Alarm topic"
 警报接收账号 : "Alarm receiving account"
 警报收信账号 : "Alarm receiving account"
+计划任务数量 : "Number of planned tasks"
 计算 : "Calculation"
 订阅 : "subscription"
 认证插件 : "authentication plug-in"
@@ -2501,5 +2508,3 @@ webhook时有效 : "Valid when webhook"
 默认角色 : "default role"
 默认金额 : "default amount"
 "👆必须勾选此项才能安装" : "👆This item must be checked to install"
-"#short#内容管理" : "CMS"
-"#short#其它功能" : "Other"
