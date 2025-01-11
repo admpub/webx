@@ -17,16 +17,16 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"接口名称"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="name" value="{{$.Form "name"}}" required>
+                    <input type="text" class="form-control" name="name" value="{{$.Form `name`}}" required>
                 </div>
                 <label class="col-sm-2 control-label">{{"分组"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$groupId := ($.Formx "groupId").Uint}}
+                  {{- $groupId := ($.Formx "groupId").Uint -}}
                   <select name="groupId" id="groupId" class="form-control">
                   <option value="0">{{`<无>`|$.T}}</option>
-                  {{range $k, $v := $.Stored.groupList}}
-                  <option value="{{$v.Id}}" {{if eq $groupId $v.Id}} selected{{end}}>{{$v.Name}}</option>
-                  {{end}}
+                  {{- range $k, $v := $.Stored.groupList -}}
+                  <option value="{{$v.Id}}" {{- if eq $groupId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+                  {{- end -}}
                   </select>
                 </div>
               </div>
@@ -79,11 +79,11 @@
                 <div class="col-sm-9">
                   {{$v := $.Form "disabled"}}
                   <span class="radio radio-success radio-inline">
-                      <input type="radio" value="N" name="disabled"{{if or (eq $v "N") (eq $v "")}} checked{{end}} id="disabled-N"> <label for="disabled-N">{{"启用"|$.T}}
+                      <input type="radio" value="N" name="disabled"{{if eq $v `N` ``}} checked{{end}} id="disabled-N"> <label for="disabled-N">{{"启用"|$.T}}
                     </label>
                     </span>
                     <span class="radio radio-danger radio-inline">
-                      <input type="radio" value="Y" name="disabled"{{if eq $v "Y"}} checked{{end}} id="disabled-Y"> <label for="disabled-Y">{{"禁用"|$.T}}
+                      <input type="radio" value="Y" name="disabled"{{if eq $v `Y`}} checked{{end}} id="disabled-Y"> <label for="disabled-Y">{{"禁用"|$.T}}
                     </label>
                   </span>
                 </div>

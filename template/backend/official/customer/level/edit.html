@@ -26,7 +26,7 @@
                   {{range $k,$v := $.Stored.groupList}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="{{$v.K}}" name="group" id="group-{{$v.K}}" {{- if or (and (not $group) (eq $v.K `base`)) (eq $group $v.K)}} checked="checked" {{end}}>
-                    <label for="group-{{$v.K}}">{{$v.V}}</label>
+                    <label for="group-{{$v.K}}">{{$v.V|$.T}}</label>
                   </div>
                   {{end}}
                 </div>
@@ -61,22 +61,22 @@
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"资产类型"|$.T}}</label>
-                <div class="col-sm-3">{{$integralAsset := $.Form `integralAsset` `integral`}}
-                  {{range $k,$v := $.Stored.assetTypes}}
+                <div class="col-sm-3">{{- $integralAsset := $.Form `integralAsset` `integral` -}}
+                  {{- range $k,$v := $.Stored.assetTypes -}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="{{$v.K}}" name="integralAsset" id="integralAsset-{{$v.K}}" {{- if eq $integralAsset $v.K}} checked="checked" {{end}}>
-                    <label for="integralAsset-{{$v.K}}">{{$v.V}}</label>
+                    <label for="integralAsset-{{$v.K}}">{{$v.V|$.T}}</label>
                   </div>
-                  {{end}}
+                  {{- end -}}
                 </div>
                 <label class="col-sm-2 control-label">{{"金额类型"|$.T}}</label>
-                <div class="col-sm-3">{{$integralAmountType := $.Form `integralAmountType` `balance`}}
-                  {{range $k,$v := $.Stored.amountTypes}}
+                <div class="col-sm-3">{{- $integralAmountType := $.Form `integralAmountType` `balance` -}}
+                  {{- range $k,$v := $.Stored.amountTypes -}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="{{$v.K}}" name="integralAmountType" id="integralAmountType-{{$v.K}}" {{- if eq $integralAmountType $v.K}} checked="checked" {{end}}>
-                    <label for="integralAmountType-{{$v.K}}">{{$v.V}}</label>
+                    <label for="integralAmountType-{{$v.K}}">{{$v.V|$.T}}</label>
                   </div>
-                  {{end}}
+                  {{- end -}}
                 </div>
               </div>
               <div class="form-group">
@@ -127,11 +127,11 @@
                 <label class="col-sm-2 control-label">{{`是否禁用`|$.T}}</label>
                 <div class="col-sm-8">{{$v := $.Form `disabled` `N`}}
                   <div class="radio radio-primary radio-inline">
-                    <input type="radio" value="Y" name="disabled" id="disabled-Y" {{- if eq $v "Y"}} checked="checked" {{end}}>
+                    <input type="radio" value="Y" name="disabled" id="disabled-Y" {{- if eq $v `Y`}} checked="checked" {{end}}>
                     <label for="disabled-Y">{{`禁用`|$.T}}</label>
                   </div>
                   <div class="radio radio-primary radio-inline">
-                    <input type="radio" value="N" name="disabled" id="disabled-N" {{- if eq $v "N"}} checked="checked" {{end}}>
+                    <input type="radio" value="N" name="disabled" id="disabled-N" {{- if eq $v `N`}} checked="checked" {{end}}>
                     <label for="disabled-N">{{`启用`|$.T}}</label>
                   </div>
                 </div>
@@ -140,9 +140,9 @@
                 <label class="col-sm-2 control-label">{{"客户角色"|$.T}}</label>
                 <div class="col-sm-8">
                   <select id="select2roles" name="roleIds" multiple="multiple">
-                    {{range $k, $v := $.Stored.roleList}}
+                    {{- range $k, $v := $.Stored.roleList -}}
                     <option value="{{$v.Id}}"{{if call $.Func.isChecked $v.Id}} selected="selected"{{end}}>{{$v.Name}}</option>
-                    {{end}}
+                    {{- end -}}
                   </select>
                 </div>
               </div>

@@ -17,7 +17,7 @@
                 {{- if gt (len $.Stored.groupList) 1 -}}
                 <ul class="nav nav-outline nav-gray d-block d-sm-flex justify-content-center" role="tablist">
                     {{- range $k, $v := $.Stored.groupList -}}
-                    <li class="nav-item"><a class="nav-link{{if eq $.Stored.group $v.K }} active{{end}}" href="?group={{$v.K}}">{{$v.V}}</a></li>
+                    <li class="nav-item"><a class="nav-link{{if eq $.Stored.group $v.K }} active{{end}}" href="?group={{$v.K}}">{{$v.V|$.T}}</a></li>
                     {{- end -}}
                 </ul>
                 {{- end -}}

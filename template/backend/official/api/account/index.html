@@ -15,10 +15,10 @@
 							<span class="input-group-addon">{{"组类型"|$.T}}</span>
 							<select name="groupId" class="form-control" id="groupId" onchange="$('#search-form').submit()">
 								<option value="0"> - {{"不限"|$.T}} - </option>
-								{{$groupId := $.Stored.groupId}} 
-								{{range $k, $v := $.Stored.groupList}}
+								{{- $groupId := $.Stored.groupId -}} 
+								{{- range $k, $v := $.Stored.groupList -}}
 								<option value="{{$v.Id}}" {{if eq $groupId $v.Id}} selected{{end}}>{{$v.Name}}</option>
-								{{end}}
+								{{- end -}}
 							</select>
 						</div>
 					</form>
@@ -56,7 +56,7 @@
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 							<td>
 								<div class="checkbox checkbox-success no-margin-y">
-									<input id="checkbox-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}" data-disabled="{{$v.Disabled}}"{{if eq $v.Disabled "N"}} checked="checked"{{end}} value="N" /><label for="checkbox-{{$k}}">{{"启用"|$.T}}</label>
+									<input id="checkbox-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}" data-disabled="{{$v.Disabled}}"{{if eq $v.Disabled `N`}} checked="checked"{{end}} value="N" /><label for="checkbox-{{$k}}">{{"启用"|$.T}}</label>
 								</div>
 							</td>
 							<td class="text-center">

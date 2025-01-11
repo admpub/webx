@@ -20,12 +20,12 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"等级组"|$.T}}</label>
                 <div class="col-sm-8">{{$group := $.Form `group` `base`}}
-                  {{range $k,$v := $.Stored.groupList}}
+                  {{- range $k,$v := $.Stored.groupList}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="{{$v.K}}" name="group" id="group-{{$v.K}}" {{- if or (and (not $group) (eq $v.K `base`)) (eq $group $v.K)}} checked="checked" {{end}}>
-                    <label for="group-{{$v.K}}">{{$v.V}}</label>
+                    <label for="group-{{$v.K}}">{{$v.V|$.T}}</label>
                   </div>
-                  {{end}}
+                  {{- end}}
                 </div>
               </div>
               <div class="form-group">

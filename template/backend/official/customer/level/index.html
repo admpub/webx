@@ -16,7 +16,7 @@
 							<select name="group" class="form-control" id="group" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
 								{{- range $k, $v := $.Stored.groupList -}}
-								<option value="{{$v.K}}" {{if eq $group $v.K}} selected{{end}}>{{$v.V}} ({{$v.K}})</option>
+								<option value="{{$v.K}}" {{if eq $group $v.K}} selected{{end}}>{{$v.V|$.T}} ({{$v.K}})</option>
 								{{- end -}}
 							</select>
 						</div>
@@ -58,8 +58,8 @@
 							<td>{{call $.Func.levelGroupName $v.Group}}({{$v.Group}})</td>
 							<td>{{$v.IntegralMin}}～{{$v.IntegralMax}}<br />
 								<small>
-									{{`资产类型`|$.T}}: {{call $.Func.assetTypeName $v.IntegralAsset}}<br />
-									{{`金额类型`|$.T}}: {{call $.Func.amountTypeName $v.IntegralAmountType}}
+									{{`资产类型`|$.T}}: {{call $.Func.assetTypeName $v.IntegralAsset|$.T}}<br />
+									{{`金额类型`|$.T}}: {{call $.Func.amountTypeName $v.IntegralAmountType|$.T}}
 								</small>
 							</td>
 							<td class="text-center">{{$v.Score}}</td>

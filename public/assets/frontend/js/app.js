@@ -38,17 +38,17 @@
   window.App={
     clientID: {},
     i18n: {
-			SYS_INFO: 'System Information', 
-			UPLOAD_ERR: 'Upload Error', 
-			PLEASE_SELECT_FOR_OPERATE: 'Please select the item you want to operate', 
-			PLEASE_SELECT_FOR_REMOVE: 'Please select the item you want to delete', 
-			CONFIRM_REMOVE: 'Are you sure you want to delete them?', 
-			SELECTED_ITEMS: 'You have selected %d items', 
-			SUCCESS: 'The operation was successful', 
-			FAILURE: 'Operation failed', 
-			UPLOADING:'File uploading, please wait...', 
-			UPLOAD_SUCCEED:'Upload successfully', 
-			BUTTON_UPLOAD:'Upload' 
+			SYS_INFO: 'System Information', // App.t('SYS_INFO')
+			UPLOAD_ERR: 'Upload Error', // App.t('UPLOAD_ERR')
+			PLEASE_SELECT_FOR_OPERATE: 'Please select the item you want to operate', // App.t('PLEASE_SELECT_FOR_OPERATE')
+			PLEASE_SELECT_FOR_REMOVE: 'Please select the item you want to delete', // App.t('PLEASE_SELECT_FOR_REMOVE')
+			CONFIRM_REMOVE: 'Are you sure you want to delete them?', // App.t('CONFIRM_REMOVE')
+			SELECTED_ITEMS: 'You have selected %d items', // App.t('SELECTED_ITEMS')
+			SUCCESS: 'The operation was successful', // App.t('SUCCESS')
+			FAILURE: 'Operation failed', // App.t('FAILURE')
+			UPLOADING:'File uploading, please wait...', // App.t('UPLOADING')
+			UPLOAD_SUCCEED:'Upload successfully', // App.t('UPLOAD_SUCCEED')
+			BUTTON_UPLOAD:'Upload' // App.t('BUTTON_UPLOAD')
 		},
     lang: 'en',
     status: {CaptchaError:-9,CaptchaIdMissing:-10,CaptchaCodeRequired:-11,NonPrivileged:-2,NotLoggedIn:-1,Failure:0,Success:1},

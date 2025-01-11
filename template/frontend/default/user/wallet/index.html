@@ -32,7 +32,7 @@
                 {{- end -}}
                 <div class="asset-value">{{$comment := $v.H.comment}}
                   <div class="abs-top5">
-                    <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="tx-size-xs tx-gray-light">{{$v.V}}{{if $comment}}({{$comment}}){{end}}</a>
+                    <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="tx-size-xs tx-gray-light">{{$v.V|$.T}}{{if $comment}}({{$comment|$.T}}){{end}}</a>
                   </div>
                   {{- if and $v.X (HasImplemented $v.X `RenderContextWithData`) -}}
                   <div class="d-flex justify-content-between align-items-center balance-wrap">

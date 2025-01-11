@@ -25,9 +25,9 @@
                   <div class="col-sm-3">
                     <div class="avatar-upload">
                       {{$avatar := $.Form "avatar"}}
-                      <img src="{{if $avatar}}{{AddSuffix $avatar "_200_200"}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
+                      <img src="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
                       <input id="fileupload" type="file" name="files[]">
-                      <input type="hidden" id="avatar-image" name="avatar-small" value="{{if $avatar}}{{AddSuffix $avatar "_200_200"}}{{end}}" />
+                      <input type="hidden" id="avatar-image" name="avatar-small" value="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{end}}" />
                       <input type="hidden" id="avatar-image-original" name="avatar" value="{{$avatar}}" />
                       <div id="progress" class="overlay"></div>
                     </div>
@@ -41,7 +41,7 @@
                 <label class="col-sm-2 control-label">{{"登录名称"|$.T}}</label>
                 <div class="col-sm-3">
                 {{if $addMode}}
-                  <input type="text" class="form-control" name="name" value="{{$.Form "name"}}" required />
+                  <input type="text" class="form-control" name="name" value="{{$.Form `name`}}" required />
                 {{else}}
                   <span class="form-control no-border">
                     {{$.Form "name"}}
@@ -50,28 +50,28 @@
                 </div>
                 <label class="col-sm-2 control-label">{{"真实姓名"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="realName" value="{{$.Form "realName"}}" />
+                    <input type="text" class="form-control" name="realName" value="{{$.Form `realName`}}" />
                 </div>
               </div>
               {{if $addMode}}
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"登录密码"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="password" class="form-control" id="password" name="password" value="{{$.Form "password"}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="密码不可为空" data-parsley-minlength="6" data-parsley-minlength-message="密码位数不可少于6位" />
+                    <input type="password" class="form-control" id="password" name="password" value="{{$.Form `password`}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="密码不可为空" data-parsley-minlength="6" data-parsley-minlength-message="密码位数不可少于6位" />
                 </div>
                 <label class="col-sm-2 control-label">{{"登录密码确认"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="password" class="form-control" name="password2" value="{{$.Form "password2"}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="确认密码不可为空" data-parsley-equalto="#password" data-parsley-equalto-message="两次密码输入不一致" />
+                    <input type="password" class="form-control" name="password2" value="{{$.Form `password2`}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="确认密码不可为空" data-parsley-equalto="#password" data-parsley-equalto-message="两次密码输入不一致" />
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"安全密码"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="password" class="form-control" id="safePwd" name="safePwd" value="{{$.Form "safePwd"}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="密码不可为空" data-parsley-minlength="6" data-parsley-minlength-message="密码位数不可少于6位" />
+                    <input type="password" class="form-control" id="safePwd" name="safePwd" value="{{$.Form `safePwd`}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="密码不可为空" data-parsley-minlength="6" data-parsley-minlength-message="密码位数不可少于6位" />
                 </div>
                 <label class="col-sm-2 control-label">{{"安全密码确认"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="password" class="form-control" name="safePwd2" value="{{$.Form "safePwd2"}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="确认密码不可为空" data-parsley-equalto="#safePwd" data-parsley-equalto-message="两次密码输入不一致" />
+                    <input type="password" class="form-control" name="safePwd2" value="{{$.Form `safePwd2`}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="确认密码不可为空" data-parsley-equalto="#safePwd" data-parsley-equalto-message="两次密码输入不一致" />
                 </div>
               </div>
               {{else}}
@@ -80,11 +80,11 @@
                   <div class="col-sm-8">
                     {{$v := $.Form "modifyPwd"}}
                     <div class="checkbox checkbox-primary checkbox-inline">
-                      <input type="checkbox" value="1" name="modifyPwd" id="modifyPwd"{{if eq $v "1"}} checked{{end}} onclick="switchPwdInput(this)"> <label for="modifyPwd">{{"修改登录密码"|$.T}}</label>
+                      <input type="checkbox" value="1" name="modifyPwd" id="modifyPwd"{{if eq $v `1`}} checked{{end}} onclick="switchPwdInput(this)"> <label for="modifyPwd">{{"修改登录密码"|$.T}}</label>
                     </div>
                     {{$v := $.Form "modifySafePwd"}}
                     <div class="checkbox checkbox-primary checkbox-inline">
-                      <input type="checkbox" value="1" name="modifySafePwd" id="modifySafePwd"{{if eq $v "1"}} checked{{end}} onclick="switchSafePwdInput(this)"> <label for="modifySafePwd">{{"修改安全密码"|$.T}}</label>
+                      <input type="checkbox" value="1" name="modifySafePwd" id="modifySafePwd"{{if eq $v `1`}} checked{{end}} onclick="switchSafePwdInput(this)"> <label for="modifySafePwd">{{"修改安全密码"|$.T}}</label>
                     </div>
                   </div>
               </div>
@@ -92,11 +92,11 @@
   <div class="form-group" id="form-group-pwd">
     <label class="col-sm-2 control-label">{{"登录密码"|$.T}}</label>
     <div class="col-sm-3">
-        <input type="password" class="form-control" id="password" name="password" value="{{$.Form "password"}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="密码不可为空" data-parsley-minlength="6" data-parsley-minlength-message="密码位数不可少于6位" />
+        <input type="password" class="form-control" id="password" name="password" value="{{$.Form `password`}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="密码不可为空" data-parsley-minlength="6" data-parsley-minlength-message="密码位数不可少于6位" />
     </div>
     <label class="col-sm-2 control-label">{{"登录密码确认"|$.T}}</label>
     <div class="col-sm-3">
-        <input type="password" class="form-control" name="password2" value="{{$.Form "password2"}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="确认密码不可为空" data-parsley-equalto="#password" data-parsley-equalto-message="两次密码输入不一致" />
+        <input type="password" class="form-control" name="password2" value="{{$.Form `password2`}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="确认密码不可为空" data-parsley-equalto="#password" data-parsley-equalto-message="两次密码输入不一致" />
     </div>
   </div>
 </script>
@@ -104,11 +104,11 @@
   <div class="form-group" id="form-group-safepwd">
     <label class="col-sm-2 control-label">{{"安全密码"|$.T}}</label>
     <div class="col-sm-3">
-        <input type="password" class="form-control" id="safePwd" name="safePwd" value="{{$.Form "safePwd"}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="密码不可为空" data-parsley-minlength="6" data-parsley-minlength-message="密码位数不可少于6位" />
+        <input type="password" class="form-control" id="safePwd" name="safePwd" value="{{$.Form `safePwd`}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="密码不可为空" data-parsley-minlength="6" data-parsley-minlength-message="密码位数不可少于6位" />
     </div>
     <label class="col-sm-2 control-label">{{"安全密码确认"|$.T}}</label>
     <div class="col-sm-3">
-        <input type="password" class="form-control" name="safePwd2" value="{{$.Form "safePwd2"}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="确认密码不可为空" data-parsley-equalto="#safePwd" data-parsley-equalto-message="两次密码输入不一致" />
+        <input type="password" class="form-control" name="safePwd2" value="{{$.Form `safePwd2`}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="确认密码不可为空" data-parsley-equalto="#safePwd" data-parsley-equalto-message="两次密码输入不一致" />
     </div>
   </div>
 </script>
@@ -116,11 +116,11 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"手机号码"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="mobile" value="{{$.Form "mobile"}}" />
+                    <input type="text" class="form-control" name="mobile" value="{{$.Form `mobile`}}" />
                 </div>
                 <label class="col-sm-2 control-label">{{"电邮地址"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="email" class="form-control" name="email" value="{{$.Form "email"}}" required />
+                    <input type="email" class="form-control" name="email" value="{{$.Form `email`}}" required />
                 </div>
               </div>
               <div class="form-group">
@@ -128,18 +128,18 @@
                   <div class="col-sm-3">
                     {{$v := $.Form "gendar"}}
                     <div class="radio radio-primary radio-inline">
-                      <input type="radio" value="secret" name="gendar" id="gendar-secret"{{if or (eq $v "secret") (eq $v "")}} checked{{end}}> <label for="gendar-secret">{{"保密"|$.T}}</label>
+                      <input type="radio" value="secret" name="gendar" id="gendar-secret"{{if eq $v `secret` ``}} checked{{end}}> <label for="gendar-secret">{{"保密"|$.T}}</label>
                     </div>
                     <div class="radio radio-primary radio-inline">
-                      <input type="radio" value="female" name="gendar" id="gendar-female"{{if eq $v "female"}} checked{{end}}> <label for="gendar-female">{{"女"|$.T}}</label>
+                      <input type="radio" value="female" name="gendar" id="gendar-female"{{if eq $v `female`}} checked{{end}}> <label for="gendar-female">{{"女"|$.T}}</label>
                     </div>
                     <div class="radio radio-primary radio-inline">
-                      <input type="radio" value="male" name="gendar" id="gendar-male"{{if eq $v "male"}} checked{{end}}> <label for="gendar-male">{{"男"|$.T}}</label>
+                      <input type="radio" value="male" name="gendar" id="gendar-male"{{if eq $v `male`}} checked{{end}}> <label for="gendar-male">{{"男"|$.T}}</label>
                     </div>
                   </div>
                 <label class="col-sm-2 control-label">{{"身份证号码"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="idCardNo" value="{{$.Form "idCardNo"}}" />
+                    <input type="text" class="form-control" name="idCardNo" value="{{$.Form `idCardNo`}}" />
                 </div>
               </div>
               <div class="form-group">
@@ -152,38 +152,38 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"关联后台用户"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$uid := ($.Formx "uid").Uint64}}
+                  {{- $uid := ($.Formx "uid").Uint64 -}}
                   <input type="text" name="uid" id="uid"{{if gt $uid 0}} data-init="{{$uid}}"{{end}} value="{{$uid}}" class="form-control">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"客户等级"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$levelId := ($.Formx "levelId").Uint64}}
+                  {{- $levelId := ($.Formx "levelId").Uint64 -}}
                   <input type="text" name="levelId" id="levelId"{{if gt $levelId 0}} data-init="{{$levelId}}"{{end}} value="{{$levelId}}" class="form-control">
                 </div>
                 <label class="col-sm-2 control-label">{{"代理等级"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$agentLevelId := ($.Formx "agentLevelId").Uint64}}
+                  {{- $agentLevelId := ($.Formx "agentLevelId").Uint64 -}}
                   <input type="text" name="agentLevel" id="agentLevel"{{if gt $agentLevelId 0}} data-init="{{$agentLevelId}}"{{end}} value="{{$agentLevelId}}" class="form-control">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"客户组"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$groupId := ($.Formx "groupId").Uint}}
+                  {{- $groupId := ($.Formx "groupId").Uint -}}
                   <select name="groupId" id="groupId" class="form-control">
                     <option value="0">- {{"无"|$.T}} -</option>
-                    {{range $k, $v := $.Stored.groupList}}
+                    {{- range $k, $v := $.Stored.groupList -}}
                     <option value="{{$v.Id}}"{{if eq $groupId $v.Id}} selected="selected"{{end}}>{{$v.Name}}</option>
-                    {{end}}
+                    {{- end -}}
                   </select>
                 </div>
                 <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := $.Form "disabled"}}
+                  {{- $v := $.Form "disabled" -}}
                   <div class="radio radio-primary radio-inline"> 
-                    <input type="radio" value="N" id="disabled-N" name="disabled"{{if or (eq $v `N`) (eq $v ``)}} checked{{end}}><label for="disabled-N">{{"启用"|$.T}}</label> 
+                    <input type="radio" value="N" id="disabled-N" name="disabled"{{if eq $v `N` ``}} checked{{end}}><label for="disabled-N">{{"启用"|$.T}}</label> 
                   </div>
                   <div class="radio radio-danger radio-inline"> 
                     <input type="radio" value="Y" id="disabled-Y" name="disabled"{{if eq $v `Y`}} checked{{end}}><label for="disabled-Y">{{"禁用"|$.T}}</label> 
@@ -194,9 +194,9 @@
                 <label class="col-sm-2 control-label">{{"客户角色"|$.T}}</label>
                 <div class="col-sm-8">
                   <select id="select2roles" name="roleIds" multiple="multiple">
-                    {{range $k, $v := $.Stored.roleList}}
+                    {{- range $k, $v := $.Stored.roleList -}}
                     <option value="{{$v.Id}}"{{if call $.Func.isChecked $v.Id}} selected="selected"{{end}}>{{$v.Name}}</option>
-                    {{end}}
+                    {{- end -}}
                   </select>
                 </div>
               </div>
