@@ -28,7 +28,7 @@
 								<option value=""> - {{"不限"|$.T}} - </option>
 								{{- $contype := $.Form `contype` -}} 
 								{{- range $k, $v := $.Stored.contypes -}}
-								<option value="{{$v.K}}" {{if eq $contype $v.K}} selected{{end}}>{{$v.V}}</option>
+								<option value="{{$v.K}}" {{if eq $contype $v.K}} selected{{end}}>{{$v.V|$.T|UpperCaseFirst}}</option>
 								{{- end -}}
 							</select>
 						</div>

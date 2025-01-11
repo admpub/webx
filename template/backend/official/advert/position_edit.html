@@ -53,7 +53,7 @@
                   <select name="contype" required id="contype" class="form-control">
                     <option value=""> - {{`请选择`|$.T}} - </option>
                     {{range $k, $v := $.Stored.contypes}}
-                    <option value="{{$v.K}}"{{if eq $v.K $contype}} selected="selected"{{end}}>{{$v.V}}</option>
+                    <option value="{{$v.K}}"{{if eq $v.K $contype}} selected="selected"{{end}}>{{$v.V|$.T|UpperCaseFirst}}</option>
                     {{end}}
                   </select>
                 </div>
@@ -66,7 +66,7 @@
                     <ol class="no-margin-bottom md-padding-left">
                       {{- range $k, $v := $.Stored.contypes -}}
                       {{- if $v.H.description -}}
-                      <li>{{$v.V}}: {{$v.H.description}}</li>
+                      <li>{{$v.V|$.T|UpperCaseFirst}}: {{$v.H.description|$.T|UpperCaseFirst}}</li>
                       {{- end -}}
                       {{- end -}}
                     </ol>

@@ -6,7 +6,7 @@
     {{- range $.Stored.contypes -}}
     <div class="radio radio-primary radio-inline">
         <input type="radio" value="{{.K}}" name="{{$prefix}}contype" id="{{$prefix}}comment-contype-{{.K}}"{{if eq $contype .K}} checked{{end}}>
-        <label for="{{$prefix}}comment-contype-{{.K}}">{{.V}}</label>
+        <label for="{{$prefix}}comment-contype-{{.K}}">{{.V|$.T|UpperCaseFirst}}</label>
     </div>
     {{- end -}}
     </div>

@@ -3,11 +3,11 @@
 {{Super}}
 <div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
-    <h5 class="tx-inverse tx-bold mg-b-0">{{"钱包充值"|$.T}}</h5>
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"钱包充值"|$.T|UpperCaseFirst}}</h5>
     <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
-      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.T}}</a>
-      <a class="breadcrumb-item" href="{{FrontendURL}}/user/wallet">{{"我的钱包"|$.T}}</a>
-      <span class="breadcrumb-item active">{{"钱包充值"|$.T}}</span>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.T|UpperCaseFirst}}</a>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/wallet">{{"我的钱包"|$.T|UpperCaseFirst}}</a>
+      <span class="breadcrumb-item active">{{"钱包充值"|$.T|UpperCaseFirst}}</span>
     </nav>
   </div>
 
@@ -17,7 +17,7 @@
             <div class="card card-form form-label-right">
                 <div class="card-body">
                     <div class="row form-group">
-                        <label class="col-sm-2 col-form-label">{{`当前余额`|$.T}}</label>
+                        <label class="col-sm-2 col-form-label">{{`当前余额`|$.T|UpperCaseFirst}}</label>
                         <div class="col-sm-8">
                             <div>
                                 <span class="tx-orange tx-bold tx-size-24">{{$.Stored.money}}</span>
@@ -41,17 +41,17 @@
             <form class="form form-label-right" method="post" action="{{FrontendURL}}/user/wallet/recharge/prepaid_card">
               <div class="card card-form">
                   <div class="card-header">
-                    <h6 class="card-title">{{"用充值卡充值"|$.T}}</h6>
+                    <h6 class="card-title">{{"用充值卡充值"|$.T|UpperCaseFirst}}</h6>
                   </div><!-- card-header -->
                   <div class="card-body">
                       <div class="row form-group">
-                          <label class="col-sm-2 col-form-label required">{{`充值卡卡号`|$.T}}</label>
+                          <label class="col-sm-2 col-form-label required">{{`充值卡卡号`|$.T|UpperCaseFirst}}</label>
                           <div class="col-sm-5">
                               <input type="text" class="form-control" name="cardNumber" value="{{$.Form `cardNumber`}}" placeholder="{{`充值卡卡号`|$.T}}" required="required">
                           </div>
                       </div>
                       <div class="row form-group">
-                          <label class="col-sm-2 col-form-label required">{{`充值卡密码`|$.T}}</label>
+                          <label class="col-sm-2 col-form-label required">{{`充值卡密码`|$.T|UpperCaseFirst}}</label>
                           <div class="col-sm-5">
                             <input type="password" class="form-control" name="cardPassword" value="{{$.Form `cardPassword`}}" placeholder="{{`充值卡密码`|$.T}}" required="required">
                           </div>
@@ -61,8 +61,8 @@
                     <div class="row form-group">
                         <div class="col-sm-8 offset-sm-2">
                             <input type="hidden" name="next" value="{{$.Form `next`}}">
-                            <button type="submit" class="btn btn-primary">{{`充值`|$.T}}</button>
-                            <a href="{{$returnURL}}" class="btn btn-default tx-inverse">{{`返回`|$.T}}</a>
+                            <button type="submit" class="btn btn-primary">{{`充值`|$.T|UpperCaseFirst}}</button>
+                            <a href="{{$returnURL}}" class="btn btn-default tx-inverse">{{`返回`|$.T|UpperCaseFirst}}</a>
                         </div>
                     </div>
                   </div>
@@ -79,24 +79,24 @@
         <div class="col-md-12">
             <div class="card card-form">
                 <div class="card-header">
-                  <h6 class="card-title">{{"线下付款"|$.T}}</h6>
+                  <h6 class="card-title">{{"线下付款"|$.T|UpperCaseFirst}}</h6>
                 </div><!-- card-header -->
                 <div class="card-body">
                     <div class="row form-group">
-                        <label class="col-sm-2 col-form-label tx-right">{{`付款方式`|$.T}}</label>
+                        <label class="col-sm-2 col-form-label tx-right">{{`付款方式`|$.T|UpperCaseFirst}}</label>
                         <div class="col-sm-8">
                             <div class="form-control-plaintext">{{Config.contact.recvMoneyMethod}}</div>
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label class="col-sm-2 col-form-label tx-right">{{`账号`|$.T}}</label>
+                        <label class="col-sm-2 col-form-label tx-right">{{`账号`|$.T|UpperCaseFirst}}</label>
                         <div class="col-sm-8">
                             <div class="form-control-plaintext">{{Config.contact.recvMoneyAccount}}</div>
                         </div>
                     </div>
                     {{- if Config.contact.recvMoneyBranch -}}
                     <div class="row form-group">
-                        <label class="col-sm-2 col-form-label tx-right">{{`银行支行`|$.T}}</label>
+                        <label class="col-sm-2 col-form-label tx-right">{{`银行支行`|$.T|UpperCaseFirst}}</label>
                         <div class="col-sm-8">
                             <div class="form-control-plaintext">{{Config.contact.recvMoneyBranch}}</div>
                         </div>
@@ -104,7 +104,7 @@
                     {{- end -}}
                     {{- if Config.contact.recvMoneyOwner -}}
                     <div class="row form-group">
-                        <label class="col-sm-2 col-form-label tx-right">{{`开户人姓名`|$.T}}</label>
+                        <label class="col-sm-2 col-form-label tx-right">{{`开户人姓名`|$.T|UpperCaseFirst}}</label>
                         <div class="col-sm-8">
                             <div class="form-control-plaintext">{{Config.contact.recvMoneyOwner}}</div>
                         </div>
