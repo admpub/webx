@@ -3231,3 +3231,7 @@ figure {
 .input-group .input-group-addon select.form-control {
   flex-direction: unset;
 }
+
+.input-group-addon>.fa{
+  min-width: 20px;
+}
