@@ -3,5 +3,5 @@
 {{- else -}}
 {{- $.Delete `captchaNoIcon` -}}
 {{- end -}}
-<input type="text" placeholder="{{`请输入验证码`|$.T}}" value="{{$.Form `code`}}" name="{{$.Data.captchaName}}" required="required" data-toggle="tooltip" title="{{`验证码`|$.T}}" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter">
+<input type="text" placeholder="{{`请输入验证码`|$.T}}" value="{{$.Form `code`}}" name="{{$.Data.captchaName}}" required="required" data-toggle="tooltip" title="{{`验证码`|$.T}}" class="form-control pd-y-12 bd-color-gray-lighter">
 <span class="input-group-addon pd-0">{{$.Data.captchaImage}}</span>

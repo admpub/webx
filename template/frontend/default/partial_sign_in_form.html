@@ -9,11 +9,11 @@
               <form id="sign-in-form" onsubmit="signIn(this,'{{$.GetNextURL}}');return false;">
                 <div class="input-group mg-b-20">
                   <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-person tx-gray-light"></i></span>
-                  <input type="text" name="name" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" placeholder="{{`登录名`|$.T}}" data-toggle="tooltip" title="{{`请输入登录名`|$.T}}" required autofocus="autofocus">
+                  <input type="text" name="name" class="form-control pd-y-12 bd-color-gray-lighter" placeholder="{{`登录名`|$.T}}" data-toggle="tooltip" title="{{`请输入登录名`|$.T}}" required autofocus="autofocus">
                 </div><!-- input-group -->
                 <div class="input-group mg-b-20">
                   <span class="input-group-addon bg-white bd-r-0"><i class="icon ion-locked tx-gray-light"></i></span>
-                  <input type="password" name="password" class="form-control pd-y-12 pd-l-0 bd-l-0 bd-color-gray-lighter" placeholder="{{`登录密码`|$.T}}" data-toggle="tooltip" title="{{`请输入登录密码`|$.T}}" required>
+                  <input type="password" name="password" class="form-control pd-y-12 bd-color-gray-lighter" placeholder="{{`登录密码`|$.T}}" data-toggle="tooltip" title="{{`请输入登录密码`|$.T}}" required>
                 </div><!-- input-group -->
                 <div class="input-group mg-b-20">
                   {{$.CaptchaForm `#default#default`}}
