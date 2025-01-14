@@ -3232,6 +3232,6 @@ figure {
   flex-direction: unset;
 }
 
-.input-group-addon>.fa{
+.input-group-addon>.fa,.input-group-addon>.icon{
   min-width: 20px;
 }
