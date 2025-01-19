@@ -16137,6 +16137,7 @@
 .tx-center {
   text-align: center !important;
 }
+select.tx-center{text-align-last:center}
 
 .tx-right {
   text-align: right !important;

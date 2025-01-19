@@ -4956,6 +4956,7 @@ ul.c-bredcrumb li,
 .no-margin{margin:0 !important;}
 .no-border{border:none;}
 .tx-center{text-align: center;}
+select.tx-center{text-align-last:center}
 
 /* friend links */
 /* .friend-links-wrapper .friend-links{} */
