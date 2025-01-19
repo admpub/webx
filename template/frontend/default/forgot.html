@@ -54,8 +54,8 @@
     </div><!-- form-group -->
     <div class="form-group mg-b-0">{{$type := $.Form `type`}}
         <div class="input-group">
-            <span class="input-group-addon bg-white bd-r-0 wd-100 tx-right pd-0">
-                <select name="type" id="receiverType" class="form-control wd-100p-force tx-right bd-0">
+            <span class="input-group-addon bg-white bd-r-0 wd-100 pd-0">
+                <select name="type" id="receiverType" class="form-control wd-100p-force tx-center bd-0">
                     {{- range $key, $rtype := $.Stored.recvTypes -}}
                     <option value="{{$rtype.Key}}"{{if eq $type $rtype.Key}} selected="selected"{{end}}>{{$rtype.Label|$.T|UpperCaseFirst}}</option>
                     {{- end -}}
