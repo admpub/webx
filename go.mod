@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre72
-	github.com/coscms/webcore v0.6.42
-	github.com/coscms/webfront v0.0.0-20250122072958-aa159f662071
+	github.com/coscms/webcore v0.6.43-0.20250122080322-80f321f2c97e
+	github.com/coscms/webfront v0.0.0-20250122080422-47d3d640fc23
 )
 
 require (
@@ -44,7 +44,7 @@ require (
 	github.com/admpub/useragent v0.0.2 // indirect
 	github.com/caddy-plugins/ipfilter v1.1.8 // indirect
 	github.com/coscms/forms v1.13.10
-	github.com/coscms/oauth2s v0.4.1 // indirect
+	github.com/coscms/oauth2s v0.4.2 // indirect
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.15.0 // indirect
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76 // indirect
@@ -147,11 +147,11 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/coscms/captcha v0.2.1 // indirect
 	github.com/coscms/go-imgparse v0.0.1 // indirect
-	github.com/coscms/session-boltstore v0.0.0-20241123103427-f7a05e3c6d60 // indirect
-	github.com/coscms/session-mysqlstore v0.0.0-20241122060432-e4161cb8f12f // indirect
-	github.com/coscms/session-redisstore v0.0.0-20241123110057-3c697bf14511 // indirect
-	github.com/coscms/session-sqlitestore v0.0.3 // indirect
-	github.com/coscms/session-sqlstore v0.0.0-20241206070659-19aaf21e7876 // indirect
+	github.com/coscms/session-boltstore v0.0.0-20250122075547-392556af7a5a // indirect
+	github.com/coscms/session-mysqlstore v0.0.0-20250122075110-d94d6bc2ce54 // indirect
+	github.com/coscms/session-redisstore v0.0.0-20250122075426-4fb2344fcc5b // indirect
+	github.com/coscms/session-sqlitestore v0.0.4 // indirect
+	github.com/coscms/session-sqlstore v0.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/davidbyttow/govips/v2 v2.15.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
