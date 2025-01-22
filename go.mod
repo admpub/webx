@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.3-pre72
-	github.com/coscms/webcore v0.6.41
-	github.com/coscms/webfront v0.0.0-20250119082903-0cb7e3dd38b3
+	github.com/coscms/webcore v0.6.42
+	github.com/coscms/webfront v0.0.0-20250122072958-aa159f662071
 )
 
 require (
@@ -95,7 +95,7 @@ require (
 	github.com/admpub/fsnotify v1.7.0 // indirect
 	github.com/admpub/gifresize v1.0.2 // indirect
 	github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588 // indirect
-	github.com/admpub/go-captcha-assets v0.0.0-20250118155016-6be2fe25ee51 // indirect
+	github.com/admpub/go-captcha-assets v0.0.0-20250122071745-baa7da4bda0d // indirect
 	github.com/admpub/go-captcha/v2 v2.0.5 // indirect
 	github.com/admpub/go-figure v0.0.0-20180619031829-18b2b544842c // indirect
 	github.com/admpub/go-isatty v0.0.11 // indirect
@@ -145,7 +145,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/coscms/captcha v0.2.0 // indirect
+	github.com/coscms/captcha v0.2.1 // indirect
 	github.com/coscms/go-imgparse v0.0.1 // indirect
 	github.com/coscms/session-boltstore v0.0.0-20241123103427-f7a05e3c6d60 // indirect
 	github.com/coscms/session-mysqlstore v0.0.0-20241122060432-e4161cb8f12f // indirect
@@ -193,7 +193,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/gomodule/redigo v1.9.2 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20241210010833-40e02aabc2ad // indirect
+	github.com/google/pprof v0.0.0-20250121033306-997b0b79cac0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/css v1.0.1 // indirect
 	github.com/gorilla/schema v1.4.1 // indirect
@@ -233,7 +233,7 @@ require (
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
 	github.com/miekg/dns v1.1.62 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/minio-go/v7 v7.0.82 // indirect
+	github.com/minio/minio-go/v7 v7.0.84 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect

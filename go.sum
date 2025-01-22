@@ -712,8 +712,8 @@ github.com/admpub/gifresize v1.0.2 h1:aFLkKkdyfyg4OIl84R2xA/q/+itFd/mOlGPnhIAbq8
 github.com/admpub/gifresize v1.0.2/go.mod h1:4cJFfCR1yfgyq7lZiQZomEGeR/OVQVPeflN38P0T+M0=
 github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588 h1:OzETPaPe3vghcMkx/J6VpnNFg+Sd8TiQ5L+xaty3vJY=
 github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588/go.mod h1:ukjkgape3aExDbQ8N5uIbsU2m/dHL800EdWSSl46ECc=
-github.com/admpub/go-captcha-assets v0.0.0-20250118155016-6be2fe25ee51 h1:sRPrg3yadIPq1sWBaAFmMG0cnrT2JguQV2fOGC6dNfM=
-github.com/admpub/go-captcha-assets v0.0.0-20250118155016-6be2fe25ee51/go.mod h1:0F37F+t17mNZNvh6g8B5gCeXvXbCMMRZ/uaqzW86dqg=
+github.com/admpub/go-captcha-assets v0.0.0-20250122071745-baa7da4bda0d h1:+UO3s6gHqYJhie9FuyMsJ33nQDWEOh+C7LwQzOgdNmk=
+github.com/admpub/go-captcha-assets v0.0.0-20250122071745-baa7da4bda0d/go.mod h1:H30YA9pj/D2EljjRMMfQ4OUi4uJWZhD1ro8FqX5IB0E=
 github.com/admpub/go-captcha/v2 v2.0.5 h1:gyqV4X+lQIDtA3UkJ35IC/RsT4LD2Y+AUdofbI6KYOE=
 github.com/admpub/go-captcha/v2 v2.0.5/go.mod h1:Dxip2PFYlSZLQboPiglOQjRxnC1WpVUuW5WkLgwOkdM=
 github.com/admpub/go-download/v2 v2.1.15 h1:MWGYEzBgRS1Fe/5q7rI5ss91bUIjZSIY4DjJxLjODY8=
@@ -951,8 +951,8 @@ github.com/coreos/go-semver v0.3.0/go.mod h1:nnelYz7RCh+5ahJtPPxZlU+153eP4D4r3Ee
 github.com/coreos/go-systemd v0.0.0-20181012123002-c6f51f82210d/go.mod h1:F5haX7vjVVG0kc13fIWeqUViNPyEJxv/OmvnBo0Yme4=
 github.com/coreos/go-systemd v0.0.0-20190321100706-95778dfbb74e/go.mod h1:F5haX7vjVVG0kc13fIWeqUViNPyEJxv/OmvnBo0Yme4=
 github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f/go.mod h1:E3G3o1h8I7cfcXa63jLwjI0eiQQMgzzUDFVpN/nH/eA=
-github.com/coscms/captcha v0.2.0 h1:poz0n1Gj40cO4erukJVdI3PrfFdqZ2ZaX3bQENQdOF0=
-github.com/coscms/captcha v0.2.0/go.mod h1:XAW2506G3SEbY4OQZuqjGucHAWMgzGnt8tLiCJ5zMqY=
+github.com/coscms/captcha v0.2.1 h1:X6hc6LGkylaUtkb3rZJWqqW+OBwFYqsUbwXHR2xXbX8=
+github.com/coscms/captcha v0.2.1/go.mod h1:7+zoG6iQkZ5N2r+bbvXjLlWbNPmz/nlVYSwH8aJPuEY=
 github.com/coscms/forms v1.13.10 h1:zpyd1xdYG3gn54g81ySPCn3hhHfHFQ4LzYcqDPBOVwo=
 github.com/coscms/forms v1.13.10/go.mod h1:SmoJCrusoUPSSHH3AGHAFFte4RdSIPSEXkcFstfXp/E=
 github.com/coscms/go-imgparse v0.0.1 h1:RMnw3/VtfTOil3SdukPgdGm4xmO5KoQpyVNtPKuFKFY=
@@ -971,10 +971,10 @@ github.com/coscms/session-sqlstore v0.0.0-20241206070659-19aaf21e7876 h1:THLILM0
 github.com/coscms/session-sqlstore v0.0.0-20241206070659-19aaf21e7876/go.mod h1:fkbU1N2At0fP38do0UvwcPN/6RXBlxoMQ2agI5JXVkk=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.6.41 h1:NOplGVQ1z68JJ7pZ5qD49sNOiVBXAk6faT2LFWXJkes=
-github.com/coscms/webcore v0.6.41/go.mod h1:LgmgOtKLRgLBVjaMnn4GSp6VdbX2y1LDUUo3h6lEDyo=
-github.com/coscms/webfront v0.0.0-20250119082903-0cb7e3dd38b3 h1:XoSjPkAgR2wVKL7RxzkkKHymBO8XqFKzBrLhx/066Ug=
-github.com/coscms/webfront v0.0.0-20250119082903-0cb7e3dd38b3/go.mod h1:bBAkVmN09vCC3LsAjfXYjew6lNky0qVivttuJJLIGDY=
+github.com/coscms/webcore v0.6.42 h1:dzLkrP3JqfsA+qNghBJywoU/uxkrDc11zH42pQOelQ8=
+github.com/coscms/webcore v0.6.42/go.mod h1:XP37xwWM6rsEenR/X/k3OEPHOhGkX8lbfy53rSOaUC8=
+github.com/coscms/webfront v0.0.0-20250122072958-aa159f662071 h1:CpQHClioSXmHtqgpvC4/6gFH6Yv2Nmw9SwtDmAehjCc=
+github.com/coscms/webfront v0.0.0-20250122072958-aa159f662071/go.mod h1:h0MN1ui5ReNbumoowmIeisvWd5BDMo+5684mwNEodrY=
 github.com/cpu/goacmedns v0.1.1/go.mod h1:MuaouqEhPAHxsbqjgnck5zeghuwBP1dLnPoobeGqugQ=
 github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d/go.mod h1:maD7wRr/U5Z6m/iR4s+kqSMx2CaBsrgA7czyZG/E6dU=
 github.com/cpuguy83/go-md2man/v2 v2.0.0/go.mod h1:maD7wRr/U5Z6m/iR4s+kqSMx2CaBsrgA7czyZG/E6dU=
@@ -1073,7 +1073,6 @@ github.com/go-acme/lego/v4 v4.4.0/go.mod h1:l3+tFUFZb590dWcqhWZegynUthtaHJbG2fev
 github.com/go-acme/lego/v4 v4.5.3/go.mod h1:mL1DY809LzjvRuaxINNxsI26f5oStVhBGTpJMiinkZM=
 github.com/go-acme/lego/v4 v4.21.0 h1:arEW+8o5p7VI8Bk1kr/PDlgD1DrxtTH1gJ4b7mehL8o=
 github.com/go-acme/lego/v4 v4.21.0/go.mod h1:HrSWzm3Ckj45Ie3i+p1zKVobbQoMOaGu9m4up0dUeDI=
-github.com/go-bindata/go-bindata v3.1.2+incompatible/go.mod h1:xK8Dsgwmeed+BBsSy2XTopBn/8uK2HWuGSnA11C3Joo=
 github.com/go-chi/chi v4.0.2+incompatible/go.mod h1:eB3wogJHnLi3x/kFX2A+IbTBlXxmMeXJVKy9tTv1XzQ=
 github.com/go-chi/chi/v5 v5.0.0/go.mod h1:BBug9lr0cqtdAhsu6R4AAdvufI0/XBzAQSsUqJpoZOs=
 github.com/go-cmd/cmd v1.0.5/go.mod h1:y8q8qlK5wQibcw63djSl/ntiHUHXHGdCkPk0j4QeW4s=
@@ -1262,8 +1261,8 @@ github.com/google/pprof v0.0.0-20210609004039-a478d1d731e9/go.mod h1:kpwsk12EmLe
 github.com/google/pprof v0.0.0-20210720184732-4bb14d4b1be1/go.mod h1:kpwsk12EmLew5upagYY7GY0pfYCcupk39gWOCRROcvE=
 github.com/google/pprof v0.0.0-20211214055906-6f57359322fd/go.mod h1:KgnwoLYCZ8IQu3XUZ8Nc/bM9CCZFOyjUNOSygVozoDg=
 github.com/google/pprof v0.0.0-20230309165930-d61513b1440d/go.mod h1:79YE0hCXdHag9sBkw2o+N/YnZtTkXi0UT9Nnixa5eYk=
-github.com/google/pprof v0.0.0-20241210010833-40e02aabc2ad h1:a6HEuzUHeKH6hwfN/ZoQgRgVIWFJljSWa/zetS2WTvg=
-github.com/google/pprof v0.0.0-20241210010833-40e02aabc2ad/go.mod h1:vavhavw2zAxS5dIdcRluK6cSGGPlZynqzFM8NdvU144=
+github.com/google/pprof v0.0.0-20250121033306-997b0b79cac0 h1:EinjE47mmVVsxcjIwVKQWNY+3P+5R2BhkbULjhEDThc=
+github.com/google/pprof v0.0.0-20250121033306-997b0b79cac0/go.mod h1:vavhavw2zAxS5dIdcRluK6cSGGPlZynqzFM8NdvU144=
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
 github.com/google/s2a-go v0.1.0/go.mod h1:OJpEgntRZo8ugHpF9hkoLJbS5dSI20XZeXJ9JVywLlM=
 github.com/google/s2a-go v0.1.3/go.mod h1:Ej+mSEMGRnqRzjc7VtF+jdBwYG5fuJfiZ8ELkjEwM0A=
@@ -1554,8 +1553,8 @@ github.com/minio/asm2plan9s v0.0.0-20200509001527-cdd76441f9d8/go.mod h1:mC1jAcs
 github.com/minio/c2goasm v0.0.0-20190812172519-36a3d3bbc4f3/go.mod h1:RagcQ7I8IeTMnF8JTXieKnO4Z6JCsikNEzj0DwauVzE=
 github.com/minio/md5-simd v1.1.2 h1:Gdi1DZK69+ZVMoNHRXJyNcxrMA4dSxoYHZSQbirFg34=
 github.com/minio/md5-simd v1.1.2/go.mod h1:MzdKDxYpY2BT9XQFocsiZf/NKVtR7nkE4RoEpN+20RM=
-github.com/minio/minio-go/v7 v7.0.82 h1:tWfICLhmp2aFPXL8Tli0XDTHj2VB/fNf0PC1f/i1gRo=
-github.com/minio/minio-go/v7 v7.0.82/go.mod h1:84gmIilaX4zcvAWWzJ5Z1WI5axN+hAbM5w25xf8xvC0=
+github.com/minio/minio-go/v7 v7.0.84 h1:D1HVmAF8JF8Bpi6IU4V9vIEj+8pc+xU88EWMs2yed0E=
+github.com/minio/minio-go/v7 v7.0.84/go.mod h1:57YXpvc5l3rjPdhqNrDsvVlY0qPI6UTk1bflAe+9doY=
 github.com/mitchellh/cli v1.0.0/go.mod h1:hNIlj7HEI86fIcpObd7a0FcrxTWetlwJDGcceTlRvqc=
 github.com/mitchellh/go-homedir v1.0.0/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrkLzIz1N1q0pr0=
 github.com/mitchellh/go-homedir v1.1.0 h1:lukF9ziXFxDFPkA1vsr5zpc1XuPDn/wFntq5mG+4E0Y=
