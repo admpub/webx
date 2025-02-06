@@ -11,9 +11,9 @@ go 1.23
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.3-pre72
-	github.com/coscms/webcore v0.6.43
-	github.com/coscms/webfront v0.0.0-20250202123840-e8186f373178
+	github.com/admpub/nging/v5 v5.3.4-0.20250206104344-0ec13ea634b8
+	github.com/coscms/webcore v0.7.0
+	github.com/coscms/webfront v0.0.0-20250206105600-fac970f81490
 )
 
 require (
@@ -60,8 +60,8 @@ require (
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.1
 	github.com/webx-top/validation v0.0.3 // indirect
-	golang.org/x/oauth2 v0.25.0 // indirect
-	golang.org/x/sync v0.10.0
+	golang.org/x/oauth2 v0.26.0 // indirect
+	golang.org/x/sync v0.11.0
 	gopkg.in/redis.v5 v5.2.9 // indirect
 )
 
@@ -199,7 +199,7 @@ require (
 	github.com/gorilla/schema v1.4.1 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/gosimple/unidecode v1.0.1 // indirect
-	github.com/grafov/m3u8 v0.12.0 // indirect
+	github.com/grafov/m3u8 v0.12.1 // indirect
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79 // indirect
 	github.com/h2non/filetype v1.1.3 // indirect
 	github.com/h2non/go-is-svg v0.0.0-20160927212452-35e8c4b0612c // indirect
@@ -247,8 +247,8 @@ require (
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
-	github.com/phuslu/iploc v1.0.20241230 // indirect
-	github.com/phuslu/lru v1.0.17 // indirect
+	github.com/phuslu/iploc v1.0.20250131 // indirect
+	github.com/phuslu/lru v1.0.18 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
@@ -275,7 +275,7 @@ require (
 	github.com/studio-b12/gowebdav v0.10.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
 	github.com/tdewolff/minify/v2 v2.21.3 // indirect
-	github.com/tdewolff/parse/v2 v2.7.19 // indirect
+	github.com/tdewolff/parse/v2 v2.7.20 // indirect
 	github.com/tidwall/btree v1.7.0 // indirect
 	github.com/tidwall/buntdb v1.3.2 // indirect
 	github.com/tidwall/gjson v1.18.0 // indirect
@@ -300,18 +300,18 @@ require (
 	github.com/webx-top/validator v0.3.0 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
-	go.etcd.io/bbolt v1.3.11 // indirect
+	go.etcd.io/bbolt v1.4.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/mock v0.5.0 // indirect
 	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/exp v0.0.0-20250128182459-e0ece0dbea4c // indirect
-	golang.org/x/image v0.23.0 // indirect
-	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
-	golang.org/x/mod v0.22.0 // indirect
+	golang.org/x/image v0.24.0 // indirect
+	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
+	golang.org/x/mod v0.23.0 // indirect
 	golang.org/x/net v0.34.0 // indirect
-	golang.org/x/sys v0.29.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
-	golang.org/x/time v0.9.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/time v0.10.0 // indirect
 	golang.org/x/tools v0.29.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
 	google.golang.org/protobuf v1.36.4 // indirect
