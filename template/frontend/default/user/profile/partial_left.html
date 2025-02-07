@@ -10,9 +10,9 @@
     <ul class="nav nav-gray nav-pills {{if $themeInfo.IsColorName `dark`}}nav-hover-bg-dark{{else}}nav-hover-bg-gray-lightest{{end}} flex-column mg-t-20 lh-10 tx-size-13 wd-100p mg-lg-b-auto">
       {{- $activeURL := $.Stored.String "activeURL" "-" -}}
       {{- range $k,$nav := call $.Func.LeftNavigate -}}
-      {{- if $nav.Display -}}
+      {{- if and $nav.Display $nav.IsValid -}}
       {{- range $subK, $subNav := $nav.Children -}}
-      {{- if $subNav.Display -}}
+      {{- if and $subNav.Display $subNav.IsValid -}}
       <li class="nav-item">{{$route := printf "/user/%s/%s" $nav.Action $subNav.Action}}
         <a href="{{FrontendURL}}/user/{{$nav.Action}}/{{$subNav.Action}}" class="nav-link{{if or (eq $.Path $route) (HasPrefix $route $activeURL)}} active{{end}}"><i class="fa fa-{{$subNav.Icon|Default $nav.Icon}} tx-center wd-16 mg-r-5"></i> {{$subNav.Name}}</a>
       </li>
