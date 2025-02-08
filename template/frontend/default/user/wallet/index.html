@@ -88,7 +88,7 @@
         <tbody>{{$zeroAmt := Float64 0}}
           {{- range $k, $v := $.Stored.list -}}
           <tr>
-            <td class="valign-middle" id="wallet-flow-{{$v.Id}}" title="{{(Date $v.Created).Format `2006-01-02 15:04:05`}}">
+            <td id="wallet-flow-{{$v.Id}}" title="{{(Date $v.Created).Format `2006-01-02 15:04:05`}}">
               {{- $.TimeAgo $v.Created `now` -}}
             </td>
             <td>
@@ -101,13 +101,13 @@
             <td>
               {{- call $.Func.formatAnyAssetAmount $v.AssetType $v.WalletAmount -}}
             </td>
-            <td class="valign-middle tx-right">
+            <td class="tx-right">
               {{- call $.Func.assetTypeName $v.AssetType -}}
             </td>
             <td>
               {{- $v.Description -}}
             </td>
-            <td class="valign-middle">
+            <td>
               {{- if eq $v.Status "pending"}}
                 <span class="tx-size-11 d-block"><span class="square-8 bg-warning mg-r-5 rounded-circle"></span> {{"待确认"|$.T}}</span>
               {{- else if eq $v.Status "confirmed"}}
