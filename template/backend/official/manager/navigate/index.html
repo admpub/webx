@@ -5,7 +5,8 @@
 <li class="active">{{"菜单管理"|$.T}}</li>
 {{/Block}}
 {{Block "head"}}
-<link href="{{AssetsURL}}/css/custom.css?t={{BuildTime}}" rel="stylesheet" />
+<link rel="stylesheet" href="{{AssetsURL}}/css/custom.css?t={{BuildTime}}" />
+<link rel="stylesheet" href="{{AssetsURL}}/js/bootstrap.editable/css/bootstrap-editable.min.css?t={{BuildTime}}" />
 {{/Block}}
 {{Block "main"}}
 <div class="row">
@@ -18,10 +19,10 @@
 							<span class="input-group-addon">{{"菜单类型"|$.T}}</span>
 							<select name="type" class="form-control" id="selectType" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{$type := $.Stored.type}} 
-								{{range $k, $v := $.Stored.typeList}}
-								<option value="{{$v.K}}" {{if eq $type $v.K}} selected{{end}}>{{$v.V}}</option>
-								{{end}}
+								{{- $type := $.Stored.type -}} 
+								{{- range $k, $v := $.Stored.typeList -}}
+								<option value="{{$v.K}}" {{- if eq $type $v.K}} selected{{end}}>{{$v.V}}</option>
+								{{- end -}}
 							</select>
 						</div>
 					</form>
@@ -41,6 +42,7 @@
 							<th><strong>{{"菜单名称"|$.T}}</strong></th>
 							<th style="width:100px"><strong>{{"类别"|$.T}}</strong></th>
 							<th style="width:100px"><strong>{{"类型"|$.T}}</strong></th>
+							<th style="width:60px"><strong>{{"排序"|$.T}}</strong></th>
 							<th style="width:130px"><strong>{{"创建时间"|$.T}}</strong></th>
 							<th style="width:60px"><strong>{{"状态"|$.T}}</strong></th>
 							<th style="width:150px" class="text-right"><strong>{{"操作"|$.T}}</strong></th>
@@ -59,12 +61,13 @@
 {{/Block}}
 {{Block "footer"}}
 <!-- <script src="{{AssetsURL}}/js/template.js?t={{BuildTime}}" type="text/javascript"></script> -->
+<script type="text/javascript" src="{{AssetsURL}}/js/bootstrap.editable/js/bootstrap-editable.min.js?t={{BuildTime}}"></script>
 <script>
 function switchDisabled(a){
-	App.switchStatus(a,'disabled','manager/navigate/edit');
+	App.switchStatus(a,'disabled','manager/navigate/edit?op=setDisabled');
 }
 function switchShowOnMenu(a){
-	App.switchStatus(a,'showOnMenu','manager/navigate/edit');
+	App.switchStatus(a,'showOnMenu','manager/navigate/edit?op=setShowOnMenu');
 }
 function expandStatus(a,expanded){
 	var cClose='fa-plus-square-o',cOpen='fa-minus-square-o';
@@ -89,7 +92,9 @@ function expandCategory(a){
 	$.get(window.location.href,{partial:1,parentId:id,path:path},function(r){
 		if(r){
 			expandStatus(a,true);
-			tr.after(r);
+			var $r=$(r);
+			tr.after($r);
+			App.editableSortNumber($r[0],'/manager/navigate/edit?op=setSort');
 		}
 	},'html');
 }
@@ -100,6 +105,7 @@ $(function(){
 	$('#pcont').on('click','#navigate-list-container td.navigate-name',function(){
 		expandCategory(this);
 	});
+	App.editableSortNumber('#navigate-list-container','/manager/navigate/edit?op=setSort');
 });
 </script>
 {{/Block}}

@@ -126,7 +126,50 @@ func NavigateAdd(ctx echo.Context) error {
 	return ctx.Render(`official/manager/navigate/edit`, err)
 }
 
+func ajaxNavigateSetDisabled(ctx echo.Context) error {
+	id := ctx.Formx(`id`).Uint()
+	m := official.NewNavigate(ctx)
+	disabled := ctx.Query(`disabled`)
+	if !common.IsBoolFlag(disabled) {
+		return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
+	}
+	data := ctx.Data()
+	err := m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
+	if err != nil {
+		data.SetError(err)
+		return ctx.JSON(data)
+	}
+	data.SetInfo(ctx.T(`操作成功`))
+	return ctx.JSON(data)
+}
+
+func ajaxNavigateSetSort(ctx echo.Context) error {
+	id := ctx.Formx(`pk`).Uint()
+	m := official.NewNavigate(ctx)
+	sort := ctx.Formx(`value`).Int()
+	if id == 0 {
+		return ctx.NewError(code.InvalidParameter, ``).SetZone(`pk`)
+	}
+	data := ctx.Data()
+	err := m.UpdateField(nil, `sort`, sort, db.Cond{`id`: id})
+	if err != nil {
+		data.SetError(err)
+		return ctx.JSON(data)
+	}
+	data.SetInfo(ctx.T(`操作成功`))
+	return ctx.JSON(data)
+}
+
+var ajaxNavigateSet = echo.HandlerFuncs{
+	`setDisabled`: ajaxNavigateSetDisabled,
+	`setSort`:     ajaxNavigateSetSort,
+}
+
 func NavigateEdit(ctx echo.Context) error {
+	op := ctx.Form(`op`)
+	if len(op) > 0 {
+		return ajaxNavigateSet.Call(ctx, op)
+	}
 	var err error
 	id := ctx.Formx(`id`).Uint()
 	m := official.NewNavigate(ctx)
@@ -157,21 +200,6 @@ func NavigateEdit(ctx echo.Context) error {
 			}
 		}
 	} else if ctx.IsAjax() {
-		disabled := ctx.Query(`disabled`)
-		if len(disabled) > 0 {
-			if !common.IsBoolFlag(disabled) {
-				return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
-			}
-			m.Disabled = disabled
-			data := ctx.Data()
-			err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
-			if err != nil {
-				data.SetError(err)
-				return ctx.JSON(data)
-			}
-			data.SetInfo(ctx.T(`操作成功`))
-			return ctx.JSON(data)
-		}
 	} else if err == nil {
 		echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
 	}
