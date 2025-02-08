@@ -66,9 +66,6 @@
 function switchDisabled(a){
 	App.switchStatus(a,'disabled','manager/navigate/edit?op=setDisabled');
 }
-function switchShowOnMenu(a){
-	App.switchStatus(a,'showOnMenu','manager/navigate/edit?op=setShowOnMenu');
-}
 function expandStatus(a,expanded){
 	var cClose='fa-plus-square-o',cOpen='fa-minus-square-o';
 	if(expanded) return $(a).find('.'+cClose).removeClass(cClose).addClass(cOpen);
@@ -94,7 +91,7 @@ function expandCategory(a){
 			expandStatus(a,true);
 			var $r=$(r);
 			tr.after($r);
-			App.editableSortNumber($r[0],'/manager/navigate/edit?op=setSort');
+			$r.each(function(){App.editableSortNumber(this,'/manager/navigate/edit?op=setSort');});
 		}
 	},'html');
 }

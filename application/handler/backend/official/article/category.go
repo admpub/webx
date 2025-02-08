@@ -85,11 +85,17 @@ func CategoryAdd(ctx echo.Context) error {
 		err = ctx.MustBind(m.OfficialCommonCategory)
 		if err == nil {
 			var added []string
-			added, err = common.BatchAdd(ctx, `name`, m, func(_ *string) error {
+			var first bool
+			added, err = common.BatchAdd(ctx, `name,slugify`, m, func(v *string) error {
 				m.Id = 0
 				m.HasChild = `N`
+				if !first {
+					first = true
+				} else {
+					m.Slugify = ``
+				}
 				return nil
-			})
+			}, `=`)
 			if err == nil && len(added) == 0 {
 				err = ctx.E(`分类名称不能为空`)
 			}
@@ -123,7 +129,59 @@ func CategoryAdd(ctx echo.Context) error {
 	return ctx.Render(`official/article/category_edit`, err)
 }
 
+func ajaxCategorySetDisabled(ctx echo.Context) error {
+	return ajaxCategorySetSwitch(ctx, `disabled`, `disabled`)
+}
+
+func ajaxCategorySetShowOnMenu(ctx echo.Context) error {
+	return ajaxCategorySetSwitch(ctx, `showOnMenu`, `show_on_menu`)
+}
+
+func ajaxCategorySetSwitch(ctx echo.Context, inputKey, field string) error {
+	id := ctx.Formx(`id`).Uint()
+	m := official.NewCategory(ctx)
+	value := ctx.Query(inputKey)
+	if !common.IsBoolFlag(value) {
+		return ctx.NewError(code.InvalidParameter, ``).SetZone(inputKey)
+	}
+	data := ctx.Data()
+	err := m.UpdateField(nil, field, value, db.Cond{`id`: id})
+	if err != nil {
+		data.SetError(err)
+		return ctx.JSON(data)
+	}
+	data.SetInfo(ctx.T(`操作成功`))
+	return ctx.JSON(data)
+}
+
+func ajaxCategorySetSort(ctx echo.Context) error {
+	id := ctx.Formx(`pk`).Uint()
+	m := official.NewCategory(ctx)
+	sort := ctx.Formx(`value`).Int()
+	if id == 0 {
+		return ctx.NewError(code.InvalidParameter, ``).SetZone(`pk`)
+	}
+	data := ctx.Data()
+	err := m.UpdateField(nil, `sort`, sort, db.Cond{`id`: id})
+	if err != nil {
+		data.SetError(err)
+		return ctx.JSON(data)
+	}
+	data.SetInfo(ctx.T(`操作成功`))
+	return ctx.JSON(data)
+}
+
+var ajaxCategorySet = echo.HandlerFuncs{
+	`setDisabled`:   ajaxCategorySetDisabled,
+	`setShowOnMenu`: ajaxCategorySetShowOnMenu,
+	`setSort`:       ajaxCategorySetSort,
+}
+
 func CategoryEdit(ctx echo.Context) error {
+	op := ctx.Form(`op`)
+	if len(op) > 0 {
+		return ajaxCategorySet.Call(ctx, op)
+	}
 	var err error
 	id := ctx.Formx(`id`).Uint()
 	m := official.NewCategory(ctx)
@@ -159,37 +217,6 @@ func CategoryEdit(ctx echo.Context) error {
 				common.SendOk(ctx, ctx.T(`操作成功`))
 				return ctx.Redirect(backend.URLFor(`/official/article/category`))
 			}
-		}
-	} else if ctx.IsAjax() {
-		disabled := ctx.Query(`disabled`)
-		if len(disabled) > 0 {
-			if !common.IsBoolFlag(disabled) {
-				return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
-			}
-			m.Disabled = disabled
-			data := ctx.Data()
-			err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
-			if err != nil {
-				data.SetError(err)
-				return ctx.JSON(data)
-			}
-			data.SetInfo(ctx.T(`操作成功`))
-			return ctx.JSON(data)
-		}
-		showOnMenu := ctx.Query(`showOnMenu`)
-		if len(showOnMenu) > 0 {
-			if !common.IsBoolFlag(showOnMenu) {
-				return ctx.NewError(code.InvalidParameter, ``).SetZone(`showOnMenu`)
-			}
-			m.ShowOnMenu = showOnMenu
-			data := ctx.Data()
-			err = m.UpdateField(nil, `show_on_menu`, showOnMenu, db.Cond{`id`: id})
-			if err != nil {
-				data.SetError(err)
-				return ctx.JSON(data)
-			}
-			data.SetInfo(ctx.T(`操作成功`))
-			return ctx.JSON(data)
 		}
 	} else if err == nil {
 		echo.StructToForm(ctx, m.OfficialCommonCategory, ``, echo.LowerCaseFirstLetter)

@@ -5,8 +5,9 @@
 <li class="active">{{"分类管理"|$.T}}</li>
 {{/Block}}
 {{Block "head"}}
-<!-- <link href="{{AssetsURL}}/js/treetable/bootstrap-gtreetable.min.css?t={{BuildTime}}" rel="stylesheet" /> -->
-<link href="{{AssetsURL}}/css/custom.css?t={{BuildTime}}" rel="stylesheet" />
+<!-- <link rel="stylesheet" href="{{AssetsURL}}/js/treetable/bootstrap-gtreetable.min.css?t={{BuildTime}}" /> -->
+<link rel="stylesheet" href="{{AssetsURL}}/css/custom.css?t={{BuildTime}}" />
+<link rel="stylesheet" href="{{AssetsURL}}/js/bootstrap.editable/css/bootstrap-editable.min.css?t={{BuildTime}}" />
 {{/Block}}
 {{Block "main"}}
 <div class="row">
@@ -42,6 +43,7 @@
 							<th><strong>{{"分类名称"|$.T}}</strong></th>
 							<th style="width:100px"><strong>{{"类别"|$.T}}</strong></th>
 							<th><strong>{{"分类说明"|$.T}}</strong></th>
+							<th style="width:60px"><strong>{{"排序"|$.T}}</strong></th>
 							<th style="width:130px"><strong>{{"创建时间"|$.T}}</strong></th>
 							<th style="width:90px"><strong>{{"显示在菜单"|$.T}}</strong></th>
 							<th style="width:60px"><strong>{{"状态"|$.T}}</strong></th>
@@ -61,12 +63,13 @@
 {{/Block}}
 {{Block "footer"}}
 <!-- <script src="{{AssetsURL}}/js/template.js?t={{BuildTime}}" type="text/javascript"></script> -->
+<script type="text/javascript" src="{{AssetsURL}}/js/bootstrap.editable/js/bootstrap-editable.min.js?t={{BuildTime}}"></script>
 <script>
 function switchDisabled(a){
-	App.switchStatus(a,'disabled','official/article/category_edit');
+	App.switchStatus(a,'disabled','official/article/category_edit?op=setDisabled');
 }
 function switchShowOnMenu(a){
-	App.switchStatus(a,'showOnMenu','official/article/category_edit');
+	App.switchStatus(a,'showOnMenu','official/article/category_edit?op=setShowOnMenu');
 }
 function expandStatus(a,expanded){
 	var cClose='fa-plus-square-o',cOpen='fa-minus-square-o';
@@ -91,7 +94,9 @@ function expandCategory(a){
 	$.get(window.location.href,{partial:1,parentId:id,path:path},function(r){
 		if(r){
 			expandStatus(a,true);
-			tr.after(r);
+			var $r=$(r);
+			tr.after($r);
+			$r.each(function(){App.editableSortNumber(this,'/official/article/category_edit?op=setSort');});
 		}
 	},'html');
 }
@@ -105,6 +110,7 @@ $(function(){
 	$('#pcont').on('click','#category-list-container td.category-name',function(){
 		expandCategory(this);
 	});
+	App.editableSortNumber('#category-list-container','/official/article/category_edit?op=setSort');
 });
 </script>
 {{/Block}}

@@ -127,14 +127,18 @@ func NavigateAdd(ctx echo.Context) error {
 }
 
 func ajaxNavigateSetDisabled(ctx echo.Context) error {
+	return ajaxNavigateSetSwitch(ctx, `disabled`, `disabled`)
+}
+
+func ajaxNavigateSetSwitch(ctx echo.Context, inputKey, field string) error {
 	id := ctx.Formx(`id`).Uint()
 	m := official.NewNavigate(ctx)
-	disabled := ctx.Query(`disabled`)
-	if !common.IsBoolFlag(disabled) {
-		return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
+	value := ctx.Query(inputKey)
+	if !common.IsBoolFlag(value) {
+		return ctx.NewError(code.InvalidParameter, ``).SetZone(inputKey)
 	}
 	data := ctx.Data()
-	err := m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
+	err := m.UpdateField(nil, field, value, db.Cond{`id`: id})
 	if err != nil {
 		data.SetError(err)
 		return ctx.JSON(data)
@@ -199,7 +203,6 @@ func NavigateEdit(ctx echo.Context) error {
 				return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
 			}
 		}
-	} else if ctx.IsAjax() {
 	} else if err == nil {
 		echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
 	}

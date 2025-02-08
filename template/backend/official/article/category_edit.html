@@ -20,29 +20,29 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"类别"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$type := $.Stored.type}}
-                  {{$id := $.Form "id"}}
-                  {{if $.Stored.editableType}}
-                  {{range $k, $v := $.Stored.typeList}}
+                  {{- $type := $.Stored.type -}}
+                  {{- $id := $.Form "id" -}}
+                  {{- if $.Stored.editableType -}}
+                  {{- range $k, $v := $.Stored.typeList -}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="{{$v.K}}" id="type-{{$v.K}}" name="type"{{if eq $v.K $type}} checked="checked"{{end}} onclick="window.location.href='?type={{$v.K}}&id={{$id}}'"><label for="type-{{$v.K}}">{{$v.V}}</label> 
                   </div>
-                  {{end}}
-                  {{else}}
+                  {{- end -}}
+                  {{- else -}}
                   <span class="form-control no-border">{{call $.Func.getTypeName $type $type}}</span>
-                  {{end}}
+                  {{- end -}}
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"上级分类"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$v := ($.Formx "parentId").Uint}}
+                  {{- $v := ($.Formx "parentId").Uint -}}
                   <select name="parentId" class="form-control" id="parentId">
                     <option value=""></option>
-                    {{range $k, $c := $.Stored.categoryList}}
+                    {{- range $k, $c := $.Stored.categoryList -}}
                     <option value="{{$c.Id}}"{{if eq $c.Id $v}} selected="selected"{{end}}>{{$c.Name}}</option>
-                    {{end}}
+                    {{- end -}}
                   </select>
                 </div>
               </div>
@@ -57,8 +57,8 @@
                 <label class="col-sm-2 control-label">{{"分类名称"|$.T}}</label>
                 <div class="col-sm-8">
                     {{- if HasSuffix $.URL.Path "_add" -}}
-                    <textarea class="form-control resize-y" placeholder='{{"分类名称"|$.T}}' name="name" rows="5">{{$.Form "name"}}</textarea>
-                    <div class="help-block">{{"如要一次添加多个同级分类，请一行一个"|$.T}}</div>
+                    <textarea class="form-control resize-y" placeholder='{{"分类名称"|$.T}}={{"英文标识"|$.T}}' name="name" rows="5">{{$.Form "name"}}</textarea>
+                    <div class="help-block">{{"如要一次添加多个同级分类，请一行一个，并且每行中格式为"|$.T}}: <code>{{"分类名称"|$.T}}</code>=<code>{{"英文标识"|$.T}}</code></div>
                     {{- else -}}
                     <input type="text" class="form-control" name="name" value="{{$.Form "name"}}">
                     {{- end -}}
@@ -97,7 +97,7 @@
                 </div>
                 <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := $.Form "disabled"}}
+                  {{- $v := $.Form "disabled" -}}
                   <div class="radio radio-primary radio-inline"> 
                     <input type="radio" value="N" id="disabled-N" name="disabled"{{if eq $v `N` ``}} checked{{end}}><label for="disabled-N">{{"启用"|$.T}}</label>
                   </div>
@@ -110,7 +110,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"显示在菜单"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := $.Form "showOnMenu" "Y"}}
+                  {{- $v := $.Form "showOnMenu" "Y" -}}
                   <div class="radio radio-primary radio-inline"> 
                     <input type="radio" value="Y" id="showOnMenu-Y" name="showOnMenu"{{if eq $v `Y`}} checked{{end}}><label for="showOnMenu-Y">{{"显示"|$.T}}</label>
                   </div>
