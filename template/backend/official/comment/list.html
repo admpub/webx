@@ -38,8 +38,8 @@
 						<span class="input-group-addon">{{"状态"|$.T}}</span>
 						<select name="display" class="form-control" id="display" onchange="$('#search-form').submit()">
 							<option value=""> - {{"不限"|$.T}} - </option>
-							<option value="Y" {{if eq $display `Y`}} selected{{end}}>{{"显示"|$.T}}</option>
-							<option value="N" {{if eq $display `N`}} selected{{end}}>{{"隐藏"|$.T}}</option>
+							<option value="Y"{{if eq $display `Y`}} selected{{end}}>{{"显示"|$.T}}</option>
+							<option value="N"{{if eq $display `N`}} selected{{end}}>{{"隐藏"|$.T}}</option>
 						</select>
 					</div>
 				</form>

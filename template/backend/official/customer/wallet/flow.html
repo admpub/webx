@@ -66,26 +66,26 @@
 						</tr>
 					</thead>
 					<tbody class="no-border-y">{{$zero := Float64 0}}
-                        {{range $k,$v := $.Stored.listData}}
+                        {{- range $k,$v := $.Stored.listData -}}
 						<tr>
 							<td>{{if $v.Customer}}{{$v.Customer.Name}}{{else}}-{{end}}</td>
 							<td>{{if $v.SrcCustomer}}{{$v.SrcCustomer.Name}}{{else}}-{{end}}</td>
 							<td>{{$v.AssetTypeName}}</td>
 							<td>
-                                {{if eq $v.AmountType `balance`}}
+                                {{- if eq $v.AmountType `balance` -}}
                                 {{`余额`|$.T}}
-                                {{else if eq $v.AmountType `freeze`}}
+                                {{- else if eq $v.AmountType `freeze` -}}
                                 {{`冻结额`|$.T}}
-                                {{else}}
+                                {{- else -}}
                                 {{`未知`|$.T}}: {{$v.AmountTyp}}
-                                {{end}}
+                                {{- end -}}
                             </td>
 							<td>
-								{{if lt $v.Amount $zero}}
+								{{- if lt $v.Amount $zero -}}
 								<strong class="text-danger">{{$v.Amount}}</strong>
-								{{else}}
+								{{- else -}}
 								<strong class="text-success">{{$v.Amount}}</strong>
-								{{end}}
+								{{- end -}}
 							</td>
 							<td>{{$v.WalletAmount}}</td>
 							<td>{{$v.SourceType}}</td>
@@ -94,25 +94,25 @@
 							<td>{{$v.TradeNo}}</td>
 							<td>{{$v.Description}}</td>
 							<td>
-                                {{if eq $v.Status `confirmed`}}
+                                {{- if eq $v.Status `confirmed` -}}
                                 <span class="label label-success">{{`已确认`|$.T}}</span>
-                                {{else if eq $v.Status `pending`}}
+                                {{- else if eq $v.Status `pending` -}}
                                 <span class="label label-primary">{{`待确认`|$.T}}</span>
-                                {{else if eq $v.Status `refunded`}}
+                                {{- else if eq $v.Status `refunded` -}}
                                 <span class="label label-danger">{{`已退款`|$.T}}</span>
-                                {{else if eq $v.Status `failed`}}
+                                {{- else if eq $v.Status `failed` -}}
                                 <span class="label label-danger">{{`失败`|$.T}}</span>
-                                {{else if eq $v.Status `succeed`}}
+                                {{- else if eq $v.Status `succeed` -}}
                                 <span class="label label-success">{{`成功`|$.T}}</span>
-                                {{else if eq $v.Status `canceled`}}
+                                {{- else if eq $v.Status `canceled` -}}
                                 <span class="label label-default">{{`已取消`|$.T}}</span>
-                                {{else}}
-                                {{$v.Status}}
-                                {{end}}
+                                {{- else -}}
+                                {{- $v.Status -}}
+                                {{- end -}}
                             </td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 						</tr>
-                        {{end}}
+                        {{- end -}}
 					</tbody>
 				</table>		
 				</div>

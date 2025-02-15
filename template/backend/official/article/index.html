@@ -97,13 +97,13 @@
 							</td>
 							<td>
 								<div class="checkbox checkbox-success no-margin-y">
-									&nbsp;<input id="checkbox-closeComment-{{$k}}" class="styled switch-closeComment" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.CloseComment "N"}} checked="checked"{{end}} value="N" /><label for="checkbox-closeComment-{{$k}}">{{"开"|$.T}}</label>
+									&nbsp;<input id="checkbox-closeComment-{{$k}}" class="styled switch-closeComment" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.CloseComment `N`}} checked="checked"{{end}} value="N" /><label for="checkbox-closeComment-{{$k}}">{{"开"|$.T}}</label>
 								</div>
 								<a href="{{BackendURL}}/official/article/comment/list{{$.Ext}}?targetId={{$v.Id}}"><i class="fa fa-comments"></i>{{$v.Comments}}</a>
 							</td>
 							<td>
 								<div class="checkbox checkbox-success no-margin-y">
-									&nbsp;<input id="checkbox-{{$k}}" class="styled switch-display" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Display "Y"}} checked="checked"{{end}} value="Y" /><label for="checkbox-{{$k}}">{{"开"|$.T}}</label>
+									&nbsp;<input id="checkbox-{{$k}}" class="styled switch-display" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Display `Y`}} checked="checked"{{end}} value="Y" /><label for="checkbox-{{$k}}">{{"开"|$.T}}</label>
 								</div>
 								<i class="fa fa-eye"></i>{{$v.Views}}
 							</td>

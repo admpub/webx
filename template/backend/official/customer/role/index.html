@@ -28,21 +28,21 @@
 									</tr>
 								</thead>
 								<tbody class="no-border-y">
-                                    {{range $k,$v := $.Stored.listData}}
+                                    {{- range $k,$v := $.Stored.listData -}}
 									<tr>
 										<td>{{$v.Id}}</td>
 										<td>{{$v.Name}}</td>
 										<td>{{$v.Description}}</td>
 										<td>{{if eq $v.IsDefault `Y`}}<i class="fa fa-check text-success" data-toggle="tooltip" title="{{`默认角色`|$.T}}"></i>{{else}}<i class="fa fa-times text-gray" data-toggle="tooltip" title="{{`非默认角色`|$.T}}"></i>{{end}}</td>
 										<td class="text-center">
-										<a class="label label-default" href="{{BackendURL}}/official/customer/role/add?copyId={{$v.Id}}" title="{{"复制"|$.T}}"><i class="fa fa-copy"></i></a>
+										<a class="label label-default" href="{{BackendURL}}/official/customer/role/add?copyId={{$v.Id}}" title="{{`复制`|$.T}}"><i class="fa fa-copy"></i></a>
 										<a class="label label-success" href="{{BackendURL}}/official/customer/role/edit?id={{$v.Id}}"><i class="fa fa-pencil"></i></a>
-										{{if gt $v.Id 1}}
+										{{- if gt $v.Id 1}}
 										<a class="label label-danger" href="{{BackendURL}}/official/customer/role/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');"><i class="fa fa-times"></i></a>
-										{{end}}
+										{{- end}}
 										</td>
 									</tr>
-                                    {{end}}
+                                    {{- end -}}
 								</tbody>
 							</table>		
 							</div>

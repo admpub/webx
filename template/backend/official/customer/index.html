@@ -23,28 +23,28 @@
 							<select name="groupId" class="form-control" id="groupId" onchange="$('#search-form').submit()">{{$groupId := ($.Formx `groupId`).Uint}}
 								<option value=""> - {{"不限"|$.T}} - </option>
 								{{- range $k, $v := $.Stored.groupList -}}
-								<option value="{{$v.Id}}" {{if eq $groupId $v.Id}} selected{{end}}>{{$v.Name|$.T}}</option>
+								<option value="{{$v.Id}}"{{if eq $groupId $v.Id}} selected{{end}}>{{$v.Name|$.T}}</option>
 								{{- end -}}
 							</select>
 							<span class="input-group-addon">{{"客户等级"|$.T}}</span>
 							<select name="levelId" class="form-control" id="levelId" onchange="$('#search-form').submit()">{{$levelId := ($.Formx `levelId`).Uint}}
 								<option value=""> - {{"不限"|$.T}} - </option>
 								{{- range $k, $v := $.Stored.levelList}}
-								<option value="{{$v.Id}}" {{if eq $levelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+								<option value="{{$v.Id}}"{{if eq $levelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
 								{{- end}}
 							</select>
 							<span class="input-group-addon">{{"代理等级"|$.T}}</span>
 							<select name="agentLevelId" class="form-control" id="agentLevelId" onchange="$('#search-form').submit()">{{$agentLevelId := ($.Formx `agentLevelId`).Uint}}
 								<option value=""> - {{"不限"|$.T}} - </option>
 								{{- range $k, $v := $.Stored.agentLevelList}}
-								<option value="{{$v.Id}}" {{if eq $agentLevelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+								<option value="{{$v.Id}}"{{if eq $agentLevelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
 								{{- end}}
 							</select>
 							<span class="input-group-addon">{{"角色"|$.T}}</span>
 							<select name="roleId" class="form-control" id="roleId" onchange="$('#search-form').submit()">{{$roleId := ($.Formx `roleId`).Uint}}
 								<option value=""> - {{"不限"|$.T}} - </option>
 								{{- range $k, $v := $.Stored.roleList}}
-								<option value="{{$v.Id}}" {{if eq $roleId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+								<option value="{{$v.Id}}"{{if eq $roleId $v.Id}} selected{{end}}>{{$v.Name}}</option>
 								{{- end}}
 							</select>
 						</div>
