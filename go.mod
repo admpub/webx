@@ -11,9 +11,9 @@ go 1.23
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20250213102728-8fe845e5b191
-	github.com/coscms/webcore v0.7.7-0.20250213112421-565f7438d08c
-	github.com/coscms/webfront v0.0.0-20250213112541-e4670eed8c8b
+	github.com/admpub/nging/v5 v5.3.4-0.20250215100817-f8b64086ed08
+	github.com/coscms/webcore v0.7.7
+	github.com/coscms/webfront v0.0.0-20250215100701-440200164008
 )
 
 require (
@@ -39,7 +39,7 @@ require (
 	github.com/admpub/pinyin-golang v1.0.1 // indirect
 	github.com/admpub/pp v0.0.7
 	github.com/admpub/redsync/v4 v4.0.3 // indirect
-	github.com/admpub/resty/v2 v2.7.1 // indirect
+	github.com/admpub/resty/v2 v2.7.2 // indirect
 	github.com/admpub/sensitive v0.0.0-20230925121413-6c7ffc3addbb // indirect
 	github.com/admpub/useragent v0.0.2 // indirect
 	github.com/caddy-plugins/ipfilter v1.1.8 // indirect
@@ -78,7 +78,7 @@ require (
 	gitee.com/admpub/certmagic v0.8.8 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/abh/errorutil v1.0.0 // indirect
-	github.com/admpub/9t v0.0.0-20190605154903-a68069ace5e1 // indirect
+	github.com/admpub/9t v0.0.1 // indirect
 	github.com/admpub/archiver v1.1.4 // indirect
 	github.com/admpub/boltstore v1.2.0 // indirect
 	github.com/admpub/caddy v1.2.7 // indirect
@@ -94,16 +94,16 @@ require (
 	github.com/admpub/fasthttp v0.0.5 // indirect
 	github.com/admpub/fsnotify v1.7.0 // indirect
 	github.com/admpub/gifresize v1.0.2 // indirect
-	github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588 // indirect
+	github.com/admpub/go-bindata-assetfs v0.0.1 // indirect
 	github.com/admpub/go-captcha-assets v0.0.0-20250122071745-baa7da4bda0d // indirect
 	github.com/admpub/go-captcha/v2 v2.0.6 // indirect
-	github.com/admpub/go-figure v0.0.0-20180619031829-18b2b544842c // indirect
+	github.com/admpub/go-figure v0.0.2 // indirect
 	github.com/admpub/go-isatty v0.0.11 // indirect
 	github.com/admpub/go-lock v1.3.0 // indirect
 	github.com/admpub/go-password v0.1.3 // indirect
 	github.com/admpub/go-pretty/v6 v6.0.4 // indirect
 	github.com/admpub/go-ps v0.0.1 // indirect
-	github.com/admpub/go-reuseport v0.0.4 // indirect
+	github.com/admpub/go-reuseport v0.5.0 // indirect
 	github.com/admpub/go-utility v0.0.1 // indirect
 	github.com/admpub/godownloader v2.2.2+incompatible // indirect
 	github.com/admpub/gohls v1.3.3 // indirect
@@ -232,8 +232,9 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.24 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
 	github.com/miekg/dns v1.1.63 // indirect
+	github.com/minio/crc64nvme v1.0.1 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/minio-go/v7 v7.0.85 // indirect
+	github.com/minio/minio-go/v7 v7.0.86 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
@@ -250,7 +251,6 @@ require (
 	github.com/phuslu/iploc v1.0.20250131 // indirect
 	github.com/phuslu/lru v1.0.18 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect
@@ -322,6 +322,6 @@ require (
 	modernc.org/libc v1.61.13 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.8.2 // indirect
-	modernc.org/sqlite v1.34.5 // indirect
+	modernc.org/sqlite v1.35.0 // indirect
 	rsc.io/qr v0.2.0 // indirect
 )
