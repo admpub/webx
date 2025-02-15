@@ -11,7 +11,7 @@ go 1.23
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20250215112018-6cac230a2651
+	github.com/admpub/nging/v5 v5.3.4-0.20250215120216-6e8df918f5eb
 	github.com/coscms/webcore v0.7.7
 	github.com/coscms/webfront v0.0.0-20250215100701-440200164008
 )
@@ -69,7 +69,7 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.2.3
-	github.com/nging-plugins/dbmanager v1.8.0
+	github.com/nging-plugins/dbmanager v1.8.1
 	github.com/silenceper/wechat/v2 v2.1.7
 )
 
