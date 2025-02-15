@@ -33,7 +33,7 @@
 							<th><strong>{{"显示"|$.T}}</strong></th>
 							<th><strong>{{"宽x高"|$.T}}</strong></th>
 							<th><strong>{{"默认广告"|$.T}}</strong></th>
-							<th style="width:130px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
+							<th style="width:80px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
@@ -45,7 +45,7 @@
 							<td>{{$v.Contype}}</td>
 							<td>
 								<div class="checkbox checkbox-success no-margin-y">
-									<input id="checkbox-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Disabled "N"}} checked="checked"{{end}} value="N" /><label for="checkbox-{{$k}}">&nbsp;</label>
+									<input id="checkbox-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Disabled `N`}} checked="checked"{{end}} value="N" /><label for="checkbox-{{$k}}">&nbsp;</label>
 								</div>
 							</td>
 							<td>
@@ -66,7 +66,7 @@
 								</code>
 							</td>
 							<td><div class="rendered">{{$v.Rendered|ToHTML}}</div></td>
-							<td class="text-center">
+							<td class="label-group">
 							<a class="label label-info" href="{{BackendURL}}/official/advert/index?positionId={{$v.Id}}" title="{{`广告列表`|$.T}}" data-toggle="tooltip"><i class="fa fa-table"></i></a> 
 							<a class="label label-default" href="{{BackendURL}}/official/advert/position_add?copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a> 
 							<a class="label label-success" href="{{BackendURL}}/official/advert/position_edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 

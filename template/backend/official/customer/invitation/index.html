@@ -31,7 +31,7 @@
 										<th style="width:130px"><strong>{{"可用次数"|$.T}}</strong></th>
 										<th style="width:130px"><strong>{{"使用次数"|$.T}}</strong></th>
 										<th style="width:60px"><strong>{{"状态"|$.T}}</strong></th>
-										<th style="width:100px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
+										<th style="width:110px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 									</tr>
 								</thead>
 								<tbody class="no-border-y">
@@ -40,15 +40,15 @@
 										<td>{{$v.Id}}</td>
 										<td>{{$v.Code}}</td>
 										<td>
-											{{if and (gt $v.Start 0) (gt $v.End 0)}}
+											{{- if and (gt $v.Start 0) (gt $v.End 0)}}
 											{{$v.Start|DateFormat "2006-01-02 15:04:05"}} ~ {{$v.End|DateFormat "2006-01-02 15:04:05"}}
-											{{else if gt $v.Start 0}}
+											{{- else if gt $v.Start 0}}
 											{{$v.Start|DateFormat "2006-01-02 15:04:05"}}{{"以后"|$.T}}
-											{{else if gt $v.End 0}}
+											{{- else if gt $v.End 0}}
 											{{$v.End|DateFormat "2006-01-02 15:04:05"}}{{"以前"|$.T}}
-											{{else}}
+											{{- else}}
 											{{"不限制"|$.T}}
-											{{end}}
+											{{- end}}
 										</td>
 										<td>
 											{{$v.Created|DateFormat "2006-01-02 15:04:05"}}
@@ -59,9 +59,9 @@
 										<td>{{$v.UsedNum}}</td>
 										<td>{{if eq $v.Disabled "Y"}}{{"禁用"|$.T}}{{else}}{{"启用"|$.T}}{{end}}</td>
 										<td class="text-center">
-										<a href="{{BackendURL}}/official/customer/invitation/customer_list?invitationId={{$v.Id}}" class="label label-primary" data-toggle="tooltip" title="{{"使用记录"|$.T}}"><i class="fa fa-list"></i></a>
-										<a class="label label-success" href="{{BackendURL}}/official/customer/invitation/edit?id={{$v.Id}}" data-toggle="tooltip" title="{{"修改"|$.T}}"><i class="fa fa-pencil"></i></a> 
-										<a class="label label-danger" href="{{BackendURL}}/official/customer/invitation/delete?id={{$v.Id}}" onclick="return confirm('{{"真的要删除吗？"|$.T}}');" data-toggle="tooltip" title="{{"删除"|$.T}}"><i class="fa fa-times"></i></a>
+										<a href="{{BackendURL}}/official/customer/invitation/customer_list?invitationId={{$v.Id}}" class="label label-primary" data-toggle="tooltip" title="{{`使用记录`|$.T}}"><i class="fa fa-list"></i></a>
+										<a class="label label-success" href="{{BackendURL}}/official/customer/invitation/edit?id={{$v.Id}}" data-toggle="tooltip" title="{{`修改`|$.T}}"><i class="fa fa-pencil"></i></a> 
+										<a class="label label-danger" href="{{BackendURL}}/official/customer/invitation/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" data-toggle="tooltip" title="{{`删除`|$.T}}"><i class="fa fa-times"></i></a>
 										</td>
 									</tr>
                                     {{end}}
