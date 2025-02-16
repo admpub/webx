@@ -11,7 +11,7 @@ go 1.23
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20250215120216-6e8df918f5eb
+	github.com/admpub/nging/v5 v5.3.4-0.20250216042019-0cee5cc76b4b
 	github.com/coscms/webcore v0.7.7
 	github.com/coscms/webfront v0.0.0-20250215100701-440200164008
 )
@@ -69,7 +69,7 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.2.3
-	github.com/nging-plugins/dbmanager v1.8.1
+	github.com/nging-plugins/dbmanager v1.8.2
 	github.com/silenceper/wechat/v2 v2.1.7
 )
 
@@ -242,7 +242,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/nging-plugins/dlmanager v1.8.0 // indirect
+	github.com/nging-plugins/dlmanager v1.8.1 // indirect
 	github.com/nwaples/rardecode v1.1.3 // indirect
 	github.com/onsi/ginkgo/v2 v2.22.2 // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect

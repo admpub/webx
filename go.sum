@@ -785,8 +785,8 @@ github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5 h1:N9+M16t6Pa0zNjy2g
 github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5/go.mod h1:Aim7aOlr/P9OkX0ucuhrzMEUcKOJXErCMS3MDGTBGJc=
 github.com/admpub/mysql-schema-sync v0.2.6 h1:BaL7J2gWguEe9ADQkhp4olnkdBGeePwcCT+lnxxjoC0=
 github.com/admpub/mysql-schema-sync v0.2.6/go.mod h1:LmUAY60w9nQCiGBMjZEBah35kA0fvGZfh0PSwAqPZHE=
-github.com/admpub/nging/v5 v5.3.4-0.20250215120216-6e8df918f5eb h1:XvUCar9LraIrrVdKnwhiLo744jNJp5SXUq1lhFlJDKU=
-github.com/admpub/nging/v5 v5.3.4-0.20250215120216-6e8df918f5eb/go.mod h1:mVBfPKHfdAipmCkAIxVPk9VKEFE/Nt8qIhuFFrbgQb8=
+github.com/admpub/nging/v5 v5.3.4-0.20250216042019-0cee5cc76b4b h1:AZSNoPn6+n+YXgwx9FcN0MHwvbVh721/4YDyFW59j2U=
+github.com/admpub/nging/v5 v5.3.4-0.20250216042019-0cee5cc76b4b/go.mod h1:Ezsp0dZMM2nYNmMZ/a/0PIm+fKzmlku6xfC4o5bCTA8=
 github.com/admpub/null v8.0.4+incompatible h1:t7lrTd11PlVE+KGrdffWQTi/oFAyczVQQkmqhzfEOvU=
 github.com/admpub/null v8.0.4+incompatible/go.mod h1:DMV9RC+JZv6AhaX1E62ur1mS7gyGLYRh+r0s8MF7mHA=
 github.com/admpub/oauth2/v4 v4.0.2 h1:849AHd+KrFkRpTiGk17q7cw7u9QqNii6zd1HY+bOdJs=
@@ -1590,10 +1590,10 @@ github.com/neelance/astrewrite v0.0.0-20160511093645-99348263ae86/go.mod h1:kHJE
 github.com/neelance/sourcemap v0.0.0-20151028013722-8c68805598ab/go.mod h1:Qr6/a/Q4r9LP1IltGz7tA7iOK1WonHEYhu1HRBA7ZiM=
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 h1:zYyBkD/k9seD2A7fsi6Oo2LfFZAehjjQMERAvZLEDnQ=
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646/go.mod h1:jpp1/29i3P1S/RLdc7JQKbRpFeM1dOBd8T9ki5s+AY8=
-github.com/nging-plugins/dbmanager v1.8.1 h1:/KU9Q53PVya8zbqwkIdvo2we/WFo9YbhAo8R271CAwI=
-github.com/nging-plugins/dbmanager v1.8.1/go.mod h1:hexTCrw0/FKs/1yC2dvgQ0aQpxV0E0Lgd3mWyEt6WkI=
-github.com/nging-plugins/dlmanager v1.8.0 h1:uE1U/ImZSz3V/GHPndBxWfSfqehgJMUxkSke6yCIxl4=
-github.com/nging-plugins/dlmanager v1.8.0/go.mod h1:1/rjGpxlJvtSL3vRz/nmuWHW9Tk7Lf5KGTLtY17Vt1Q=
+github.com/nging-plugins/dbmanager v1.8.2 h1:drIWWYFZwMdq9Ej9eyVXakCMrL5DINDbjUHwLrjQM2U=
+github.com/nging-plugins/dbmanager v1.8.2/go.mod h1:hexTCrw0/FKs/1yC2dvgQ0aQpxV0E0Lgd3mWyEt6WkI=
+github.com/nging-plugins/dlmanager v1.8.1 h1:0NHroeI9zRHhMIpQSeVmSpxdBr3aCBfKnRt+2NpX4Yg=
+github.com/nging-plugins/dlmanager v1.8.1/go.mod h1:1/rjGpxlJvtSL3vRz/nmuWHW9Tk7Lf5KGTLtY17Vt1Q=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
 github.com/nrdcg/auroradns v1.0.1/go.mod h1:y4pc0i9QXYlFCWrhWrUSIETnZgrf4KuwjDIWmmXo3JI=
 github.com/nrdcg/desec v0.5.0/go.mod h1:2ejvMazkav1VdDbv2HeQO7w+Ta1CGHqzQr27ZBYTuEQ=
