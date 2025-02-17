@@ -10,12 +10,12 @@ import (
 
 func _Authentication(ctx echo.Context) error {
 	customer := xMW.Customer(ctx)
+	if customer == nil {
+		return nerrors.ErrUserNotLoggedIn.SetMessage(ctx.T(`请先登录`))
+	}
 	m := modelCustomer.NewCustomer(ctx)
-	err := m.VerifySession(customer)
+	err := m.Get(nil, `id`, customer.Id)
 	if err != nil {
-		if nerrors.IsUserNotLoggedIn(err) {
-			return ctx.E(`请先登录`)
-		}
 		return err
 	}
 	typ := `password` // 验证类型: 密码验证

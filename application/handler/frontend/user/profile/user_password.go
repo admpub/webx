@@ -3,7 +3,6 @@ package profile
 import (
 	"errors"
 
-	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
 	"github.com/coscms/webcore/library/nerrors"
@@ -53,12 +52,12 @@ func Password(c echo.Context) error {
 		typName = c.T(`安全密码`)
 	}
 	customer := xMW.Customer(c)
+	if customer == nil {
+		return nerrors.ErrUserNotLoggedIn.SetMessage(c.T(`请先登录`))
+	}
 	m := modelCustomer.NewCustomer(c)
-	err := m.VerifySession(customer)
+	err := m.Get(nil, `id`, customer.Id)
 	if err != nil {
-		if nerrors.IsUserNotLoggedIn(err) {
-			return c.E(`请先登录`)
-		}
 		return err
 	}
 	if c.IsPost() {
@@ -105,12 +104,6 @@ func Password(c echo.Context) error {
 				if len(oldPwd) == 0 {
 					return errors.New(`请输入旧密码`)
 				}
-				err = m.Get(func(r db.Result) db.Result {
-					return r.Select(`id`, `salt`, `disabled`, `password`)
-				}, `id`, customer.Id)
-				if err != nil {
-					return err
-				}
 				err = m.CheckSignInPassword(oldPwd)
 				if err != nil {
 					return err
@@ -127,7 +120,12 @@ func Password(c echo.Context) error {
 				if err != nil {
 					return err
 				}
-				data.GetData().(echo.H).DeepMerge(genRespData())
+				h, y := data.GetData().(echo.H)
+				if !y {
+					data.SetData(genRespData())
+				} else {
+					h.DeepMerge(genRespData())
+				}
 				return c.JSON(data)
 			}
 			if stepID == StepVerifyAndModify {
@@ -147,7 +145,12 @@ func Password(c echo.Context) error {
 				if err != nil {
 					return err
 				}
-				data.GetData().(echo.H).DeepMerge(genRespData())
+				h, y := data.GetData().(echo.H)
+				if !y {
+					data.SetData(genRespData())
+				} else {
+					h.DeepMerge(genRespData())
+				}
 				return c.JSON(data)
 			}
 			if stepID == StepVerifyAndModify {
