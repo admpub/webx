@@ -14,7 +14,7 @@
 .wrap {
   display: block;
 }
-
+.btn > .fa{min-width:15px;text-align:center;}
 .pull-right {
   float:right !important
 }
@@ -335,7 +335,7 @@
 .form-control-plaintext {
   display: block;
   width: 100%;
-  padding-top: .5rem;
+  padding-top: .45rem;
   padding-bottom: .3rem;
   margin-bottom: 0;
   line-height: 1.5;
