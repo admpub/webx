@@ -120,6 +120,9 @@ func Password(c echo.Context) error {
 				if err != nil {
 					return err
 				}
+				if nerrors.IsCaptchaErrCode(data.GetCode()) {
+					return c.JSON(data)
+				}
 				h, y := data.GetData().(echo.H)
 				if !y {
 					data.SetData(genRespData())
@@ -144,6 +147,9 @@ func Password(c echo.Context) error {
 				err = sendmsg.MobileSend(c, m, `modify-password`)
 				if err != nil {
 					return err
+				}
+				if nerrors.IsCaptchaErrCode(data.GetCode()) {
+					return c.JSON(data)
 				}
 				h, y := data.GetData().(echo.H)
 				if !y {
