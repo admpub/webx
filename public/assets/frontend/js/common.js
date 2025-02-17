@@ -624,10 +624,6 @@ $.get(BASE_URL+'/user/profile/_authentication',{type:authType},function(r){
         case 'email':btnLabel=App.t('发送邮件');btnIcon='paper-plane';break;
         case 'mobile':btnLabel=App.t('发送短信');btnIcon='paper-plane';break;
     }
-    var $h=$(html);
-    var scripts=$h.find('script');
-    $h.find('script').remove();
-    html=$h.html();
     App.dialog().show({
         id:'authentication-dialog',
         title:App.t('身份验证'),
@@ -635,6 +631,7 @@ $.get(BASE_URL+'/user/profile/_authentication',{type:authType},function(r){
         message:html,
         nl2br:false,
         closeByBackdrop:false,
+        enableScript:true,
         onshown: function(dialogRef){
           var $form=$('#authentication-form');
           var ipt=$form.find('input:not(readonly):first');
@@ -644,16 +641,6 @@ $.get(BASE_URL+'/user/profile/_authentication',{type:authType},function(r){
             authDialog($(this).data('type'),$(this).data('object-name'),formElem,postURL);
             dialogRef.close();
           });
-          if(scripts && scripts.length>0){
-            for(var i=0;i<scripts.length;i++){
-                var script=scripts[i];
-                if(script.src){
-                    if($('script[src$="'+script.src+'"]').length<1) $('body').append('<script type="text/javascript" src="'+script.src+'"></script>');
-                }else if(script.text){
-                    $('body').append('<script type="text/javascript">'+script.text+'</script>');
-                }
-            }
-          }
         },
         buttons: [{
             id: 'authentication-btn-submit',
