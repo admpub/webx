@@ -1,5 +1,7 @@
-{{if $.Data.jsURL}}<script src="{{$.Data.jsURL}}"></script>{{end}}
-{{if eq $.Data.provider `turnstile`}}
+{{- if $.Data.jsURL}}<script src="{{$.Data.jsURL}}"></script>{{end -}}
+{{- if eq $.Data.provider `turnstile` -}}
+{{- if not ($.Get `turnstileCSSLoaded`) -}}
+{{- $.Set `turnstileCSSLoaded` `1` -}}
 <style type="text/css">
 .turnstile-captcha-container{position:relative;width:100%}
 .turnstile-captcha-container .turnstile-captcha{position:relative;z-index:2;margin-top:-38px;min-height:25px}
@@ -37,7 +39,7 @@ if(document.readyState=='complete'){
     window.addEventListener('load',function(){window["tarnstileInit{{$.Data.captchaID}}"]();})
 }
 </script>
-{{else}}
+{{- else -}}
 <div class="form-control-plaintext">
 <div class="captcha-loading text-center wd-100p" id="recaptcha-{{$.Data.captchaID}}-loading" data-success-tips="{{`验证加载成功`|$.T}}"><i class="fa fa-spinner fa-spin"></i> {{`验证加载中，请稍候...`}}</div>
 <input type="hidden" name="captchaId" value="{{$.Data.captchaID}}" />
@@ -81,4 +83,4 @@ if(document.readyState=='complete'){
 }
 })();
 </script>
-{{end}}
+{{- end -}}
