@@ -1,8 +1,16 @@
 {{if $.Data.jsURL}}<script src="{{$.Data.jsURL}}"></script>{{end}}
 {{if eq $.Data.provider `turnstile`}}
-<div class="form-control-plaintext pd-t-0-force">
-    <div class="captcha-loading text-center" style="position:relative"><i class="fa fa-spinner fa-spin"></i> {{`验证加载中，请稍候...`|$.T}}</div>
-    <div style="position:relative;z-index:2;margin-top:-20px;min-height:25px">
+<style type="text/css">
+.turnstile-captcha-container{position:relative;width:100%}
+.turnstile-captcha-container .turnstile-captcha{position:relative;z-index:2;margin-top:-38px;min-height:25px}
+.text-left>.turnstile-captcha-container .captcha-loading,
+.text-left>.turnstile-captcha-container .cf-turnstile{text-align:left !important}
+.text-middle>.turnstile-captcha-container .turnstile-captcha{margin-top:-50px}
+.text-middle3>.turnstile-captcha-container .turnstile-captcha{margin-top:-30px}
+</style>
+<div class="turnstile-captcha-container">
+    <div class="form-control-plaintext captcha-loading text-center"><i class="fa fa-spinner fa-spin"></i> {{`验证加载中，请稍候...`|$.T}}</div>
+    <div class="turnstile-captcha">
         <input type="hidden" name="captchaId" value="{{$.Data.captchaID}}" />
         <div class="cf-turnstile text-center" id="turnstile-{{$.Data.captchaID}}"></div>
         <input type="hidden" id="turnstile-{{$.Data.captchaID}}-extend" disabled />

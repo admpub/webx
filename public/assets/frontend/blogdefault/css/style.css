@@ -4618,12 +4618,15 @@ ul.c-bredcrumb li,
   background-color: transparent !important;
 }
 .comment-box .comment-form input,
-.comment-box .comment-form textarea {
+.comment-box .comment-form textarea{
   width: 100%;
   padding: 15px 20px;
   background: #eef5ff;
   border-radius: 10px;
   margin-bottom: 20px;
+}
+.comment-box .comment-form .form-control-plaintext{
+  padding: 15px 20px;
 }
 
 .comment-box .comment-form .input-group>input.form-control{

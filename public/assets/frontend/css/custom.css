@@ -17,10 +17,6 @@
 
 .btn > .fa{min-width:15px;text-align:center;}
 
-/* captcha: turnstile */
-.text-left>div.form-control-plaintext>.captcha-loading,
-.text-left>div.form-control-plaintext>div>div.cf-turnstile{text-align:left !important}
-
 .pull-right {
   float:right !important
 }
