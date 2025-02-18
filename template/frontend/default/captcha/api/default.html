@@ -1,11 +1,10 @@
-{{if $.Data.jsURL}}<script src="{{$.Data.jsURL}}" async defer></script>{{end}}
-{{- $themeColor := $.ThemeColor -}}
+{{if $.Data.jsURL}}<script src="{{$.Data.jsURL}}"></script>{{end}}
 {{if eq $.Data.provider `turnstile`}}
 <div class="form-control-plaintext pd-t-0-force">
     <div class="captcha-loading text-center" style="position:relative"><i class="fa fa-spinner fa-spin"></i> {{`验证加载中，请稍候...`|$.T}}</div>
     <div style="position:relative;z-index:2;margin-top:-20px;min-height:25px">
         <input type="hidden" name="captchaId" value="{{$.Data.captchaID}}" />
-        <div class="cf-turnstile text-center" id="turnstile-{{$.Data.captchaID}}" data-sitekey="{{$.Data.siteKey}}" data-theme="{{if eq $themeColor `dark`}}dark{{else}}light{{end}}"></div>
+        <div class="cf-turnstile text-center" id="turnstile-{{$.Data.captchaID}}"></div>
         <input type="hidden" id="turnstile-{{$.Data.captchaID}}-extend" disabled />
     </div>
 </div>
@@ -23,7 +22,7 @@ window["tarnstileInit{{$.Data.captchaID}}"]=function(){
         $('#turnstile-{{$.Data.captchaID}}').data('lastGeneratedAt',(new Date()).getTime());
     });
 }
-window["tarnstileRender{{$.Data.captchaID}}"]=function(){turnstile.render('#turnstile-{{$.Data.captchaID}}',{sitekey:'{{$.Data.siteKey}}',callback:function(token){}});}
+window["tarnstileRender{{$.Data.captchaID}}"]=function(){turnstile.render('#turnstile-{{$.Data.captchaID}}',{sitekey:'{{$.Data.siteKey}}',theme:'{{if $.ThemeInfo.IsColorName `dark`}}dark{{else}}light{{end}}',callback:function(token){}});}
 if(document.readyState=='complete'){
     window["tarnstileInit{{$.Data.captchaID}}"]();
 }else{
@@ -31,10 +30,20 @@ if(document.readyState=='complete'){
 }
 </script>
 {{else}}
+<div class="form-control-plaintext">
+<div class="captcha-loading text-center wd-100p" id="recaptcha-{{$.Data.captchaID}}-loading" data-success-tips="{{`验证加载成功`|$.T}}"><i class="fa fa-spinner fa-spin"></i> {{`验证加载中，请稍候...`}}</div>
 <input type="hidden" name="captchaId" value="{{$.Data.captchaID}}" />
 <input type="hidden" id="recaptcha-{{$.Data.captchaID}}" name="{{$.Data.captchaName}}" value="" />
 <input type="hidden" id="recaptcha-{{$.Data.captchaID}}-extend" disabled />
+</div>
 <script>
+(function(){
+function thenExecute(token){
+    $('#recaptcha-{{$.Data.captchaID}}').val(token);
+    $('#recaptcha-{{$.Data.captchaID}}').data('lastGeneratedAt',(new Date()).getTime());
+    var $loading=$('#recaptcha-{{$.Data.captchaID}}-loading');
+    if($loading.length>0)$loading.html('<i class="fa fa-check text-success"></i> '+$loading.data('success-tips'));
+}
 window["recaptchaInit{{$.Data.captchaID}}"]=function(){
     var $submit=$('#recaptcha-{{$.Data.captchaID}}').closest('form').find(':submit');
     $submit.on('click',function(e){
@@ -52,21 +61,16 @@ window["recaptchaInit{{$.Data.captchaID}}"]=function(){
     });
 }
 if(document.readyState=='complete'){
-    grecaptcha.execute('{{$.Data.siteKey}}', {action: 'submit'}).then(function(token) {
-      $('#recaptcha-{{$.Data.captchaID}}').val(token);
-      $('#recaptcha-{{$.Data.captchaID}}').data('lastGeneratedAt',(new Date()).getTime());
-    });
+    grecaptcha.execute('{{$.Data.siteKey}}', {action: 'submit'}).then(thenExecute);
     window["recaptchaInit{{$.Data.captchaID}}"]();
 }else{
     window.addEventListener('load',function(){
         grecaptcha.ready(function() {
-          grecaptcha.execute('{{$.Data.siteKey}}', {action: 'submit'}).then(function(token) {
-            $('#recaptcha-{{$.Data.captchaID}}').val(token);
-            $('#recaptcha-{{$.Data.captchaID}}').data('lastGeneratedAt',(new Date()).getTime());
-          });
+          grecaptcha.execute('{{$.Data.siteKey}}', {action: 'submit'}).then(thenExecute);
         });
         window["recaptchaInit{{$.Data.captchaID}}"]();
     })
 }
+})();
 </script>
 {{end}}
