@@ -1,7 +1,7 @@
 {{if $.Data.jsURL}}<script src="{{$.Data.jsURL}}" async defer></script>{{end}}
 {{- $themeColor := $.ThemeColor -}}
 {{if eq $.Data.provider `turnstile`}}
-<div class="form-control-plaintext">
+<div class="form-control-plaintext pd-t-0-force">
     <div class="captcha-loading text-center" style="position:relative"><i class="fa fa-spinner fa-spin"></i> {{`验证加载中，请稍候...`|$.T}}</div>
     <div style="position:relative;z-index:2;margin-top:-20px;min-height:25px">
         <input type="hidden" name="captchaId" value="{{$.Data.captchaID}}" />
@@ -23,15 +23,10 @@ window["tarnstileInit{{$.Data.captchaID}}"]=function(){
         $('#turnstile-{{$.Data.captchaID}}').data('lastGeneratedAt',(new Date()).getTime());
     });
 }
-if(document.readyState=='complete'){
-	turnstile.render('#turnstile-{{$.Data.captchaID}}');
+if(document.readyState=='complete'){//turnstile.render('#turnstile-{{$.Data.captchaID}}');
     window["tarnstileInit{{$.Data.captchaID}}"]();
 }else{
-    window["windowOriginalOnload{{$.Data.captchaID}}"]=window.onload;
-    window.onload=function(){
-        window["tarnstileInit{{$.Data.captchaID}}"]();
-        window["windowOriginalOnload{{$.Data.captchaID}}"] && window["windowOriginalOnload{{$.Data.captchaID}}"].apply(this,arguments);
-    }
+    window.addEventListener('load',function(){window["tarnstileInit{{$.Data.captchaID}}"]();})
 }
 </script>
 {{else}}
@@ -62,8 +57,7 @@ if(document.readyState=='complete'){
     });
     window["recaptchaInit{{$.Data.captchaID}}"]();
 }else{
-    window["windowOriginalOnload{{$.Data.captchaID}}"]=window.onload;
-    window.onload=function(){
+    window.addEventListener('load',function(){
         grecaptcha.ready(function() {
           grecaptcha.execute('{{$.Data.siteKey}}', {action: 'submit'}).then(function(token) {
             $('#recaptcha-{{$.Data.captchaID}}').val(token);
@@ -71,8 +65,7 @@ if(document.readyState=='complete'){
           });
         });
         window["recaptchaInit{{$.Data.captchaID}}"]();
-        window["windowOriginalOnload{{$.Data.captchaID}}"] && window["windowOriginalOnload{{$.Data.captchaID}}"].apply(this,arguments);
-    }
+    })
 }
 </script>
 {{end}}
