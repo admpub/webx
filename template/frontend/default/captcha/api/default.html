@@ -23,7 +23,8 @@ window["tarnstileInit{{$.Data.captchaID}}"]=function(){
         $('#turnstile-{{$.Data.captchaID}}').data('lastGeneratedAt',(new Date()).getTime());
     });
 }
-if(document.readyState=='complete'){//turnstile.render('#turnstile-{{$.Data.captchaID}}');
+window["tarnstileRender{{$.Data.captchaID}}"]=function(){turnstile.render('#turnstile-{{$.Data.captchaID}}',{sitekey:'{{$.Data.siteKey}}',callback:function(token){}});}
+if(document.readyState=='complete'){
     window["tarnstileInit{{$.Data.captchaID}}"]();
 }else{
     window.addEventListener('load',function(){window["tarnstileInit{{$.Data.captchaID}}"]();})
