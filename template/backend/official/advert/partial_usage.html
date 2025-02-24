@@ -1,0 +1,15 @@
+{{Strip}}{{$tag := $.Data|Default `Advert`}}<strong>{{`在模板中的用法:`|$.T}}</strong><br />
+<code>{{`{{`}}$ads := {{$tag}} `{{`广告位标识`|$.T}}`{{`}}`}}</code><br />
+<ol>
+    <li><code>{{`{{`}}$ads.Rand.HTML{{`}}`}}</code></li>
+    <li><code>{{`{{`}}$ads.First.HTML{{`}}`}}</code></li>
+    <li><code>{{`{{`}}$ads.Last.HTML{{`}}`}}</code></li>
+    <li><code>{{`{{`}}range $adk, $adv := $ads{{`}}`}}...{{`{{`}}end{{`}}`}}</code></li>
+</ol>
+<code>{{`{{`}}$ads := {{$tag}} `{{`广告位标识-1`|$.T}}` `{{`广告位标识-2`|$.T}}`{{`}}`}}</code><br />
+<ol>
+    <li><code>{{`{{`}}($ads.Place `{{`广告位标识-1`|$.T}}`).Rand.HTML{{`}}`}}</code></li>
+    <li><code>{{`{{`}}($ads.Place `{{`广告位标识-1`|$.T}}`).First.HTML{{`}}`}}</code></li>
+    <li><code>{{`{{`}}($ads.Place `{{`广告位标识-1`|$.T}}`).Last.HTML{{`}}`}}</code></li>
+    <li><code>{{`{{`}}range $adk, $adv := $ads.Place `{{`广告位标识-1`|$.T}}`{{`}}`}}...{{`{{`}}end{{`}}`}}</code></li>
+</ol>{{/Strip}}
