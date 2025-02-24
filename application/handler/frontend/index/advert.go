@@ -5,6 +5,7 @@ import (
 	"github.com/webx-top/echo"
 )
 
+// /advert/ident or /advert/ident1,ident2
 func Advert(ctx echo.Context) error {
 	idents := ctx.Paramx(`idents`).Split(`,`).Unique().Filter().String()
 	typ := ctx.Form(`type`)
