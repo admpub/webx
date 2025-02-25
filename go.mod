@@ -14,8 +14,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250225121722-fb8ea99ffa09
-	github.com/coscms/webcore v0.7.13
-	github.com/coscms/webfront v0.0.0-20250224053321-651f45a58a8e
+	github.com/coscms/webcore v0.7.14
+	github.com/coscms/webfront v0.0.0-20250225133915-feae22fac357
 )
 
 require (
@@ -255,7 +255,7 @@ require (
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
 	github.com/quic-go/quic-go v0.50.0 // indirect
-	github.com/redis/go-redis/v9 v9.7.0 // indirect
+	github.com/redis/go-redis/v9 v9.7.1 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
