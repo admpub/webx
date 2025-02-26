@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{`请进行人类验证`|$.T}}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{{$.RootPrefix}}/favicon.ico">
     {{- if eq $captchaType `default` -}}
     <link href="{{AssetsXURL}}/css/fonts/Ionicons/css.min.css?t={{BuildTime}}" rel="stylesheet">
     <link href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet">
@@ -11,11 +12,11 @@
     <link href="{{AssetsXURL}}/css/frontend.lite.min.css?t={{BuildTime}}" rel="stylesheet">
     {{- if $.ThemeInfo.IsColorName `dark` -}}
     <link href="{{AssetsXURL}}/css/dark.min.css?t={{BuildTime}}" rel="stylesheet" />
+    <meta name="theme-color" content="#000000" />
     {{- end -}}
     <style type="text/css">body{text-align:center;}h1{margin:30px auto}
 {{- if eq $captchaType `default` -}}
-    .input-group{width:280px !important;margin:auto !important}
-    img#captchaImage{height:42px !important}
+    .input-group{width:280px !important;margin:auto !important}img#captchaImage{height:42px !important}
     {{- if $.ThemeInfo.IsColorName `dark` -}}
     .input-group-addon.bg-white:not(.btn){background-color:#333 !important}.form-control{border-color:#333 !important;border-right:0 !important}
     {{- end -}}

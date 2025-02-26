@@ -17,7 +17,10 @@ import (
 func init() {
 	xnotice.RegsterCmder()
 	frontend.RegisterToGroup(`/user`, func(u echo.RouteRegister) {
-		xnotice.RegisterRoute(u)
+		cfg := config.FromFile().Extend.GetStore(`frontendNotice`)
+		if len(cfg) > 0 && !cfg.Bool(`disabled`) {
+			xnotice.RegisterRoute(u, cfg)
+		}
 		// 用户个人
 		u.Route(`GET`, `/index`, Index).SetName(`user.index`)
 
