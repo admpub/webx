@@ -616,6 +616,16 @@ var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
 			Sort:        30,
 			Disabled:    `N`,
 		},
+		`underAttack`: {
+			Key:         `underAttack`,
+			Label:       `Under Attack 模式`,
+			Description: `如果您遭到攻击并且在攻击期间可以启用此功能`,
+			Value:       ``,
+			Group:       `frequency`,
+			Type:        `text`,
+			Sort:        30,
+			Disabled:    `N`,
+		},
 		`mobile`: {
 			Key:         `mobile`,
 			Label:       `短信频率`,

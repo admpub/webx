@@ -1,0 +1,46 @@
+{{Strip}}<!DOCTYPE html>
+<html lang="{{$.Lang}}">
+<head>{{$captchaType := $.Stored.captchaType}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{`请进行人类验证`|$.T}}</title>
+    {{- if eq $captchaType `default` -}}
+    <link href="{{AssetsXURL}}/css/fonts/Ionicons/css.min.css?t={{BuildTime}}" rel="stylesheet">
+    <link href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet">
+    {{- end -}}
+    <link href="{{AssetsXURL}}/css/frontend.lite.min.css?t={{BuildTime}}" rel="stylesheet">
+    {{- if $.ThemeInfo.IsColorName `dark` -}}
+    <link href="{{AssetsXURL}}/css/dark.min.css?t={{BuildTime}}" rel="stylesheet" />
+    {{- end -}}
+    <style type="text/css">body{text-align:center;}h1{margin:30px auto}
+{{- if eq $captchaType `default` -}}
+    .input-group{width:280px !important;margin:auto !important}
+    img#captchaImage{height:42px !important}
+    {{- if $.ThemeInfo.IsColorName `dark` -}}
+    .input-group-addon.bg-white:not(.btn){background-color:#333 !important}.form-control{border-color:#333 !important;border-right:0 !important}
+    {{- end -}}
+{{- else if eq $captchaType `go` -}}
+    .wg-cap-wrap{bottom:auto !important}.wg-cap-wrap__ico{text-align:left !important}
+{{- end -}}
+    </style>{{Include "#default#global_js"}}
+</head>
+<body>
+<div class="container">
+    <h1>{{`请进行人类验证`|$.T}}</h1>
+    <div>
+        <form class="form" action="" method="post">
+            <div class="form-group">
+                <span class="input-group">{{$.CaptchaForm `#default#default`}}</span>
+            </div>
+            <button class="btn btn-primary">{{`确认`|$.T}}</button>
+        </form>
+    </div>
+</div>
+<script src="{{AssetsURL}}/js/compatible.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/jquery3.6.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/jquery.migrate3.4.min.js?t={{BuildTime}}"></script>
+{{- if eq $captchaType `default` -}}
+<script type="text/javascript">$(function(){$('input.form-control').focus()})</script>
+{{- end -}}
+</body>
+</html>{{/Strip}}
