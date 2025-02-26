@@ -1,6 +1,6 @@
 {{Strip}}<!DOCTYPE html>
 <html lang="{{$.Lang}}">
-<head>{{$captchaType := $.Stored.captchaType}}
+<head>{{- $captchaType := $.Stored.captchaType -}}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{`请进行人类验证`|$.T}}</title>
