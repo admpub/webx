@@ -22,6 +22,8 @@
     {{- end -}}
 {{- else if eq $captchaType `go` -}}
     .wg-cap-wrap{bottom:auto !important}.wg-cap-wrap__ico{text-align:left !important}
+{{- else if eq $captchaType `api` -}}
+    .input-group{width:280px !important;margin:auto !important}
 {{- end -}}
     </style>{{Include "#default#global_js"}}
 </head>
