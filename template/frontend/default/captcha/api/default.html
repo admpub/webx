@@ -56,23 +56,25 @@ if(document.readyState=='complete'){
 <script>
 (function(){
 function thenExecute(token){
-    $('#recaptcha-{{$.Data.captchaID}}').val(token);
-    $('#recaptcha-{{$.Data.captchaID}}').data('lastGeneratedAt',(new Date()).getTime());
+    var id='#recaptcha-{{$.Data.captchaID}}';
+    $(id).val(token);
+    $(id).data('lastGeneratedAt',(new Date()).getTime());
     var $loading=$('#recaptcha-{{$.Data.captchaID}}-loading');
     if($loading.length>0)$loading.html('<i class="fa fa-check text-success"></i> '+$loading.data('success-tips'));
 }
 window["recaptchaInit{{$.Data.captchaID}}"]=function(){
-    var $submit=$('#recaptcha-{{$.Data.captchaID}}').closest('form').find(':submit');
+    var id='#recaptcha-{{$.Data.captchaID}}';
+    var $submit=$(id).closest('form').find(':submit');
     $submit.on('click',function(e){
-        if($('#recaptcha-{{$.Data.captchaID}}').val() && $('#recaptcha-{{$.Data.captchaID}}').data('lastGeneratedAt')>(new Date()).getTime()-110) {
-            $('#recaptcha-{{$.Data.captchaID}}').data('lastGeneratedAt',0);
+        if($(id).val() && $(id).data('lastGeneratedAt')>(new Date()).getTime()-110) {
+            $(id).data('lastGeneratedAt',0);
             return true;
         }
         var $this=$(this);
         e.preventDefault();
         grecaptcha.execute('{{$.Data.siteKey}}', {action: 'submit'}).then(function(token) {
-          $('#recaptcha-{{$.Data.captchaID}}').val(token);
-          $('#recaptcha-{{$.Data.captchaID}}').data('lastGeneratedAt',(new Date()).getTime());
+          $(id).val(token);
+          $(id).data('lastGeneratedAt',(new Date()).getTime());
           $this.trigger('click');
         });
     });
