@@ -36,6 +36,7 @@ window["tarnstileInit{{$.Data.captchaID}}"]=function(){
         },1000);
         $box.data('lastGeneratedAt',(new Date()).getTime());
     });
+    if(!$('body').data('tarnstileInited')){$('body').data('tarnstileInited',true);return;}
     if($box.children('div').length>0)return;
     turnstile.render(id);
 };
