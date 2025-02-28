@@ -341,7 +341,7 @@
     	ws.onmessage = function(evt) {
     	    if(showmsg) showmsg(evt.data);
     	};
-    	//ws.onerror = function(evt) {console.dir(evt);};
+      // ws.onerror = function(evt) {console.dir(evt);};
       if(onopen!=null&&typeof(onopen)=='object'){
         ws=$.extend({},ws,onopen);
       }
@@ -466,7 +466,12 @@
         }
       },
 			connect=function(onopen){
-        var ws = App.websocket(websocketHandle,notifyURL,onopen,function(){
+        var connected = false; 
+        var ws = App.websocket(function(message){
+          websocketHandle(message);
+          if(!connected)connected=true;
+        },notifyURL,onopen,function(){
+            if(!connected) return;
             if(!( typeof(CUSTOMER)=='object' && ('ID' in CUSTOMER) )) return;
             var reconnect=function(){
               window.setTimeout(function(){

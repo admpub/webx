@@ -127,14 +127,31 @@ function onSelectDbAccount(a) {
                         <code>127.0.0.0-127.0.0.5</code><br />
                         <code>192.168.0.0/16</code>
                     </div>
-                </div><!-- col-sm-10 -->
-            </div><!-- form-group -->
-            <div class="form-group">
+                </div><!-- col-sm-4 -->
                 <label class="col-sm-2 control-label">{{"浏览器白名单"|$.T}}</label>
                 <div class="col-sm-4">
                     <textarea name="frequency[underAttack][value][UAWhitelist]" class="form-control" style="resize:vertical" rows="5">{{$frequency.underAttack.ValueObject.UAWhitelist}}</textarea>
                     <div class="help-block">{{`请输入正则表达式，用来匹配浏览器的UserAgent特征值`|$.T}}</div>
-                </div><!-- col-sm-10 -->
+                </div><!-- col-sm-4 -->
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{"Header白名单"|$.T}}</label>
+                <div class="col-sm-10">
+                    <div class="fieldset bg-fc">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{"Header名称"|$.T}}</label>
+                            <div class="col-sm-4">
+                                <input name="frequency[underAttack][value][HeaderName]" class="form-control" value="{{$frequency.underAttack.ValueObject.HeaderName}}" />
+                                <div class="help-block">{{`如果留空则表示关闭Header白名单`|$.T}}</div>
+                            </div><!-- col-sm-4 -->
+                            <label class="col-sm-2 control-label">{{"Header值"|$.T}}</label>
+                            <div class="col-sm-4">
+                                <input name="frequency[underAttack][value][HeaderValue]" class="form-control" value="{{$frequency.underAttack.ValueObject.HeaderValue}}" />
+                                <div class="help-block">{{`如果留空，则表示任意值均可`|$.T}}</div>
+                            </div><!-- col-sm-4 -->
+                        </div>
+                    </div><!-- fieldset -->
+                </div>
             </div><!-- form-group -->
         </div><!-- fieldset -->
     </div>

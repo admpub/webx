@@ -13,6 +13,7 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/defaults"
 	"github.com/webx-top/echo/subdomains"
 
 	dbschemaNging "github.com/coscms/webcore/dbschema"
@@ -23,7 +24,6 @@ import (
 	"github.com/coscms/webcore/registry/upload"
 
 	xOAuth "github.com/admpub/webx/application/handler/frontend/oauth"
-	"github.com/coscms/webcore/library/ipfilter"
 	xcache "github.com/coscms/webfront/library/cache"
 	cfgIPFilter "github.com/coscms/webfront/library/ipfilter"
 	cfgUnderAttack "github.com/coscms/webfront/library/underattack"
@@ -938,7 +938,7 @@ func init() {
 	})
 	settings.RegisterEncoder(`frequency.underAttack`, func(v *dbschemaNging.NgingConfig, r echo.H) ([]byte, error) {
 		cfg := cfgUnderAttack.NewConfig().FromStore(r)
-		if err := ipfilter.ValidateRows(v.Context(), cfg.IPWhitelist); err != nil {
+		if err := cfg.Validate(defaults.MustGetContext(v.Context())); err != nil {
 			return nil, err
 		}
 		return com.JSONEncode(cfg)
