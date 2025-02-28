@@ -14,8 +14,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250227074949-be94f0e53ed3
-	github.com/coscms/webcore v0.7.21-0.20250227113629-cd5cbc8c7db9
-	github.com/coscms/webfront v0.0.0-20250227113753-55a020d62efc
+	github.com/coscms/webcore v0.8.1
+	github.com/coscms/webfront v0.0.0-20250228112758-ecd1f0b0133c
 )
 
 require (
@@ -81,6 +81,7 @@ require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/abh/errorutil v1.0.0 // indirect
 	github.com/admpub/9t v0.0.1 // indirect
+	github.com/admpub/bart v0.0.0-20250228043657-ac611bda7852 // indirect
 	github.com/admpub/boltstore v1.2.0 // indirect
 	github.com/admpub/caddy v1.2.8 // indirect
 	github.com/admpub/captcha-go v0.0.1 // indirect

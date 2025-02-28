@@ -23,11 +23,12 @@ import (
 	"github.com/coscms/webcore/registry/upload"
 
 	xOAuth "github.com/admpub/webx/application/handler/frontend/oauth"
+	"github.com/coscms/webcore/library/ipfilter"
 	xcache "github.com/coscms/webfront/library/cache"
 	cfgIPFilter "github.com/coscms/webfront/library/ipfilter"
+	cfgUnderAttack "github.com/coscms/webfront/library/underattack"
 	modelApi "github.com/coscms/webfront/model/official/api"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
-
 	modelDBMgr "github.com/nging-plugins/dbmanager/application/model"
 )
 
@@ -620,9 +621,9 @@ var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
 			Key:         `underAttack`,
 			Label:       `Under Attack 模式`,
 			Description: `如果您遭到攻击并且在攻击期间可以启用此功能`,
-			Value:       ``,
+			Value:       `{}`,
 			Group:       `frequency`,
-			Type:        `text`,
+			Type:        `json`,
 			Sort:        30,
 			Disabled:    `N`,
 		},
@@ -824,6 +825,18 @@ func init() {
 		r[`ValueObject`] = jsonData
 		return nil
 	})
+	settings.RegisterDecoder(`frequency.underAttack`, func(v *dbschemaNging.NgingConfig, r echo.H) error {
+		jsonData := cfgUnderAttack.NewConfig()
+		if len(v.Value) > 0 {
+			if v.Value[0] == '{' {
+				com.JSONDecode(com.Str2bytes(v.Value), jsonData)
+			} else {
+				jsonData.On = v.Value == `1`
+			}
+		}
+		r[`ValueObject`] = jsonData
+		return nil
+	})
 	settings.RegisterDecoder(`cache`, func(v *dbschemaNging.NgingConfig, r echo.H) error {
 		jsonData := &cache.Options{}
 		if len(v.Value) > 0 {
@@ -921,6 +934,13 @@ func init() {
 	})
 	settings.RegisterEncoder(`frequency.rateLimiter`, func(v *dbschemaNging.NgingConfig, r echo.H) ([]byte, error) {
 		cfg := cfgIPFilter.NewRateLimiterConfig().FromStore(r)
+		return com.JSONEncode(cfg)
+	})
+	settings.RegisterEncoder(`frequency.underAttack`, func(v *dbschemaNging.NgingConfig, r echo.H) ([]byte, error) {
+		cfg := cfgUnderAttack.NewConfig().FromStore(r)
+		if err := ipfilter.ValidateRows(v.Context(), cfg.IPWhitelist); err != nil {
+			return nil, err
+		}
 		return com.JSONEncode(cfg)
 	})
 	settings.RegisterEncoder(`cache`, func(v *dbschemaNging.NgingConfig, r echo.H) ([]byte, error) {

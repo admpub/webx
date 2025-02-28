@@ -107,16 +107,36 @@ function onSelectDbAccount(a) {
 <div class="form-group">
     <label class="col-sm-2 control-label">{{"Under Attack 模式"|$.T}}</label>
     <div class="col-sm-10">
-        {{- $v := $frequency.underAttack.Value|Default `0` -}}
+        {{- $on := $frequency.underAttack.ValueObject.On|Default false -}}
         <span class="radio radio-warning radio-inline">
-            <input type="radio" name="frequency[underAttack][value]" value="1"{{if eq $v `1`}} checked{{end}} id="frequency-underAttack-1">
+            <input type="radio" name="frequency[underAttack][value][On]" value="1"{{if $on}} checked{{end}} id="frequency-underAttack-1" onclick="$('#frequency-underAttack-settings').removeClass('hide')">
             <label for="frequency-underAttack-1">{{"启用"|$.T}}</label>
         </span>
         <span class="radio radio-success radio-inline">
-            <input type="radio" name="frequency[underAttack][value]" value="0"{{if ne $v `1`}} checked{{end}} id="frequency-underAttack-0">
+            <input type="radio" name="frequency[underAttack][value][On]" value="0"{{if not $on}} checked{{end}} id="frequency-underAttack-0" onclick="$('#frequency-underAttack-settings:not(.hide)').addClass('hide')">
             <label for="frequency-underAttack-0">{{"禁用"|$.T}}</label>
         </span>
-        <div class="help-block">{{`如果网站正遭到攻击，可以启用此模式`|$.T}}</div>
+        <div class="help-block">{{`如果网站正遭到攻击，可以启用此模式(新IP访问时显示验证码)`|$.T}}</div>
+        <div class="fieldset bg-fc{{if not $on}} hide{{end}}" id="frequency-underAttack-settings">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{"IP白名单"|$.T}}</label>
+                <div class="col-sm-4">
+                    <textarea name="frequency[underAttack][value][IPWhitelist]" class="form-control" style="resize:vertical" rows="5">{{$frequency.underAttack.ValueObject.IPWhitelist}}</textarea>
+                    <div class="help-block">
+                        {{`一行一个。支持用“-”来指定范围或使用子网掩码，例如：`|$.T}}<br />
+                        <code>127.0.0.0-127.0.0.5</code><br />
+                        <code>192.168.0.0/16</code>
+                    </div>
+                </div><!-- col-sm-10 -->
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{"浏览器白名单"|$.T}}</label>
+                <div class="col-sm-4">
+                    <textarea name="frequency[underAttack][value][UAWhitelist]" class="form-control" style="resize:vertical" rows="5">{{$frequency.underAttack.ValueObject.UAWhitelist}}</textarea>
+                    <div class="help-block">{{`请输入正则表达式，用来匹配浏览器的UserAgent特征值`|$.T}}</div>
+                </div><!-- col-sm-10 -->
+            </div><!-- form-group -->
+        </div><!-- fieldset -->
     </div>
 </div>
 <div class="form-group">
