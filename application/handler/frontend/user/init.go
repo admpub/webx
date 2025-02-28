@@ -18,7 +18,7 @@ func init() {
 	xnotice.RegsterCmder()
 	frontend.RegisterToGroup(`/user`, func(u echo.RouteRegister) {
 		cfg := config.FromFile().Extend.GetStore(`frontendNotice`)
-		if len(cfg) > 0 && !cfg.Bool(`disabled`) {
+		if !cfg.Bool(`disabled`) {
 			xnotice.RegisterRoute(u, cfg)
 		}
 		// 用户个人
