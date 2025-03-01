@@ -490,7 +490,8 @@ function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, cap
             codeIpt.val(vcode);
             if(captchaIdent) form.find('[name="'+captchaIdent+'"]').val(idVal);
         }
-        form.trigger('submit');
+        //form.trigger('submit');
+        form.submit();
     }else{
         $.ajax(ajaxOptions);
     }
