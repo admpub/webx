@@ -40,8 +40,8 @@
         <div class="input-group no-margin-bottom">
             <span class="input-group-btn">
                 <select name="recipientType" id="recipientType" class="form-control" style="width:100px">
-                    <option value="user"{{if eq $recipientType "user"}} selected="selected"{{end}}>{{"后台用户"|$.T}}</option>
-                    <option value="customer"{{if eq $recipientType "customer"}} selected="selected"{{end}}>{{"前台客户"|$.T}}</option>
+                    <option value="user"{{if eq $recipientType `user`}} selected="selected"{{end}}>{{"后台用户"|$.T}}</option>
+                    <option value="customer"{{if eq $recipientType `customer`}} selected="selected"{{end}}>{{"前台客户"|$.T}}</option>
                 </select>
             </span>
             <input type="text" name="recipientId" id="recipientId" data-init="{{$recipientId}}" value="{{$recipientId}}" class="form-control">
@@ -52,7 +52,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">{{"消息标题"|$.T}}</label>
       <div class="col-sm-9">
-          <input type="text" class="form-control" required name="title" value="{{$.Form "title"}}">
+          <input type="text" class="form-control" required name="title" value="{{$.Form `title`}}">
       </div>
     </div>
     <div class="form-group">
@@ -65,9 +65,9 @@
     </div>
       <div class="form-group form-submit-group">
         <div class="col-sm-2 control-label">
-          {{$v := $.Form "encrypted"}}
+          {{- $v := $.Form "encrypted" -}}
           <div class="checkbox checkbox-success">
-            <input type="checkbox" value="Y" name="encrypted" id="encrypted-Y"{{if eq $v "Y"}} checked{{end}}> 
+            <input type="checkbox" value="Y" name="encrypted" id="encrypted-Y"{{if eq $v `Y`}} checked{{end}}> 
             <label class="text-left" for="encrypted-Y">{{"加密"|$.T}}</label>
           </div>
         </div>
