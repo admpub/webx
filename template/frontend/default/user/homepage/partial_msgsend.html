@@ -1,4 +1,4 @@
-{{$info := $.Stored.info}}
+{{- $info := $.Stored.info -}}
     <div class="card card-flat tx-size-sm pd-30 mg-t-20">
         <form class="form form-label-right" method="POST" ajax-submit>
             <div class="form-group row">
@@ -10,7 +10,7 @@
             <div class="form-group row">
               <label for="inputTitle" class="col-sm-2 col-form-label">{{"消息标题"|$.T|UpperCaseFirst}}:</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="title" id="inputTitle" value="{{$.Form "title"}}">
+                <input type="text" class="form-control" name="title" id="inputTitle" value="{{$.Form `title`}}">
               </div>
             </div>
             <div class="form-group row">
@@ -23,9 +23,9 @@
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">{{"内容加密"|$.T|UpperCaseFirst}}:</label>
               <div class="col-sm-9 mg-t-5">
-                {{$encrypted := $.Form "encrypted"}}
+                {{- $encrypted := $.Form "encrypted" -}}
                 <label class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" value="Y" name="encrypted"{{if eq $encrypted "Y"}} checked="checked"{{end}}>
+                  <input type="checkbox" class="custom-control-input" value="Y" name="encrypted"{{if eq $encrypted `Y`}} checked="checked"{{end}}>
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">{{"加密"|$.T|UpperCaseFirst}} 
                     <small>({{"消息加密保存更加安全，但加密后的消息将无法搜索"|$.T}})</small>

@@ -950,10 +950,10 @@ function ajaxForm(a,onSuccess,onFailure){
         };
     }
     var opts={
-        ajaxFormObject: a,
+        //ajaxFormObject: a,
         type: String($(a).attr('method')).toLowerCase()=='post'?'post':'get',
         dataType: 'json',
-        data: {},
+        data: $(a).serializeArray(),
         url: $(a).attr('action'),
         close: close,
         beforeSubmit:function(){
@@ -979,6 +979,7 @@ function onAjaxRespond(form,r,ajaxOptions,onSuccess,onFailure){
         renewCaptcha(form,r);
         if(onSuccess!=null&&$.isFunction(onSuccess)) onSuccess(r);
         closeLoadingFunction(ajaxOptions);
+        form.reset();
         return showMsg({text:r.Info,type:'success'});
     }
     if(r.Code==App.status.NotLoggedIn){

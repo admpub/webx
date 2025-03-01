@@ -1,4 +1,4 @@
-{{Extend "user/base"}}
+{{Strip}}{{Extend "user/base"}}
 {{Block "body"}}
 {{Super}}
 
@@ -15,7 +15,7 @@
 <div class="row">
   <div class="col-lg-12 mg-t-0">
     <div class="card bd-0 rounded-0">
-      {{$boxType := $.Stored.boxType}}
+      {{- $boxType := $.Stored.boxType -}}
         <div class="pd-10 bg-inverse rounded-top">
           <ul class="nav nav-pills nav-white flex-column flex-sm-row">
             <li class="nav-item"><a class="nav-link{{if eq $boxType `inbox`}} active{{end}}" href="{{FrontendURL}}/user/message/inbox">{{"收件箱"|$.T|UpperCaseFirst}}</a></li>
@@ -32,7 +32,7 @@
           </nav><!-- nav -->
         </div><!-- card-header -->
         {{- $isDark := $.ThemeInfo.IsColorName `dark` -}}
-        {{if $.Stored.list}}
+        {{- if $.Stored.list -}}
         <form method="GET">
         <input type="hidden" name="type" value="{{$type}}">
         <div class="input-group bd-b{{if $isDark}} bd-color-inverse{{end}}">
@@ -42,21 +42,21 @@
           </span>
         </div><!-- input-group -->
         </form>
-        {{range $k, $v := $.Stored.list}}
+        {{- range $k, $v := $.Stored.list -}}
         <div class="row mg-0{{if gt $k 0}} bd-t{{end}} {{if $isDark}}hover-bg-inverse bd-color-inverse{{else}}bg-superlight-hover{{end}}">
           <div class="col-md-8 col-lg-9">
             <div class="pd-20">
               <h6 class="mg-b-2 tx-size-sm tx-bold">
                   <!-- <a href="javascript:;"><i class="fa fa-star-o tx-gray-light"></i></a> -->
                   <a href="{{FrontendURL}}/user/message/view/{{$boxType}}/{{$v.Id}}" class="{{if $v.IsViewed}}tx-gray-light{{else}}tx-gray-dark{{end}}">{{$v.Title}}</a>
-                  {{if not $v.IsViewed}}
+                  {{- if not $v.IsViewed}}
                   <span class="tx-size-11 mg-l-5">
                     <span class="square-8 bg-danger rounded-circle" data-toggle="tooltip" title="{{`未读`|$.T}}"></span>
                   </span>
-                  {{end}}
-                  {{if eq $v.Encrypted "Y"}}
+                  {{- end}}
+                  {{- if eq $v.Encrypted "Y"}}
                   <i class="fa fa-lock tx-success mg-l-5" data-toggle="tooltip" title="{{`加密消息`|$.T}}"></i>
-                  {{end}}
+                  {{- end}}
               </h6>
               <p class="mg-b-0 tx-size-12">
                 <span class="d-block d-sm-inline">{{"发送时间"|$.T}}: {{(Ts2time $v.Created).Format "2006-01-02 15:04:05"}}</span>
@@ -66,19 +66,19 @@
           </div><!-- col-9 -->
           <div class="col-md-4 col-lg-3">
             <div class="media pd-20">
-              <a class="d-flex mg-r-10" href="{{URLByName `user.home` $v.MsgUser.Id}}" target="_blank"><img src="{{if $v.MsgUser.Avatar}}{{AddSuffix $v.MsgUser.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-40 ht-40 rounded-circle" alt="Image"></a>
+              <a class="d-flex mg-r-10"{{if eq $v.MsgUser.Type `customer`}} href="{{URLByName `user.home` $v.MsgUser.Id}}" target="_blank"{{end}}><img src="{{if $v.MsgUser.Avatar}}{{AddSuffix $v.MsgUser.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="wd-40 ht-40 rounded-circle" alt="Image"></a>
               <div class="media-body">
-                <p class="tx-size-sm mg-b-0 tx-bold"><a href="{{URLByName `user.home` $v.MsgUser.Id}}" target="_blank" class="tx-gray-dark d-block">{{$v.MsgUser.Name}}</a></p>
+                <p class="tx-size-sm mg-b-0 tx-bold"><a{{if eq $v.MsgUser.Type `customer`}} href="{{URLByName `user.home` $v.MsgUser.Id}}" target="_blank"{{end}} class="tx-gray-dark d-block">{{$v.MsgUser.Name}}</a></p>
                 <div class="tx-size-12">{{$v.Created|$.TsHumanize}}</div>
               </div><!-- media-body -->
             </div><!-- media -->
           </div><!-- col-3 -->
         </div><!-- row -->
-        {{end}}
+        {{- end -}}
         <div class="card-footer tx-size-xs pd-y-15 auto-bottom-float">
         {{$.Stored.pagination.Render `#default#pagination`}}
         </div><!-- card-footer -->
-        {{else}}
+        {{- else -}}
         <div class="pd-5">
         <div class="alert alert-warning alert-bordered pd-y-20 mg-0" role="alert">
           <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -93,7 +93,7 @@
           </div><!-- d-flex -->
         </div>
         </div>
-        {{end}}
+        {{- end -}}
       </div><!-- card -->
   </div><!-- col-12 -->
 </div><!-- row -->
@@ -104,3 +104,4 @@
 {{Block "footer"}}
 {{Super}}
 {{/Block}}
+{{/Strip}}

@@ -5,7 +5,7 @@
 {{/Block}}
 {{Block "body"}}
 {{Super}}
-{{$customer := $.Customer}}
+{{- $customer := $.Customer -}}
  <div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
     {{Include "user/profile/partial_breadcrumb"}}
   <div class="main-body pd-20">
@@ -18,13 +18,13 @@
             <li class="nav-item"><a class="nav-link{{if eq $type `mobile`}} active{{end}}" href="{{FrontendURL}}/user/profile/binding?type=mobile">{{"绑定手机号"|$.T}}</a></li>
             <li class="nav-item"><a class="nav-link{{if eq $type `oauth`}} active{{end}}" href="{{FrontendURL}}/user/profile/binding?type=oauth">{{"绑定社区账号"|$.T}}</a></li>
         </ul>
-        {{if eq $type "email"}}
+        {{- if eq $type "email"}}
         {{Include "user/profile/binding/partial_email"}}
-        {{else if eq $type "mobile"}}
+        {{- else if eq $type "mobile"}}
         {{Include "user/profile/binding/partial_mobile"}}
-        {{else}}
+        {{- else}}
         {{Include "user/profile/binding/partial_oauth"}}
-        {{end}}
+        {{- end}}
     </div><!-- .card -->
   </div><!-- col-lg-12 -->
 </div><!-- row -->

@@ -1,4 +1,4 @@
-{{Extend "user/base"}}
+{{Strip}}{{Extend "user/base"}}
 {{Block "body"}}{{Super}}
  <div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
@@ -12,9 +12,9 @@
   <div class="main-body pd-20">
 <div class="row">
   <div class="col-lg-12 mg-t-0">
-{{$data := $.Stored.data}}
-{{$replyList := $.Stored.replyList}}
-{{$customer := $.Customer}}
+{{- $data := $.Stored.data -}}
+{{- $replyList := $.Stored.replyList -}}
+{{- $customer := $.Customer -}}
 <div class="row">
     <div class="col-lg-4">
       <div class="card rounded-0 bd-0 tx-size-14">
@@ -165,3 +165,4 @@
     </div><!-- main-body -->
 </div><!-- main -->
 {{/Block}}
+{{/Strip}}
