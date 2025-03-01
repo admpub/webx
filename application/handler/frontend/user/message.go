@@ -246,6 +246,7 @@ func MessageSend(ctx echo.Context, targetCustomer *dbschema.OfficialCustomer) er
 			m.Encrypted = `N`
 		}
 		m.CustomerB = targetCustomer.Id
+		m.UserB = targetCustomer.Uid
 		if customer != nil {
 			m.CustomerA = customer.Id
 		} else {
