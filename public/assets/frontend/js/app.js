@@ -470,7 +470,7 @@
           case 'notify':
           default:
             if(m.type=='message'){
-              if(!m.content.avatar)m.content.avatar=ASSETS_X_URL+'/images/user_50.png';
+              if(!m.content.avatar)m.content.avatar=ASSETS_URL+'/images/user_50.png';
               App.sendNotification(
                 App.t('%s说: ','「'+m.content.author+'」'), // m.title, 
                 m.content.content,
