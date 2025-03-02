@@ -472,8 +472,8 @@
             if(m.type=='message'){
               if(!m.content.avatar)m.content.avatar=ASSETS_X_URL+'/images/user_50.png';
               App.sendNotification(
-                App.text2html(m.title), 
-                m.content.author+': '+m.content.content,
+                App.t('%s说: ','「'+m.content.author+'」'), // m.title, 
+                m.content.content,
                 m.content.avatar,
                 m.content.url,
                 function(){
