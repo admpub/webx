@@ -14,8 +14,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250227074949-be94f0e53ed3
-	github.com/coscms/webcore v0.8.4
-	github.com/coscms/webfront v0.0.0-20250301142621-f27ec50d32a4
+	github.com/coscms/webcore v0.8.5
+	github.com/coscms/webfront v0.0.0-20250302085105-c91b8ba98440
 )
 
 require (
@@ -300,7 +300,7 @@ require (
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/mock v0.5.0 // indirect
 	golang.org/x/crypto v0.35.0 // indirect
-	golang.org/x/exp v0.0.0-20250218142911-aa4b98e5adaa // indirect
+	golang.org/x/exp v0.0.0-20250228200357-dead58393ab7 // indirect
 	golang.org/x/image v0.24.0 // indirect
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
 	golang.org/x/mod v0.23.0 // indirect
@@ -318,6 +318,6 @@ require (
 	modernc.org/libc v1.61.13 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.8.2 // indirect
-	modernc.org/sqlite v1.35.0 // indirect
+	modernc.org/sqlite v1.36.0 // indirect
 	rsc.io/qr v0.2.0 // indirect
 )
