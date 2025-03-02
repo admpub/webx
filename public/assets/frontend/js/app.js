@@ -346,6 +346,31 @@
         ws=$.extend({},ws,onopen);
       }
       return ws;
+    }, 
+    notification:null,
+    sendNotification:function(title,content,icon,url,onfail) {
+      if (!("Notification" in window)) {
+        if(onfail) onfail();
+        return;
+      }
+      if (Notification.permission === "denied") {
+        if(onfail) onfail();
+        return;
+      }
+      if (Notification.permission === "granted") {
+        App.notification = new Notification(title, {body: content, icon: icon, tag: "message", renotify:true});
+        if(url)App.notification.addEventListener("click",function(){window.location.href=url})
+        return;
+      }
+      Notification.requestPermission(function(permission){
+        if(permission === "granted"){
+          if(!App.notification) App.notification.close();
+          App.notification = new Notification(title, {body: content, icon: icon, tag: "message", renotify:true});
+          if(url)App.notification.addEventListener("click",function(){window.location.href=url})
+        }else{
+          if(onfail) onfail();
+        }
+      });
     },
     notifyListen:function(notifyURL){
       if(notifyURL==null) notifyURL='/user/notice';
@@ -441,13 +466,32 @@
           }
           messageCount[m.mode]++;
           break;
-          
+
           case 'notify':
           default:
+            if(m.type=='message'){
+              if(!m.content.avatar)m.content.avatar=ASSETS_X_URL+'/images/user_50.png';
+              App.sendNotification(
+                App.text2html(m.title), 
+                m.content.author+': '+m.content.content,
+                m.content.avatar,
+                m.content.url,
+                function(){
+                  if('lastMessageId' in App) App.message('remove',App.lastMessageId);
+                  App.lastMessageId=App.message({
+                    title: App.text2html(m.title),
+                    text: '<strong>'+m.content.author+'</strong>'+(m.content.isAdmin?'<span class="badge badge-warning">'+App.t('管理员')+'</span>':'')+':<br /><a href="'+m.content.url+'" class="tx-white">'+m.content.content+'</a>',
+                    image: m.content.avatar,
+                    class_name: 'dark',
+                    sticky: true
+                  });
+              })
+              return
+            }
             if('notify'!=m.mode) m.mode='notify';
             var c=$('#notice-message-container');
             if(c.length<1){
-              App.message({title: App.i18n.SYS_INFO, text: '<ul id="notice-message-container" class="no-list-style" style="max-height:500px;overflow-y:auto;overflow-x:hidden"></ul>',sticky: true});
+              App.message({title: App.i18n.SYS_INFO, text: '<ul id="notice-message-container" class="no-list-style" style="list-style:none;padding:0;max-height:500px;overflow-y:auto;overflow-x:hidden"></ul>', sticky: true});
               c=$('#notice-message-container');
             }
             if(messageCount[m.mode]>=messageMax[m.mode]){

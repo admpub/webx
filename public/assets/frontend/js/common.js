@@ -444,7 +444,8 @@ function defaultCaptchaDialog(resp,ajaxOptions){
 }
 function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, captchaIdent){
     var isAjaxForm = ('ajaxFormObject' in ajaxOptions) && ajaxOptions.ajaxFormObject;
-    if(!isAjaxForm || (resp.Zone && $(ajaxOptions.ajaxFormObject).find('[name="'+resp.Zone+'"]').length<1)){
+    var inputField = resp.Zone || captchaName;
+    if(!isAjaxForm || (inputField && $(ajaxOptions.ajaxFormObject).find('[name="'+inputField+'"]').length<1)){
         if(!ajaxOptions.data) ajaxOptions.data={};
         switch(typeof(ajaxOptions.data)){
             case 'string':
@@ -965,6 +966,8 @@ function ajaxForm(a,onSuccess,onFailure){
             return true
         },
         success: function(r){
+            opts.data={};
+            if('postByCaptchaDialog' in opts) delete(opts.postByCaptchaDialog);
             onAjaxRespond(a,r,opts,onSuccess,onFailure);
         },error: function(xhr){
             cc.close();
