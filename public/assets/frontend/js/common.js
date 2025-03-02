@@ -271,7 +271,6 @@ function goCaptchaDialog(resp,ajaxOptions){
         var vcode = $form.find('[name="'+captchaName+'"]').val();
         postCaptchaDialogData(resp, ajaxOptions, vcode, null, captchaName, null);
         dialogRef.close();
-        closeLoadingFunction(ajaxOptions);
     }
     App.dialog().show({
         title: App.t('行为验证'),
@@ -338,7 +337,6 @@ function apiCaptchaDialog(resp,ajaxOptions){
         var idVal = $form.find('[name="'+captchaIdent+'"]').val();
         postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, captchaIdent);
         dialogRef.close();
-        closeLoadingFunction(ajaxOptions);
     }
     /*
     var captchaID=resp.Data.captchaID,jsCallback=resp.Data.jsCallback;
@@ -432,7 +430,6 @@ function defaultCaptchaDialog(resp,ajaxOptions){
                 var idVal = $('#dialog-captcha-id').val();
                 postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, captchaIdent);
                 dialogRef.close();
-                closeLoadingFunction(ajaxOptions);
             }
         },{
             label: App.t('取消'),
@@ -483,6 +480,7 @@ function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, cap
         }
     }
     ajaxOptions.postByCaptchaDialog=true;
+    closeLoadingFunction(ajaxOptions);
     if(isAjaxForm){
         var form=$(ajaxOptions.ajaxFormObject);
         var codeIpt=form.find('[name="'+captchaName+'"]');
@@ -490,8 +488,7 @@ function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, cap
             codeIpt.val(vcode);
             if(captchaIdent) form.find('[name="'+captchaIdent+'"]').val(idVal);
         }
-        //form.trigger('submit');
-        form.submit();
+        form.trigger('submit');
     }else{
         $.ajax(ajaxOptions);
     }
@@ -951,10 +948,10 @@ function ajaxForm(a,onSuccess,onFailure){
         };
     }
     var opts={
-        //ajaxFormObject: a,
+        ajaxFormObject: a,
         type: String($(a).attr('method')).toLowerCase()=='post'?'post':'get',
         dataType: 'json',
-        data: $(a).serializeArray(),
+        data: {},
         url: $(a).attr('action'),
         close: close,
         beforeSubmit:function(){
