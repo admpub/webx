@@ -346,9 +346,29 @@
         ws=$.extend({},ws,onopen);
       }
       return ws;
-    }, 
+    },
+    titleBlinking:false,
+    handleNotificationTag: function() {
+      if(App.titleBlinking) return;
+      App.titleBlinking = true;
+      var defaultTitle = document.title, newTitle = App.t('【你有新消息】');
+      var timer = setInterval(function () {
+        var title = document.title
+        if (document.hidden) {
+          if (title !== newTitle) {
+            document.title = newTitle
+          } else {
+            document.title = defaultTitle
+          }
+        } else {
+          App.titleBlinking = false;
+          clearInterval(timer)
+          document.title = defaultTitle
+        }
+      }, 500)
+    },
     notification:null,
-    sendNotification:function(title,content,icon,url,onfail) {
+    sendNotification:function(title,content,icon,url,sound,onfail) {
       if (!("Notification" in window)) {
         if(onfail) onfail();
         return;
@@ -357,20 +377,51 @@
         if(onfail) onfail();
         return;
       }
-      if (Notification.permission === "granted") {
-        App.notification = new Notification(title, {body: content, icon: icon, tag: "message", renotify:true});
-        if(url)App.notification.addEventListener("click",function(){window.location.href=url})
-        return;
-      }
+      var onclick=function(){
+        window.focus();
+        App.notification.close();
+        if(url)window.location.href=url;
+      }, create=function(){
+        App.notification = new Notification(title, {body:content, icon:icon, tag:"message", renotify:true, sound:sound});
+        App.notification.addEventListener("click",onclick)
+      };
+      if (Notification.permission === "granted") {create();return;}
       Notification.requestPermission(function(permission){
         if(permission === "granted"){
-          if(!App.notification) App.notification.close();
-          App.notification = new Notification(title, {body: content, icon: icon, tag: "message", renotify:true});
-          if(url)App.notification.addEventListener("click",function(){window.location.href=url})
+          create();
         }else{
           if(onfail) onfail();
         }
       });
+    },
+    messageNotify:function(title,d){
+      if(!d.avatar)d.avatar=ASSETS_URL+'/images/user_50.png';
+      App.sendNotification(
+        App.t('%s说: ','「'+d.author+'」'), // title, 
+        d.content,
+        d.avatar,
+        d.url,
+        d.sound,
+        function(){
+          if('lastMessageId' in App) App.message('remove',App.lastMessageId);
+          var audioHTML='';
+          if(d.sound){
+            audioHTML='<audio style="visibility:hidden;position:absolute;bottom:0;" controls="controls" hidden="true" src="'+d.sound+'"></audio>';
+          }
+          App.lastMessageId=App.message({
+            title: App.text2html(title),
+            text: '<strong>'+d.author+'</strong>'+(d.isAdmin?'<span class="badge badge-warning">'+App.t('管理员')+'</span>':'')+':<br /><a href="'+d.url+'" class="tx-white">'+d.content+'</a>'+audioHTML,
+            image: d.avatar,
+            class_name: 'dark',
+            sticky: true,
+            after_open: d.sound?function(item){
+              var audio=item.find('audio')[0];
+              audio.currentTime = 0;
+              audio.play();
+            }:function(){},
+          });
+          App.handleNotificationTag();
+      })
     },
     notifyListen:function(notifyURL){
       if(notifyURL==null) notifyURL='/user/notice';
@@ -470,22 +521,7 @@
           case 'notify':
           default:
             if(m.type=='message'){
-              if(!m.content.avatar)m.content.avatar=ASSETS_URL+'/images/user_50.png';
-              App.sendNotification(
-                App.t('%s说: ','「'+m.content.author+'」'), // m.title, 
-                m.content.content,
-                m.content.avatar,
-                m.content.url,
-                function(){
-                  if('lastMessageId' in App) App.message('remove',App.lastMessageId);
-                  App.lastMessageId=App.message({
-                    title: App.text2html(m.title),
-                    text: '<strong>'+m.content.author+'</strong>'+(m.content.isAdmin?'<span class="badge badge-warning">'+App.t('管理员')+'</span>':'')+':<br /><a href="'+m.content.url+'" class="tx-white">'+m.content.content+'</a>',
-                    image: m.content.avatar,
-                    class_name: 'dark',
-                    sticky: true
-                  });
-              })
+              App.messageNotify(m.title,m.content);
               return
             }
             if('notify'!=m.mode) m.mode='notify';
