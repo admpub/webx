@@ -14,8 +14,8 @@
   </div>
   <div class="content">
     <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="" id="message-send-form">
-    {{if gt $.Stored.replyId 0}}
-    {{$data := $.Stored.replyMsg}}
+    {{- if gt $.Stored.replyId 0 -}}
+    {{- $data := $.Stored.replyMsg -}}
     <div class="form-group">
       <label class="col-sm-2 control-label">{{"回复消息"|$.T}}</label>
       <div class="col-sm-9">
@@ -31,12 +31,12 @@
         </blockquote>
       </div>
     </div>
-    {{else}}
+    {{- else -}}
     <div class="form-group">
       <label class="col-sm-2 control-label">{{"收信人"|$.T}}</label>
       <div class="col-sm-9">
-        {{$recipientId := ($.Formx "recipientId").Uint64}}
-        {{$recipientType := $.Form "recipientType"}}
+        {{- $recipientId := ($.Formx "recipientId").Uint64 -}}
+        {{- $recipientType := $.Form "recipientType" -}}
         <div class="input-group no-margin-bottom">
             <span class="input-group-btn">
                 <select name="recipientType" id="recipientType" class="form-control" style="width:100px">
@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    {{end}}
+    {{- end -}}
     <div class="form-group">
       <label class="col-sm-2 control-label">{{"消息标题"|$.T}}</label>
       <div class="col-sm-9">

@@ -25,6 +25,23 @@ var GetAgentLevelList = func(echo.Context) (interface{}, error) {
 	return nil, nil
 }
 
+var customerLinks = []func(ctx echo.Context, c *modelCustomer.CustomerAndGroup) string{}
+
+func CustomerLink(ctx echo.Context, c *modelCustomer.CustomerAndGroup) string {
+	var t string
+	for _, cl := range customerLinks {
+		v := cl(ctx, c)
+		if len(v) > 0 {
+			t += ` ` + v
+		}
+	}
+	return t
+}
+
+func AddCustomerLink(fn func(ctx echo.Context, c *modelCustomer.CustomerAndGroup) string) {
+	customerLinks = append(customerLinks, fn)
+}
+
 func Index(ctx echo.Context) error {
 	groupId := ctx.Formx(`groupId`).Uint()
 	levelId := ctx.Formx(`levelId`).Uint()
@@ -114,6 +131,9 @@ func Index(ctx echo.Context) error {
 
 	ctx.Set(`groupId`, groupId)
 	ctx.SetFunc(`levelGroupName`, modelLevel.GroupList.Get)
+	ctx.SetFunc(`customerLink`, func(c *modelCustomer.CustomerAndGroup) string {
+		return CustomerLink(ctx, c)
+	})
 	return ctx.Render(`official/customer/index`, ret)
 }
 
