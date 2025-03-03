@@ -390,12 +390,9 @@
         App.notification.addEventListener("click",onclick)
       };
       if (Notification.permission === "granted") {create();return;}
+      if (onfail) onfail();
       Notification.requestPermission(function(permission){
-        if(permission === "granted"){
-          create();
-        }else{
-          if(onfail) onfail();
-        }
+        if(permission === "granted") create();
       });
     },
     messageNotify:function(title,d){
