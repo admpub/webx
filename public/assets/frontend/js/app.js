@@ -380,8 +380,12 @@
       var onclick=function(){
         window.focus();
         App.notification.close();
+        App.notification=null;
         if(url)window.location.href=url;
       }, create=function(){
+        if(('notification' in App) && App.notification) {
+          try{App.notification.close();}catch{}
+        }
         App.notification = new Notification(title, {body:content, icon:icon, tag:"message", renotify:true, sound:sound});
         App.notification.addEventListener("click",onclick)
       };
