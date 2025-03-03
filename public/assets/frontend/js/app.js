@@ -409,6 +409,7 @@
             audioHTML='<audio style="visibility:hidden;position:absolute;bottom:0;" controls="controls" hidden="true" src="'+d.sound+'"></audio>';
           }
           App.lastMessageId=App.message({
+            //position: 'bottom-right',
             title: App.text2html(title),
             text: '<strong>'+d.author+'</strong>'+(d.isAdmin?'<span class="badge badge-warning">'+App.t('管理员')+'</span>':'')+':<br /><a href="'+d.url+'" class="tx-white">'+d.content+'</a>'+audioHTML,
             image: d.avatar,
