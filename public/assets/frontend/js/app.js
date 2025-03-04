@@ -381,7 +381,11 @@
         window.focus();
         App.notification.close();
         App.notification=null;
-        if(url)window.location.href=url;
+        if('lastMessageId' in App) App.message('remove',App.lastMessageId);
+        if(url){
+          window.open(url)
+          //window.location.href=url;
+        }
       }, create=function(){
         if(('notification' in App) && App.notification) {
           try{App.notification.close();}catch{}
@@ -405,23 +409,31 @@
         d.sound,
         function(){
           if('lastMessageId' in App) App.message('remove',App.lastMessageId);
-          var audioHTML='';
-          if(d.sound){
-            audioHTML='<audio style="visibility:hidden;position:absolute;bottom:0;" controls="controls" hidden="true" src="'+d.sound+'"></audio>';
-          }
-          App.lastMessageId=App.message({
+          var options={
             //position: 'bottom-right',
             title: App.text2html(title),
-            text: '<strong>'+d.author+'</strong>'+(d.isAdmin?'<span class="badge badge-warning">'+App.t('管理员')+'</span>':'')+':<br /><a href="'+d.url+'" class="tx-white">'+d.content+'</a>'+audioHTML,
+            text: '<strong>'+d.author+'</strong>'+(d.isAdmin?'<span class="badge badge-warning">'+App.t('管理员')+'</span>':'')+':<br /><a href="'+d.url+'" class="tx-white">'+d.content+'</a>',
             image: d.avatar,
             class_name: 'dark',
             sticky: true,
-            after_open: d.sound?function(item){
-              var audio=item.find('audio')[0];
-              audio.currentTime = 0;
-              audio.play();
-            }:function(){},
-          });
+            after_open: function(item){
+              item.find('a').on('click',function(){
+                if(('notification' in App) && App.notification) {
+                  try{App.notification.close();App.notification=null;}catch{}
+                }
+              });
+              if(d.sound && item.find('audio').length>0){
+                var audio=item.find('audio')[0];
+                audio.currentTime = 0;
+                audio.play();
+              }
+            },
+            after_close: function(){}
+          };
+          if(d.sound){
+            options.text+='<audio style="visibility:hidden;position:absolute;bottom:0;" controls="controls" hidden="true" src="'+d.sound+'"></audio>';
+          }
+          App.lastMessageId=App.message(options);
           App.handleNotificationTag();
       })
     },
