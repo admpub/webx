@@ -424,8 +424,10 @@
               });
               if(d.sound && item.find('audio').length>0){
                 var audio=item.find('audio')[0];
-                audio.currentTime = 0;
-                audio.play();
+                if(audio.duration!==NaN){
+                  audio.currentTime = 0;
+                  audio.play();
+                }
               }
             },
             after_close: function(){}
