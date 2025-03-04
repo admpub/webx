@@ -382,10 +382,7 @@
         App.notification.close();
         App.notification=null;
         if('lastMessageId' in App) App.message('remove',App.lastMessageId);
-        if(url){
-          window.open(url)
-          //window.location.href=url;
-        }
+        if(url && !window.open(url)) window.location.href=url;
       }, create=function(){
         if(('notification' in App) && App.notification) {
           try{App.notification.close();}catch{}
