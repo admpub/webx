@@ -13,7 +13,7 @@ toolchain go1.24.0
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20250304063605-355636d94519
+	github.com/admpub/nging/v5 v5.3.4-0.20250305170133-db5a002c4402
 	github.com/coscms/webcore v0.8.8
 	github.com/coscms/webfront v0.0.0-20250305115231-58442bc79b24
 )
@@ -55,7 +55,7 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.6
-	github.com/webx-top/com v1.3.26
+	github.com/webx-top/com v1.3.28
 	github.com/webx-top/db v1.28.2
 	github.com/webx-top/echo v1.15.1
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
@@ -63,7 +63,7 @@ require (
 	github.com/webx-top/pagination v0.3.1
 	github.com/webx-top/validation v0.0.3 // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
-	golang.org/x/sync v0.11.0
+	golang.org/x/sync v0.12.0
 	gopkg.in/redis.v5 v5.2.9 // indirect
 )
 
