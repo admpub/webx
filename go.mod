@@ -15,7 +15,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250305170133-db5a002c4402
 	github.com/coscms/webcore v0.8.8
-	github.com/coscms/webfront v0.0.0-20250305115231-58442bc79b24
+	github.com/coscms/webfront v0.0.0-20250314151635-785e20f9b228
 )
 
 require (
@@ -304,7 +304,7 @@ require (
 	golang.org/x/image v0.24.0 // indirect
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
 	golang.org/x/mod v0.23.0 // indirect
-	golang.org/x/net v0.35.0 // indirect
+	golang.org/x/net v0.36.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
 	golang.org/x/time v0.10.0 // indirect
