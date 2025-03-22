@@ -1,8 +1,6 @@
 module github.com/admpub/webx
 
-go 1.24
-
-toolchain go1.24.0
+go 1.24.0
 
 // replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
@@ -14,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250305170133-db5a002c4402
-	github.com/coscms/webcore v0.8.9
-	github.com/coscms/webfront v0.0.0-20250316053935-5ebe8c41a6a6
+	github.com/coscms/webcore v0.8.11
+	github.com/coscms/webfront v0.0.0-20250322105926-d831ef14ca61
 )
 
 require (
@@ -46,7 +44,7 @@ require (
 	github.com/admpub/useragent v0.0.2 // indirect
 	github.com/caddy-plugins/ipfilter v1.1.8 // indirect
 	github.com/coscms/forms v1.13.10
-	github.com/coscms/oauth2s v0.4.2 // indirect
+	github.com/coscms/oauth2s v0.4.3 // indirect
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.15.0 // indirect
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76 // indirect
@@ -57,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.3.28
 	github.com/webx-top/db v1.28.2
-	github.com/webx-top/echo v1.15.2
+	github.com/webx-top/echo v1.16.0
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.1
@@ -123,7 +121,7 @@ require (
 	github.com/admpub/mail v0.0.0-20170408110349-d63147b0317b // indirect
 	github.com/admpub/map2struct v0.1.3 // indirect
 	github.com/admpub/mysql-schema-sync v0.2.6 // indirect
-	github.com/admpub/oauth2/v4 v4.0.2 // indirect
+	github.com/admpub/oauth2/v4 v4.0.3 // indirect
 	github.com/admpub/pester v0.0.0-20200411024648-005672a2bd48 // indirect
 	github.com/admpub/qrcode v0.0.3 // indirect
 	github.com/admpub/randomize v0.0.2 // indirect
@@ -138,6 +136,7 @@ require (
 	github.com/admpub/tail v1.1.1 // indirect
 	github.com/admpub/timeago v1.2.2 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
+	github.com/admpub/xencoding v0.0.2 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.72 // indirect
 	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/aws/aws-sdk-go v1.55.6 // indirect
@@ -187,8 +186,8 @@ require (
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
-	github.com/golang-jwt/jwt/v4 v4.5.1 // indirect
+	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/golang/snappy v1.0.0 // indirect
