@@ -357,6 +357,23 @@
   }
 }
 
+@media (max-width: 768px) {
+  .form-label-right .col-md-1.col-form-label,
+  .form-label-right .col-md-2.col-form-label,
+  .form-label-right .col-md-3.col-form-label,
+  .form-label-right .col-md-4.col-form-label,
+  .form-label-right .col-md-5.col-form-label,
+  .form-label-right .col-md-6.col-form-label,
+  .form-label-right .col-md-7.col-form-label,
+  .form-label-right .col-md-8.col-form-label,
+  .form-label-right .col-md-9.col-form-label,
+  .form-label-right .col-md-10.col-form-label,
+  .form-label-right .col-md-11.col-form-label,
+  .form-label-right .col-md-12.col-form-label {
+    text-align: left
+  }
+}
+
 .hx-gray-dark h1,
 .hx-gray-dark h2,
 .hx-gray-dark h3,
