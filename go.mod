@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250305170133-db5a002c4402
-	github.com/coscms/webcore v0.8.12
-	github.com/coscms/webfront v0.0.0-20250323020952-af74eef7b909
+	github.com/coscms/webcore v0.8.13
+	github.com/coscms/webfront v0.0.0-20250323032032-ea0ef846fb94
 )
 
 require (
@@ -136,7 +136,7 @@ require (
 	github.com/admpub/tail v1.1.1 // indirect
 	github.com/admpub/timeago v1.2.2 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
-	github.com/admpub/xencoding v0.0.2 // indirect
+	github.com/admpub/xencoding v0.0.3 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.72 // indirect
 	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/aws/aws-sdk-go v1.55.6 // indirect
