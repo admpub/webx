@@ -1,7 +1,8 @@
 <ul class="sub-menu">{{$v := $.Get `mobileHeaderNavChildren`}}
 {{- range $key,$sub := $v.FetchChildren -}}
+{{- $surl := $sub.URL -}}
     <li>
-        <a href="{{$sub.Url}}" class="{{- if $sub.HasChildren -}}has-arrow{{- end -}}{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}</a>
+        <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}" class="{{- if $sub.HasChildren -}}has-arrow{{- end -}}{{if $sub.IsActive}} active{{end}}"{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}</a>
         {{- if $sub.HasChildren -}}
         {{- $.Set `mobileHeaderNavChildren` $sub -}}
         {{Include "header_nav_mobile_children" $}}

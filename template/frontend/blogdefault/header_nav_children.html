@@ -1,7 +1,8 @@
 <ul class="submenu">{{$v := $.Get `headerNavChildren`}}
 {{- range $key,$sub := $v.FetchChildren -}}
+{{- $surl := $sub.URL -}}
     <li class="submenu-item {{- if $sub.HasChildren}} submenu-wrapper{{- end -}}">
-        <a href="{{$sub.Url}}" class="submenu-link{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
+        <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}" class="submenu-link{{if $sub.IsActive}} active{{end}}"{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>
             {{$sub.Title}}
             {{if $sub.HasChildren -}}
             <span class="icon">

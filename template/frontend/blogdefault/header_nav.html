@@ -21,8 +21,9 @@
                 {{- if $v.HasChildren -}}
                     {{- if eq $v.Direction `X` -}}
                         {{- range $key,$sub := $v.FetchChildren -}}
+                        {{- $surl := $sub.URL -}}
                         <li class="navmenu-item {{- if $sub.HasChildren}} submenu-wrapper{{- end -}}">
-                            <a href="{{$sub.Url}}" class="navmenu-link{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}
+                            <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}" class="navmenu-link{{if $sub.IsActive}} active{{end}}"{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}
                                 {{if $sub.HasChildren -}}
                                 <span class="icon">
                                     <i class="fal fa-chevron-down"></i>
