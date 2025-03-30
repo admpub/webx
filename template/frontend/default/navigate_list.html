@@ -4,9 +4,10 @@
 {{- if $v.HasChildren -}}
   {{- if eq $v.Direction `X` -}}
   {{- range $key,$sub := $v.FetchChildren -}}
+  {{- $surl := $sub.URL -}}
   <li class="nav-item dropdown">
     {{- if $sub.HasChildren -}}
-    <a href="{{if $sub.Url}}{{$sub.Url}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive}} active{{end}}" data-toggle="dropdown"{{if and $sub.Url $sub.Target}} target="{{$sub.Target}}"{{end}}>
+    <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive}} active{{end}}" data-toggle="dropdown"{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>
       {{$sub.Title|$.T|UpperCaseFirst}}
       {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
       <i class="fa fa-angle-down"></i>
@@ -14,7 +15,7 @@
     {{- $.Set `navigateListChildren` $sub -}}
     {{Include "#default#navigate_list_children" $}}
     {{- else -}}
-    <a href="{{if $sub.Url}}{{$sub.Url}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive}} active{{end}}"{{if and $sub.Url $sub.Target}} target="{{$sub.Target}}"{{end}}>
+    <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive}} active{{end}}"{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>
       {{$sub.Title|$.T|UpperCaseFirst}}
       {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
     </a>

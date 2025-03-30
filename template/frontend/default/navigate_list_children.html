@@ -1,6 +1,7 @@
 {{Strip}}<div class="dropdown-menu rounded-top-0">{{$v := $.Get `navigateListChildren`}}
 {{- range $key,$sub := $v.FetchChildren -}}
-<a href="{{$sub.Url}}" class="dropdown-item{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
+{{- $surl := $sub.URL -}}
+<a href="{{$surl}}" class="dropdown-item{{if $sub.IsActive}} active{{end}}"{{if $sub.Target}} target="{{$sub.Target}}"{{end}}>
     {{$sub.Title|$.T|UpperCaseFirst}}
     {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
 </a>
