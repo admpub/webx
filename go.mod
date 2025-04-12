@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250330060823-8ec5bec8fdc1
-	github.com/coscms/webcore v0.8.13
-	github.com/coscms/webfront v0.0.0-20250411091813-b918734d0541
+	github.com/coscms/webcore v0.8.14
+	github.com/coscms/webfront v0.0.0-20250412110501-e5fe07649fab
 )
 
 require (
@@ -54,7 +54,7 @@ require (
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.3.28
-	github.com/webx-top/db v1.28.2
+	github.com/webx-top/db v1.28.3
 	github.com/webx-top/echo v1.16.1
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
@@ -69,7 +69,7 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.3.0
-	github.com/nging-plugins/dbmanager v1.8.4
+	github.com/nging-plugins/dbmanager v1.8.5
 	github.com/silenceper/wechat/v2 v2.1.8
 )
 
@@ -233,7 +233,7 @@ require (
 	github.com/miekg/dns v1.1.65 // indirect
 	github.com/minio/crc64nvme v1.0.1 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/minio-go/v7 v7.0.88 // indirect
+	github.com/minio/minio-go/v7 v7.0.90 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
