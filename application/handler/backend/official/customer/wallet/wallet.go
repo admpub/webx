@@ -90,7 +90,7 @@ func Edit(ctx echo.Context) error {
 			m.Flow.TradeNo = ``
 			m.Flow.Status = modelCustomer.FlowStatusConfirmed //状态(pending-待确认;confirmed-已确认;canceled-已取消)
 			m.Flow.Description = changeBalanceReason
-			if err = m.AddFlow(); err != nil {
+			if err = m.AddRepeatableFlow(); err != nil {
 				goto END
 			}
 		}
@@ -106,7 +106,7 @@ func Edit(ctx echo.Context) error {
 			m.Flow.TradeNo = ``
 			m.Flow.Status = modelCustomer.FlowStatusConfirmed //状态(pending-待确认;confirmed-已确认;canceled-已取消)
 			m.Flow.Description = changeFreezeReason
-			if err = m.AddFlow(); err != nil {
+			if err = m.AddRepeatableFlow(); err != nil {
 				goto END
 			}
 		}

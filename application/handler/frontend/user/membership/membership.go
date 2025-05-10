@@ -139,7 +139,7 @@ func Buy(ctx echo.Context) error {
 		walletM.Flow.TradeNo = ``
 		walletM.Flow.Status = modelCustomer.FlowStatusConfirmed //状态(pending-待确认;confirmed-已确认;canceled-已取消)
 		walletM.Flow.Description = `购买会员套餐: ` + pkgM.Title
-		err = walletM.AddFlow()
+		err = walletM.AddRepeatableFlow()
 		if err != nil {
 			ctx.Rollback()
 			goto END
