@@ -78,8 +78,7 @@
         <thead>
           <tr>
             <th style="width:130px">{{"时间"|$.T}}</th>
-            <th style="width:100px">{{"资产"|$.T}}</th>
-            <th style="width:100px">{{"变动后"|$.T}}</th>
+            <th style="width:200px">{{"资产"|$.T}}</th>
             <th class="tx-right" style="width:100px">{{"类型"|$.T}}</th>
             <th>{{"说明"|$.T}}</th>
             <th style="width:100px">{{"状态"|$.T}}</th>
@@ -91,15 +90,14 @@
             <td id="wallet-flow-{{$v.Id}}" title="{{(Date $v.Created).Format `2006-01-02 15:04:05`}}">
               {{- $.TimeAgo $v.Created `now` -}}
             </td>
-            <td>
+            <td><div>
               {{- if gt $v.Amount $zeroAmt}}
               <span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i>{{call $.Func.formatAnyAssetAmount $v.AssetType $v.Amount}}</span>
               {{- else}}
               <span class="tx-danger"><i class="icon ion-android-arrow-down mg-r-5"></i>{{call $.Func.formatAnyAssetAmount $v.AssetType $v.Amount}}</span>
               {{- end}}
-            </td>
-            <td>
-              {{- call $.Func.formatAnyAssetAmount $v.AssetType $v.WalletAmount -}}
+            </div>
+            <div class="small">{{"变动后"|$.T}}: {{call $.Func.formatAnyAssetAmount $v.AssetType $v.WalletAmount -}}</div>
             </td>
             <td class="tx-right">
               {{- call $.Func.assetTypeName $v.AssetType -}}
