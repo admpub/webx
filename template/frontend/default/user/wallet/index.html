@@ -35,22 +35,22 @@
                     <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="tx-size-xs tx-gray-light">{{$v.V|$.T|UpperCaseFirst}}{{if $comment}}({{$comment|$.T}}){{end}}</a>
                   </div>
                   {{- if and $v.X (HasImplemented $v.X `RenderContextWithData`) -}}
-                  <div class="d-flex justify-content-between align-items-center balance-wrap">
+                  <div class="d-flex justify-content-between align-items-center balance-wrapper">
                     {{$.Set `fullAssetAmountFormat` `1`}}
                     {{- $.RenderWithData $v.X $asset.Balance -}}
                     {{$.Set `fullAssetAmountFormat` ``}}
                   </div>
                   {{- else -}}
-                  <h4 class="tx-inverse tx-arimo tx-bold mg-b-0">
+                  <h4 class="tx-inverse tx-arimo tx-bold mg-b-0 wrap">
                     {{- if $v.H.symbol}}{{$v.H.symbol|ToHTML}}{{end -}}
-                    {{- $asset.Balance -}}
+                    {{- $asset.Balance|ToDecimal -}}
                   </h4>
                   {{- end -}}
                   {{- if and (eq $v.K `money`) Config.base.recharge.On -}}
                   <a href="{{FrontendURL}}/user/wallet/recharge" class="btn btn-xs btn-pink tx-size-xs pd-y-0 pd-x-5" data-toggle="tooltip" title="{{`点击充值`|$.T}}" target="_blank">{{`充值`|$.T|UpperCaseFirst}}</a>
                   {{- end -}}
                   {{- if gt $asset.Freeze 0.0 -}}
-                  <span class="tx-size-xs tx-gray-light freeze-wrap">
+                  <span class="tx-size-xs tx-gray-light freeze-wrapper">
                     {{- `冻结`|$.T}}:
                     {{if and $v.X (HasImplemented $v.X `RenderContextWithData`) -}}
                     {{- $.RenderWithData $v.X $asset.Freeze -}}

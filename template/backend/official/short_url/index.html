@@ -37,7 +37,7 @@
 							<td>{{$v.Id}}</td>
 							<td>
 								<a href="{{FrontendURL}}/r/{{$v.ShortUrl}}" target="_blank" class="text-bold x-block">{{$v.ShortUrl}}</a>
-								<small>{{$v.LongUrl}}</small>
+								<small class="wrap">{{$v.LongUrl}}</small>
 							</td>
 							<td>{{if gt $v.Visited 0}}{{(Date $v.Visited).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</td>
 							<td>{{$v.Visits}}</td>
