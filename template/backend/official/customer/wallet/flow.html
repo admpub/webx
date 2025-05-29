@@ -21,22 +21,22 @@
 							<span class="input-group-addon">{{"资产类型"|$.T}}</span>
 							<select name="assetType" class="form-control" id="assetType" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{$assetType := $.Stored.assetType}} 
-								{{range $k, $v := $.Stored.assetTypes}}
-								<option value="{{$v.K}}" {{if eq $assetType $v.K}} selected{{end}}>{{$v.V}}</option>
-								{{end}}
+								{{- $assetType := $.Stored.assetType -}} 
+								{{- range $k, $v := $.Stored.assetTypes -}}
+								<option value="{{$v.K}}" {{- if eq $assetType $v.K}} selected{{end}}>{{$v.V}}</option>
+								{{- end}}
 							</select>
 							<span class="input-group-addon">{{"金额类型"|$.T}}</span>
 							<select name="amountType" class="form-control" id="amountType" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{$amountType := $.Form `amountType`}}
-								<option value="balance" {{if eq $amountType `balance`}} selected{{end}}>{{`可用余额`|$.T}}</option>
-								<option value="freeze" {{if eq $amountType `freeze`}} selected{{end}}>{{`冻结额`|$.T}}</option>
+								{{- $amountType := $.Form `amountType` -}}
+								<option value="balance" {{- if eq $amountType `balance`}} selected{{end}}>{{`可用余额`|$.T}}</option>
+								<option value="freeze" {{- if eq $amountType `freeze`}} selected{{end}}>{{`冻结额`|$.T}}</option>
 							</select>
 							<span class="input-group-addon">{{"消费类型"|$.T}}</span>
 							<select name="type" class="form-control" id="type" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{$type := $.Form `type`}}
+								{{- $type := $.Form `type` -}}
 								<option value="income" {{if eq $type `income`}} selected{{end}}>{{`收入`|$.T}}</option>
 								<option value="consume" {{if eq $type `consume`}} selected{{end}}>{{`支出`|$.T}}</option>
 							</select>
@@ -52,17 +52,13 @@
 						<tr>
 							<th><strong>{{"客户"|$.T}}</strong></th>
 							<th><strong>{{"发起人"|$.T}}</strong></th>
-							<th><strong>{{"资产类型"|$.T}}</strong></th>
 							<th><strong>{{"类型"|$.T}}</strong></th>
-							<th><strong>{{"额度"|$.T}}</strong></th>
-							<th><strong>{{"变动后"|$.T}}</strong></th>
-							<th><strong>{{"来源类型"|$.T}}</strong></th>
-							<th><strong>{{"来源表"|$.T}}</strong></th>
-							<th><strong>{{"来源ID"|$.T}}</strong></th>
+							<th class="text-right"><strong>{{"额度"|$.T}}</strong></th>
+							<th><strong>{{"来源"|$.T}}</strong></th>
 							<th><strong>{{"交易号"|$.T}}</strong></th>
 							<th><strong>{{"说明"|$.T}}</strong></th>
 							<th style="width:65px"><strong>{{"状态"|$.T}}</strong></th>
-							<th style="width:65px"><strong>{{"创建时间"|$.T}}</strong></th>
+							<th style="width:90px"><strong>{{"创建时间"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">{{$zero := Float64 0}}
@@ -70,27 +66,29 @@
 						<tr>
 							<td>{{if $v.Customer}}{{$v.Customer.Name}}{{else}}-{{end}}</td>
 							<td>{{if $v.SrcCustomer}}{{$v.SrcCustomer.Name}}{{else}}-{{end}}</td>
-							<td>{{$v.AssetTypeName}}</td>
-							<td>
-                                {{- if eq $v.AmountType `balance` -}}
-                                {{`余额`|$.T}}
-                                {{- else if eq $v.AmountType `freeze` -}}
-                                {{`冻结额`|$.T}}
-                                {{- else -}}
-                                {{`未知`|$.T}}: {{$v.AmountTyp}}
-                                {{- end -}}
+							<td><span title='{{"资产类型"|$.T}}'>{{$v.AssetTypeName}}</span><br />
+                                <span title='{{"金额类型"|$.T}}'>
+									{{- if eq $v.AmountType `balance` -}}
+                                	<span class="text-success">{{`余额`|$.T}}</span>
+                                	{{- else if eq $v.AmountType `freeze` -}}
+                                	<span class="text-danger">{{`冻结额`|$.T}}</span>
+                                	{{- else -}}
+                                	<span class="text-grey">{{`未知`|$.T}}: {{$v.AmountTyp}}</span>
+                                	{{- end -}}
+								</span>
                             </td>
-							<td>
+							<td class="text-right">
 								{{- if lt $v.Amount $zero -}}
-								<strong class="text-danger">{{$v.Amount}}</strong>
+								<strong class="text-danger">{{NumberFormat $v.Amount 2}}</strong>
 								{{- else -}}
-								<strong class="text-success">{{$v.Amount}}</strong>
+								<strong class="text-success">{{NumberFormat $v.Amount 2}}</strong>
 								{{- end -}}
+								<br /><small class="text-grey">{{"变动后"|$.T}}: {{NumberFormat $v.WalletAmount 2}}</small>
 							</td>
-							<td>{{$v.WalletAmount}}</td>
-							<td>{{$v.SourceType}}</td>
-							<td>{{$v.SourceTable}}</td>
-							<td>{{$v.SourceId}}</td>
+							<td><small>{{"来源类型"|$.T}}: {{$v.SourceType}}<br />
+							{{"来源表"|$.T}}: {{$v.SourceTable}}<br />
+							{{"来源ID"|$.T}} :{{$v.SourceId}}</small>
+							</td>
 							<td>{{$v.TradeNo}}</td>
 							<td>{{$v.Description}}</td>
 							<td>

@@ -37,8 +37,8 @@
 						<tr>
 							<th><strong>{{"客户"|$.T}}</strong></th>
 							<th><strong>{{"资产类型"|$.T}}</strong></th>
-							<th><strong>{{"余额"|$.T}}</strong></th>
-							<th><strong>{{"冻结"|$.T}}</strong></th>
+							<th class="text-right"><strong>{{"余额"|$.T}}</strong></th>
+							<th class="text-right"><strong>{{"冻结"|$.T}}</strong></th>
 							<th style="width:120px"><strong>{{"创建时间"|$.T}}</strong></th>
 							<th style="width:120px"><strong>{{"更新时间"|$.T}}</strong></th>
 							<th style="width:100px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
@@ -49,8 +49,8 @@
 						<tr>
 							<td>{{if $v.Customer}}{{$v.Customer.Name}}{{else}}-{{end}}</td>
 							<td>{{$v.AssetTypeName}}</td>
-							<td>{{$v.Balance}}</td>
-							<td>{{$v.Freeze}}</td>
+							<td class="text-right">{{NumberFormat $v.Balance 2}}</td>
+							<td class="text-right">{{NumberFormat $v.Freeze 2}}</td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{end}}</td>
 							<td class="text-center">
