@@ -11,7 +11,7 @@ go 1.24.3
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20250519041101-0e0d011b7183
+	github.com/admpub/nging/v5 v5.3.4-0.20250602102102-c269c5e32128
 	github.com/coscms/webcore v0.9.10
 	github.com/coscms/webfront v0.0.0-20250519041346-e69b6f76a554
 )
