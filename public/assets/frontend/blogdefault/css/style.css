@@ -4539,9 +4539,12 @@ ul.c-bredcrumb li,
   border: none;
   margin-bottom: 10px;
 }
+.single-post-wrapper .post-comments .pagination-wrapper{
+  margin-top: 10px;
+}
 .single-post-wrapper .post-comments .comment-card.reply + .pagination-wrapper{
   margin-left: 40px;
-  margin-top: 10px
+  margin-bottom: 10px
 }
 .single-post-wrapper .post-comments .card-meta {
   border: none;

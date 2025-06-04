@@ -5,10 +5,12 @@ import (
 	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
 	stdCode "github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/param"
 
 	"github.com/admpub/log"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/nerrors"
+	"github.com/coscms/webcore/model"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/frontend"
 	"github.com/coscms/webfront/library/top"
@@ -30,8 +32,15 @@ func Detail(c echo.Context) error {
 	}) + `?page={page}&size={size}&rows={rows}`
 
 	//commentURLLayout := `/article/comment_list?html=1&_pjax=true&page={page}&size={size}&rows={rows}&id=` + param.AsString(id)
-	//flat := true
-	flat := c.Formx(`flat`, `1`).Bool()
+	flat := true
+	if sessdata.IsAdmin(c) {
+		flat = c.Formx(`flat`, `1`).Bool()
+	}
+	kvM := model.NewKv(c)
+	v, _ := kvM.GetValue(`ARTICLE_COMMENT_FLAT`, `1`, `文章评论是否扁平化显示`)
+	if len(v) > 0 {
+		flat = param.AsBool(v)
+	}
 	c.Set(`flat`, flat)
 	c.SetFunc(`commentList`, func() []*modelComment.CommentAndExtra {
 		c.Request().Form().Set(`_pjax`, `true`)
