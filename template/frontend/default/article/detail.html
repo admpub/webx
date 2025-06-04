@@ -172,8 +172,9 @@
 <script type="text/javascript" src="{{AssetsXURL}}/js/page/article_detail.js?t={{BuildTime}}"></script>
 <script>
 $(function(){
-  bindCommentList($('#comment-list-container'), false, $('#headPanel').height()+90);
-  initPageAllCommentForm();
+  var offsetY=$('#headPanel').height()+90;
+  bindCommentList($('#comment-list-container'), false, offsetY);
+  initPageAllCommentForm(offsetY);
 });
 </script>
 <!-- <script type="text/javascript" src="{{AssetsXURL}}/js/page/comment.js?t={{BuildTime}}"></script> -->

@@ -4516,17 +4516,11 @@ ul.c-bredcrumb li,
 .single-post-wrapper .post-comments .comment-card {
   border: 1px solid #dae6f9;
   border-radius: 15px;
-  padding: 30px;
+  padding: 15px;
 }
-
+.single-post-wrapper .post-comments .body-text,
 .single-post-wrapper .post-comments .comment-card p {
   font-size: 16px;
-}
-
-@media (max-width: 575px) {
-  .single-post-wrapper .post-comments .comment-card {
-    padding: 20px;
-  }
 }
 
 .single-post-wrapper .post-comments .comment-card:not(:last-child) {
