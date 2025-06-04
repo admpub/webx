@@ -82,7 +82,7 @@
                         <span id="article-likes">{{$data.Likes}}</span>
                       </a>
                     </span>
-                    <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`点赞数量`|$.T}}">
+                    <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`收藏`|$.T}}">
                       <a href="javascript:;" class="{{if $.Stored.favorited}}tx-success{{else}}tx-gray-light{{end}} hover-success d-inline-block" id="collect-article" data-article-id="{{$data.Id}}">
                         <i class="fa fa-star tx-gray-lighter"></i>
                         <span>{{if $.Stored.favorited}}{{`已收藏`|$.T}}{{else}}{{`收藏`|$.T}}{{end}}</span>

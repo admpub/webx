@@ -56,13 +56,17 @@
                                         <span class="meta-item"> {{(Date $data.Created).Format ($.T "2006年1月2日")}} </span>
                                         {{- if eq $data.CloseComment "N" -}}
                                         <a href="#comment-list" class="meta-item">
-                                            <i class="fal fa-comment"></i>
+                                            <i class="fa fa-comment"></i>
                                             {{$data.Comments}}
                                         </a>
                                         {{- end -}}
                                         <a href="javascript:;" class="meta-item {{if and $clickFlow (eq $clickFlow.Type `like`)}}tx-success{{else}}tx-gray-light{{end}}" id="declare-like" data-article-id="{{$data.Id}}">
-                                            <i class="fal fa-thumbs-up"></i>
+                                            <i class="fa fa-thumbs-up"></i>
                                             <span id="article-likes">{{$data.Likes}}</span>
+                                        </a>
+                                        <a href="javascript:;" class="meta-item {{if $.Stored.favorited}}tx-success{{else}}tx-gray-light{{end}}" id="collect-article" data-article-id="{{$data.Id}}">
+                                            <i class="fa fa-star"></i>
+                                            <span>{{if $.Stored.favorited}}{{`已收藏`|$.T}}{{else}}{{`收藏`|$.T}}{{end}}</span>
                                         </a>
                                     </div>
                                     <div class="post-content">

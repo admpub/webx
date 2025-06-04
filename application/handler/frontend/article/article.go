@@ -30,7 +30,8 @@ func Detail(c echo.Context) error {
 	}) + `?page={page}&size={size}&rows={rows}`
 
 	//commentURLLayout := `/article/comment_list?html=1&_pjax=true&page={page}&size={size}&rows={rows}&id=` + param.AsString(id)
-	flat := true
+	//flat := true
+	flat := c.Formx(`flat`, `1`).Bool()
 	c.Set(`flat`, flat)
 	c.SetFunc(`commentList`, func() []*modelComment.CommentAndExtra {
 		c.Request().Form().Set(`_pjax`, `true`)

@@ -26,7 +26,7 @@
                             <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}" class="navmenu-link{{if $sub.IsActive}} active{{end}}"{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>{{$sub.Title}}
                                 {{if $sub.HasChildren -}}
                                 <span class="icon">
-                                    <i class="fal fa-chevron-down"></i>
+                                    <i class="fa fa-chevron-down"></i>
                                 </span>
                                 {{- end -}}
                             </a>
@@ -41,7 +41,7 @@
                         <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="navmenu-link{{if $v.IsActive}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
                             {{$v.Title}}
                             <span class="icon">
-                                <i class="fal fa-chevron-down"></i>
+                                <i class="fa fa-chevron-down"></i>
                             </span>
                         </a>
                         {{- $.Set `headerNavChildren` $v -}}
@@ -59,7 +59,7 @@
                 <!-- <li class="navmenu-item submenu-wrapper">
                     <a href="#" class="navmenu-link">Pages
                         <span class="icon">
-                            <i class="fal fa-chevron-down"></i>
+                            <i class="fa fa-chevron-down"></i>
                         </span>
                     </a>
                     <ul class="submenu">
@@ -72,7 +72,7 @@
                     <a href="blog-list.html" class="navmenu-link"
                         >Technology
                         <span class="icon">
-                            <i class="fal fa-chevron-down"></i>
+                            <i class="fa fa-chevron-down"></i>
                         </span>
                     </a>
                     {{/*Include "header_nav_children_mega"*/}}

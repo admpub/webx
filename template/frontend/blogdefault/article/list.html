@@ -53,11 +53,11 @@
                                         </div>
                                         <span class="meta-item"> {{(Date $v.Created).Format `2006-01-02`}} </span>
                                         <span class="meta-item">
-                                            <i class="fal fa-comment"></i>
+                                            <i class="fa fa-comment"></i>
                                             {{$v.Comments}}
                                         </span>
                                         <span class="meta-item">
-                                            <i class="fal fa-share-alt"></i>
+                                            <i class="fa fa-share-alt"></i>
                                         </span>
                                     </div>
                                     <div class="post-content">
@@ -82,12 +82,12 @@
                             {{end}}
                         </div>
                         <!-- PAGINATION -->
-                        {{($.Stored.pagination.SetNum 1).Render}}
+                        {{($.Stored.pagination.SetNum 1).Render `#blogdefault#pagination`}}
                         <!-- ============= AD CAMPAIGN-2 ============= -->
-                        {{Include "common/ad_banner2" (MakeMap `ident` `ad6` `title` `虚位以待` `url` `#`)}}
+                        {{Include "#blogdefault#common/ad_banner2" (MakeMap `ident` `ad6` `title` `虚位以待` `url` `#`)}}
                     </div>
                     <div class="col-lg-3">
-                        {{Include "article/right/right"}}
+                        {{Include "#blogdefault#article/right/right"}}
                     </div>
                 </div>
             </div>

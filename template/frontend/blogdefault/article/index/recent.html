@@ -26,7 +26,7 @@
                             {{- end -}}
                             <span class="meta-item"> {{(Date $v.Created).Format `2006-01-02`}} </span>
                             <span class="meta-item">
-                                <i class="fal fa-comment"></i>
+                                <i class="fa fa-comment"></i>
                                 {{$v.Comments}}
                             </span>
                         </div>
@@ -69,7 +69,7 @@
                                     </div>
                                     <span class="meta-item"> {{(Date $v.Created).Format `2006-01-02`}} </span>
                                     <span class="meta-item">
-                                        <i class="fal fa-share-alt"></i>
+                                        <i class="fa fa-share-alt"></i>
                                     </span>
                                 </div>
                                 <a href="{{URLByName `article.detail` $v.Id}}">

@@ -47,9 +47,9 @@
 {{- if $commentList -}}
     {{- $paging := $.Get `paginationComment` -}}
     {{- if $paging -}}
-    {{- ($paging.SetNum 1).Render -}}
+    {{- ($paging.SetNum 1).Render `#blogdefault#pagination` -}}
     {{- else -}}
-    {{- ($.Stored.pagination.SetNum 1).Render -}}
+    {{- ($.Stored.pagination.SetNum 1).Render `#blogdefault#pagination` -}}
     {{- end -}}
 {{- end -}}
 </div><!-- /#comment-list-container -->
