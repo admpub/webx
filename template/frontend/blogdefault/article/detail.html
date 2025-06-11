@@ -3,7 +3,7 @@
 {{Block `releaseDate`}}{{(Date $.Stored.data.Created).Format `2006-01-02`}}{{/Block}}
 {{Block "title"}}{{$.Stored.data.Title}}{{/Block}}
 {{Block "keywords"}}{{$.Stored.data.Keywords}}{{/Block}}
-{{Block "description"}}{{if $.Stored.data.Summary}}{{$.Stored.data.Summary}}{{else}}{{Substr (StripTags $.Stored.data.Content) `...` 200}}{{end}}{{/Block}}
+{{Block "description"}}{{if $.Stored.data.Summary}}{{$.Stored.data.Summary}}{{else}}{{Substr (StripTags $.Stored.data.Content true) `...` 200}}{{end}}{{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsXURL}}/css/page/article_detail.css?t={{BuildTime}}" />
 {{/Block}}
