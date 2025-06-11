@@ -2,6 +2,7 @@
 {{Block "title"}}{{$.Stored.data.Title}}{{/Block}}
 {{Block "keywords"}}{{$.Stored.data.Keywords}}{{/Block}}
 {{Block "description"}}{{$.Stored.data.Summary}}{{/Block}}
+{{Block `releaseDate`}}{{(Date $.Stored.data.Created).Format `2006-01-02`}}{{/Block}}
 {{Block "bodyAttr"}} class="landing-3 pd-t-70 bg-gray-lightest"{{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsXURL}}/css/page/article_detail.css?t={{BuildTime}}" />
