@@ -1,5 +1,5 @@
 {{Strip}}{{Extend "#blogdefault#base"}}
-{{Block `image`}}{{$.Stored.data.Image}}{{/Block}}
+{{Block `image`}}{{if $.Stored.data.Image}}{{$.FullURL $.Stored.data.Image}}{{end}}{{/Block}}
 {{Block `releaseDate`}}{{(Date $.Stored.data.Created).Format `2006-01-02`}}{{/Block}}
 {{Block "title"}}{{$.Stored.data.Title}}{{/Block}}
 {{Block "keywords"}}{{$.Stored.data.Keywords}}{{/Block}}
