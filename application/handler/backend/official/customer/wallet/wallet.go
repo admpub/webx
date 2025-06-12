@@ -32,7 +32,9 @@ func Index(ctx echo.Context) error {
 		cond.AddKV(`asset_type`, assetType)
 	}
 	list, err := m.ListPage(cond, `asset_type`)
-	if err == nil && customerID > 0 && len(assetType) > 0 && len(list) == 0 {
+	if err == nil &&
+		customerID > 0 && len(assetType) > 0 &&
+		len(list) == 0 && modelCustomer.AssetTypes.Has(assetType) {
 		walletData := dbschema.NewOfficialCustomerWallet(ctx)
 		walletData.CustomerId = customerID
 		walletData.AssetType = assetType
