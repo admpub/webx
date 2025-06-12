@@ -8,6 +8,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/dbschema"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
@@ -31,6 +32,23 @@ func Index(ctx echo.Context) error {
 		cond.AddKV(`asset_type`, assetType)
 	}
 	list, err := m.ListPage(cond, `asset_type`)
+	if err == nil && customerID > 0 && len(assetType) > 0 && len(list) == 0 {
+		walletData := dbschema.NewOfficialCustomerWallet(ctx)
+		walletData.CustomerId = customerID
+		walletData.AssetType = assetType
+		list = []*modelCustomer.WalletExt{
+			{
+				OfficialCustomerWallet: walletData,
+				Customer: &modelCustomer.CustomerBase{
+					Id:     walletData.CustomerId,
+					Name:   cs.Name,
+					Gender: cs.Gender,
+					Avatar: cs.Avatar,
+				},
+				AssetTypeName: modelCustomer.AssetTypes.Get(walletData.AssetType),
+			},
+		}
+	}
 	ctx.Set(`listData`, list)
 	assetTypes := modelCustomer.AssetTypeList()
 	ctx.Set(`assetTypes`, assetTypes)
