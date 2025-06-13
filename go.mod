@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250612052531-7975ff7c1ea2
-	github.com/coscms/webcore v0.9.13
-	github.com/coscms/webfront v0.0.0-20250612085849-848cff002026
+	github.com/coscms/webcore v0.9.14-0.20250613041248-41836f56e761
+	github.com/coscms/webfront v0.0.0-20250613041353-94f748c5a08a
 )
 
 require (
@@ -96,7 +96,7 @@ require (
 	github.com/admpub/gifresize v1.0.2 // indirect
 	github.com/admpub/go-bindata-assetfs v0.0.1 // indirect
 	github.com/admpub/go-captcha-assets v0.0.0-20250122071745-baa7da4bda0d // indirect
-	github.com/admpub/go-captcha/v2 v2.0.6 // indirect
+	github.com/admpub/go-captcha/v2 v2.0.7 // indirect
 	github.com/admpub/go-figure v0.0.2 // indirect
 	github.com/admpub/go-isatty v0.0.11 // indirect
 	github.com/admpub/go-lock v1.3.0 // indirect
@@ -146,7 +146,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/coscms/captcha v0.2.2 // indirect
+	github.com/coscms/captcha v0.2.3 // indirect
 	github.com/coscms/go-imgparse v0.0.1 // indirect
 	github.com/coscms/session-boltstore v0.0.0-20250122075547-392556af7a5a // indirect
 	github.com/coscms/session-mysqlstore v0.0.0-20250122075110-d94d6bc2ce54 // indirect
