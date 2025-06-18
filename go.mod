@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250616151100-ec442060b6ea
-	github.com/coscms/webcore v0.9.16
-	github.com/coscms/webfront v0.0.0-20250616143958-9d7f843b6b5a
+	github.com/coscms/webcore v0.9.17
+	github.com/coscms/webfront v0.0.0-20250618045027-e79a26809948
 )
 
 require (
@@ -25,7 +25,7 @@ require (
 	github.com/admpub/decimal v1.3.1 // indirect
 	github.com/admpub/errors v0.8.2
 	github.com/admpub/fasttemplate v0.0.2 // indirect
-	github.com/admpub/go-download/v2 v2.1.15 // indirect
+	github.com/admpub/go-download/v2 v2.2.0 // indirect
 	github.com/admpub/go-hashids v2.0.1+incompatible // indirect
 	github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe // indirect
 	github.com/admpub/godotenv v1.4.3
@@ -130,7 +130,7 @@ require (
 	github.com/admpub/regexp2 v1.1.8 // indirect
 	github.com/admpub/safesvg v0.0.8 // indirect
 	github.com/admpub/securecookie v1.3.0 // indirect
-	github.com/admpub/service v0.0.5 // indirect
+	github.com/admpub/service v0.0.7 // indirect
 	github.com/admpub/sockjs-go/v3 v3.0.1 // indirect
 	github.com/admpub/sonyflake v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
@@ -148,8 +148,8 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/coscms/captcha v0.2.3 // indirect
 	github.com/coscms/go-imgparse v0.0.1 // indirect
-	github.com/coscms/session-boltstore v0.0.0-20250122075547-392556af7a5a // indirect
-	github.com/coscms/session-mysqlstore v0.0.0-20250122075110-d94d6bc2ce54 // indirect
+	github.com/coscms/session-boltstore v0.0.0-20250617034717-a58d8848fa61 // indirect
+	github.com/coscms/session-mysqlstore v0.0.0-20250617035706-a20b648443b1 // indirect
 	github.com/coscms/session-redisstore v0.0.0-20250122075426-4fb2344fcc5b // indirect
 	github.com/coscms/session-sqlitestore v0.0.4 // indirect
 	github.com/coscms/session-sqlstore v0.0.1 // indirect
@@ -182,7 +182,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.26.0 // indirect
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
-	github.com/go-sql-driver/mysql v1.9.2 // indirect
+	github.com/go-sql-driver/mysql v1.9.3 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
@@ -234,7 +234,7 @@ require (
 	github.com/miekg/dns v1.1.66 // indirect
 	github.com/minio/crc64nvme v1.0.2 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/minio-go/v7 v7.0.92 // indirect
+	github.com/minio/minio-go/v7 v7.0.94 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
@@ -317,7 +317,7 @@ require (
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	modernc.org/libc v1.65.10 // indirect
+	modernc.org/libc v1.66.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
 	modernc.org/sqlite v1.38.0 // indirect
