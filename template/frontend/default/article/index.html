@@ -1,4 +1,4 @@
-{{Strip}}{{Extend "base"}}
+{{Strip}}{{Extend "#default#base"}}
 {{Block "title"}}{{- "文章列表"|$.T -}}{{range $index, $category := $.Stored.categories}} - {{$category.Name}}{{- end -}}{{/Block}}
 {{Block "keywords"}}
 {{- if Config.base.siteMetaKeywords}}
