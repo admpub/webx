@@ -109,9 +109,7 @@ func AreaEdit(ctx echo.Context) error {
 }
 
 func AreaDelete(ctx echo.Context) error {
-	id := ctx.FormxValues(`id`).Uint(func(index int, value uint) bool {
-		return value > 0
-	})
+	id := ctx.FormxValues(`id`).Uint(param.IsGreaterThanZeroElement)
 	m := official.NewArea(ctx)
 	var err error
 	for _, _v := range id {

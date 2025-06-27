@@ -3,6 +3,7 @@ package tool
 import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
@@ -100,9 +101,7 @@ func AreaGroupEdit(ctx echo.Context) error {
 }
 
 func AreaGroupDelete(ctx echo.Context) error {
-	id := ctx.FormxValues(`id`).Uint(func(index int, value uint) bool {
-		return value > 0
-	})
+	id := ctx.FormxValues(`id`).Uint(param.IsGreaterThanZeroElement)
 	m := official.NewAreaGroup(ctx)
 	var err error
 	for _, _v := range id {

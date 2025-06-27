@@ -10,6 +10,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/param"
 )
 
 func FrontendRouteRewrite(ctx echo.Context) error {
@@ -135,9 +136,7 @@ END:
 }
 
 func FrontendRouteRewriteDelete(ctx echo.Context) error {
-	ids := ctx.FormxValues(`id`).Uint64(func(index int, value uint64) bool {
-		return value > 0
-	})
+	ids := ctx.FormxValues(`id`).Uint64(param.IsGreaterThanZeroElement)
 	m := official.NewRouteRewrite(ctx)
 	var err error
 	for _, _v := range ids {

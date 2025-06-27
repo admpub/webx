@@ -7,6 +7,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/param"
 
 	"github.com/admpub/webx/application/handler/backend/official/page"
 	"github.com/coscms/webcore/library/backend"
@@ -140,9 +141,7 @@ func FrontendRoutePageEdit(ctx echo.Context) error {
 }
 
 func FrontendRoutePageDelete(ctx echo.Context) error {
-	ids := ctx.FormxValues(`id`).Uint64(func(index int, value uint64) bool {
-		return value > 0
-	})
+	ids := ctx.FormxValues(`id`).Uint64(param.IsGreaterThanZeroElement)
 	m := official.NewRoutePage(ctx)
 	var err error
 	for _, _v := range ids {
