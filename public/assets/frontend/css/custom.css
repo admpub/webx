@@ -52,11 +52,21 @@
 }
 
 .label-gray {
+  background-color: gray;
+  color: #eee;
+}
+
+.label-gray:hover{
+  background-color: #707070;
+  color: #fafafa;
+}
+
+.label-gray-light {
   background-color: #eee;
   color: #999;
 }
 
-.label-gray:hover{
+.label-gray-light:hover{
   background-color: #ddd;
   color: #999;
 }
