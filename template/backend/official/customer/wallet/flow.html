@@ -79,11 +79,11 @@
                             </td>
 							<td class="text-right">
 								{{- if lt $v.Amount $zero -}}
-								<strong class="text-danger">{{NumberFormat $v.Amount 2}}</strong>
+								<strong class="text-danger">{{NumberFormat $v.Amount 4}}</strong>
 								{{- else -}}
-								<strong class="text-success">{{NumberFormat $v.Amount 2}}</strong>
+								<strong class="text-success">{{NumberFormat $v.Amount 4}}</strong>
 								{{- end -}}
-								<br /><small class="text-grey">{{"变动后"|$.T}}: {{NumberFormat $v.WalletAmount 2}}</small>
+								<br /><small class="text-grey">{{"变动后"|$.T}}: {{NumberFormat $v.WalletAmount 4}}</small>
 							</td>
 							<td><small>{{"来源类型"|$.T}}: {{$v.SourceType}}<br />
 							{{"来源表"|$.T}}: {{$v.SourceTable}}<br />

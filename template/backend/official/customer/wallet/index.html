@@ -49,8 +49,8 @@
 						<tr>
 							<td>{{if $v.Customer}}{{$v.Customer.Name}}{{else}}-{{end}}</td>
 							<td>{{$v.AssetTypeName}}</td>
-							<td class="text-right">{{NumberFormat $v.Balance 2}}</td>
-							<td class="text-right">{{NumberFormat $v.Freeze 2}}</td>
+							<td class="text-right">{{NumberFormat $v.Balance 4}}</td>
+							<td class="text-right">{{NumberFormat $v.Freeze 4}}</td>
 							<td>{{if gt $v.Created 0}}{{(Date $v.Created).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</td>
 							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</td>
 							<td class="text-center">

@@ -44,9 +44,9 @@
                 <label class="col-sm-2 control-label">{{"余额"|$.T}}</label>
                 <div class="col-sm-8">{{$balance := $.Form `balance` `0`}}
                   <div class="input-group no-margin">
-                  <input type="text" class="form-control" name="balance" value="{{NumberFormat $balance 2}}" disabled="disabled" />
+                  <input type="text" class="form-control" name="balance" value="{{NumberFormat $balance 4}}" disabled="disabled" />
                   <span class="input-group-addon">{{"调整额度"|$.T}}</span>
-                  <input type="number" class="form-control" name="changeBalance" value="{{$.Form `changeBalance` `0`}}" placeholder="{{`负数代表扣除`|$.T}}" title="{{`负数代表扣除`|$.T}}" min="{{if ne $balance `0`}}-{{end}}{{$balance}}" step="0.01" data-parsley-errors-container="#balance-error-container" />
+                  <input type="number" class="form-control" name="changeBalance" value="{{$.Form `changeBalance` `0`}}" placeholder="{{`负数代表扣除`|$.T}}" title="{{`负数代表扣除`|$.T}}" min="{{if ne $balance `0`}}-{{end}}{{$balance}}" step="0.03" data-parsley-errors-container="#balance-error-container" />
                   <span class="input-group-addon">{{"调整原因"|$.T}}</span>
                   <input type="text" class="form-control" name="changeBalanceReason" value="{{$.Form `changeBalanceReason`}}" placeholder="" />
                   </div>
@@ -58,9 +58,9 @@
                 <label class="col-sm-2 control-label">{{"冻结"|$.T}}</label>
                 <div class="col-sm-8">{{$freeze := $.Form `freeze` `0`}}
                   <div class="input-group no-margin">
-                  <input type="text" class="form-control" name="freeze" value="{{NumberFormat $freeze 2}}" disabled="disabled" />
+                  <input type="text" class="form-control" name="freeze" value="{{NumberFormat $freeze 4}}" disabled="disabled" />
                   <span class="input-group-addon">{{"调整额度"|$.T}}</span>
-                  <input type="number" class="form-control" name="changeFreeze" value="{{$.Form `changeFreeze` `0`}}" placeholder="{{`负数代表扣除`|$.T}}" title="{{`负数代表扣除`|$.T}}" min="{{if ne $freeze `0`}}-{{end}}{{$freeze}}" step="0.01" data-parsley-errors-container="#freeze-error-container" />
+                  <input type="number" class="form-control" name="changeFreeze" value="{{$.Form `changeFreeze` `0`}}" placeholder="{{`负数代表扣除`|$.T}}" title="{{`负数代表扣除`|$.T}}" min="{{if ne $freeze `0`}}-{{end}}{{$freeze}}" step="0.001" data-parsley-errors-container="#freeze-error-container" />
                   <span class="input-group-addon">{{"调整原因"|$.T}}</span>
                   <input type="text" class="form-control" name="changeFreezeReason" value="{{$.Form `changeFreezeReason`}}" placeholder="" />
                   </div>
