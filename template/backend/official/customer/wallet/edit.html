@@ -46,7 +46,7 @@
                   <div class="input-group no-margin">
                   <input type="text" class="form-control" name="balance" value="{{NumberFormat $balance 4}}" disabled="disabled" />
                   <span class="input-group-addon">{{"调整额度"|$.T}}</span>
-                  <input type="number" class="form-control" name="changeBalance" value="{{$.Form `changeBalance` `0`}}" placeholder="{{`负数代表扣除`|$.T}}" title="{{`负数代表扣除`|$.T}}" min="{{if ne $balance `0`}}-{{end}}{{$balance}}" step="0.03" data-parsley-errors-container="#balance-error-container" />
+                  <input type="number" class="form-control" name="changeBalance" value="{{$.Form `changeBalance` `0`}}" placeholder="{{`负数代表扣除`|$.T}}" title="{{`负数代表扣除`|$.T}}" min="{{if ne $balance `0`}}-{{end}}{{$balance}}" step="0.001" data-parsley-errors-container="#balance-error-container" />
                   <span class="input-group-addon">{{"调整原因"|$.T}}</span>
                   <input type="text" class="form-control" name="changeBalanceReason" value="{{$.Form `changeBalanceReason`}}" placeholder="" />
                   </div>
