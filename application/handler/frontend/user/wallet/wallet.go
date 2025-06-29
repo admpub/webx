@@ -24,7 +24,7 @@ func Index(ctx echo.Context) error {
 	flowM := dbschema.NewOfficialCustomerWalletFlow(ctx)
 	cond := db.NewCompounds()
 	cond.AddKV(`customer_id`, customer.Id)
-	err = flowM.ListPageByOffset(cond, flowM, `-id`)
+	err = flowM.ListPageByOffset(cond, `-id`)
 	ctx.Set(`list`, flowM.Objects())
 	ctx.Set(`activeURL`, `/user/wallet`)
 	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)
