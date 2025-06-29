@@ -22,9 +22,9 @@ func Index(ctx echo.Context) error {
 	ctx.Set(`assetTypes`, modelCustomer.AssetTypeList())
 	pagination.SetPageDefaultSize(ctx, 20)
 	flowM := dbschema.NewOfficialCustomerWalletFlow(ctx)
-	_, err = common.NewLister(flowM, nil, func(r db.Result) db.Result {
-		return r.OrderBy(`-id`)
-	}, `customer_id`, customer.Id).Paging(ctx)
+	cond := db.NewCompounds()
+	cond.AddKV(`customer_id`, customer.Id)
+	err = flowM.ListPageByOffset(cond, flowM, `-id`)
 	ctx.Set(`list`, flowM.Objects())
 	ctx.Set(`activeURL`, `/user/wallet`)
 	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)

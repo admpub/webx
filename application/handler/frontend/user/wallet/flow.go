@@ -32,9 +32,7 @@ func Flow(ctx echo.Context) error {
 		ctx.SetFunc(`formatAnyAssetAmount`, modelCustomer.MakeAnyAssetAmountFormatter(ctx))
 	}
 	pagination.SetPageDefaultSize(ctx, 20)
-	_, err := common.NewLister(flowM, nil, func(r db.Result) db.Result {
-		return r.OrderBy(`-id`)
-	}, cond.And()).Paging(ctx)
+	err := flowM.ListPageByOffset(cond, flowM, `-id`)
 	ctx.Set(`list`, flowM.Objects())
 	ctx.Set(`activeURL`, `/user/wallet`)
 	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)

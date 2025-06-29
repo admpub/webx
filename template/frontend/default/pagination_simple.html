@@ -2,6 +2,30 @@
 {{- with $.Data -}}
 <nav aria-label="Page navigation">
     <ul class="pagination mg-0">
+{{- if .IsPosition -}}
+  {{- $isFirst := .IsFirst -}}
+  {{- if not $isFirst -}}
+  <li class="page-item wd-100">
+    <a class="page-link" href="{{.URL ``}}" aria-label="First"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+    {{`第一页`|$.T}}
+    </a>
+  </li>
+  {{- end -}}
+  {{- if .HasPrev -}}
+  <li class="page-item wd-100">
+    <a class="page-link" href="{{.URL .PrevPosition}}" aria-label="Next"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+    {{`上一页`|$.T}}
+    </a>
+  </li>
+  {{- end -}}
+  {{- if .HasNext -}}
+  <li class="page-item active {{if $isFirst}}wd-200{{else}}wd-100{{end}}">
+    <a class="page-link" href="{{.URL .NextPosition}}" aria-label="Next"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
+    {{`下一页`|$.T}}
+    </a>
+  </li>
+  {{- end -}}
+{{- else -}}
     {{- $page := .Page -}}
       <li class="page-item{{if eq $page 1}} disabled{{end}}">
         <a class="page-link" href="{{if eq $page 1}}javascript:;{{else}}{{.URL .PrevPage}}{{end}}" aria-label="Previous"{{if $pjax}} data-pjax="{{$pjax}}" data-keepjs="true"{{end}}>
@@ -13,6 +37,7 @@
             {{`下一页`|$.T}}
         </a>
       </li>
+{{- end -}}
     </ul>
 </nav>
 {{- end -}}
