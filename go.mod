@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250627053147-e9ef1d824cd0
-	github.com/coscms/webcore v0.9.20
-	github.com/coscms/webfront v0.0.0-20250629032103-a9329bbeaf05
+	github.com/coscms/webcore v0.9.21
+	github.com/coscms/webfront v0.0.0-20250629035112-e1c9cbe9384f
 )
 
 require (
@@ -54,11 +54,11 @@ require (
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.3.30
-	github.com/webx-top/db v1.28.4
+	github.com/webx-top/db v1.28.5
 	github.com/webx-top/echo v1.16.7
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
-	github.com/webx-top/pagination v0.3.1
+	github.com/webx-top/pagination v0.3.2
 	github.com/webx-top/validation v0.0.3 // indirect
 	golang.org/x/oauth2 v0.30.0 // indirect
 	golang.org/x/sync v0.15.0
@@ -81,7 +81,7 @@ require (
 	github.com/admpub/9t v0.0.1 // indirect
 	github.com/admpub/bart v0.0.1 // indirect
 	github.com/admpub/boltstore v1.2.0 // indirect
-	github.com/admpub/caddy v1.2.8 // indirect
+	github.com/admpub/caddy v1.2.9 // indirect
 	github.com/admpub/captcha-go v0.0.1 // indirect
 	github.com/admpub/ccs-gm v0.0.5 // indirect
 	github.com/admpub/checksum v1.1.0 // indirect
@@ -217,7 +217,7 @@ require (
 	github.com/kisielk/errcheck v1.9.0 // indirect
 	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/klauspost/cpuid v1.3.1 // indirect
-	github.com/klauspost/cpuid/v2 v2.2.10 // indirect
+	github.com/klauspost/cpuid/v2 v2.2.11 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/lufia/plan9stats v0.0.0-20250317134145-8bc96cf8fc35 // indirect
 	github.com/mailru/easyjson v0.9.0 // indirect
@@ -244,7 +244,7 @@ require (
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
-	github.com/philhofer/fwd v1.1.3-0.20240916144458-20a13a1f6b7c // indirect
+	github.com/philhofer/fwd v1.2.0 // indirect
 	github.com/phuslu/iploc v1.0.20250601 // indirect
 	github.com/phuslu/lru v1.0.18 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
