@@ -121,7 +121,7 @@
       </table>
       </div><!-- table-responsive -->
       <div class="card-footer">
-        {{- ($.Stored.pagination.SetNum 5).Render `#default#pagination` -}}
+        {{- $.Stored.pagination.Render `#default#pagination` -}}
       </div><!-- card-footer -->
       
     </div><!-- card -->
