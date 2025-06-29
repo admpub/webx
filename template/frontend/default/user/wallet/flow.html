@@ -71,10 +71,11 @@
         </tbody>
       </table>
       </div><!-- table-responsive -->
+      {{- if not $.Stored.pagination.IsSingle -}}
       <div class="card-footer auto-bottom-float">
         {{- $.Stored.pagination.Render `#default#pagination` -}}
       </div><!-- card-footer -->
-      
+      {{- end -}}
     </div><!-- card -->
   </div><!-- col-6 -->
 </div><!-- row -->
