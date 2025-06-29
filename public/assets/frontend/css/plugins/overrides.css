@@ -2381,7 +2381,7 @@ label.custom-control{
 
 /*! ########## 3.18 Pagination ########## */
 .pagination .page-item .page-link {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif; text-align: center;
 }
 
 .pagination-success .page-link {
