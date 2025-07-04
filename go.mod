@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250704114251-57dbb8b98272
-	github.com/coscms/webcore v0.9.21
-	github.com/coscms/webfront v0.0.0-20250704105502-029b4d68941e
+	github.com/coscms/webcore v0.9.22
+	github.com/coscms/webfront v0.0.0-20250704130155-4ed2e1632227
 )
 
 require (
@@ -53,9 +53,9 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.6
-	github.com/webx-top/com v1.3.30
+	github.com/webx-top/com v1.3.31
 	github.com/webx-top/db v1.28.5
-	github.com/webx-top/echo v1.16.8
+	github.com/webx-top/echo v1.16.9
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2
@@ -245,7 +245,7 @@ require (
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
-	github.com/phuslu/iploc v1.0.20250601 // indirect
+	github.com/phuslu/iploc v1.0.20250702 // indirect
 	github.com/phuslu/lru v1.0.18 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
