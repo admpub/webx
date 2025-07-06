@@ -1834,6 +1834,10 @@ label.custom-control{
   margin-bottom: 0;
 }
 
+.form-group > .col-form-label + div > .custom-control{
+  margin-top: 5px
+}
+
 .input-group-addon .custom-control {
   padding-left: 1rem;
   margin: 0;
