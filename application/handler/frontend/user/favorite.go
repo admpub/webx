@@ -36,15 +36,14 @@ func favoriteList(ctx echo.Context) error {
 }
 
 func favoriteDelete(ctx echo.Context) error {
-	ids := ctx.FormValues(`id`)
+	ids := param.StringSlice(ctx.FormValues(`id`)).Unique().Uint64(param.IsGreaterThanZeroElement)
 	if len(ids) == 0 {
-		ids = ctx.FormValues(`id[]`)
+		ids = param.StringSlice(ctx.FormValues(`id[]`)).Unique().Uint64(param.IsGreaterThanZeroElement)
 	}
 	var err error
 	var affected int64
 	var customer *dbschema.OfficialCustomer
 	var m *official.Collection
-	var nids []uint64
 	var after func(isCancel ...bool) error
 	if len(ids) == 0 {
 		common.SendFail(ctx, ctx.T(`请选择要删除的收藏`))
@@ -52,16 +51,9 @@ func favoriteDelete(ctx echo.Context) error {
 	}
 	customer = sessdata.Customer(ctx)
 	m = official.NewCollection(ctx)
-	nids = param.Converts(ids, func(v string) uint64 {
-		return param.AsUint64(v)
-	})
-	if len(nids) == 0 {
-		common.SendFail(ctx, ctx.T(`请选择要删除的收藏`))
-		goto END
-	}
 	_, err = m.ListByOffset(nil, nil, 0, -1, db.And(
 		db.Cond{`customer_id`: customer.Id},
-		db.Cond{`id`: db.In(nids)},
+		db.Cond{`id`: db.In(ids)},
 	))
 	if err != nil {
 		goto END
@@ -82,10 +74,9 @@ func favoriteDelete(ctx echo.Context) error {
 			}
 		}
 	}
-	nids = param.UniqueWithFilter(nids, param.IsGreaterThanZeroElement)
 	affected, err = m.Deletex(nil, db.And(
 		db.Cond{`customer_id`: customer.Id},
-		db.Cond{`id`: db.In(nids)},
+		db.Cond{`id`: db.In(ids)},
 	))
 
 END:

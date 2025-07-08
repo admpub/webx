@@ -3,6 +3,7 @@ package tool
 import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/backend"
@@ -110,6 +111,9 @@ func AreaEdit(ctx echo.Context) error {
 
 func AreaDelete(ctx echo.Context) error {
 	id := ctx.FormxValues(`id`).Uint(param.IsGreaterThanZeroElement)
+	if len(id) == 0 {
+		return ctx.NewError(code.InvalidParameter, `请选择要删除的项`).SetZone(`id`)
+	}
 	m := official.NewArea(ctx)
 	var err error
 	for _, _v := range id {
