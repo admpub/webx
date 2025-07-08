@@ -136,7 +136,7 @@ END:
 }
 
 func FrontendRouteRewriteDelete(ctx echo.Context) error {
-	ids := ctx.FormxValues(`id`).Uint64(param.IsGreaterThanZeroElement)
+	ids := ctx.FormxValues(`id`).Unique().Uint64(param.IsGreaterThanZeroElement)
 	if len(ids) == 0 {
 		return ctx.NewError(code.InvalidParameter, `请选择要删除的项`).SetZone(`id`)
 	}

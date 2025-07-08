@@ -102,7 +102,7 @@ func AreaGroupEdit(ctx echo.Context) error {
 }
 
 func AreaGroupDelete(ctx echo.Context) error {
-	id := ctx.FormxValues(`id`).Uint(param.IsGreaterThanZeroElement)
+	id := ctx.FormxValues(`id`).Unique().Uint(param.IsGreaterThanZeroElement)
 	if len(id) == 0 {
 		return ctx.NewError(code.InvalidParameter, `请选择要删除的项`).SetZone(`id`)
 	}

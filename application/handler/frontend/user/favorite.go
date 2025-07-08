@@ -36,9 +36,9 @@ func favoriteList(ctx echo.Context) error {
 }
 
 func favoriteDelete(ctx echo.Context) error {
-	ids := param.StringSlice(ctx.FormValues(`id`)).Unique().Uint64(param.IsGreaterThanZeroElement)
+	ids := ctx.FormxValues(`id`).Unique().Uint64(param.IsGreaterThanZeroElement)
 	if len(ids) == 0 {
-		ids = param.StringSlice(ctx.FormValues(`id[]`)).Unique().Uint64(param.IsGreaterThanZeroElement)
+		ids = ctx.FormxValues(`id[]`).Unique().Uint64(param.IsGreaterThanZeroElement)
 	}
 	var err error
 	var affected int64
