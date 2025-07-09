@@ -22,7 +22,7 @@
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">{{"内容加密"|$.T|UpperCaseFirst}}:</label>
-              <div class="col-sm-9 mg-t-5">
+              <div class="col-sm-9">
                 {{- $encrypted := $.Form "encrypted" -}}
                 <label class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" value="Y" name="encrypted"{{if eq $encrypted `Y`}} checked="checked"{{end}}>
