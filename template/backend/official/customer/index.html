@@ -63,13 +63,12 @@
 						<tr>
 							<th style="width:60px"><strong>ID</strong></th>
 							<th style="width:50px"><strong>{{"头像"|$.T}}</strong></th>
-							<th style="width:300px"><strong>{{"客户名称"|$.T}}</strong></th>
-							<th><strong>{{"描述"|$.T}}</strong></th>
-							<th><strong>{{"角色"|$.T}}</strong></th>
-							<th><strong>{{"附件"|$.T}}</strong></th>
+							<th style="min-width:200px"><strong>{{"客户名称"|$.T}}</strong></th>
+							<th style="width:100px"><strong>{{"角色"|$.T}}</strong></th>
+							<th style="width:100px"><strong>{{"附件"|$.T}}</strong></th>
 							<th style="width:85px"><strong>{{"创建时间"|$.T}}</strong></th>
 							<th style="width:85px"><strong>{{"更新时间"|$.T}}</strong></th>
-							<th style="width:80px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
+							<th style="width:80px;min-width:80px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
@@ -78,6 +77,11 @@
 							<td>{{$v.Id}}</td>
 							<td class="no-padding-x"><a href="{{FrontendURLByName `user.home` $v.Id}}" target="_blank" class="text-bold"><img style="width:50px;height:50px" src="{{if $v.Avatar}}{{AddSuffix $v.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" onerror="this.src='{{AssetsURL}}/images/user_128.png';" /></a></td>
 							<td>
+								{{- if eq $v.Gender `male`}}
+								<i class="fa fa-male text-primary" title="{{`男性`|$.T}}"></i>
+								{{- else if eq $v.Gender `female`}}
+								<i class="fa fa-female text-pink" title="{{`女性`|$.T}}"></i>
+								{{- end}}
 								<a href="{{FrontendURLByName `user.home` $v.Id}}" target="_blank" class="text-bold">{{$v.Name}}</a>
 								{{- if eq $v.Online "Y" }}
 								<img src="{{AssetsURL}}/images/state_online.png" alt="Status" data-toggle="tooltip" title="{{`在线`|$.T}}" />
@@ -99,7 +103,8 @@
 								{{- range $lk,$lv := $v.Levels}}
 								{{- if $lv.Level -}}
 								<span class="label-group">
-									<span class="label label-black label-xs">{{`等级`|$.T}}</span><span class="label label-primary label-xs" data-toggle="tooltip" title="{{$lv.Level.Name}} ({{call $.Func.levelGroupName $lv.Level.Group}})" style="{{if $lv.Level.Color}}color:{{$lv.Level.Color}}{{end}};{{if $lv.Level.Bgcolor}}background-color:{{$lv.Level.Bgcolor}}{{end}}">{{$lv.Level.Name}}</span>
+									{{- $groupName := call $.Func.levelGroupName $lv.Level.Group -}}
+									<span class="label label-black label-xs">{{`等级`|$.T}}</span><span class="label label-primary label-xs" data-toggle="tooltip" title="{{$lv.Level.Name}}{{if $groupName}} ({{$groupName}}){{end}}" style="{{if $lv.Level.Color}}color:{{$lv.Level.Color}}{{end}};{{if $lv.Level.Bgcolor}}background-color:{{$lv.Level.Bgcolor}}{{end}}">{{$lv.Level.Name}}</span>
 								</span>
 								{{- end -}}
 								{{- end}}
@@ -108,8 +113,8 @@
 									<span class="label label-black label-xs">{{`代理`|$.T}}</span><span class="label label-danger label-xs" data-toggle="tooltip" title="{{$v.Agent.Name}}">{{$v.Agent.Name}}</span>
 								</span>
 								{{- end}}
+								{{if $v.Description}}<div class="small" title="{{"描述"|$.T}}" data-toggle="tooltip">{{$v.Description}}</div>{{end}}
 							</td>
-							<td>{{$v.Description}}</td>
 							<td>
 								{{- range $v.Roles -}}
 								<span class="label label-default label-xs" data-toggle="tooltip" title="{{.Name}}">{{.Name}}</span>

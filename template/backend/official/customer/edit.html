@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="{{AssetsURL}}/js/jquery.select2/select2.css" />
 {{/Block}}
 {{Block "main"}}
-{{$addMode := not $.Stored.isEdit}}
+{{- $addMode := not $.Stored.isEdit -}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat no-padding">
@@ -24,7 +24,7 @@
                   <label class="col-sm-2 control-label">{{"头像"|$.T}}</label>
                   <div class="col-sm-3">
                     <div class="avatar-upload">
-                      {{$avatar := $.Form "avatar"}}
+                      {{- $avatar := $.Form "avatar" -}}
                       <img src="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
                       <input id="fileupload" type="file" name="files[]">
                       <input type="hidden" id="avatar-image" name="avatar-small" value="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{end}}" />
@@ -32,28 +32,28 @@
                       <div id="progress" class="overlay"></div>
                     </div>
                   </div>
-                  {{if not $addMode}}
+                  {{- if not $addMode -}}
                   <label class="col-sm-2 control-label">{{"客户ID"|$.T}}</label>
                   <div class="col-sm-3"><span class="form-control no-border">{{$.Form "id"}}</span></div>
-                  {{end}}
+                  {{- end -}}
                 </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"登录名称"|$.T}}</label>
                 <div class="col-sm-3">
-                {{if $addMode}}
+                {{- if $addMode -}}
                   <input type="text" class="form-control" name="name" value="{{$.Form `name`}}" required />
-                {{else}}
+                {{- else -}}
                   <span class="form-control no-border">
                     {{$.Form "name"}}
                   </span>
-                {{end}}
+                {{- end -}}
                 </div>
                 <label class="col-sm-2 control-label">{{"真实姓名"|$.T}}</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="realName" value="{{$.Form `realName`}}" />
                 </div>
               </div>
-              {{if $addMode}}
+              {{- if $addMode -}}
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"登录密码"|$.T}}</label>
                 <div class="col-sm-3">
@@ -74,15 +74,15 @@
                     <input type="password" class="form-control" name="safePwd2" value="{{$.Form `safePwd2`}}" required data-parsley-required="true" data-parsley-trigger="focusout" data-parsley-required-message="确认密码不可为空" data-parsley-equalto="#safePwd" data-parsley-equalto-message="两次密码输入不一致" />
                 </div>
               </div>
-              {{else}}
+              {{- else -}}
               <div class="form-group" id="form-pwd-ctrl">
                   <label class="col-sm-2 control-label">{{"修改密码"|$.T}}</label>
                   <div class="col-sm-8">
-                    {{$v := $.Form "modifyPwd"}}
+                    {{- $v := $.Form "modifyPwd" -}}
                     <div class="checkbox checkbox-primary checkbox-inline">
                       <input type="checkbox" value="1" name="modifyPwd" id="modifyPwd"{{if eq $v `1`}} checked{{end}} onclick="switchPwdInput(this)"> <label for="modifyPwd">{{"修改登录密码"|$.T}}</label>
                     </div>
-                    {{$v := $.Form "modifySafePwd"}}
+                    {{- $v := $.Form "modifySafePwd" -}}
                     <div class="checkbox checkbox-primary checkbox-inline">
                       <input type="checkbox" value="1" name="modifySafePwd" id="modifySafePwd"{{if eq $v `1`}} checked{{end}} onclick="switchSafePwdInput(this)"> <label for="modifySafePwd">{{"修改安全密码"|$.T}}</label>
                     </div>
@@ -112,7 +112,7 @@
     </div>
   </div>
 </script>
-              {{end}}
+              {{- end -}}
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"手机号码"|$.T}}</label>
                 <div class="col-sm-3">
@@ -126,15 +126,15 @@
               <div class="form-group">
                   <label class="col-sm-2 control-label">{{"性别"|$.T}}</label>
                   <div class="col-sm-3">
-                    {{$v := $.Form "gendar"}}
+                    {{- $v := $.Form "gender" -}}
                     <div class="radio radio-primary radio-inline">
-                      <input type="radio" value="secret" name="gendar" id="gendar-secret"{{if eq $v `secret` ``}} checked{{end}}> <label for="gendar-secret">{{"保密"|$.T}}</label>
+                      <input type="radio" value="secret" name="gender" id="gender-secret"{{if eq $v `secret` ``}} checked{{end}}> <label for="gender-secret">{{"保密"|$.T}}</label>
                     </div>
                     <div class="radio radio-primary radio-inline">
-                      <input type="radio" value="female" name="gendar" id="gendar-female"{{if eq $v `female`}} checked{{end}}> <label for="gendar-female">{{"女"|$.T}}</label>
+                      <input type="radio" value="female" name="gender" id="gender-female"{{if eq $v `female`}} checked{{end}}> <label for="gender-female">{{"女"|$.T}}</label>
                     </div>
                     <div class="radio radio-primary radio-inline">
-                      <input type="radio" value="male" name="gendar" id="gendar-male"{{if eq $v `male`}} checked{{end}}> <label for="gendar-male">{{"男"|$.T}}</label>
+                      <input type="radio" value="male" name="gender" id="gender-male"{{if eq $v `male`}} checked{{end}}> <label for="gender-male">{{"男"|$.T}}</label>
                     </div>
                   </div>
                 <label class="col-sm-2 control-label">{{"身份证号码"|$.T}}</label>
