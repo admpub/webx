@@ -1834,6 +1834,7 @@ label.custom-control{
   margin-bottom: 0;
 }
 
+.form-group > .control-label + div > .custom-control,
 .form-group > .col-form-label + div > .custom-control{
   margin-top: 5px
 }
