@@ -53,6 +53,13 @@ nav .page-item.disabled .page-link{background-color: transparent !important;}
 .markdown-body h6{border-color: #777 !important;}
 
 img.object-fit-cover{filter: invert(1);}
+.img-thumbnail{
+    background-color: #888;
+    border-color: #aaa;
+}
+.shadow {
+    box-shadow: 2px 2px 4px #000;
+}
 
 .btn.btn-default.tx-inverse{color:#282c35 !important}
 .form-control-plaintext{color: #ccc}
