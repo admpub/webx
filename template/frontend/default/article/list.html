@@ -24,13 +24,11 @@
                         <div class="media-body tx-size-md">
                             <span class="pull-right">
                                 {{- if $v.Tags -}}
-                                <span class="d-inline-block">
-                                    <i class="fa fa-tags"></i>
-                                    {{- range $tagK,$tagV := Split $v.Tags ","}}
-                                    {{- if gt $tagK 0}}/{{end}}
-                                    <span class="tx-info">
-                                        <a href="{{FrontendURL}}/articles{{$.Ext}}?tag={{$tagV}}">{{$tagV}}</a>
-                                    </span>
+                                <span class="d-inline-block small">
+                                    <i class="fa fa-tags tx-gray-lighter"></i>
+                                    {{range $tagK,$tagV := Split $v.Tags ","}}
+                                    {{- if gt $tagK 0}} / {{end -}}
+                                    <a href="{{FrontendURL}}/articles{{$.Ext}}?tag={{$tagV}}" class="tx-gray-light hover-info">{{$tagV}}</a>
                                     {{- end -}}
                                 </span>
                                 {{- end -}}

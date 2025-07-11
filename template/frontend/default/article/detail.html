@@ -23,7 +23,7 @@
             <div class="d-sm-flex justify-content-between align-items-center">
               <div>
                 <h1 class="tx-inverse tx-spacing-neg-2 tx-bold tx-size-30 mg-y-10">{{$data.Title}}</h1>
-                <div class="tx-gray-light">
+                <div class="tx-gray-light small">
                   {{- if eq $data.Display `N` -}}
                   <span class="badge badge-danger mg-r-10">{{`待审核`|$.T}}</span>
                   {{- end -}}
@@ -52,9 +52,9 @@
                     {{- if $data.Tags -}}
                     <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`标签`|$.T}}">
                         <i class="fa fa-tags tx-gray-lighter"></i>
-                        {{range $tagK,$tagV := Split $data.Tags ","}}
-                        {{if gt $tagK 0}}/{{end}}
-                        <span class="tx-info"><a href="{{$.Stored.listURL}}?tag={{$tagV}}">{{$tagV}}</a></span>
+                        {{range $tagK,$tagV := Split $data.Tags "," -}}
+                        {{- if gt $tagK 0}} / {{end -}}
+                        <a href="{{$.Stored.listURL}}?tag={{$tagV}}" class="tx-gray-light hover-info">{{$tagV}}</a>
                         {{- end -}}
                     </span>
                     {{- end -}}
