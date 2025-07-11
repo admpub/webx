@@ -24,7 +24,7 @@
             <div class="col-lg-4{{if gt $k 0}} mg-t-30 mg-lg-t-0{{end}}">
                 <div class="card bd-0 bg-transparent">
                     <div class="overlay">
-                        <img src="{{$v.Image}}" class="img-fluid wd-100p" alt="{{$v.Name}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
+                        <img src="{{$v.Image}}" class="img-fluid wd-100p shadow" alt="{{$v.Name}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
                         <div class="pos-absolute-bottom pd-25 bg-opacity-black-7">
                             <!-- <span class="tx-white tx-uppercase tx-size-11 op-2">Groceries</span> -->
                             <h5 class="tx-white mg-b-15 tx-normal tx-shadow">{{$v.Name}}</h5>
@@ -51,7 +51,7 @@
                     {{if $v.Image}}
                     <a href="{{URLByName `article.detail` $v.Id}}" target="_blank">
                         <figure class="effect-shine">
-                            <img class="img-fluid wd-100p" src="{{$v.Image}}" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
+                            <img class="img-fluid wd-100p shadow" src="{{$v.Image}}" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
                             <figcaption></figcaption>
                         </figure>
                     </a>

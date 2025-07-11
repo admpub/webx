@@ -1018,6 +1018,10 @@ nav.friend-links a.nav-link>.img-label>.title {
   bottom: 0;
 }
 
+.shadow {
+  box-shadow: 2px 2px 4px #ccc;
+}
+
 .customerLV.lv-expired span.badge,
 .customerLV.lv-expired i{
   background-color:#ddd !important;
