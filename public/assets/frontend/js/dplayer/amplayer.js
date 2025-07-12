@@ -29,6 +29,7 @@
 			"container": "",
 			"defaultType": "customHls",
 			"defaultExtName": ".m3u8",
+			"touchVideoChangeProgress": false,
 			"listeners":{}
 		},
 		'secure': win.location.protocol == 'https:',
@@ -408,6 +409,7 @@
 						pic: c.pics,
 						customType: amplayer.player.customType
 					},
+					touchVideoChangeProgress: c.touchVideoChangeProgress,
 					pluginOptions:{}
 				};
 				switch(type){
@@ -452,6 +454,7 @@
 					chromecast: c.chromecast&&window.chrome&&window.chrome.cast,
 					p2pAppId: c.p2pAppId,
 					highlight: c.highlight||[],
+					touchVideoChangeProgress: c.touchVideoChangeProgress,
 					video: {
 						url: c.urls,
 						pic: c.pics
