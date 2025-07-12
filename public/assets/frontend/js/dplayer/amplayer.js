@@ -539,11 +539,11 @@
 
 	function bindListener(player) {
 		player.on('loadstart', function () {
-			var $video=$(amplayer.elemPrefix()+'video');
+			var $video=$(player.video);
 			$video.attr('playsinline', 'true');
 			$video.attr('x5-playsinline', 'true');
 			$video.attr('webkit-playsinline', 'true');
-			if (player.video.paused) $(amplayer.elemPrefix()+'.amplayer-play').show();
+			if (player.video.paused && !$video.hasClass('dplayer-mobile')) $(amplayer.elemPrefix()+'.amplayer-center-button').show();
 			callListener('loadstart',this,arguments)
 		});
 		player.on('loadeddata', function () {
@@ -559,11 +559,13 @@
 			amplayer.jump(amplayer.options.jump);
 		});
 		player.on('pause', function () {
-			$(amplayer.elemPrefix()+'.amplayer-play').show();
+			var $video=$(player.video);
+			if(!$video.hasClass('dplayer-mobile')) $(amplayer.elemPrefix()+'.amplayer-center-button').show();
 			callListener('pause',this,arguments)
 		});
 		player.on('play', function () {
-			$(amplayer.elemPrefix()+'.amplayer-play').hide();
+			var $video=$(player.video);
+			if(!$video.hasClass('dplayer-mobile')) $(amplayer.elemPrefix()+'.amplayer-center-button').hide();
 			callListener('play',this,arguments)
 		});
 		player.on('error', function () {
@@ -572,6 +574,16 @@
 		});
 		$(amplayer.elemPrefix()+'.amplayer-play').click(function () {
 			player.play();
+		});
+		$(amplayer.elemPrefix()+'.amplayer-backward').click(function () {
+            let t = Math.max(player.video.currentTime - 10, 0);
+            player.seek(t);
+            player.controller.setAutoHide();
+		});
+		$(amplayer.elemPrefix()+'.amplayer-forward').click(function () {
+            let t = Math.min(player.video.currentTime + 10, player.video.duration);
+            player.seek(t);
+            player.controller.setAutoHide();
 		});
 	}
 
