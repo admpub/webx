@@ -11,7 +11,7 @@ text-shadow:0 0 3px rgba(0,0,0,0.5);}
 .amplayer-center-button > * > span{position:absolute;display:block;width:100%;text-align:center;left:0;font-size:12px}
 .amplayer-center-button .amplayer-play{margin-left:15px;margin-right:15px}
 .amplayer-center-button .amplayer-play i{font-size:50px;margin:0}
-.dplayer-mobile + .amplayer-center-button,.dplayer-mobile .amplayer-center-button{display: none !important;}
+.dplayer-mobile + .amplayer-center-button,.dplayer-mobile .amplayer-center-button,.dplayer-hide-controller .amplayer-center-button{display: none !important;}
 .dplayer-live + .amplayer-center-button .amplayer-backward,.dplayer-live + .amplayer-center-button .amplayer-forward,
 .dplayer-live .amplayer-center-button .amplayer-backward,.dplayer-live .amplayer-center-button .amplayer-forward{display:none}
 .amplayer-loading{width:90%;position:absolute;top:50%;left:50%;color:#fff;font-size:16px;text-align:center;transform:translate(-50%, -50%);z-index:999}
