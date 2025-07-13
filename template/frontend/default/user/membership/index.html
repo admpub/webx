@@ -29,11 +29,11 @@
                       <div class="d-flex align-items-center justify-content-start">
                         <i class="icon ion-ios-checkmark alert-icon tx-size-32 mg-t-5 mg-xs-t-0"></i>
                         <p>
-                          <strong class="mg-r-20">{{`我的套餐`|$.T|UpperCaseFirst}}</strong>
+                          <strong class="mg-r-20 nowrap">{{`我的套餐`|$.T|UpperCaseFirst}}</strong>
                           {{- if $myLevel.Level -}}
-                          <span class="mg-r-20">{{`我的等级：`|$.T}}{{$myLevel.Level.Name}}</span>
+                          <span class="mg-r-20 nowrap">{{`我的等级：`|$.T}}{{$myLevel.Level.Name}}</span>
                           {{- end -}}
-                          <span>{{`过期时间：`|$.T}}
+                          <span class="nowrap">{{`过期时间：`|$.T}}
                           {{- if gt $myLevel.Expired 0 -}}
                             {{- (Date $myLevel.Expired).Format "2006-01-02 15:04:05" -}}
                           {{- else -}}
