@@ -11,7 +11,7 @@ go 1.24.3
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20250711143143-890483e5357f
+	github.com/admpub/nging/v5 v5.3.4-0.20250718080152-73252262ab6a
 	github.com/coscms/webcore v0.9.28
 	github.com/coscms/webfront v0.0.0-20250712022204-37e7592a4118
 )
@@ -285,7 +285,7 @@ require (
 	github.com/webx-top/chardet v0.0.2 // indirect
 	github.com/webx-top/codec v0.3.0 // indirect
 	github.com/webx-top/poolx v0.0.0-20210912044716-5cfa2d58e380 // indirect
-	github.com/webx-top/restyclient v0.0.5 // indirect
+	github.com/webx-top/restyclient v0.0.6 // indirect
 	github.com/webx-top/tagfast v0.0.1 // indirect
 	github.com/webx-top/validator v0.3.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
