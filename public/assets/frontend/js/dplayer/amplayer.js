@@ -391,9 +391,7 @@
 			'eplayer': function (options) {
 				var c = $.extend(amplayer.options, options || {});
 				var type = amplayer.player.getType(c.urls);
-				var ctn = amplayer.elemPrefix(true);
-				var elem = ctn && $(ctn).length>0 ? $(ctn)[0] : null;
-				if (!elem) elem = document.getElementById('video');
+				var elem = getPlayerContainer();
 				var opts = {
 					container: elem,
 					autoplay: c.autoPlay,
@@ -442,9 +440,7 @@
 			},
 			'dplayer': function (options) {
 				var c = $.extend(amplayer.options, options || {});
-				var ctn = amplayer.elemPrefix(true);
-				var elem = ctn && $(ctn).length>0 ? $(ctn)[0] : null;
-				if (!elem) elem = document.getElementById('video');
+				var elem = getPlayerContainer();
 				var player = new DPlayer({
 					container: elem,
 					autoplay: c.autoPlay,
@@ -528,6 +524,14 @@
 		try { supportedLocalStorage = ('localStorage' in win) }
 		catch (err) { supportedLocalStorage = false }
 		return supportedLocalStorage;
+	}
+
+	function getPlayerContainer(){
+		var ctn = amplayer.elemPrefix(true);
+		var elem = ctn ? $(ctn).find('#video') : null;
+		if (!elem || elem.length < 1) elem = document.getElementById('video');
+		else if (elem.length > 0) elem = elem[0];
+		return elem;
 	}
 
 	function storer() {
