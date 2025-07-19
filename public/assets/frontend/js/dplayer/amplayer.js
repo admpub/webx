@@ -394,6 +394,7 @@
 				var ctn = amplayer.elemPrefix();
 				var elem = ctn ? $(ctn).find('video') : null;
 				if (!elem || elem.length < 1) elem = document.getElementById('video');
+				else if (elem.length > 0) elem = elem[0];
 				var opts = {
 					container: elem,
 					autoplay: c.autoPlay,
@@ -445,6 +446,7 @@
 				var ctn = amplayer.elemPrefix();
 				var elem = ctn ? $(ctn).find('video') : null;
 				if (!elem || elem.length < 1) elem = document.getElementById('video');
+				else if (elem.length > 0) elem = elem[0];
 				var player = new DPlayer({
 					container: elem,
 					autoplay: c.autoPlay,
