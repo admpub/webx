@@ -580,15 +580,15 @@
 			//console.dir(arguments)
 			callListener('error', this, arguments)
 		});
-		$(amplayer.elemPrefix() + '.amplayer-play').click(function () {
+		$(amplayer.elemPrefix() + '.amplayer-play').off('click').on('click',function () {
 			player.play();
 		});
-		$(amplayer.elemPrefix() + '.amplayer-backward').click(function () {
+		$(amplayer.elemPrefix() + '.amplayer-backward').off('click').on('click',function () {
 			let t = Math.max(player.video.currentTime - 10, 0);
 			player.seek(t);
 			player.controller.setAutoHide();
 		});
-		$(amplayer.elemPrefix() + '.amplayer-forward').click(function () {
+		$(amplayer.elemPrefix() + '.amplayer-forward').off('click').on('click',function () {
 			let t = Math.min(player.video.currentTime + 10, player.video.duration);
 			player.seek(t);
 			player.controller.setAutoHide();
