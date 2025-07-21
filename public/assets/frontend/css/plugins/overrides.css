@@ -7,6 +7,8 @@
 
 .alert .close {
   opacity: .25;
+  position: absolute;
+  right: 3px;
 }
 
 .alert-bordered {
