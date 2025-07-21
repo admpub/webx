@@ -59,7 +59,7 @@
                         </div><!-- card-block -->
                         <div class="card-footer pd-b-30 bd-t-0">
                           <h1 class="mg-b-30 tx-inverse tx-arimo tx-bold">
-                            {{call $.Func.Currency $v.Price true}}
+                            {{call $.Func.Currency $v.Price true true}}
                             <small>{{call $.Func.timeUnitSuffix $v.TimeDuration $v.TimeUnit}}</small>
                          </h1>
                           <a href="{{$.WithNextURL (printf `/user/membership/buy/%d` $v.Id)}}" target="_blank" class="btn bg-gray-dark tx-white tx-size-xs tx-uppercase">{{`立即购买`|$.T}}</a>

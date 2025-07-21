@@ -25,7 +25,7 @@
                         <label class="col-sm-2 col-form-label">{{`当前余额`|$.T}}:</label>
                         <div class="col-sm-8">
                             <div>
-                                <span class="tx-success tx-bold tx-size-24">{{call $.Func.Currency $.Stored.money true}}</span>
+                                <span class="tx-success tx-bold tx-size-24">{{call $.Func.Currency $.Stored.money true true}}</span>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <label class="col-sm-2 col-form-label">{{`实付金额`|$.T}}:</label>
                         <div class="col-sm-8">
                             <div>
-                                <span class="tx-orange tx-bold tx-size-24">{{call $.Func.Currency $data.Price true}}</span>
+                                <span class="tx-orange tx-bold tx-size-24">{{call $.Func.Currency $data.Price true true}}</span>
                                 <small>{{call $.Func.timeUnitSuffix $data.TimeDuration $data.TimeUnit}}</small>
                             </div>
                         </div>
