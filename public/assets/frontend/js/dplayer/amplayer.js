@@ -213,7 +213,7 @@
 						}
 					} else {
 						config.p2pConfig = {
-							logLevel: 'error',
+							logLevel: 'error', showSlogan: false,
 							live: amplayer.options.live,        // set to true in live mode
 							//wsSignalerAddr: 'wss://opensignal.cdnbye.com',
 							//announce: 'https://tracker.cdnbye.com/v1',
