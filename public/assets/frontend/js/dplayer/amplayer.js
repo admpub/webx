@@ -466,6 +466,7 @@
 			'data': {},
 			'set': function (name, value, days, path) {
 				var exp = new Date();
+				if(!days) days=30;
 				exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
 				var cookie = name + '=' + escape(value) + ';path=' + (path?path:win.location.pathname) + ';expires=' + exp.toUTCString() + ';sameSite=Lax';
 				if (amplayer.secure) cookie += ';secure=true';
