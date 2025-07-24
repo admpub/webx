@@ -464,10 +464,10 @@
 		},
 		'cookie': {
 			'data': {},
-			'set': function (name, value, days) {
+			'set': function (name, value, days, path) {
 				var exp = new Date();
 				exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
-				var cookie = name + '=' + escape(value) + ';path=' + win.location.pathname + ';expires=' + exp.toUTCString() + ';sameSite=Lax';
+				var cookie = name + '=' + escape(value) + ';path=' + (path?path:win.location.pathname) + ';expires=' + exp.toUTCString() + ';sameSite=Lax';
 				if (amplayer.secure) cookie += ';secure=true';
 				document.cookie = cookie;
 				amplayer.cookie.data[name] = value;
@@ -483,7 +483,7 @@
 		},
 		'localStorage': {
 			'data': {},
-			'set': function (name, value, days) {
+			'set': function (name, value, days, path) {
 				if (value === undefined) { return amplayer.localStorage.remove(name) }
 				win.localStorage.setItem(name, value);
 				amplayer.localStorage.data[name] = value;
@@ -497,8 +497,8 @@
 			}
 		},
 		'store': {
-			'set': function (name, value, days) {
-				return storer().set(name, value, days);
+			'set': function (name, value, days, path) {
+				return storer().set(name, value, days, path);
 			},
 			'get': function (name) {
 				return storer().get(name);
