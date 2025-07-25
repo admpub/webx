@@ -100,11 +100,12 @@
 				});
 			},
 			'customType': {
-				'customWebTorrent': function (video, player) {
+				'customWebTorrent': function (video, player, videoURL) {
+					if(!videoURL) videoURL = video.src;
 					//测试种子: https://webtorrent.io/torrents/sintel.torrent
 					player.container.classList.add('dplayer-loading');
 					var client = new WebTorrent();
-					var torrentId = video.src;
+					var torrentId = videoURL;
 					video.torrentId = torrentId;
 					video.src = '';
 					video.preload = 'metadata';
@@ -184,12 +185,14 @@
 					});
 					return client;
 				},
-				'customHls': function (video, player) {
+				'customHls': function (video, player, videoURL) {
+					if(!videoURL) videoURL = video.src;
 					var vd = $(amplayer.elemPrefix() + '#video');
 					if (vd.data('hls')) {
 						var eventIndex = vd.data('eventIndex');
 						player.trigger('destroy');
 						if (eventIndex !== null) player.off('destroy', eventIndex);
+						if(vd.data('hls').destroy) vd.data('hls').destroy();
 					}
 					var config = $.extend({
 						debug: amplayer.options.debug,
@@ -235,7 +238,7 @@
 							engine = new P2PEngine(hls, config.p2pConfig);
 						}
 					}
-					hls.loadSource(video.src);
+					hls.loadSource(videoURL);
 					hls.attachMedia(video);
 					if (engine) {
 						if (amplayer.options.p2pEngine == 'p2p-media-loader') {
@@ -282,6 +285,19 @@
 							});
 						}
 					}
+                
+					// enable airplay, from https://github.com/video-dev/hls.js/issues/5989
+                	// 检查是否已存在source元素，如果存在则更新，不存在则创建
+                	var $sourceElem = $(video).children('source').not('[src^="blob://"]');
+                	if ($sourceElem.length>0) {
+                	    $sourceElem.attr('src',videoURL);
+                	} else {
+                	    var sourceElem = document.createElement('source');
+                	    sourceElem.src = videoURL;
+                	    $(video).append($(sourceElem));
+                	}
+                	video.disableRemotePlayback = false;
+
 					var recoverDecodingErrorDate, recoverSwapAudioCodecDate, recoverStartLoadDate;
 					hls.on(Hls.Events.ERROR, function (event, data) {
 						var msg = '';
@@ -364,10 +380,10 @@
 					vd.data('eventIndex', eventIndex);
 					return hls;
 				},
-				'shakaDash': function (video, player) {
-					var src = video.src;
-					var playerShaka = new shaka.Player(video); // 将会修改 video.src
-					playerShaka.load(src);
+				'shakaDash': function (video, player, videoURL) {
+					if(!videoURL) videoURL = video.src;
+					var playerShaka = new shaka.Player(video);
+					playerShaka.load(videoURL);
 				}
 			},
 			'getType': function (urls) {
@@ -406,7 +422,9 @@
 						url: c.urls,
 						type: type,
 						pic: c.pics,
-						customType: amplayer.player.customType
+						customType: function(video,player){
+							return amplayer.player.customType(video,player,c.urls);
+						}
 					},
 					touchVideoChangeProgress: c.touchVideoChangeProgress,
 					pluginOptions: {}
