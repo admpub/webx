@@ -552,6 +552,7 @@
 			$video.attr('playsinline', 'true');
 			$video.attr('x5-playsinline', 'true');
 			$video.attr('webkit-playsinline', 'true');
+			$video.removeAttr('disableremoteplayback');
 			if (player.video.paused && !$video.hasClass('dplayer-mobile')) $(amplayer.elemPrefix() + '.amplayer-center-button').show();
 			callListener('loadstart', this, arguments)
 		});
