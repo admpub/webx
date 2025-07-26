@@ -500,15 +500,6 @@
     background-color: #158eeb;
   }
 
-  .sf-menu ul {
-    position: static;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    background-color: #f7f7f7;
-    border-left-width: 0;
-    border-right-width: 0;
-  }
-
   .sf-arrows .sf-with-ul::after {
     padding-right: 12px;
   }
@@ -536,5 +527,15 @@
   .sf-menu-dark ul ul li a:focus {
     background-color: #1d2026;
     color: #fff;
+  }
+}
+@media (max-width: 768px) {
+  .sf-menu ul {
+    position: static;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #f7f7f7;
+    border-left-width: 0;
+    border-right-width: 0;
   }
 }
