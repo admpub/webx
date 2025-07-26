@@ -3,7 +3,7 @@
 		'options': {
 			// player options
 			"autoPlay": true,
-			"screenshot": false,
+			"screenshot": true,
 			"airplay": true,
 			"chromecast": true,
 			"live": false, // 直播模式
@@ -31,6 +31,7 @@
 			"defaultType": "customHls",
 			"defaultExtName": ".m3u8",
 			"touchVideoChangeProgress": false,
+			"disableRemotePlayback": false,
 			"listeners": {}
 		},
 		'secure': win.location.protocol == 'https:',
@@ -235,6 +236,7 @@
 							engine = new P2PEngine(hls, config.p2pConfig);
 						}
 					}
+					var videoURL = video.src
 					hls.loadSource(video.src);
 					hls.attachMedia(video);
 					if (engine) {
@@ -282,7 +284,17 @@
 							});
 						}
 					}
-                	video.disableRemotePlayback = false;
+					// enable airplay, from https://github.com/video-dev/hls.js/issues/5989
+                	// 检查是否已存在source元素，如果存在则更新，不存在则创建
+                	var $sourceElem = $(video).children('source');
+                	if ($sourceElem.length>0) {
+                	    $sourceElem.attr('src',videoURL);
+                	} else {
+                	    var sourceElem = document.createElement('source');
+                	    sourceElem.src = videoURL;
+                	    $(video).append($(sourceElem));
+                	}
+                	if(amplayer.options.disableRemotePlayback===false) video.disableRemotePlayback = false;
 					var recoverDecodingErrorDate, recoverSwapAudioCodecDate, recoverStartLoadDate;
 					hls.on(Hls.Events.ERROR, function (event, data) {
 						var msg = '';
@@ -553,7 +565,7 @@
 			$video.attr('playsinline', 'true');
 			$video.attr('x5-playsinline', 'true');
 			$video.attr('webkit-playsinline', 'true');
-			$video.removeAttr('disableremoteplayback');
+			if(amplayer.options.disableRemotePlayback===false) $video.removeAttr('disableremoteplayback');
 			if (player.video.paused && !$video.hasClass('dplayer-mobile')) $(amplayer.elemPrefix() + '.amplayer-center-button').show();
 			callListener('loadstart', this, arguments)
 		});
