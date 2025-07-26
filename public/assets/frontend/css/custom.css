@@ -757,7 +757,7 @@ nav.friend-links a.nav-link>.img-label>.title {
   background-color: #1695f5
 }
 
-@media (max-width: 991px) {
+@media (max-width: 768px) {
   #navbarMain+.backward-md-down {
     /* 登录和退出按钮前移 */
     position: absolute;

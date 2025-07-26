@@ -5,8 +5,8 @@
 {{- $textColor := "white" -}}
 {{- $logoColor := "white" -}}
   <div id="headPanel" class="headpanel bg-{{$headPanelBg}} pos-fixed-top z-index-100 shadow-base">
-    <div class="container pd-x-0 pd-lg-x-10 ht-70 d-lg-flex align-items-center justify-content-between">
-      <div class="d-flex ht-70 align-items-center justify-content-between pd-x-20 pd-lg-x-0">
+    <div class="container pd-x-0 pd-md-x-20 ht-70 d-md-flex align-items-center justify-content-between">
+      <div class="d-flex ht-70 align-items-center justify-content-between pd-x-20 pd-md-x-0">
         <h5 class="tx-size-sm-24 mg-b-0 tx-bold tx-spacing-neg-2">
           <a href="{{FrontendURL}}/" class="tx-white site-logo-name">
             {{- if Config.base.siteLogo -}}
@@ -17,20 +17,20 @@
             {{- end -}}
           </a>
         </h5>
-        <a id="showMenu" href="javascript:;" class="tx-{{$textColor}} hidden-lg-up"><i class="fa fa-navicon tx-size-18"></i></a>
+        <a id="showMenu" href="javascript:;" class="tx-{{$textColor}} hidden-md-up"><i class="fa fa-navicon tx-size-18"></i></a>
       </div>
-      <ul id="navbarMain" class="nav-superfish nav sf-menu {{if $darkMode}}nav-active-white sf-menu-dark{{else}}nav-{{$headPanelBg}}{{end}} tx-uppercase tx-size-12 tx-bold tx-spacing-2 hidden-md-down shadow-1">
+      <ul id="navbarMain" class="nav-superfish nav sf-menu {{if $darkMode}}nav-active-white sf-menu-dark{{else}}nav-{{$headPanelBg}}{{end}} tx-uppercase tx-size-12 tx-bold tx-spacing-2 hidden-sm-down shadow-1">
         {{Include "#default#navigate_list_sf" $}}
       </ul>
       
-      <div class="backward-md-down">
-        {{if $.Customer}}
+      <div class="backward-md-down nowrap">
+        {{- if $.Customer -}}
         <a href="{{FrontendURL}}/user/index" class="btn btn-secondary tx-medium tx-size-12 tx-gray" data-toggle="tooltip" data-placement="bottom" title="{{`进入会员中心`|$.T}}">{{$.Customer.Name}}</a>
         <a href="{{FrontendURL}}/sign_out" class="btn btn-danger tx-medium tx-size-12 tx-white" data-toggle="tooltip" data-placement="bottom" title="{{`退出登录`|$.T}}" onclick="return confirm('{{`真的要退出登录吗？`|$.T}}');">{{"退出"|$.T}}</a>
-        {{else}}
+        {{- else -}}
         <a href="{{FrontendURL}}/sign_in?next={{$.ReturnToCurrentURL}}" rel="nofollow" class="btn btn-secondary tx-medium tx-size-12 tx-gray">{{"登录"|$.T}}</a>
         <a href="{{FrontendURL}}/sign_up?next={{$.ReturnToCurrentURL}}" rel="nofollow" class="btn btn-inverse bg-black-2 mg-l-10 tx-normal tx-size-12">{{"注册"|$.T}}</a>
-        {{end}}
+        {{- end -}}
       </div>
     </div><!-- container -->
   </div><!-- headpanel -->
