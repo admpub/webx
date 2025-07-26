@@ -2,12 +2,12 @@
 {{- $darkMode := $themeInfo.IsColorName `dark` -}} 
     <div class="{{if $darkMode}}bg-inverse{{else}}bg-white{{end}} pos-fixed t-0 l-0 r-0 shadow-1 z-index-10">
       <div class="container ht-70 d-flex align-items-center justify-content-between">
-        <a href="{{FrontendURL}}/" class="tx-inverse tx-size-24 tx-spacing-neg-2 tx-bold">
+        <a href="{{FrontendURL}}/" class="tx-inverse tx-size-24 tx-spacing-neg-2 tx-bold site-logo-name">
           {{- if Config.base.siteLogo -}}
           <img src="{{Config.base.siteLogo}}" class="ht-50" alt="{{Config.base.siteName}}">
           {{- else -}}
           <img src="{{AssetsURL `/images/logo.png`}}" class="wd-50 ht-50" alt="{{Config.base.siteName}}">
-          <span class="site-name">{{Config.base.siteName}}</span>
+          <span class="site-name nowrap">{{Config.base.siteName}}</span>
           {{- end -}}
         </a>
         <div><a href="{{FrontendURL}}/" class="btn btn-warning tx-size-13">{{"返回首页"|$.T}}</a></div>

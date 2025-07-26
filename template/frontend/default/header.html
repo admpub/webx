@@ -8,12 +8,12 @@
     <div class="container pd-x-0 pd-lg-x-10 ht-70 d-lg-flex align-items-center justify-content-between">
       <div class="d-flex ht-70 align-items-center justify-content-between pd-x-20 pd-lg-x-0">
         <h5 class="tx-size-sm-24 mg-b-0 tx-bold tx-spacing-neg-2">
-          <a href="{{FrontendURL}}/" class="tx-white">
+          <a href="{{FrontendURL}}/" class="tx-white site-logo-name">
             {{- if Config.base.siteLogo -}}
             <img src="{{Config.base.siteLogo}}" class="ht-50" alt="{{Config.base.siteName}}">
             {{- else -}}
             <img src="{{AssetsURL `/images/logo.png`}}" class="wd-50 ht-50" alt="{{Config.base.siteName}}">
-            <span class="site-name">{{Config.base.siteName}}</span>
+            <span class="site-name nowrap">{{Config.base.siteName}}</span>
             {{- end -}}
           </a>
         </h5>

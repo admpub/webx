@@ -474,7 +474,15 @@
   background-color: #21252c;
   color: #fff;
 }
-
+.site-logo-name{
+  height: 70px;
+  line-height: 70px;
+  overflow: hidden;
+  display: block;
+}
+.site-logo-name>img{
+  margin-top: -5px;
+}
 @media (max-width: 768px) {
   .sf-menu ul {
     position: static;
