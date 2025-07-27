@@ -64,7 +64,7 @@ img.object-fit-cover{filter: invert(1);}
 .btn.btn-default.tx-inverse{color:#282c35 !important}
 .form-control-plaintext{color: #ccc}
 .list-group-item{background-color: #333;}
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 .sf-menu ul{
     background-color: #222;
 }
