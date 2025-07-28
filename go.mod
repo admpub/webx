@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250727035244-bfe066caa518
-	github.com/coscms/webcore v0.9.29
-	github.com/coscms/webfront v0.0.0-20250723114519-acccf69ea7e7
+	github.com/coscms/webcore v0.9.30
+	github.com/coscms/webfront v0.0.0-20250728034347-a1a54a3ba59f
 )
 
 require (
@@ -54,7 +54,7 @@ require (
 	github.com/swaggo/swag v1.16.3
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.3.31
-	github.com/webx-top/db v1.28.5
+	github.com/webx-top/db v1.28.6
 	github.com/webx-top/echo v1.16.10
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
@@ -224,10 +224,10 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
-	github.com/mattn/go-sqlite3 v1.14.28 // indirect
+	github.com/mattn/go-sqlite3 v1.14.29 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
 	github.com/miekg/dns v1.1.67 // indirect
-	github.com/minio/crc64nvme v1.0.2 // indirect
+	github.com/minio/crc64nvme v1.1.0 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
 	github.com/minio/minio-go/v7 v7.0.95 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
@@ -307,9 +307,9 @@ require (
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	modernc.org/libc v1.66.3 // indirect
+	modernc.org/libc v1.66.6 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.38.0 // indirect
+	modernc.org/sqlite v1.38.1 // indirect
 	rsc.io/qr v0.2.0 // indirect
 )
