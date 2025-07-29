@@ -610,6 +610,10 @@
 		});
 	}
 
+	function seekEqual(a, b) {
+		return a.toFixed(0) == b.toFixed(0);
+	}
+
 	function onLoaded(play, player) {
 		if (play.live) return;
 		if (play.autoSkip && play.seek <= 0 && play.filmRange && play.filmRange.playRange.min > 0) {
@@ -620,14 +624,14 @@
 		//console.log(play.seek,lastTime);
 		//console.dir(amplayer.options)
 		if (!lastTime) {
-			if (current == play.seek) return;
+			if (seekEqual(current,play.seek)) return;
 			return player.seek(play.seek);
 		}
 		if (player.video.duration - lastTime < 60 || play.seek > lastTime) {
-			if (current == play.seek) return;
+			if (seekEqual(current,play.seek)) return;
 			player.seek(play.seek);
 		} else {
-			if (current == lastTime) return;
+			if (seekEqual(current,lastTime)) return;
 			player.seek(lastTime);
 		}
 	}
@@ -646,6 +650,7 @@
 			var rg = play.filmRange;
 			if (play.autoSkip) { // 跳过片头和片尾
 				if (rg.playRange.min > 0 && current < rg.playRange.min) {
+					if (seekEqual(current,rg.playRange.min)) return;
 					return player.seek(rg.playRange.min);
 				}
 				var playRangeMax = rg.playRange.max;
@@ -660,6 +665,7 @@
 					if (current >= v.min) {
 						if (v.max < 0 && (v.max * -1) < player.video.duration) v.max = player.video.duration + v.max;
 						if (current < v.max) {
+							if (seekEqual(current,v.max)) return;
 							return player.seek(v.max);
 						}
 					}
