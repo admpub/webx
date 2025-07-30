@@ -32,6 +32,7 @@
 			"defaultExtName": ".m3u8",
 			"touchVideoChangeProgress": false,
 			"disableRemotePlayback": false,
+			"contextmenu": null,
 			"listeners": {}
 		},
 		'secure': win.location.protocol == 'https:',
@@ -415,6 +416,7 @@
 					chromecast: c.chromecast && window.chrome && window.chrome.cast,
 					p2pAppId: c.p2pAppId,
 					highlight: c.highlight || [],
+					contextmenu: c.contextmenu,
 					video: {
 						url: c.urls,
 						type: type,
@@ -425,6 +427,7 @@
 					pluginOptions: {}
 				};
 				if(('subtitle' in c) && c.subtitle) opts.subtitle = c.subtitle;
+				if(('danmaku' in c) && c.danmaku) opts.danmaku = c.danmaku;
 				switch (type) {
 					case 'flv':
 						opts.pluginOptions.flv = {
@@ -466,6 +469,7 @@
 					p2pAppId: c.p2pAppId,
 					highlight: c.highlight || [],
 					touchVideoChangeProgress: c.touchVideoChangeProgress,
+					contextmenu: c.contextmenu,
 					video: {
 						url: c.urls,
 						pic: c.pics
