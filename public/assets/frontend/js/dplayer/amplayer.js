@@ -424,6 +424,7 @@
 					touchVideoChangeProgress: c.touchVideoChangeProgress,
 					pluginOptions: {}
 				};
+				if(('subtitle' in c) && c.subtitle) opts.subtitle = c.subtitle;
 				switch (type) {
 					case 'flv':
 						opts.pluginOptions.flv = {
