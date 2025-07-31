@@ -1,9 +1,9 @@
 {{Strip}}{{Extend "#default#base"}}
 {{Block "title"}}{{"找回密码"|$.T}}{{/Block}}
-{{Block "bodyAttr"}} class="bg-superlight tx-size-sm ht-100p pos-relative"{{/Block}}
+{{Block "bodyAttr"}} class="bg-superlight tx-size-sm"{{/Block}}
 {{Block "body"}}
     {{Include "#default#headsimple"}}
-    <div class="ht-100v wd-100p d-flex align-items-center justify-content-center pd-md-t-70 pd-x-20">
+    <div class="wd-100p d-flex align-items-center justify-content-center pd-t-100 pd-x-20">
       <div class="card pd-y-30 pd-x-25 shadow-center-5 wd-450">
         <h5 class="tx-size-md-32 tx-gray-dark tx-center">{{"找回密码"|$.T}}</h5>
         <p class="tx-size-12 tx-size-md-14 mg-b-30 tx-center">{{$.T "请输入您收到的%d位数字验证码。" $.Stored.verifyCodeLength}}</p>
