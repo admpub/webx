@@ -8,19 +8,19 @@
     <div class="pos-absolute a-0 d-flex align-items-center">
       <div class="pos-absolute-bottom tx-right"></div><!-- pos-absolute-bottom -->
       <div class="container">
-        <div class="card pd-20 col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1" style="background-color:rgba(255, 255, 255, 0.3);box-shadow:2px 2px 10px rgba(0, 0, 0, 0.2);">
+        <div class="card card-glass pd-20 col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
           <a href="{{FrontendURL}}/" class="tx-inverse tx-size-20 tx-spacing-neg-2 tx-bold">
             <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="ht-50" alt="{{Config.base.siteName}}">
             <span class="nowrap">{{Config.base.siteName}}</span>
           </a>
           <h1 class="tx-inverse tx-bold tx-size-72 tx-size-xs-96 tx-size-sm-110 tx-size-md-130 tx-size-lg-140 lh-1 mg-b-0 tx-center shadow-1">404</h1>
           <h4 class="tx-gray tx-size-xs-32 tx-size-sm-40 tx-size-md-48 tx-size-lg-56 tx-spacing-neg-2 mg-b-15 tx-center shadow-1">Page Not Found</h4>
-          <h6 class="tx-size-12 tx-size-xs-13 tx-size-sm-14 tx-size-md-15 tx-size-lg-15 tx-size-xl-16 mg-b-0 tx-gray-dark tx-normal lh-5">Whooops, we couldn't find the page your were looking for. Please try searching.</h6>
+          <h6 class="tx-size-12 tx-size-xs-13 tx-size-sm-14 tx-size-md-15 tx-size-lg-15 tx-size-xl-16 mg-b-0 tx-gray-dark tx-normal lh-5 tx-center">Whooops, we couldn't find the page your were looking for. Please try searching.<br />呜呜呜，我们找不到你要找的页面。请尝试搜索。</h6>
           <form action="{{FrontendURL}}/search" method="GET" class="mg-t-20">
           <div class="input-group wd-md-350 mx-auto">
             <input type="text" class="form-control lh-6 bd-r-0 tx-size-12" placeholder="Search page" name="q" value="{{$.Form "q"}}">
             <div class="input-group-btn pd-l-1">
-              <button class="btn btn-inverse tx-size-12">Search</button>
+              <button class="btn btn-inverse tx-size-12">{{`Search`|$.T}}</button>
             </div><!-- input-group-btn -->
           </div><!-- input-group -->
           </form>
