@@ -1,0 +1,20 @@
+/* 扫光效果 */
+.tx-shark,.tx-hover-shark:hover{
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(45deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.7), rgba(255,255,255,0) 60%) -100% / 50% no-repeat currentColor;
+  animation: sharkText 2s infinite;
+  background-clip: text;
+}
+@keyframes sharkText{from{background-position:-100%}to{background-position:200%}}
+.card-shark::after,.card-hover-shark:hover::after{
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(45deg, rgba(255,255,255,0) 40%, rgba(255, 255, 255, 0.7), rgba(255,255,255,0) 60%);
+  animation: sharkWrap 2s infinite;
+  transform: translateX(-100%);
+  /* 对于不规则图像需增加: */
+  /* -webkit-mask: url(不规则图像网址) 0 0/100%; */
+}
+.card-shark,.card-hover-shark:hover{flex-shrink:0;position:relative;overflow:hidden;}
+@keyframes sharkWrap{to{transform:translateX(100%);}}
