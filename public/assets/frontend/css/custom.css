@@ -436,12 +436,9 @@
 
 .login-form-left-box .color-box-wrapper {
   width: 100%;
-  text-align: center
-}
-
-.login-form-left-box .color-box-wrapper {
-  width: 100%;
-  text-align: center
+  text-align: center;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .login-form-left-box .color-box-wrapper .color-box {
