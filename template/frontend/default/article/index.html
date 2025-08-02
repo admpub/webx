@@ -26,46 +26,8 @@
                     {{- $articles := call $.Func.getArticles -}}
                     {{- $endIndex := Sub (len $articles) 1 -}}
                     {{- range $k, $v := $articles -}}
-                    <div class="media pd-20 bg-white{{if ne $k $endIndex}} bd-b bd-gray-light{{end}} {{if $isDark}}hover-bg-inverse bd-color-inverse{{else}}hover-bg-gray-xlightest{{end}}">
-                        <div class="media-body tx-size-md">
-                            <span class="pull-right">
-                                {{- if $v.Tags -}}
-                                <span class="d-inline-block">
-                                    <i class="fa fa-tags"></i>
-                                    {{- range $tagK,$tagV := Split $v.Tags ","}}
-                                    {{- if gt $tagK 0}}/{{end}}
-                                    <span class="tx-info">
-                                        <a href="{{FrontendURL}}/articles{{$.Ext}}?tag={{$tagV}}">{{$tagV}}</a>
-                                    </span>
-                                    {{- end -}}
-                                </span>
-                                {{- end -}}
-                            </span>
-                            <a href="{{URLByName `article.detail` $v.Id}}" class="tx-medium tx-size-20">{{$v.Title}}</a>
-                            <p class="tx-gray-light mg-b-5 d-block">
-                                {{$v.Summary}}
-                            </p>
-                            <div class="tx-size-12 d-flex align-items-center">
-                                <span class="tx-gray-light hover-info d-inline-block mg-r-20">
-                                    <i class="fa fa-eye"></i>
-                                    <span class="tx-size-12">{{$v.Views}}<span class="hidden-xs-down"> Views</span></span>
-                                </span>
-                                <span href="javascript:;" class="tx-gray-light hover-info d-inline-block mg-r-20">
-                                    <i class="fa fa-thumbs-up"></i>
-                                    <span class="tx-size-12">{{$v.Likes}}<span class="hidden-xs-down"> Likes</span></span>
-                                </span>
-                                <span href="javascript:;" class="tx-gray-light hover-info d-inline-block mg-r-40">
-                                    <i class="fa fa-comment"></i>
-                                    <span class="tx-size-12">{{$v.Comments}}<span class="hidden-xs-down"> Comments</span></span>
-                                </span>
-                            </div>
-                        </div><!-- media-body -->
-                        {{- if $v.Image -}}
-                        <a href="{{URLByName `article.detail` $v.Id}}">
-                            <img src="{{$v.Image}}" class="img-fluid wd-100 mg-l-15 rounded-3 shadow" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/placeholder/default-sm.jpg';">
-                        </a>
-                        {{- end -}}
-                    </div><!-- media -->
+                    {{- $.Set `partial.articleList` (MakeMap `k` $k `v` $v `endIndex` $endIndex `isDark` $isDark) -}}
+                    {{Include "#default#article/partial_list" $}}
                     {{- end -}}
                 </div><!-- media-list -->
                 <nav class="d-flex justify-content-center bd-t pd-t-10">
