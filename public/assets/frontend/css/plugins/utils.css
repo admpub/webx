@@ -24315,3 +24315,15 @@ select.tx-center{text-align-last:center}
 .wd-100v {
   width: 100vw;
 }
+
+/* 毛玻璃效果 */
+
+.aero-light{
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+}
+
+.aero-dark{
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+}
