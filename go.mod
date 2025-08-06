@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250731031910-eb90ae50e19c
-	github.com/coscms/webcore v0.9.31
-	github.com/coscms/webfront v0.0.0-20250804072048-1c043dffa362
+	github.com/coscms/webcore v0.9.32
+	github.com/coscms/webfront v0.0.0-20250806063709-7c5c3dd1b928
 )
 
 require (
@@ -48,7 +48,7 @@ require (
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.15.0 // indirect
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76 // indirect
-	github.com/prometheus/client_golang v1.22.0 // indirect
+	github.com/prometheus/client_golang v1.23.0 // indirect
 	github.com/spf13/cobra v1.9.1 // indirect
 	github.com/stretchr/testify v1.10.0
 	github.com/swaggo/swag v1.16.3
@@ -79,7 +79,7 @@ require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/abh/errorutil v1.0.0 // indirect
 	github.com/admpub/9t v0.0.1 // indirect
-	github.com/admpub/bart v0.0.1 // indirect
+	github.com/admpub/bart v0.0.2 // indirect
 	github.com/admpub/boltstore v1.2.0 // indirect
 	github.com/admpub/caddy v1.2.9 // indirect
 	github.com/admpub/captcha-go v0.0.1 // indirect
@@ -138,7 +138,7 @@ require (
 	github.com/admpub/xencoding v0.0.3 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.100 // indirect
 	github.com/andybalholm/brotli v1.2.0 // indirect
-	github.com/aws/aws-sdk-go v1.55.7 // indirect
+	github.com/aws/aws-sdk-go v1.55.8 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/boombuler/barcode v1.1.0 // indirect
@@ -170,7 +170,7 @@ require (
 	github.com/go-acme/lego/v4 v4.25.1 // indirect
 	github.com/go-errors/errors v1.5.1 // indirect
 	github.com/go-ini/ini v1.67.0 // indirect
-	github.com/go-jose/go-jose/v4 v4.1.1 // indirect
+	github.com/go-jose/go-jose/v4 v4.1.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
@@ -226,7 +226,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/mattn/go-sqlite3 v1.14.30 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
-	github.com/miekg/dns v1.1.67 // indirect
+	github.com/miekg/dns v1.1.68 // indirect
 	github.com/minio/crc64nvme v1.1.0 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
 	github.com/minio/minio-go/v7 v7.0.95 // indirect
@@ -242,7 +242,7 @@ require (
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
-	github.com/phuslu/iploc v1.0.20250715 // indirect
+	github.com/phuslu/iploc v1.0.20250801 // indirect
 	github.com/phuslu/lru v1.0.18 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
@@ -251,7 +251,7 @@ require (
 	github.com/prometheus/procfs v0.17.0 // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
 	github.com/quic-go/quic-go v0.54.0 // indirect
-	github.com/redis/go-redis/v9 v9.11.0 // indirect
+	github.com/redis/go-redis/v9 v9.12.0 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
@@ -260,7 +260,7 @@ require (
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/segmentio/fasthash v1.0.3 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
-	github.com/shirou/gopsutil/v4 v4.25.6 // indirect
+	github.com/shirou/gopsutil/v4 v4.25.7 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/cast v1.9.2 // indirect
 	github.com/spf13/pflag v1.0.7 // indirect
@@ -268,7 +268,7 @@ require (
 	github.com/syndtr/goleveldb v1.0.0 // indirect
 	github.com/tdewolff/minify/v2 v2.23.10 // indirect
 	github.com/tdewolff/parse/v2 v2.8.1 // indirect
-	github.com/tidwall/btree v1.8.0 // indirect
+	github.com/tidwall/btree v1.8.1 // indirect
 	github.com/tidwall/buntdb v1.3.2 // indirect
 	github.com/tidwall/gjson v1.18.0 // indirect
 	github.com/tidwall/grect v0.1.4 // indirect
