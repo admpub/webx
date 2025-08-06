@@ -51,7 +51,7 @@ require (
 	github.com/prometheus/client_golang v1.23.0 // indirect
 	github.com/spf13/cobra v1.9.1 // indirect
 	github.com/stretchr/testify v1.10.0
-	github.com/swaggo/swag v1.16.3
+	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.3.31
 	github.com/webx-top/db v1.28.6
@@ -85,7 +85,7 @@ require (
 	github.com/admpub/captcha-go v0.0.1 // indirect
 	github.com/admpub/ccs-gm v0.0.5 // indirect
 	github.com/admpub/checksum v1.1.0 // indirect
-	github.com/admpub/collate v1.1.0 // indirect
+	github.com/admpub/collate v1.2.0 // indirect
 	github.com/admpub/confl v0.2.4 // indirect
 	github.com/admpub/cove v0.0.0-20241224063114-4fdd53c948a6 // indirect
 	github.com/admpub/cron v0.1.1 // indirect
@@ -106,7 +106,7 @@ require (
 	github.com/admpub/go-reuseport v0.5.0 // indirect
 	github.com/admpub/go-utility v0.0.1 // indirect
 	github.com/admpub/godownloader v2.2.2+incompatible // indirect
-	github.com/admpub/gohls v1.3.3 // indirect
+	github.com/admpub/gohls v1.3.4 // indirect
 	github.com/admpub/gohls-server v0.3.10 // indirect
 	github.com/admpub/gotwilio v0.0.1 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
@@ -136,7 +136,7 @@ require (
 	github.com/admpub/timeago v1.2.2 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/admpub/xencoding v0.0.3 // indirect
-	github.com/aliyun/alibaba-cloud-sdk-go v1.63.100 // indirect
+	github.com/aliyun/alibaba-cloud-sdk-go v1.63.107 // indirect
 	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/aws/aws-sdk-go v1.55.8 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
@@ -153,7 +153,7 @@ require (
 	github.com/coscms/session-sqlitestore v0.0.4 // indirect
 	github.com/coscms/session-sqlstore v0.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/davidbyttow/govips/v2 v2.15.0 // indirect
+	github.com/davidbyttow/govips/v2 v2.16.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/dsoprea/go-logging v0.0.0-20200710184922-b02d349568dd // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -172,10 +172,10 @@ require (
 	github.com/go-ini/ini v1.67.0 // indirect
 	github.com/go-jose/go-jose/v4 v4.1.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
-	github.com/go-openapi/jsonpointer v0.21.0 // indirect
+	github.com/go-openapi/jsonpointer v0.21.1 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
 	github.com/go-openapi/spec v0.21.0 // indirect
-	github.com/go-openapi/swag v0.23.0 // indirect
+	github.com/go-openapi/swag v0.23.1 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.27.0 // indirect
