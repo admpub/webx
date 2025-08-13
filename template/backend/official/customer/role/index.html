@@ -24,7 +24,7 @@
 										<th><strong>{{"角色名"|$.T}}</strong></th>
 										<th><strong>{{"描述"|$.T}}</strong></th>
 										<th style="width:70px"><strong>{{"默认角色"|$.T}}</strong></th>
-										<th style="width:100px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
+										<th style="width:110px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 									</tr>
 								</thead>
 								<tbody class="no-border-y">
@@ -34,7 +34,7 @@
 										<td>{{$v.Name}}</td>
 										<td>{{$v.Description}}</td>
 										<td>{{if eq $v.IsDefault `Y`}}<i class="fa fa-check text-success" data-toggle="tooltip" title="{{`默认角色`|$.T}}"></i>{{else}}<i class="fa fa-times text-gray" data-toggle="tooltip" title="{{`非默认角色`|$.T}}"></i>{{end}}</td>
-										<td class="text-center">
+										<td class="text-center label-group">
 										<a class="label label-default" href="{{BackendURL}}/official/customer/role/add?copyId={{$v.Id}}" title="{{`复制`|$.T}}"><i class="fa fa-copy"></i></a>
 										<a class="label label-success" href="{{BackendURL}}/official/customer/role/edit?id={{$v.Id}}"><i class="fa fa-pencil"></i></a>
 										{{- if gt $v.Id 1}}
