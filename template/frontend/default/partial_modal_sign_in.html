@@ -11,10 +11,9 @@
             <h3 class="tx-semibold tx-white mg-b-20">
               {{- if gt $length 1 -}}
               {{- $endIndex := Sub $length 1 -}}
-              {{- index $hostInfo (Sub $endIndex 1) -}}
-              <span class="tx-normal op-3">.{{- index $hostInfo $endIndex -}}</span>
+              <span class="text-capitalize">{{- index $hostInfo (Sub $endIndex 1) -}}</span><span class="tx-normal op-3">.{{- index $hostInfo $endIndex -}}</span>
               {{- else -}}
-              {{$.Domain}}
+              <span class="text-capitalize">{{$.Domain}}</span>
               {{- end -}}
             </h3>
             <div class="tx-white op-2 mg-b-60">
