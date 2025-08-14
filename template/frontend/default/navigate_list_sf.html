@@ -7,7 +7,7 @@
         {{- $surl := $sub.URL -}}
         <li>
             <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}"{{if $sub.IsActive}} class="active"{{end}}{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>
-                {{$sub.Title|$.T|UpperCaseFirst}}
+                {{$sub.Title|UpperCaseFirst|$.T}}
                 {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
             </a>
             {{- if $sub.HasChildren -}}
@@ -19,7 +19,7 @@
         {{- else -}}
         <li>
           <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}"{{if $v.IsActive}} class="active"{{end}}{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
-              {{$v.Title|$.T|UpperCaseFirst}}
+              {{$v.Title|UpperCaseFirst|$.T}}
               {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
             </a>
             {{- $.Set `navigateListSfChildren` $v -}}
@@ -28,7 +28,7 @@
         {{- end -}}
     {{- else -}}
         <li><a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}"{{if $v.IsActive}} class="active"{{end}}{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
-            {{$v.Title|$.T|UpperCaseFirst}}
+            {{$v.Title|UpperCaseFirst|$.T}}
             {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
         </a></li>
     {{- end -}}

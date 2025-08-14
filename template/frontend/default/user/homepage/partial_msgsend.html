@@ -2,32 +2,32 @@
     <div class="card card-flat tx-size-sm pd-30 mg-t-20">
         <form class="form form-label-right" method="POST" ajax-submit>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">{{"收信人"|$.T|UpperCaseFirst}}:</label>
+              <label class="col-sm-2 col-form-label">{{"收信人"|UpperCaseFirst|$.T}}:</label>
               <div class="col-sm-8">
                 <span class="form-control-plaintext">{{$info.Name}}</span>
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputTitle" class="col-sm-2 col-form-label">{{"消息标题"|$.T|UpperCaseFirst}}:</label>
+              <label for="inputTitle" class="col-sm-2 col-form-label">{{"消息标题"|UpperCaseFirst|$.T}}:</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" name="title" id="inputTitle" value="{{$.Form `title`}}">
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputContent" class="col-sm-2 col-form-label">{{"消息内容"|$.T|UpperCaseFirst}}:</label>
+              <label for="inputContent" class="col-sm-2 col-form-label">{{"消息内容"|UpperCaseFirst|$.T}}:</label>
               <div class="col-sm-9">
                 <textarea class="form-control" name="content" id="inputContent" maxlength="2000" rows="10" count-words="#contentWordsCount" required="required">{{$.Form "content"}}</textarea>
                 <small id="contentHelp" class="form-text text-muted">{{$.T "不得超过%d个字,还能输入%s个字" 2000 `<code id="contentWordsCount">2000</code>` | ToHTML}}</small>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">{{"内容加密"|$.T|UpperCaseFirst}}:</label>
+              <label class="col-sm-2 col-form-label">{{"内容加密"|UpperCaseFirst|$.T}}:</label>
               <div class="col-sm-9">
                 {{- $encrypted := $.Form "encrypted" -}}
                 <label class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" value="Y" name="encrypted"{{if eq $encrypted `Y`}} checked="checked"{{end}}>
                   <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">{{"加密"|$.T|UpperCaseFirst}} 
+                  <span class="custom-control-description">{{"加密"|UpperCaseFirst|$.T}} 
                     <small>({{"消息加密保存更加安全，但加密后的消息将无法搜索"|$.T}})</small>
                   </span>
                 </label>
@@ -37,7 +37,7 @@
               <div class="col-sm-9 mg-t-5 offset-sm-2">
                   <button type="submit" class="btn btn-primary">
                     <i class="fa fa-plane"></i>
-                    {{"发送私信"|$.T|UpperCaseFirst}}
+                    {{"发送私信"|UpperCaseFirst|$.T}}
                   </button>
               </div>
             </div>
