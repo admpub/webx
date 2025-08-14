@@ -4,6 +4,7 @@ import (
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/logic/articlelogic"
+	"github.com/coscms/webfront/model/official"
 	"github.com/webx-top/echo"
 )
 
@@ -18,5 +19,7 @@ func Tags(ctx echo.Context) error {
 		return err
 	}
 	ctx.Set(`tagList`, tags)
+	ctx.Set(`tagGroup`, group)
+	ctx.Set(`tagGroupName`, official.TagGroups.Get(group))
 	return ctx.Render(`article/tags`, common.Err(ctx, err))
 }

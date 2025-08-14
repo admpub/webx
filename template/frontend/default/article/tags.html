@@ -12,7 +12,12 @@
         <div class="card mg-t-20">
           <div class="card-header pd-x-0 bg-transparent bd-color-gray-lighter">
             <span class="tx-size-18 tx-bold tx-inverse pd-x-15">
-                {{- "文章标签"|$.T -}}
+              {{- if $.Stored.tagGroupName  -}}
+              {{- $.Stored.tagGroupName|$.T -}}
+              {{- "标签"|$.T -}}
+              {{- else -}}
+              {{- "文章标签"|$.T -}}
+              {{- end -}}
             </span>
           </div>
           <div class="card-block pd-10">
