@@ -11,19 +11,19 @@
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta http-equiv="Cache-Control" content="no-transform">
   <!-- device-setting:end -->
-  <meta name="keywords" content="{{Block `keywords`}}{{Config.base.siteMetaKeywords|Default Config.base.siteName}}{{/Block}}">
-  <meta name="description" content="{{Block `description`}}{{if Config.base.siteMetaDescription}}{{Config.base.siteMetaDescription}}{{else}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{end}}{{/Block}}">
+  <meta name="keywords" content="{{Block `keywords`}}{{Config.base.siteMetaKeywords|Default Config.base.siteName|$.T}}{{/Block}}">
+  <meta name="description" content="{{Block `description`}}{{if Config.base.siteMetaDescription}}{{Config.base.siteMetaDescription|$.T}}{{else}}{{Config.base.siteName|$.T}}{{if Config.base.siteSlogan|$.T}}: {{Config.base.siteSlogan|$.T}}{{end}}{{end}}{{/Block}}">
 <!-- og-tag:start -->
 <meta property="og:type" content="{{Block `type`}}article{{/Block}}" /><!-- 常用值:article、news、book、movie、product… -->
-<meta property="og:site_name" content="{{Config.base.siteName}}" />
-<meta property="og:title" content="{{Block `title`}}{{Config.base.siteName}}{{/Block}}" />
-<meta property="og:description" content="{{Block `description`}}{{Config.base.siteMetaDescription|Default Config.base.siteName}}{{/Block}}" />
+<meta property="og:site_name" content="{{Config.base.siteName|$.T}}" />
+<meta property="og:title" content="{{Block `title`}}{{Config.base.siteName|$.T}}{{/Block}}" />
+<meta property="og:description" content="{{Block `description`}}{{Config.base.siteMetaDescription|Default Config.base.siteName|$.T}}{{/Block}}" />
 <meta property="og:image" content="{{Block `image`}}{{/Block}}" />
 <meta property="og:url" content="{{Block `url`}}{{$.FullRequestURI}}{{/Block}}" />
 <meta property="og:release_date" content="{{Block `releaseDate`}}{{Now.Format `2006-01-02`}}{{/Block}}" />
 <!-- og-tag:end -->
 	<link rel="shortcut icon" type="image/x-icon" href="{{$.RootPrefix}}/favicon.ico">
-  <title>{{Block "title"}}{{/Block}}{{if hasAnyBlock `title`}} - {{end}}{{Config.base.siteName}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan}}{{end}}</title>
+  <title>{{Block "title"}}{{/Block}}{{if hasAnyBlock `title`}} - {{end}}{{Config.base.siteName|$.T}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan|$.T}}{{end}}</title>
 	<link combine href="{{AssetsURL}}/css/font_awesome.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   <link combine href="{{AssetsXURL}}/css/fonts/Ionicons/css.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   <link combine href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">

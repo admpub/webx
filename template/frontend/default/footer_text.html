@@ -1,6 +1,6 @@
 {{Strip}}
 
-&copy; {{Now.Format "2006"}} <a href="{{Config.base.siteURL|Default (FrontendURL `/`)}}" class="tx-gray hover-warning">{{Config.base.siteName}}</a>. All Rights Reserved.
+&copy; {{Now.Format "2006"}} <a href="{{Config.base.siteURL|Default (FrontendURL `/`)}}" class="tx-gray hover-warning">{{Config.base.siteName|$.T}}</a>. All Rights Reserved.
 
 {{- if Config.base.siteICPFiling -}}
 <a href="{{Config.base.siteICPURL|Default `https://beian.miit.gov.cn/`}}" target="_blank" class="tx-gray">{{Config.base.siteICPFiling}}</a>
@@ -10,7 +10,7 @@
 
 {{- if Config.base.siteSlogan -}}
 <br />
-{{- Config.base.siteSlogan -}}
+{{- Config.base.siteSlogan|$.T -}}
 {{- end -}}
 
 {{- if not (HasFeature `hide-poweredby`) -}}

@@ -6,24 +6,34 @@
       <div class="row no-gutters">
         <div class="col-lg-6 bg-primary rounded-left">
           <div class="pd-30">
-            <h3 class="tx-semibold tx-white mg-b-20">Webx<span class="tx-normal op-3">.top</span></h3>
+            {{- $hostInfo := Split $.Domain `.` -}}
+            {{- $length := len $hostInfo -}}
+            <h3 class="tx-semibold tx-white mg-b-20">
+              {{- if gt $length 1 -}}
+              {{- $endIndex := Sub $length 1 -}}
+              {{- index $hostInfo (Sub $endIndex 1) -}}
+              <span class="tx-normal op-3">.{{- index $hostInfo $endIndex -}}</span>
+              {{- else -}}
+              {{$.Domain}}
+              {{- end -}}
+            </h3>
             <div class="tx-white op-2 mg-b-60">
                 <p>{{"欢迎使用Webx软件产品。"|$.T}}</p>
                 <p>{{"打造："|$.T}}</p>
                 <ul>
-                    <li>快速</li>
-                    <li>稳定</li>
-                    <li>安全</li>
-                    <li>省心</li>
+                    <li>{{"快速"|$.T}}</li>
+                    <li>{{"稳定"|$.T}}</li>
+                    <li>{{"安全"|$.T}}</li>
+                    <li>{{"省心"|$.T}}</li>
                 </ul>
                 <p>{{"的软件产品是我们的一贯目标和追求。"|$.T}}</p>
                 <p>{{"如果在登录的时候遇到问题，请联系我们"|$.T}}</p>
             </div>
             <p class="tx-white tx-size-xs">
                 <span class="tx-uppercase">{{"联系方式"|$.T}}:</span><br />
-                <span class="op-2">E-mail: {{Config.contact.siteEmail|Default "-"}}</span><br />
-                <span class="op-2">QQ: {{Config.contact.siteQQ|Default "-"}}</span><br />
-                <span class="op-2">{{"电话"|$.T}}: {{Config.contact.siteMobile|Default "-"}}</span><br />
+                <span class="op-2">E-mail: {{Config.contact.siteEmail|Default "-"|$.T}}</span><br />
+                <span class="op-2">QQ: {{Config.contact.siteQQ|Default "-"|$.T}}</span><br />
+                <span class="op-2">{{"电话"|$.T}}: {{Config.contact.siteMobile|Default "-"|$.T}}</span><br />
             </p>
             </div>
           </div><!-- col-6 -->
