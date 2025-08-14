@@ -1,7 +1,7 @@
 {{Strip}}{{Extend "#default#base"}}
 {{Block "title"}}{{- "文章标签"|$.T -}}{{/Block}}
 {{Block "keywords"}}{{- "文章标签"|$.T -}}{{/Block}}
-{{Block "description"}}{{$.Stored.data.Summary}}{{/Block}}
+{{Block "description"}}{{$.Stored.data.Summary|$.T}}{{/Block}}
 {{Block "bodyAttr"}} class="pd-t-70 bg-gray-lightest"{{/Block}}
 {{Block "body"}}
   {{Include "#default#header"}}
@@ -23,7 +23,7 @@
           <div class="card-block pd-10">
             <div class="tags-container">
             {{- range $k,$v := $.Stored.tagList -}}
-            <a class="tag-item tag-item-{{$k}} badge badge-default badge-pill" href="{{FrontendURL}}/articles?tag={{$v.Name}}"><i class="fa fa-tags"></i> {{$v.Name}}<sup>{{$v.Num}}</sup></a>
+            <a class="tag-item tag-item-{{$k}} badge badge-default badge-pill" href="{{FrontendURL}}/articles?tag={{$v.Name}}"><i class="fa fa-tags"></i> {{$v.Name|$.T}}<sup>{{$v.Num}}</sup></a>
             {{- end -}}
             </div>
           </div><!-- card-block -->
