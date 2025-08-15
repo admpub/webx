@@ -61,7 +61,7 @@
 
         <!-- ============= MAIN JS ============= -->
         <script>
-        window.activeURL={{if $.Stored.Get "activeURL"}}'{{FrontendURL}}{{$.Stored.Get "activeURL"}}'{{else}}null{{end}};window.errorMSG=null;window.successMSG=null;App.lang='{{$.Lang}}';
+        window.activeURL={{if $.Stored.Get "activeURL"}}'{{FrontendURL}}{{$.Stored.Get "activeURL"}}'{{else}}null{{end}};window.errorMSG=null;window.successMSG=null;App.lang='{{$.Lang.Normalize}}';
         {{- if $.Data -}}
           {{- if IsError $.Data -}}
         window.errorMSG="{{$.Data}}";
