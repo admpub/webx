@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250815030023-776b34a96d9c
-	github.com/coscms/webcore v0.9.40
-	github.com/coscms/webfront v0.0.0-20250815115707-14626199d468
+	github.com/coscms/webcore v0.9.41
+	github.com/coscms/webfront v0.0.0-20250815134040-183a92509d97
 )
 
 require (
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.3.31
 	github.com/webx-top/db v1.28.6
-	github.com/webx-top/echo v1.16.17
+	github.com/webx-top/echo v1.16.19
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2
@@ -131,7 +131,7 @@ require (
 	github.com/admpub/safesvg v0.0.8 // indirect
 	github.com/admpub/securecookie v1.3.0 // indirect
 	github.com/admpub/service v0.0.8 // indirect
-	github.com/admpub/sitemap-generator v0.0.0-20250814124852-43e227654102 // indirect
+	github.com/admpub/sitemap-generator v0.0.0-20250815123445-c6bebe90982f // indirect
 	github.com/admpub/sockjs-go/v3 v3.0.1 // indirect
 	github.com/admpub/sonyflake v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
@@ -227,7 +227,7 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
-	github.com/mattn/go-sqlite3 v1.14.31 // indirect
+	github.com/mattn/go-sqlite3 v1.14.32 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
 	github.com/miekg/dns v1.1.68 // indirect
 	github.com/minio/crc64nvme v1.1.1 // indirect
@@ -296,7 +296,7 @@ require (
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/mock v0.5.2 // indirect
 	golang.org/x/crypto v0.41.0 // indirect
-	golang.org/x/exp v0.0.0-20250811191247-51f88131bc50 // indirect
+	golang.org/x/exp v0.0.0-20250813145105-42675adae3e6 // indirect
 	golang.org/x/image v0.30.0 // indirect
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
 	golang.org/x/mod v0.27.0 // indirect
