@@ -28,6 +28,10 @@ func init() {
 		g.Route(`GET,POST`, `/secure_key`, SecureKey).SetName(`secure_key`)
 		g.Route(`GET,POST`, `/advert/:idents`, Advert).SetName(`advert`)
 		rssgenerator.RegisterRoute(g)
-		sitemap.RegisterRoute(g)
+		sitemap.RegisterRoute(g, getSitemapSubDirName)
 	})
+}
+
+func getSitemapSubDirName(c echo.Context) string {
+	return c.Domain()
 }
