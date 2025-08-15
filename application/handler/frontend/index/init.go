@@ -5,6 +5,8 @@ import (
 	"github.com/coscms/webcore/library/httpserver"
 	uploadLibrary "github.com/coscms/webcore/library/upload"
 	"github.com/coscms/webfront/initialize/frontend"
+	"github.com/coscms/webfront/library/rssgenerator"
+	"github.com/coscms/webfront/library/sitemap"
 	"github.com/webx-top/echo"
 )
 
@@ -25,5 +27,7 @@ func init() {
 		g.Route(`GET,POST`, `/error_code`, ErrorCode).SetName(`error_code`)
 		g.Route(`GET,POST`, `/secure_key`, SecureKey).SetName(`secure_key`)
 		g.Route(`GET,POST`, `/advert/:idents`, Advert).SetName(`advert`)
+		rssgenerator.RegisterRoute(g)
+		sitemap.RegisterRoute(g)
 	})
 }
