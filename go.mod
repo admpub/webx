@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250815030023-776b34a96d9c
 	github.com/coscms/webcore v0.9.40
-	github.com/coscms/webfront v0.0.0-20250815074744-611181aafc59
+	github.com/coscms/webfront v0.0.0-20250815092707-fb26c432c083
 )
 
 require (
@@ -92,7 +92,7 @@ require (
 	github.com/admpub/dgoogauth v0.0.1 // indirect
 	github.com/admpub/email v2.4.1+incompatible // indirect
 	github.com/admpub/fasthttp v0.0.7 // indirect
-	github.com/admpub/feeds v0.0.0-20250815022102-62f528415033 // indirect
+	github.com/admpub/feeds v0.0.0-20250815085047-66c35b59a155 // indirect
 	github.com/admpub/fsnotify v1.7.1 // indirect
 	github.com/admpub/gifresize v1.0.2 // indirect
 	github.com/admpub/go-bindata-assetfs v0.0.1 // indirect
