@@ -3,20 +3,20 @@
   {{- $customer := $.Stored.info -}}
   {{- $noSet := $.T "未设置" -}}
     <dl class="row">
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"客户ID"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"客户ID"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{$customer.Id}}</dd>
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"用户名"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"用户名"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{$customer.Name}}</dd>
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"用户组"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"用户组"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{if $customer.Group}}{{$customer.Group.Name}}{{else}}{{"普通会员"|$.T}}{{end}}</dd>
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"用户等级"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"用户等级"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">
         {{- range $ck, $cv := $customer.Levels -}}
         {{- if $cv.Level -}}{{Include "#default#common/label_level" $cv}}{{- end -}}
         {{- else -}}-{{end}}
       </dd>
       {{if $customer.Agent}}
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"代理等级"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"代理等级"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{$customer.Agent.Name}}</dd>
       {{end}}
       <dd class="col-sm-7 offset-sm-5">-</dd>
@@ -24,19 +24,19 @@
       <dd class="col-sm-7">{{$customer.RealName|Default $noSet}} &nbsp;</dd>
       <dt class="col-sm-5 tx-right tx-inverse">{{"身份证号"|$.T}}</dt>
       <dd class="col-sm-7">{{$customer.IdCardNo|Default $noSet}} &nbsp;</dd> -->
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"手机号码"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"手机号码"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{$customer.Mobile|Default $noSet}} {{if eq $customer.MobileBind "Y"}}<i class="fa fa-check tx-success" title="{{`已验证`|$.T}}"></i>{{end}} &nbsp;</dd>
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"电子邮箱"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"电子邮箱"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{$customer.Email|Default $noSet}} {{if eq $customer.EmailBind "Y"}}<i class="fa fa-check tx-success" title="{{`已验证`|$.T}}"></i>{{end}} &nbsp;</dd>
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"性别"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"性别"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{if eq $customer.Gender "male"}}{{"男"|$.T}}{{else if eq $customer.Gender "female"}}{{"女"|$.T}}{{else}}{{"保密"|$.T}}{{end}}</dd>
       {{- if gt $customer.Licenses 0 -}}
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"购买授权"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"购买授权"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{$customer.Licenses}} &nbsp;</dd>
       {{- end -}}
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"说明"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"说明"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{$customer.Description|Default $noSet|Nl2br}} &nbsp;</dd>
-      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"推荐人"|UpperCaseFirst|$.T}}</dt>
+      <dt class="col-sm-5 tx-sm-right tx-inverse">{{"推荐人"|$.RawT|UpperCaseFirst|$.ExtT}}</dt>
       <dd class="col-sm-7">{{if gt $customer.InviterId 0}}<a href="{{URLByName `user.home` $customer.InviterId}}" target="_blank">{{$customer.InviterId}}</a>{{else}}{{"无"|$.T}}{{end}} &nbsp;</dd>
     </dl>
 </div>

@@ -3,10 +3,10 @@
 {{Super}}
 <div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
-    <h5 class="tx-inverse tx-bold mg-b-0">{{"会员套餐"|UpperCaseFirst|$.T}}</h5>
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"会员套餐"|$.RawT|UpperCaseFirst|$.ExtT}}</h5>
     <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
-      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|UpperCaseFirst|$.T}}</a>
-      <span class="breadcrumb-item active">{{"会员套餐"|UpperCaseFirst|$.T}}</span>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
+      <span class="breadcrumb-item active">{{"会员套餐"|$.RawT|UpperCaseFirst|$.ExtT}}</span>
     </nav>
   </div>
 
@@ -17,7 +17,7 @@
                 {{- if gt (len $.Stored.groupList) 1 -}}
                 <ul class="nav nav-outline nav-gray d-block d-sm-flex justify-content-center" role="tablist">
                     {{- range $k, $v := $.Stored.groupList -}}
-                    <li class="nav-item"><a class="nav-link{{if eq $.Stored.group $v.K }} active{{end}}" href="?group={{$v.K}}">{{$v.V|UpperCaseFirst|$.T}}</a></li>
+                    <li class="nav-item"><a class="nav-link{{if eq $.Stored.group $v.K }} active{{end}}" href="?group={{$v.K}}">{{$v.V|$.RawT|UpperCaseFirst|$.ExtT}}</a></li>
                     {{- end -}}
                 </ul>
                 {{- end -}}
@@ -29,7 +29,7 @@
                       <div class="d-flex align-items-center justify-content-start">
                         <i class="icon ion-ios-checkmark alert-icon tx-size-32 mg-t-5 mg-xs-t-0"></i>
                         <p>
-                          <strong class="mg-r-20 nowrap">{{`我的套餐`|UpperCaseFirst|$.T}}</strong>
+                          <strong class="mg-r-20 nowrap">{{`我的套餐`|$.RawT|UpperCaseFirst|$.ExtT}}</strong>
                           {{- if $myLevel.Level -}}
                           <span class="mg-r-20 nowrap">{{`我的等级：`|$.T}}{{$myLevel.Level.Name}}</span>
                           {{- end -}}

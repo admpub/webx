@@ -4,10 +4,10 @@
 
 <div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
-    <h5 class="tx-inverse tx-bold mg-b-0">{{"用户消息"|UpperCaseFirst|$.T}} - {{$.Stored.boxTypeName}}</h5>
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"用户消息"|$.RawT|UpperCaseFirst|$.ExtT}} - {{$.Stored.boxTypeName}}</h5>
     <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
-      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|UpperCaseFirst|$.T}}</a>
-      <span class="breadcrumb-item active">{{"消息中心"|UpperCaseFirst|$.T}}</span>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
+      <span class="breadcrumb-item active">{{"消息中心"|$.RawT|UpperCaseFirst|$.ExtT}}</span>
     </nav>
   </div>
 
@@ -18,17 +18,17 @@
       {{- $boxType := $.Stored.boxType -}}
         <div class="pd-10 bg-inverse rounded-top">
           <ul class="nav nav-pills nav-white flex-column flex-sm-row">
-            <li class="nav-item"><a class="nav-link{{if eq $boxType `inbox`}} active{{end}}" href="{{FrontendURL}}/user/message/inbox">{{"收件箱"|UpperCaseFirst|$.T}}</a></li>
-            <li class="nav-item"><a class="nav-link{{if eq $boxType `outbox`}} active{{end}}" href="{{FrontendURL}}/user/message/outbox">{{"发件箱"|UpperCaseFirst|$.T}}</a></li>
-            <li class="nav-item"><a class="nav-link{{if eq $boxType `system`}} active{{end}}" href="{{FrontendURL}}/user/message/system">{{"系统消息"|UpperCaseFirst|$.T}}</a></li>
+            <li class="nav-item"><a class="nav-link{{if eq $boxType `inbox`}} active{{end}}" href="{{FrontendURL}}/user/message/inbox">{{"收件箱"|$.RawT|UpperCaseFirst|$.ExtT}}</a></li>
+            <li class="nav-item"><a class="nav-link{{if eq $boxType `outbox`}} active{{end}}" href="{{FrontendURL}}/user/message/outbox">{{"发件箱"|$.RawT|UpperCaseFirst|$.ExtT}}</a></li>
+            <li class="nav-item"><a class="nav-link{{if eq $boxType `system`}} active{{end}}" href="{{FrontendURL}}/user/message/system">{{"系统消息"|$.RawT|UpperCaseFirst|$.ExtT}}</a></li>
           </ul>
         </div>
 
 
         <div class="card-header bd-b-0 rounded-0 pd-0 bg-superlight">
           <nav class="nav nav-outline nav-gray tx-bold tx-size-13 tx-uppercase pd-sm-x-20 flex-column flex-sm-row">{{$type := $.Form "type"}}
-            <a href="{{FrontendURL}}/user/message/{{$boxType}}" class="nav-link pd-y-20{{if not $type}} active{{end}}">{{"所有消息"|UpperCaseFirst|$.T}}</a>
-            <a href="{{FrontendURL}}/user/message/{{$boxType}}?type=unread" class="nav-link pd-y-20{{if eq $type `unread`}} active{{end}}">{{"未读消息"|UpperCaseFirst|$.T}}</a>
+            <a href="{{FrontendURL}}/user/message/{{$boxType}}" class="nav-link pd-y-20{{if not $type}} active{{end}}">{{"所有消息"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
+            <a href="{{FrontendURL}}/user/message/{{$boxType}}?type=unread" class="nav-link pd-y-20{{if eq $type `unread`}} active{{end}}">{{"未读消息"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
           </nav><!-- nav -->
         </div><!-- card-header -->
         {{- $isDark := $.ThemeInfo.IsColorName `dark` -}}

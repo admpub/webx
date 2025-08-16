@@ -4,10 +4,10 @@
 
 <div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
-    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的收藏"|UpperCaseFirst|$.T}}</h5>
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的收藏"|$.RawT|UpperCaseFirst|$.ExtT}}</h5>
     <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
-      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|UpperCaseFirst|$.T}}</a>
-      <span class="breadcrumb-item active">{{"我的收藏"|UpperCaseFirst|$.T}}</span>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
+      <span class="breadcrumb-item active">{{"我的收藏"|$.RawT|UpperCaseFirst|$.ExtT}}</span>
     </nav>
   </div>
 
@@ -19,7 +19,7 @@
           <ul class="nav nav-pills nav-gray nav-hover-bg-gray-lightest flex-column">{{$type := $.Form `type` `article`}}
             {{- range $name, $target := $.Stored.targets -}}
             <li class="nav-item">
-                <a class="nav-link{{if eq $type $name}} active active-info{{end}}" href="{{FrontendURL}}/user/favorite/index?type={{$name}}">{{$target.Title|UpperCaseFirst|$.T}}</a>
+                <a class="nav-link{{if eq $type $name}} active active-info{{end}}" href="{{FrontendURL}}/user/favorite/index?type={{$name}}">{{$target.Title|$.RawT|UpperCaseFirst|$.ExtT}}</a>
             </li>
             {{- end -}}
           </ul>
@@ -29,7 +29,7 @@
   <div class="{{if gt $len 1}}col-lg-10{{else}}col-lg-12{{end}} mg-t-0">
     <div class="card card-table">
       <div class="card-header">
-        <h6 class="card-title">{{"我的收藏"|UpperCaseFirst|$.T}}</h6>
+        <h6 class="card-title">{{"我的收藏"|$.RawT|UpperCaseFirst|$.ExtT}}</h6>
       </div><!-- card-header -->
       <div class="table-responsive">
       <table class="table table-hover">

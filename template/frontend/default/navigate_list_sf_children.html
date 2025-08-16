@@ -5,7 +5,7 @@
   {{- $surl := $sub.URL -}}
   <li>
       <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}"{{if $sub.IsActive}} class="active"{{end}}{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>
-        {{$sub.Title|UpperCaseFirst|$.T}}
+        {{$sub.Title|$.RawT|UpperCaseFirst|$.ExtT}}
         {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
       </a>
       {{- if $sub.HasChildren -}}

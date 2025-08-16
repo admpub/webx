@@ -8,7 +8,7 @@
   <li class="nav-item dropdown">
     {{- if $sub.HasChildren -}}
     <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive}} active{{end}}" data-toggle="dropdown"{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>
-      {{$sub.Title|UpperCaseFirst|$.T}}
+      {{$sub.Title|$.RawT|UpperCaseFirst|$.ExtT}}
       {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
       <i class="fa fa-angle-down"></i>
     </a>
@@ -16,7 +16,7 @@
     {{Include "#default#navigate_list_children" $}}
     {{- else -}}
     <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}" class="nav-link{{if $sub.IsActive}} active{{end}}"{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>
-      {{$sub.Title|UpperCaseFirst|$.T}}
+      {{$sub.Title|$.RawT|UpperCaseFirst|$.ExtT}}
       {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
     </a>
     {{- end -}}
@@ -25,7 +25,7 @@
   {{- else -}}
   <li class="nav-item dropdown">
     <a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive}} active{{end}}" data-toggle="dropdown"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
-      {{$v.Title|UpperCaseFirst|$.T}}
+      {{$v.Title|$.RawT|UpperCaseFirst|$.ExtT}}
       {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
       <i class="fa fa-angle-down"></i>
     </a>
@@ -35,7 +35,7 @@
   {{- end -}}
 {{- else -}}
   <li class="nav-item"><a href="{{if $url}}{{$url}}{{else}}javascript:;{{end}}" class="nav-link{{if $v.IsActive}} active{{end}}"{{if and $isValidURL $v.Target}} target="{{$v.Target}}"{{end}}>
-    {{$v.Title|UpperCaseFirst|$.T}}
+    {{$v.Title|$.RawT|UpperCaseFirst|$.ExtT}}
     {{if $v.Badge}}<sup class="badge badge-danger">{{$v.Badge}}</sup>{{end}}
   </a></li>
 {{- end -}}

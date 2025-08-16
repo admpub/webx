@@ -33,11 +33,11 @@
       <div class="dropdown">
         <a href="javascript:;" class="nav-link tx-white pd-x-0 tx-size-13" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="hidden-sm-down">{{$customer.Name}}</span><i class="fa fa-angle-down mg-l-5"></i></a>
         <div class="dropdown-menu dropdown-menu-right tx-size-13 mg-t-19 rounded-top-0 shadow-base">
-          <a class="dropdown-item" href="{{FrontendURL}}/user/qrcode/scan">{{"扫二维码"|UpperCaseFirst|$.T}}</a>
-          <!-- <a class="dropdown-item" href="#"><i class=""></i> {{"修改资料"|UpperCaseFirst|$.T}}</a> -->
-          <a class="dropdown-item" href="{{FrontendURL}}/user/profile/detail">{{"我的资料"|UpperCaseFirst|$.T}}</a>
-          <a class="dropdown-item" href="{{FrontendURL}}/user/profile/settings">{{"账号设置"|UpperCaseFirst|$.T}}</a>
-          <a class="dropdown-item" href="{{FrontendURL}}/sign_out">{{"注销登录"|UpperCaseFirst|$.T}}</a>
+          <a class="dropdown-item" href="{{FrontendURL}}/user/qrcode/scan">{{"扫二维码"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
+          <!-- <a class="dropdown-item" href="#"><i class=""></i> {{"修改资料"|$.RawT|UpperCaseFirst|$.ExtT}}</a> -->
+          <a class="dropdown-item" href="{{FrontendURL}}/user/profile/detail">{{"我的资料"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
+          <a class="dropdown-item" href="{{FrontendURL}}/user/profile/settings">{{"账号设置"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
+          <a class="dropdown-item" href="{{FrontendURL}}/sign_out">{{"注销登录"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
         </div><!-- dropdown-menu -->
       </div><!-- dropdown -->
     </nav>

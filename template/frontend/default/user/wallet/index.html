@@ -11,10 +11,10 @@
 
 <div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
   <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
-    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的钱包"|UpperCaseFirst|$.T}}</h5>
+    <h5 class="tx-inverse tx-bold mg-b-0">{{"我的钱包"|$.RawT|UpperCaseFirst|$.ExtT}}</h5>
     <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
-      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|UpperCaseFirst|$.T}}</a>
-      <span class="breadcrumb-item active">{{"我的钱包"|UpperCaseFirst|$.T}}</span>
+      <a class="breadcrumb-item" href="{{FrontendURL}}/user/index">{{"用户中心"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
+      <span class="breadcrumb-item active">{{"我的钱包"|$.RawT|UpperCaseFirst|$.ExtT}}</span>
     </nav>
   </div>
 
@@ -32,7 +32,7 @@
                 {{- end -}}
                 <div class="asset-value">{{$comment := $v.H.comment}}
                   <div class="abs-top5">
-                    <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="tx-size-xs tx-gray-light">{{$v.V|UpperCaseFirst|$.T}}{{if $comment}}({{$comment|$.T}}){{end}}</a>
+                    <a href="{{FrontendURL}}/user/wallet/flow?amountType=balance&assetType={{$v.K}}" class="tx-size-xs tx-gray-light">{{$v.V|$.RawT|UpperCaseFirst|$.ExtT}}{{if $comment}}({{$comment|$.T}}){{end}}</a>
                   </div>
                   {{- if and $v.X (HasImplemented $v.X `RenderContextWithData`) -}}
                   <div class="d-flex justify-content-between align-items-center balance-wrapper">
@@ -47,7 +47,7 @@
                   </h4>
                   {{- end -}}
                   {{- if and (eq $v.K `money`) Config.base.recharge.On -}}
-                  <a href="{{FrontendURL}}/user/wallet/recharge" class="btn btn-xs btn-pink tx-size-xs pd-y-0 pd-x-5" data-toggle="tooltip" title="{{`点击充值`|$.T}}" target="_blank">{{`充值`|UpperCaseFirst|$.T}}</a>
+                  <a href="{{FrontendURL}}/user/wallet/recharge" class="btn btn-xs btn-pink tx-size-xs pd-y-0 pd-x-5" data-toggle="tooltip" title="{{`点击充值`|$.T}}" target="_blank">{{`充值`|$.RawT|UpperCaseFirst|$.ExtT}}</a>
                   {{- end -}}
                   {{- if gt $asset.Freeze 0.0 -}}
                   <span class="tx-size-xs tx-gray-light freeze-wrapper">

@@ -2,7 +2,7 @@
 {{- range $key,$sub := $v.FetchChildren -}}
 {{- $surl := $sub.URL -}}
 <a href="{{if $surl}}{{$surl}}{{else}}javascript:;{{end}}" class="dropdown-item{{if $sub.IsActive}} active{{end}}"{{if and $surl $sub.Target}} target="{{$sub.Target}}"{{end}}>
-    {{$sub.Title|UpperCaseFirst|$.T}}
+    {{$sub.Title|$.RawT|UpperCaseFirst|$.ExtT}}
     {{if $sub.Badge}}<sup class="badge badge-danger">{{$sub.Badge}}</sup>{{end}}
 </a>
 {{- end -}}
