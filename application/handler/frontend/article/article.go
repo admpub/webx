@@ -85,7 +85,7 @@ func Detail(c echo.Context) error {
 	c.Set(`categories`, categories)
 	var (
 		sourceInfo echo.KV
-		listURL    = sessdata.URLFor(`/articles`)
+		listURL    = c.URLFor(`/articles`)
 	)
 	if len(articleM.SourceTable) > 0 && len(articleM.SourceId) > 0 {
 		infoGetter := modelArticle.Source.GetInfoGetter(articleM.SourceTable)
@@ -94,7 +94,7 @@ func Detail(c echo.Context) error {
 			if err != nil {
 				return err
 			}
-			listURL = sessdata.URLFor(`/articlesBy/` + articleM.SourceTable + `/` + articleM.SourceId)
+			listURL = c.URLFor(`/articlesBy/` + articleM.SourceTable + `/` + articleM.SourceId)
 			c.Set(`sourceTable`, articleM.SourceTable)
 			c.Set(`sourceId`, articleM.SourceId)
 		}
@@ -196,7 +196,7 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 	c.Set(`sourceInfo`, sourceInfo)
 	c.Set(`sourceTable`, sourceTable)
 	c.Set(`sourceId`, sourceID)
-	c.Set(`listURL`, sessdata.URLFor(`/articlesBy/`+sourceTable+`/`+sourceID))
+	c.Set(`listURL`, c.URLFor(`/articlesBy/`+sourceTable+`/`+sourceID))
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
 	return c.Render(`article/list_by`, common.Err(c, err))
@@ -235,7 +235,7 @@ func List(c echo.Context) error {
 	c.Set(`articles`, articles)
 	c.Set(`categories`, categories)
 	c.Set(`tag`, tag)
-	c.Set(`listURL`, sessdata.URLFor(`/articles`)+c.DefaultExtension())
+	c.Set(`listURL`, c.URLFor(`/articles`)+c.DefaultExtension())
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
 	return c.Render(`article/list`, common.Err(c, err))

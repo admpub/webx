@@ -20,7 +20,7 @@ func IsFollowed(ctx echo.Context) error {
 	m.CustomerA = customer.Id
 	m.CustomerB = ctx.Formx(`uid`).Uint64()
 	if m.CustomerA < 1 {
-		data.SetURL(xMW.URLFor(`/sign_in`))
+		data.SetURL(ctx.URLFor(`/sign_in`))
 		data.SetError(nerrors.ErrUserNotLoggedIn)
 		return ctx.JSON(data)
 	}
@@ -51,7 +51,7 @@ func Follow(ctx echo.Context) error {
 	m.CustomerA = customer.Id
 	m.CustomerB = ctx.Formx(`uid`).Uint64()
 	if m.CustomerA < 1 {
-		data.SetURL(xMW.URLFor(`/sign_in`))
+		data.SetURL(ctx.URLFor(`/sign_in`))
 		return ctx.JSON(data.SetInfo(ctx.T(`请先登录`), -6))
 	}
 	if m.CustomerB < 1 {
@@ -83,7 +83,7 @@ func Unfollow(ctx echo.Context) error {
 	m.CustomerA = customer.Id
 	m.CustomerB = ctx.Formx(`uid`).Uint64()
 	if m.CustomerA < 1 {
-		data.SetURL(xMW.URLFor(`/sign_in`))
+		data.SetURL(ctx.URLFor(`/sign_in`))
 		return ctx.JSON(data.SetInfo(ctx.T(`请先登录`), -6))
 	}
 	if m.CustomerB < 1 {

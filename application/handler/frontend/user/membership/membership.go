@@ -159,7 +159,7 @@ func Buy(ctx echo.Context) error {
 		ctx.Commit()
 		next := ctx.Form(`next`)
 		if len(next) == 0 {
-			next = sessdata.URLFor(`/user/membership/index?group=` + pkgM.Group)
+			next = ctx.URLFor(`/user/membership/index?group=` + pkgM.Group)
 		}
 		ctx.Data().SetInfo(ctx.T(`购买成功`))
 		return ctx.Redirect(next)

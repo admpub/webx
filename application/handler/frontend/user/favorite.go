@@ -90,7 +90,7 @@ END:
 
 	next := ctx.Form(`next`)
 	if len(next) == 0 {
-		next = sessdata.URLFor(`/user/favorite/index`)
+		next = ctx.URLFor(`/user/favorite/index`)
 	}
 	return ctx.Redirect(next)
 }
@@ -129,7 +129,7 @@ func favoriteGo(ctx echo.Context) error {
 	}
 	next := ctx.Form(`next`)
 	if len(next) == 0 {
-		next = sessdata.URLFor(`/user/favorite/index`)
+		next = ctx.URLFor(`/user/favorite/index`)
 	}
 	common.SendFail(ctx, ctx.T(`没有找到可以跳转的网址`))
 	return ctx.Redirect(next)

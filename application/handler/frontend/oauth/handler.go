@@ -70,10 +70,10 @@ func successHandler(ctx echo.Context) error {
 		return err
 	}
 	if len(next) == 0 {
-		next = common.GetSavedNextURL(ctx, sessdata.URLFor(`/index`))
+		next = common.GetSavedNextURL(ctx, c.URLFor(`/index`))
 	}
 	if needSignIn {
-		next = sessdata.URLFor(`/sign_in?next=` + com.URLEncode(next))
+		next = ctx.URLFor(`/sign_in?next=` + com.URLEncode(next))
 	}
 	return ctx.Redirect(next)
 }

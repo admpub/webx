@@ -18,7 +18,7 @@ func WechatMP(ctx echo.Context) error {
 		next := ctx.Form(`next`)
 		next = echo.GetOtherURL(ctx, next)
 		if len(next) == 0 {
-			next = sessdata.URLFor(`/index`)
+			next = ctx.URLFor(`/index`)
 		}
 		return ctx.Redirect(next)
 	}

@@ -57,7 +57,7 @@ func Upload(ctx echo.Context) error {
 	ownerType, ownerID := OwnerData(ctx)
 	if ownerID < 1 {
 		ctx.Data().SetError(ctx.NewError(code.Unauthenticated, `请先登录`))
-		return ctx.Redirect(sessdata.URLFor(`/sign_in`))
+		return ctx.Redirect(ctx.URLFor(`/sign_in`))
 	}
 
 	var verify []func(result *uploadClient.Result) error
@@ -139,7 +139,7 @@ func Crop(ctx echo.Context) error {
 	ownerType, ownerID := OwnerData(ctx)
 	if ownerID < 1 {
 		ctx.Data().SetError(ctx.NewError(code.Unauthenticated, `请先登录`))
-		return ctx.Redirect(sessdata.URLFor(`/sign_in`))
+		return ctx.Redirect(ctx.URLFor(`/sign_in`))
 	}
 	return manager.CropByOwner(ctx, ownerType, ownerID)
 }
@@ -152,7 +152,7 @@ func Finder(ctx echo.Context) error {
 	ownerType, ownerID := OwnerData(ctx)
 	if ownerID < 1 {
 		ctx.Data().SetError(ctx.NewError(code.Unauthenticated, `请先登录`))
-		return ctx.Redirect(sessdata.URLFor(`/sign_in`))
+		return ctx.Redirect(ctx.URLFor(`/sign_in`))
 	}
 	err := file.List(ctx, ownerType, ownerID)
 	var suffix string

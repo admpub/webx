@@ -46,7 +46,7 @@ func Create(ctx echo.Context) error {
 		if err != nil {
 			goto END
 		}
-		return ctx.Redirect(sessdata.URLFor(`/user/short_url/list`))
+		return ctx.Redirect(ctx.URLFor(`/user/short_url/list`))
 	}
 
 END:
@@ -81,7 +81,7 @@ func Edit(ctx echo.Context) error {
 			goto END
 		}
 		common.SendOk(ctx, ctx.T(`修改成功`))
-		return ctx.Redirect(sessdata.URLFor(`/user/short_url/edit/` + fmt.Sprint(id)))
+		return ctx.Redirect(ctx.URLFor(`/user/short_url/edit/` + fmt.Sprint(id)))
 	}
 	echo.StructToForm(ctx, m.OfficialShortUrl, ``, echo.LowerCaseFirstLetter)
 	ctx.Request().Form().Set(`url`, ctx.Form(`longUrl`))
@@ -110,7 +110,7 @@ func Delete(ctx echo.Context) error {
 	if m.OwnerType != `customer` || m.OwnerId != customer.Id {
 		return ctx.NewError(code.NonPrivileged, `越权操作！您没有权限删除此数据`)
 	}
-	return ctx.Redirect(sessdata.URLFor(`/user/short_url/list`))
+	return ctx.Redirect(ctx.URLFor(`/user/short_url/list`))
 }
 
 // Analysis 用户短网址访问统计

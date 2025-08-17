@@ -58,7 +58,7 @@ func SignUp(c echo.Context) error {
 	next := c.Form(`next`)
 	next = echo.GetOtherURL(c, next)
 	if len(next) == 0 {
-		next = sessdata.URLFor(`/index`)
+		next = c.URLFor(`/index`)
 	}
 
 	// 已经登录的时候跳过当前页面
@@ -134,7 +134,7 @@ END:
 	}
 	signInURL := c.Internal().String(`signInURL`)
 	if len(signInURL) == 0 {
-		signInURL = sessdata.URLFor(`/sign_in`)
+		signInURL = c.URLFor(`/sign_in`)
 	}
 	c.Set(`signInURL`, signInURL)
 	c.Set(`registerState`, registerState)
@@ -147,7 +147,7 @@ func SignOut(c echo.Context) error {
 	deviceM := modelCustomer.NewDevice(c)
 	customer := sessdata.Customer(c)
 	if customer == nil {
-		return c.Redirect(sessdata.URLFor(`/sign_in`))
+		return c.Redirect(c.URLFor(`/sign_in`))
 	}
 	copied := *customer
 	m.OfficialCustomer = &copied
@@ -170,7 +170,7 @@ func SignOut(c echo.Context) error {
 		log.Error(err)
 	}
 	co.UnsetSession(c)
-	return c.Redirect(sessdata.URLFor(`/sign_in`))
+	return c.Redirect(c.URLFor(`/sign_in`))
 }
 
 // SignIn 登录
@@ -187,7 +187,7 @@ func SignIn(c echo.Context) error {
 	next := c.Form(`next`)
 	next = echo.GetOtherURL(c, next)
 	if len(next) == 0 {
-		next = sessdata.URLFor(`/index`)
+		next = c.URLFor(`/index`)
 	}
 	// 已经登录的时候跳过当前页面
 	if !debug && sessdata.Customer(c) != nil {
@@ -249,12 +249,12 @@ END:
 	}
 	signUpURL := c.Internal().String(`signUpURL`)
 	if len(signUpURL) == 0 {
-		signUpURL = sessdata.URLFor(`/sign_up`)
+		signUpURL = c.URLFor(`/sign_up`)
 	}
 	c.Set(`signUpURL`, signUpURL)
 	forgotURL := c.Internal().String(`forgotURL`)
 	if len(forgotURL) == 0 {
-		forgotURL = sessdata.URLFor(`/forgot`)
+		forgotURL = c.URLFor(`/forgot`)
 	}
 	c.Set(`forgotURL`, forgotURL)
 	return c.Render(tmpl, common.Err(c, err))

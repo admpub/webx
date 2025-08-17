@@ -6,7 +6,6 @@ import (
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/apiutils"
 	"github.com/coscms/webfront/library/xcommon"
-	xMW "github.com/coscms/webfront/middleware"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
@@ -63,7 +62,7 @@ func unbindOAuth(ctx echo.Context, customer *modelCustomer.Customer, provider st
 		return err
 	}
 	common.SendOk(ctx, ctx.T(`操作成功`))
-	return ctx.Redirect(xMW.URLFor(`/user/profile/binding?type=oauth`))
+	return ctx.Redirect(ctx.URLFor(`/user/profile/binding?type=oauth`))
 }
 
 // 查询支持绑定的第三方平台账号和当前账号是否已与其绑定

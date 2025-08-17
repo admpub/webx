@@ -4,7 +4,6 @@ import (
 	"strings"
 
 	"github.com/coscms/webcore/library/common"
-	"github.com/coscms/webfront/middleware/sessdata"
 	modelArticle "github.com/coscms/webfront/model/official/article"
 	modelComment "github.com/coscms/webfront/model/official/comment"
 	"github.com/webx-top/db"
@@ -32,7 +31,7 @@ func Index(c echo.Context) error {
 		articles, _ := articleM.ListPageSimple(cond)
 		return articles
 	})
-	c.Set(`listURL`, sessdata.URLFor(`/articles`)+c.DefaultExtension())
+	c.Set(`listURL`, c.URLFor(`/articles`)+c.DefaultExtension())
 	return c.Render(`article/index`, common.Err(c, err))
 }
 

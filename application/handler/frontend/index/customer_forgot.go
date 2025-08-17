@@ -10,7 +10,6 @@ import (
 	"github.com/coscms/webcore/model"
 	"github.com/coscms/webfront/library/resetpassword"
 	"github.com/coscms/webfront/library/sendmsg"
-	"github.com/coscms/webfront/middleware/sessdata"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
@@ -194,12 +193,12 @@ func Forgot(c echo.Context) error {
 	}
 	signUpURL := c.Internal().String(`signUpURL`)
 	if len(signUpURL) == 0 {
-		signUpURL = sessdata.URLFor(`/sign_up`)
+		signUpURL = c.URLFor(`/sign_up`)
 	}
 	c.Set(`signUpURL`, signUpURL)
 	signInURL := c.Internal().String(`signInURL`)
 	if len(signInURL) == 0 {
-		signInURL = sessdata.URLFor(`/sign_in`)
+		signInURL = c.URLFor(`/sign_in`)
 	}
 	c.Set(`signInURL`, signInURL)
 	c.Set(`verifyCodeLength`, sendmsg.VerifyCodeLength())

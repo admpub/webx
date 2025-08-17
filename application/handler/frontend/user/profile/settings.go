@@ -53,7 +53,7 @@ func Settings(ctx echo.Context) error {
 		err = m.Edit(nil, cond)
 		if err == nil {
 			m.SetSession()
-			return ctx.Redirect(xMW.URLFor(`/user/profile/settings`))
+			return ctx.Redirect(ctx.URLFor(`/user/profile/settings`))
 		}
 	}
 
