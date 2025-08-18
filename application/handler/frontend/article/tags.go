@@ -16,7 +16,7 @@ func getTags(ctx echo.Context, group ...string) ([]*dbschema.OfficialCommonTags,
 
 func Tags(ctx echo.Context) error {
 	group := ctx.Query(`group`)
-	v, _ := xkv.GetValue(`TAGS_PAGE_SIZE`, `200`, `标签列表页数据量`, `设置前台标签列表页中每页显示的标签数量`)
+	v, _ := xkv.GetValue(ctx, `TAGS_PAGE_SIZE`, `200`, `标签列表页数据量`, `设置前台标签列表页中每页显示的标签数量`)
 	var pageSize int
 	if len(v) > 0 {
 		pageSize = param.AsInt(v)
