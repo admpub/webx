@@ -23,7 +23,7 @@
 <meta property="og:release_date" content="{{Block `releaseDate`}}{{Now.Format `2006-01-02`}}{{/Block}}" />
 <!-- og-tag:end -->
 	<link rel="shortcut icon" type="image/x-icon" href="{{$.RootPrefix}}/favicon.ico">
-  <title>{{Block "title"}}{{/Block}}{{if hasAnyBlock `title`}} - {{end}}{{Config.base.siteName|$.T}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan|$.T}}{{end}}</title>
+  <title>{{Block "title"}}{{Config.base.siteName|$.T}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan|$.T}}{{end}}{{/Block}}</title>
 	<link combine href="{{AssetsURL}}/css/font_awesome.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   <link combine href="{{AssetsXURL}}/css/fonts/Ionicons/css.min.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
   <link combine href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet" charset="utf-8">
