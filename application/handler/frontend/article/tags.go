@@ -14,7 +14,7 @@ func getTags(ctx echo.Context, group ...string) ([]*dbschema.OfficialCommonTags,
 
 func Tags(ctx echo.Context) error {
 	group := ctx.Query(`group`)
-	common.SetPageDefaultSize(ctx, 180)
+	common.SetPageDefaultSize(ctx, 200)
 	tags, err := getTags(ctx, group)
 	if err != nil {
 		return err
