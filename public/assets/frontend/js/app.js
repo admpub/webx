@@ -437,10 +437,10 @@
       })
     },
     notifyListen:function(notifyURL){
-      if(notifyURL==null) notifyURL='/user/notice';
+      if(notifyURL==null) notifyURL=FRONTEND_URL + '/user/notice';
       var messageCount={notify:0,element:0,modal:0},
       messageMax={notify:20,element:50,modal:50},retries=0,
-      websocketHandle=function(message){
+      messageHandle=function(message){
         //console.dir(message);
         var m=$.parseJSON(message);
         if(typeof(App.clientID['notify'])=='undefined'){
@@ -559,9 +559,19 @@
         }
       },
 			connect=function(onopen){
+				if (!!window.EventSource) {
+					var headers = {'Last-Event-Id':''};
+          var source = new EventSource(FRONTEND_URL + '/user/sse', {headers: headers});
+          source.addEventListener('notice', function(e) {
+						//console.dir(e)
+						headers['Last-Event-Id']=e.lastEventId;
+            messageHandle(e.data)
+          }, false);
+					return;
+        }
         var connected = false; 
         var ws = App.websocket(function(message){
-          websocketHandle(message);
+          messageHandle(message);
           if(!connected)connected=true;
         },notifyURL,onopen,function(){
             if(!connected) return;

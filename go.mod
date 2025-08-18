@@ -11,9 +11,9 @@ go 1.24.5
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20250817093708-c2a0e88ad4fc
-	github.com/coscms/webcore v0.12.0
-	github.com/coscms/webfront v0.0.0-20250818025944-d681eb7a23ab
+	github.com/admpub/nging/v5 v5.3.4-0.20250818150633-fac5acba4a61
+	github.com/coscms/webcore v0.12.1
+	github.com/coscms/webfront v0.0.0-20250818150458-e1b44bf34086
 )
 
 require (
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.0
 	github.com/webx-top/db v1.28.6
-	github.com/webx-top/echo v1.18.1
+	github.com/webx-top/echo v1.18.2
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2
@@ -112,7 +112,7 @@ require (
 	github.com/admpub/gotwilio v0.0.1 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
-	github.com/admpub/i18n v0.5.1 // indirect
+	github.com/admpub/i18n v0.5.2 // indirect
 	github.com/admpub/identicon v1.0.2 // indirect
 	github.com/admpub/imaging v1.6.3 // indirect
 	github.com/admpub/ini v1.38.2 // indirect
@@ -134,6 +134,7 @@ require (
 	github.com/admpub/sitemap-generator v0.0.0-20250815123445-c6bebe90982f // indirect
 	github.com/admpub/sockjs-go/v3 v3.0.1 // indirect
 	github.com/admpub/sonyflake v0.0.1 // indirect
+	github.com/admpub/sse v0.0.0-20160126180136-ee05b128a739 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
 	github.com/admpub/timeago v1.3.0 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
@@ -245,7 +246,7 @@ require (
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
-	github.com/phuslu/iploc v1.0.20250801 // indirect
+	github.com/phuslu/iploc v1.0.20250815 // indirect
 	github.com/phuslu/lru v1.0.18 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect

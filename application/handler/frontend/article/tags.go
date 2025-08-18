@@ -4,8 +4,10 @@ import (
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/logic/articlelogic"
+	"github.com/coscms/webfront/library/xkv"
 	"github.com/coscms/webfront/model/official"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/param"
 )
 
 func getTags(ctx echo.Context, group ...string) ([]*dbschema.OfficialCommonTags, error) {
@@ -14,7 +16,15 @@ func getTags(ctx echo.Context, group ...string) ([]*dbschema.OfficialCommonTags,
 
 func Tags(ctx echo.Context) error {
 	group := ctx.Query(`group`)
-	common.SetPageDefaultSize(ctx, 200)
+	v, _ := xkv.GetValue(`TAGS_PAGE_SIZE`, `200`, `标签列表页数据量`, `设置前台标签列表页中每页显示的标签数量`)
+	var pageSize int
+	if len(v) > 0 {
+		pageSize = param.AsInt(v)
+	}
+	if pageSize <= 0 {
+		pageSize = 200
+	}
+	common.SetPageDefaultSize(ctx, pageSize)
 	tags, err := getTags(ctx, group)
 	if err != nil {
 		return err
