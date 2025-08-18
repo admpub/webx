@@ -1,5 +1,5 @@
 {{Extend "#default#base"}}
-{{Block "title"}}{{"用户中心"|$.RawT|UpperCaseFirst|$.ExtT}}{{/Block}}
+{{Block "title"}}{{"用户中心"|$.RawT|UpperCaseFirst|$.ExtT}} - {{Super}}{{/Block}}
 {{Block "head"}}{{/Block}}
 {{Block "headEnd"}}
 {{- if $.ThemeInfo.IsColorName `dark` -}}
