@@ -61,7 +61,7 @@
 
                     <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`发布日期`|$.T}}">
                     <i class="fa fa-clock-o tx-gray-lighter"></i>
-                    <span class="d-inline-block" title="{{(Date $data.Created).Format `2006-01-02`}}">{{(Date $data.Created).Format ($.T "2006年1月2日")}}</span>
+                    <span class="d-inline-block" title="{{(Date $data.Created).Format `2006-01-02`}}">{{(Date $data.Created).Format ($.RawT "2006年1月2日")}}</span>
                     </span>
 
                     <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`浏览次数`|$.T}}">

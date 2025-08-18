@@ -55,7 +55,7 @@
                                             <span class="author-name">{{- $author.Name -}}</span>
                                             {{- end -}}
                                         </div>
-                                        <span class="meta-item"> {{(Date $data.Created).Format ($.T "2006年1月2日")}} </span>
+                                        <span class="meta-item"> {{(Date $data.Created).Format ($.RawT "2006年1月2日")}} </span>
                                         {{- if eq $data.CloseComment "N" -}}
                                         <a href="#comment-list" class="meta-item">
                                             <i class="fa fa-comment"></i>
@@ -121,7 +121,7 @@
                                         <a href="{{URLByName `article.detail` $prevRow.Id}}">
                                             <h3 class="heading-tertiary">{{$prevRow.Title}}</h3>
                                         </a>
-                                        <span class="date body-text">{{(Date $prevRow.Created).Format ($.T "2006年1月2日")}}</span>
+                                        <span class="date body-text">{{(Date $prevRow.Created).Format ($.RawT "2006年1月2日")}}</span>
                                     </div>
                                     {{- end -}}
                                 </div>
@@ -137,7 +137,7 @@
                                         <a href="{{URLByName `article.detail` $nextRow.Id}}">
                                             <h3 class="heading-tertiary">{{$nextRow.Title}}</h3>
                                         </a>
-                                        <span class="date body-text">{{(Date $nextRow.Created).Format ($.T "2006年1月2日")}}</span>
+                                        <span class="date body-text">{{(Date $nextRow.Created).Format ($.RawT "2006年1月2日")}}</span>
                                     </div>
                                     {{- end -}}
                                 </div>
