@@ -1,11 +1,9 @@
 {{Extend "user/profile/partial_homepage"}}
-{{Block "head"}}
-{{Super}}
-{{/Block}}
+{{Block "head"}}{{Super}}{{/Block}}
 {{Block "body"}}
 {{Super}}
-{{$agentLevel := $.Stored.agentLevel}}
-{{$customerGroup := $.Stored.customerGroup}}
+{{- $agentLevel := $.Stored.agentLevel -}}
+{{- $customerGroup := $.Stored.customerGroup -}}
  <div class="main mg-lg-l-240 pd-t-70 pd-lg-t-75">
     {{Include "user/profile/partial_breadcrumb"}}
   <div class="main-body pd-20">
