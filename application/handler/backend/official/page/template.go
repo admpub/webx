@@ -281,12 +281,12 @@ func TemplateEdit(ctx echo.Context) error {
 		original := file
 		themeDir = filepath.Join(frontend.DefaultTemplateDir, themeDir)
 		file = filepath.Join(themeDir, file)
-		if ctx.Formx(`isNew`).Bool() {
+		if ctx.Formx(`isNew`).Bool() { // 新建文件时
 			if com.FileExists(file) && !ctx.Formx(`confirmed`).Bool() {
 				return ctx.NewError(code.DataAlreadyExists, `文件“%s”已经存在，确定要覆盖吗？`, original)
 			}
 		} else if !com.FileExists(file) {
-			if tfs == nil {
+			if getEmbedFS() == nil {
 				log.Debugf(`%v: %s`, echo.ErrNotFound, file)
 				return echo.ErrNotFound
 			}
@@ -317,7 +317,7 @@ func TemplateEdit(ctx echo.Context) error {
 		if com.FileExists(file) && !ctx.Formx(`confirmed`).Bool() {
 			return ctx.NewError(code.DataAlreadyExists, `文件“%s”已经存在，确定要覆盖吗？`, original)
 		}
-		if tfs != nil {
+		if getEmbedFS() != nil {
 			com.MkdirAll(themeDir, os.ModePerm)
 		}
 		content := ctx.Form(`content`)
