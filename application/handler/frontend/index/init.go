@@ -12,7 +12,7 @@ import (
 
 func init() {
 	frontend.Register(func(g echo.RouteRegister) {
-		g.Route(`GET,HEAD`, uploadLibrary.UploadURLPath+`:subdir/*`, manager.File).SetMetaKV(httpserver.PermGuestKV())
+		g.Route(`GET,HEAD`, uploadLibrary.UploadURLPath+`:subdir/*`, manager.File).SetMetaKV(httpserver.PermGuestKV()).SetMetaKV(`static`, true)
 		g.Route(`GET,POST`, `/`, Index).SetName(`root`)
 		g.Route(`GET,POST`, `/index`, Index).SetName(`index`)
 		g.Route(`GET,POST`, `/search`, Search).SetName(`search`)
