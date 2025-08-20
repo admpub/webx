@@ -25,12 +25,12 @@
 	<link rel="shortcut icon" type="image/x-icon" href="{{$.RootPrefix}}/favicon.ico">
   <title>{{Block "title"}}
   {{- if $.Stored.pageTitle -}}
-    {{- $.Stored.pageTitle -}}{{- /*内页标题*/ -}}
+    {{- $.Stored.pageTitle|$.T -}}{{- /*内页标题*/ -}}
   {{- else if $.Stored.siteTitle -}}
-    {{- $.Stored.siteTitle -}}{{- /*首页标题*/ -}}
+    {{- $.Stored.siteTitle|$.T -}}{{- /*首页标题*/ -}}
   {{- else -}}
     {{- if $.Stored.title -}}{{- /*内容标题*/ -}}
-      {{- $.Stored.title}} -
+      {{- $.Stored.title|$.T}} -
     {{- end}} {{Config.base.siteName|$.T}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan|$.T}}{{end}}
   {{- end -}}
   {{/Block}}</title>
