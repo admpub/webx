@@ -5,9 +5,19 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- =============== PAGE TITLE =============== -->
-        <title>{{Block "title"}}{{/Block}}{{if hasAnyBlock `title`}} - {{end}}{{Config.base.siteName}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan}}{{end}}</title>
-        <meta name="keywords" content="{{Block `keywords`}}{{Config.base.siteMetaKeywords|Default Config.base.siteName}}{{/Block}}">
-        <meta name="description" content="{{Block `description`}}{{if Config.base.siteMetaDescription}}{{Config.base.siteMetaDescription}}{{else}}{{Config.base.siteName}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan}}{{end}}{{end}}{{/Block}}">
+        <title>{{Block "title"}}
+  {{- if $.Stored.pageTitle -}}
+    {{- $.Stored.pageTitle|$.T -}}{{- /*内页标题*/ -}}
+  {{- else if $.Stored.siteTitle -}}
+    {{- $.Stored.siteTitle|$.T -}}{{- /*首页标题*/ -}}
+  {{- else -}}
+    {{- if $.Stored.title -}}{{- /*内容标题*/ -}}
+      {{- $.Stored.title|$.T}} -
+    {{- end}} {{Config.base.siteName|$.T}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan|$.T}}{{end}}
+  {{- end -}}
+  {{/Block}}</title>
+        <meta name="keywords" content="{{Block `keywords`}}{{Config.base.siteMetaKeywords|Default Config.base.siteName|$.T}}{{/Block}}">
+        <meta name="description" content="{{Block `description`}}{{if Config.base.siteMetaDescription}}{{Config.base.siteMetaDescription|$.T}}{{else}}{{Config.base.siteName|$.T}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan|$.T}}{{end}}{{end}}{{/Block}}">
         <!-- ============= FAVICON ICON ============= -->
         <link rel="shortcut icon" href="{{$.RootPrefix}}/favicon.ico" />
         <!-- ============= VENDORS CSS ============= -->
