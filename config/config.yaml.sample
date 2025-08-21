@@ -39,7 +39,8 @@ sys {
   editableFileMaxSize   : "1M" #允许在线编辑的最大文件尺寸
   errorPages            : { #指定错误页面模板
     "403" : "#default#error/403"
-    "404" : "#default#error/404"
+    "-404" : "#default#error/404" #未达路由前(在Pre*注册的中间件中触发)的404
+    "404" : "#default#error/404in"
     "500" : "#default#error/500"
     "0"   : "#default#error/500" #其它所有错误显示的模板
   }
