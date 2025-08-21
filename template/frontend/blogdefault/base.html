@@ -16,8 +16,29 @@
     {{- end}} {{Config.base.siteName|$.T}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan|$.T}}{{end}}
   {{- end -}}
   {{/Block}}</title>
-        <meta name="keywords" content="{{Block `keywords`}}{{Config.base.siteMetaKeywords|Default Config.base.siteName|$.T}}{{/Block}}">
-        <meta name="description" content="{{Block `description`}}{{if Config.base.siteMetaDescription}}{{Config.base.siteMetaDescription|$.T}}{{else}}{{Config.base.siteName|$.T}}{{if Config.base.siteSlogan}}: {{Config.base.siteSlogan|$.T}}{{end}}{{end}}{{/Block}}">
+        <meta name="keywords" content="{{Block `keywords`}}
+  {{- if $.Stored.pageKeywords -}}
+    {{- $.Stored.pageKeywords|$.T -}}{{- /*内页关键词*/ -}}
+  {{- else if $.Stored.siteKeywords -}}
+    {{- $.Stored.siteKeywords|$.T -}}{{- /*首页关键词*/ -}}
+  {{- else -}}
+    {{- Config.base.siteMetaKeywords|Default Config.base.siteName|$.T -}}
+  {{- end -}}
+  {{/Block}}">
+        <meta name="description" content="{{Block `description`}}
+{{- if $.Stored.pageDescription -}}
+  {{- $.Stored.pageDescription|$.T -}}{{- /*内页内容简介*/ -}}
+{{- else if $.Stored.siteDescription -}}
+  {{- $.Stored.siteDescription|$.T -}}{{- /*首页内容简介*/ -}}
+{{- else -}}
+  {{- if Config.base.siteMetaDescription -}}
+    {{- Config.base.siteMetaDescription|$.T -}}
+  {{- else -}}
+    {{- Config.base.siteName|$.T -}}
+    {{- if Config.base.siteSlogan|$.T}}: {{Config.base.siteSlogan|$.T -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+  {{/Block}}">
         <!-- ============= FAVICON ICON ============= -->
         <link rel="shortcut icon" href="{{$.RootPrefix}}/favicon.ico" />
         <!-- ============= VENDORS CSS ============= -->
