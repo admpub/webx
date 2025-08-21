@@ -35,7 +35,7 @@
     {{- Config.base.siteMetaDescription|$.T -}}
   {{- else -}}
     {{- Config.base.siteName|$.T -}}
-    {{- if Config.base.siteSlogan|$.T}}: {{Config.base.siteSlogan|$.T -}}{{- end -}}
+    {{- if Config.base.siteSlogan}}: {{Config.base.siteSlogan|$.T -}}{{- end -}}
   {{- end -}}
 {{- end -}}
   {{/Block}}">

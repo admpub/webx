@@ -30,7 +30,7 @@
     {{- Config.base.siteMetaDescription|$.T -}}
   {{- else -}}
     {{- Config.base.siteName|$.T -}}
-    {{- if Config.base.siteSlogan|$.T}}: {{Config.base.siteSlogan|$.T -}}{{- end -}}
+    {{- if Config.base.siteSlogan}}: {{Config.base.siteSlogan|$.T -}}{{- end -}}
   {{- end -}}
 {{- end -}}
   {{/Block}}">
@@ -38,7 +38,15 @@
 <meta property="og:type" content="{{Block `type`}}article{{/Block}}" /><!-- 常用值:article、news、book、movie、product… -->
 <meta property="og:site_name" content="{{Block `name`}}{{Config.base.siteName|$.T}}{{/Block}}" />
 <meta property="og:title" content="{{Block `title`}}{{Config.base.siteName|$.T}}{{/Block}}" />
-<meta property="og:description" content="{{Block `description`}}{{Config.base.siteMetaDescription|Default Config.base.siteName|$.T}}{{/Block}}" />
+<meta property="og:description" content="{{Block `description`}}
+{{- if $.Stored.pageDescription -}}
+  {{- $.Stored.pageDescription|$.T -}}{{- /*内页内容简介*/ -}}
+{{- else if $.Stored.siteDescription -}}
+  {{- $.Stored.siteDescription|$.T -}}{{- /*首页内容简介*/ -}}
+{{- else -}}
+  {{- Config.base.siteMetaDescription|Default Config.base.siteName|$.T -}}
+{{- end -}}
+  {{/Block}}" />
 <meta property="og:image" content="{{Block `image`}}{{/Block}}" />
 <meta property="og:url" content="{{Block `url`}}{{$.FullRequestURI}}{{/Block}}" />
 <meta property="og:release_date" content="{{Block `releaseDate`}}{{Now.Format `2006-01-02`}}{{/Block}}" />
