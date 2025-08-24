@@ -7,7 +7,7 @@
 
     <div class="pos-absolute a-0 d-flex align-items-center">
       <div class="pos-absolute-bottom tx-right"></div><!-- pos-absolute-bottom -->
-      <div class="container">
+      <div class="container mx-wd-xl">
         <div class="card card-glass pd-20 col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
           <a href="{{FrontendURL}}/" class="tx-inverse tx-size-20 tx-spacing-neg-2 tx-bold ht-50 overflow-hidden">
             <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="ht-50" alt="{{Config.base.siteName}}">
@@ -18,7 +18,7 @@
           <h6 class="tx-size-12 tx-size-xs-13 tx-size-sm-14 tx-size-md-15 tx-size-lg-15 tx-size-xl-16 mg-b-0 tx-gray-dark tx-normal lh-5 tx-center">Whooops, we couldn't find the page your were looking for. Please try searching.<br />呜呜呜，我们找不到你要找的页面。请尝试搜索。</h6>
           <form action="{{FrontendURL}}/search" method="GET" class="mg-t-20">
           <div class="input-group wd-md-350 mx-auto">
-            <input type="text" class="form-control lh-6 bd-r-0 tx-size-12" placeholder="Search page" name="q" value="{{$.Form "q"}}">
+            <input type="text" class="form-control lh-6 bd-r-0 tx-size-12" placeholder="Search page" name="q" value="{{$.Form `q`}}">
             <div class="input-group-btn pd-l-1">
               <button class="btn btn-inverse tx-size-12">{{`Search`|$.T}}</button>
             </div><!-- input-group-btn -->
