@@ -1,4 +1,4 @@
-# brew install node-sass
+# brew install node-sass or npm install sass -g
 export rootDir="public/assets/frontend/"
 
 sass $rootDir/css/custom.css:$rootDir/css/custom.min.css\
