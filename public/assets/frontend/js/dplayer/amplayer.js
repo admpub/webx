@@ -33,7 +33,8 @@
 			"touchVideoChangeProgress": false,
 			"disableRemotePlayback": false,
 			"contextmenu": null,
-			"listeners": {}
+			"listeners": {},
+			"customSettings": []
 		},
 		'secure': win.location.protocol == 'https:',
 		'elemPrefix': function (notPrefix) {
@@ -417,6 +418,7 @@
 					p2pAppId: c.p2pAppId,
 					highlight: c.highlight || [],
 					contextmenu: c.contextmenu,
+					customSettings: c.customSettings || [],
 					video: {
 						url: c.urls,
 						type: type,
