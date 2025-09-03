@@ -12,8 +12,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250902044335-7c3a1a41ea54
-	github.com/coscms/webcore v0.12.10-0.20250902043247-6085ef224c79
-	github.com/coscms/webfront v0.0.0-20250902031648-39bd8a1c350e
+	github.com/coscms/webcore v0.12.10-0.20250903041015-52177a6065b2
+	github.com/coscms/webfront v0.0.0-20250903041131-b8c927436e39
 )
 
 require (
@@ -54,8 +54,8 @@ require (
 	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.0
-	github.com/webx-top/db v1.28.8
-	github.com/webx-top/echo v1.21.7
+	github.com/webx-top/db v1.28.9
+	github.com/webx-top/echo v1.21.8
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2
@@ -89,6 +89,7 @@ require (
 	github.com/admpub/confl v0.2.4 // indirect
 	github.com/admpub/cove v0.0.0-20241224063114-4fdd53c948a6 // indirect
 	github.com/admpub/cron v0.1.1 // indirect
+	github.com/admpub/dateparse v0.0.0-20250903020633-d86d3f2a4cfd // indirect
 	github.com/admpub/dgoogauth v0.0.1 // indirect
 	github.com/admpub/email v2.4.1+incompatible // indirect
 	github.com/admpub/fasthttp v0.0.7 // indirect
@@ -247,7 +248,7 @@ require (
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
-	github.com/phuslu/iploc v1.0.20250815 // indirect
+	github.com/phuslu/iploc v1.0.20250901 // indirect
 	github.com/phuslu/lru v1.0.18 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
