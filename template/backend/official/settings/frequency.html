@@ -121,7 +121,7 @@ function onSelectDbAccount(a) {
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"IP白名单"|$.T}}</label>
                 <div class="col-sm-4">
-                    <textarea name="frequency[underAttack][value][IPWhitelist]" class="form-control" style="resize:vertical" rows="5">{{$frequency.underAttack.ValueObject.IPWhitelist}}</textarea>
+                    <textarea name="frequency[underAttack][value][IPWhitelist]" class="form-control" style="resize:vertical" rows="3">{{$frequency.underAttack.ValueObject.IPWhitelist}}</textarea>
                     <div class="help-block">
                         {{`一行一个。支持用“-”来指定范围或使用子网掩码，例如：`|$.T}}<br />
                         <code>127.0.0.0-127.0.0.5</code><br />
@@ -130,7 +130,7 @@ function onSelectDbAccount(a) {
                 </div><!-- col-sm-4 -->
                 <label class="col-sm-2 control-label">{{"浏览器白名单"|$.T}}</label>
                 <div class="col-sm-4">
-                    <textarea name="frequency[underAttack][value][UAWhitelist]" class="form-control" style="resize:vertical" rows="5">{{$frequency.underAttack.ValueObject.UAWhitelist}}</textarea>
+                    <textarea name="frequency[underAttack][value][UAWhitelist]" class="form-control" style="resize:vertical" rows="3">{{$frequency.underAttack.ValueObject.UAWhitelist}}</textarea>
                     <div class="help-block">{{`请输入正则表达式，用来匹配浏览器的UserAgent特征值`|$.T}}</div>
                 </div><!-- col-sm-4 -->
             </div><!-- form-group -->
@@ -148,6 +148,34 @@ function onSelectDbAccount(a) {
                             <div class="col-sm-4">
                                 <input name="frequency[underAttack][value][HeaderValue]" class="form-control" value="{{$frequency.underAttack.ValueObject.HeaderValue}}" />
                                 <div class="help-block">{{`如果留空，则表示任意值均可`|$.T}}</div>
+                            </div><!-- col-sm-4 -->
+                        </div>
+                    </div><!-- fieldset -->
+                </div>
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{"网址白名单"|$.T}}</label>
+                <div class="col-sm-10">
+                    <div class="fieldset bg-fc">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{"网址路径"|$.T}}</label>
+                            <div class="col-sm-4">
+                                <textarea name="frequency[underAttack][value][URIPathWhitelist]" class="form-control" style="resize:vertical" rows="3">
+{{- range $frequency.underAttack.ValueObject.URIPathWhitelist}}
+{{.}}
+{{- end -}}
+                                </textarea>
+                                <div class="help-block">{{`请输入网址路径，一行一个`|$.T}}</div>
+                            </div><!-- col-sm-4 -->
+                            <label class="col-sm-2 control-label">{{"网址参数"|$.T}}</label>
+                            <div class="col-sm-4">
+                                <textarea name="frequency[underAttack][value][URIQueryWhitelist]" class="form-control" style="resize:vertical" rows="3" placeholder="key=value
+key2=value">
+{{- range $frequency.underAttack.ValueObject.URIQueryWhitelist}}
+{{.}}
+{{- end -}}
+                                </textarea>
+                                <div class="help-block">{{`请输入网址参数名和参数值，一行一个。`|$.T}}{{`参数名和参数值之间用“=”隔开`|$.T}}</div>
                             </div><!-- col-sm-4 -->
                         </div>
                     </div><!-- fieldset -->
