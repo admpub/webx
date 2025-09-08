@@ -11,7 +11,7 @@ go 1.24.5
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20250902044335-7c3a1a41ea54
+	github.com/admpub/nging/v5 v5.3.4-0.20250908112403-8fc31407fa62
 	github.com/coscms/webcore v0.12.10-0.20250907042714-b2f65799f881
 	github.com/coscms/webfront v0.0.0-20250908031654-639d19f11656
 )
@@ -243,7 +243,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/nging-plugins/dlmanager v1.8.2 // indirect
+	github.com/nging-plugins/dlmanager v1.8.3 // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
