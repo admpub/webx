@@ -11,8 +11,8 @@ go 1.25.1
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20250911061547-218bd0a27937
-	github.com/coscms/webcore v0.12.10-0.20250911054150-744cdee2580b
+	github.com/admpub/nging/v5 v5.3.4-0.20250911130448-831c105d1905
+	github.com/coscms/webcore v0.12.10-0.20250911120317-f23b57a60052
 	github.com/coscms/webfront v0.0.0-20250911054802-212e32c10da7
 )
 
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.0
 	github.com/webx-top/db v1.28.9
-	github.com/webx-top/echo v1.22.3-0.20250910195354-d6a202751f73
+	github.com/webx-top/echo v1.22.3
 	github.com/webx-top/echo-prometheus v1.1.2 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2
@@ -69,7 +69,7 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.3.0
-	github.com/nging-plugins/dbmanager v1.8.9
+	github.com/nging-plugins/dbmanager v1.8.10
 	github.com/silenceper/wechat/v2 v2.1.9
 )
 
@@ -243,7 +243,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/nging-plugins/dlmanager v1.8.3 // indirect
+	github.com/nging-plugins/dlmanager v1.8.5 // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
