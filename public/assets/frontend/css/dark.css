@@ -10,9 +10,12 @@ body{background-color: black !important;}.headpanel{background-color:#323843 !im
 .card .bg-white:not(.btn),.bg-white:not(.btn){background-color: #1f2126 !important;}
 .card .tx-gray-dark, .bg-white .tx-gray-dark{color: #f1f1f1 !important}
 .card .tx-gray,.container .tx-gray:not(.btn){color:#bbb !important}
-.card a:not(.btn):not(.tx-white):not(.nav-link){color:#389afc}
-.card a:not(.btn):hover{color:#2182e3}
-.card a.badge.tag-item{color:#fff !important}
+.card a:not(.btn):not(.tx-white):not(.nav-link),
+.modal-content a:not(.btn):not(.tx-white):not(.nav-link){color:#389afc}
+.card a:not(.btn):hover,
+.modal-content a:not(.btn):hover{color:#2182e3}
+.card a.badge.tag-item,
+.modal-content a.badge.tag-item{color:#fff !important}
 .form-control,.form-control:focus{background-color: #000;color:#fff}
 .form-control{border-color: #000 !important;}
 p.form-control{background-color: transparent;}
