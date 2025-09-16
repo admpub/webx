@@ -32,6 +32,7 @@ nav .page-item.disabled .page-link{background-color: transparent !important;}
 .modal-content,.modal-content .card{background-color:#3a4042 !important}
 .modal-title{color:#ddd}
 .modal-header,.modal-footer{border-color: #4a5254 !important;}
+.modal-content{color:#bbb}
 
 #sectionSignIn{background: #000 !important;}
 .heading-hr::after,
