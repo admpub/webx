@@ -33,7 +33,8 @@
 			"touchVideoChangeProgress": false,
 			"disableRemotePlayback": false,
 			"contextmenu": null,
-			"listeners": {}
+			"listeners": {},
+			"customSettings": []
 		},
 		'secure': win.location.protocol == 'https:',
 		'elemPrefix': function (notPrefix) {
@@ -204,15 +205,55 @@
 						liveBackBufferLength: 15,
 						liveSyncDurationCount: 1,
 					}, player.options.pluginOptions.hls || {});
-					var engine = null;
+					var videoURL = video.src, hls = null, engine = null;
 					if (amplayer.options.p2pEngine == 'p2p-media-loader') {
-						if (p2pml.hlsjs.Engine.isSupported()) {
-							engine = new p2pml.hlsjs.Engine();
-							config.liveSyncDurationCount = 7 // To have at least 7 segments in queue
-							config.loader = engine.createLoaderClass()
-						} else {
-							amplayer.options.p2pEngine = ''
+						function addEvents(p2pEngine){
+							/*p2pEngine.addEventListener('onSegmentLoaded', function(segment, peerId) {
+								$('.load').text('加载0MB 共享0MB 加速0MB');
+								$('.peer').text('P2P已开启');
+								$('.line').text('在线1NP');
+							});*/
+							var peers = 0;
+							p2pEngine.addEventListener('onPeerConnect', function (peer) { // peer: { peerId: "-PM0202-m8jjBoneGDb5", streamType: "main" }
+								peers++;
+								$(amplayer.elemPrefix() + '.line').text('在线' + (peers + 1) + 'NP');
+								$(amplayer.elemPrefix() + '.peer').text('P2P已开启');
+							});
+							p2pEngine.addEventListener('onPeerClose', function (peer) {
+								peers--;
+								if (peers <= 0) peers = 0;
+								$(amplayer.elemPrefix() + '.line').text('在线' + (peers + 1) + 'NP');
+							});
+							var downloaded = { http: 0, p2p: 0 }, uploaded = 0;
+							p2pEngine.addEventListener('onChunkDownloaded', function (bytes, method, peerId) {
+								downloaded[method] += bytes / 1024;
+								$(amplayer.elemPrefix() + '.load').text('加载' + (downloaded.http / 1024).toFixed(2) + 'MB 共享' + (uploaded / 1024).toFixed(2) + 'MB 加速' + (downloaded.p2p / 1024).toFixed(2) + 'MB');
+								downloaded.p2p > 0 ? $('.peer').text('P2P加速中') : $('.peer').text('P2P已开启');
+							});
+							p2pEngine.addEventListener('onChunkUploaded', function (bytes, peerId) {
+								uploaded += bytes / 1024;
+								$(amplayer.elemPrefix() + '.load').text('加载' + (downloaded.http / 1024).toFixed(2) + 'MB 共享' + (uploaded / 1024).toFixed(2) + 'MB 加速' + (downloaded.p2p / 1024).toFixed(2) + 'MB');
+								downloaded.p2p > 0 ? $('.peer').text('P2P加速中') : $('.peer').text('P2P已开启');
+							});
 						}
+						const HlsWithP2P = HlsJsP2PEngine.injectMixin(window.Hls);
+						var p2pConfig = {
+          				    core: {
+          				      	swarmId: videoURL,
+    						  	//announceTrackers: ["wss://personal.tracker1.com","wss://personal.tracker2.com",],
+    							//rtcConfig: {iceServers: [{ urls: "stun:stun.l.google.com:19302" },{ urls: "stun:global.stun.twilio.com:3478?transport=udp" }]},
+							  	//https://novage.github.io/p2p-media-loader/docs/v2.2/classes/p2p-media-loader-hlsjs.HlsJsP2PEngine.html#bindhls
+          				    },
+              				//onHlsJsCreated: function(hls) {/*addEvents(hls.p2pEngine)*//* Subscribe to P2P engine and Hls.js events here */},
+          				}
+						p2pConfig = $.extend(p2pConfig, amplayer.options.p2pConfig || {});
+						var sep = '/proxy/', pos = p2pConfig.core.swarmId.indexOf(sep);
+						if(pos>0) p2pConfig.core.swarmId = p2pConfig.core.swarmId.substring(pos+sep.length);
+          				hls = new HlsWithP2P({p2p: p2pConfig});
+						hls.loadSource(video.src);
+						hls.attachMedia(video);
+						engine = hls.p2pEngine;
+						addEvents(engine)
 					} else {
 						config.p2pConfig = {
 							logLevel: 'error', showSlogan: false,
@@ -227,63 +268,27 @@
 						}
 						if (config.debug) config.p2pConfig.logLevel = 'debug';
 						config.p2pConfig = $.extend(config.p2pConfig, amplayer.options.p2pConfig || {});
-					}
-					var hls = new Hls(config);
-					if (engine) {
-						p2pml.hlsjs.initHlsJsPlayer(hls);
-					} else {
+						hls = new Hls(config);
 						engine = hls.p2pEngine || hls.engine; // hls.p2pEngine - cdnbye; hls.engine - raycdn
 						if (!engine && P2PEngine && P2PEngine.isSupported()) {
 							engine = new P2PEngine(hls, config.p2pConfig);
 						}
-					}
-					var videoURL = video.src
-					hls.loadSource(video.src);
-					hls.attachMedia(video);
-					if (engine) {
-						if (amplayer.options.p2pEngine == 'p2p-media-loader') {
-							/*engine.on(p2pml.core.Events.SegmentLoaded, function(segment, peerId) {
-								$('.load').text('加载0MB 共享0MB 加速0MB');
-								$('.peer').text('P2P已开启');
-								$('.line').text('在线1NP');
-							});*/
-							var peers = 0;
-							engine.on(p2pml.core.Events.PeerConnect, function (peer) {
-								peers++;
-								$(amplayer.elemPrefix() + '.line').text('在线' + (peers + 1) + 'NP');
-								$(amplayer.elemPrefix() + '.peer').text('P2P已开启');
-							});
-							engine.on(p2pml.core.Events.PeerClose, function (peerId) {
-								peers--;
-								if (peers <= 0) peers = 0;
-								$(amplayer.elemPrefix() + '.line').text('在线' + (peers + 1) + 'NP');
-							});
-							var downloaded = { http: 0, p2p: 0 }, uploaded = { http: 0, p2p: 0 };
-							engine.on(p2pml.core.Events.PieceBytesDownloaded, function (method, bytes, peerId) {
-								downloaded[method] += bytes / 1024;
-								$(amplayer.elemPrefix() + '.load').text('加载' + (downloaded.http / 1024).toFixed(2) + 'MB 共享' + (uploaded.p2p / 1024).toFixed(2) + 'MB 加速' + (downloaded.p2p / 1024).toFixed(2) + 'MB');
-								downloaded.p2p > 0 ? $('.peer').text('P2P加速中') : $('.peer').text('P2P已开启');
-							});
-							engine.on(p2pml.core.Events.PieceBytesUploaded, function (method, bytes) {
-								uploaded[method] += bytes / 1024;
-								$(amplayer.elemPrefix() + '.load').text('加载' + (downloaded.http / 1024).toFixed(2) + 'MB 共享' + (uploaded.p2p / 1024).toFixed(2) + 'MB 加速' + (downloaded.p2p / 1024).toFixed(2) + 'MB');
-								downloaded.p2p > 0 ? $('.peer').text('P2P加速中') : $('.peer').text('P2P已开启');
-							});
-						} else {
-							engine.on('peerId', function (peerId) {
-								$(amplayer.elemPrefix() + '.load').text('加载0MB 共享0MB 加速0MB');
-								$(amplayer.elemPrefix() + '.peer').text('P2P已开启');
-								$(amplayer.elemPrefix() + '.line').text('在线1NP');
-							});
-							engine.on('peers', function (peers) {
-								$(amplayer.elemPrefix() + '.line').text('在线' + (peers.length + 1) + 'NP');
-								$(amplayer.elemPrefix() + '.peer').text('P2P已开启');
-							});
-							engine.on('stats', function (data) {
-								$(amplayer.elemPrefix() + '.load').text('加载' + (data.totalHTTPDownloaded / 1024).toFixed(2) + 'MB 共享' + (data.totalP2PUploaded / 1024).toFixed(2) + 'MB 加速' + (data.totalP2PDownloaded / 1024).toFixed(2) + 'MB');
-								data.totalP2PDownloaded ? $(amplayer.elemPrefix() + '.peer').text('P2P加速中') : $(amplayer.elemPrefix() + '.peer').text('P2P已开启');
-							});
-						}
+						hls.loadSource(video.src);
+						hls.attachMedia(video);
+
+						engine.on('peerId', function (peerId) {
+							$(amplayer.elemPrefix() + '.load').text('加载0MB 共享0MB 加速0MB');
+							$(amplayer.elemPrefix() + '.peer').text('P2P已开启');
+							$(amplayer.elemPrefix() + '.line').text('在线1NP');
+						});
+						engine.on('peers', function (peers) {
+							$(amplayer.elemPrefix() + '.line').text('在线' + (peers.length + 1) + 'NP');
+							$(amplayer.elemPrefix() + '.peer').text('P2P已开启');
+						});
+						engine.on('stats', function (data) {
+							$(amplayer.elemPrefix() + '.load').text('加载' + (data.totalHTTPDownloaded / 1024).toFixed(2) + 'MB 共享' + (data.totalP2PUploaded / 1024).toFixed(2) + 'MB 加速' + (data.totalP2PDownloaded / 1024).toFixed(2) + 'MB');
+							data.totalP2PDownloaded ? $(amplayer.elemPrefix() + '.peer').text('P2P加速中') : $(amplayer.elemPrefix() + '.peer').text('P2P已开启');
+						});
 					}
 					// enable airplay, from https://github.com/video-dev/hls.js/issues/5989
                 	// 检查是否已存在source元素，如果存在则更新，不存在则创建
@@ -417,6 +422,7 @@
 					p2pAppId: c.p2pAppId,
 					highlight: c.highlight || [],
 					contextmenu: c.contextmenu,
+					customSettings: c.customSettings || [],
 					video: {
 						url: c.urls,
 						type: type,

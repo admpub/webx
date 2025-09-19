@@ -1,0 +1,35 @@
+{{Strip}}{{$rule := $.Data}}
+                    <div class="fieldset bg-fc">
+<a href="javascript:;" class="btn-danger" style="padding:5px 10px;border-radius:5px 0 50px 0;position:absolute;display:block;z-index:10;" onclick="if(confirm('{{`确定要删除此规则吗？`|$.T}}'))$(this).parent().remove()">
+    <i class="fa fa-times"></i>
+</a>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{"路径前缀"|$.T}}</label>
+                            <div class="col-sm-4">
+                                <input name="frequency[underAttack][value][Rules][Path][]" class="form-control" value="{{$rule.Path}}" />
+                                <div class="help-block">{{"如果不填则会忽略此规则。对此路径设置的白名单参数一旦设置必须都匹配才会放行，不设置任何白名单参数时则直接放行"|$.T}}</div>
+                            </div><!-- col-sm-4 -->
+                            <label class="col-sm-2 control-label">{{"浏览器UA白名单"|$.T}}</label>
+                            <div class="col-sm-4">
+                                <input name="frequency[underAttack][value][Rules][UAWhitelist][]" class="form-control" value="{{$rule.UAWhitelist}}" />
+                                <div class="help-block">{{`输入正则表达式，用来匹配浏览器的UserAgent特征值`|$.T}}</div>
+                            </div><!-- col-sm-4 -->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{"Header白名单"|$.T}}</label>
+                            <div class="col-sm-4">
+                                <textarea name="frequency[underAttack][value][Rules][Headers][]" class="form-control" style="resize:vertical" rows="3">
+{{- range $hk, $hv := $rule.Headers}}
+{{$hk}}={{$hv}}
+{{- end -}}
+                                </textarea>
+                                <div class="help-block">{{`请输入Header名称和值，一行一个。`|$.T}}{{`名称和值之间用“=”隔开`|$.T}}</div>
+                            </div><!-- col-sm-4 -->
+                            <label class="col-sm-2 control-label">{{"网址参数白名单"|$.T}}</label>
+                            <div class="col-sm-4">
+                                <input name="frequency[underAttack][value][Rules][QueryString][]" class="form-control" value="{{$rule.QueryString}}" />
+                                <div class="help-block">{{`例如：参数名1=参数值&参数名2=参数值`|$.T}}</div>
+                            </div><!-- col-sm-4 -->
+                        </div>
+                    </div><!-- fieldset -->
+{{/Strip}}
