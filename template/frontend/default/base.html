@@ -1,15 +1,15 @@
 {{Strip}}<!DOCTYPE html>
 <html lang="{{$.Lang.Normalize}}">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <!-- device-setting:start -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
-  <meta name="applicable-device" content="pc, mobile">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+  <meta name="applicable-device" content="pc, mobile" />
   {{- if hasAnyBlock "canonical" -}}
-  <link rel="canonical" href="{{Block `canonical`}}{{/Block}}">
+  <link rel="canonical" href="{{Block `canonical`}}{{/Block}}" />
   {{- end -}}
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
   <!-- device-setting:end -->
   <meta name="keywords" content="{{Block `keywords`}}
   {{- if $.Stored.pageKeywords -}}
@@ -51,7 +51,7 @@
 <meta property="og:url" content="{{Block `url`}}{{$.FullRequestURI}}{{/Block}}" />
 <meta property="og:release_date" content="{{Block `releaseDate`}}{{Now.Format `2006-01-02`}}{{/Block}}" />
 <!-- og-tag:end -->
-	<link rel="shortcut icon" type="image/x-icon" href="{{$.RootPrefix}}/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="{{$.RootPrefix}}/favicon.ico" />
   <title>{{Block "title"}}
   {{- if $.Stored.pageTitle -}}
     {{- $.Stored.pageTitle|$.T -}}{{- /*内页标题*/ -}}
@@ -63,21 +63,21 @@
     {{- end}} {{Config.base.siteName|$.T}}{{if Config.base.siteSlogan}} - {{Config.base.siteSlogan|$.T}}{{end}}
   {{- end -}}
   {{/Block}}</title>
-	<link combine href="{{AssetsURL}}/css/font_awesome.min.css?t={{BuildTime}}" rel="stylesheet">
-  <link combine href="{{AssetsXURL}}/css/fonts/Ionicons/css.min.css?t={{BuildTime}}" rel="stylesheet">
-  <link combine href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet">
-  <link combine href="{{AssetsXURL}}/js/superfish/superfish.min.css?t={{BuildTime}}" rel="stylesheet">
+	<link combine href="{{AssetsURL}}/css/font_awesome.min.css?t={{BuildTime}}" rel="stylesheet" />
+  <link combine href="{{AssetsXURL}}/css/fonts/Ionicons/css.min.css?t={{BuildTime}}" rel="stylesheet" />
+  <link combine href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet" />
+  <link combine href="{{AssetsXURL}}/js/superfish/superfish.min.css?t={{BuildTime}}" rel="stylesheet" />
   {{Block "link"}}{{/Block}}
-	<link combine="2" href="{{AssetsURL}}/js/jquery.gritter/css/jquery.gritter.min.css?t={{BuildTime}}" rel="stylesheet">
-	<link combine="2" href="{{AssetsURL}}/js/jquery.gritter/css/custom.min.css?t={{BuildTime}}" rel="stylesheet">
-  <link combine="2" href="{{AssetsURL}}/js/nprogress/nprogress.min.css?t={{BuildTime}}" rel="stylesheet">
-  <link combine="2" href="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.css?t={{BuildTime}}" rel="stylesheet">
+	<link combine="2" href="{{AssetsURL}}/js/jquery.gritter/css/jquery.gritter.min.css?t={{BuildTime}}" rel="stylesheet" />
+	<link combine="2" href="{{AssetsURL}}/js/jquery.gritter/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" />
+  <link combine="2" href="{{AssetsURL}}/js/nprogress/nprogress.min.css?t={{BuildTime}}" rel="stylesheet" />
+  <link combine="2" href="{{AssetsURL}}/js/dialog/bootstrap-dialog.min.css?t={{BuildTime}}" rel="stylesheet" />
   {{Include "#default#global_js"}}
   {{Block "head"}}{{/Block}}
-  <link combine="4" id="css-lazyload-end" href="{{AssetsXURL}}/css/frontend.lite.min.css?t={{BuildTime}}" rel="stylesheet">
-  <!-- <link href="{{AssetsXURL}}/css/color-orange.css?t={{BuildTime}}" rel="stylesheet"> -->
-  <link combine="4" href="{{AssetsURL}}/css/form/input-webx/webx.min.css?t={{BuildTime}}" rel="stylesheet">
-  <link combine="4" href="{{AssetsXURL}}/css/custom.min.css?t={{BuildTime}}" rel="stylesheet">
+  <link combine="4" id="css-lazyload-end" href="{{AssetsXURL}}/css/frontend.lite.min.css?t={{BuildTime}}" rel="stylesheet" />
+  <!-- <link href="{{AssetsXURL}}/css/color-orange.css?t={{BuildTime}}" rel="stylesheet" /> -->
+  <link combine="4" href="{{AssetsURL}}/css/form/input-webx/webx.min.css?t={{BuildTime}}" rel="stylesheet" />
+  <link combine="4" href="{{AssetsXURL}}/css/custom.min.css?t={{BuildTime}}" rel="stylesheet" />
   {{Block "darkCSS"}}
   {{- if $.ThemeInfo.IsColorName `dark` -}}
   <link href="{{AssetsXURL}}/css/dark.min.css?t={{BuildTime}}" rel="stylesheet" />
