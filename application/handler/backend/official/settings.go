@@ -31,6 +31,7 @@ import (
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	modelDBMgr "github.com/nging-plugins/dbmanager/application/model"
 
+	// 注册 oauth2 provider
 	_ "github.com/coscms/oauth2s/client/goth/providers"
 	_ "github.com/webx-top/echo/handler/oauth2/register/github"
 )
