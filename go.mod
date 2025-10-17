@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20250911171829-cfcfa64e4820
 	github.com/coscms/webcore v0.13.3-0.20251017072501-c110091fb264
-	github.com/coscms/webfront v0.0.0-20251017072622-cf6a3b89bb0e
+	github.com/coscms/webfront v0.0.0-20251017075002-819ba5a4c020
 )
 
 require (
@@ -44,7 +44,7 @@ require (
 	github.com/admpub/useragent v0.0.2 // indirect
 	github.com/caddy-plugins/ipfilter v1.1.8 // indirect
 	github.com/coscms/forms v1.13.11
-	github.com/coscms/oauth2s v0.4.3 // indirect
+	github.com/coscms/oauth2s v0.5.0 // indirect
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.15.0 // indirect
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76 // indirect
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.0
 	github.com/webx-top/db v1.28.9
-	github.com/webx-top/echo v1.22.5
+	github.com/webx-top/echo v1.22.6
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2

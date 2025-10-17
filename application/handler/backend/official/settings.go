@@ -30,6 +30,8 @@ import (
 	modelApi "github.com/coscms/webfront/model/official/api"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	modelDBMgr "github.com/nging-plugins/dbmanager/application/model"
+
+	_ "github.com/webx-top/echo/handler/oauth2/register/github"
 )
 
 var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
