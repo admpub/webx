@@ -44,7 +44,7 @@ require (
 	github.com/admpub/useragent v0.0.2 // indirect
 	github.com/caddy-plugins/ipfilter v1.1.8 // indirect
 	github.com/coscms/forms v1.13.11
-	github.com/coscms/oauth2s v0.5.0 // indirect
+	github.com/coscms/oauth2s v0.5.0
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.15.0 // indirect
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76 // indirect
