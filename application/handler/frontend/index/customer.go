@@ -11,6 +11,7 @@ import (
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/httpserver"
+	"github.com/coscms/webcore/library/httpserver/httpserverutils"
 	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/library/qrsignin"
 	"github.com/coscms/webfront/middleware/sessdata"
@@ -253,7 +254,7 @@ func CustomerInfo(c echo.Context) error {
 
 func qrcodeSignIn(ctx echo.Context) error {
 	expireTime := time.Now().Add(time.Minute * 10)
-	signInData := qrsignin.NewQRSignIn(ctx, CookieMaxAge, expireTime)
+	signInData := qrsignin.NewQRSignIn(ctx, httpserverutils.CookieMaxAge, expireTime)
 	caseName := config.FromFile().Extend.GetStore(`QRCodeSignIn`).String(`case`)
 	cs := qrsignin.Get(caseName)
 	qrcode, err := cs.Encode(ctx, signInData)
