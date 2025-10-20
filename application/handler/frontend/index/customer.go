@@ -6,7 +6,6 @@ import (
 	"github.com/admpub/log"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
-	"github.com/webx-top/echo/middleware/session"
 
 	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/common"
@@ -14,13 +13,9 @@ import (
 	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webcore/library/nerrors"
 	"github.com/coscms/webfront/library/qrsignin"
-	"github.com/coscms/webfront/library/top"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
-
-// CookieMaxAge 允许设置的Cookie最大有效时长(单位:秒)
-var CookieMaxAge = 86400 * 365
 
 const debug = false
 
@@ -211,22 +206,7 @@ func SignIn(c echo.Context) error {
 				return c.JSON(data)
 			}
 		} else {
-			remember := c.Form(`remember`)
-			var maxAge int
-			if len(remember) > 0 {
-				if remember == `forever` {
-					maxAge = CookieMaxAge
-				} else {
-					duration, err := top.ParseDuration(remember)
-					if err == nil {
-						maxAge = int(duration.Seconds())
-					}
-				}
-				if maxAge > CookieMaxAge {
-					maxAge = CookieMaxAge
-				}
-				session.RememberMaxAge(c, maxAge)
-			}
+			maxAge := httpserverutils.RememberSession(c)
 			err = m.SignIn(name, pass, typi, modelCustomer.GenerateOptionsFromHeader(c, maxAge)...)
 			if err != nil {
 				if c.Format() != `html` {
