@@ -1,6 +1,6 @@
 module github.com/admpub/webx
 
-go 1.25.1
+go 1.25.3
 
 // replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
@@ -11,8 +11,8 @@ go 1.25.1
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20251101101707-83c78d2ed0ea
-	github.com/coscms/webcore v0.13.3-0.20251026074907-7a2f3313c9e3
+	github.com/admpub/nging/v5 v5.3.4-0.20251105100359-303403a61ecc
+	github.com/coscms/webcore v0.13.3-0.20251105100044-80437087bd5a
 	github.com/coscms/webfront v0.0.0-20251026075552-86624bf4395d
 )
 
@@ -116,7 +116,7 @@ require (
 	github.com/admpub/identicon v1.0.2 // indirect
 	github.com/admpub/imaging v1.6.3 // indirect
 	github.com/admpub/ini v1.38.2 // indirect
-	github.com/admpub/ip2region/v2 v2.0.1 // indirect
+	github.com/admpub/ip2region/v3 v3.0.3 // indirect
 	github.com/admpub/json5 v0.0.1 // indirect
 	github.com/admpub/machineid v1.0.2 // indirect
 	github.com/admpub/mahonia v0.0.0-20151019004008-c528b747d92d // indirect
