@@ -104,7 +104,7 @@
 <script combine src="{{AssetsURL}}/js/behaviour/sprintf.min.js?t={{BuildTime}}"></script>
 <script combine src="{{AssetsXURL}}/js/app.min.js?t={{BuildTime}}"></script>
 <script combine src="{{AssetsURL}}/js/scrollLoading.min.js?t={{BuildTime}}"></script>
-<script src="{{FrontendURL}}/i18n/i18n.js?t={{BuildTime}}"></script>
+<script src="{{FrontendURL}}/i18n/i18n.js?t={{BuildTime}}&lng={{$.Lang.Normalize}}"></script>
 <script>
 window.activeURL={{if $.Stored.Get "activeURL"}}'{{FrontendURL}}{{$.Stored.Get "activeURL"}}'{{else}}null{{end}};window.errorMSG=null;window.successMSG=null;App.lang='{{$.Lang.Normalize}}';
 {{- if $.Data -}}
