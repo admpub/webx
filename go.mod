@@ -13,13 +13,13 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20251107063749-9ae39cd8427f
 	github.com/coscms/webcore v0.13.3-0.20251110042526-b077cf655047
-	github.com/coscms/webfront v0.0.0-20251107111829-b3b1dde41139
+	github.com/coscms/webfront v0.0.0-20251110052245-34649a2cc720
 )
 
 require (
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/admpub/bindata/v3 v3.2.1
-	github.com/admpub/cache v0.8.0
+	github.com/admpub/cache v0.8.1
 	github.com/admpub/color v1.8.1 // indirect
 	github.com/admpub/copier v0.1.1 // indirect
 	github.com/admpub/decimal v1.3.2 // indirect
@@ -60,7 +60,7 @@ require (
 	github.com/webx-top/pagination v0.3.2
 	github.com/webx-top/validation v0.0.3 // indirect
 	golang.org/x/oauth2 v0.32.0 // indirect
-	golang.org/x/sync v0.17.0
+	golang.org/x/sync v0.18.0
 	gopkg.in/redis.v5 v5.2.9 // indirect
 )
 
@@ -325,7 +325,7 @@ require (
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
 	golang.org/x/mod v0.29.0 // indirect
 	golang.org/x/net v0.46.0 // indirect
-	golang.org/x/sys v0.37.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.30.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
