@@ -21,7 +21,7 @@ import (
 )
 
 // Proxy http://www.coscms.com/image/proxy/A?image=/public/upload/film/370/72142867778240512.jpg&size=640x351
-// {{ImageProxyURL `size`, `640x351`, `image`, `/public/upload/film/370/72142867778240512.jpg` }}
+// {{ImageProxyURL `size` `640x351` `image` `/public/upload/film/370/72142867778240512.jpg`}}
 func Proxy(ctx echo.Context) error {
 	token := ctx.Param("token")
 	if token != uploadChecker.Token(ctx.Queries()) {
