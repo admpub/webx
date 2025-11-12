@@ -21,6 +21,10 @@ var (
 	mapping sync.Map
 )
 
+func RemoveCache(key string) {
+	cached.Delete(key)
+}
+
 type config struct {
 	thumbM                                                *modelFile.Thumb
 	storer                                                driver.Storer
@@ -60,7 +64,8 @@ func (cfg *config) getFileReaderFromStorer(imageURL string) (buf *bytes.Buffer, 
 		if err != nil {
 			return nil, err
 		}
-		b, err := io.ReadAll(fr)
+		var b []byte
+		b, err = io.ReadAll(fr)
 		fr.Close()
 		if err != nil {
 			return nil, fmt.Errorf(`%s: %w`, imageURL, err)
@@ -74,14 +79,12 @@ func (cfg *config) getFileReaderFromStorer(imageURL string) (buf *bytes.Buffer, 
 }
 
 func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
-	var err error
-
 	// ======================
 	// 直接获取该文件
 	// ======================
 	if len(cfg.suffix) > 0 {
 		if v, ok := cached.Load(cfg.thumbOtherFormatURL); ok {
-			return bytes.NewBuffer(v.([]byte)), err
+			return bytes.NewBuffer(v.([]byte)), nil
 		}
 		buf, err := cfg.getFileReaderFromStorer(cfg.thumbOtherFormatURL)
 		if err != nil {
@@ -119,7 +122,7 @@ func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
 			}
 		}
 		mapping.Store(cfg.mappingKey, cfg.thumbURL)
-		return bytes.NewBuffer(thumbBytes), err
+		return bytes.NewBuffer(thumbBytes), nil
 	}
 
 	// ======================
@@ -146,11 +149,9 @@ func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
 			}
 		}
 	}
-	var sgVal interface{}
-	var shared bool
-	sgVal, err, shared = sg.Do(`makethumb:`+cfg.image, func() (interface{}, error) {
+	sgVal, err, shared := sg.Do(`makethumb:`+cfg.image, func() (interface{}, error) {
 		fileM := modelFile.NewFile(ctx)
-		err = fileM.GetByViewURL(cfg.viewURL)
+		err := fileM.GetByViewURL(cfg.viewURL)
 		if err != nil {
 			return nil, fmt.Errorf(`%s: %w`, cfg.viewURL, err)
 		}
