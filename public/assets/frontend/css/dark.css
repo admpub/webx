@@ -40,13 +40,14 @@ nav .page-item.disabled .page-link{background-color: transparent !important;}
 #sectionSignIn{background: #000 !important;}
 .heading-hr::after,
 .heading-hr::before{color: #555}
-
+.breadcrumb{background-color: #2a2f39;}
 .container-wrapper:not(.bg-gray-darker){background-color:#1a1d23;color:#ccc}
 .container-wrapper.bg-superlight{background-color:#292f38 !important;}
 .container-wrapper.bg-inverse{background-color:#000 !important;}
 .container-wrapper:not(.bg-gray-darker) .tx-inverse{color: white !important}
 .table td, .table th{border-color: #555;}
 .table tfoot > tr > th, .table thead:not(.thead-default):not(.thead-inverse) > tr > th,.table tbody > tr > th{color:#ccc;}
+.card.card-table table.table>thead{background-color:#2c2f36}
 .markdown-body {color: #ddd !important}
 .markdown-body table,
 .editormd-html-preview .editormd-toc-menu h1, 
