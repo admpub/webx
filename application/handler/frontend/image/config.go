@@ -28,6 +28,7 @@ type config struct {
 	quality                                               int
 	width, height                                         float64
 	mappingKey                                            string
+	disableWatermark                                      bool
 }
 
 func (cfg *config) convertOtherFormatThumb(convert convert.Convert, data []byte) (buf *bytes.Buffer, err error) {
@@ -167,7 +168,10 @@ func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
 			Storer:           cfg.storer,
 			DestFile:         cfg.storer.URLToFile(cfg.thumbURL),
 			FileMD5:          ``,
-			WatermarkOptions: manager.GetWatermarkOptions(),
+			WatermarkOptions: nil,
+		}
+		if !cfg.disableWatermark {
+			cropOpt.WatermarkOptions = manager.GetWatermarkOptions()
 		}
 		err = cfg.thumbM.Crop(cropOpt) // 裁剪图片并保存
 		if err != nil {

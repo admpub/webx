@@ -13,6 +13,7 @@ import (
 	modelFile "github.com/coscms/webcore/model/file"
 	"github.com/coscms/webcore/registry/upload"
 	uploadChecker "github.com/coscms/webcore/registry/upload/checker"
+	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
@@ -102,6 +103,14 @@ func Proxy(ctx echo.Context) error {
 	} else if err != db.ErrNoMoreRows {
 		return err
 	}
+	var disableWatermark bool
+	disable := ctx.Form(`disable`) // disable=watermark
+	if len(disable) > 0 {
+		disables := strings.Split(disable, `,`)
+		if com.InSlice(`watermark`, disables) {
+			disableWatermark = true
+		}
+	}
 	return ctx.ServeCallbackContent(func(ctx echo.Context) (io.Reader, error) {
 		return GetFileReader(ctx, &config{
 			mappingKey:          mappingKey,
@@ -115,6 +124,7 @@ func Proxy(ctx echo.Context) error {
 			quality:             quality,
 			width:               width,
 			height:              height,
+			disableWatermark:    disableWatermark,
 		})
 	}, path.Base(thumbOtherFormatURL), time.Unix(0, 0), bootconfig.HTTPCacheMaxAge)
 }
