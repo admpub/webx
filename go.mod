@@ -13,13 +13,13 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20251113040644-e9bdbe0bba81
 	github.com/coscms/webcore v0.13.3-0.20251113040332-dc4945fbf1a6
-	github.com/coscms/webfront v0.0.0-20251113040623-92809ace6574
+	github.com/coscms/webfront v0.0.0-20251113141712-ee2590be7d26
 )
 
 require (
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/admpub/bindata/v3 v3.2.1
-	github.com/admpub/cache v0.8.1
+	github.com/admpub/cache v0.8.2
 	github.com/admpub/color v1.8.1 // indirect
 	github.com/admpub/copier v0.1.1 // indirect
 	github.com/admpub/decimal v1.3.2 // indirect
