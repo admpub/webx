@@ -1,12 +1,12 @@
 package manager
 
 import (
-	"strconv"
 	"strings"
 
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
@@ -18,13 +18,13 @@ func NavigateIndex(ctx echo.Context) error {
 	m := official.NewNavigate(ctx)
 	cond := db.Compounds{}
 	t := ctx.Form(`type`)
-	parentID := ctx.Formx(`parentId`).Int()
+	parentID := ctx.Formx(`parentId`).Uint()
 	currentID := ctx.Formx(`currentId`).Uint()
 	onlyList := ctx.Formx(`onlyList`).Bool()
 	if len(t) > 0 {
 		cond.AddKV(`type`, t)
 	}
-	if parentID >= 0 {
+	if parentID > 0 {
 		cond.AddKV(`parent_id`, parentID)
 	}
 	if currentID > 0 {
@@ -72,7 +72,7 @@ func NavigateAdd(ctx echo.Context) error {
 	var err error
 	m := official.NewNavigate(ctx)
 	t := ctx.Form(`type`, `default`)
-	parentID := ctx.Formx(`parentId`).Int()
+	parentID := ctx.Formx(`parentId`).Uint()
 	if parentID > 0 {
 		err = m.Get(nil, db.Cond{`id`: parentID})
 		if err != nil {
@@ -109,7 +109,7 @@ func NavigateAdd(ctx echo.Context) error {
 			}
 		} else {
 			if parentID > 0 {
-				ctx.Request().Form().Set(`parentId`, strconv.Itoa(parentID))
+				ctx.Request().Form().Set(`parentId`, param.AsString(parentID))
 			}
 		}
 	}
