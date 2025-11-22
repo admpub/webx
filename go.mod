@@ -12,7 +12,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20251113040644-e9bdbe0bba81
-	github.com/coscms/webcore v0.13.3-0.20251122061559-841c438ab7f1
+	github.com/coscms/webcore v0.13.3-0.20251122062421-97124ba8d97d
 	github.com/coscms/webfront v0.0.0-20251121102742-d28f3cfab730
 )
 
@@ -28,7 +28,7 @@ require (
 	github.com/admpub/go-download/v2 v2.2.0 // indirect
 	github.com/admpub/go-hashids v2.0.1+incompatible // indirect
 	github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe // indirect
-	github.com/admpub/godotenv v1.4.3
+	github.com/admpub/godotenv v1.4.4
 	github.com/admpub/imageproxy v0.10.1
 	github.com/admpub/ipfilter v1.0.6 // indirect
 	github.com/admpub/license_gen v0.1.2

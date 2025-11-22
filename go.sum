@@ -102,8 +102,8 @@ github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe h1:mR9VsdfIkdT8q
 github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe/go.mod h1:EVIe79bkZxI2fkWBKI8Is5RIRs3ooZdoTermKYIDbQ4=
 github.com/admpub/go-utility v0.0.1 h1:/nja86vknCoMYJtMCm8nV+vuBiOf5PU45I5w7XAJUEU=
 github.com/admpub/go-utility v0.0.1/go.mod h1:QZ/OrlUkHyD7Hg8Jj/iPkT6RZuMfYUOp0S4NsaQzRnA=
-github.com/admpub/godotenv v1.4.3 h1:yxoRSi0rVWLNLC1c3v1MBw3At6fBTvTwGrVY/44huaA=
-github.com/admpub/godotenv v1.4.3/go.mod h1:W8zOql4lSgnK6zfI6Le+GXlAaz5ZCj4kZI2wgcjar18=
+github.com/admpub/godotenv v1.4.4 h1:xi/+0B0k/F3ZfuoYICccvn3KGLOWRomJHZLB5PZ7iQY=
+github.com/admpub/godotenv v1.4.4/go.mod h1:W8zOql4lSgnK6zfI6Le+GXlAaz5ZCj4kZI2wgcjar18=
 github.com/admpub/godownloader v2.2.2+incompatible h1:fcmMzI99/ZjNGGyfFZh0qy+Z72ZsFqmXnw9I3+uqNvY=
 github.com/admpub/godownloader v2.2.2+incompatible/go.mod h1:ftgrnKg7ptai8E/oJeMA6PqJWR7KkVGU8TgKs0rdhtY=
 github.com/admpub/gohls v1.3.4 h1:fPpu3GPc+D4uxo3k6GAoP6Uln7/ujuQgoInn0/1YTLE=
@@ -323,8 +323,8 @@ github.com/coscms/session-sqlstore v0.0.1 h1:L1ef74QILW4RXrAcG2Se6K+zakmnE7sE735
 github.com/coscms/session-sqlstore v0.0.1/go.mod h1:n1mHOa5RJRVCXjliFkVcgg8A+TEDY6BPqFkyi3qVbTc=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.13.3-0.20251122061559-841c438ab7f1 h1:ngIy3FHxoKI1G1X/JHKhPkQS9WjUACYO1yOApifLc78=
-github.com/coscms/webcore v0.13.3-0.20251122061559-841c438ab7f1/go.mod h1:rKpGul5LecBMkWzqLh/8U2XF5BxWoxS+hXN7hjDpydk=
+github.com/coscms/webcore v0.13.3-0.20251122062421-97124ba8d97d h1:hqTOhAPJjEFF2I/8JGgE39jEYaOWnwi/J7NOP42/5fY=
+github.com/coscms/webcore v0.13.3-0.20251122062421-97124ba8d97d/go.mod h1:KuBpel00BbF9qoN30Q3MD68TNNxLGaftKug7gJhUtNY=
 github.com/coscms/webfront v0.0.0-20251121102742-d28f3cfab730 h1:3uFTtxKX8n3opWI+8B95NBFCIh6sywMge00C1GYx0lA=
 github.com/coscms/webfront v0.0.0-20251121102742-d28f3cfab730/go.mod h1:6kxjK6CJvySZ7GtcCN58stIwuoSGF+PP1kdqzBy9BiQ=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
