@@ -14,8 +14,8 @@ btnstemplate: ""
 elements:
     - id: ""
       type: text
-      name: Title
-      label: Title
+      name: title
+      label: 菜单标题
       labelcols: 0
       fieldcols: 0
       labelclasses: []
@@ -31,7 +31,7 @@ elements:
       data: {}
     # - id: ""
     #   type: text
-    #   name: Cover
+    #   name: cover
     #   label: Cover
     #   labelcols: 0
     #   fieldcols: 0
@@ -48,8 +48,8 @@ elements:
     #   data: {}
     - id: ""
       type: text
-      name: Remark
-      label: Remark
+      name: remark
+      label: 备注
       labelcols: 0
       fieldcols: 0
       labelclasses: []
@@ -65,7 +65,7 @@ elements:
       data: {}
     - id: ""
       type: text
-      name: Badge
+      name: badge
       label: Badge
       labelcols: 0
       fieldcols: 0
