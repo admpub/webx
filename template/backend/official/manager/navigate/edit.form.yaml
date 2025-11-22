@@ -1,6 +1,6 @@
 id: Forms
 theme: bootstrap3
-template: ""
+template: "allfields"
 method: POST
 action: ""
 attributes:
@@ -12,108 +12,6 @@ withbuttons: true
 buttons: []
 btnstemplate: ""
 elements:
-    - id: ""
-      type: text
-      name: Id
-      label: Id
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: "0"
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: Type
-      label: Type
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: LinkType
-      label: LinkType
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: ParentId
-      label: ParentId
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: "0"
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: HasChild
-      label: HasChild
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: Level
-      label: Level
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: "0"
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
     - id: ""
       type: text
       name: Title
@@ -131,129 +29,27 @@ elements:
       format: ""
       languages: []
       data: {}
-    - id: ""
-      type: text
-      name: Cover
-      label: Cover
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: Url
-      label: Url
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: Ident
-      label: Ident
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
+    # - id: ""
+    #   type: text
+    #   name: Cover
+    #   label: Cover
+    #   labelcols: 0
+    #   fieldcols: 0
+    #   labelclasses: []
+    #   value: ""
+    #   helptext: ""
+    #   template: ""
+    #   valid: ""
+    #   attributes: []
+    #   choices: []
+    #   elements: []
+    #   format: ""
+    #   languages: []
+    #   data: {}
     - id: ""
       type: text
       name: Remark
       label: Remark
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: number
-      name: Sort
-      label: Sort
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: "0"
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: Disabled
-      label: Disabled
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: Target
-      label: Target
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: Direction
-      label: Direction
       labelcols: 0
       fieldcols: 0
       labelclasses: []
@@ -275,40 +71,6 @@ elements:
       fieldcols: 0
       labelclasses: []
       value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: Created
-      label: Created
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: "0"
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: Updated
-      label: Updated
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: "0"
       helptext: ""
       template: ""
       valid: ""

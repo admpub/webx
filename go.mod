@@ -11,8 +11,8 @@ go 1.25.3
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20251113040644-e9bdbe0bba81
-	github.com/coscms/webcore v0.13.3-0.20251122082321-54c77da3f3b7
+	github.com/admpub/nging/v5 v5.3.4-0.20251122085601-0f51e76fc904
+	github.com/coscms/webcore v0.13.3-0.20251122085511-18f054e0e5dd
 	github.com/coscms/webfront v0.0.0-20251121102742-d28f3cfab730
 )
 
@@ -42,7 +42,7 @@ require (
 	github.com/admpub/resty/v2 v2.7.2 // indirect
 	github.com/admpub/sensitive v0.0.1 // indirect
 	github.com/admpub/useragent v0.0.2 // indirect
-	github.com/coscms/forms v1.13.12
+	github.com/coscms/forms v1.13.13
 	github.com/coscms/oauth2s v0.5.0
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.15.0 // indirect
