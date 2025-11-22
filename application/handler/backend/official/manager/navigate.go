@@ -97,6 +97,7 @@ func NavigateAdd(ctx echo.Context) error {
 	if form.Exited() {
 		return form.Error()
 	}
+	form.Generate()
 	/*
 		if ctx.IsPost() {
 			m.Reset()
