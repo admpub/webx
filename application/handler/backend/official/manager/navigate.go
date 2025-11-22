@@ -6,10 +6,10 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
-	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/model/official"
 )
@@ -81,39 +81,56 @@ func NavigateAdd(ctx echo.Context) error {
 		t = m.Type
 		m.HasChild = `Y`
 	}
-	if ctx.IsPost() {
-		m.Reset()
-		err = ctx.MustBind(m.OfficialCommonNavigate)
-		if err == nil {
-			var added []string
-			added, err = common.BatchAdd(ctx, `title,ident,url`, m, func(_ *string) error {
-				m.Id = 0
-				m.HasChild = `N`
-				return nil
-			}, `|`)
-			if err == nil && len(added) == 0 {
-				err = ctx.E(`菜单标题不能为空`)
-			}
+
+	form := formbuilder.New(ctx,
+		m.OfficialCommonNavigate,
+		formbuilder.ConfigFile(`official/manager/navigate/edit`))
+	form.OnPost(func() error {
+		_, err := m.Add()
+		if err != nil {
+			return err
 		}
-		if err == nil {
-			common.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
-		}
-	} else {
-		id := ctx.Formx(`copyId`).Uint()
-		if id > 0 {
-			err = m.Get(nil, `id`, id)
+		common.SendOk(ctx, ctx.T(`添加成功`))
+		return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	/*
+		if ctx.IsPost() {
+			m.Reset()
+			err = ctx.MustBind(m.OfficialCommonNavigate)
 			if err == nil {
-				echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
-				ctx.Request().Form().Set(`id`, `0`)
+				var added []string
+				added, err = common.BatchAdd(ctx, `title,ident,url`, m, func(_ *string) error {
+					m.Id = 0
+					m.HasChild = `N`
+					return nil
+				}, `|`)
+				if err == nil && len(added) == 0 {
+					err = ctx.E(`菜单标题不能为空`)
+				}
+			}
+			if err == nil {
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
 			}
 		} else {
-			if parentID > 0 {
-				ctx.Request().Form().Set(`parentId`, param.AsString(parentID))
+			id := ctx.Formx(`copyId`).Uint()
+			if id > 0 {
+				err = m.Get(nil, `id`, id)
+				if err == nil {
+					echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
+					ctx.Request().Form().Set(`id`, `0`)
+				}
+			} else {
+				if parentID > 0 {
+					ctx.Request().Form().Set(`parentId`, param.AsString(parentID))
+				}
 			}
 		}
-	}
-
+	*/
 	ctx.Set(`activeURL`, `/manager/navigate/index`)
 	navigateList := m.ListIndent(m.ListAllParent(t, 0))
 	ctx.Set(`navigateList`, navigateList)
