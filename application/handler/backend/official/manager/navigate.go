@@ -6,7 +6,6 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
-	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
@@ -83,7 +82,20 @@ func NavigateAdd(ctx echo.Context) error {
 		t = m.Type
 		m.HasChild = `Y`
 	}
-
+	if ctx.IsGet() {
+		id := ctx.Formx(`copyId`).Uint()
+		if id > 0 {
+			err = m.Get(nil, `id`, id)
+			if err == nil {
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(m.OfficialCommonNavigate, uint64(id))
+			}
+		} else {
+			if parentID > 0 {
+				m.ParentId = parentID
+			}
+		}
+	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonNavigate,
 		formbuilder.ConfigFile(`official/manager/navigate/edit`),
@@ -101,48 +113,11 @@ func NavigateAdd(ctx echo.Context) error {
 		common.SendOk(ctx, ctx.T(`添加成功`))
 		return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
 	})
-	form.OnGet(func() error {
-		id := ctx.Formx(`copyId`).Uint()
-		if id > 0 {
-			err = m.Get(nil, `id`, id)
-			if err == nil {
-				echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
-				ctx.Request().Form().Set(`id`, `0`)
-				i18nm.SetModelTranslationsToForm(m.OfficialCommonNavigate, uint64(id))
-			}
-		} else {
-			if parentID > 0 {
-				ctx.Request().Form().Set(`parentId`, param.AsString(parentID))
-			}
-		}
-		return nil
-	})
 	err = form.RecvSubmission()
 	if form.Exited() {
 		return form.Error()
 	}
 	form.Generate()
-	/*
-		if ctx.IsPost() {
-			m.Reset()
-			err = ctx.MustBind(m.OfficialCommonNavigate)
-			if err == nil {
-				var added []string
-				added, err = common.BatchAdd(ctx, `title,ident,url`, m, func(_ *string) error {
-					m.Id = 0
-					m.HasChild = `N`
-					return nil
-				}, `|`)
-				if err == nil && len(added) == 0 {
-					err = ctx.E(`菜单标题不能为空`)
-				}
-			}
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
-			}
-		}
-	*/
 	ctx.Set(`activeURL`, `/manager/navigate/index`)
 	navigateList := m.ListIndent(m.ListAllParent(t, 0))
 	ctx.Set(`navigateList`, navigateList)
@@ -221,6 +196,9 @@ func NavigateEdit(ctx echo.Context) error {
 	if editableType {
 		allowedNames = append(allowedNames, `type`)
 	}
+	if ctx.IsGet() {
+		i18nm.SetModelTranslationsToForm(m.OfficialCommonNavigate, uint64(id))
+	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonNavigate,
 		formbuilder.ConfigFile(`official/manager/navigate/edit`),
@@ -238,11 +216,6 @@ func NavigateEdit(ctx echo.Context) error {
 		}
 		common.SendOk(ctx, ctx.T(`操作成功`))
 		return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
-	})
-	form.OnGet(func() error {
-		echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
-		i18nm.SetModelTranslationsToForm(m.OfficialCommonNavigate, uint64(id))
-		return nil
 	})
 	err = form.RecvSubmission()
 	if form.Exited() {

@@ -7,6 +7,7 @@ go 1.25.3
 // replace github.com/coscms/webcore => ../../coscms/webcore
 
 // replace github.com/coscms/webfront => ../../coscms/webfront
+replace github.com/coscms/forms => ../../coscms/forms
 
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
