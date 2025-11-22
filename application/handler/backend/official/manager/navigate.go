@@ -117,7 +117,6 @@ func NavigateAdd(ctx echo.Context) error {
 	if form.Exited() {
 		return form.Error()
 	}
-	form.Generate()
 	ctx.Set(`activeURL`, `/manager/navigate/index`)
 	navigateList := m.ListIndent(m.ListAllParent(t, 0))
 	ctx.Set(`navigateList`, navigateList)
@@ -221,7 +220,6 @@ func NavigateEdit(ctx echo.Context) error {
 	if form.Exited() {
 		return form.Error()
 	}
-	form.Generate()
 	ctx.Set(`activeURL`, `/manager/navigate`)
 	navigateRows := m.ListAllParent(m.Type, 0)
 	navigateList := []*dbschema.OfficialCommonNavigate{}
