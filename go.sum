@@ -305,8 +305,8 @@ github.com/clipperhouse/uax29/v2 v2.3.0/go.mod h1:Wn1g7MK6OoeDT0vL+Q0SQLDz/KpfsV
 github.com/coreos/go-systemd v0.0.0-20181012123002-c6f51f82210d/go.mod h1:F5haX7vjVVG0kc13fIWeqUViNPyEJxv/OmvnBo0Yme4=
 github.com/coscms/captcha v0.2.3 h1:r9GA1x8zvaC43gr+lRm79/EAqXx4+8WXCP+vC47vC8c=
 github.com/coscms/captcha v0.2.3/go.mod h1:IAdMnt5ExsjQPA7+SVzQa9qV/xNJmV7NMEXqrFJiSME=
-github.com/coscms/forms v1.13.13 h1:TTOwybmzh6urM4sv/nnT4HAgBuj+TBLBO2van29haRY=
-github.com/coscms/forms v1.13.13/go.mod h1:isSiruSp/5rdQTgJ94gKeGV2LJhbvgGak18DSUkPN1E=
+github.com/coscms/forms v1.13.14 h1:0tQFEFcx1VyJmxMWJ06jIwY7fPEMLDjsVzNDyAoJxFU=
+github.com/coscms/forms v1.13.14/go.mod h1:isSiruSp/5rdQTgJ94gKeGV2LJhbvgGak18DSUkPN1E=
 github.com/coscms/go-imgparse v0.0.1 h1:RMnw3/VtfTOil3SdukPgdGm4xmO5KoQpyVNtPKuFKFY=
 github.com/coscms/go-imgparse v0.0.1/go.mod h1:FqBNWVAozSee1bB11G8ohGq5artPO7Zz3xLtw3d4Kdk=
 github.com/coscms/oauth2s v0.5.0 h1:hx40Ss3xTeIpkX0mVQST+XjNMnOeVa/eN2VuxEIscY0=
@@ -323,8 +323,8 @@ github.com/coscms/session-sqlstore v0.0.1 h1:L1ef74QILW4RXrAcG2Se6K+zakmnE7sE735
 github.com/coscms/session-sqlstore v0.0.1/go.mod h1:n1mHOa5RJRVCXjliFkVcgg8A+TEDY6BPqFkyi3qVbTc=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.13.3-0.20251122093555-d0e79146a307 h1:fBxW7DfDvRqtzfXtdQ//1WYzb4uWcrMcznjU+z/dq/M=
-github.com/coscms/webcore v0.13.3-0.20251122093555-d0e79146a307/go.mod h1:VshIkvQ91w/g7cC3u277EY1HxXUosoiLwKF3cElKpkY=
+github.com/coscms/webcore v0.13.3-0.20251122102108-2519cd90a038 h1:fv1GVV6xTX8+5qf7ROEXsnZ1rIggXYFGTHfx1ewZJo8=
+github.com/coscms/webcore v0.13.3-0.20251122102108-2519cd90a038/go.mod h1:iag3JeY/VofNqGJnJaY5+kUXWOhZFpr5bBk2fTKafhU=
 github.com/coscms/webfront v0.0.0-20251121102742-d28f3cfab730 h1:3uFTtxKX8n3opWI+8B95NBFCIh6sywMge00C1GYx0lA=
 github.com/coscms/webfront v0.0.0-20251121102742-d28f3cfab730/go.mod h1:6kxjK6CJvySZ7GtcCN58stIwuoSGF+PP1kdqzBy9BiQ=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=

@@ -45,36 +45,15 @@
                     {{- end -}}
                   </select>
                 </div>
-                <label class="col-sm-2 control-label">{{"徽标文本"|$.T}}</label>
-                <div class="col-sm-3">
-                  <input name="badge" class="form-control" id="badge" value="{{$.Form `badge`}}">
-                </div>
-              </div>
-              <div class="form-group">
                 <label class="col-sm-2 control-label">{{"封面图片"|$.T}}</label>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                     {{- $.Set `fileInputConfig` (MakeMap `name` `cover` `value` ($.Form `cover`) `subdir` `navigate`) -}}
                     {{Include "common/file_input" $}}
                 </div>
               </div>
-            {{- $.Stored.forms.Render -}}
-              {{- $isAdd := HasSuffix $.URL.Path "/add" -}}
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"菜单标题"|$.T}}</label>
-                <div class="col-sm-8">
-                    {{- if $isAdd -}}
-                    <textarea class="form-control resize-y" placeholder='{{"菜单标题"|$.T}}|{{"匹配标识"|$.T}}|{{"网址"|$.T}}' name="title" rows="5">{{$.Form "title"}}</textarea>
-                    <div class="help-block">
-                      {{"如要一次添加多个同级菜单，请一行一个，并且每行中格式为"|$.T}}: <code>{{"菜单标题"|$.T}}</code>|<code>{{"匹配标识"|$.T}}</code>|<code>{{"网址"|$.T}}</code>
-                      <br />
-                      {{`其中，匹配标识如要指定正则表达式，请添加前缀<code>regexp:</code>`|$.T|ToHTML}}
-                    </div>
-                    {{- else -}}
-                    <input type="text" class="form-control" name="title" value="{{$.Form `title`}}">
-                    {{- end -}}
-                </div>
-              </div>
-              {{- if not $isAdd -}}
+
+              {{- $.Stored.forms.Render -}}
+
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"网址"|$.T}}</label>
                 <div class="col-sm-3">
@@ -86,7 +65,6 @@
                     <div class="help-block">{{`如要指定正则表达式，请添加前缀<code>regexp:</code>`|$.T|ToHTML}}</div>
                 </div>
               </div>
-              {{- end -}}
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"排序编号"|$.T}}</label>
@@ -132,12 +110,6 @@
                     <input type="radio" value="X" id="direction-X" name="direction"{{if eq $v `X`}} checked{{end}}><label for="direction-X">{{"横向"|$.T}}</label> 
                   </div>
                   <div class="help-block">{{`对自定义链接无效`|$.T}}</div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"备注"|$.T}}</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" name="remark" value="{{$.Form `remark`}}">
                 </div>
               </div>
 

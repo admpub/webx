@@ -8,7 +8,7 @@ attributes:
       - form-horizontal
     - - role
       - form
-withbuttons: true
+withbuttons: false
 buttons: []
 btnstemplate: ""
 elements:

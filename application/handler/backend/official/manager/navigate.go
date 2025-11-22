@@ -12,6 +12,7 @@ import (
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webfront/dbschema"
+	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 )
 
@@ -85,9 +86,15 @@ func NavigateAdd(ctx echo.Context) error {
 
 	form := formbuilder.New(ctx,
 		m.OfficialCommonNavigate,
-		formbuilder.ConfigFile(`official/manager/navigate/edit`))
+		formbuilder.ConfigFile(`official/manager/navigate/edit`),
+		formbuilder.AllowedNames(`type`, `parentId`, `title`, `ident`, `url`, `linkType`, `badge`, `cover`, `remark`, `disabled`, `sort`, `target`, `direction`),
+	)
 	form.OnPost(func() error {
 		_, err := m.Add()
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonNavigate, uint64(m.Id))
 		if err != nil {
 			return err
 		}
@@ -101,6 +108,7 @@ func NavigateAdd(ctx echo.Context) error {
 			if err == nil {
 				echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
 				ctx.Request().Form().Set(`id`, `0`)
+				i18nm.SetModelTranslationsToForm(m.OfficialCommonNavigate, uint64(id))
 			}
 		} else {
 			if parentID > 0 {
@@ -132,19 +140,6 @@ func NavigateAdd(ctx echo.Context) error {
 			if err == nil {
 				common.SendOk(ctx, ctx.T(`操作成功`))
 				return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
-			}
-		} else {
-			id := ctx.Formx(`copyId`).Uint()
-			if id > 0 {
-				err = m.Get(nil, `id`, id)
-				if err == nil {
-					echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
-					ctx.Request().Form().Set(`id`, `0`)
-				}
-			} else {
-				if parentID > 0 {
-					ctx.Request().Form().Set(`parentId`, param.AsString(parentID))
-				}
 			}
 		}
 	*/
@@ -222,25 +217,38 @@ func NavigateEdit(ctx echo.Context) error {
 			m.Type = t
 		}
 	}
-	if ctx.IsPost() {
-		excludeFields := []string{`created`}
-		if editableType {
-			excludeFields = append(excludeFields, `type`)
-		}
-		err = ctx.MustBind(m.OfficialCommonNavigate, echo.ExcludeFieldName(excludeFields...))
-
-		if err == nil {
-			m.Id = id
-			err = m.Edit(nil, db.Cond{`id`: id})
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
-			}
-		}
-	} else if err == nil {
-		echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
+	allowedNames := []string{`parentId`, `title`, `ident`, `url`, `linkType`, `badge`, `cover`, `remark`, `disabled`, `sort`, `target`, `direction`}
+	if editableType {
+		allowedNames = append(allowedNames, `type`)
 	}
-
+	form := formbuilder.New(ctx,
+		m.OfficialCommonNavigate,
+		formbuilder.ConfigFile(`official/manager/navigate/edit`),
+		formbuilder.AllowedNames(allowedNames...),
+	)
+	form.OnPost(func() error {
+		m.Id = id
+		err = m.Edit(nil, db.Cond{`id`: id})
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonNavigate, uint64(m.Id))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
+	})
+	form.OnGet(func() error {
+		echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
+		i18nm.SetModelTranslationsToForm(m.OfficialCommonNavigate, uint64(id))
+		return nil
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
 	ctx.Set(`activeURL`, `/manager/navigate`)
 	navigateRows := m.ListAllParent(m.Type, 0)
 	navigateList := []*dbschema.OfficialCommonNavigate{}
