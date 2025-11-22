@@ -16,8 +16,25 @@ elements:
       type: text
       name: title
       label: 菜单标题
-      labelcols: 0
-      fieldcols: 0
+      labelcols: 2
+      fieldcols: 3
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: []
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: "badge"
+      type: text
+      name: badge
+      label: 徽标文本
+      labelcols: 2
+      fieldcols: 3
       labelclasses: []
       value: ""
       helptext: ""
@@ -50,23 +67,6 @@ elements:
       type: text
       name: remark
       label: 备注
-      labelcols: 0
-      fieldcols: 0
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: ""
-      type: text
-      name: badge
-      label: Badge
       labelcols: 0
       fieldcols: 0
       labelclasses: []

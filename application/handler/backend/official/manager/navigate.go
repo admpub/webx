@@ -6,6 +6,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
@@ -92,6 +93,21 @@ func NavigateAdd(ctx echo.Context) error {
 		}
 		common.SendOk(ctx, ctx.T(`添加成功`))
 		return ctx.Redirect(backend.URLFor(`/manager/navigate/index`))
+	})
+	form.OnGet(func() error {
+		id := ctx.Formx(`copyId`).Uint()
+		if id > 0 {
+			err = m.Get(nil, `id`, id)
+			if err == nil {
+				echo.StructToForm(ctx, m.OfficialCommonNavigate, ``, echo.LowerCaseFirstLetter)
+				ctx.Request().Form().Set(`id`, `0`)
+			}
+		} else {
+			if parentID > 0 {
+				ctx.Request().Form().Set(`parentId`, param.AsString(parentID))
+			}
+		}
+		return nil
 	})
 	err = form.RecvSubmission()
 	if form.Exited() {
