@@ -12,7 +12,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20251113040644-e9bdbe0bba81
-	github.com/coscms/webcore v0.13.3-0.20251122054728-c0e587cb5ece
+	github.com/coscms/webcore v0.13.3-0.20251122061559-841c438ab7f1
 	github.com/coscms/webfront v0.0.0-20251121102742-d28f3cfab730
 )
 
@@ -54,7 +54,7 @@ require (
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.1
 	github.com/webx-top/db v1.28.12
-	github.com/webx-top/echo v1.22.8
+	github.com/webx-top/echo v1.22.9
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2
