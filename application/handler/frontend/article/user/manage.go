@@ -86,6 +86,7 @@ func applyFormData(ctx echo.Context, m *dbschema.OfficialCommonArticle) {
 }
 
 // Create 创建文章
+// TODO: 多语种支持
 func Create(ctx echo.Context) error {
 	sourceID := ``
 	sourceTable := ``
@@ -116,6 +117,7 @@ END:
 }
 
 // Edit 修改文章
+// TODO: 多语种支持
 func Edit(ctx echo.Context) error {
 	sourceID := ``
 	sourceTable := ``

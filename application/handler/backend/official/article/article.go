@@ -78,6 +78,7 @@ func selectPageSource(ctx echo.Context) error {
 	return nil
 }
 
+// Add TODO: 多语种支持
 func Add(ctx echo.Context) error {
 	sourceID := ctx.Queryx(`sourceId`).String()
 	sourceTable := ctx.Queryx(`sourceTable`).String()
@@ -116,6 +117,7 @@ func Add(ctx echo.Context) error {
 	return ctx.Render(`official/article/edit`, common.Err(ctx, err))
 }
 
+// Edit TODO: 多语种支持
 func Edit(ctx echo.Context) error {
 	sourceID := ctx.Queryx(`sourceId`).String()
 	sourceTable := ctx.Queryx(`sourceTable`).String()
