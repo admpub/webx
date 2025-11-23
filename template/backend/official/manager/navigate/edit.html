@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.uploadPreviewer/css/jquery.uploadPreviewer.min.css?t={{BuildTime}}" type="text/css" />
 {{/Block}}
 {{Block "main"}}
+{{- $data := $.Stored.forms.Model -}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat no-padding">
@@ -20,7 +21,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"类别"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{- $type := $.Stored.type -}}
+                  {{- $type := $data.Type -}}
                   {{- $id := $.Form "id" -}}
                   {{- if $.Stored.editableType -}}
                   {{- range $k, $v := $.Stored.typeList -}}
@@ -37,7 +38,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"上级菜单"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{- $v := ($.Formx "parentId").Uint -}}
+                  {{- $v := $data.ParentId -}}
                   <select name="parentId" class="form-control" id="parentId">
                     <option value=""></option>
                     {{- range $k, $c := $.Stored.navigateList -}}
@@ -47,7 +48,7 @@
                 </div>
                 <label class="col-sm-2 control-label">{{"封面图片"|$.T}}</label>
                 <div class="col-sm-3">
-                    {{- $.Set `fileInputConfig` (MakeMap `name` `cover` `value` ($.Form `cover`) `subdir` `navigate`) -}}
+                    {{- $.Set `fileInputConfig` (MakeMap `name` `cover` `value` $data.Cover `subdir` `navigate`) -}}
                     {{Include "common/file_input" $}}
                 </div>
               </div>
@@ -57,11 +58,11 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"网址"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="url" value="{{$.Form `url`}}">
+                    <input type="text" class="form-control" name="url" value="{{$data.Url}}">
                 </div>
                 <label class="col-sm-2 control-label">{{"匹配标识"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="ident" value="{{$.Form `ident`}}">
+                    <input type="text" class="form-control" name="ident" value="{{$data.Ident}}">
                     <div class="help-block">{{`如要指定正则表达式，请添加前缀<code>regexp:</code>`|$.T|ToHTML}}</div>
                 </div>
               </div>
@@ -69,19 +70,19 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"排序编号"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="number" class="form-control" name="sort" value="{{$.Form `sort` `5000`}}">
+                    <input type="number" class="form-control" name="sort" value="{{$data.Sort}}">
                     <div class="help-block">{{"排序编号(从小到大)"|$.T}}</div>
                 </div>
                 <label class="col-sm-2 control-label">{{"打开方式"|$.T}}</label>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" name="target" value="{{$.Form `target`}}">
+                  <input type="text" class="form-control" name="target" value="{{$data.Target}}">
                   <div class="help-block"><code>_self</code> / <code>_blank</code> / <code>_parent</code> /<code> _top</code></div>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"链接类型"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{- $v := $.Form "linkType" "custom" -}}
+                  {{- $v := $data.LinkType | Default "custom" -}}
                   {{- range $.Stored.linkTypeList -}}
                   <div class="radio radio-primary radio-inline"> 
                     <input type="radio" value="{{.K}}" id="linkType-{{.K}}" name="linkType"{{if eq $v .K}} checked{{end}}><label for="linkType-{{.K}}">{{.V}}</label>
@@ -92,7 +93,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{- $v := $.Form "disabled" -}}
+                  {{- $v := $data.Disabled -}}
                   <div class="radio radio-primary radio-inline"> 
                     <input type="radio" value="N" id="disabled-N" name="disabled"{{if eq $v `N` ``}} checked{{end}}><label for="disabled-N">{{"启用"|$.T}}</label>
                   </div>
@@ -102,7 +103,7 @@
                 </div>
                 <label class="col-sm-2 control-label">{{"排列方式"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{- $v := $.Form "direction" -}}
+                  {{- $v := $data.Direction -}}
                   <div class="radio radio-primary radio-inline"> 
                     <input type="radio" value="Y" id="direction-Y" name="direction"{{if eq $v `Y` ``}} checked{{end}}><label for="direction-Y">{{"竖向"|$.T}}</label>
                   </div>

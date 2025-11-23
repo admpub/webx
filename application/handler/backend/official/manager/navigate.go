@@ -27,6 +27,8 @@ func NavigateIndex(ctx echo.Context) error {
 	}
 	if parentID > 0 {
 		cond.AddKV(`parent_id`, parentID)
+	} else {
+		cond.AddKV(`parent_id`, 0)
 	}
 	if currentID > 0 {
 		cond.AddKV(`id`, db.NotEq(currentID))
@@ -79,7 +81,6 @@ func NavigateAdd(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		t = m.Type
 		m.HasChild = `Y`
 	}
 	if ctx.IsGet() {
@@ -89,12 +90,18 @@ func NavigateAdd(ctx echo.Context) error {
 			if err == nil {
 				m.Id = 0
 				i18nm.SetModelTranslationsToForm(m.OfficialCommonNavigate, uint64(id))
+			} else {
+				m.Sort = 5000
 			}
 		} else {
 			if parentID > 0 {
 				m.ParentId = parentID
 			}
+			m.Sort = 5000
 		}
+	}
+	if len(m.Type) == 0 {
+		m.Type = t
 	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonNavigate,
@@ -117,12 +124,12 @@ func NavigateAdd(ctx echo.Context) error {
 	if form.Exited() {
 		return form.Error()
 	}
+	form.Generate()
 	ctx.Set(`activeURL`, `/manager/navigate/index`)
-	navigateList := m.ListIndent(m.ListAllParent(t, 0))
+	navigateList := m.ListIndent(m.ListAllParent(m.Type, 0))
 	ctx.Set(`navigateList`, navigateList)
 	ctx.Set(`typeList`, official.GetAddNavigateTypes())
 	ctx.Set(`linkTypeList`, official.NavigateLinkType.Slice())
-	ctx.Set(`type`, t)
 	ctx.Set(`title`, ctx.T(`添加菜单`))
 	navigateEdiableType(ctx, m.OfficialCommonNavigate)
 	ctx.SetFunc(`getTypeName`, official.NavigateTypes.Get)
@@ -220,6 +227,7 @@ func NavigateEdit(ctx echo.Context) error {
 	if form.Exited() {
 		return form.Error()
 	}
+	form.Generate()
 	ctx.Set(`activeURL`, `/manager/navigate`)
 	navigateRows := m.ListAllParent(m.Type, 0)
 	navigateList := []*dbschema.OfficialCommonNavigate{}
@@ -244,7 +252,6 @@ func NavigateEdit(ctx echo.Context) error {
 	ctx.Set(`navigateList`, navigateList)
 	ctx.Set(`typeList`, official.GetAddNavigateTypes())
 	ctx.Set(`linkTypeList`, official.NavigateLinkType.Slice())
-	ctx.Set(`type`, m.Type)
 	ctx.Set(`title`, ctx.T(`修改菜单`))
 	ctx.SetFunc(`getTypeName`, official.NavigateTypes.Get)
 	return ctx.Render(`official/manager/navigate/edit`, err)
