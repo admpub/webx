@@ -25,11 +25,7 @@ func NavigateIndex(ctx echo.Context) error {
 	if len(t) > 0 {
 		cond.AddKV(`type`, t)
 	}
-	if parentID > 0 {
-		cond.AddKV(`parent_id`, parentID)
-	} else {
-		cond.AddKV(`parent_id`, 0)
-	}
+	cond.AddKV(`parent_id`, parentID)
 	if currentID > 0 {
 		cond.AddKV(`id`, db.NotEq(currentID))
 	}
