@@ -139,7 +139,7 @@ elements:
       labelclasses: []
       value: ""
       helptext: ""
-      template: "passwordinput"
+      template: "select2"
       valid: ""
       attributes: []
       choices: []
