@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20251123054958-40b6b9212903
-	github.com/coscms/webcore v0.13.3-0.20251123034225-bc12128a533d
-	github.com/coscms/webfront v0.0.0-20251123063117-3202f42a6bcd
+	github.com/coscms/webcore v0.13.3-0.20251124042929-3df40a44b113
+	github.com/coscms/webfront v0.0.0-20251124043229-5b01c14c0c62
 )
 
 require (
@@ -143,10 +143,10 @@ require (
 	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.40.0 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.3 // indirect
-	github.com/aws/aws-sdk-go-v2/config v1.32.0 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.0 // indirect
+	github.com/aws/aws-sdk-go-v2/config v1.32.1 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.1 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.14 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.20.10 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.20.11 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.14 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.14 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.4 // indirect
@@ -158,7 +158,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.92.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/signin v1.0.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.30.4 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.8 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.1 // indirect
 	github.com/aws/smithy-go v1.23.2 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
@@ -274,7 +274,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
-	github.com/prometheus/common v0.67.3 // indirect
+	github.com/prometheus/common v0.67.4 // indirect
 	github.com/prometheus/procfs v0.19.2 // indirect
 	github.com/redis/go-redis/v9 v9.17.0 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
@@ -335,7 +335,7 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	modernc.org/libc v1.67.0 // indirect
+	modernc.org/libc v1.67.1 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
 	modernc.org/sqlite v1.40.1 // indirect
