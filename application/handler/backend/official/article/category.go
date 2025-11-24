@@ -66,7 +66,7 @@ func categoryEdiableType(ctx echo.Context, m *dbschema.OfficialCommonCategory) b
 	return editable
 }
 
-// CategoryAdd TODO: 多语种支持
+// CategoryAdd 添加分类
 func CategoryAdd(ctx echo.Context) error {
 	var err error
 	m := official.NewCategory(ctx)
@@ -183,7 +183,7 @@ var ajaxCategorySet = echo.HandlerFuncs{
 	`setSort`:       ajaxCategorySetSort,
 }
 
-// CategoryEdit TODO: 多语种支持
+// CategoryEdit 修改分类
 func CategoryEdit(ctx echo.Context) error {
 	op := ctx.Form(`op`)
 	if len(op) > 0 {
