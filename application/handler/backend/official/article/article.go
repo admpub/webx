@@ -11,7 +11,9 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webcore/library/nsql"
+	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 	modelArticle "github.com/coscms/webfront/model/official/article"
 	modelComment "github.com/coscms/webfront/model/official/comment"
@@ -88,27 +90,48 @@ func Add(ctx echo.Context) error {
 	var err error
 	m := modelArticle.NewArticle(ctx)
 	user := backend.User(ctx)
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCommonArticle, articleFormFilter())
-		if err == nil {
-			m.OwnerId = uint64(user.Id)
-			m.OwnerType = `user`
-			_, err = m.Add()
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/official/article/index?sourceId=`) + sourceID + `&sourceTable=` + sourceTable)
-			}
-		}
-	} else {
-		id := ctx.Formx(`copyId`).Uint64()
+	if ctx.IsGet() {
+		id := ctx.Formx(`copyId`).Uint()
 		if id > 0 {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
-				echo.StructToForm(ctx, m.OfficialCommonArticle, ``, echo.LowerCaseFirstLetter)
-				ctx.Request().Form().Set(`id`, `0`)
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, uint64(id))
 			}
 		}
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonArticle,
+		formbuilder.ConfigFile(`official/article/edit`),
+		formbuilder.AllowedNames(
+			`categoryId`, `sourceTable`, `sourceId`, `image`, `imageOriginal`, `title`, `keywords`,
+			`summary`, `contype`, `content`, `price`, `display`, `closeComment`, `commentAutoDisplay`, `commentAllowUser`, `tags`,
+		),
+	)
+	form.OnPost(func() error {
+		m.OwnerId = uint64(user.Id)
+		m.OwnerType = `user`
+		_, err := m.Add()
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, uint64(m.Id))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`添加成功`))
+		return ctx.Redirect(backend.URLFor(`/official/article/index?sourceId=`) + sourceID + `&sourceTable=` + sourceTable)
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	field := form.Field(`contype`)
+	for _, v := range modelArticle.Contype.Slice() {
+		field.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == `html`)
+	}
+
 	SetArticleFormData(ctx, sourceID, sourceTable)
 	ctx.Set(`activeURL`, `/official/article/index`)
 	ctx.Set(`sourceId`, sourceID)
@@ -131,43 +154,64 @@ func Edit(ctx echo.Context) error {
 	if err != nil {
 		return err
 	}
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCommonArticle, articleFormFilter())
-		if err == nil {
-			m.Id = id
-			err = m.Edit(nil, db.Cond{`id`: id})
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/official/article/index?sourceId=`) + sourceID + `&sourceTable=` + sourceTable)
-			}
-		}
-	} else if ctx.IsAjax() {
-		display := ctx.Query(`display`)
-		closeComment := ctx.Query(`closeComment`)
-		if len(display) > 0 {
-			m.Display = display
-			data := ctx.Data()
-			err = m.UpdateField(nil, `display`, display, db.Cond{`id`: id})
-			if err != nil {
-				data.SetError(err)
+	if ctx.IsGet() {
+		if ctx.IsAjax() {
+			display := ctx.Query(`display`)
+			closeComment := ctx.Query(`closeComment`)
+			if len(display) > 0 {
+				m.Display = display
+				data := ctx.Data()
+				err = m.UpdateField(nil, `display`, display, db.Cond{`id`: id})
+				if err != nil {
+					data.SetError(err)
+					return ctx.JSON(data)
+				}
+				data.SetInfo(ctx.T(`操作成功`))
 				return ctx.JSON(data)
 			}
-			data.SetInfo(ctx.T(`操作成功`))
-			return ctx.JSON(data)
-		}
-		if len(closeComment) > 0 {
-			m.CloseComment = closeComment
-			data := ctx.Data()
-			err = m.UpdateField(nil, `close_comment`, closeComment, db.Cond{`id`: id})
-			if err != nil {
-				data.SetError(err)
-				return ctx.JSON(data)
+			if len(closeComment) > 0 {
+				m.CloseComment = closeComment
+				data := ctx.Data()
+				err = m.UpdateField(nil, `close_comment`, closeComment, db.Cond{`id`: id})
+				if err != nil {
+					data.SetError(err)
+					return ctx.JSON(data)
+				}
+				data.SetInfo(ctx.T(`操作成功`))
 			}
-			data.SetInfo(ctx.T(`操作成功`))
 		}
-	} else if err == nil {
-		echo.StructToForm(ctx, m.OfficialCommonArticle, ``, echo.LowerCaseFirstLetter)
+		i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, uint64(id))
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonArticle,
+		formbuilder.ConfigFile(`official/article/edit`),
+		formbuilder.AllowedNames(
+			`categoryId`, `sourceTable`, `sourceId`, `image`, `imageOriginal`, `title`, `keywords`,
+			`summary`, `contype`, `content`, `price`, `display`, `closeComment`, `commentAutoDisplay`, `commentAllowUser`, `tags`,
+		),
+	)
+	form.OnPost(func() error {
+		err = m.Edit(nil, db.Cond{`id`: id})
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, uint64(m.Id))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/official/article/index?sourceId=`) + sourceID + `&sourceTable=` + sourceTable)
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	field := form.Field(`contype`)
+	for _, v := range modelArticle.Contype.Slice() {
+		field.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == `html`)
+	}
+
 	SetArticleFormData(ctx, sourceID, sourceTable)
 	ctx.Set(`activeURL`, `/official/article/index`)
 	ctx.Set(`sourceId`, sourceID)
