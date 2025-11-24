@@ -207,7 +207,6 @@ func NavigateEdit(ctx echo.Context) error {
 		formbuilder.AllowedNames(allowedNames...),
 	)
 	form.OnPost(func() error {
-		m.Id = id
 		err = m.Edit(nil, db.Cond{`id`: id})
 		if err != nil {
 			return err

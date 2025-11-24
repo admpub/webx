@@ -1,7 +1,6 @@
 package article
 
 import (
-	"strconv"
 	"strings"
 
 	"github.com/webx-top/db"
@@ -10,7 +9,9 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webfront/dbschema"
+	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 )
 
@@ -18,15 +19,13 @@ func CategoryIndex(ctx echo.Context) error {
 	m := official.NewCategory(ctx)
 	cond := db.Compounds{}
 	t := ctx.Form(`type`)
-	parentID := ctx.Formx(`parentId`).Int()
+	parentID := ctx.Formx(`parentId`).Uint()
 	currentID := ctx.Formx(`currentId`).Uint()
 	onlyList := ctx.Formx(`onlyList`).Bool()
 	if len(t) > 0 {
 		cond.AddKV(`type`, t)
 	}
-	if parentID >= 0 {
-		cond.AddKV(`parent_id`, parentID)
-	}
+	cond.AddKV(`parent_id`, parentID)
 	if currentID > 0 {
 		cond.AddKV(`id`, db.NotEq(currentID))
 	}
@@ -72,7 +71,7 @@ func CategoryAdd(ctx echo.Context) error {
 	var err error
 	m := official.NewCategory(ctx)
 	t := ctx.Form(`type`, `article`)
-	parentID := ctx.Formx(`parentId`).Int()
+	parentID := ctx.Formx(`parentId`).Uint()
 	if parentID > 0 {
 		err = m.Get(nil, db.Cond{`id`: parentID})
 		if err != nil {
@@ -81,50 +80,56 @@ func CategoryAdd(ctx echo.Context) error {
 		t = m.Type
 		m.HasChild = `Y`
 	}
-	if ctx.IsPost() {
-		m.Reset()
-		err = ctx.MustBind(m.OfficialCommonCategory)
-		if err == nil {
-			var added []string
-			var first bool
-			added, err = common.BatchAdd(ctx, `name,slugify`, m, func(v *string) error {
-				m.Id = 0
-				m.HasChild = `N`
-				if !first {
-					first = true
-				} else {
-					m.Slugify = ``
-				}
-				return nil
-			}, `=`)
-			if err == nil && len(added) == 0 {
-				err = ctx.E(`分类名称不能为空`)
-			}
-		}
-		if err == nil {
-			common.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(backend.URLFor(`/official/article/category`))
-		}
-	} else {
+	if ctx.IsGet() {
 		id := ctx.Formx(`copyId`).Uint()
 		if id > 0 {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
-				echo.StructToForm(ctx, m.OfficialCommonCategory, ``, echo.LowerCaseFirstLetter)
-				ctx.Request().Form().Set(`id`, `0`)
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(m.OfficialCommonCategory, uint64(id))
+			} else {
+				m.Sort = 5000
 			}
 		} else {
 			if parentID > 0 {
-				ctx.Request().Form().Set(`parentId`, strconv.Itoa(parentID))
+				m.ParentId = parentID
 			}
+			m.Sort = 5000
 		}
 	}
+	if len(m.Type) == 0 {
+		m.Type = t
+	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonCategory,
+		formbuilder.ConfigFile(`official/article/category_edit`),
+		formbuilder.AllowedNames(
+			`type`, `parentId`, `cover`, `name`, `keywords`, `slugify`,
+			`description`, `template`, `showOnMenu`, `sort`, `disabled`,
+		),
+	)
+	form.OnPost(func() error {
+		_, err := m.Add()
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonCategory, uint64(m.Id))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`添加成功`))
+		return ctx.Redirect(backend.URLFor(`/official/article/category`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
 
 	ctx.Set(`activeURL`, `/official/article/category`)
-	categoryList := m.ListIndent(m.ListAllParent(t, 0))
+	categoryList := m.ListIndent(m.ListAllParent(m.Type, 0))
 	ctx.Set(`categoryList`, categoryList)
 	ctx.Set(`typeList`, official.CategoryTypes.Slice())
-	ctx.Set(`type`, t)
 	categoryEdiableType(ctx, m.OfficialCommonCategory)
 	ctx.SetFunc(`getTypeName`, official.CategoryTypes.Get)
 	return ctx.Render(`official/article/category_edit`, err)
@@ -198,32 +203,36 @@ func CategoryEdit(ctx echo.Context) error {
 			m.Type = t
 		}
 	}
-	if ctx.IsPost() {
-		name := ctx.Form(`name`)
-		if len(name) == 0 {
-			err = ctx.E(`分类名称不能为空`)
-		} else if e := m.ExistsOther(name, id); e != nil {
-			err = e
-		} else {
-			excludeFields := []string{`created`}
-			if editableType {
-				excludeFields = append(excludeFields, `type`)
-			}
-			err = ctx.MustBind(m.OfficialCommonCategory, echo.ExcludeFieldName(excludeFields...))
-		}
-
-		if err == nil {
-			m.Id = id
-			err = m.Edit(nil, db.Cond{`id`: id})
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/official/article/category`))
-			}
-		}
-	} else if err == nil {
-		echo.StructToForm(ctx, m.OfficialCommonCategory, ``, echo.LowerCaseFirstLetter)
+	allowedNames := []string{`parentId`, `cover`, `name`, `keywords`, `slugify`,
+		`description`, `template`, `showOnMenu`, `sort`, `disabled`}
+	if editableType {
+		allowedNames = append(allowedNames, `type`)
 	}
-
+	if ctx.IsGet() {
+		i18nm.SetModelTranslationsToForm(m.OfficialCommonCategory, uint64(id))
+	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonCategory,
+		formbuilder.ConfigFile(`official/article/category_edit`),
+		formbuilder.AllowedNames(allowedNames...),
+	)
+	form.OnPost(func() error {
+		err = m.Edit(nil, db.Cond{`id`: id})
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonCategory, uint64(m.Id))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/official/article/category`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
 	ctx.Set(`activeURL`, `/official/article/category`)
 	categoryRows := m.ListAllParent(m.Type, 0)
 	categoryList := []*dbschema.OfficialCommonCategory{}
@@ -247,7 +256,6 @@ func CategoryEdit(ctx echo.Context) error {
 	}
 	ctx.Set(`categoryList`, categoryList)
 	ctx.Set(`typeList`, official.CategoryTypes.Slice())
-	ctx.Set(`type`, m.Type)
 	ctx.SetFunc(`getTypeName`, official.CategoryTypes.Get)
 	return ctx.Render(`official/article/category_edit`, err)
 }

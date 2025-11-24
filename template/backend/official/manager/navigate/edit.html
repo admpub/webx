@@ -37,7 +37,7 @@
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"上级菜单"|$.T}}</label>
-                <div class="col-sm-3">
+                <div class="col-sm-8">
                   {{- $v := $data.ParentId -}}
                   <select name="parentId" class="form-control" id="parentId">
                     <option value=""></option>
@@ -46,8 +46,11 @@
                     {{- end -}}
                   </select>
                 </div>
+              </div>
+
+              <div class="form-group">
                 <label class="col-sm-2 control-label">{{"封面图片"|$.T}}</label>
-                <div class="col-sm-3">
+                <div class="col-sm-8">
                     {{- $.Set `fileInputConfig` (MakeMap `name` `cover` `value` $data.Cover `subdir` `navigate`) -}}
                     {{Include "common/file_input" $}}
                 </div>
