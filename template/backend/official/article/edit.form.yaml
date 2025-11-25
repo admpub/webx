@@ -58,7 +58,9 @@ elements:
       helptext: ""
       template: ""
       valid: ""
-      attributes: []
+      attributes:
+        - - class
+          - select2tags
       choices: []
       elements: []
       format: ""

@@ -64,38 +64,6 @@
                 </div>
               {{- $.Stored.forms.Render -}}
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"编辑器类型"|$.T}}</label>
-                <div class="col-sm-8">
-                  {{$contype := $.Form `contype` `html`}}
-                  {{- range $.Stored.contypes -}}
-                  <div class="radio radio-primary radio-inline">
-                      <input type="radio" value="{{.K}}" name="contype" id="contype-{{.K}}"{{if eq $contype .K}} checked{{end}}>
-                      <label for="contype-{{.K}}">{{.V|$.T|UpperCaseFirst}}</label>
-                  </div>
-                  {{- end -}}
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"文章内容"|$.T}}</label>
-                <div class="col-sm-8">
-                  <div class="checkbox checkbox-primary">
-                      <input type="checkbox" value="1" name="syncRemoteImage" id="syncRemoteImage"{{if eq ($.Form `syncRemoteImage`) `1`}} checked{{end}}>
-                      <label for="syncRemoteImage">{{`自动下载远程图片`|$.T}}</label>
-                  </div>
-                  <div id="content-container">
-                  <textarea name="content" data-editor-name="tinymce" class="form-control" cols="50" rows="20" id="content" placeholder="{{`文章内容`|$.T}}" action="{{BackendUploadURL ``}}">{{$.Form "content"}}</textarea>
-                  </div>
-                  <div class="help-block">
-                    {{`支持内容隐藏标签`|$.T}}: <strong>[hide]</strong><code>{{`隐藏的内容`|$.T}}</code><strong>[/hide]</strong> {{`或者指定条件标识`|$.T}} <strong>[hide:</strong><code>{{`条件标识`|$.T}}</code><strong>]</strong><code>{{`隐藏的内容`|$.T}}</code><strong>[/hide]</strong><br />
-                    {{`在不指定条件标识的情况下采用默认条件标识: comment`|$.T}}<br />
-                    {{`支持以下`|$.T}}<code>{{`条件标识`|$.T}}</code>:<br />
-                    {{- range $.Stored.contentHideTags -}}
-                    <code>{{.K}}</code>: {{.H.description|Default .V}}<br />
-                    {{- end -}}
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
                   <label class="col-sm-2 control-label">{{"文章状态"|$.T}}</label>
                   <div class="col-sm-3">
                     {{- $v := $data.Display -}}
@@ -186,11 +154,24 @@
 <script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
 <script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
 <script src="{{AssetsURL}}/js/behaviour/page/select2.min.js?t={{BuildTime}}"></script>
+<div class="hide" id="content-help-block"><div class="help-block">
+{{`支持内容隐藏标签`|$.T}}: <strong>[hide]</strong><code>{{`隐藏的内容`|$.T}}</code><strong>[/hide]</strong> {{`或者指定条件标识`|$.T}} <strong>[hide:</strong><code>{{`条件标识`|$.T}}</code><strong>]</strong><code>{{`隐藏的内容`|$.T}}</code><strong>[/hide]</strong><br />
+{{`在不指定条件标识的情况下采用默认条件标识: comment`|$.T}}<br />
+{{`支持以下`|$.T}}<code>{{`条件标识`|$.T}}</code>:<br />
+{{- range $.Stored.contentHideTags -}}
+<code>{{.K}}</code>: {{.H.description|Default .V}}<br />
+{{- end -}}  
+</div></div>
 <script type="text/javascript">
 $(function(){
   cropImage('{{BackendUploadURL ``}}',"#article-image",'#article-image-original');
   //App.editor.tinymces('#content');
-  App.editor.switcher("input[name='contype']", '#content','tinymce');
+  $('textarea[data-editor-name]').each(function(){
+  $(this).parent().after($('#content-help-block').html());
+  $(this).attr('action','{{BackendUploadURL ``}}');
+  $(this).attr('data-markdown-options','{"autoHeight":true}');
+  App.editor.switcher("input[name='contype']", '#'+this.id,'tinymce');
+  })
   var checked=$('[name="closeComment"]:checked');
   if(checked.length>0){
     checked.trigger('click');
@@ -213,7 +194,7 @@ $(function(){
     }
   }).trigger('change');
   var tagList={{$.Stored.tagList|JSONEncode|ToJS}};
-  App.select2.tags('#select2tags',tagList);
+  $('.select2tags').each(function(){App.select2.tags(this,tagList);})
 });
 </script>
 {{/Block}}
