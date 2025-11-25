@@ -34,33 +34,14 @@ elements:
       type: text
       name: keywords
       label: 关键词
-      labelcols: 2
-      fieldcols: 3
+      labelcols: 0
+      fieldcols: 0
       labelclasses: []
       value: ""
-      helptext: ""
+      helptext: "多个关键词之间用半角逗号<code>,</code>隔开"
       template: ""
       valid: ""
       attributes: []
-      choices: []
-      elements: []
-      format: ""
-      languages: []
-      data: {}
-    - id: "select2tags"
-      type: hidden
-      name: tags
-      label: 标签
-      labelcols: 2
-      fieldcols: 3
-      labelclasses: []
-      value: ""
-      helptext: ""
-      template: ""
-      valid: ""
-      attributes:
-        - - class
-          - select2tags
       choices: []
       elements: []
       format: ""
@@ -135,7 +116,7 @@ elements:
       labelcols: 0
       fieldcols: 0
       labelclasses: []
-      value: ""
+      value: "1"
       helptext: ""
       template: ""
       valid: ""
@@ -145,6 +126,25 @@ elements:
             - 1
             - 下载内容中的远程图片
           checked: true
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: "select2tags"
+      type: hidden
+      name: tags
+      label: 标签
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes:
+        - - class
+          - select2tags
+      choices: []
       elements: []
       format: ""
       languages: []

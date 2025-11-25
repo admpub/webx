@@ -123,12 +123,6 @@
 
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">{{"标签"|$.T}}</label>
-                  <div class="col-sm-8">
-                    <input id="select2tags" name="tags" type="hidden" value="{{$data.Tags}}" />
-                  </div>
-                </div>
               <div class="form-group form-submit-group">
 									<div class="col-sm-9 col-sm-offset-2">
 									  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save"></i> {{"保存"|$.T}}</button>
@@ -165,13 +159,24 @@
 <script type="text/javascript">
 $(function(){
   cropImage('{{BackendUploadURL ``}}',"#article-image",'#article-image-original');
-  //App.editor.tinymces('#content');
+  var container=$('#content').parent()
   $('textarea[data-editor-name]').each(function(){
   $(this).parent().after($('#content-help-block').html());
   $(this).attr('action','{{BackendUploadURL ``}}');
-  $(this).attr('data-markdown-options','{"autoHeight":true}');
+  if(this.id!='content') {
+    $(this).attr('data-markdown-options','{"height":'+container.height()+',"width":'+container.width()+'}');
+  }
   App.editor.switcher("input[name='contype']", '#'+this.id,'tinymce');
   })
+  $('div[data-editor-name] > .langset > .nav-tabs li').on('click',function(){
+    if($(this).data('refreshed'))return;
+    $(this).data('refreshed',true);
+    var target=$(this).find('a').attr('href');
+    setTimeout(function(){
+    var editor =$(target).find('textarea[data-editor-name]').data('editor-object');
+    if(editor && typeof(editor.codeEditor)!='undefined')editor.codeEditor.refresh();
+    },200);
+  });
   var checked=$('[name="closeComment"]:checked');
   if(checked.length>0){
     checked.trigger('click');
