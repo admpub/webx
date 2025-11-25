@@ -208,6 +208,15 @@ func Edit(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
+	/*
+		for _, v := range form.Fields() {
+			if val, ok := v.(*forms.LangSetType); ok {
+				for key, vv := range val.FieldMap() {
+					echo.Dump(echo.H{`key`: key, `vv`: vv})
+				}
+			}
+		}
+	*/
 
 	field := form.Field(`contype`)
 	for _, v := range modelArticle.Contype.Slice() {
