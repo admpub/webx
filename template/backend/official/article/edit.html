@@ -157,26 +157,38 @@
 {{- end -}}  
 </div></div>
 <script type="text/javascript">
-$(function(){
-  cropImage('{{BackendUploadURL ``}}',"#article-image",'#article-image-original');
-  var container=$('#content').parent()
-  $('textarea[data-editor-name]').each(function(){
+function multilingualContentEditor(formContainer,contentElem,uploadUrl){
+  var root=formContainer?$(formContainer):$('body');
+  var container=$(contentElem).parent()
+  root.find('textarea[data-editor-name]').each(function(){
   $(this).parent().after($('#content-help-block').html());
-  $(this).attr('action','{{BackendUploadURL ``}}');
-  if(this.id!='content') {
-    $(this).attr('data-markdown-options','{"height":'+container.height()+',"width":'+container.width()+'}');
-  }
+  $(this).attr('action',uploadUrl);
+  $(this).attr('data-markdown-options','{"height":'+container.height()+',"width":'+container.width()+'}');
   App.editor.switcher("input[name='contype']", '#'+this.id,'tinymce');
   })
-  $('div[data-editor-name] > .langset > .nav-tabs li').on('click',function(){
-    if($(this).data('refreshed'))return;
-    $(this).data('refreshed',true);
-    var target=$(this).find('a').attr('href');
+  root.find('div[data-editor-name] > .langset > .nav-tabs li').on('click',function(){
+    var that=$(this);
+    if(that.data('refreshing'))return;
+    that.data('refreshing',true);
     setTimeout(function(){
+    var target=that.find('a').attr('href');
     var editor =$(target).find('textarea[data-editor-name]').data('editor-object');
-    if(editor && typeof(editor.codeEditor)!='undefined')editor.codeEditor.refresh();
+    if(editor) {
+      if(typeof(editor.codeEditor)!='undefined'){ // editormd
+        editor.codeEditor.refresh();
+      }else if(typeof(editor.fire)!='undefined'){ // tinymce
+        editor.fire('ResizeWindow');
+      }else if(typeof(editor.dispatch)!='undefined'){ // tinymce8
+        editor.dispatch('ResizeWindow');
+      }
+    }
+    that.data('refreshing',false);
     },200);
   });
+}
+$(function(){
+  cropImage('{{BackendUploadURL ``}}',"#article-image",'#article-image-original');
+  multilingualContentEditor(null,'#content','{{BackendUploadURL ``}}');
   var checked=$('[name="closeComment"]:checked');
   if(checked.length>0){
     checked.trigger('click');

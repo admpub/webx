@@ -1,8 +1,6 @@
 package article
 
 import (
-	"strings"
-
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory/mysql"
@@ -100,6 +98,9 @@ func Add(ctx echo.Context) error {
 			}
 		}
 	}
+	if len(m.Contype) == 0 {
+		m.Contype = `html`
+	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonArticle,
 		formbuilder.ConfigFile(`official/article/edit`),
@@ -129,7 +130,7 @@ func Add(ctx echo.Context) error {
 	form.Generate()
 	field := form.Field(`contype`)
 	for _, v := range modelArticle.Contype.Slice() {
-		field.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == `html`)
+		field.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
 	}
 
 	SetArticleFormData(ctx, sourceID, sourceTable)
@@ -207,9 +208,10 @@ func Edit(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
+
 	field := form.Field(`contype`)
 	for _, v := range modelArticle.Contype.Slice() {
-		field.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == `html`)
+		field.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
 	}
 
 	SetArticleFormData(ctx, sourceID, sourceTable)
@@ -221,14 +223,6 @@ func Edit(ctx echo.Context) error {
 }
 
 func SetArticleFormData(ctx echo.Context, sourceID string, sourceTable string) {
-	var tags []string
-	if len(ctx.Form(`tags`)) > 0 {
-		tags = strings.Split(ctx.Form(`tags`), `,`)
-	}
-	ctx.Set(`tags`, tags)
-	ctx.SetFunc(`isCheckedTag`, func(tag string) bool {
-		return com.InSlice(tag, tags)
-	})
 	var tagRows []echo.H
 	tagsGetter := modelArticle.Source.GetTagsGetter(sourceTable)
 	if tagsGetter != nil {
