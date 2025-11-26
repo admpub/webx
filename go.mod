@@ -43,7 +43,7 @@ require (
 	github.com/admpub/resty/v2 v2.7.2 // indirect
 	github.com/admpub/sensitive v0.0.1 // indirect
 	github.com/admpub/useragent v0.0.2 // indirect
-	github.com/coscms/forms v1.15.0
+	github.com/coscms/forms v1.15.1
 	github.com/coscms/oauth2s v0.5.0
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.15.0 // indirect

@@ -1,6 +1,7 @@
 package tags
 
 import (
+	"github.com/coscms/forms/fields"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
@@ -128,7 +129,10 @@ func Edit(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
-	echo.Dump(form.LangSet(`name`).Field(config.FromFile().Language.Default + `:name`))
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`).(*fields.Field)
+	nameField.Type = `static`
+	nameField.SetText(m.Name).SetTemplate(`static`)
+	echo.Dump(nameField)
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
 	ctx.Set(`groups`, official.TagGroups.Slice())
