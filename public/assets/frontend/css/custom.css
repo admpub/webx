@@ -1050,3 +1050,18 @@ i.coin-icon+span{vertical-align:middle;}
 }
 .asset-value .freeze-wrapper{bottom: -5px;position: relative;}
 .asset-value .btn+.freeze-wrapper{margin-left:5px}
+.tabbable>.nav-tabs {
+  border-bottom: 0;
+}
+.tabbable>.tab-content{
+  border:1px solid #ccc;
+}
+.tabbable>.tab-content>.tab-pane {
+  display: none;
+}
+.tabbable>.tab-content>.tab-pane .form-group:first-child {
+  margin-top:1rem
+}
+.tabbable>.tab-content>.tab-pane.active {
+  display: block;
+}
