@@ -5,6 +5,7 @@ import (
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/logic/articlelogic"
 	"github.com/coscms/webfront/library/xkv"
+	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/param"
@@ -29,6 +30,7 @@ func Tags(ctx echo.Context) error {
 	if err != nil {
 		return err
 	}
+	i18nm.GetModelsTranslations(ctx, tags)
 	ctx.Set(`tagList`, tags)
 	ctx.Set(`tagGroup`, group)
 	ctx.Set(`tagGroupName`, official.TagGroups.Get(group))

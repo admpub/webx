@@ -76,7 +76,6 @@ func Detail(c echo.Context) error {
 	if articleM.Display == `N` && (customer == nil || articleM.OwnerType != `customer` || customer.Id != articleM.OwnerId) {
 		return c.NewError(stdCode.DataUnavailable, `此文章不可查看`)
 	}
-	i18nm.GetModelTranslations(c, articleM.OfficialCommonArticle)
 	articleM.Content = top.HideContent(articleM.Content, articleM.Contype, modelArticle.GetContentHideDetector(customer, articleM.OfficialCommonArticle), frontend.GlobalFuncMap())
 	//c.PrintFuncs()
 	c.Set(`data`, articleM.OfficialCommonArticle)
@@ -141,6 +140,17 @@ func Detail(c echo.Context) error {
 	c.Set(`nextRow`, nextRow)
 	prevRow, _ := articleM.PrevRow(articleM.Id, extraCond)
 	c.Set(`prevRow`, prevRow)
+
+	// 多语言
+	articleModels := []*dbschema.OfficialCommonArticle{articleM.OfficialCommonArticle}
+	if nextRow != nil && nextRow.Id > 0 {
+		articleModels = append(articleModels, nextRow)
+	}
+	if prevRow != nil && prevRow.Id > 0 {
+		articleModels = append(articleModels, prevRow)
+	}
+	i18nm.GetModelsTranslations(c, articleModels)
+
 	c.Set(`listURL`, listURL+c.DefaultExtension())
 	return c.Render(`article/`+tmpl, common.Err(c, err))
 }
@@ -162,7 +172,7 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 	cond.Add(db.Cond{`source_id`: sourceID})
 	cond.Add(db.Cond{`source_table`: sourceTable})
 	cond.Add(db.Cond{`display`: `Y`})
-	var categories []dbschema.OfficialCommonCategory
+	var categories []*dbschema.OfficialCommonCategory
 	if len(categoryID) > 0 && categoryID[0] > 0 {
 		cond.Add(db.Or(
 			db.Cond{`category1`: categoryID[0]},
@@ -172,6 +182,7 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 		))
 		cateM := official.NewCategory(c)
 		categories, _ = cateM.Positions(categoryID[0])
+		i18nm.GetModelsTranslations(c, categories)
 	}
 	if len(tag) > 0 {
 		cond.Add(articleM.TagCond(tag))
@@ -214,7 +225,7 @@ func List(c echo.Context) error {
 	cond := db.NewCompounds()
 	cond.Add(db.Cond{`display`: `Y`})
 	categoryID := c.Queryx(`categoryId`).Uint()
-	var categories []dbschema.OfficialCommonCategory
+	var categories []*dbschema.OfficialCommonCategory
 	if categoryID > 0 {
 		cond.Add(db.Or(
 			db.Cond{`category1`: categoryID},
@@ -224,6 +235,7 @@ func List(c echo.Context) error {
 		))
 		cateM := official.NewCategory(c)
 		categories, _ = cateM.Positions(categoryID)
+		i18nm.GetModelsTranslations(c, categories)
 	}
 	if len(tag) > 0 {
 		cond.Add(articleM.TagCond(tag))
@@ -236,6 +248,7 @@ func List(c echo.Context) error {
 	if err != nil {
 		return err
 	}
+	i18nm.GetModelsTranslations(c, articles)
 	c.Set(`articles`, articles)
 	c.Set(`categories`, categories)
 	c.Set(`tag`, tag)
@@ -266,6 +279,7 @@ func Pay(c echo.Context) error {
 	if articleM.Price <= 0 {
 		return c.NewError(stdCode.Failure, `此为免费文章，无需购买`)
 	}
+	i18nm.GetModelTranslations(c, articleM.OfficialCommonArticle)
 	walletM := modelCustomer.NewWallet(c)
 	exists, err := walletM.Flow.Exists(nil, db.And(
 		db.Cond{`customer_id`: customer.Id},
@@ -290,7 +304,7 @@ func Pay(c echo.Context) error {
 	walletM.Flow.SourceId = articleM.Id
 	walletM.Flow.TradeNo = ``
 	walletM.Flow.Status = modelCustomer.FlowStatusConfirmed //状态(pending-待确认;confirmed-已确认;canceled-已取消)
-	walletM.Flow.Description = `购买文章: ` + articleM.Title
+	walletM.Flow.Description = c.T(`购买文章: `) + articleM.Title
 	err = walletM.AddFlow()
 	return c.JSON(c.Data().SetError(err))
 }

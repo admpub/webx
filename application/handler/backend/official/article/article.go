@@ -72,7 +72,7 @@ func selectPageSource(ctx echo.Context) error {
 	return nil
 }
 
-// Add TODO: 多语种支持
+// Add 添加文章
 func Add(ctx echo.Context) error {
 	sourceID := ctx.Queryx(`sourceId`).String()
 	sourceTable := ctx.Queryx(`sourceTable`).String()
@@ -83,12 +83,12 @@ func Add(ctx echo.Context) error {
 	m := modelArticle.NewArticle(ctx)
 	user := backend.User(ctx)
 	if ctx.IsGet() {
-		id := ctx.Formx(`copyId`).Uint()
+		id := ctx.Formx(`copyId`).Uint64()
 		if id > 0 {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
 				m.Id = 0
-				i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, uint64(id))
+				i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, id)
 			}
 		}
 	}
@@ -110,7 +110,7 @@ func Add(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, m.Id)
 		if err != nil {
 			return err
 		}
@@ -135,7 +135,7 @@ func Add(ctx echo.Context) error {
 	return ctx.Render(`official/article/edit`, common.Err(ctx, err))
 }
 
-// Edit TODO: 多语种支持
+// Edit 修改文章
 func Edit(ctx echo.Context) error {
 	sourceID := ctx.Queryx(`sourceId`).String()
 	sourceTable := ctx.Queryx(`sourceTable`).String()
@@ -175,7 +175,7 @@ func Edit(ctx echo.Context) error {
 				data.SetInfo(ctx.T(`操作成功`))
 			}
 		}
-		i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, uint64(id))
+		i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, id)
 	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonArticle,
@@ -190,7 +190,7 @@ func Edit(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, m.Id)
 		if err != nil {
 			return err
 		}
