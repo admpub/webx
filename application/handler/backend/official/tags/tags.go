@@ -3,6 +3,9 @@ package tags
 import (
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/formbuilder"
+	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -37,17 +40,29 @@ func Index(ctx echo.Context) error {
 func Add(ctx echo.Context) error {
 	var err error
 	m := official.NewTags(ctx)
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCommonTags, FormFilter())
-		if err == nil {
-			m.Group = ctx.Form(`newGroup`)
-			_, err = m.Add()
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/official/tags/index`))
-			}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonTags,
+		formbuilder.ConfigFile(`official/tags/edit`),
+		formbuilder.AllowedNames(`name`, `group`, `display`),
+	)
+	form.OnPost(func() error {
+		m.Group = ctx.Form(`newGroup`)
+		_, err := m.Add()
+		if err != nil {
+			return err
 		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonTags, uint64(m.Id))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`添加成功`))
+		return ctx.Redirect(backend.URLFor(`/official/tags/index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
 	}
+	form.Generate()
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
 	ctx.Set(`groups`, official.TagGroups.Slice())
@@ -68,39 +83,52 @@ func Edit(ctx echo.Context) error {
 	if err != nil {
 		return err
 	}
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCommonTags, FormFilter(formfilter.Exclude(`name`)))
-		if err == nil {
-			m.Group = ctx.Form(`newGroup`)
-			m.Name = name
-			m.Display = common.GetBoolFlag(ctx.Form(`display`))
-			err = m.UpdateFields(nil, echo.H{
-				`group`:   m.Group,
-				`display`: m.Display,
-			}, cond)
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/official/tags/index`))
-			}
-		}
-	} else if ctx.IsAjax() {
-		display := ctx.Query(`display`)
-		if len(display) > 0 {
-			m.Display = display
-			data := ctx.Data()
-			err = m.UpdateField(nil, `display`, display, cond)
-			if err != nil {
-				data.SetError(err)
+	if ctx.IsGet() {
+		if ctx.IsAjax() {
+			display := ctx.Query(`display`)
+			if len(display) > 0 {
+				m.Display = display
+				data := ctx.Data()
+				err = m.UpdateField(nil, `display`, display, cond)
+				if err != nil {
+					data.SetError(err)
+					return ctx.JSON(data)
+				}
+				data.SetInfo(ctx.T(`操作成功`))
 				return ctx.JSON(data)
 			}
-			data.SetInfo(ctx.T(`操作成功`))
-			return ctx.JSON(data)
 		}
-	} else if err == nil {
-		echo.StructToForm(ctx, m.OfficialCommonTags, ``, func(topName, fieldName string) string {
-			return echo.LowerCaseFirstLetter(topName, fieldName)
-		})
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonTags,
+		formbuilder.ConfigFile(`official/tags/edit`),
+		formbuilder.AllowedNames(`group`, `display`),
+		formbuilder.FormFilter(formfilter.Exclude(`name`)),
+	)
+	form.OnPost(func() error {
+		m.Group = ctx.Form(`newGroup`)
+		m.Name = name
+		m.Display = common.GetBoolFlag(m.Display)
+		err := m.UpdateFields(nil, echo.H{
+			`group`:   m.Group,
+			`display`: m.Display,
+		}, cond)
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonTags, uint64(m.Id))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/official/tags/index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	echo.Dump(form.LangSet(`name`).Field(config.FromFile().Language.Default + `:name`))
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
 	ctx.Set(`groups`, official.TagGroups.Slice())

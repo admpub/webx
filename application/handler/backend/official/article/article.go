@@ -5,7 +5,6 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
-	"github.com/webx-top/echo/formfilter"
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
@@ -16,11 +15,6 @@ import (
 	modelArticle "github.com/coscms/webfront/model/official/article"
 	modelComment "github.com/coscms/webfront/model/official/comment"
 )
-
-func articleFormFilter(options ...formfilter.Options) echo.FormDataFilter {
-	options = append(options, formfilter.Exclude(`updated`, `created`, `comments`, `likes`, `hates`, `views`))
-	return formfilter.Build(options...)
-}
 
 func Index(ctx echo.Context) error {
 	if operation := ctx.Form(`operation`); operation == `selectSource` {
@@ -208,15 +202,15 @@ func Edit(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
-	/*
-		for _, v := range form.Fields() {
-			if val, ok := v.(*forms.LangSetType); ok {
-				for key, vv := range val.FieldMap() {
-					echo.Dump(echo.H{`key`: key, `vv`: vv})
-				}
+	/*//
+	for _, v := range form.Fields() {
+		if val, ok := v.(*forms.LangSetType); ok {
+			for key, vv := range val.FieldMap() {
+				echo.Dump(echo.H{`key`: key, `vv`: vv})
 			}
 		}
-	*/
+	}
+	//*/
 
 	field := form.Field(`contype`)
 	for _, v := range modelArticle.Contype.Slice() {

@@ -6,6 +6,7 @@
 <li class="active">{{if not $.Stored.isEdit}}{{"添加"|$.T}}{{else}}{{"修改"|$.T}}{{end}}</li>
 {{/Block}}
 {{Block "main"}}
+{{- $data := $.Stored.forms.Model -}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat no-padding">
@@ -14,22 +15,15 @@
           </div>
           <div class="content">
               <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              {{- $.Stored.forms.Render -}}
               <div class="form-group">
-                <label class="col-sm-2 control-label">{{"标签名称"|$.T}}</label>
-                <div class="col-sm-3">
-                    {{if not $.Stored.isEdit}}
-                    <input type="text" class="form-control" required name="name" value="{{$.Form `name`}}">
-                    {{else}}
-                    <span class="form-control no-border">{{$.Form "name"}}</span>
-                    {{end}}
-                </div>
                 <label class="col-sm-2 control-label">{{"标签分组"|$.T}}</label>
                 <div class="col-sm-3">
                   <span class="input-group">
-                    <input type="hidden" class="form-control" name="group" value="{{$.Form `group`}}">
-                    <input type="text" class="form-control" name="newGroup" value="{{$.Form `newGroup` ($.Form `group`)}}">
+                    <input type="hidden" class="form-control" name="group" value="{{$data.Group}}">
+                    <input type="text" class="form-control" name="newGroup" value="{{$.Form `newGroup` $data.Group}}">
                     <span class="input-group-addon no-padding no-border">
-                      <select class="form-control" onchange="$(this).parent().prev().val(this.value)" style="min-width:100px">{{$group := $.Form `group`}}
+                      <select class="form-control" onchange="$(this).parent().prev().val(this.value)" style="min-width:100px">{{$group := $data.Group}}
                         <option value="">- {{`请选择`|$.T}} -</option>
                         {{- range $k, $v := $.Stored.groups -}}
                         <option value="{{$v.K}}"{{if eq $v.K $group}} selected{{end}}>{{$v.V}}</option>
@@ -39,11 +33,9 @@
                   </span>
                   <div class="help-block">{{`选择或输入分组`|$.T}}</div>
                 </div>
-              </div>
-              <div class="form-group">
                   <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
-                  <div class="col-sm-8">
-                    {{$v := $.Form "display"}}
+                  <div class="col-sm-3">
+                    {{- $v := $data.Display -}}
                     <div class="radio radio-success radio-inline">
                         <input type="radio" value="Y" name="display" id="display-Y"{{if eq $v `Y` ``}} checked{{end}}> 
                         <label for="display-Y">{{"显示"|$.T}}</label>
