@@ -9,6 +9,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/model/i18nm"
@@ -125,6 +126,8 @@ func CategoryAdd(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
 
 	ctx.Set(`activeURL`, `/official/article/category`)
 	categoryList := m.ListIndent(m.ListAllParent(m.Type, 0))
@@ -233,6 +236,9 @@ func CategoryEdit(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
+
 	ctx.Set(`activeURL`, `/official/article/category`)
 	categoryRows := m.ListAllParent(m.Type, 0)
 	categoryList := []*dbschema.OfficialCommonCategory{}

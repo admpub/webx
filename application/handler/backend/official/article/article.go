@@ -8,6 +8,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webcore/library/nsql"
 	"github.com/coscms/webfront/model/i18nm"
@@ -122,6 +123,8 @@ func Add(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
+	titleField := form.MultilingualField(config.FromFile().Language.Default, `title`, `title`)
+	titleField.AddTag(`required`)
 	field := form.Field(`contype`)
 	for _, v := range modelArticle.Contype.Slice() {
 		field.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
@@ -202,6 +205,8 @@ func Edit(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
+	titleField := form.MultilingualField(config.FromFile().Language.Default, `title`, `title`)
+	titleField.AddTag(`required`)
 	/*//
 	for _, v := range form.Fields() {
 		if val, ok := v.(*forms.LangSetType); ok {

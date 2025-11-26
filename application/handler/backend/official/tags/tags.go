@@ -64,6 +64,8 @@ func Add(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
 	ctx.Set(`groups`, official.TagGroups.Slice())
@@ -131,6 +133,7 @@ func Edit(ctx echo.Context) error {
 	}
 	form.Generate()
 	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`).(*fields.Field)
+	nameField.AddTag(`required`)
 	nameField.SetType(`static`).SetText(m.Name).SetTemplate(`static`)
 	nameField.ReinitTemplate()
 

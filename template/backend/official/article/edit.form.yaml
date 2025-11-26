@@ -23,8 +23,7 @@ elements:
       helptext: ""
       template: ""
       valid: ""
-      attributes: 
-        - - required
+      attributes: []
       choices: []
       elements: []
       format: ""

@@ -26,7 +26,7 @@
                       <select class="form-control" onchange="$(this).parent().prev().val(this.value)" style="min-width:100px">{{$group := $data.Group}}
                         <option value="">- {{`请选择`|$.T}} -</option>
                         {{- range $k, $v := $.Stored.groups -}}
-                        <option value="{{$v.K}}"{{if eq $v.K $group}} selected{{end}}>{{$v.V}}</option>
+                        <option value="{{$v.K}}"{{if eq $v.K $group}} selected{{end}}>{{$v.V|$.T}}</option>
                         {{- end -}}
                       </select>
                     </span>

@@ -9,6 +9,7 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/model/i18nm"
@@ -121,6 +122,9 @@ func NavigateAdd(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
+	titleField := form.MultilingualField(config.FromFile().Language.Default, `title`, `title`)
+	titleField.AddTag(`required`)
+
 	ctx.Set(`activeURL`, `/manager/navigate/index`)
 	navigateList := m.ListIndent(m.ListAllParent(m.Type, 0))
 	ctx.Set(`navigateList`, navigateList)
@@ -223,6 +227,9 @@ func NavigateEdit(ctx echo.Context) error {
 		return form.Error()
 	}
 	form.Generate()
+	titleField := form.MultilingualField(config.FromFile().Language.Default, `title`, `title`)
+	titleField.AddTag(`required`)
+
 	ctx.Set(`activeURL`, `/manager/navigate`)
 	navigateRows := m.ListAllParent(m.Type, 0)
 	navigateList := []*dbschema.OfficialCommonNavigate{}

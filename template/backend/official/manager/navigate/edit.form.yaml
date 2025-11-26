@@ -46,23 +46,6 @@ elements:
       format: ""
       languages: []
       data: {}
-    # - id: ""
-    #   type: text
-    #   name: cover
-    #   label: Cover
-    #   labelcols: 0
-    #   fieldcols: 0
-    #   labelclasses: []
-    #   value: ""
-    #   helptext: ""
-    #   template: ""
-    #   valid: ""
-    #   attributes: []
-    #   choices: []
-    #   elements: []
-    #   format: ""
-    #   languages: []
-    #   data: {}
     - id: ""
       type: text
       name: remark
