@@ -99,6 +99,7 @@ func Edit(ctx echo.Context) error {
 				return ctx.JSON(data)
 			}
 		}
+		i18nm.SetModelTranslationsToForm(m.OfficialCommonTags, m.Id)
 	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonTags,
@@ -117,7 +118,7 @@ func Edit(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonTags, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(m.OfficialCommonTags, m.Id)
 		if err != nil {
 			return err
 		}
@@ -130,10 +131,8 @@ func Edit(ctx echo.Context) error {
 	}
 	form.Generate()
 	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`).(*fields.Field)
-	nameField.Type = `static`
-	nameField.SetText(m.Name).SetTemplate(`static`)
-	nameField.InitTemplate()
-	echo.Dump(nameField)
+	nameField.SetType(`static`).SetText(m.Name).SetTemplate(`static`)
+	nameField.ReinitTemplate()
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
 	ctx.Set(`groups`, official.TagGroups.Slice())

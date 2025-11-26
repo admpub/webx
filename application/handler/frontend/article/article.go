@@ -16,6 +16,7 @@ import (
 	"github.com/coscms/webfront/library/top"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelAuthor "github.com/coscms/webfront/model/author"
+	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 	modelArticle "github.com/coscms/webfront/model/official/article"
 	modelComment "github.com/coscms/webfront/model/official/comment"
@@ -75,6 +76,7 @@ func Detail(c echo.Context) error {
 	if articleM.Display == `N` && (customer == nil || articleM.OwnerType != `customer` || customer.Id != articleM.OwnerId) {
 		return c.NewError(stdCode.DataUnavailable, `此文章不可查看`)
 	}
+	i18nm.GetModelTranslations(c, articleM.OfficialCommonArticle)
 	articleM.Content = top.HideContent(articleM.Content, articleM.Contype, modelArticle.GetContentHideDetector(customer, articleM.OfficialCommonArticle), frontend.GlobalFuncMap())
 	//c.PrintFuncs()
 	c.Set(`data`, articleM.OfficialCommonArticle)
@@ -82,6 +84,7 @@ func Detail(c echo.Context) error {
 	if err != nil {
 		return err
 	}
+	i18nm.GetModelsTranslations(c, categories)
 	c.Set(`categories`, categories)
 	var (
 		sourceInfo echo.KV
@@ -181,6 +184,7 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 	if err != nil {
 		return err
 	}
+	i18nm.GetModelsTranslations(c, articles)
 	c.Set(`articles`, articles)
 	c.Set(`categories`, categories)
 	var sourceInfo echo.KV
