@@ -1,6 +1,7 @@
 package user
 
 import (
+	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
@@ -8,8 +9,11 @@ import (
 
 	hanlderArticle "github.com/admpub/webx/application/handler/backend/official/article"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/middleware/sessdata"
+	"github.com/coscms/webfront/model/i18nm"
 	modelArticle "github.com/coscms/webfront/model/official/article"
 )
 
@@ -78,7 +82,6 @@ func applyFormData(ctx echo.Context, m *dbschema.OfficialCommonArticle) {
 	m.Image = ctx.Formx(`image`).String()
 	m.ImageOriginal = ctx.Formx(`imageOriginal`).String()
 	m.Summary = ctx.Formx(`summary`).String()
-	m.Summary = ctx.Formx(`summary`).String()
 	m.Content = ctx.Formx(`content`).String()
 	m.Contype = ctx.Formx(`contype`).String()
 	m.Display = `N`
@@ -86,7 +89,6 @@ func applyFormData(ctx echo.Context, m *dbschema.OfficialCommonArticle) {
 }
 
 // Create 创建文章
-// TODO: 多语种支持
 func Create(ctx echo.Context) error {
 	sourceID := ``
 	sourceTable := ``
@@ -94,18 +96,42 @@ func Create(ctx echo.Context) error {
 	var err error
 	m := modelArticle.NewArticle(ctx)
 	m.DisallowCreateTags = true
-	if ctx.IsPost() {
+	m.Contype = `html`
+	form := formbuilder.New(ctx,
+		m.OfficialCommonArticle,
+		formbuilder.ConfigFile(`article/user/edit`),
+		formbuilder.AllowedNames(
+			`categoryId`, `image`, `imageOriginal`, `title`, `keywords`,
+			`summary`, `contype`, `content`, `tags`,
+		),
+	)
+	form.OnPost(func() error {
 		m.OwnerId = customer.Id
 		m.OwnerType = `customer`
-		applyFormData(ctx, m.OfficialCommonArticle)
-		_, err = m.Add()
+		m.Display = `N`
+		_, err := m.Add()
 		if err != nil {
-			goto END
+			return err
 		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, m.Id)
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`添加成功`))
 		return ctx.Redirect(ctx.URLFor(`/user/article/list`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	titleField := form.MultilingualField(config.FromFile().Language.Default, `title`, `title`)
+	titleField.AddTag(`required`)
+	contypeField := form.Field(`contype`)
+	for _, v := range modelArticle.Contype.Slice() {
+		contypeField.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
 	}
 
-END:
 	hanlderArticle.SetArticleFormData(ctx, sourceID, sourceTable)
 	ctx.Set(`activeURL`, `/user/article/list`)
 	ctx.Set(`sourceId`, sourceID)
@@ -117,7 +143,6 @@ END:
 }
 
 // Edit 修改文章
-// TODO: 多语种支持
 func Edit(ctx echo.Context) error {
 	sourceID := ``
 	sourceTable := ``
@@ -138,18 +163,42 @@ func Edit(ctx echo.Context) error {
 	if m.OwnerType != `customer` || m.OwnerId != customer.Id {
 		return ctx.NewError(code.NonPrivileged, `越权操作！您没有权限修改此数据`)
 	}
-	if ctx.IsPost() {
-		applyFormData(ctx, m.OfficialCommonArticle)
-		err = m.Edit(nil, `id`, m.Id)
+	if ctx.IsGet() {
+		i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, id)
+	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonArticle,
+		formbuilder.ConfigFile(`article/user/edit`),
+		formbuilder.AllowedNames(
+			`categoryId`, `image`, `imageOriginal`, `title`, `keywords`,
+			`summary`, `contype`, `content`, `tags`,
+		),
+	)
+	form.OnPost(func() error {
+		m.Display = `N`
+		err = m.Edit(nil, db.Cond{`id`: id})
 		if err != nil {
-			goto END
+			return err
+		}
+		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, m.Id)
+		if err != nil {
+			return err
 		}
 		common.SendOk(ctx, ctx.T(`修改成功`))
 		return ctx.Redirect(ctx.URLFor(`/user/article/list`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
 	}
-	echo.StructToForm(ctx, m.OfficialCommonArticle, ``, echo.LowerCaseFirstLetter)
+	form.Generate()
+	titleField := form.MultilingualField(config.FromFile().Language.Default, `title`, `title`)
+	titleField.AddTag(`required`)
+	contypeField := form.Field(`contype`)
+	for _, v := range modelArticle.Contype.Slice() {
+		contypeField.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
+	}
 
-END:
 	hanlderArticle.SetArticleFormData(ctx, sourceID, sourceTable)
 	ctx.Set(`activeURL`, `/user/article/list`)
 	ctx.Set(`sourceId`, sourceID)

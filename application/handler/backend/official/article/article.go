@@ -125,9 +125,9 @@ func Add(ctx echo.Context) error {
 	form.Generate()
 	titleField := form.MultilingualField(config.FromFile().Language.Default, `title`, `title`)
 	titleField.AddTag(`required`)
-	field := form.Field(`contype`)
+	contypeField := form.Field(`contype`)
 	for _, v := range modelArticle.Contype.Slice() {
-		field.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
+		contypeField.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
 	}
 
 	SetArticleFormData(ctx, sourceID, sourceTable)
@@ -217,9 +217,9 @@ func Edit(ctx echo.Context) error {
 	}
 	//*/
 
-	field := form.Field(`contype`)
+	contypeField := form.Field(`contype`)
 	for _, v := range modelArticle.Contype.Slice() {
-		field.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
+		contypeField.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
 	}
 
 	SetArticleFormData(ctx, sourceID, sourceTable)

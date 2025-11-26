@@ -1,0 +1,153 @@
+id: Forms
+theme: bootstrap4
+template: "allfields"
+method: POST
+action: ""
+attributes:
+    - - class
+      - form-horizontal
+    - - role
+      - form
+withbuttons: false
+buttons: []
+btnstemplate: ""
+elements:
+    - id: ""
+      type: text
+      name: title
+      label: 标题
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: []
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: ""
+      type: text
+      name: keywords
+      label: 关键词
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: "多个关键词之间用半角逗号<code>,</code>隔开"
+      template: ""
+      valid: ""
+      attributes: []
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: "input-summary"
+      type: textarea
+      name: summary
+      label: 摘要
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes:
+        - - rows
+          - 5
+        - - maxlength
+          - 255
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: ""
+      type: radio
+      name: contype
+      label: 编辑器
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: html
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: "content"
+      type: textarea
+      name: content
+      label: 内容
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes:
+        - - data-editor-name
+          - tinymce
+        - - rows
+          - 20
+        - - cols
+          - 50
+        - - placeholder
+          - 请输入文章内容
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: "syncRemoteImage"
+      type: checkbox
+      name: syncRemoteImage
+      label: "同步远程图片"
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: "1"
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: []
+      choices:
+        - option:
+            - 1
+            - 下载内容中的远程图片
+          checked: true
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: "select2tags"
+      type: hidden
+      name: tags
+      label: 标签
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes:
+        - - class
+          - select2tags
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+languages: []
+data: {}
+trimnameprefix: ""
