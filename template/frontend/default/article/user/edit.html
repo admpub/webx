@@ -17,114 +17,50 @@
   </div>
 
   <div class="main-body pd-20">
-<div class="row">
-  <div class="col-lg-12 mg-t-0">
-    <div class="card card-form">
-      <div class="card-header">
-        <a class="btn btn-info pull-right" href="{{FrontendURL}}/user/article/list">{{"返回列表"|$.T}}</a>
-        <h6 class="card-title">{{$.Stored.title}}</h6>
-      </div><!-- card-header -->
-      <div class="card-body card-body-pd-lg">
+    <div class="row">
+      <div class="col-lg-12 mg-t-0">
+        <div class="card card-form">
+          <div class="card-header">
+            <a class="btn btn-info pull-right" href="{{FrontendURL}}/user/article/list">{{"返回列表"|$.T}}</a>
+            <h6 class="card-title">{{$.Stored.title}}</h6>
+          </div><!-- card-header -->
+          <div class="card-body card-body-pd-lg">
             <form class="form form-label-right" method="POST">
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label">{{"封面图"|$.T}}:</label>
+                <div class="col-md-8">
+                  <div class="avatar-upload">
+                    {{- $image := $data.Image -}}
+                    <img src="{{$image|Default (AssetsURL `/images/user_128.png`)}}"
+                      class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
+                    <input id="fileupload" type="file" name="files[]">
+                    <input type="hidden" id="article-image" name="image" value="{{$image}}" />
+                    <input type="hidden" id="article-image-original" name="imageOriginal"
+                      value="{{$data.ImageOriginal}}" />
+                    <div id="progress" class="overlay"></div>
+                  </div>
+                </div>
+              </div>
               {{- $.Stored.forms.Render -}}
-                <div class="form-group row">
-                  <label for="input-title" class="col-md-2 col-form-label">{{"标题"|$.T}}:</label>
-                  <div class="col-md-8">
-                    <input type="text" class="form-control" required id="input-title" name="title" value="{{$.Form `title`}}">
-                  </div>
+              <div class="form-group row">
+                <div class="col-md-10 mg-t-5 offset-sm-2">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    {{"保存"|$.T}}
+                  </button>
+                  {{if $.Stored.isEdit}}
+                  <span class="text-warning mg-l-20">{{`提交后需要重新审核`|$.T}}</span>
+                  {{end}}
                 </div>
-                <div class="form-group row">
-                  <label class="col-md-2 col-form-label">{{"封面图"|$.T}}:</label>
-                  <div class="col-md-8">
-                    <div class="avatar-upload">
-                      {{$image := $.Form "image"}}
-                      <img src="{{$image|Default (AssetsURL `/images/user_128.png`)}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
-                      <input id="fileupload" type="file" name="files[]">
-                      <input type="hidden" id="article-image" name="image" value="{{$image}}" />
-                      <input type="hidden" id="article-image-original" name="imageOriginal" value="{{$.Form `imageOriginal`}}" />
-                      <div id="progress" class="overlay"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="input-summary" class="col-md-2 col-form-label">{{"摘要"|$.T}}:</label>
-                  <div class="col-md-8">
-                    <textarea class="form-control" name="summary" id="input-summary" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-validation-threshold="10">{{$.Form "summary"}}</textarea>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-2 col-form-label">{{"编辑器"|$.T}}:</label>
-                  <div class="col-md-8">
-                    {{$contype := $.Form `contype` `html`}}
-                    {{- range $.Stored.contypes -}}
-                    <label class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" value="{{.K}}" name="contype" id="contype-{{.K}}"{{if eq $contype .K}} checked{{end}}>
-                      <span class="custom-control-indicator"></span>
-                      <div class="custom-control-description">
-                        {{.V|$.RawT|UpperCaseFirst|$.ExtT}}
-                      </div>
-                    </label>
-                    {{- end -}}
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-2 col-form-label">{{"内容"|$.T}}:</label>
-                  <div class="col-md-8">
-                    <label class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" value="1" name="syncRemoteImage" id="syncRemoteImage"{{if eq ($.Form `syncRemoteImage`) `1`}} checked{{end}}>
-                      <span class="custom-control-indicator"></span>
-                      <div class="custom-control-description">
-                        {{`自动下载远程图片`|$.T}}
-                      </div>
-                    </label>
-                    <div id="content-container">
-                    <textarea name="content" data-editor-name="tinymce" class="form-control" cols="50" rows="20" id="content" placeholder="{{`文章内容`|$.T}}" action="{{FrontendUploadURL ``}}">{{$.Form "content"}}</textarea>
-                    </div>
-                    <!-- <div class="help-block">
-                      {{`支持内容隐藏标签`|$.T}}: <strong>[hide]</strong><code>{{`隐藏的内容`|$.T}}</code><strong>[/hide]</strong> {{`或者指定条件标识`|$.T}} <strong>[hide:</strong><code>{{`条件标识`|$.T}}</code><strong>]</strong><code>{{`隐藏的内容`|$.T}}</code><strong>[/hide]</strong><br />
-                      {{`在不指定条件标识的情况下采用默认条件标识: comment`|$.T}}<br />
-                      {{`支持以下`|$.T}}<code>{{`条件标识`|$.T}}</code>:<br />
-                      {{- range $.Stored.contentHideTags -}}
-                      <code>{{.K}}</code>: {{.H.description|Default .V}}<br />
-                      {{- end -}}
-                    </div> -->
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="categoryId" class="col-md-2 col-form-label">{{"分类"|$.T}}:</label>
-                  <div class="col-md-3">
-                    {{- $v := ($.Formx "categoryId").Uint -}}
-                    <select name="categoryId" class="form-control" id="categoryId">
-                      <option value=""></option>
-                      {{- range $k, $c := $.Stored.categoryList -}}
-                      <option value="{{$c.Id}}"{{if eq $c.Id $v}} selected="selected"{{end}}>{{$c.Name}}</option>
-                      {{- end -}}
-                    </select>
-                  </div>
-                  <label for="select2tags" class="col-md-2 col-form-label">{{"标签"|$.T}}:</label>
-                  <div class="col-md-3">
-                    <input id="select2tags" name="tags" type="hidden" value="{{$.Form `tags`}}" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-10 mg-t-5 offset-sm-2">
-                      <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
-                        {{"保存"|$.T}}
-                      </button>
-                      {{if $.Stored.isEdit}}
-                      <span class="text-warning mg-l-20">{{`提交后需要重新审核`|$.T}}</span>
-                      {{end}}
-                  </div>
-                </div>
-              </form>
-              {{Include "modal_crop_image"}}
-      </div><!-- card-body -->
-      
-    </div><!-- card -->
-  </div><!-- col-6 -->
-</div><!-- row -->
-    </div><!-- main-body -->
+              </div>
+            </form>
+            {{Include "modal_crop_image"}}
+          </div><!-- card-body -->
+
+        </div><!-- card -->
+      </div><!-- col-6 -->
+    </div><!-- row -->
+  </div><!-- main-body -->
 </div><!-- main -->
 {{/Block}}
 
@@ -136,14 +72,12 @@
 <script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
 <script src="{{AssetsURL}}/js/behaviour/page/select2.min.js?t={{BuildTime}}"></script>
 <script type="text/javascript">
-$(function(){
-  window.CropServerURL='{{FrontendURL}}/user/file/crop';
-  App.editor.cropImage('{{FrontendUploadURL ``}}',"#article-image",'#article-image-original');
-  //App.editor.tinymces('#content');
-  App.editor.switcher("input[name='contype']", '#content','tinymce');
-  var tagList={{$.Stored.tagList|JSONEncode|ToJS}};
-  //App.select2.tags('#select2tags',tagList);
-  App.select2.select('#select2tags',{multiple:true,data:tagList||[]});
+  $(function () {
+    window.CropServerURL = '{{FrontendURL}}/user/file/crop';
+    App.editor.cropImage('{{FrontendUploadURL ``}}', "#article-image", '#article-image-original');
+    App.editor.multilingualContentEditor(null, '#content', '{{FrontendUploadURL ``}}');
+    var tagList = {{ $.Stored.tagList| JSONEncode | ToJS}};
+    App.select2.select('#select2tags', { multiple: true, data: tagList || [] });
 });
 </script>
 {{/Block}}

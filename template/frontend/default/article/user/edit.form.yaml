@@ -129,12 +129,29 @@ elements:
       format: ""
       languages: []
       data: {}
+    - id: "categoryId"
+      type: select
+      name: categoryId
+      label: 分类
+      labelcols: 2
+      fieldcols: 3
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: []
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
     - id: "select2tags"
       type: hidden
       name: tags
       label: 标签
-      labelcols: 0
-      fieldcols: 0
+      labelcols: 2
+      fieldcols: 3
       labelclasses: []
       value: ""
       helptext: ""

@@ -131,8 +131,14 @@ func Create(ctx echo.Context) error {
 	for _, v := range modelArticle.Contype.Slice() {
 		contypeField.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
 	}
+	categoryField := form.Field(`categoryId`)
+	categoryField.AddChoice(``, ctx.T(`无`), false)
 
 	hanlderArticle.SetArticleFormData(ctx, sourceID, sourceTable)
+
+	for _, v := range ctx.Get(`categoryList`).([]*dbschema.OfficialCommonCategory) {
+		categoryField.AddChoice(v.Id, v.Name, v.Id == m.CategoryId)
+	}
 	ctx.Set(`activeURL`, `/user/article/list`)
 	ctx.Set(`sourceId`, sourceID)
 	ctx.Set(`sourceTable`, sourceTable)
@@ -198,8 +204,14 @@ func Edit(ctx echo.Context) error {
 	for _, v := range modelArticle.Contype.Slice() {
 		contypeField.AddChoice(v.K, com.UpperCaseFirst(ctx.T(v.V)), v.K == m.Contype)
 	}
+	categoryField := form.Field(`categoryId`)
+	categoryField.AddChoice(``, ctx.T(`无`), false)
 
 	hanlderArticle.SetArticleFormData(ctx, sourceID, sourceTable)
+	for _, v := range ctx.Get(`categoryList`).([]*dbschema.OfficialCommonCategory) {
+		categoryField.AddChoice(v.Id, v.Name, v.Id == m.CategoryId)
+	}
+
 	ctx.Set(`activeURL`, `/user/article/list`)
 	ctx.Set(`sourceId`, sourceID)
 	ctx.Set(`sourceTable`, sourceTable)
