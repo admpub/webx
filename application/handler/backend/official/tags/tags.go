@@ -132,6 +132,7 @@ func Edit(ctx echo.Context) error {
 	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`).(*fields.Field)
 	nameField.Type = `static`
 	nameField.SetText(m.Name).SetTemplate(`static`)
+	nameField.InitTemplate()
 	echo.Dump(nameField)
 
 	ctx.Set(`activeURL`, `/official/tags/index`)
