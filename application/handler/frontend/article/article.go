@@ -195,7 +195,7 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 	if err != nil {
 		return err
 	}
-	i18nm.GetModelsTranslations(c, articles)
+	modelArticle.MultilingualArticlesWithOwner(c, articles)
 	c.Set(`articles`, articles)
 	c.Set(`categories`, categories)
 	var sourceInfo echo.KV
@@ -248,7 +248,7 @@ func List(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	i18nm.GetModelsTranslations(c, articles)
+	modelArticle.MultilingualArticlesWithOwner(c, articles)
 	c.Set(`articles`, articles)
 	c.Set(`categories`, categories)
 	c.Set(`tag`, tag)
@@ -279,7 +279,7 @@ func Pay(c echo.Context) error {
 	if articleM.Price <= 0 {
 		return c.NewError(stdCode.Failure, `此为免费文章，无需购买`)
 	}
-	i18nm.GetModelTranslations(c, articleM.OfficialCommonArticle)
+	i18nm.GetModelTranslations(c, articleM.OfficialCommonArticle, `title`)
 	walletM := modelCustomer.NewWallet(c)
 	exists, err := walletM.Flow.Exists(nil, db.And(
 		db.Cond{`customer_id`: customer.Id},
