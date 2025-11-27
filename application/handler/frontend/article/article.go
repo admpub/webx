@@ -249,6 +249,7 @@ func List(c echo.Context) error {
 		return err
 	}
 	i18nm.GetModelsTranslations(c, articles)
+	echo.Dump(articles)
 	c.Set(`articles`, articles)
 	c.Set(`categories`, categories)
 	c.Set(`tag`, tag)
