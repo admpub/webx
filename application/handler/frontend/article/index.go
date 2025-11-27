@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/model/i18nm"
 	modelArticle "github.com/coscms/webfront/model/official/article"
 	modelComment "github.com/coscms/webfront/model/official/comment"
 	"github.com/webx-top/db"
@@ -19,7 +20,9 @@ func Index(c echo.Context) error {
 		cond := db.NewCompounds()
 		_ids := strings.Split(ids, `,`)
 		cond.AddKV(`id`, db.In(_ids))
-		return articleM.CommonQueryList(cond, len(_ids), 0)
+		articles := articleM.CommonQueryList(cond, len(_ids), 0)
+		i18nm.GetModelsTranslations(c, articles)
+		return articles
 	})
 	c.SetFunc(`hotCommentArticles`, func(query string, limit int, offset int) []*modelArticle.ArticleWithOwner {
 		rows, _ := hotCommentArticles(c, query, limit, offset)
@@ -29,6 +32,7 @@ func Index(c echo.Context) error {
 		c.Request().Form().Set(`pageSize`, `20`)
 		cond := db.NewCompounds()
 		articles, _ := articleM.ListPageSimple(cond)
+		i18nm.GetModelsTranslations(c, articles)
 		return articles
 	})
 	c.Set(`listURL`, c.URLFor(`/articles`)+c.DefaultExtension())
@@ -53,5 +57,7 @@ func hotCommentArticles(ctx echo.Context, query string, limit int, offset int) (
 	articleM := modelArticle.NewArticle(ctx)
 	cond.Reset()
 	cond.AddKV(`id`, db.In(targetIDs))
-	return articleM.CommonQueryList(cond, limit, 0, `-comments`), nil
+	articles := articleM.CommonQueryList(cond, limit, 0, `-comments`)
+	i18nm.GetModelsTranslations(ctx, articles)
+	return articles, nil
 }
