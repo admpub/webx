@@ -113,7 +113,7 @@ func Create(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, m.Id)
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArticle, m.Id)
 		if err != nil {
 			return err
 		}
@@ -170,7 +170,7 @@ func Edit(ctx echo.Context) error {
 		return ctx.NewError(code.NonPrivileged, `越权操作！您没有权限修改此数据`)
 	}
 	if ctx.IsGet() {
-		i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, id)
+		i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonArticle, id)
 	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonArticle,
@@ -186,7 +186,7 @@ func Edit(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, m.Id)
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArticle, m.Id)
 		if err != nil {
 			return err
 		}

@@ -52,7 +52,7 @@ func Add(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonTags, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonTags, uint64(m.Id))
 		if err != nil {
 			return err
 		}
@@ -101,7 +101,7 @@ func Edit(ctx echo.Context) error {
 				return ctx.JSON(data)
 			}
 		}
-		i18nm.SetModelTranslationsToForm(m.OfficialCommonTags, m.Id)
+		i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonTags, m.Id)
 	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonTags,
@@ -120,7 +120,7 @@ func Edit(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonTags, m.Id)
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonTags, m.Id)
 		if err != nil {
 			return err
 		}

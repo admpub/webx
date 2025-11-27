@@ -89,7 +89,7 @@ func Add(ctx echo.Context) error {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
 				m.Id = 0
-				i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, id)
+				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonArticle, id)
 			}
 		}
 	}
@@ -111,7 +111,7 @@ func Add(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, m.Id)
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArticle, m.Id)
 		if err != nil {
 			return err
 		}
@@ -178,7 +178,7 @@ func Edit(ctx echo.Context) error {
 				data.SetInfo(ctx.T(`操作成功`))
 			}
 		}
-		i18nm.SetModelTranslationsToForm(m.OfficialCommonArticle, id)
+		i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonArticle, id)
 	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonArticle,
@@ -193,7 +193,7 @@ func Edit(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonArticle, m.Id)
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArticle, m.Id)
 		if err != nil {
 			return err
 		}

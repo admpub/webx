@@ -86,7 +86,7 @@ func NavigateAdd(ctx echo.Context) error {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
 				m.Id = 0
-				i18nm.SetModelTranslationsToForm(m.OfficialCommonNavigate, uint64(id))
+				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonNavigate, uint64(id))
 			} else {
 				m.Sort = 5000
 			}
@@ -110,7 +110,7 @@ func NavigateAdd(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonNavigate, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonNavigate, uint64(m.Id))
 		if err != nil {
 			return err
 		}
@@ -203,7 +203,7 @@ func NavigateEdit(ctx echo.Context) error {
 		allowedNames = append(allowedNames, `type`)
 	}
 	if ctx.IsGet() {
-		i18nm.SetModelTranslationsToForm(m.OfficialCommonNavigate, uint64(id))
+		i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonNavigate, uint64(id))
 	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonNavigate,
@@ -215,7 +215,7 @@ func NavigateEdit(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(m.OfficialCommonNavigate, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonNavigate, uint64(m.Id))
 		if err != nil {
 			return err
 		}
