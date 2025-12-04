@@ -5,7 +5,7 @@
         <div class="card bd-0{{if not $inModal}} mg-t-20{{end}}{{if $containerClass}} {{$containerClass}}{{end}}">
           {{- if not $inModal -}}
           <div class="card-header pd-y-20 pd-x-0">
-            <h4 class="tx-inverse tx-bold tx-spacing-neg-2 mg-b-0">{{"发表评论"|$.T}}</h4>
+            <h4 class="tx-inverse tx-bold tx-spacing-neg-2 mg-b-0">{{"发表评论"|$.T|UpperCaseFirst}}</h4>
           </div><!-- card-header -->
           {{- end -}}
           <div class="card-block {{if not $inModal}}pd-y-20{{else}}pd-t-0{{end}} pd-x-0">
@@ -44,7 +44,7 @@
               <input type="hidden" name="subtype" id="target-subtype" value="{{$.Stored.targetSubtype}}">
               <input type="hidden" name="type" id="target-type" value="{{$.Stored.targetType}}">
               </div>
-              <button type="submit" class="btn btn-inverse tx-size-sm" data-form="#{{if $inModal}}modal-{{end}}comment-post-form">{{"发表评论"|$.T}}{{if $.Stored.needReviewComment}}<br/>({{"需要审核"|$.T}}){{end}}</button>
+              <button type="submit" class="btn btn-inverse tx-size-sm" data-form="#{{if $inModal}}modal-{{end}}comment-post-form">{{"发表评论"|$.T|UpperCaseFirst}}{{if $.Stored.needReviewComment}}<br/>({{"需要审核"|$.T}}){{end}}</button>
             </div><!-- form-group -->
           </form>
           {{- end -}}

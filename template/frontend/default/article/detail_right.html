@@ -4,12 +4,12 @@
         <div class="lh-1 tx-bold tx-gray-dark tx-size-14">{{"最新文章"|$.T}}</div>
       </div><!-- card-header -->
       <div class="list-group list-group-transparent">
-        {{range $k,$v := $.Stored.newsList}}
+        {{- range $k,$v := $.Stored.newsList}}
         <div class="list-group-item d-block">
           <a href="{{URLByName `article.detail` $v.Id}}" class="tx-gray-dark tx-medium lh-4 tx-size-sm">{{$v.Title}}</a>
           <span class="tx-size-xs tx-gray-light d-block mg-t-5">{{(Date $v.Created).Format (printf "%s%s" ($.RawT "2006年1月2日") " 15:04")}}</span>
         </div>
-        {{end}}
+        {{- end}}
       </div><!-- list-group -->
     </div><!-- card -->
 
@@ -18,11 +18,11 @@
         <div class="lh-1 tx-bold tx-gray-dark tx-size-14">{{"分类"|$.T}}</div>
       </div><!-- card-header -->
       <div class="list-group list-group-transparent">
-        {{range $k, $v := $.Stored.tagList}}
+        {{- range $k, $v := $.Stored.tagList}}
         <div class="list-group-item">
           <a href="{{FrontendURL}}/articlesBy/{{$product.Ident}}{{$.Ext}}?tag={{$v.Name}}" class="tx-gray-dark lh-1 tx-size-sm">{{$v.Name}}</a>
         </div>
-        {{end}}
+        {{- end}}
       </div><!-- list-group -->
     </div><!-- card -->
 

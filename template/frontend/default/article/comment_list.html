@@ -1,22 +1,22 @@
 {{Strip}}
 {{- $commentList := call $.Func.commentList -}}
-{{if $commentList}}
-{{range $k,$v := $commentList}}
+{{- if $commentList -}}
+{{- range $k,$v := $commentList -}}
 <div class="card-block pd-y-30 pd-x-0 bd-0">
     <div class="media d-block d-sm-flex">
         <a href="javascript:;"><img src="{{if $v.Extra.avatar}}{{AddSuffix $v.Extra.avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="d-flex mg-r-20 rounded-circle wd-48 ht-48 bg-info" alt="{{$v.Extra.name}}"></a>
         <div class="media-body tx-size-sm mg-t-20 mg-sm-t-0">
             <div class="d-block">
               <span class="tx-medium tx-gray-dark tx-size-sm">{{$v.Extra.name}}</span>
-              {{if $v.Extra.isTargetAuthor}}
+              {{- if $v.Extra.isTargetAuthor}}
               <span class="badge badge-primary tx-normal">{{"作者"|$.T}}</span>
-              {{end}}
-              {{if $v.Extra.isBought}}
+              {{- end}}
+              {{- if $v.Extra.isBought}}
               <span class="badge badge-success tx-normal">{{"已购买"|$.T}}</span>
-              {{end}}
-              {{if $v.Extra.isAdmin}}
+              {{- end}}
+              {{- if $v.Extra.isAdmin}}
               <span class="badge badge-warning tx-normal">{{"管理员"|$.T}}</span>
-              {{end}}
+              {{- end}}
               <small class="tx-normal tx-light">{{$.T `%d楼` $v.FloorNumber}}</small>
             </div>
           <small class="tx-size-12 d-block mg-b-20">
@@ -26,30 +26,30 @@
               <span class="tx-size-14 comment-likes">{{$v.Likes}}</span>
             </a>
             <a href="javascript:;" class="mg-l-10" data-toggle="modal" data-target="#modal-comment-form" data-comment-id="{{$v.Id}}" data-root-id="{{$v.RootId}}" data-comment-author="{{$v.Extra.name}}" data-comment-content="#comment-content-{{$v.Id}}">{{"回复"|$.T}}</a>
-            {{if and (not $.Stored.flat) (not $.Stored.isReply)}}
+            {{- if and (not $.Stored.flat) (not $.Stored.isReply)}}
             (<a href="javascript:;" data-reply-id="{{$v.Id}}">{{$v.Replies}}</a>)
-            {{end}}
+            {{- end}}
           </small>
 
           <div class="comment-content mg-b-0" id="comment-content-{{$v.Id}}" data-contype="{{$v.Contype}}">
-            {{if gt $v.ReplyCommentId 0}}
+            {{- if gt $v.ReplyCommentId 0}}
             <div class="reply-head mg-b-10 inline">
             <span class="tx-gray-light tx-light">{{"回复"|$.T}}</span>
             <span class="tx-medium tx-gray-dark tx-size-sm">{{$v.Extra.repliedCustomerName}}</span>
-            {{if gt $v.ReplyFloorNumber 0 -}}
+            {{- if gt $v.ReplyFloorNumber 0 -}}
             <span class="tx-gray-light tx-light">{{$.T "%d楼" $v.ReplyFloorNumber}}</span>
             {{- end -}}
             :</div>
-            {{end}}
+            {{- end}}
             <div class="cmt-cont{{if eq $v.Contype `markdown`}} markdown-code{{end}}">{{- OutputContent $v.Content $v.Contype -}}</div>
           </div>
-          {{if and (not $.Stored.flat) (not $.Stored.isReply)}}
+          {{- if and (not $.Stored.flat) (not $.Stored.isReply)}}
           <div id="reply-list-box-{{$v.Id}}" data-url="{{URLByName `article.comment.replyList`}}?commentId={{$v.Id}}"></div>
-          {{end}}
+          {{- end}}
         </div><!-- media-body -->
     </div><!-- media -->
 </div><!-- card-block -->
-{{end}}
+{{- end -}}
 
 <div class="card-footer tx-size-xs pd-x-0">
   {{- $paging := $.Get `paginationComment` -}}
@@ -59,9 +59,9 @@
   {{- $.Stored.pagination.Render `#default#pagination` -}}
   {{- end -}}
 </div><!-- card-footer -->
-{{else}}
+{{- else -}}
 <div class="alert" role="alert">
     <strong><i class="fa fa-comments"></i></strong> {{"尚未发布任何评论"|$.T}}
 </div>
-{{end}}
+{{- end -}}
 {{/Strip}}

@@ -1,5 +1,5 @@
 {{Strip}}
-            {{$customer := $.Customer}}
+            {{- $customer := $.Customer -}}
             <div class="col mg-t-10" id="comment-poster">
               <div class="input-group input-group-static">
               <span class="input-group-addon input-group-img bd-0"><a href="javascript:;"><img src="{{if $customer.Avatar}}{{AddSuffix $customer.Avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_50.png{{end}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_50.png';" class="rounded-circle wd-45 ht-45 bg-info" alt="{{$customer.Name}}"></a></span>
