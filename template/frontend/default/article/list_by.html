@@ -24,7 +24,7 @@
         {{- $mod := Eq (Math "mod" $k 2) 0 -}}
         {{if $mod}}
           {{if gt $k 0}}</div><!-- card-deck -->{{end}}
-          <div class="card-deck{{if ge $k 2}} mg-t-20{{end}}{{if eq $k $end}} wd-100p{{end}}">
+          <div class="card-deck{{if ge $k 2}} mg-t-20{{end}} wd-100p">
         {{end}}
           <div class="card pd-15">
             <div class="row flex-sm-row-reverse">
