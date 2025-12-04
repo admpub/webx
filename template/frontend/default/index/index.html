@@ -12,7 +12,7 @@
                     <h3 class="tx-inverse tx-size-30 tx-bold mg-b-5">{{"推荐产品"|$.T}}</h3>
                     <p class="mg-b-0"></p>
                 </div>
-                <a href="{{FrontendURL}}/product/list" class="btn btn-gray-light bd-0 tx-uppercase tx-size-11 tx-spacing-2 pd-y-15 mg-t-20 mg-sm-t-0">{{"浏览更多产品"|$.T}} <i class="fa fa-angle-right mg-l-5"></i></a>
+                <a href="{{FrontendURL}}/product/list" class="btn btn-gray-light bd-0 tx-size-11 tx-spacing-2 pd-y-15 mg-t-20 mg-sm-t-0">{{"浏览更多产品"|$.T}} <i class="fa fa-angle-right mg-l-5"></i></a>
             </div><!-- d-flex -->
         </div><!-- container -->
     </div><!-- container-wrapper -->
@@ -26,10 +26,9 @@
                     <div class="overlay">
                         <img src="{{$v.Image}}" class="img-fluid wd-100p shadow" alt="{{$v.Name}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
                         <div class="pos-absolute-bottom pd-25 bg-opacity-black-7">
-                            <!-- <span class="tx-white tx-uppercase tx-size-11 op-2">Groceries</span> -->
                             <h5 class="tx-white mg-b-15 tx-normal tx-shadow">{{$v.Name}}</h5>
                             <p class="mg-b-20 tx-white tx-light op-3 lh-7">{{$v.Summary}}</p>
-                            <a href="{{FrontendURL}}/product/detail/{{$v.Ident}}" class="btn btn-outline-white tx-size-11 tx-uppercase tx-semibold" target="_blank">{{"查看详情"|$.T}}</a>
+                            <a href="{{FrontendURL}}/product/detail/{{$v.Ident}}" class="btn btn-outline-white tx-size-11 tx-semibold" target="_blank">{{"查看详情"|$.T}}</a>
                         </div><!-- pos-absolute-bottom -->
                     </div><!-- overlay -->
                 </div>
@@ -57,7 +56,7 @@
                     </a>
                     {{end}}
                     <div class="card-block pd-25">
-                        <div class="d-flex justify-content-between align-items-center tx-uppercase tx-size-11 mg-b-5">
+                        <div class="d-flex justify-content-between align-items-center tx-size-11 mg-b-5">
                             <span class="d-inline-block tx-pink tx-medium">Food</span>
                             <span class="d-inline-block">{{(Date $v.Created).Format ($.RawT "2006年1月2日")}}</span>
                         </div><!-- d-flex -->
@@ -80,7 +79,7 @@
             </div><!-- card-columns -->
 
             <div class="pd-y-12 rounded tx-center bd bd-color-gray-lighter bg-white mg-t-40">
-                <a href="{{FrontendURL}}/articles" class="tx-gray tx-uppercase tx-medium">{{"浏览更多"|$.T}} <i class="fa fa-angle-right mg-l-5"></i></a>
+                <a href="{{FrontendURL}}/articles" class="tx-gray tx-medium">{{"浏览更多"|$.T}} <i class="fa fa-angle-right mg-l-5"></i></a>
             </div>
         </div><!-- container -->
     </div><!-- container-wrapper -->

@@ -26,7 +26,7 @@
 
 
         <div class="card-header bd-b-0 rounded-0 pd-0 bg-superlight">
-          <nav class="nav nav-outline nav-gray tx-bold tx-size-13 tx-uppercase pd-sm-x-20 flex-column flex-sm-row">{{$type := $.Form "type"}}
+          <nav class="nav nav-outline nav-gray tx-bold tx-size-13 pd-sm-x-20 flex-column flex-sm-row">{{$type := $.Form "type"}}
             <a href="{{FrontendURL}}/user/message/{{$boxType}}" class="nav-link pd-y-20{{if not $type}} active{{end}}">{{"所有消息"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
             <a href="{{FrontendURL}}/user/message/{{$boxType}}?type=unread" class="nav-link pd-y-20{{if eq $type `unread`}} active{{end}}">{{"未读消息"|$.RawT|UpperCaseFirst|$.ExtT}}</a>
           </nav><!-- nav -->

@@ -1,7 +1,7 @@
 {{- $isDark := $.ThemeInfo.IsColorName `dark` -}}
 <div class="card bd-0 rounded-0 mg-t-20">
     <div class="card-header bd-b-0 rounded-0 pd-0 bg-superlight">
-      <nav class="nav nav-outline nav-gray tx-bold tx-size-13 tx-uppercase pd-sm-x-20 flex-column flex-sm-row">{{$sort := $.Form `sort`}}
+      <nav class="nav nav-outline nav-gray tx-bold tx-size-13 pd-sm-x-20 flex-column flex-sm-row">{{$sort := $.Form `sort`}}
         <a href="{{$.URL.Path}}" class="nav-link pd-y-20{{if not $sort}} active{{end}}">{{`最新文章`|$.T}}</a>
         <a href="{{$.URL.Path}}?sort=-reviews" class="nav-link pd-y-20{{if eq $sort `-reviews`}} active{{end}}">{{`热门文章`|$.T}}</a>
         <a href="{{$.URL.Path}}?sort=-comments" class="nav-link pd-y-20{{if eq $sort `-comments`}} active{{end}}">{{`话题文章`|$.T}}</a>
