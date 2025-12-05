@@ -111,7 +111,12 @@ func Add(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArticle, m.Id)
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArticle, m.Id,
+			i18nm.OptionContentType(`content`, m.Contype),
+			i18nm.OptionContentType(`summary`, `text`),
+			i18nm.OptionContentType(`keywords`, `string`),
+			i18nm.OptionContentType(`title`, `string`),
+		)
 		if err != nil {
 			return err
 		}
@@ -193,7 +198,12 @@ func Edit(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArticle, m.Id)
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArticle, m.Id,
+			i18nm.OptionContentType(`content`, m.Contype),
+			i18nm.OptionContentType(`summary`, `text`),
+			i18nm.OptionContentType(`keywords`, `string`),
+			i18nm.OptionContentType(`title`, `string`),
+		)
 		if err != nil {
 			return err
 		}
