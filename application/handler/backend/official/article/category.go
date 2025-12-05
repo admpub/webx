@@ -114,7 +114,7 @@ func CategoryAdd(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonCategory, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonCategory, uint64(m.Id), i18nm.OptionContentType(`description`, `text`))
 		if err != nil {
 			return err
 		}
@@ -224,7 +224,7 @@ func CategoryEdit(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonCategory, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonCategory, uint64(m.Id), i18nm.OptionContentType(`description`, `text`))
 		if err != nil {
 			return err
 		}

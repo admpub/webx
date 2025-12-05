@@ -110,7 +110,7 @@ func NavigateAdd(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonNavigate, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonNavigate, uint64(m.Id), i18nm.OptionContentType(`remark`, `text`))
 		if err != nil {
 			return err
 		}
@@ -215,7 +215,7 @@ func NavigateEdit(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonNavigate, uint64(m.Id))
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonNavigate, uint64(m.Id), i18nm.OptionContentType(`remark`, `text`))
 		if err != nil {
 			return err
 		}
