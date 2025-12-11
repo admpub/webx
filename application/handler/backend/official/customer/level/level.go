@@ -6,12 +6,14 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
-	"github.com/webx-top/echo/formfilter"
 	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webcore/library/nsql"
+	"github.com/coscms/webfront/model/i18nm"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	modelLevel "github.com/coscms/webfront/model/official/level"
 )
@@ -37,40 +39,51 @@ func Index(ctx echo.Context) error {
 	return ctx.Render(`official/customer/level/index`, ret)
 }
 
-func formFilter(options ...formfilter.Options) echo.FormDataFilter {
-	options = append(
-		options,
-		formfilter.Exclude(`Created`, `Updated`),
-		formfilter.JoinValues(`RoleIds`),
-	)
-	return formfilter.Build(options...)
-}
-
 func Add(ctx echo.Context) error {
 	var err error
 	m := modelLevel.NewLevel(ctx)
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCustomerLevel, formFilter())
-		if err == nil {
-			if len(ctx.FormValues(`roleIds`)) == 0 {
-				m.RoleIds = ``
-			}
-			_, err = m.Add()
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/official/customer/level/index`))
-			}
-		}
-	} else {
+	if ctx.IsGet() {
 		id := ctx.Formx(`copyId`).Uint()
 		if id > 0 {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
-				echo.StructToForm(ctx, m.OfficialCustomerLevel, ``, echo.LowerCaseFirstLetter)
-				ctx.Request().Form().Set(`id`, `0`)
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCustomerLevel, uint64(id))
 			}
 		}
+
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialCustomerLevel,
+		formbuilder.ConfigFile(`official/customer/level/edit`),
+		formbuilder.AllowedNames(
+			`iconImage`, `iconClass`, `color`, `bgcolor`, `price`, `integralAsset`, `integralAmountType`, `integralMin`, `integralMax`, `score`, `disabled`, `group`, `roleIds`, `extra`, `name`, `short`, `description`,
+		),
+	)
+	form.OnPost(func() error {
+		if len(ctx.FormValues(`roleIds`)) == 0 {
+			m.RoleIds = ``
+		} else {
+			m.RoleIds = strings.Join(ctx.FormValues(`roleIds`), `,`)
+		}
+		_, err := m.Add()
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCustomerLevel, uint64(m.Id), i18nm.OptionContentType(`description`, `text`))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/official/customer/level/index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
 
 	ctx.Set(`activeURL`, `/official/customer/level/index`)
 	ctx.Set(`title`, ctx.T(`添加等级`))
@@ -106,47 +119,67 @@ func setFormData(ctx echo.Context, m *modelLevel.Level) {
 func Edit(ctx echo.Context) error {
 	var err error
 	id := ctx.Formx(`id`).Uint()
+	if id == 0 {
+		return ctx.NewError(code.InvalidParameter, `参数错误`).SetZone(`id`)
+	}
 	m := modelLevel.NewLevel(ctx)
 	err = m.Get(nil, db.Cond{`id`: id})
 	if err != nil {
 		return err
 	}
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCustomerLevel, formFilter())
-		if err == nil {
-			m.Id = id
-			if len(ctx.FormValues(`roleIds`)) == 0 {
-				m.RoleIds = ``
-			}
-			err = m.Edit(nil, db.Cond{`id`: id})
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/official/customer/level/index`))
-			}
-		}
-	} else if ctx.IsAjax() {
+	if ctx.IsGet() {
+		if ctx.IsAjax() {
 
-		disabled := ctx.Query(`disabled`)
-		if len(disabled) > 0 {
-			if !common.IsBoolFlag(disabled) {
-				return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
-			}
-			m.Disabled = disabled
-			data := ctx.Data()
-			err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
-			if err != nil {
-				data.SetError(err)
+			disabled := ctx.Query(`disabled`)
+			if len(disabled) > 0 {
+				if !common.IsBoolFlag(disabled) {
+					return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
+				}
+				m.Disabled = disabled
+				data := ctx.Data()
+				err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
+				if err != nil {
+					data.SetError(err)
+					return ctx.JSON(data)
+				}
+				data.SetInfo(ctx.T(`操作成功`))
 				return ctx.JSON(data)
 			}
-			data.SetInfo(ctx.T(`操作成功`))
-			return ctx.JSON(data)
-		}
 
-	} else if err == nil {
-		echo.StructToForm(ctx, m.OfficialCustomerLevel, ``, func(topName, fieldName string) string {
-			return echo.LowerCaseFirstLetter(topName, fieldName)
-		})
+		}
+		i18nm.SetModelTranslationsToForm(ctx, m.OfficialCustomerLevel, uint64(id))
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialCustomerLevel,
+		formbuilder.ConfigFile(`official/customer/level/edit`),
+		formbuilder.AllowedNames(
+			`iconImage`, `iconClass`, `color`, `bgcolor`, `price`, `integralAsset`, `integralAmountType`, `integralMin`, `integralMax`, `score`, `disabled`, `group`, `roleIds`, `extra`, `name`, `short`, `description`,
+		),
+	)
+	form.OnPost(func() error {
+		if len(ctx.FormValues(`roleIds`)) == 0 {
+			m.RoleIds = ``
+		} else {
+			m.RoleIds = strings.Join(ctx.FormValues(`roleIds`), `,`)
+		}
+		err := m.Edit(nil, db.Cond{`id`: id})
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCustomerLevel, uint64(m.Id), i18nm.OptionContentType(`description`, `text`))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/official/customer/level/index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
 
 	ctx.Set(`activeURL`, `/official/customer/level/index`)
 	ctx.Set(`title`, ctx.T(`编辑等级`))
