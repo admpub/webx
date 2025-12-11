@@ -57,13 +57,15 @@ import (
 	"github.com/admpub/webx/application/handler/frontend/index"
 	"github.com/coscms/webfront/version"
 
-	_ "github.com/coscms/webfront/model/i18nm/initialize"
-	_ "github.com/coscms/webfront/model/i18nm/translate"
-
 	// module
 	"github.com/admpub/nging/v5/application/handler/cloud"
 	"github.com/admpub/nging/v5/application/handler/task"
 	"github.com/nging-plugins/dbmanager"
+
+	// initialize i18n
+	_ "github.com/coscms/webfront/model/i18nm/initialize"
+	_ "github.com/coscms/webfront/model/i18nm/listener"
+	_ "github.com/coscms/webfront/model/i18nm/translate"
 )
 
 var (
