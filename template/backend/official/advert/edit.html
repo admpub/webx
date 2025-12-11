@@ -6,6 +6,7 @@
 <li class="active">{{if not $.Stored.isEdit}}{{"添加"|$.T}}{{else}}{{"修改"|$.T}}{{end}}</li>
 {{/Block}}
 {{Block "main"}}
+{{- $data := $.Stored.forms.Model -}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat no-padding">
@@ -13,14 +14,14 @@
             <h3>{{if not $.Stored.isEdit}}{{"添加广告"|$.T}}{{else}}{{"修改广告"|$.T}}{{end}}</h3>
           </div>
           <div class="content">
-              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="" id="advertForm">
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"广告名称"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" required name="name" value="{{$.Form "name"}}">
+                    <input type="text" class="form-control" required name="name" value="{{$data.Name}}">
                 </div>
                 <label class="col-sm-2 control-label">{{"广告位"|$.T}}</label>
-                <div class="col-sm-3">{{$positionId := ($.Formx `positionId`).Uint64}}
+                <div class="col-sm-3">{{- $positionId := $data.PositionId -}}
                   <select name="positionId" id="positionId" required class="form-control">
                     <option value=""> - {{`请选择`|$.T}} - </option>
                     {{- range $k, $v := $.Stored.positionList -}}
@@ -32,7 +33,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"广告类型"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{- $contype := $.Form "contype" "text" -}}
+                  {{- $contype := $data.Contype | Default "text" -}}
                   <select name="contype" required id="contype" class="form-control">
                     <option value=""> - {{`请选择`|$.T}} - </option>
                     {{- range $k, $v := $.Stored.contypes -}}
@@ -42,7 +43,7 @@
                 </div>
                 <label class="col-sm-2 control-label">{{"广告模式"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$mode := $.Form "mode" "CPC"}}
+                  {{- $mode := $data.Mode | Default "CPC" -}}
                   <select name="mode" id="mode" class="form-control">
                     <option value=""> - {{`请选择`|$.T}} - </option>
                     {{- range $k, $v := $.Stored.modes -}}
@@ -51,52 +52,38 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"广告内容"|$.T}}</label>
-                <div class="col-sm-8">
-                  <textarea class="form-control" name="content">{{$.Form "content"}}</textarea>
-                  <div class="help-block">
-                    <ol class="no-margin-bottom md-padding-left">
-                      {{- range $k, $v := $.Stored.contypes -}}
-                      {{- if $v.H.description -}}
-                      <li>{{$v.V|$.T|UpperCaseFirst}}: {{$v.H.description|$.T|UpperCaseFirst}}</li>
-                      {{- end -}}
-                      {{- end -}}
-                    </ol>
-                  </div>
-                </div>
-              </div>
+              {{- $.Stored.forms.Render -}}
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"跳转网址"|$.T}}</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" name="url" value="{{$.Form "url"}}">
+                  <input type="text" class="form-control" name="url" value="{{$data.Url}}">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"有效期"|$.T}}</label>
                 <div class="col-sm-8">
                   <div class="input-group">
-                      <input class="form-control" type="date" name="start" value="{{$.Form "start"}}">
+                      <input class="form-control" type="date" name="start" value="{{if gt $data.Start 0}}{{(Date $data.Start).Format `2006-01-02`}}{{end}}">
                       <span class="input-group-addon"> ~ </span>
-                      <input class="form-control" type="date" name="end" value="{{$.Form "end"}}">
+                      <input class="form-control" type="date" name="end" value="{{if gt $data.End 0}}{{(Date $data.End).Format `2006-01-02`}}{{end}}">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"序号"|$.T}}</label>
                 <div class="col-sm-8">
-                    <input class="form-control" type="number" name="sort" value="{{$.Form "sort"}}">
+                    <input class="form-control" type="number" name="sort" value="{{$data.Sort}}">
                 </div>
               </div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                   <div class="col-sm-8">
-                    {{$v := $.Form "disabled" "N"}}
+                    {{- $v := $data.Disabled | Default "N" -}}
                     <div class="radio radio-success radio-inline">
-                        <input type="radio" value="N" name="disabled" id="disabled-N"{{if eq $v "N"}} checked{{end}}> <label for="disabled-N">{{"显示"|$.T}}</label>
+                        <input type="radio" value="N" name="disabled" id="disabled-N"{{if eq $v `N`}} checked{{end}}> <label for="disabled-N">{{"显示"|$.T}}</label>
                     </div>
                       <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="Y" name="disabled" id="disabled-Y"{{if eq $v "Y"}} checked{{end}}> <label for="disabled-Y">{{"隐藏"|$.T}}</label>
+                        <input type="radio" value="Y" name="disabled" id="disabled-Y"{{if eq $v `Y`}} checked{{end}}> <label for="disabled-Y">{{"隐藏"|$.T}}</label>
                       </div>
                   </div>
                 </div>
@@ -111,4 +98,22 @@
         </div><!-- /.block-flat -->
     </div>
 </div>
+{{/Block}}
+{{Block "footer"}}
+<script type="text/template" id="content-help-block-tpl"><div class="help-block">
+<ol class="no-margin-bottom md-padding-left">
+  {{- range $k, $v := $.Stored.contypes -}}
+  {{- if $v.H.description -}}
+  <li>{{$v.V|$.T|UpperCaseFirst}}: {{$v.H.description|$.T|UpperCaseFirst}}</li>
+  {{- end -}}
+  {{- end -}}
+</ol>
+</div></script>
+<script>$(function(){
+  $('#content').parent().after($('#content-help-block-tpl').html());
+  $('#advertForm').find('textarea[name$="[content]"]').each(function(){
+    if(this.id=='content') return;
+    $(this).parent().after($('#content-help-block-tpl').html());
+  });
+})</script>
 {{/Block}}

@@ -1,8 +1,6 @@
 package advert
 
 import (
-	"time"
-
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
@@ -68,7 +66,11 @@ func Add(ctx echo.Context) error {
 			if err == nil {
 				m.Id = 0
 				i18nm.SetModelTranslationsToForm(ctx, m.OfficialAdItem, id)
+			} else {
+				m.Sort = 500
 			}
+		} else {
+			m.Sort = 500
 		}
 	}
 	form := formbuilder.New(ctx,
@@ -117,49 +119,60 @@ func setFormData(ctx echo.Context) {
 func Edit(ctx echo.Context) error {
 	var err error
 	id := ctx.Formx(`id`).Uint64()
+	if id == 0 {
+		return ctx.NewError(code.InvalidParameter, `参数错误`).SetZone(`id`)
+	}
 	m := modelAdvert.NewAdItem(ctx)
 	err = m.Get(nil, db.Cond{`id`: id})
 	if err != nil {
 		return err
 	}
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialAdItem, formFilter())
-		if err == nil {
-			m.Id = id
-			err = m.Edit(nil, db.Cond{`id`: id})
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/official/advert/index`))
-			}
-		}
-	} else if ctx.IsAjax() {
-		disabled := ctx.Query(`disabled`)
-		if len(disabled) > 0 {
-			if !common.IsBoolFlag(disabled) {
-				return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
-			}
-			m.Disabled = disabled
-			data := ctx.Data()
-			err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
-			if err != nil {
-				data.SetError(err)
+	if ctx.IsGet() {
+		if ctx.IsAjax() {
+			disabled := ctx.Query(`disabled`)
+			if len(disabled) > 0 {
+				if !common.IsBoolFlag(disabled) {
+					return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
+				}
+				m.Disabled = disabled
+				data := ctx.Data()
+				err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
+				if err != nil {
+					data.SetError(err)
+					return ctx.JSON(data)
+				}
+				data.SetInfo(ctx.T(`操作成功`))
 				return ctx.JSON(data)
 			}
-			data.SetInfo(ctx.T(`操作成功`))
-			return ctx.JSON(data)
 		}
-	} else if err == nil {
-		echo.StructToForm(ctx, m.OfficialAdItem, ``, echo.LowerCaseFirstLetter)
-		var startDate, endDate string
-		if m.OfficialAdItem.Start > 0 {
-			startDate = time.Unix(int64(m.OfficialAdItem.Start), 0).Format(`2006-01-02`)
-		}
-		ctx.Request().Form().Set(`start`, startDate)
-		if m.OfficialAdItem.End > 0 {
-			endDate = time.Unix(int64(m.OfficialAdItem.End), 0).Format(`2006-01-02`)
-		}
-		ctx.Request().Form().Set(`end`, endDate)
+		i18nm.SetModelTranslationsToForm(ctx, m.OfficialAdItem, id)
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialAdItem,
+		formbuilder.ConfigFile(`official/advert/edit`),
+		formbuilder.AllowedNames(
+			`name`, `positionId`, `contype`, `mode`, `content`, `url`, `start`, `end`, `sort`, `disabled`,
+		),
+	)
+	form.OnPost(func() error {
+		err := m.Edit(nil, db.Cond{`id`: id})
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialAdItem, m.Id,
+			i18nm.OptionContentType(`content`, m.Contype),
+		)
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/official/advert/index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
 
 	ctx.Set(`activeURL`, `/official/advert/index`)
 	ctx.Set(`isEdit`, true)
