@@ -57,7 +57,9 @@ func Add(ctx echo.Context) error {
 		m.OfficialCustomerLevel,
 		formbuilder.ConfigFile(`official/customer/level/edit`),
 		formbuilder.AllowedNames(
-			`iconImage`, `iconClass`, `color`, `bgcolor`, `price`, `integralAsset`, `integralAmountType`, `integralMin`, `integralMax`, `score`, `disabled`, `group`, `roleIds`, `extra`, `name`, `short`, `description`,
+			`iconImage`, `iconClass`, `color`, `bgcolor`, `price`,
+			`integralAsset`, `integralAmountType`, `integralMin`, `integralMax`,
+			`score`, `disabled`, `group`, `roleIds`, `extra`, `name`, `short`, `description`,
 		),
 	)
 	form.OnPost(func() error {
@@ -153,7 +155,9 @@ func Edit(ctx echo.Context) error {
 		m.OfficialCustomerLevel,
 		formbuilder.ConfigFile(`official/customer/level/edit`),
 		formbuilder.AllowedNames(
-			`iconImage`, `iconClass`, `color`, `bgcolor`, `price`, `integralAsset`, `integralAmountType`, `integralMin`, `integralMax`, `score`, `disabled`, `group`, `roleIds`, `extra`, `name`, `short`, `description`,
+			`iconImage`, `iconClass`, `color`, `bgcolor`, `price`,
+			`integralAsset`, `integralAmountType`, `integralMin`, `integralMax`,
+			`score`, `disabled`, `group`, `roleIds`, `extra`, `name`, `short`, `description`,
 		),
 	)
 	form.OnPost(func() error {

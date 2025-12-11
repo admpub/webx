@@ -14,8 +14,8 @@ btnstemplate: ""
 elements:
     - id: ""
       type: text
-      name: name
-      label: 等级名称
+      name: title
+      label: 套餐标题
       labelcols: 0
       fieldcols: 0
       labelclasses: []
@@ -34,7 +34,7 @@ elements:
     - id: ""
       type: textarea
       name: description
-      label: 说明
+      label: 套餐简介
       labelcols: 0
       fieldcols: 0
       labelclasses: []
@@ -46,7 +46,9 @@ elements:
         - - class
           - resize-y
         - - maxlength
-          - 255
+          - 2000
+        - - rows
+          - 10
       choices: []
       elements: []
       format: ""

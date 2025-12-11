@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{{AssetsURL}}/js/jquery.uploadPreviewer/css/jquery.uploadPreviewer.min.css?t={{BuildTime}}" type="text/css" />
 {{/Block}}
 {{Block "main"}}
+{{- $data := $.Stored.forms.Model -}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat no-padding">
@@ -19,7 +20,7 @@
               <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"等级组"|$.T}}</label>
-                <div class="col-sm-8">{{$group := $.Form `group` `base`}}
+                <div class="col-sm-8">{{- $group := $data.Group | Default `base` -}}
                   {{- range $k,$v := $.Stored.groupList}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="{{$v.K}}" name="group" id="group-{{$v.K}}" {{- if or (and (not $group) (eq $v.K `base`)) (eq $group $v.K)}} checked="checked" {{end}}>
@@ -28,31 +29,20 @@
                   {{- end}}
                 </div>
               </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"套餐标题"|$.T}}</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" required name="title" value="{{$.Form `title`}}">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"套餐简介"|$.T}}</label>
-                <div class="col-sm-8">
-                    <textarea type="text" class="form-control" name="description" maxlength="2000" placeholder="" data-parsley-trigger="keyup" data-parsley-maxlength="2000" data-parsley-validation-threshold="10" rows="10">{{$.Form `description`}}</textarea>
-                </div>
-              </div>
+              {{- $.Stored.forms.Render -}}
               <div class="form-group">
                 <label class="col-sm-2 control-label required">{{"价格"|$.T}}</label>
                 <div class="col-sm-3">
                   <span class="input-group">
-                    <input type="number" class="form-control" required name="price" value="{{$.Form `price`}}" min="0.01" step="0.01" placeholder="{{`精确到两位小数`|$.T}}">
+                    <input type="number" class="form-control" required name="price" value="{{$data.Price}}" min="0.01" step="0.01" placeholder="{{`精确到两位小数`|$.T}}">
                     <span class="input-group-addon">{{`元`|$.T}}</span>
                   </span>
                 </div>
                 <label class="col-sm-2 control-label">{{"时长"|$.T}}</label>
                 <div class="col-sm-3">
                   <span class="input-group">
-                    <input type="number" class="form-control" required name="timeDuration" value="{{$.Form `timeDuration`}}" min="1" step="1" placeholder="{{`不小于0的整数`|$.T}}">
-                    <span class="input-group-addon no-padding no-border" style="min-width:60px">{{$timeUnit := $.Form `timeUnit`}}
+                    <input type="number" class="form-control" required name="timeDuration" value="{{$data.TimeDuration}}" min="1" step="1" placeholder="{{`不小于0的整数`|$.T}}">
+                    <span class="input-group-addon no-padding no-border" style="min-width:60px">{{- $timeUnit := $data.TimeUnit -}}
                       <select name="timeUnit" class="form-control" required id="timeUnit">
                         {{- range $k, $v := $.Stored.timeUnits -}}
                         <option value="{{$v.K}}"{{if eq $v.K $timeUnit}} selected{{end}}>{{$v.V|$.T}}</option>
@@ -64,7 +54,7 @@
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"图片图标"|$.T}}</label>
-                <div class="col-sm-8">{{$iconImage := $.Form `iconImage`}}
+                <div class="col-sm-8">{{- $iconImage := $data.IconImage -}}
                   {{- $.Set `fileInputConfig` (MakeMap `name` `iconImage` `value` $iconImage `subdir` `membership`) -}}
                   {{Include "common/file_input" $}}
                 </div>
@@ -72,18 +62,18 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"字体图标"|$.T}}</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="iconClass" value="{{$.Form `iconClass`}}" placeholder="icon ion-model-s">
+                    <input type="text" class="form-control" name="iconClass" value="{{$data.IconClass}}" placeholder="icon ion-model-s">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"排序"|$.T}}</label>
                 <div class="col-sm-3">
-                  <input type="number" class="form-control" name="sort" value="{{$.Form `sort`}}" step="1" placeholder="{{`支持负数。采用从小到大排列`|$.T}}">
+                  <input type="number" class="form-control" name="sort" value="{{$data.Sort}}" step="1" placeholder="{{`支持负数。采用从小到大排列`|$.T}}">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{`是否禁用`|$.T}}</label>
-                <div class="col-sm-3">{{$v := $.Form `disabled` `N`}}
+                <div class="col-sm-3">{{- $v := $data.Disabled | Default `N` -}}
                   <div class="radio radio-success radio-inline">
                     <input type="radio" value="N" name="disabled" id="disabled-N" {{- if eq $v `N`}} checked="checked" {{end}}>
                     <label for="disabled-N">{{`启用`|$.T}}</label>
@@ -94,7 +84,7 @@
                   </div>
                 </div>
                 <label class="col-sm-2 control-label">{{`是否推荐`|$.T}}</label>
-                <div class="col-sm-3">{{$v := $.Form `recommend` `N`}}
+                <div class="col-sm-3">{{- $v := $data.Recommend | Default `N` -}}
                   <div class="radio radio-warning radio-inline">
                     <input type="radio" value="Y" name="recommend" id="recommend-Y" {{- if eq $v `Y`}} checked="checked" {{end}}>
                     <label for="recommend-Y">{{`是`|$.T}}</label>
