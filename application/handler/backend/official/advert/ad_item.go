@@ -10,6 +10,8 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/formbuilder"
+	"github.com/coscms/webfront/model/i18nm"
 	modelAdvert "github.com/coscms/webfront/model/official/advert"
 )
 
@@ -59,25 +61,42 @@ func formFilter() echo.FormDataFilter {
 func Add(ctx echo.Context) error {
 	m := modelAdvert.NewAdItem(ctx)
 	var err error
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialAdItem, formFilter())
-		if err == nil {
-			_, err = m.Add()
-		}
-		if err == nil {
-			common.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(backend.URLFor(`/official/advert/index`))
-		}
-	} else {
+	if ctx.IsGet() {
 		id := ctx.Formx(`copyId`).Uint64()
 		if id > 0 {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
-				echo.StructToForm(ctx, m.OfficialAdItem, ``, echo.LowerCaseFirstLetter)
-				ctx.Request().Form().Set(`id`, `0`)
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(ctx, m.OfficialAdItem, id)
 			}
 		}
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialAdItem,
+		formbuilder.ConfigFile(`official/advert/edit`),
+		formbuilder.AllowedNames(
+			`name`, `positionId`, `contype`, `mode`, `content`, `url`, `start`, `end`, `sort`, `disabled`,
+		),
+	)
+	form.OnPost(func() error {
+		_, err := m.Add()
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialAdItem, m.Id,
+			i18nm.OptionContentType(`content`, m.Contype),
+		)
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`添加成功`))
+		return ctx.Redirect(backend.URLFor(`/official/advert/index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
 
 	ctx.Set(`activeURL`, `/official/advert/index`)
 	ctx.Set(`isEdit`, false)

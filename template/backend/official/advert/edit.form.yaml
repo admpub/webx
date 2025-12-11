@@ -1,0 +1,34 @@
+id: Forms
+theme: bootstrap3
+template: "allfields"
+method: POST
+action: ""
+attributes:
+    - - class
+      - form-horizontal
+    - - role
+      - form
+withbuttons: false
+buttons: []
+btnstemplate: ""
+elements:
+    - id: "content"
+      type: textarea
+      name: content
+      label: 广告内容
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: []
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+languages: []
+data: {}
+trimnameprefix: ""
