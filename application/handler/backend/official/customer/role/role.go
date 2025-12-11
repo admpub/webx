@@ -24,8 +24,11 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webfront/library/xrole"
 	"github.com/coscms/webfront/library/xrole/xroleutils"
+	"github.com/coscms/webfront/model/i18nm"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
@@ -40,27 +43,13 @@ func Add(ctx echo.Context) error {
 	var err error
 	m := modelCustomer.NewRole(ctx)
 	permission := xrole.NewRolePermission()
-	if ctx.IsPost() {
-		ctx.Begin()
-		err = ctx.MustBind(m.OfficialCustomerRole)
-		if err == nil {
-			_, err = m.Add()
-		}
-		if err == nil {
-			err = xroleutils.AddCustomerRolePermission(ctx, m.Id)
-		}
-		ctx.End(err == nil)
-		if err == nil {
-			common.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(backend.URLFor(`/official/customer/role/index`))
-		}
-	} else {
+	if ctx.IsGet() {
 		id := ctx.Formx(`copyId`).Uint()
 		if id > 0 {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
-				echo.StructToForm(ctx, m.OfficialCustomerRole, ``, echo.LowerCaseFirstLetter)
-				ctx.Request().Form().Set(`id`, `0`)
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCustomerRole, uint64(id))
 				rpM := modelCustomer.NewRolePermission(ctx)
 				rpM.ListByOffset(nil, nil, 0, -1, `role_id`, m.Id)
 				permissionList := []*xrole.CustomerRoleWithPermissions{
@@ -72,7 +61,43 @@ func Add(ctx echo.Context) error {
 				permission.Init(permissionList)
 			}
 		}
+
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialCustomerRole,
+		formbuilder.ConfigFile(`official/customer/role/edit`),
+		formbuilder.AllowedNames(
+			`parentId`, `disabled`, `isDefault`, `name`, `description`,
+		),
+	)
+	form.OnPost(func() error {
+		ctx.Begin()
+		_, err := m.Add()
+		if err != nil {
+			ctx.Rollback()
+			return err
+		}
+		err = xroleutils.AddCustomerRolePermission(ctx, m.Id)
+		if err != nil {
+			ctx.Rollback()
+			return err
+		}
+		ctx.Commit()
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCustomerRole, uint64(m.Id), i18nm.OptionContentType(`description`, `text`))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/official/customer/role/index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
+
 	ctx.Set(`activeURL`, `/official/customer/role/index`)
 	ctx.Set(`data`, m)
 	ctx.Set(`permission`, permission)
@@ -89,26 +114,44 @@ func Edit(ctx echo.Context) error {
 		common.SendFail(ctx, err.Error())
 		return ctx.Redirect(backend.URLFor(`/official/customer/role/index`))
 	}
-	if ctx.IsPost() {
-		ctx.Begin()
-		err = ctx.MustBind(m.OfficialCustomerRole)
-		if err == nil {
-			m.Id = id
-		}
-		if err == nil {
-			err = m.Edit(nil, `id`, id)
-		}
-		if err == nil {
-			err = xroleutils.EditCustomerRolePermission(ctx, m.Id)
-		}
-		ctx.End(err == nil)
-		if err == nil {
-			common.SendOk(ctx, ctx.T(`修改成功`))
-			return ctx.Redirect(backend.URLFor(`/official/customer/role/index`))
-		}
+	if ctx.IsGet() {
+		i18nm.SetModelTranslationsToForm(ctx, m.OfficialCustomerRole, uint64(id))
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialCustomerRole,
+		formbuilder.ConfigFile(`official/customer/role/edit`),
+		formbuilder.AllowedNames(
+			`parentId`, `disabled`, `isDefault`, `name`, `description`,
+		),
+	)
+	form.OnPost(func() error {
+		ctx.Begin()
+		err := m.Edit(nil, db.Cond{`id`: id})
+		if err != nil {
+			ctx.Rollback()
+			return err
+		}
+		err = xroleutils.EditCustomerRolePermission(ctx, m.Id)
+		if err != nil {
+			ctx.Rollback()
+			return err
+		}
+		ctx.Commit()
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCustomerRole, uint64(m.Id), i18nm.OptionContentType(`description`, `text`))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`修改成功`))
+		return ctx.Redirect(backend.URLFor(`/official/customer/role/index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
 
-	echo.StructToForm(ctx, m.OfficialCustomerRole, ``, echo.LowerCaseFirstLetter)
 	ctx.Set(`activeURL`, `/official/customer/role/index`)
 	ctx.Set(`data`, m)
 	rpM := modelCustomer.NewRolePermission(ctx)

@@ -12,6 +12,9 @@ import (
 	"github.com/admpub/webx/application/handler/backend/official/page"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/formbuilder"
+	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 )
 
@@ -43,35 +46,44 @@ func FrontendRoutePageAdd(ctx echo.Context) error {
 	var err error
 	m := official.NewRoutePage(ctx)
 	templateFiles := page.ListTemplateFileNames(`route_page`)
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCommonRoutePage, echo.ExcludeFieldName(`updated`))
-		if err == nil {
-			m.Method = strings.Join(ctx.FormxValues(`method[]`), `,`)
-			_, err = m.Add()
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/manager/frontend/route_page`))
-			}
-		}
-	} else {
+	if ctx.IsGet() {
 		id := ctx.Formx(`copyId`).Uint64()
 		if id > 0 {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
-				echo.StructToForm(ctx, m.OfficialCommonRoutePage, ``, echo.LowerCaseFirstLetter)
-				ctx.Request().Form().Set(`id`, `0`)
-				if len(m.Method) > 0 {
-					for k, v := range strings.Split(m.Method, `,`) {
-						if k == 0 {
-							ctx.Request().Form().Set(`method[]`, v)
-						} else {
-							ctx.Request().Form().Add(`method[]`, v)
-						}
-					}
-				}
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonRoutePage, id)
 			}
 		}
+
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonRoutePage,
+		formbuilder.ConfigFile(`official/manager/frontend/route_page_edit`),
+		formbuilder.AllowedNames(
+			`pageType`, `method`, `route`, `pageVars`, `templateEnabled`, `templateFile`, ``, `disabled`, `name`, `pageContent`,
+		),
+	)
+	form.OnPost(func() error {
+		m.Method = strings.Join(ctx.FormxValues(`method[]`), `,`)
+		_, err := m.Add()
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonRoutePage, m.Id, i18nm.OptionContentType(`pageContent`, m.PageType))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/manager/frontend/route_page`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
 
 	ctx.Set(`activeURL`, `/manager/frontend/route_page`)
 	ctx.Set(`title`, ctx.T(`添加自定义页面`))
@@ -89,44 +101,57 @@ func FrontendRoutePageEdit(ctx echo.Context) error {
 	id := ctx.Formx(`id`).Uint64()
 	m := official.NewRoutePage(ctx)
 	err = m.Get(nil, db.Cond{`id`: id})
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCommonRoutePage, echo.ExcludeFieldName(`created`))
-		if err == nil {
-			m.Method = strings.Join(ctx.FormxValues(`method[]`), `,`)
-			err = m.Edit(nil, db.Cond{`id`: id})
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/manager/frontend/route_page`))
-			}
-		}
-	} else if ctx.IsAjax() {
-		disabled := ctx.Query(`disabled`)
-		if len(disabled) > 0 {
-			if !common.IsBoolFlag(disabled) {
-				return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
-			}
-			m.Disabled = disabled
-			data := ctx.Data()
-			err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
-			if err != nil {
-				data.SetError(err)
+	if err != nil {
+		return err
+	}
+
+	if ctx.IsGet() {
+		if ctx.IsAjax() {
+			disabled := ctx.Query(`disabled`)
+			if len(disabled) > 0 {
+				if !common.IsBoolFlag(disabled) {
+					return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
+				}
+				m.Disabled = disabled
+				data := ctx.Data()
+				err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
+				if err != nil {
+					data.SetError(err)
+					return ctx.JSON(data)
+				}
+				data.SetInfo(ctx.T(`操作成功`))
 				return ctx.JSON(data)
 			}
-			data.SetInfo(ctx.T(`操作成功`))
-			return ctx.JSON(data)
 		}
-	} else if err == nil {
-		echo.StructToForm(ctx, m.OfficialCommonRoutePage, ``, echo.LowerCaseFirstLetter)
-		if len(m.Method) > 0 {
-			for k, v := range strings.Split(m.Method, `,`) {
-				if k == 0 {
-					ctx.Request().Form().Set(`method[]`, v)
-				} else {
-					ctx.Request().Form().Add(`method[]`, v)
-				}
-			}
-		}
+		i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonRoutePage, id)
 	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonRoutePage,
+		formbuilder.ConfigFile(`official/manager/frontend/route_page_edit`),
+		formbuilder.AllowedNames(
+			`pageType`, `method`, `route`, `pageVars`, `templateEnabled`, `templateFile`, ``, `disabled`, `name`, `pageContent`,
+		),
+	)
+	form.OnPost(func() error {
+		m.Method = strings.Join(ctx.FormxValues(`method[]`), `,`)
+		err := m.Edit(nil, db.Cond{`id`: id})
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonRoutePage, m.Id, i18nm.OptionContentType(`pageContent`, m.PageType))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/manager/frontend/route_page`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
 
 	ctx.Set(`activeURL`, `/manager/frontend/route_page`)
 	ctx.Set(`title`, ctx.T(`编辑自定义页面`))

@@ -1,6 +1,6 @@
 $(function(){
-function setPageContentEditor(v){
-    var editor=$('#pageContent').data('codemirror');
+function setPageContentEditor(elem,v){
+    var editor=$(elem).data('codemirror');
     if(!editor){
         window.setTimeout(function(){setPageContentEditor(v)},500);
         return;
@@ -8,6 +8,7 @@ function setPageContentEditor(v){
     var mime=type2mime(v);
     editor.setOption("mode", mime);
     editor.refresh();
+    //console.log('refresh',mime);
 }
 function type2mime(v){
     var mime='';
@@ -26,17 +27,31 @@ App.editor.codemirror('#pageVars', {
     theme: 'ambiance',
     mode:  "application/javascript"
 },'json');
-App.editor.codemirror('#pageContent', {
-    lineNumbers: true,
-    theme: 'ambiance',
-    mode:  type2mime(checkedPageType.val()),
-});
+function initCodeMirror(elem){
+    App.editor.codemirror(elem, { lineNumbers: true, theme: 'ambiance', mode:  type2mime(checkedPageType.val()) });
+}
+function setAllEditor(cb){
+    $('#routePageEditForm').find('textarea[name$="[pageContent]"]').each(function(){
+        if(this.id=='pageContent') return;
+        cb('#'+this.id);
+    })
+    cb('#pageContent');
+}
+setAllEditor(initCodeMirror);
 $('#routePageEditForm input[name=pageType]').on('click',function(){
     var v=$(this).val(),$form=$('#routePageEditForm');
     $form.find('.pageType-hide-'+v).hide();
     $form.find('.pageType-show-'+v).show();
     $form.find('[class^="pageType-hide"]:not(.pageType-hide-'+v+')').show();
-    setPageContentEditor(v);
+    setAllEditor(function(elem){
+        setPageContentEditor(elem,v);
+    })
 });
+$('#routePageEditForm').find('.langset > .nav-tabs > li').on('click',function(){
+    var tabContentE=$(this).children('a').attr('href');
+    var editor=$(tabContentE).find('textarea[name$="[pageContent]"]').data('codemirror');
+    if(!editor) return;
+    setTimeout(function(){editor.refresh();},200);
+})
 checkedPageType.trigger('click');
 });

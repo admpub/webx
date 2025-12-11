@@ -8,7 +8,10 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webcore/library/nsql"
+	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 )
 
@@ -45,37 +48,47 @@ func AreaIndex(ctx echo.Context) error {
 func AreaAdd(ctx echo.Context) error {
 	var err error
 	m := official.NewArea(ctx)
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCommonArea, echo.ExcludeFieldName(`updated`))
-		if err == nil {
-			var added []string
-			added, err = common.BatchAdd(ctx, `name`, m, func(_ *string) error {
-				m.Id = 0
-				return nil
-			})
-			if err == nil && len(added) == 0 {
-				err = ctx.E(`地区名称不能为空`)
-			}
-		}
-		if err == nil {
-			common.SendOk(ctx, ctx.T(`操作成功`))
-			return ctx.Redirect(backend.URLFor(`/tool/area/index`))
-		}
-	} else {
+	var pids []uint
+	if ctx.IsGet() {
 		id := ctx.Formx(`copyId`).Uint()
 		if id > 0 {
 			err = m.Get(nil, `id`, id)
 			if err == nil {
-				echo.StructToForm(ctx, m.OfficialCommonArea, ``, echo.LowerCaseFirstLetter)
-				ctx.Request().Form().Set(`id`, `0`)
-				pids, _ := m.PositionIds(m.Pid)
-				for _, pid := range pids {
-					ctx.Request().Form().Add("pids[]", param.AsString(pid))
-				}
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonArea, uint64(id))
+				pids, _ = m.PositionIds(m.Pid)
 			}
 		}
-	}
 
+	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonArea,
+		formbuilder.ConfigFile(`official/tool/area/edit`),
+		formbuilder.AllowedNames(
+			`countryAbbr`, `name`, `short`, `merged`, `pid`, `pinyin`, `code`, `zip`, `lng`, `lat`,
+		),
+	)
+	form.OnPost(func() error {
+		_, err := m.Add()
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArea, uint64(m.Id))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/tool/area/group_index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
+
+	ctx.Set(`pids`, pids)
 	ctx.Set(`activeURL`, `/tool/area/index`)
 	ctx.Set(`title`, ctx.T(`添加地区`))
 	return ctx.Render(`official/tool/area/edit`, err)
@@ -84,26 +97,47 @@ func AreaAdd(ctx echo.Context) error {
 func AreaEdit(ctx echo.Context) error {
 	var err error
 	id := ctx.Formx(`id`).Uint()
+	if id == 0 {
+		return ctx.NewError(code.InvalidParameter, `参数错误`).SetZone(`id`)
+	}
 	m := official.NewArea(ctx)
 	err = m.Get(nil, db.Cond{`id`: id})
-	if ctx.IsPost() {
-		err = ctx.MustBind(m.OfficialCommonArea, echo.ExcludeFieldName(`created`, `updated`))
-		if err == nil {
-			m.Id = id
-			err = m.Edit(nil, db.Cond{`id`: id})
-			if err == nil {
-				common.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(backend.URLFor(`/tool/area/index`))
-			}
-		}
-	} else if err == nil {
-		echo.StructToForm(ctx, m.OfficialCommonArea, ``, echo.LowerCaseFirstLetter)
-		pids, _ := m.PositionIds(m.Pid)
-		for _, pid := range pids {
-			ctx.Request().Form().Add("pids[]", param.AsString(pid))
-		}
+	if err != nil {
+		return err
 	}
+	var pids []uint
+	if ctx.IsGet() {
+		i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonArea, uint64(id))
+		pids, _ = m.PositionIds(m.Pid)
+	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonArea,
+		formbuilder.ConfigFile(`official/tool/area/edit`),
+		formbuilder.AllowedNames(
+			`countryAbbr`, `name`, `short`, `merged`, `pid`, `pinyin`, `code`, `zip`, `lng`, `lat`,
+		),
+	)
+	form.OnPost(func() error {
+		err := m.Edit(nil, db.Cond{`id`: id})
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonArea, uint64(m.Id))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`操作成功`))
+		return ctx.Redirect(backend.URLFor(`/tool/area/group_index`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
 
+	ctx.Set(`pids`, pids)
 	ctx.Set(`activeURL`, `/tool/area/index`)
 	ctx.Set(`title`, ctx.T(`编辑地区`))
 	return ctx.Render(`official/tool/area/edit`, err)

@@ -7,6 +7,7 @@
 {{/Block}}
 {{Block "main"}}
 <style>.select-parent-id{width:200px;display:inline;}</style>
+{{- $data := $.Stored.forms.Model -}}
 <div class="row">
   <div class="col-md-12">
     <div class="block-flat no-padding">
@@ -15,52 +16,43 @@
       </div>
       <div class="content">
         <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
-          <input type="hidden" name="id" value="{{$.Form `id`}}">
+          <input type="hidden" name="id" value="{{$data.Id}}">
           <div class="form-group">
             <label class="col-sm-2 control-label">{{`上级地区`|$.T}}</label>
             <div class="col-sm-8">
-              <select name="pids[]" class="form-control select-parent-id" id="select-parent-id" data-target="#pid" data-exclude="{{$.Form `id`}}"></select>
-              <input type="hidden" id="pid" class="form-control" name="pid" value="{{$.Form `pid`}}" maxlength="100" />
+              <select name="pids[]" class="form-control select-parent-id" id="select-parent-id" data-target="#pid" data-exclude="{{$data.Id}}"></select>
+              <input type="hidden" id="pid" class="form-control" name="pid" value="{{$data.Pid}}" maxlength="100" />
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">{{`地区名`|$.T}}</label>
-            <div class="col-sm-3">
-              <input type="text" class="form-control" name="name" value="{{$.Form `name`}}" maxlength="100" />
-            </div>
-            <label class="col-sm-2 control-label">{{`简称`|$.T}}</label>
-            <div class="col-sm-3">
-              <input type="text" class="form-control" name="short" value="{{$.Form `short`}}" maxlength="100" />
-            </div>
-          </div>
+          {{- $.Stored.forms.Render -}}
           <div class="form-group">
             <label class="col-sm-2 control-label">{{`拼音`|$.T}}</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" name="pinyin" value="{{$.Form `pinyin`}}" maxlength="100" />
+              <input type="text" class="form-control" name="pinyin" value="{{$data.Pinyin}}" maxlength="100" />
             </div>
             <label class="col-sm-2 control-label">{{`国家码`|$.T}}</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" name="countryAbbr" value="{{$.Form `countryAbbr` `CN`}}" maxlength="2" placeholder="{{`例如: CN`|$.T}}" />
+              <input type="text" class="form-control" name="countryAbbr" value="{{$data.CountryAbbr | Default `CN`}}" maxlength="2" placeholder="{{`例如: CN`|$.T}}" />
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">{{"区号"|$.T}}</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="code" value="{{$.Form `code`}}" maxlength="100">
+                <input type="text" class="form-control" name="code" value="{{$data.Code}}" maxlength="100">
             </div>
             <label class="col-sm-2 control-label">{{`邮编`|$.T}}</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" name="zip" value="{{$.Form `zip`}}" maxlength="100" />
+              <input type="text" class="form-control" name="zip" value="{{$data.Zip}}" maxlength="100" />
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">{{"经度"|$.T}}</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="lng" value="{{$.Form `lng`}}" maxlength="100">
+                <input type="text" class="form-control" name="lng" value="{{$data.Lng}}" maxlength="100">
             </div>
             <label class="col-sm-2 control-label">{{`纬度`|$.T}}</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" name="lat" value="{{$.Form `lat`}}" maxlength="100" />
+              <input type="text" class="form-control" name="lat" value="{{$data.Lat}}" maxlength="100" />
             </div>
           </div>
           <div class="form-group form-submit-group">
@@ -79,7 +71,7 @@
 <script src="{{AssetsURL}}/js/behaviour/page/cascade-select.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
-  CascadeSelect.init('#select-parent-id',{{$.FormxValues `pids[]`|JSONEncode|ToJS}});
+  CascadeSelect.init('#select-parent-id',{{$.Stored.pids|JSONEncode|ToJS}});
 });
 </script>
 {{/Block}}

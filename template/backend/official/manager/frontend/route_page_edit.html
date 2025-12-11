@@ -6,6 +6,7 @@
 <li class="active">{{$.Stored.title}}</li>
 {{/Block}}
 {{Block "main"}}
+{{- $data := $.Stored.forms.Model -}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat no-padding">
@@ -18,51 +19,39 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"类型"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$pageType := $.Form `pageType` `text`}}
-                  {{range $k, $v := $.Stored.typeList}}
+                  {{- $pageType := $data.PageType | Default `text` -}}
+                  {{- range $k, $v := $.Stored.typeList -}}
                   <div class="radio radio-primary radio-inline">
                     <input type="radio" value="{{$v.K}}" id="page-type-{{$v.K}}" name="pageType"{{if eq $v.K $pageType}} checked="checked"{{end}}><label for="page-type-{{$v.K}}">{{$v.V}}</label> 
                   </div>
-                  {{end}}
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"页面名称"|$.T}}</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" name="name" value="{{$.Form `name`}}">
+                  {{- end -}}
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"路由方法"|$.T}}</label>
                 <div class="col-sm-8">
-                  {{$methods := $.FormxValues "method[]"}}
-                  {{range $k, $method := $.Stored.methodList}}
+                  {{- $methods := Split $data.Method "," -}}
+                  {{- range $k, $method := $.Stored.methodList -}}
                   <div class="checkbox checkbox-primary checkbox-inline"> 
                     <input type="checkbox" value="{{$method}}" id="method-{{$method}}" name="method[]"{{if call $.Func.methodChecked $method $methods}} checked{{end}}><label for="method-{{$method}}">{{$method}}</label>
                   </div>
-                  {{end}}
+                  {{- end -}}
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"页面路由"|$.T}}</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="route" value="{{$.Form `route`}}">
+                    <input type="text" class="form-control" name="route" value="{{$data.Route}}">
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"页面内容"|$.T}}</label>
-                <div class="col-sm-8">
-                    <textarea class="form-control" id="pageContent" name="pageContent" style="resize:vertical" rows="20">{{$.Form "pageContent"}}</textarea>
-                </div>
-              </div>
+              {{- $.Stored.forms.Render -}}
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"页面变量"|$.T}}</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control" id="pageVars" name="pageVars" style="resize:vertical" rows="10">{{$.Form "pageVars"}}</textarea>
+                    <textarea class="form-control" id="pageVars" name="pageVars" style="resize:vertical" rows="10">{{$data.PageVars}}</textarea>
                     <div class="help-block">
                       {{`JSON格式，如果留空则不会解析页面内容中的模板标签`|$.T}}<br />
                       {{$.T `例如，设置页面变量为 %s，在“页面内容”中就可以使用模板标签 %s 来访问` `<code>{"name":"test"}</code>` `<code>{{$.Data.name}}</code>` | ToHTML}} 
@@ -72,7 +61,7 @@
               <div class="pageType-hide-redirect form-group">
                 <label class="col-sm-2 control-label">{{"使用模板"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := $.Form "templateEnabled"}}
+                  {{- $v := $data.TemplateEnabled -}}
                   <div class="radio radio-primary radio-inline"> 
                     <input type="radio" value="Y" id="templateEnabled-Y" name="templateEnabled"{{if eq $v `Y`}} checked{{end}}><label for="templateEnabled-Y">{{"使用模板"|$.T}}</label> 
                   </div>
@@ -82,7 +71,7 @@
                 </div>
                 <label class="col-sm-2 control-label">{{"模板文件"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := $.Form "templateFile"}}
+                  {{- $v := $data.TemplateFile -}}
                   <select name="templateFile" id="templateFile" class="form-control">
                     <option value="">{{`请选择`|$.T}}</option>
                     {{- range $k, $tf := $.Stored.templateFiles -}}
@@ -95,7 +84,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                 <div class="col-sm-3">
-                  {{$v := $.Form "disabled"}}
+                  {{- $v := $data.Disabled -}}
                   <div class="radio radio-primary radio-inline"> 
                     <input type="radio" value="N" id="disabled-N" name="disabled"{{if eq $v `N` ``}} checked{{end}}><label for="disabled-N">{{"启用"|$.T}}</label>
                   </div>

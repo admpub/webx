@@ -17,6 +17,7 @@
 {{/Block}}
 {{Block "main"}}
 {{Strip}}
+{{- $data := $.Stored.forms.Model -}}
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat no-padding">
@@ -31,22 +32,11 @@
           </div>
           <div class="content">
               <form class="form-horizontal group-border-dashed" method="POST" action="">
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"角色名"|$.T}}</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" required name="name" value="{{$.Form `name`}}">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">{{"说明"|$.T}}</label>
-                <div class="col-sm-9">
-                  <textarea class="form-control" name="description">{{$.Form "description"}}</textarea>
-                </div>
-              </div>
+              {{- $.Stored.forms.Render -}}
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"状态"|$.T}}</label>
                 <div class="col-sm-9">
-                  {{$v := $.Form "disabled"}}
+                  {{- $v := $data.Disabled -}}
                   <span class="radio radio-success radio-inline">
                       <input type="radio" value="N" name="disabled"{{if eq $v `N` ``}} checked{{end}} id="disabled-N"> 
                       <label for="disabled-N">{{"启用"|$.T}}</label>
@@ -60,7 +50,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"默认"|$.T}}</label>
                 <div class="col-sm-9">
-                  {{$v := $.Form "isDefault" "N"}}
+                  {{- $v := $data.IsDefault | Default "N" -}}
                   <span class="radio radio-primary radio-inline">
                     <input type="radio" value="N" name="isDefault"{{if eq $v `N`}} checked{{end}} id="isDefault-N"> 
                     <label for="isDefault-N">{{"非默认"|$.T}}</label>

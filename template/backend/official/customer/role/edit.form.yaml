@@ -1,0 +1,55 @@
+id: Forms
+theme: bootstrap3
+template: "allfields"
+method: POST
+action: ""
+attributes:
+    - - class
+      - form-horizontal
+    - - role
+      - form
+withbuttons: false
+buttons: []
+btnstemplate: ""
+elements:
+    - id: ""
+      type: text
+      name: name
+      label: 角色名
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: 
+        - - maxlength
+          - 60
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: ""
+      type: textarea
+      name: description
+      label: 说明
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: 
+        - - class
+          - resize-y
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+languages: []
+data: {}
+trimnameprefix: ""
