@@ -3,6 +3,9 @@ package group
 import (
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/formbuilder"
+	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -41,6 +44,44 @@ func Index(ctx echo.Context) error {
 func Add(ctx echo.Context) error {
 	var err error
 	m := official.NewGroup(ctx)
+	if ctx.IsGet() {
+		id := ctx.Formx(`copyId`).Uint()
+		if id > 0 {
+			err = m.Get(nil, `id`, id)
+			if err == nil {
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonGroup, uint64(id))
+			}
+		}
+	}
+	form := formbuilder.New(ctx,
+		m.OfficialCommonGroup,
+		formbuilder.ConfigFile(`official/customer/group/edit`),
+		formbuilder.AllowedNames(
+			`type`, `parentId`, `cover`, `name`, `keywords`, `slugify`,
+			`description`, `template`, `showOnMenu`, `sort`, `disabled`,
+		),
+	)
+	form.OnPost(func() error {
+		_, err := m.Add()
+		if err != nil {
+			return err
+		}
+		err = i18nm.SaveModelTranslations(ctx, m.OfficialCommonGroup, uint64(m.Id), i18nm.OptionContentType(`description`, `text`))
+		if err != nil {
+			return err
+		}
+		common.SendOk(ctx, ctx.T(`添加成功`))
+		return ctx.Redirect(backend.URLFor(`/official/article/category`))
+	})
+	err = form.RecvSubmission()
+	if form.Exited() {
+		return form.Error()
+	}
+	form.Generate()
+	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
+	nameField.AddTag(`required`)
+
 	if ctx.IsPost() {
 		name := ctx.Form(`name`)
 		if len(name) == 0 {
