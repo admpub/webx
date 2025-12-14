@@ -185,12 +185,13 @@ func ListBy(c echo.Context, sourceID string, sourceTable string, categoryID ...u
 		i18nm.GetModelsTranslations(c, categories)
 	}
 	if len(tag) > 0 {
+		finalTag := tag
 		var err error
-		tag, err = i18nm.GetColumnDefaultLangText(c, `official_common_tags`, `name`, tag)
+		finalTag, err = i18nm.GetColumnDefaultLangText(c, `official_common_tags`, `name`, tag)
 		if err != nil {
 			return err
 		}
-		cond.Add(articleM.TagCond(tag))
+		cond.Add(articleM.TagCond(finalTag))
 	}
 	if len(query) > 0 {
 		cond.From(mysql.SearchField(`~title`, query))
@@ -243,12 +244,13 @@ func List(c echo.Context) error {
 		i18nm.GetModelsTranslations(c, categories)
 	}
 	if len(tag) > 0 {
+		finalTag := tag
 		var err error
-		tag, err = i18nm.GetColumnDefaultLangText(c, `official_common_tags`, `name`, tag)
+		finalTag, err = i18nm.GetColumnDefaultLangText(c, `official_common_tags`, `name`, tag)
 		if err != nil {
 			return err
 		}
-		cond.Add(articleM.TagCond(tag))
+		cond.Add(articleM.TagCond(finalTag))
 	}
 	if len(query) > 0 {
 		cond.From(mysql.SearchField(`~title`, query))
