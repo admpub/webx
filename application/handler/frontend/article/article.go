@@ -1,6 +1,8 @@
 package article
 
 import (
+	"strings"
+
 	"github.com/webx-top/db"
 	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
@@ -85,6 +87,21 @@ func Detail(c echo.Context) error {
 	}
 	i18nm.GetModelsTranslations(c, categories)
 	c.Set(`categories`, categories)
+
+	var tagList []*dbschema.OfficialCommonTags
+	if len(articleM.Tags) > 0 {
+		tagM := dbschema.NewOfficialCommonTags(c)
+		_, err = tagM.ListByOffset(nil, nil, 0, -1, db.And(
+			db.Cond{`name`: db.In(strings.Split(articleM.Tags, `,`))},
+			db.Cond{`group`: modelArticle.GroupName},
+		))
+		if err != nil {
+			return err
+		}
+		tagList = tagM.Objects()
+		i18nm.GetModelsTranslations(c, tagList)
+	}
+	c.Set(`tagList`, tagList)
 	var (
 		sourceInfo echo.KV
 		listURL    = c.URLFor(`/articles`)

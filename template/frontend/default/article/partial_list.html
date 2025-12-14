@@ -30,12 +30,12 @@
                 <i class="fa fa-comment"></i>
                 <span class="tx-size-12">{{$v.Comments}}<span class="hidden-xs-down"> Comments</span></span>
             </span>
-            {{- if $v.Tags -}}
+            {{- if $v.TagList -}}
             <span class="tx-gray-light d-inline-block nowrap">
                 <i class="fa fa-tags"></i>
-                {{range $tagK,$tagV := Split $v.Tags ","}}
-                {{- if gt $tagK 0}} / {{end -}}
-                <a href="{{FrontendURL}}/articles{{$.Ext}}?tag={{$tagV}}" class="tx-gray-light hover-info">{{$tagV}}</a>
+                {{- range $tagK,$tagV := $v.TagList}}
+                {{if gt $tagK 0}} / {{end -}}
+                <a href="{{FrontendURL}}/articles{{$.Ext}}?tag={{$tagV.Name}}" class="tx-gray-light hover-info">{{$tagV.Name}}</a>
                 {{- end -}}
             </span>
             {{- end -}}

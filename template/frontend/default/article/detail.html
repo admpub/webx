@@ -49,12 +49,12 @@
                   {{- end -}}
                   </span>
 
-                    {{- if $data.Tags -}}
+                    {{- if $.Stored.tagList -}}
                     <span class="d-inline-block mg-r-10" data-toggle="tooltip" title="{{`标签`|$.T}}">
                         <i class="fa fa-tags tx-gray-lighter"></i>
-                        {{range $tagK,$tagV := Split $data.Tags "," -}}
-                        {{- if gt $tagK 0}} / {{end -}}
-                        <a href="{{$.Stored.listURL}}?tag={{$tagV}}" class="tx-gray-light hover-info">{{$tagV}}</a>
+                        {{- range $tagK,$tagV := $.Stored.tagList}}
+                        {{if gt $tagK 0}} / {{end -}}
+                        <a href="{{$.Stored.listURL}}?tag={{$tagV.Name}}" class="tx-gray-light hover-info">{{$tagV.Name}}</a>
                         {{- end -}}
                     </span>
                     {{- end -}}

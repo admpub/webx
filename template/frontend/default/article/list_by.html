@@ -9,7 +9,7 @@
 <div class="bb-mainpanel">
     {{Include "#default#article/partial_list_top"}}
 
-    <div class="container pd-b-40">{{$sourceInfo := $.Stored.sourceInfo}}
+    <div class="container pd-b-40">{{- $sourceInfo := $.Stored.sourceInfo -}}
       {{- if and $sourceInfo $sourceInfo.X -}}
       <div class="row mg-b-20">
         <div class="tx-bold">
@@ -19,13 +19,13 @@
       </div>
       {{- end -}}
       <div class="row">
-        {{$end := Sub (len $.Stored.articles) 1}}
-        {{range $k, $v := $.Stored.articles}}
+        {{- $end := Sub (len $.Stored.articles) 1 -}}
+        {{- range $k, $v := $.Stored.articles -}}
         {{- $mod := Eq (Math "mod" $k 2) 0 -}}
-        {{if $mod}}
+        {{- if $mod -}}
           {{if gt $k 0}}</div><!-- card-deck -->{{end}}
           <div class="card-deck{{if ge $k 2}} mg-t-20{{end}} wd-100p">
-        {{end}}
+        {{- end -}}
           <div class="card pd-15">
             <div class="row flex-sm-row-reverse">
               <div class="col-sm-4">
@@ -36,15 +36,15 @@
               </div>
               <div class="col-sm-8 mg-t-20 mg-sm-t-0 d-sm-flex align-items-start flex-column">
                 <div class="wd-100p d-flex justify-content-between align-items-center tx-gray-light tx-size-12">
-                  {{if $v.Tags}}
+                  {{- if $v.TagList -}}
                   <span class="d-inline-block">
                   <i class="fa fa-tags"></i>
-                  {{range $tagK,$tagV := Split $v.Tags ","}}
-                  {{if gt $tagK 0}}/{{end}}
-                  <span class="tx-info"><a href="{{FrontendURL}}/articlesBy/{{$.Stored.sourceTable}}/{{$.Stored.sourceId}}{{$.Ext}}?tag={{$tagV}}">{{$tagV}}</a></span>
-                  {{end}}
+                  {{- range $tagK,$tagV := $v.TagList}}
+                  {{- if gt $tagK 0}}/{{end}}
+                  <span class="tx-info"><a href="{{FrontendURL}}/articlesBy/{{$.Stored.sourceTable}}/{{$.Stored.sourceId}}{{$.Ext}}?tag={{$tagV.Name}}">{{$tagV.Name}}</a></span>
+                  {{- end -}}
                   </span>
-                  {{end}}
+                  {{- end -}}
                   <span class="d-inline-block">{{(Date $v.Created).Format ($.RawT "2006年1月2日")}}</span>
                 </div><!-- d-flex -->
                 <h5 class="lh-3 mg-t-5"><a href="{{URLByName `article.detail` $v.Id}}" class="tx-inverse">{{$v.Title}}</a></h5>
@@ -68,14 +68,14 @@
             </div><!-- row -->
           </div><!-- card -->
           {{- if eq $k $end -}}
-          {{if $mod}}
+          {{- if $mod -}}
           <div class="card pd-15 align-items-center justify-content-center">
             <div class="tx-gray-light">{{`没有了...`|$.T}}</div>
           </div>
-          {{end}}
+          {{- end -}}
           </div><!-- card-deck -->
           {{- end -}}
-        {{end}}
+        {{- end -}}
       </div><!-- row -->
 
       <nav class="mg-t-60 d-flex justify-content-center">
