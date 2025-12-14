@@ -168,7 +168,7 @@ func Detail(c echo.Context) error {
 	}
 	i18nm.GetModelsTranslations(c, articleModels)
 
-	c.Set(`listURL`, listURL+c.DefaultExtension())
+	c.Set(`listURL`, listURL)
 	return c.Render(`article/`+tmpl, common.Err(c, err))
 }
 
@@ -281,7 +281,7 @@ func List(c echo.Context) error {
 	c.Set(`articles`, articles)
 	c.Set(`categories`, categories)
 	c.Set(`tag`, tag)
-	c.Set(`listURL`, c.URLFor(`/articles`)+c.DefaultExtension())
+	c.Set(`listURL`, c.URLFor(`/articles`))
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
 	return c.Render(`article/list`, common.Err(c, err))

@@ -34,7 +34,7 @@ func Index(c echo.Context) error {
 		modelArticle.MultilingualArticlesWithOwner(c, articles)
 		return articles
 	})
-	c.Set(`listURL`, c.URLFor(`/articles`)+c.DefaultExtension())
+	c.Set(`listURL`, c.URLFor(`/articles`))
 	return c.Render(`article/index`, common.Err(c, err))
 }
 
