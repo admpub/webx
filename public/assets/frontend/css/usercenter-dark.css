@@ -9,3 +9,7 @@
 .card.card-table table.table > thead{background-color:#2c2f36;}
 .table tfoot > tr > th, 
 .table thead > tr > th{color:#ddd;}
+.table .table,.thead-default th{background-color:transparent}
+.thead-default{background-color:#2c2f36}
+.nav-hover-bg-gray-lightest > .nav-item > .nav-link:not(.active):focus,
+.nav-hover-bg-gray-lightest > .nav-item > .nav-link:not(.active):hover{background-color: #33363e;color: #ccc}
