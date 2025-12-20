@@ -12,9 +12,9 @@ go 1.25.3
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20251210053239-0c0f6789fede
-	github.com/coscms/webcore v0.13.3-0.20251219095148-43b5ae382b32
-	github.com/coscms/webfront v0.0.0-20251219095421-999edf906b1d
+	github.com/admpub/nging/v5 v5.3.4-0.20251220111709-c773b4b8b0ad
+	github.com/coscms/webcore v0.13.3-0.20251220110030-57c23bf884fc
+	github.com/coscms/webfront v0.0.0-20251220110129-840865a51ce2
 )
 
 require (
@@ -43,7 +43,7 @@ require (
 	github.com/admpub/resty/v2 v2.7.3 // indirect
 	github.com/admpub/sensitive v0.0.1 // indirect
 	github.com/admpub/useragent v0.0.2 // indirect
-	github.com/coscms/forms v1.16.1
+	github.com/coscms/forms v1.16.2
 	github.com/coscms/oauth2s v0.5.0
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.15.0 // indirect
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.1
 	github.com/webx-top/db v1.28.12
-	github.com/webx-top/echo v1.22.18
+	github.com/webx-top/echo v1.22.19
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2
