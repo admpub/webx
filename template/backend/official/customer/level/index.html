@@ -41,12 +41,12 @@
 							<th style="width:80px"><strong>{{"等级分值"|$.T}}</strong></th>
 							<th style="width:80px"><strong>{{"等级价格"|$.T}}</strong></th>
 							<th style="min-width:80px"><strong>{{"描述"|$.T}}</strong></th>
-							<th style="width:160px"><strong>{{"时间"|$.T}}</strong></th>
+							<th style="width:175px"><strong>{{"时间"|$.T}}</strong></th>
 							<th style="width:110px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
-                        {{range $k,$v := $.Stored.listData}}
+                        {{- range $k,$v := $.Stored.listData -}}
 						<tr>
 							<td>{{$v.Id}}</td>
 							<td>
@@ -75,7 +75,7 @@
 							<a class="label label-danger" href="{{BackendURL}}/official/customer/level/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
-                        {{end}}
+                        {{- end -}}
 					</tbody>
 				</table>		
 				</div>

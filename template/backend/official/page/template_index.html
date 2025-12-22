@@ -22,14 +22,14 @@
 						<tr>
 							<th style="width:100px"><strong>{{"预览"|$.T}}</strong></th>
 							<th><strong>{{"模板"|$.T}}</strong></th>
-							<th style="width:165px"><strong>{{"版本"|$.T}}</strong></th>
-							<th style="width:200px"><strong>{{"作者"|$.T}}</strong></th>
+							<th style="width:175px"><strong>{{"版本"|$.T}}</strong></th>
+							<th style="width:230px"><strong>{{"作者"|$.T}}</strong></th>
 							<th style="width:80px"><strong>{{"启用"|$.T}}</strong></th>
 							<th style="width:50px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y" id="tbody-template-list">
-                        {{range $k,$v := $.Stored.listData}}
+                        {{- range $k,$v := $.Stored.listData -}}
 						<tr>
 							<td>
 								<div style="width:100px;height:100px;overflow:hidden;">
@@ -78,7 +78,7 @@
 							<a class="label label-danger" href="{{BackendURL}}/official/page/template_delete?name={{$v.Name}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
-                        {{end}}
+                        {{- end -}}
 					</tbody>
 				</table>		
 				</div>
