@@ -330,10 +330,10 @@ github.com/coscms/session-sqlstore v0.0.1 h1:L1ef74QILW4RXrAcG2Se6K+zakmnE7sE735
 github.com/coscms/session-sqlstore v0.0.1/go.mod h1:n1mHOa5RJRVCXjliFkVcgg8A+TEDY6BPqFkyi3qVbTc=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.13.3-0.20251221071825-876529ad1b55 h1:ekI5H98idFudVpqGiEGQwN+MCkXqQ0CSHzJFqyGk5ow=
-github.com/coscms/webcore v0.13.3-0.20251221071825-876529ad1b55/go.mod h1:PVSaM+mnDRJ51FqwFiQZnuGrayJKdDhIfI4hvHwldx4=
-github.com/coscms/webfront v0.0.0-20251222112754-7ffe64514ae4 h1:xc4CtU2F232eTvP+GrPNNbdD5muE4iGqeWhuzxlf1co=
-github.com/coscms/webfront v0.0.0-20251222112754-7ffe64514ae4/go.mod h1:0wqxUO6kgqPhFPVw57LoECQW+sXHFrQ2tVGC7JivcPg=
+github.com/coscms/webcore v0.13.3-0.20251223054848-5164c46804c2 h1:47dWwxP4dg7kKzzgDpqaL19NBo5sKfi45PtIpoiufQE=
+github.com/coscms/webcore v0.13.3-0.20251223054848-5164c46804c2/go.mod h1:Spwmrj+Lf/d82eje8C4nvAUQfEGdLUaNWSBeDODtUHc=
+github.com/coscms/webfront v0.0.0-20251223055129-f5aaf7dcd80b h1:/5eniP8HtIeGD/0WmRFO9RkOpbY9TZJkFLJPO6wQbp0=
+github.com/coscms/webfront v0.0.0-20251223055129-f5aaf7dcd80b/go.mod h1:w/waw2MXpUBcZSbZZypjCLJAhJTCtWrLNTNIpYVsvic=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
@@ -425,8 +425,8 @@ github.com/go-playground/locales v0.14.1 h1:EWaQ/wswjilfKLTECiXz7Rh+3BjFhfDFKv/o
 github.com/go-playground/locales v0.14.1/go.mod h1:hxrqLVvrK65+Rwrd5Fc6F2O76J/NuW9t0sjnWqG1slY=
 github.com/go-playground/universal-translator v0.18.1 h1:Bcnm0ZwsGyWbCzImXv+pAJnYK9S473LQFuzCbDbfSFY=
 github.com/go-playground/universal-translator v0.18.1/go.mod h1:xekY+UJKNuX9WP91TpwSH2VMlDf28Uj24BCp08ZFTUY=
-github.com/go-playground/validator/v10 v10.29.0 h1:lQlF5VNJWNlRbRZNeOIkWElR+1LL/OuHcc0Kp14w1xk=
-github.com/go-playground/validator/v10 v10.29.0/go.mod h1:D6QxqeMlgIPuT02L66f2ccrZ7AGgHkzKmmTMZhk/Kc4=
+github.com/go-playground/validator/v10 v10.30.0 h1:5YBPNs273uzsZJD1I8uiB4Aqg9sN6sMDVX3s6LxmhWU=
+github.com/go-playground/validator/v10 v10.30.0/go.mod h1:oSuBIQzuJxL//3MelwSLD5hc2Tu889bF0Idm9Dg26cM=
 github.com/go-redis/redis v6.15.9+incompatible h1:K0pv1D7EQUjfyoMql+r/jZqCLizCGKFlFgcHWWmHQjg=
 github.com/go-redis/redis v6.15.9+incompatible/go.mod h1:NAIEuMOZ/fxfXJIrKDQDz8wamY7mA7PouImQ2Jvg6kA=
 github.com/go-redis/redis/v7 v7.4.1 h1:PASvf36gyUpr2zdOUS/9Zqc80GbM+9BDyiJSJDDOrTI=
@@ -887,8 +887,8 @@ github.com/webx-top/com v0.2.10/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQE
 github.com/webx-top/com v1.2.12/go.mod h1:DDfATzu1w5+vD5XmG3YRTfLjaIqZWi/yeJ7HQEGsM2Q=
 github.com/webx-top/com v1.4.1 h1:ecMsocWikBES03cpsd47IjFBS9LR9tut+MMtCM9fWd0=
 github.com/webx-top/com v1.4.1/go.mod h1:qNrw27rDEesdJrQ43XroGxrYHs/+8F9UHP1RZH0fZUg=
-github.com/webx-top/db v1.28.12 h1:cSjs9oC7CkgDxQOy+/DBw1IaFJGEL568EX2qwy1Xaog=
-github.com/webx-top/db v1.28.12/go.mod h1:LXivNAN3a6iL9DC5kcxPMnzgqSkMI8duC4P5TFkpJW0=
+github.com/webx-top/db v1.28.15 h1:M/hxc7Lhn8hX1Tf8BfTQ7Rjkxw5pl7vdrqZggktwlyE=
+github.com/webx-top/db v1.28.15/go.mod h1:R9xMjx+oDCvyYtAsuztpZh7ykyyEtvn+cWpY8Bof/AY=
 github.com/webx-top/echo v1.22.19 h1:IlQM3091C7Epy2kCOEqUVJmjc1FXPdGTCWEaE2TmvEM=
 github.com/webx-top/echo v1.22.19/go.mod h1:tv0U5zku4iGiGHatJ3V9J+iGXKcZsL1N9UT65wVUOuc=
 github.com/webx-top/echo-prometheus v1.1.3 h1:vwqklusrxPvjiduKNQvbobqSCvp9lUq6KqUf5wz/s8I=

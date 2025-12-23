@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20251220111709-c773b4b8b0ad
-	github.com/coscms/webcore v0.13.3-0.20251221071825-876529ad1b55
-	github.com/coscms/webfront v0.0.0-20251222112754-7ffe64514ae4
+	github.com/coscms/webcore v0.13.3-0.20251223054848-5164c46804c2
+	github.com/coscms/webfront v0.0.0-20251223055129-f5aaf7dcd80b
 )
 
 require (
@@ -54,7 +54,7 @@ require (
 	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.1
-	github.com/webx-top/db v1.28.12
+	github.com/webx-top/db v1.28.15
 	github.com/webx-top/echo v1.22.19
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
@@ -208,7 +208,7 @@ require (
 	github.com/go-openapi/swag/yamlutils v0.25.1 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.29.0 // indirect
+	github.com/go-playground/validator/v10 v10.30.0 // indirect
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/go-sql-driver/mysql v1.9.3 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
