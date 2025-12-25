@@ -263,9 +263,7 @@ function goCaptchaDialog(resp,ajaxOptions){
             $('body').append('<script src="'+ASSETS_URL+jsURL+'?t='+BUILD_TIME+'" type="text/javascript"></script>');
         }
     }
-    var formHTML='<form method="post" id="dialog-retry-captcha">\
-        '+htmlCode+'\
-    </form>';
+    var formHTML='<form method="post" id="dialog-retry-captcha">'+htmlCode+'</form>';
     var done=function(dialogRef) {
         var $form = $('#dialog-retry-captcha');
         var vcode = $form.find('[name="'+captchaName+'"]').val();
@@ -294,19 +292,7 @@ function goCaptchaDialog(resp,ajaxOptions){
             }
         },onhide: function(d){
             closeLoadingFunction(ajaxOptions);
-        }/*,
-        buttons: [{
-            id: 'captchaDialogBtnSubmit',
-            label: App.t('提交'),
-            icon: 'fa fa-check',
-            cssClass: 'btn-primary mg-r-10',
-            action: done},{
-            label: App.t('取消'),
-            icon: 'fa fa-times',
-            action: function(dialogRef) {
-                dialogRef.close();
-            }
-        }]*/
+        }
     });
     return true;
 }
