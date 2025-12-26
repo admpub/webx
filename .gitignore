@@ -51,6 +51,7 @@ nohup.out
 /public/upload/*
 /public/assets/backend/combined
 /public/collect/*
+/public/sitemap/*
 .DS_Store
 /dist/localtest/*
 .env
