@@ -39,6 +39,22 @@ function showModal(msg,type){
 function hideModal(){
     $('#error-dialog').modal('hide');
 }
+function setCookie(name, value, days, path) {
+    var exp = new Date();
+    if(!days) days=30;
+    exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
+    var cookie = name + '=' + escape(value) + ';path=' + (path?path:window.location.pathname) + ';expires=' + exp.toUTCString() + ';sameSite=Lax';
+    if (window.location.protocol === 'https:') cookie += ';secure=true';
+    document.cookie = cookie;
+}
+function rememberSignIn(a){
+    var checked=$(a).prop('checked');
+    if(checked){
+        setCookie('RememberFrontendLogin', $(a).val(), 30, `/`);
+    }else{
+        setCookie('RememberFrontendLogin', '', -1, `/`);
+    }
+}
 /**
  * ajax登录
  * @param {string|object} elem 
@@ -1321,6 +1337,9 @@ function commonInit($,App){
         $('form[ajax-submit]').each(function(){
             ajaxForm(this);
         });
+        $('form#sign-in-form,form#modal-sign-in-form').find('input[name=remember]').on('click',function(){
+            rememberSignIn(this);
+        }).trigger('click');
         App.fixedFooter('.footer-fix');
         App.bottomFloat('.auto-bottom-float',0,true);
         App.showRequriedInputStar();
