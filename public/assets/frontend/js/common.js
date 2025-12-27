@@ -1337,9 +1337,9 @@ function commonInit($,App){
         $('form[ajax-submit]').each(function(){
             ajaxForm(this);
         });
-        $('form#sign-in-form,form#modal-sign-in-form').find('input[name=remember]').on('click',function(){
+        $('form#sign-in-form,form#modal-sign-in-form').find('input[name=remember]').on('change',function(){
             rememberSignIn(this);
-        }).trigger('click');
+        }).trigger('change');
         App.fixedFooter('.footer-fix');
         App.bottomFloat('.auto-bottom-float',0,true);
         App.showRequriedInputStar();
