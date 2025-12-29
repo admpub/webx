@@ -426,6 +426,11 @@
 
 .content img,
 .comment-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.all-img-small img {
   max-width: 200px;
   max-height: 200px;
 }

@@ -101,14 +101,14 @@
           </div>
           <div class="card-block pd-10 tx-size-sm">
             <!-- <h2 class="lh-3 mg-y-20 tx-inverse">{{$data.Title}}</h2> -->
-            {{if $data.Summary}}
+            {{- if $data.Summary}}
             <div class="lead pd-10 bg-indigo tx-white mg-b-20">{{$data.Summary}}</div>
             <!-- <blockquote class="blockquote">
               <p class="mb-0 tx-inverse">{{$data.Summary}}</p>
               <footer class="blockquote-footer tx-size-sm">Author</footer>
             </blockquote> -->
-            {{end}}
-            <div class="content" id="article-content" data-contype="{{$data.Contype}}">
+            {{- end}}
+            <div class="content all-img-small" id="article-content" data-contype="{{$data.Contype}}">
               {{- if eq $data.Contype "markdown" -}}
               <div class="markdown-code pd-0-force">{{- OutputContent $data.Content $data.Contype -}}</div>
               {{- else -}}

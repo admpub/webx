@@ -1340,6 +1340,9 @@ function commonInit($,App){
         $('form#sign-in-form,form#modal-sign-in-form').find('input[name=remember]').on('change',function(){
             rememberSignIn(this);
         }).trigger('change');
+        $('body').on('click','.all-img-small img',function(){
+            $(this).toggleClass('img-full');
+        });
         App.fixedFooter('.footer-fix');
         App.bottomFloat('.auto-bottom-float',0,true);
         App.showRequriedInputStar();

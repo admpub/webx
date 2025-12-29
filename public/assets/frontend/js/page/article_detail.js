@@ -43,12 +43,6 @@ $(function(){
             }
         });
     });
-    $('.content').on('click','img',function(){
-        $(this).toggleClass('img-full');
-    });
-    $('body').on('click','.comment-content img',function(){
-        $(this).toggleClass('img-full');
-    });
     $('#article-content').on('click','[data-article-payment]',function(){
         var id = $(this).data('article-payment');
         var price = $(this).data('article-price');
