@@ -426,8 +426,15 @@
 
 .content img,
 .comment-content img {
-  max-width: 100%;
-  height: auto;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.img-full {
+  max-width: 100% !important;
+  max-height: none !important;
+  height: auto !important;
+  width: auto !important
 }
 
 .leftpanel {
