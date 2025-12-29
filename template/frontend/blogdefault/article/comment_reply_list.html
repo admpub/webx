@@ -21,7 +21,7 @@
             </a>
         </div>
     </div>
-    <div class="body-text{{if eq $v.Contype `markdown`}} markdown-code{{end}}" id="comment-content-{{$v.Id}}" data-contype="{{$v.Contype}}">
+    <div class="body-text all-img-small{{if eq $v.Contype `markdown`}} markdown-code{{end}}" id="comment-content-{{$v.Id}}" data-contype="{{$v.Contype}}">
         {{if gt $v.ReplyCommentId 0}}
         <span class="reply-head">
             <span>{{"回复"|$.T}}</span>

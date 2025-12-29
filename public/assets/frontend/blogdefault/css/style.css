@@ -5059,3 +5059,22 @@ select.tx-center{text-align-last:center}
     width: calc(50% - 20px);
   }
 }
+
+
+.single-post-wrapper .post-content img,
+.single-post-wrapper .comment-card .body-text img {
+  max-width: 100%;
+  height: auto;
+}
+
+.all-img-small img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.img-full {
+  max-width: 100% !important;
+  max-height: none !important;
+  height: auto !important;
+  width: auto !important
+}

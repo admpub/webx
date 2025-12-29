@@ -37,7 +37,7 @@
                 {{- end -}}
             </span>
             {{- end -}}
-            <div class="cmt-cont{{if eq $v.Contype `markdown`}} markdown-code{{end}}">{{- OutputContent $v.Content $v.Contype -}}</div>
+            <div class="cmt-cont all-img-small{{if eq $v.Contype `markdown`}} markdown-code{{end}}">{{- OutputContent $v.Content $v.Contype -}}</div>
         </div>
     </div>
     {{if not $.Stored.flat}}
