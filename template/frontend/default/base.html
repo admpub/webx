@@ -85,7 +85,7 @@
   {{/Block}}
   {{Block "headEnd"}}{{/Block}}
 </head>
-<body {{Block `bodyAttr`}}{{/Block}}>
+<body{{if hasBlock `bodyAttr`}} {{Block `bodyAttr`}}{{/Block}}{{end}}>
 {{Block "body"}}{{/Block}}
 <script combine src="{{AssetsURL}}/js/compatible.min.js?t={{BuildTime}}"></script>
 <script combine src="{{AssetsURL}}/js/jquery3.6.min.js?t={{BuildTime}}"></script>

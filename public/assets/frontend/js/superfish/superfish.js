@@ -200,7 +200,7 @@
 					clearTimeout(o.sfTimer);
 					toggleMenuClasses($this, o);
 					toggleAnchorClass($hasPopUp);
-					toggleTouchAction($this);
+					//toggleTouchAction($this);
 					// remove event handlers
 					$this.off('.superfish').off('.hoverIntent');
 					// clear animation's inline display style
@@ -228,7 +228,7 @@
 
 					toggleMenuClasses($this, o, true);
 					toggleAnchorClass($hasPopUp, true);
-					toggleTouchAction($this);
+					//toggleTouchAction($this);
 					applyHandlers($this, o);
 
 					$hasPopUp.not('.' + c.bcClass).superfish('hide', true);

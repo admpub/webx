@@ -1067,3 +1067,19 @@ i.coin-icon+span{vertical-align:middle;}
   display: block;
 }
 .select2-container .select2-choices{border-radius: 3px;}
+
+.scrollable-y,.md-scrollable-y{overflow-y: scroll;}
+.scrollable-x,.md-scrollable-x{overflow-x: scroll;}
+.scrollable-y,.md-scrollable-y,
+.scrollable-x,.md-scrollable-x{
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 和 Edge */
+}
+.scrollable-y::-webkit-scrollbar,.md-scrollable-y::-webkit-scrollbar,
+.scrollable-x::-webkit-scrollbar,.md-scrollable-x::-webkit-scrollbar {
+  display: none;
+}
+@media (max-width: 767px) {
+  .md-scrollable-y {overflow-y: inherit}
+  .md-scrollable-x {overflow-x: inherit}
+}

@@ -4,7 +4,7 @@
 {{Block "title"}}{{$.Stored.data.Title}}{{/Block}}
 {{Block "keywords"}}{{$.Stored.data.Keywords}}{{/Block}}
 {{Block "description"}}{{if $.Stored.data.Summary}}{{$.Stored.data.Summary}}{{else}}{{Substr (StripTags $.Stored.data.Content true) `...` 200}}{{end}}{{/Block}}
-{{Block "bodyAttr"}} class="landing-3 pd-t-70 bg-gray-lightest"{{/Block}}
+{{Block "bodyAttr"}} class="pd-t-70 bg-gray-lightest"{{/Block}}
 {{Block "head"}}
 <link rel="stylesheet" href="{{AssetsXURL}}/css/page/article_detail.css?t={{BuildTime}}" />
 {{/Block}}

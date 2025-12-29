@@ -339,6 +339,7 @@
   margin: 0;
   display: flex;
   flex-direction: row;
+  touch-action: pan-x;
 }
 
 .sf-menu li {
@@ -502,6 +503,7 @@
     left: 0;
     right: 0;
     background-color: #fff;
+    touch-action: pan-y !important;
   }
   .sf-menu.nav-info {
     background-color: #1695f5;;

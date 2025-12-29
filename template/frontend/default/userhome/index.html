@@ -2,7 +2,7 @@
 {{Block "title"}}{{- $.Stored.operateName}} - {{$.T "%s主页" $.Stored.info.Name -}}{{/Block}}
 {{Block "keywords"}}{{"会员主页"|$.T}},{{$.Stored.info.Name}}{{/Block}}
 {{Block "description"}}{{$.Stored.info.Description}}{{/Block}}
-{{Block "bodyAttr"}} class="landing-3 pd-t-70 bg-gray-lightest"{{/Block}}
+{{Block "bodyAttr"}} class="pd-t-70 bg-gray-lightest"{{/Block}}
 {{Block "body"}}
 {{Include "#default#header"}}
 {{$operate := $.Stored.operate}}
