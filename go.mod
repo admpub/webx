@@ -12,8 +12,8 @@ go 1.25.3
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20251227133814-e771808edd15
-	github.com/coscms/webcore v0.13.3-0.20251229094455-4fb5852df21c
+	github.com/admpub/nging/v5 v5.3.4-0.20251230041009-d298d3d70d88
+	github.com/coscms/webcore v0.13.3-0.20251230040909-8ecbfe22d146
 	github.com/coscms/webfront v0.0.0-20251228071722-6f245203987e
 )
 
@@ -54,7 +54,7 @@ require (
 	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.1
-	github.com/webx-top/db v1.28.15
+	github.com/webx-top/db v1.28.16
 	github.com/webx-top/echo v1.22.25
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
@@ -338,9 +338,9 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	modernc.org/libc v1.67.1 // indirect
+	modernc.org/libc v1.67.2 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.41.0 // indirect
+	modernc.org/sqlite v1.42.2 // indirect
 	rsc.io/qr v0.2.0 // indirect
 )
