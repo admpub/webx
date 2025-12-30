@@ -312,8 +312,8 @@ github.com/clipperhouse/uax29/v2 v2.3.0/go.mod h1:Wn1g7MK6OoeDT0vL+Q0SQLDz/KpfsV
 github.com/coreos/go-systemd v0.0.0-20181012123002-c6f51f82210d/go.mod h1:F5haX7vjVVG0kc13fIWeqUViNPyEJxv/OmvnBo0Yme4=
 github.com/coscms/captcha v0.2.3 h1:r9GA1x8zvaC43gr+lRm79/EAqXx4+8WXCP+vC47vC8c=
 github.com/coscms/captcha v0.2.3/go.mod h1:IAdMnt5ExsjQPA7+SVzQa9qV/xNJmV7NMEXqrFJiSME=
-github.com/coscms/forms v1.16.5 h1:GClDY3L1BaYNCLIGmdxXXg1qb+HNty8W+rgnZmmBO1Y=
-github.com/coscms/forms v1.16.5/go.mod h1:osCmvnORNr1D/Km0E3JQCwSs7itYnR4sPGJ6sv5rYww=
+github.com/coscms/forms v1.16.7 h1:3XDv85YnqFpyEjAo1fzMd2WPJ42ETWkhdlq+TMHG+6A=
+github.com/coscms/forms v1.16.7/go.mod h1:osCmvnORNr1D/Km0E3JQCwSs7itYnR4sPGJ6sv5rYww=
 github.com/coscms/go-imgparse v0.0.1 h1:RMnw3/VtfTOil3SdukPgdGm4xmO5KoQpyVNtPKuFKFY=
 github.com/coscms/go-imgparse v0.0.1/go.mod h1:FqBNWVAozSee1bB11G8ohGq5artPO7Zz3xLtw3d4Kdk=
 github.com/coscms/oauth2s v0.5.0 h1:hx40Ss3xTeIpkX0mVQST+XjNMnOeVa/eN2VuxEIscY0=
@@ -330,8 +330,8 @@ github.com/coscms/session-sqlstore v0.0.1 h1:L1ef74QILW4RXrAcG2Se6K+zakmnE7sE735
 github.com/coscms/session-sqlstore v0.0.1/go.mod h1:n1mHOa5RJRVCXjliFkVcgg8A+TEDY6BPqFkyi3qVbTc=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.13.3-0.20251230040909-8ecbfe22d146 h1:SDWwxD0Ic5eb2w+tYAnIAH2ZBT3znL7QoFMHwn7Zccw=
-github.com/coscms/webcore v0.13.3-0.20251230040909-8ecbfe22d146/go.mod h1:l78pDQxppH6U8eUH3dhZvOO3I4xKqvjO6YQVonC7VHU=
+github.com/coscms/webcore v0.13.3-0.20251230080320-75ded80833ef h1:L8QzYKqi86pDWEKdipTwW6bDjdTnjc2NxyfDigwHJB0=
+github.com/coscms/webcore v0.13.3-0.20251230080320-75ded80833ef/go.mod h1:NI54p10+W6duJ1aTtvUd4RiimRJj80mUemxIFEAgADo=
 github.com/coscms/webfront v0.0.0-20251230053934-1e26d6afcdba h1:cNs7VUTWqrbOHA+QJtrI0yh35XfJIaEy3ZhIrIH4dWE=
 github.com/coscms/webfront v0.0.0-20251230053934-1e26d6afcdba/go.mod h1:dru8Hxa0pmNe+pFat0acW4at3pV7JFsWGIiOg2AHmVs=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
