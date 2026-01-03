@@ -1,4 +1,5 @@
-body{background-color: black !important;}.headpanel{background-color:#323843 !important;}
+body{background-color: black !important;}
+.headpanel{background-color:#323843 !important;}
 .card{background-color: #1a1d23 !important;color: #eee !important;border-color: #333;}
 .card-glass{background-color:rgba(0, 0, 0, 0.3) !important;}
 .card .card-header,
@@ -42,7 +43,8 @@ nav .page-item.disabled .page-link{background-color: transparent !important;}
 .modal-header,.modal-footer{border-color: #4a5254 !important;}
 .modal-content{color:#bbb}
 
-#sectionSignIn{background: #000 url('/public/assets/frontend/images/background/0.jpg') no-repeat center center fixed !important;/*background-blend-mode: hard-light;*/}
+#sectionSignIn{background: #000 !important;}
+/* #sectionSignIn{background: #000 url('/public/assets/frontend/images/background/0.jpg') no-repeat center center fixed !important;}
 #sectionSignIn .card{background-color: rgba(26, 29, 35, .3) !important;backdrop-filter: blur(5px);border-color: rgba(26, 29, 35, .3);box-shadow: 0 0 5px rgba(0, 0, 0, .3);}
 #sectionSignIn .bg-success{background-color: rgba(69, 194, 47, .3) !important;backdrop-filter: blur(5px);}
 #sectionSignIn .bg-info{background-color: rgba(22, 149, 245, .3) !important;backdrop-filter: blur(5px);}
@@ -53,7 +55,7 @@ nav .page-item.disabled .page-link{background-color: transparent !important;}
 #sectionSignIn a.bg-info:hover,#sectionSignIn a.bg-info:focus{background-color: rgba(22, 149, 245, .4) !important}
 #sectionSignIn a.bg-primary:hover,#sectionSignIn a.bg-primary:focus{background-color: rgba(8, 102, 198, .4) !important}
 #sectionSignIn a.bg-warning:hover,#sectionSignIn a.bg-warning:focus{background-color: rgba(244, 153, 23, .4) !important}
-#sectionSignIn a.bg-danger:hover,#sectionSignIn a.bg-danger:focus{background-color: rgba(230, 92, 88, .4) !important}
+#sectionSignIn a.bg-danger:hover,#sectionSignIn a.bg-danger:focus{background-color: rgba(230, 92, 88, .4) !important} */
 .heading-hr::after,
 .heading-hr::before{color: #555}
 .breadcrumb{background-color: #2a2f39;}
