@@ -12,7 +12,7 @@ go 1.25.3
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20260104061413-eeff49013c41
+	github.com/admpub/nging/v5 v5.3.4-0.20260110054913-cf660991a436
 	github.com/coscms/webcore v0.13.3-0.20260107081507-00a22428e8a8
 	github.com/coscms/webfront v0.0.0-20260107081630-6655589f2395
 )
@@ -69,7 +69,7 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.3.0
-	github.com/nging-plugins/dbmanager v1.8.11
+	github.com/nging-plugins/dbmanager v1.8.12
 	github.com/silenceper/wechat/v2 v2.1.11
 )
 
@@ -331,7 +331,7 @@ require (
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
 	golang.org/x/mod v0.31.0 // indirect
 	golang.org/x/net v0.48.0 // indirect
-	golang.org/x/sys v0.39.0 // indirect
+	golang.org/x/sys v0.40.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
 	golang.org/x/tools v0.40.0 // indirect
@@ -342,6 +342,6 @@ require (
 	modernc.org/libc v1.67.4 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.42.2 // indirect
+	modernc.org/sqlite v1.43.0 // indirect
 	rsc.io/qr v0.2.0 // indirect
 )
