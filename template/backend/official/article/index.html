@@ -57,14 +57,14 @@
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
-                        {{range $k,$v := $.Stored.listData}}
+                        {{- range $k,$v := $.Stored.listData -}}
 						<tr>
 							<td>{{$v.Id}}</td>
 							<td class="no-padding text-middle"><a href="{{FrontendURLByName `article.detail` $v.Id}}" target="_blank"><img style="width:50px;height:50px" src="{{$v.Image|Default (AssetsURL `/images/user_128.png`)}}" onerror="this.src='{{AssetsURL}}/images/user_128.png';" /></a></td>
 							<td>
 								<a href="{{FrontendURLByName `article.detail` $v.Id}}" target="_blank" class="text-bold">{{$v.Title}}</a>
 								{{- if $v.Tags -}}
-								{{- range $index, $tagName := Split $v.Tags "," -}}
+								{{- range $index, $tagName := JSONDecodeStringSlice $v.Tags -}}
 								<a href="{{BackendURL}}/official/article/index{{$.Ext}}?tag={{$tagName}}">
 									<span class="label label-default label-xs label-hover-primary">{{$tagName}}</span>
 								</a>
@@ -117,7 +117,7 @@
 							<a class="label label-danger" href="{{BackendURL}}/official/article/delete?sourceId={{$.Stored.sourceId}}&sourceTable={{$.Stored.sourceTable}}&id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
-                        {{end}}
+                        {{- end -}}
 					</tbody>
 				</table>		
 				</div>
