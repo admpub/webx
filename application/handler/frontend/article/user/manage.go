@@ -76,18 +76,6 @@ func List(ctx echo.Context) error {
 	return ctx.Render(`article/user/list`, common.Err(ctx, err))
 }
 
-func applyFormData(ctx echo.Context, m *dbschema.OfficialCommonArticle) {
-	m.CategoryId = ctx.Formx(`categoryId`).Uint()
-	m.Title = ctx.Formx(`title`).String()
-	m.Image = ctx.Formx(`image`).String()
-	m.ImageOriginal = ctx.Formx(`imageOriginal`).String()
-	m.Summary = ctx.Formx(`summary`).String()
-	m.Content = ctx.Formx(`content`).String()
-	m.Contype = ctx.Formx(`contype`).String()
-	m.Display = `N`
-	m.Tags = ctx.Formx(`tags`).String()
-}
-
 // Create 创建文章
 func Create(ctx echo.Context) error {
 	sourceID := ``
