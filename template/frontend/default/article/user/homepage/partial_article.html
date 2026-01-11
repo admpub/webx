@@ -28,7 +28,7 @@
                 {{- if $v.Tags -}}
                 <small>
                 <i class="fa fa-tags"></i>
-                {{- range $index, $tagName := Split $v.Tags "," -}}
+                {{- range $index, $tagName := JSONDecodeStringSlice $v.Tags -}}
                 <a href="{{$.URL.Path}}?tag={{$tagName}}">
                   <span class="label label-default label-xs label-hover-primary">{{$tagName}}</span>
                 </a>

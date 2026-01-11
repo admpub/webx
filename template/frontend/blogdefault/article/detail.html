@@ -93,7 +93,7 @@
                             <div class="tags">
                                 <h3 class="heading-secondary">Tags</h3>
                                 <div class="categories-tags">
-                                    {{range $tagK,$tagV := Split $data.Tags ","}}
+                                    {{range $tagK,$tagV := JSONDecodeStringSlice $data.Tags}}
                                     <a href="{{$.Stored.listURL}}?tag={{$tagV}}"> {{$tagV}} </a>
                                     {{- end -}}
                                 </div>

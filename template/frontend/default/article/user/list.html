@@ -39,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          {{range $k, $v := $.Stored.list}}
+          {{- range $k, $v := $.Stored.list -}}
           <tr>
             <td class="pd-l-20">
                 <a href="{{URLByName `article.detail` $v.Id}}" target="_blank"><img src="{{$v.Image|Default (AssetsXURL `/images/background/img442.jpg`)}}" onerror="this.onerror=null; this.src='{{AssetsXURL}}/images/background/img442.jpg';" class="wd-55 ht-55" alt="{{$v.Title}}"></a>
@@ -54,7 +54,7 @@
                 {{$v.Title}}
               </a>
               {{- if $v.Tags -}}
-              {{- range $index, $tagName := Split $v.Tags "," -}}
+              {{- range $index, $tagName := JSONDecodeStringSlice $v.Tags -}}
               <a href="{{URLByName `user.article.list`}}?tag={{$tagName}}">
                 <span class="label label-default label-xs label-hover-primary">{{$tagName}}</span>
               </a>
@@ -90,7 +90,7 @@
               </div><!-- /.btn-group -->
             </td>
           </tr>
-          {{end}}
+          {{- end -}}
         </tbody>
       </table>
       </div><!-- table-responsive -->
