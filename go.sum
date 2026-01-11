@@ -330,10 +330,10 @@ github.com/coscms/session-sqlstore v0.0.1 h1:L1ef74QILW4RXrAcG2Se6K+zakmnE7sE735
 github.com/coscms/session-sqlstore v0.0.1/go.mod h1:n1mHOa5RJRVCXjliFkVcgg8A+TEDY6BPqFkyi3qVbTc=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.13.3-0.20260111055722-d958aa892a69 h1:vM9saZY8YXIrxfDhvUZYrIPTjSfbMXIZJWppVC0NFi8=
-github.com/coscms/webcore v0.13.3-0.20260111055722-d958aa892a69/go.mod h1:0cNVJGWmVWeKNT51eE0i4k79B9fp/5u8e31ISnBNCj4=
-github.com/coscms/webfront v0.0.0-20260111073851-9e2f35d7473a h1:W7pAaRKoFTdne4YPLqJfZzybmKoQtvmoM796OsfDWDc=
-github.com/coscms/webfront v0.0.0-20260111073851-9e2f35d7473a/go.mod h1:OAc4W7kpZPN7LcjtDS02xybdC9oEfbpv/5F1wmT++ew=
+github.com/coscms/webcore v0.13.3-0.20260111110144-088f899cb22e h1:QyPgLKWbDzZbFrh0vms0G7lBoCJLqivq//769gI9KxY=
+github.com/coscms/webcore v0.13.3-0.20260111110144-088f899cb22e/go.mod h1:0cNVJGWmVWeKNT51eE0i4k79B9fp/5u8e31ISnBNCj4=
+github.com/coscms/webfront v0.0.0-20260111110803-17a79ea0182b h1:e1Zkjni98373FpT1AQkEdlVJUZVxgtNzrebARXfrMbc=
+github.com/coscms/webfront v0.0.0-20260111110803-17a79ea0182b/go.mod h1:PsTZ2YMzNDGfMUpyYkA3ry47qOKc1BoRCgdJf838uuM=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
