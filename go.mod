@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260113085222-7f96c14cfdab
-	github.com/coscms/webcore v0.13.3-0.20260113123435-d5edb1a8bfda
+	github.com/coscms/webcore v0.13.3-0.20260116100724-c3cf87f24313
 	github.com/coscms/webfront v0.0.0-20260115054441-7e330108e683
 )
 
@@ -36,7 +36,7 @@ require (
 	github.com/admpub/log v1.4.0
 	github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5 // indirect
 	github.com/admpub/null v8.0.5+incompatible
-	github.com/admpub/once v0.0.1 // indirect
+	github.com/admpub/once v0.0.2 // indirect
 	github.com/admpub/pinyin-golang v1.0.1 // indirect
 	github.com/admpub/pp v0.0.7
 	github.com/admpub/redsync/v4 v4.0.3 // indirect
@@ -116,7 +116,7 @@ require (
 	github.com/admpub/identicon v1.0.2 // indirect
 	github.com/admpub/imaging v1.6.3 // indirect
 	github.com/admpub/ini v1.38.2 // indirect
-	github.com/admpub/ip2region/v3 v3.0.4 // indirect
+	github.com/admpub/ip2region/v3 v3.0.5 // indirect
 	github.com/admpub/json5 v0.0.1 // indirect
 	github.com/admpub/machineid v1.0.2 // indirect
 	github.com/admpub/mahonia v0.0.0-20151019004008-c528b747d92d // indirect
