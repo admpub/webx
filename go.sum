@@ -312,8 +312,8 @@ github.com/clipperhouse/uax29/v2 v2.3.0/go.mod h1:Wn1g7MK6OoeDT0vL+Q0SQLDz/KpfsV
 github.com/coreos/go-systemd v0.0.0-20181012123002-c6f51f82210d/go.mod h1:F5haX7vjVVG0kc13fIWeqUViNPyEJxv/OmvnBo0Yme4=
 github.com/coscms/captcha v0.2.3 h1:r9GA1x8zvaC43gr+lRm79/EAqXx4+8WXCP+vC47vC8c=
 github.com/coscms/captcha v0.2.3/go.mod h1:IAdMnt5ExsjQPA7+SVzQa9qV/xNJmV7NMEXqrFJiSME=
-github.com/coscms/forms v1.16.9 h1:npqzbk1w4QdVqWkYYxqCdFjp1loR6+9xY82FhuY17ss=
-github.com/coscms/forms v1.16.9/go.mod h1:osCmvnORNr1D/Km0E3JQCwSs7itYnR4sPGJ6sv5rYww=
+github.com/coscms/forms v1.16.10 h1:JQTrVfxeWKkKpAurkj/p2w21XQSC2EoPoEiOaUfCfII=
+github.com/coscms/forms v1.16.10/go.mod h1:osCmvnORNr1D/Km0E3JQCwSs7itYnR4sPGJ6sv5rYww=
 github.com/coscms/go-imgparse v0.0.1 h1:RMnw3/VtfTOil3SdukPgdGm4xmO5KoQpyVNtPKuFKFY=
 github.com/coscms/go-imgparse v0.0.1/go.mod h1:FqBNWVAozSee1bB11G8ohGq5artPO7Zz3xLtw3d4Kdk=
 github.com/coscms/oauth2s v0.5.0 h1:hx40Ss3xTeIpkX0mVQST+XjNMnOeVa/eN2VuxEIscY0=
@@ -330,10 +330,10 @@ github.com/coscms/session-sqlstore v0.0.1 h1:L1ef74QILW4RXrAcG2Se6K+zakmnE7sE735
 github.com/coscms/session-sqlstore v0.0.1/go.mod h1:n1mHOa5RJRVCXjliFkVcgg8A+TEDY6BPqFkyi3qVbTc=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.13.3-0.20260116100724-c3cf87f24313 h1:0wh3fvE702wdvYmmPGNZvocwBxBwp7Y44uv3HzdcMlk=
-github.com/coscms/webcore v0.13.3-0.20260116100724-c3cf87f24313/go.mod h1:JECBYbS4fUPQEVwFqKO5cSsK8dzdm3CVDIlLp8OYHDM=
-github.com/coscms/webfront v0.0.0-20260115054441-7e330108e683 h1:i2Gfi9qQiA01uUIGpujuTfXnBZb4OA0Kud9EsTEmXwo=
-github.com/coscms/webfront v0.0.0-20260115054441-7e330108e683/go.mod h1:GrylGcs3z0DKqqU4/kb7h7K9kYzG+6iWq6nv5Vm20q8=
+github.com/coscms/webcore v0.13.3-0.20260119085630-e039eeb19e32 h1:Gata71gj4GKHFvFUJmuHI72Q/WV++PZAFrRLoefeDAw=
+github.com/coscms/webcore v0.13.3-0.20260119085630-e039eeb19e32/go.mod h1:P44JKBvDYcEL1Uu2lFdg7OhVA6ckkFBPoVg8AtuBtRI=
+github.com/coscms/webfront v0.0.0-20260119085746-3680f1831df7 h1:9ba0HmvETF8kRfaPd6joPrc+jkRg2qdKbV3nrBOMDeo=
+github.com/coscms/webfront v0.0.0-20260119085746-3680f1831df7/go.mod h1:wMM2BlZOb+vIQGjx1f3N353U8P67eT/35COZG3omt2M=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
