@@ -1,8 +1,8 @@
-{{if $.Data.panic}}
+{{- if $.Data.panic -}}
 <div class="card-body">
 <div style="overflow:auto;height:300px;"><pre id="panic-content" class="bg-inverse tx-white ht-100p mg-0">{{$.Data.content}}</pre></div>
 </div>
-{{else}}
+{{- else -}}
 <div class="card-body pd-20">
 	<div class="d-flex align-items-center justify-content-start">
 		<i class="icon ion-ios-close alert-icon tx-size-52 tx-danger mg-r-20"></i>
@@ -12,7 +12,7 @@
 		</div>
 	</div>
 </div>
-{{end}}
+{{- end -}}
 <div class="card-footer text-center">
 	<a class="btn btn-primary" href="javascript:history.back()">
 		<i class="fa fa-arrow-left"></i>

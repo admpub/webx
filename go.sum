@@ -154,8 +154,8 @@ github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5 h1:N9+M16t6Pa0zNjy2g
 github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5/go.mod h1:Aim7aOlr/P9OkX0ucuhrzMEUcKOJXErCMS3MDGTBGJc=
 github.com/admpub/mysql-schema-sync v0.2.6 h1:BaL7J2gWguEe9ADQkhp4olnkdBGeePwcCT+lnxxjoC0=
 github.com/admpub/mysql-schema-sync v0.2.6/go.mod h1:LmUAY60w9nQCiGBMjZEBah35kA0fvGZfh0PSwAqPZHE=
-github.com/admpub/nging/v5 v5.3.4-0.20260127095533-4657bdfc9ead h1:lePgIeTXtXSSOFGU3tZDR4yEdDzmiAjlPUg2cpGQuec=
-github.com/admpub/nging/v5 v5.3.4-0.20260127095533-4657bdfc9ead/go.mod h1:Ml7aOqdhBjdN30oyaavtGLzrOAvJ/Ot6H1Eqnlh/M1o=
+github.com/admpub/nging/v5 v5.3.4-0.20260128045350-f7269bc68a0b h1:lDHriGrgQf6mJKYz7Vjn6bkZIzUQgDeDiYE4A1+IK+c=
+github.com/admpub/nging/v5 v5.3.4-0.20260128045350-f7269bc68a0b/go.mod h1:z2V/Ymmhd1bd8pu2J5y5hgzPrr3WpyWJZdu0rIxVuNc=
 github.com/admpub/null v8.0.5+incompatible h1:doltajgwv+ffEOFBvGL4f59E01+7xYbkS1cwKoz3XC8=
 github.com/admpub/null v8.0.5+incompatible/go.mod h1:DMV9RC+JZv6AhaX1E62ur1mS7gyGLYRh+r0s8MF7mHA=
 github.com/admpub/oauth2/v4 v4.0.3 h1:I+UiBoSWdpt4STGTIjmNCQUlrkI819WPLtdrf/vjBpM=

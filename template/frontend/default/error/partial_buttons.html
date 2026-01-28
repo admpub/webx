@@ -6,7 +6,7 @@
 {{- else -}}
 {{- $errCode := call $.Func.Code -}}
 {{- if eq $errCode -1 -}}
-<a class="btn btn-success mg-l-10" href="/sign_in?next={{$.RequestURI}}">
+<a class="btn btn-success mg-l-10" href="{{$.RootPrefix}}/sign_in?next={{$.RequestURI}}">
     <i class="fa fa-user"></i>
     {{`立即登录`|$.T}}
 </a>
