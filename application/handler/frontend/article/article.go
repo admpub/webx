@@ -26,6 +26,9 @@ import (
 func Detail(c echo.Context) error {
 	var err error
 	id := c.Paramx(`id`).Uint64()
+	if id < 1 {
+		return c.NewError(stdCode.InvalidParameter, `参数无效`).SetZone(`id`)
+	}
 	op := c.Param(`op`)
 	commentURLLayout := c.Echo().URI(`article.detailWithOp`, echo.H{
 		`id`: id,
