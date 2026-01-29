@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260128045350-f7269bc68a0b
-	github.com/coscms/webcore v0.13.3-0.20260129055157-b3fe32cc52f8
-	github.com/coscms/webfront v0.0.0-20260129062416-61e12148dd76
+	github.com/coscms/webcore v0.13.3-0.20260129071438-7a8c4980339d
+	github.com/coscms/webfront v0.0.0-20260129071811-a9ae898c5e4b
 )
 
 require (
@@ -33,7 +33,7 @@ require (
 	github.com/admpub/imageproxy v0.10.1
 	github.com/admpub/ipfilter v1.0.6 // indirect
 	github.com/admpub/license_gen v0.1.2
-	github.com/admpub/log v1.4.0
+	github.com/admpub/log v1.5.2
 	github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5 // indirect
 	github.com/admpub/null v8.0.5+incompatible
 	github.com/admpub/once v0.0.2 // indirect
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.1
 	github.com/webx-top/db v1.29.5
-	github.com/webx-top/echo v1.22.28
+	github.com/webx-top/echo v1.22.29
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2
@@ -214,7 +214,7 @@ require (
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
-	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect
+	github.com/golang-jwt/jwt/v5 v5.3.1 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/golang/snappy v1.0.0 // indirect
