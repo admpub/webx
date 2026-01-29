@@ -95,12 +95,17 @@ func Detail(c echo.Context) error {
 	articleM.Content = top.HideContent(articleM.Content, articleM.Contype, modelArticle.GetContentHideDetector(customer, articleM.OfficialCommonArticle), frontend.GlobalFuncMap())
 	//c.PrintFuncs()
 	c.Set(`data`, articleM.OfficialCommonArticle)
+
+	// 文章分类
+
 	categories, err := articleM.GetCategories()
 	if err != nil {
 		return err
 	}
 	i18nm.GetModelsTranslations(c, categories)
 	c.Set(`categories`, categories)
+
+	// 标签
 
 	var tagList []*dbschema.OfficialCommonTags
 	if len(articleM.Tags) > 0 {
@@ -119,6 +124,9 @@ func Detail(c echo.Context) error {
 		}
 	}
 	c.Set(`tagList`, tagList)
+
+	// 文章隶属
+
 	var (
 		sourceInfo echo.KV
 		listURL    = c.URLFor(`/articles`)
@@ -138,19 +146,25 @@ func Detail(c echo.Context) error {
 	c.Set(`sourceInfo`, sourceInfo)
 	c.Set(`targetSubtype`, `article`)
 	c.Set(`targetType`, ``)
+
+	// 文章作者
+
 	author := modelAuthor.New(articleM.OwnerId, articleM.OwnerType).Get(c)
 	c.Set(`author`, author)
+
+	// 更新文章浏览量
+
 	err = articleM.UpdateField(nil, `views`, db.Raw(`views+1`), `id`, id)
 	if err != nil {
 		log.Error(err)
 		err = nil
 	}
-	tmpl := `detail`
-	if len(articleM.Template) > 0 {
-		tmpl = articleM.Template
-	}
+
+	// 文章相关文章查询函数
 	c.SetFunc(`relationList`, articleM.RelationList)
 	c.SetFunc(`queryList`, articleM.QueryList)
+
+	// 点赞流&收藏
 
 	clickFlowM := official.NewClickFlow(c) // 文章点赞记录
 	var favorited bool
@@ -163,6 +177,8 @@ func Detail(c echo.Context) error {
 	}
 	c.Set(`clickFlow`, clickFlowM.OfficialCommonClickFlow)
 	c.Set(`favorited`, favorited)
+
+	// 上一篇/下一篇
 
 	extraCond := db.NewCompounds()
 	extraCond.Add(db.Cond{`source_id`: articleM.SourceId})
@@ -185,6 +201,10 @@ func Detail(c echo.Context) error {
 	i18nm.GetModelsTranslations(c, articleModels)
 
 	c.Set(`listURL`, listURL)
+	tmpl := `detail`
+	if len(articleM.Template) > 0 {
+		tmpl = articleM.Template
+	}
 	return c.Render(`article/`+tmpl, common.Err(c, err))
 }
 
