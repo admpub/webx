@@ -10,10 +10,10 @@ import (
 	"github.com/admpub/log"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/nerrors"
-	"github.com/coscms/webcore/model"
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/frontend"
 	"github.com/coscms/webfront/library/top"
+	"github.com/coscms/webfront/library/xkv"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelAuthor "github.com/coscms/webfront/model/author"
 	"github.com/coscms/webfront/model/i18nm"
@@ -22,6 +22,35 @@ import (
 	modelComment "github.com/coscms/webfront/model/official/comment"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
+
+func SetCommentData(c echo.Context, commentURLLayout string, targetType string, targetSubtype string, id uint64) func(disabledMsg error, needReview bool) {
+	flat := true
+	if sessdata.IsAdmin(c) {
+		flat = c.Formx(`flat`, `1`).Bool()
+	}
+	v, _ := xkv.GetValue(c, `ARTICLE_COMMENT_FLAT`, `1`, `文章评论是否扁平化显示`)
+	if len(v) > 0 {
+		flat = param.AsBool(v)
+	}
+	c.Set(`flat`, flat)
+	c.SetFunc(`commentList`, func() []*modelComment.CommentAndExtra {
+		c.Request().Form().Set(`_pjax`, `true`)
+		c.Request().Form().Set(`pageSize`, `10`)
+		commentList, _ := modelComment.QueryCommentList(c, id, ``, targetType, targetSubtype, flat, commentURLLayout, `Comment`)
+		//c.Request().Form().Del(`_pjax`)
+		return commentList
+	})
+
+	return func(disabledMsg error, needReview bool) {
+		// 是否允许评论
+		c.Set(`disabledCommentMessage`, disabledMsg)
+		c.Set(`needReviewComment`, needReview)
+	}
+}
+
+func setArticleCommentData(c echo.Context, commentURLLayout string, id uint64) func(disabledMsg error, needReview bool) {
+	return SetCommentData(c, commentURLLayout, `article`, ``, id)
+}
 
 func Detail(c echo.Context) error {
 	var err error
@@ -36,23 +65,7 @@ func Detail(c echo.Context) error {
 	}) + `?page={page}&size={size}&rows={rows}`
 
 	//commentURLLayout := `/article/comment_list?html=1&_pjax=true&page={page}&size={size}&rows={rows}&id=` + param.AsString(id)
-	flat := true
-	if sessdata.IsAdmin(c) {
-		flat = c.Formx(`flat`, `1`).Bool()
-	}
-	kvM := model.NewKv(c)
-	v, _ := kvM.GetValue(`ARTICLE_COMMENT_FLAT`, `1`, `文章评论是否扁平化显示`)
-	if len(v) > 0 {
-		flat = param.AsBool(v)
-	}
-	c.Set(`flat`, flat)
-	c.SetFunc(`commentList`, func() []*modelComment.CommentAndExtra {
-		c.Request().Form().Set(`_pjax`, `true`)
-		c.Request().Form().Set(`pageSize`, `10`)
-		commentList, _ := articleCommentList(c, id, ``, `article`, ``, flat, commentURLLayout, `Comment`)
-		//c.Request().Form().Del(`_pjax`)
-		return commentList
-	})
+	after := setArticleCommentData(c, commentURLLayout, id)
 	if op == `comments` && (c.IsPjax() || c.IsAjax()) {
 		data := c.Data()
 		b, err := c.Fetch(`/article/comment_list`, nil)
@@ -123,7 +136,6 @@ func Detail(c echo.Context) error {
 		}
 	}
 	c.Set(`sourceInfo`, sourceInfo)
-	c.Set(`needReviewComment`, articleM.OfficialCommonArticle.CommentAutoDisplay == `N`)
 	c.Set(`targetSubtype`, `article`)
 	c.Set(`targetType`, ``)
 	author := modelAuthor.New(articleM.OwnerId, articleM.OwnerType).Get(c)
@@ -152,8 +164,6 @@ func Detail(c echo.Context) error {
 	c.Set(`clickFlow`, clickFlowM.OfficialCommonClickFlow)
 	c.Set(`favorited`, favorited)
 
-	// 是否允许评论
-	c.Set(`disabledCommentMessage`, articleM.IsAllowedComment(customer))
 	extraCond := db.NewCompounds()
 	extraCond.Add(db.Cond{`source_id`: articleM.SourceId})
 	extraCond.Add(db.Cond{`source_table`: articleM.SourceTable})
@@ -161,6 +171,8 @@ func Detail(c echo.Context) error {
 	c.Set(`nextRow`, nextRow)
 	prevRow, _ := articleM.PrevRow(articleM.Id, extraCond)
 	c.Set(`prevRow`, prevRow)
+
+	after(articleM.IsAllowedComment(customer), articleM.CommentAutoDisplay == `N`)
 
 	// 多语言
 	articleModels := []*dbschema.OfficialCommonArticle{articleM.OfficialCommonArticle}
