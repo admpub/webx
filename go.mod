@@ -69,7 +69,7 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.3.0
-	github.com/nging-plugins/dbmanager v1.9.0
+	github.com/nging-plugins/dbmanager v1.9.1
 	github.com/silenceper/wechat/v2 v2.1.11
 )
 

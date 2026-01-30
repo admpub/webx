@@ -20,7 +20,7 @@ func Index(ctx echo.Context) error {
 	}
 	ctx.Set(`assets`, assets)
 	ctx.Set(`assetTypes`, modelCustomer.AssetTypeList())
-	pagination.SetPageDefaultSize(ctx, 20)
+	pagination.SetDefaultSize(ctx, 20)
 	flowM := dbschema.NewOfficialCustomerWalletFlow(ctx)
 	cond := db.NewCompounds()
 	cond.AddKV(`customer_id`, customer.Id)

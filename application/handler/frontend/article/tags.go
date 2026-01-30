@@ -25,7 +25,7 @@ func Tags(ctx echo.Context) error {
 	if pageSize <= 0 {
 		pageSize = 200
 	}
-	common.SetPageDefaultSize(ctx, pageSize)
+	common.SetPagingDefaultSize(ctx, pageSize)
 	tags, err := getTags(ctx, group)
 	if err != nil {
 		return err
