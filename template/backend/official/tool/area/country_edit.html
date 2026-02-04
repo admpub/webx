@@ -15,8 +15,7 @@
                 <h3>{{$.Stored.title}}</h3>
             </div>
             <div class="content">
-                <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST"
-                    action="">
+                <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="">
                     <input type="hidden" name="id" value="{{$data.Id}}">
                     {{- $.Stored.forms.Render -}}
                     <div class="form-group">
