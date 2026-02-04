@@ -26,7 +26,7 @@
 					<thead class="no-border">
 						<tr>
 							<th style="width:30px"><div class="checkbox checkbox-primary no-margin-y"><input type="checkbox" id="checkedAll"><label for="checkedAll"></label></div></th>
-							<th style="width:80px"><strong>{{"ID"|$.T}}</strong></th>
+							<th style="width:40px"><strong>{{"ID"|$.T}}</strong></th>
 							<th style="width:80px"><strong>{{"状态"|$.T}}</strong></th>
 							<th><strong>{{"名称"|$.T}}</strong></th>
 							<th><strong>{{"简称"|$.T}}</strong></th>
@@ -45,7 +45,7 @@
 							<td>{{$v.Id}}</td>
 							<td>
 								<div class="checkbox checkbox-success no-margin-y">
-									&nbsp;<input id="checkbox-disabled-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Disabled `N`}} checked="checked"{{end}} value="N" />
+									<input id="checkbox-disabled-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Disabled `N`}} checked="checked"{{end}} value="N" />
 									<label for="checkbox-disabled-{{$k}}">{{"启用"|$.T}}</label>
 								</div>
 							</td>
@@ -74,6 +74,7 @@
 <script>
 $(function(){
 App.attachCheckedAll('#checkedAll','input[type=checkbox][name="id[]"]');
+App.bindSwitch('input.switch-disabled','click','tool/area/country_edit');
 });
 </script>
 {{/Block}}
