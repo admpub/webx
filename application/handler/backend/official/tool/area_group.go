@@ -19,6 +19,10 @@ import (
 func AreaGroupIndex(ctx echo.Context) error {
 	m := official.NewAreaGroup(ctx)
 	cond := db.NewCompounds()
+	countryAbbr := ctx.Form(`countryAbbr`)
+	if len(countryAbbr) > 0 {
+		cond.Add(db.Cond{`country_abbr`: countryAbbr})
+	}
 	nsql.SelectPageCond(ctx, cond, `id`, `name%,abbr%`)
 	var err error
 	if ctx.Form(`select2`) == `1` {

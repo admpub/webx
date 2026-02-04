@@ -20,6 +20,10 @@ func AreaIndex(ctx echo.Context) error {
 	cond := db.NewCompounds()
 	pid := ctx.Formx(`pid`).Uint()
 	cond.AddKV(`pid`, pid)
+	countryAbbr := ctx.Form(`countryAbbr`)
+	if len(countryAbbr) > 0 {
+		cond.Add(db.Cond{`country_abbr`: countryAbbr})
+	}
 	nsql.SelectPageCond(ctx, cond, `id`, `name%,pinyin%`)
 	queryMW := func(r db.Result) db.Result {
 		return r.OrderBy(`id`)
