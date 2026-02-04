@@ -44,6 +44,16 @@ func AreaCountryIndex(ctx echo.Context) error {
 func AreaCountryAdd(ctx echo.Context) error {
 	var err error
 	m := official.NewAreaCountry(ctx)
+	if ctx.IsGet() {
+		id := ctx.Formx(`copyId`).Uint()
+		if id > 0 {
+			err = m.Get(nil, `id`, id)
+			if err == nil {
+				m.Id = 0
+				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonAreaCountry, uint64(id))
+			}
+		}
+	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonAreaCountry,
 		formbuilder.ConfigFile(`official/tool/area/country_edit`),
@@ -90,6 +100,21 @@ func AreaCountryEdit(ctx echo.Context) error {
 		return err
 	}
 	if ctx.IsGet() {
+		disabled := ctx.Query(`disabled`)
+		if len(disabled) > 0 {
+			if !common.IsBoolFlag(disabled) {
+				return ctx.NewError(code.InvalidParameter, ``).SetZone(`disabled`)
+			}
+			m.Disabled = disabled
+			data := ctx.Data()
+			err = m.UpdateField(nil, `disabled`, disabled, db.Cond{`id`: id})
+			if err != nil {
+				data.SetError(err)
+				return ctx.JSON(data)
+			}
+			data.SetInfo(ctx.T(`操作成功`))
+			return ctx.JSON(data)
+		}
 		i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonAreaCountry, uint64(id))
 	}
 	form := formbuilder.New(ctx,

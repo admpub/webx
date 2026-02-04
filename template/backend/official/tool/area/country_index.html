@@ -27,6 +27,7 @@
 						<tr>
 							<th style="width:30px"><div class="checkbox checkbox-primary no-margin-y"><input type="checkbox" id="checkedAll"><label for="checkedAll"></label></div></th>
 							<th style="width:80px"><strong>{{"ID"|$.T}}</strong></th>
+							<th style="width:80px"><strong>{{"状态"|$.T}}</strong></th>
 							<th><strong>{{"名称"|$.T}}</strong></th>
 							<th><strong>{{"简称"|$.T}}</strong></th>
 							<th><strong>{{"缩写"|$.T}}</strong></th>
@@ -42,6 +43,11 @@
                                 <div class="checkbox checkbox-primary no-margin-y"><input id="checkbox-{{$k}}" class="check-table" type="checkbox" name="id[]" value="{{$v.Id}}"><label for="checkbox-{{$k}}"></label></div>
 							</td>
 							<td>{{$v.Id}}</td>
+							<td>
+								<div class="checkbox checkbox-success no-margin-y">
+									&nbsp;<input id="checkbox-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Disabled `N`}} checked="checked"{{end}} value="N" /><label for="checkbox-{{$k}}">{{"启用"|$.T}}</label>
+								</div>
+							</td>
 							<td>{{$v.Name}}</td>
 							<td>{{$v.Short}}</td>
 							<td>{{$v.Abbr}}</td>
