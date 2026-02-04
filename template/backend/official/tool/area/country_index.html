@@ -45,7 +45,8 @@
 							<td>{{$v.Id}}</td>
 							<td>
 								<div class="checkbox checkbox-success no-margin-y">
-									&nbsp;<input id="checkbox-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Disabled `N`}} checked="checked"{{end}} value="N" /><label for="checkbox-{{$k}}">{{"启用"|$.T}}</label>
+									&nbsp;<input id="checkbox-disabled-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Disabled `N`}} checked="checked"{{end}} value="N" />
+									<label for="checkbox-disabled-{{$k}}">{{"启用"|$.T}}</label>
 								</div>
 							</td>
 							<td>{{$v.Name}}</td>
