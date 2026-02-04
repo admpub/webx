@@ -18,6 +18,10 @@ func init() {
 		g.Route(`GET,POST`, `/area/group_edit`, AreaGroupEdit)
 		g.Route(`GET,POST`, `/area/group_add`, AreaGroupAdd)
 		g.Route(`GET,POST`, `/area/group_delete`, AreaGroupDelete)
+		g.Route(`GET,POST`, `/area/country_index`, AreaCountryIndex)
+		g.Route(`GET,POST`, `/area/country_edit`, AreaCountryEdit)
+		g.Route(`GET,POST`, `/area/country_add`, AreaCountryAdd)
+		g.Route(`GET,POST`, `/area/country_delete`, AreaCountryDelete)
 
 		sensitive := g.Group(`/sensitive`)
 		// 敏感词管理

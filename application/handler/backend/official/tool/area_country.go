@@ -19,7 +19,7 @@ func AreaCountryIndex(ctx echo.Context) error {
 	m := official.NewAreaCountry(ctx)
 	cond := db.NewCompounds()
 	nsql.SelectPageCond(ctx, cond, `id`, `name%,abbr%`)
-	err := m.ListPage(cond, `sort`)
+	err := m.ListPage(cond, `sort`, `id`)
 	if err != nil {
 		return err
 	}
@@ -29,7 +29,7 @@ func AreaCountryIndex(ctx echo.Context) error {
 		ctx.Set(`listData`, list)
 		r := make([]echo.H, len(list))
 		for k, v := range list {
-			r[k] = echo.H{`id`: v.Abbr, `text`: v.Name}
+			r[k] = echo.H{`id`: v.Id, `text`: v.Name, `abbr`: v.Abbr}
 		}
 		ctx.Set(`listData`, r)
 		return ctx.JSON(data.SetData(ctx.Stored))
@@ -48,7 +48,7 @@ func AreaCountryAdd(ctx echo.Context) error {
 		m.OfficialCommonAreaCountry,
 		formbuilder.ConfigFile(`official/tool/area/country_edit`),
 		formbuilder.AllowedNames(
-			`countryAbbr`, `name`, `abbr`, `areaIds`, `sort`,
+			`short`, `name`, `abbr`, `code`, `disabled`, `sort`,
 		),
 	)
 	form.OnPost(func() error {
@@ -61,7 +61,7 @@ func AreaCountryAdd(ctx echo.Context) error {
 			return err
 		}
 		common.SendOk(ctx, ctx.T(`操作成功`))
-		return ctx.Redirect(backend.URLFor(`/tool/area/group_index`))
+		return ctx.Redirect(backend.URLFor(`/tool/area/country_index`))
 	})
 	err = form.RecvSubmission()
 	if form.Exited() {
@@ -70,10 +70,12 @@ func AreaCountryAdd(ctx echo.Context) error {
 	form.Generate()
 	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
 	nameField.AddTag(`required`)
+	shortField := form.MultilingualField(config.FromFile().Language.Default, `short`, `short`)
+	shortField.AddTag(`required`)
 
 	ctx.Set(`activeURL`, `/tool/area/index`)
-	ctx.Set(`title`, ctx.T(`添加地区分组`))
-	return ctx.Render(`official/tool/area/group_edit`, err)
+	ctx.Set(`title`, ctx.T(`添加国家`))
+	return ctx.Render(`official/tool/area/country_edit`, common.Err(ctx, err))
 }
 
 func AreaCountryEdit(ctx echo.Context) error {
@@ -92,9 +94,9 @@ func AreaCountryEdit(ctx echo.Context) error {
 	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonAreaCountry,
-		formbuilder.ConfigFile(`official/tool/area/group_edit`),
+		formbuilder.ConfigFile(`official/tool/area/country_edit`),
 		formbuilder.AllowedNames(
-			`countryAbbr`, `name`, `abbr`, `areaIds`, `sort`,
+			`short`, `name`, `abbr`, `code`, `disabled`, `sort`,
 		),
 	)
 	form.OnPost(func() error {
@@ -107,7 +109,7 @@ func AreaCountryEdit(ctx echo.Context) error {
 			return err
 		}
 		common.SendOk(ctx, ctx.T(`操作成功`))
-		return ctx.Redirect(backend.URLFor(`/tool/area/group_index`))
+		return ctx.Redirect(backend.URLFor(`/tool/area/country_index`))
 	})
 	err = form.RecvSubmission()
 	if form.Exited() {
@@ -116,10 +118,12 @@ func AreaCountryEdit(ctx echo.Context) error {
 	form.Generate()
 	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
 	nameField.AddTag(`required`)
+	shortField := form.MultilingualField(config.FromFile().Language.Default, `short`, `short`)
+	shortField.AddTag(`required`)
 
 	ctx.Set(`activeURL`, `/tool/area/index`)
-	ctx.Set(`title`, ctx.T(`编辑地区分组`))
-	return ctx.Render(`official/tool/area/group_edit`, err)
+	ctx.Set(`title`, ctx.T(`编辑国家`))
+	return ctx.Render(`official/tool/area/country_edit`, common.Err(ctx, err))
 }
 
 func AreaCountryDelete(ctx echo.Context) error {
@@ -140,5 +144,5 @@ func AreaCountryDelete(ctx echo.Context) error {
 		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(backend.URLFor(`/tool/area/group_index`))
+	return ctx.Redirect(backend.URLFor(`/tool/area/country_index`))
 }

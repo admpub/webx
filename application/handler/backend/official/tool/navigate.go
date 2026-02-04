@@ -46,6 +46,28 @@ var TopNavigate = navigate.List{
 		Name:    echo.T(`删除地区分组`),
 		Action:  `area/group_delete`,
 	},
+
+	&navigate.Item{
+		Display: false,
+		Name:    echo.T(`国家管理`),
+		Action:  `area/country_index`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    echo.T(`添加国家`),
+		Action:  `area/country_add`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    echo.T(`修改国家`),
+		Action:  `area/country_edit`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    echo.T(`删除国家`),
+		Action:  `area/country_delete`,
+	},
+
 	&navigate.Item{
 		Display: true,
 		Name:    echo.T(`中文分词`),

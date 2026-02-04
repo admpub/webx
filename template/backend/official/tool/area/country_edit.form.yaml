@@ -1,0 +1,55 @@
+id: Forms
+theme: bootstrap3
+template: "allfields"
+method: POST
+action: ""
+attributes:
+    - - class
+      - form-horizontal
+    - - role
+      - form
+withbuttons: false
+buttons: []
+btnstemplate: ""
+elements:
+    - id: ""
+      type: text
+      name: name
+      label: 国家名称
+      labelcols: 2
+      fieldcols: 3
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: 
+        - - maxlength
+          - 100
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: ""
+      type: text
+      name: short
+      label: 国家简称
+      labelcols: 2
+      fieldcols: 3
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: 
+        - - maxlength
+          - 100
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+languages: []
+data: {}
+trimnameprefix: ""
