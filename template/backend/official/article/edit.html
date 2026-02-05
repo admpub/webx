@@ -68,10 +68,12 @@
                   <div class="col-sm-3">
                     {{- $v := $data.Display -}}
                     <div class="radio radio-success radio-inline">
-                        <input type="radio" value="Y" name="display" id="display-Y"{{if eq $v `Y` ``}} checked{{end}}> <label for="display-Y">{{"显示"|$.T}}</label>
+                        <input type="radio" value="Y" name="display" id="display-Y"{{if eq $v `Y` ``}} checked{{end}}> 
+                        <label for="display-Y">{{"显示"|$.T}}</label>
                     </div>
                       <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="N" name="display" id="display-N"{{if eq $v `N`}} checked{{end}}> <label for="display-N">{{"隐藏"|$.T}}</label>
+                        <input type="radio" value="N" name="display" id="display-N"{{if eq $v `N`}} checked{{end}}> 
+                        <label for="display-N">{{"隐藏"|$.T}}</label>
                       </div>
                   </div>
                   <label class="col-sm-2 control-label">{{"售价"|$.T}}</label>
@@ -82,12 +84,14 @@
               <div class="form-group">
                   <label class="col-sm-2 control-label">{{"评论开关"|$.T}}</label>
                   <div class="col-sm-8">
-                    {{- $closeComment := $data.CloseComment -}}
+                    {{- $closeComment := $data.CloseComment | Default `N` -}}
                     <div class="radio radio-success radio-inline">
-                      <input type="radio" value="N" name="closeComment" id="closeComment-N"{{if eq $closeComment `N` ``}} checked{{end}} onclick="$('#comment-settings').removeClass('hide');"> <label for="closeComment-N">{{"允许评论"|$.T}}</label>
+                      <input type="radio" value="N" name="closeComment" id="closeComment-N"{{if eq $closeComment `N`}} checked{{end}} onclick="$('#comment-settings').removeClass('hide');"> 
+                      <label for="closeComment-N">{{"允许评论"|$.T}}</label>
                     </div>
                     <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="Y" name="closeComment" id="closeComment-Y"{{if eq $closeComment `Y`}} checked{{end}} onclick="$('#comment-settings').addClass('hide');"> <label for="closeComment-Y">{{"关闭评论"|$.T}}</label>
+                        <input type="radio" value="Y" name="closeComment" id="closeComment-Y"{{if eq $closeComment `Y`}} checked{{end}} onclick="$('#comment-settings').addClass('hide');"> 
+                        <label for="closeComment-Y">{{"关闭评论"|$.T}}</label>
                     </div>
 
                     <!-- comment-settings -->
@@ -97,12 +101,14 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">{{"显示评论"|$.T}}</label>
                     <div class="col-sm-8">
-                      {{- $v := $data.CommentAutoDisplay -}}
+                      {{- $v := $data.CommentAutoDisplay | Default `Y` -}}
                       <div class="radio radio-success radio-inline">
-                        <input type="radio" value="Y" name="commentAutoDisplay" id="commentAutoDisplay-Y"{{if eq $v `Y` ``}} checked{{end}}> <label for="commentAutoDisplay-Y">{{"直接显示"|$.T}}</label>
+                        <input type="radio" value="Y" name="commentAutoDisplay" id="commentAutoDisplay-Y"{{if eq $v `Y`}} checked{{end}}> 
+                        <label for="commentAutoDisplay-Y">{{"直接显示"|$.T}}</label>
                       </div>
                       <div class="radio radio-primary radio-inline">
-                          <input type="radio" value="N" name="commentAutoDisplay" id="commentAutoDisplay-N"{{if eq $v `N`}} checked{{end}}> <label for="commentAutoDisplay-N">{{"需要审核"|$.T}}</label>
+                          <input type="radio" value="N" name="commentAutoDisplay" id="commentAutoDisplay-N"{{if eq $v `N`}} checked{{end}}> 
+                          <label for="commentAutoDisplay-N">{{"需要审核"|$.T}}</label>
                       </div>
                     </div>
                   </div>
@@ -112,7 +118,8 @@
                         {{- $v := $data.CommentAllowUser | Default `all` -}}
                         {{- range $i,$r := $.Stored.allowUsers -}}
                         <div class="radio radio-success radio-inline">
-                          <input type="radio" value="{{$r.K}}" name="commentAllowUser" id="commentAllowUser-{{$r.K}}"{{if eq $v $r.K}} checked{{end}}> <label for="commentAllowUser-{{$r.K}}">{{$r.V}}</label>
+                          <input type="radio" value="{{$r.K}}" name="commentAllowUser" id="commentAllowUser-{{$r.K}}"{{if eq $v $r.K}} checked{{end}}> 
+                          <label for="commentAllowUser-{{$r.K}}">{{$r.V}}</label>
                         </div>
                         {{- end -}}
                       </div>
