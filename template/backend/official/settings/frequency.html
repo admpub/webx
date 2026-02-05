@@ -119,6 +119,14 @@ function onSelectDbAccount(a) {
         <div class="help-block">{{`如果网站正遭到攻击，可以启用此模式(新IP访问时显示验证码)`|$.T}}</div>
         <div class="fieldset bg-fc{{if not $on}} hide{{end}}" id="frequency-underAttack-settings">
             <div class="form-group">
+                <label class="col-sm-2 control-label">{{"提示信息"|$.T}}</label>
+                <div class="col-sm-4">
+                    <textarea name="frequency[underAttack][value][Message]" class="form-control" style="resize:vertical" rows="3">{{$frequency.underAttack.ValueObject.Message}}</textarea>
+                    <div class="help-block">
+                        {{`如果不填写，则使用默认提示信息：`|$.T}}<br />
+                        {{`为了杜绝恶意程序的攻击，您需要完成以下验证之后方可继续访问本站，如果给您带来不便我们深表歉意`|$.T}}
+                    </div>
+                </div>
                 <label class="col-sm-2 control-label">{{"IP白名单"|$.T}}</label>
                 <div class="col-sm-4">
                     <textarea name="frequency[underAttack][value][IPWhitelist]" class="form-control" style="resize:vertical" rows="3">{{$frequency.underAttack.ValueObject.IPWhitelist}}</textarea>

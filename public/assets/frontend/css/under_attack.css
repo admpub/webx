@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: rgb(101, 96, 187) linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh; min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #718096;
+}
+
+.container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    padding: 40px;
+    text-align: center;
+}
+
+.iconlock {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+h1 {
+    color: #1a202c;
+    font-size: 28px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+p {
+    color: #718096;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.dialog-container {
+    margin: 32px 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#message {
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 14px;
+    display: none;
+}
+
+#message.error {
+    background: #fee;
+    color: #c33;
+    border: 1px solid #fcc;
+}
+
+#message.success {
+    background: #efe;
+    color: #3c3;
+    border: 1px solid #cfc;
+}
+
+#message.info {
+    background: #eef;
+    color: #33c;
+    border: 1px solid #ccf;
+}
+
+footer {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+    color: #a0aec0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.input-group{
+    width:280px !important;margin:auto !important
+}
+img#captchaImage{
+    height:42px !important
+}
+.form-control-plaintext{
+    width: 100%;
+}
+button.btn{
+    border-radius: 20px;
+    min-width: 150px;
+}
+
+.theme-dark .container{
+    background-color:#1a1d23
+}
+.theme-dark h1{
+    color:#eee
+}
+.theme-dark .input-group-addon{
+    background-color:#333 !important;
+    border-color: #000 !important;
+}
+.theme-dark .form-control{
+    border-color:#000 !important;border-right:0 !important
+}
+.theme-dark .form-control,
+.theme-dark .form-control:focus{
+    background-color: #000;color:#fff
+}
+.theme-dark img#captchaImage{
+    filter:invert(1);margin-left:1px;
+}

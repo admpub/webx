@@ -1,49 +1,59 @@
-{{Strip}}<!DOCTYPE html>
+{{Strip}}{{- $captchaType := $.Stored.captchaType -}}
+<!DOCTYPE html>
 <html lang="{{$.Lang.Normalize}}">
-<head>{{- $captchaType := $.Stored.captchaType -}}
+<head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#6660bc">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{`请进行人类验证`|$.T}}</title>
+    <title>{{`访问验证`|$.T}}</title>
 	<link rel="shortcut icon" type="image/x-icon" href="{{$.RootPrefix}}/favicon.ico">
     {{- if eq $captchaType `default` -}}
     <link href="{{AssetsXURL}}/css/fonts/Ionicons/css.min.css?t={{BuildTime}}" rel="stylesheet">
     <link href="{{AssetsURL}}/css/fonts/iconfont/iconfont.css?t={{BuildTime}}" rel="stylesheet">
     {{- end -}}
     <link href="{{AssetsXURL}}/css/frontend.lite.min.css?t={{BuildTime}}" rel="stylesheet">
-    {{- if $.ThemeInfo.IsColorName `dark` -}}
-    <link href="{{AssetsXURL}}/css/dark.min.css?t={{BuildTime}}" rel="stylesheet" />
-    <meta name="theme-color" content="#000000" />
-    {{- end -}}
-    <style type="text/css">body{text-align:center;}h1{margin:30px auto}
-{{- if eq $captchaType `default` -}}
-    .input-group{width:280px !important;margin:auto !important}img#captchaImage{height:42px !important}
-    {{- if $.ThemeInfo.IsColorName `dark` -}}
-    .input-group-addon.bg-white:not(.btn){background-color:#333 !important}.form-control{border-color:#333 !important;border-right:0 !important}
-    {{- end -}}
-{{- else if eq $captchaType `go` -}}
-    .wg-cap-wrap{bottom:auto !important}.wg-cap-wrap__ico{text-align:left !important}
-{{- else if eq $captchaType `api` -}}
-    .input-group{width:280px !important;margin:auto !important}
-{{- end -}}
-    </style>{{Include "#default#global_js"}}
+    <link href="{{AssetsXURL}}/css/under_attack.min.css?t={{BuildTime}}" rel="stylesheet">
+    {{Include "#default#global_js"}}
 </head>
-<body>
-<div class="container">
-    <h1>{{`请进行人类验证`|$.T}}</h1>
-    <div>
-        <form class="form" action="" method="post">
-            <div class="form-group">
-                <span class="input-group">{{$.CaptchaForm `#default#default`}}</span>
+<body class="body-captcha-{{$captchaType}}{{if $.ThemeInfo.IsColorName `dark`}} theme-dark{{end}}">
+    <div class="container">
+        <div class="iconlock">🔒</div>
+        <h1>{{`访问验证`|$.T}}</h1>
+        <p>
+            {{- if $.Stored.message -}}
+            {{- $.Stored.message|Nl2br -}}
+            {{- else -}}
+            {{- `为了杜绝恶意程序的攻击，您需要完成以下验证之后方可继续访问本站，如果给您带来不便我们深表歉意`|$.T -}}
+            {{- end -}}
+        </p>
+        
+        <div class="dialog-container">
+            <div>
+                <form class="form" action="" method="post">
+                    <div class="form-group">
+                        <span class="input-group">{{$.CaptchaForm `#default#default`}}</span>
+                    </div>
+                    <button class="btn btn-primary">{{`确认`|$.T}}</button>
+                </form>
             </div>
-            <button class="btn btn-primary">{{`确认`|$.T}}</button>
-        </form>
+        </div>
+        
+        <div id="message"></div>
+        
+        <!-- <footer>Protected by Firewall</footer> -->
     </div>
-</div>
+
 <script src="{{AssetsURL}}/js/compatible.min.js?t={{BuildTime}}"></script>
 <script src="{{AssetsURL}}/js/jquery3.6.min.js?t={{BuildTime}}"></script>
 <script src="{{AssetsURL}}/js/jquery.migrate3.4.min.js?t={{BuildTime}}"></script>
 {{- if eq $captchaType `default` -}}
 <script type="text/javascript">$(function(){$('input.form-control').focus()})</script>
+{{- else if eq $captchaType `go` -}}
+<script type="text/javascript">$(function(){var $m=$('#message');
+$(window).on('captcha.error',function(e,msg){$m.html(msg).attr('class','error').show();});
+$(window).on('captcha.success',function(e,msg){$m.html(msg).attr('class','success').show();setTimeout(function(){$('form').submit()}, 1000);});
+})</script>
 {{- end -}}
 </body>
-</html>{{/Strip}}
+</html>
+{{/Strip}}
