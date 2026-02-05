@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260204065902-df6ed33c93b7
-	github.com/coscms/webcore v0.13.3-0.20260202065005-5daee5a1bffa
+	github.com/coscms/webcore v0.13.3-0.20260205051044-fe74984f68ea
 	github.com/coscms/webfront v0.0.0-20260204093125-443a47a1bc24
 )
 
@@ -97,7 +97,7 @@ require (
 	github.com/admpub/go-bindata-assetfs v0.0.1 // indirect
 	github.com/admpub/go-captcha-assets v0.0.0-20250122071745-baa7da4bda0d // indirect
 	github.com/admpub/go-captcha/v2 v2.0.7 // indirect
-	github.com/admpub/go-figure v0.0.2 // indirect
+	github.com/admpub/go-figure v0.1.0 // indirect
 	github.com/admpub/go-isatty v0.0.11 // indirect
 	github.com/admpub/go-lock v1.3.0 // indirect
 	github.com/admpub/go-password v0.1.3 // indirect
@@ -119,7 +119,6 @@ require (
 	github.com/admpub/ip2region/v3 v3.0.5 // indirect
 	github.com/admpub/json5 v0.0.1 // indirect
 	github.com/admpub/machineid v1.0.2 // indirect
-	github.com/admpub/mahonia v0.0.0-20151019004008-c528b747d92d // indirect
 	github.com/admpub/mail v0.0.0-20170408110349-d63147b0317b // indirect
 	github.com/admpub/map2struct v0.1.3 // indirect
 	github.com/admpub/mysql-schema-sync v0.2.6 // indirect
