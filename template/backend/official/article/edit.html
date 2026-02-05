@@ -109,10 +109,10 @@
                   <div class="form-group">
                       <label class="col-sm-2 control-label">{{"允许评论"|$.T}}</label>
                       <div class="col-sm-8">
-                        {{- $v := $data.CommentAllowUser -}}
+                        {{- $v := $data.CommentAllowUser | Default `all` -}}
                         {{- range $i,$r := $.Stored.allowUsers -}}
                         <div class="radio radio-success radio-inline">
-                          <input type="radio" value="{{$r.K}}" name="commentAllowUser" id="commentAllowUser-{{$r.K}}"{{if eq $v $r.K `` `all`}} checked{{end}}> <label for="commentAllowUser-{{$r.K}}">{{$r.V}}</label>
+                          <input type="radio" value="{{$r.K}}" name="commentAllowUser" id="commentAllowUser-{{$r.K}}"{{if eq $v $r.K}} checked{{end}}> <label for="commentAllowUser-{{$r.K}}">{{$r.V}}</label>
                         </div>
                         {{- end -}}
                       </div>
