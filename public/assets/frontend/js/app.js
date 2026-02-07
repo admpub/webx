@@ -557,18 +557,7 @@
             messageCount[m.mode]++;
           break;
         }
-      },
-			connect=function(onopen){
-				if (!!window.EventSource) {
-					var headers = {'Last-Event-Id':''};
-          var source = new EventSource(FRONTEND_URL + '/user/sse', {headers: headers});
-          source.addEventListener('notice', function(e) {
-						//console.dir(e)
-						headers['Last-Event-Id']=e.lastEventId;
-            messageHandle(e.data)
-          }, false);
-					return;
-        }
+      },connectWS=function(onopen){
         var connected = false; 
         var ws = App.websocket(function(message){
           messageHandle(message);
@@ -591,6 +580,25 @@
             });
         });
         return ws;
+      },
+			connect=function(onopen){
+				if (!!window.EventSource) {
+					var headers = {'Last-Event-Id':''};
+          var source = new EventSource(FRONTEND_URL + '/user/sse', {headers: headers});
+          source.addEventListener('notice', function(e) {
+						//console.dir(e)
+						headers['Last-Event-Id']=e.lastEventId;
+            messageHandle(e.data)
+          }, false);
+          source.addEventListener('error', function(e) {
+            if (e.readyState == EventSource.CLOSED) {
+              return;
+            }
+            connectWS(onopen);
+          });
+					return;
+        }
+        return connectWS(onopen);
       };
       connect();
     },

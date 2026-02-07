@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260206150700-34d9b82a1024
-	github.com/coscms/webcore v0.13.3-0.20260206094804-dc824d962da8
-	github.com/coscms/webfront v0.0.0-20260206060206-f689b49edf48
+	github.com/coscms/webcore v0.13.3-0.20260207143119-bcb202999505
+	github.com/coscms/webfront v0.0.0-20260207164014-807766394041
 )
 
 require (
@@ -134,7 +134,7 @@ require (
 	github.com/admpub/sitemap-generator v0.0.0-20250815124033-100aac5e8486 // indirect
 	github.com/admpub/sockjs-go/v3 v3.0.1 // indirect
 	github.com/admpub/sonyflake v0.0.1 // indirect
-	github.com/admpub/sse v0.0.0-20160126180136-ee05b128a739 // indirect
+	github.com/admpub/sse v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
 	github.com/admpub/timeago v1.3.0 // indirect
 	github.com/admpub/translate v0.0.0-20251210091442-a87b3fc63eda // indirect

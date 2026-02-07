@@ -195,8 +195,8 @@ github.com/admpub/sockjs-go/v3 v3.0.1 h1:vQTjPb8+yWLliAGOQztqudq5LU0QTGTVeoPEr+c
 github.com/admpub/sockjs-go/v3 v3.0.1/go.mod h1:cygzjxumP+U/XSEK0H2MRanxdChuz8YtqPJMVqzjia0=
 github.com/admpub/sonyflake v0.0.1 h1:oKYRTf7gjbHHpDe9WQkueZuHsilLUVCpshDmWsh33Mc=
 github.com/admpub/sonyflake v0.0.1/go.mod h1:dWWC99nrhdpb3esJuB7NLWvACXcd1LouCGpYEuS0Pxc=
-github.com/admpub/sse v0.0.0-20160126180136-ee05b128a739 h1:vcNlstbRWkjZlyYBK9LUDSzTuaD29CwPdKhHl0/YDok=
-github.com/admpub/sse v0.0.0-20160126180136-ee05b128a739/go.mod h1:oNYi77yjU4GPJfuHg894uT7EGy1EmJzYFwZ+BQBptK8=
+github.com/admpub/sse v0.0.1 h1:cT2gabX0Hbcm4+2g/vnBz1ZQPK3nIsgBAoUXlgU/iqg=
+github.com/admpub/sse v0.0.1/go.mod h1:4MeFjCjSVZt/kM4IhHRpgZsSexsu8c3Fml75h8gvP5Y=
 github.com/admpub/tail v1.1.1 h1:cjdOErLhSOj6Fb/Pk3b2qiPprt2Uvq4Ax/NQz/RqMxQ=
 github.com/admpub/tail v1.1.1/go.mod h1:8aebgtKxe9Nj9HY5qxe7nEVn2EaLOH6yyaB6+amzjG0=
 github.com/admpub/timeago v1.3.0 h1:uFRJ5LZUS1gjNTRGgTRf10wbBycSJmxrqMm1x/JkN1w=
@@ -328,10 +328,10 @@ github.com/coscms/session-sqlstore v0.0.1 h1:L1ef74QILW4RXrAcG2Se6K+zakmnE7sE735
 github.com/coscms/session-sqlstore v0.0.1/go.mod h1:n1mHOa5RJRVCXjliFkVcgg8A+TEDY6BPqFkyi3qVbTc=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.13.3-0.20260206094804-dc824d962da8 h1://KF7g2gEBI8jx5dzyEn4+y0xfBGMnpORZ4Ql2bhw4o=
-github.com/coscms/webcore v0.13.3-0.20260206094804-dc824d962da8/go.mod h1:7PJlUj9e8dR+CkaWaMSOGyYA03XLqcliSDI/bX55FIQ=
-github.com/coscms/webfront v0.0.0-20260206060206-f689b49edf48 h1:53Jwys8LWuXu+QK1lU6pPdel92NCUhm2itNbImv1C0Y=
-github.com/coscms/webfront v0.0.0-20260206060206-f689b49edf48/go.mod h1:kXBMmxMU3ztChxmdtQeE9KKbAPrjHS7PtmQaJE3cjek=
+github.com/coscms/webcore v0.13.3-0.20260207143119-bcb202999505 h1:ymtQeMxsZQxeQWOLr7kQ9Wio564GXgbyV57W03pgTgA=
+github.com/coscms/webcore v0.13.3-0.20260207143119-bcb202999505/go.mod h1:7PJlUj9e8dR+CkaWaMSOGyYA03XLqcliSDI/bX55FIQ=
+github.com/coscms/webfront v0.0.0-20260207164014-807766394041 h1:CAJZ8fFTw8ZqRblRz+2gGAwgjiL7MOooe5IZLBNx8VA=
+github.com/coscms/webfront v0.0.0-20260207164014-807766394041/go.mod h1:0we5DwQ/HlszTdzaXy9Ylp9awex2QZNRcOwyDH/DDmY=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
