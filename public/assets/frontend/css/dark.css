@@ -17,8 +17,8 @@ body{background-color: black !important;}
 .modal-content a:not(.btn):hover{color:#389afc !important}
 .card a.badge.tag-item,
 .modal-content a.badge.tag-item{color:#fff !important}
-.pagination:not(.pagination-inverse) .page-item.active a.page-link{color:#ddd}
-.pagination:not(.pagination-inverse) .page-item.active a.page-link:hover{color:#fff}
+.pagination:not(.pagination-inverse) .page-item.active a.page-link{color:#ccc}
+.pagination:not(.pagination-inverse) .page-item.active a.page-link:hover{color:#ddd !important}
 .form-control,.form-control:focus{background-color: #000;color:#fff}
 .form-control{border-color: #000 !important;}
 p.form-control{background-color: transparent;}
