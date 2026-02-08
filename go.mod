@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260207171023-72bb951768e2
-	github.com/coscms/webcore v0.13.3-0.20260207143119-bcb202999505
-	github.com/coscms/webfront v0.0.0-20260207164919-abdc64e50211
+	github.com/coscms/webcore v0.13.3-0.20260208063742-637671f2b67d
+	github.com/coscms/webfront v0.0.0-20260208063950-934226acea74
 )
 
 require (
@@ -55,7 +55,7 @@ require (
 	github.com/webx-top/client v0.9.6
 	github.com/webx-top/com v1.4.1
 	github.com/webx-top/db v1.30.2
-	github.com/webx-top/echo v1.22.29
+	github.com/webx-top/echo v1.23.0
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.2
@@ -270,7 +270,7 @@ require (
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
-	github.com/phuslu/iploc v1.0.20260115 // indirect
+	github.com/phuslu/iploc v1.0.20260201 // indirect
 	github.com/phuslu/lru v1.0.18 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
