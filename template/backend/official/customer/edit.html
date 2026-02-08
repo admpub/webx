@@ -26,7 +26,7 @@
                     <div class="avatar-upload">
                       {{- $avatar := $.Form "avatar" -}}
                       <img src="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
-                      <input id="fileupload" type="file" name="files[]">
+                      <input id="fileupload" type="file" name="files[]" data-prefix="avatar">
                       <input type="hidden" id="avatar-image" name="avatar-small" value="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{end}}" />
                       <input type="hidden" id="avatar-image-original" name="avatar" value="{{$avatar}}" />
                       <div id="avatar-progress" class="overlay"></div>
@@ -207,6 +207,7 @@
 									</div>
 							</div>
             </form>
+            {{- $.Set `cropImageModalPrefix` `avatar` -}}
             {{Include "modal_crop_image"}}
           </div><!-- /.content -->
         </div><!-- /.block-flat -->

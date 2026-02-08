@@ -44,11 +44,12 @@
                   <div class="col-sm-3">
                     <div class="avatar-upload">
                       {{$logo := $.Form "logo"}}
-                      <img src="{{$logo|Default (AssetsURL "/images/user_128.png")}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
-                      <input id="fileupload" type="file" name="files[]">
+                      <img src="{{$logo|Default (AssetsURL `/images/user_128.png`)}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
+                      <input id="fileupload" type="file" name="files[]" data-prefix="logo">
                       <input type="hidden" id="logo-image" name="logo" value="{{$logo}}" />
                       <input type="hidden" id="logo-image-original" name="logoOriginal" value="{{$.Form `logoOriginal`}}" />
-                      <div id="progress" class="overlay"></div>
+                      <div id="logo-progress" class="overlay"></div>
+                      {{- $.Set `cropImageModalPrefix` `logo` -}}
                       {{Include "modal_crop_image"}}
                     </div>
                   </div>
@@ -62,13 +63,13 @@
                   <div class="col-sm-8">
                     {{$v := $.Form "process" "idle"}}
                     <div class="radio radio-primary radio-inline">
-                        <input type="radio" value="idle" name="process" id="process-idle"{{if eq $v "idle"}} checked{{end}}> <label for="process-idle">{{"待处理"|$.T}}</label>
+                        <input type="radio" value="idle" name="process" id="process-idle"{{if eq $v `idle`}} checked{{end}}> <label for="process-idle">{{"待处理"|$.T}}</label>
                     </div>
                       <div class="radio radio-success radio-inline">
-                        <input type="radio" value="success" name="process" id="process-success"{{if eq $v "success"}} checked{{end}}> <label for="process-success">{{"通过"|$.T}}</label>
+                        <input type="radio" value="success" name="process" id="process-success"{{if eq $v `success`}} checked{{end}}> <label for="process-success">{{"通过"|$.T}}</label>
                       </div>
                       <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="reject" name="process" id="process-reject"{{if eq $v "reject"}} checked{{end}}> <label for="process-reject">{{"拒绝"|$.T}}</label>
+                        <input type="radio" value="reject" name="process" id="process-reject"{{if eq $v `reject`}} checked{{end}}> <label for="process-reject">{{"拒绝"|$.T}}</label>
                       </div>
                   </div>
                 </div>

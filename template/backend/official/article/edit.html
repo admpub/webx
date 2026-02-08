@@ -55,10 +55,10 @@
                     <div class="avatar-upload">
                       {{- $image := $data.Image -}}
                       <img src="{{$image|Default (AssetsURL `/images/user_128.png`)}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
-                      <input id="fileupload" type="file" name="files[]">
+                      <input id="fileupload" type="file" name="files[]" data-prefix="article">
                       <input type="hidden" id="article-image" name="image" value="{{$image}}" />
                       <input type="hidden" id="article-image-original" name="imageOriginal" value="{{$data.ImageOriginal}}" />
-                      <div id="progress" class="overlay"></div>
+                      <div id="article-progress" class="overlay"></div>
                     </div>
                   </div>
                 </div>
@@ -137,6 +137,7 @@
 									</div>
 							</div>
             </form>
+{{- $.Set `cropImageModalPrefix` `article` -}}
 {{Include "modal_crop_image"}}
           </div><!-- /.content -->
         </div><!-- /.block-flat -->
