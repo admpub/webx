@@ -21,7 +21,7 @@
 							<span class="input-group-addon">{{"资产类型"|$.T}}</span>
 							<select name="assetType" class="form-control" id="assetType" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{- $assetType := $.Stored.assetType -}} 
+								{{- $assetType := $.Stored.assetType -}}
 								{{- range $k, $v := $.Stored.assetTypes -}}
 								<option value="{{$v.K}}" {{- if eq $assetType $v.K}} selected{{end}}>{{$v.V}}</option>
 								{{- end}}
@@ -42,22 +42,22 @@
 							</select>
 						</div>
 					</form>
-				</div>					
+				</div>
 				<h3>{{"资产流水记录"|$.T}}</h3>
 			</div>
 			<div class="content">
-				<div class="table-responsive">
+				<div class="table-responsive" data-pattern="priority-columns">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
 							<th><strong>{{"客户"|$.T}}</strong></th>
-							<th><strong>{{"发起人"|$.T}}</strong></th>
-							<th><strong>{{"类型"|$.T}}</strong></th>
-							<th class="text-right"><strong>{{"额度"|$.T}}</strong></th>
-							<th><strong>{{"来源"|$.T}}</strong></th>
-							<th><strong>{{"交易号"|$.T}}</strong></th>
-							<th><strong>{{"说明"|$.T}}</strong></th>
-							<th style="width:65px"><strong>{{"状态"|$.T}}</strong></th>
+							<th data-priority="2"><strong>{{"发起人"|$.T}}</strong></th>
+							<th data-priority="1"><strong>{{"类型"|$.T}}</strong></th>
+							<th data-priority="1" class="text-right"><strong>{{"额度"|$.T}}</strong></th>
+							<th data-priority="3"><strong>{{"来源"|$.T}}</strong></th>
+							<th data-priority="4"><strong>{{"交易号"|$.T}}</strong></th>
+							<th data-priority="5"><strong>{{"说明"|$.T}}</strong></th>
+							<th data-priority="6" style="width:65px"><strong>{{"状态"|$.T}}</strong></th>
 							<th style="width:90px"><strong>{{"创建时间"|$.T}}</strong></th>
 						</tr>
 					</thead>
@@ -112,11 +112,11 @@
 						</tr>
                         {{- end -}}
 					</tbody>
-				</table>		
+				</table>
 				</div>
 				{{$.Stored.pagination.Render}}
 			</div>
-		</div>				
+		</div>
 	</div>
 </div>
 {{/Block}}

@@ -26,17 +26,17 @@
 				</h3>
 			</div>
 			<div class="content">
-				<div class="table-responsive">
+				<div class="table-responsive" data-pattern="priority-columns">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<th><strong>{{"ID"|$.T}}</strong></th>
+							<th data-priority="2"><strong>{{"ID"|$.T}}</strong></th>
 							<th><strong>{{"广告位标识"|$.T}}</strong></th>
 							<th><strong>{{"广告位名称"|$.T}}</strong></th>
-							<th><strong>{{"广告类型"|$.T}}</strong></th>
+							<th data-priority="5"><strong>{{"广告类型"|$.T}}</strong></th>
 							<th><strong>{{"显示"|$.T}}</strong></th>
-							<th><strong>{{"宽x高"|$.T}}</strong></th>
-							<th><strong>{{"默认广告"|$.T}}</strong></th>
+							<th data-priority="4"><strong>{{"宽x高"|$.T}}</strong></th>
+							<th data-priority="6"><strong>{{"默认广告"|$.T}}</strong></th>
 							<th style="width:80px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
@@ -70,20 +70,20 @@
 								</code>
 							</td>
 							<td><div class="rendered">{{$v.Rendered|ToHTML}}</div></td>
-							<td class="label-group">
-							<a class="label label-info" href="{{BackendURL}}/official/advert/index?positionId={{$v.Id}}" title="{{`广告列表`|$.T}}" data-toggle="tooltip"><i class="fa fa-table"></i></a> 
-							<a class="label label-default" href="{{BackendURL}}/official/advert/position_add?copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a> 
-							<a class="label label-success" href="{{BackendURL}}/official/advert/position_edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
+							<td class="label-group label-group">
+							<a class="label label-info" href="{{BackendURL}}/official/advert/index?positionId={{$v.Id}}" title="{{`广告列表`|$.T}}" data-toggle="tooltip"><i class="fa fa-table"></i></a>
+							<a class="label label-default" href="{{BackendURL}}/official/advert/position_add?copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
+							<br /><a class="label label-success" href="{{BackendURL}}/official/advert/position_edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
 							<a class="label label-danger" href="{{BackendURL}}/official/advert/position_delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
                         {{- end -}}
 					</tbody>
-				</table>		
+				</table>
 				</div>
 				{{$.Stored.pagination.Render}}
 			</div>
-		</div>				
+		</div>
 	</div>
 </div>
 {{/Block}}

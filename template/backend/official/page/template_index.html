@@ -16,14 +16,14 @@
 				<h3>{{"模板列表"|$.T}}</h3>
 			</div>
 			<div class="content">
-				<div class="table-responsive">
+				<div class="table-responsive" data-pattern="priority-columns">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
 							<th style="width:100px"><strong>{{"预览"|$.T}}</strong></th>
 							<th><strong>{{"模板"|$.T}}</strong></th>
-							<th style="width:175px"><strong>{{"版本"|$.T}}</strong></th>
-							<th style="width:230px"><strong>{{"作者"|$.T}}</strong></th>
+							<th data-priority="1" style="width:175px"><strong>{{"版本"|$.T}}</strong></th>
+							<th data-priority="1" style="width:230px"><strong>{{"作者"|$.T}}</strong></th>
 							<th style="width:80px"><strong>{{"启用"|$.T}}</strong></th>
 							<th style="width:50px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
@@ -74,17 +74,17 @@
 							</td>
 							<td class="text-center label-group">
 							<a class="label label-primary" href="{{BackendURL}}/official/page/template_config?name={{$v.Name}}" title="{{`配置`|$.T}}" data-toggle="tooltip"><i class="fa fa-gear"></i></a>
-							<a class="label label-success" href="{{BackendURL}}/official/page/template_edit?name={{$v.Name}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
-							<a class="label label-danger" href="{{BackendURL}}/official/page/template_delete?name={{$v.Name}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+							<br /><a class="label label-success" href="{{BackendURL}}/official/page/template_edit?name={{$v.Name}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
+							<br /><a class="label label-danger" href="{{BackendURL}}/official/page/template_delete?name={{$v.Name}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
                         {{- end -}}
 					</tbody>
-				</table>		
+				</table>
 				</div>
 				{{$.Stored.pagination.Render}}
 			</div>
-		</div>				
+		</div>
 	</div>
 </div>
 {{/Block}}

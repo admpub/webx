@@ -15,7 +15,7 @@
 							<span class="input-group-addon">{{"在线状态"|$.T}}</span>
 							<select name="online" class="form-control" id="online" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{- $online := $.Form "online"}} 
+								{{- $online := $.Form "online"}}
 								<option value="Y"{{if eq $online `Y`}} selected{{end}}>{{"在线"|$.T}}</option>
 								<option value="N"{{if eq $online `N`}} selected{{end}}>{{"离线"|$.T}}</option>
 							</select>
@@ -57,17 +57,17 @@
 				<h3>{{"客户列表"|$.T}}</h3>
 			</div>
 			<div class="content">
-				<div class="table-responsive">
+				<div class="table-responsive" data-pattern="priority-columns">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<th style="width:60px"><strong>ID</strong></th>
+							<th data-priority="2" style="width:60px"><strong>ID</strong></th>
 							<th style="width:50px"><strong>{{"头像"|$.T}}</strong></th>
 							<th style="min-width:200px"><strong>{{"客户名称"|$.T}}</strong></th>
-							<th style="width:100px"><strong>{{"角色"|$.T}}</strong></th>
-							<th style="width:100px"><strong>{{"附件"|$.T}}</strong></th>
-							<th style="width:85px"><strong>{{"创建时间"|$.T}}</strong></th>
-							<th style="width:85px"><strong>{{"更新时间"|$.T}}</strong></th>
+							<th data-priority="3" style="width:100px"><strong>{{"角色"|$.T}}</strong></th>
+							<th data-priority="4" style="width:100px"><strong>{{"附件"|$.T}}</strong></th>
+							<th data-priority="5" style="width:85px"><strong>{{"创建时间"|$.T}}</strong></th>
+							<th data-priority="6" style="width:85px"><strong>{{"更新时间"|$.T}}</strong></th>
 							<th style="width:80px;min-width:80px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
@@ -123,24 +123,24 @@
 							<td>
 								{{`数量`|$.T}}: <a class="file-num" href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{$v.FileNum}}</a><br />
 								{{`尺寸`|$.T}}: <a class="file-size" href="{{BackendURL}}/manager/file/list?ownerType=customer&ownerId={{$v.Id}}" target="_blank">{{FormatByte $v.FileSize 2}}</a><br />
-								<a class="text-warning recount-file-btn small" href="javascript:;" data-ajax-toggle="1" data-ajax-accept="json" data-ajax-url="{{BackendURL}}/official/customer/recount_file?id={{$v.Id}}" title="{{`重新统计`|$.T}}" data-toggle="tooltip">{{`重新统计`|$.T}}<i class="fa fa-refresh"></i></a> 
+								<a class="text-warning recount-file-btn small" href="javascript:;" data-ajax-toggle="1" data-ajax-accept="json" data-ajax-url="{{BackendURL}}/official/customer/recount_file?id={{$v.Id}}" title="{{`重新统计`|$.T}}" data-toggle="tooltip">{{`重新统计`|$.T}}<i class="fa fa-refresh"></i></a>
 							</td>
 							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{end}}</td>
 							<td class="text-center label-group">
 							<a class="label label-warning" href="{{BackendURL}}/official/customer/wallet/index?customerId={{$v.Id}}" title="{{`资产`|$.T}}" data-toggle="tooltip"><i class="fa fa-money"></i></a>
 							<a class="label label-default" href="{{BackendURL}}/official/customer/add?copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
-							<a class="label label-success" href="{{BackendURL}}/official/customer/edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
+							<br /><a class="label label-success" href="{{BackendURL}}/official/customer/edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
 							<a class="label label-danger" href="{{BackendURL}}/official/customer/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
                         {{end}}
 					</tbody>
-				</table>		
+				</table>
 				</div>
 				{{$.Stored.pagination.Render}}
 			</div>
-		</div>				
+		</div>
 	</div>
 </div>
 {{/Block}}

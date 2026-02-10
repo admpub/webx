@@ -9,13 +9,13 @@
 	<div class="col-md-12">
 		<div class="block-flat no-padding">
 			<div class="header">
-				<div class="pull-right" style="margin-left:10px">
+				<div class="pull-right" style="margin-left:10px;max-width:200px">
 					<form class="form-horizontal" action="" id="search-form" method="GET">
 						<div class="input-group">
 							<span class="input-group-addon">{{"来源表"|$.T}}</span>
 							<select name="sourceTable" class="form-control" id="selectSourceTable">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{- $sourceTable := $.Stored.sourceTable -}} 
+								{{- $sourceTable := $.Stored.sourceTable -}}
 								{{- range $k, $v := $.Stored.sourceTables -}}
 								<option value="{{$v.K}}" {{if eq $sourceTable $v.K}} selected{{end}}>{{$v.V}}</option>
 								{{- end -}}
@@ -26,7 +26,7 @@
 							<span class="input-group-addon">{{"内容格式"|$.T}}</span>
 							<select name="contype" class="form-control" id="selectContype" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{- $contype := $.Form `contype` -}} 
+								{{- $contype := $.Form `contype` -}}
 								{{- range $k, $v := $.Stored.contypes -}}
 								<option value="{{$v.K}}" {{if eq $contype $v.K}} selected{{end}}>{{$v.V|$.T|UpperCaseFirst}}</option>
 								{{- end -}}
@@ -41,18 +41,18 @@
 				<h3>{{"文章列表"|$.T}}</h3>
 			</div>
 			<div class="content">
-				<div class="table-responsive">
+				<div class="table-responsive" data-pattern="priority-columns">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<th style="width:40px;"><strong>ID</strong></th>
+							<th data-priority="1" style="width:40px;"><strong>ID</strong></th>
 							<th style="width:50px"><strong>{{"图"|$.T}}</strong></th>
 							<th><strong>{{"标题"|$.T}}</strong></th>
-							<th><strong>{{"来源"|$.T}}</strong></th>
-							<th style="width:80px"><strong>{{"喜欢"|$.T}}</strong></th>
-							<th style="width:80px"><strong>{{"评论"|$.T}}</strong></th>
-							<th style="width:80px"><strong>{{"显示"|$.T}}</strong></th>
-							<th style="width:175px"><strong>{{"时间"|$.T}}</strong></th>
+							<th data-priority="2"><strong>{{"来源"|$.T}}</strong></th>
+							<th data-priority="3" style="width:80px"><strong>{{"喜欢"|$.T}}</strong></th>
+							<th data-priority="4" style="width:80px"><strong>{{"评论"|$.T}}</strong></th>
+							<th data-priority="5" style="width:80px"><strong>{{"显示"|$.T}}</strong></th>
+							<th data-priority="6" style="width:175px"><strong>{{"时间"|$.T}}</strong></th>
 							<th style="width:120px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
@@ -111,19 +111,19 @@
 								{{"创建"|$.T}}: {{(Date $v.Created).Format "2006-01-02 15:04:05"}}<br />
 								{{"修改"|$.T}}: {{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}
 							</td>
-							<td class="text-center">
+							<td class="text-center label-group">
 							<a class="label label-default" href="{{BackendURL}}/official/article/add?sourceId={{$.Stored.sourceId}}&sourceTable={{$.Stored.sourceTable}}&copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
-							<a class="label label-success" href="{{BackendURL}}/official/article/edit?sourceId={{$.Stored.sourceId}}&sourceTable={{$.Stored.sourceTable}}&id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
+							<a class="label label-success" href="{{BackendURL}}/official/article/edit?sourceId={{$.Stored.sourceId}}&sourceTable={{$.Stored.sourceTable}}&id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
 							<a class="label label-danger" href="{{BackendURL}}/official/article/delete?sourceId={{$.Stored.sourceId}}&sourceTable={{$.Stored.sourceTable}}&id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
                         {{- end -}}
 					</tbody>
-				</table>		
+				</table>
 				</div>
 				{{$.Stored.pagination.Render}}
 			</div>
-		</div>				
+		</div>
 	</div>
 </div>
 {{/Block}}

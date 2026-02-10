@@ -9,7 +9,7 @@
 	<div class="col-md-12">
 		<div class="block-flat no-padding">
 			<div class="header">
-				<span class="pull-right margin-left-10">
+				<span class="pull-right margin-left-10" style="max-width:200px">
 					<form class="form-horizontal" action="" id="search-form" method="GET">
 						<div class="input-group">{{$group := $.Form "group"}}
 							<span class="input-group-addon">{{"等级组"|$.T}}</span>
@@ -25,23 +25,23 @@
 				<a href="{{BackendURL}}/official/customer/level/add" class="btn btn-success pull-right">
 					<i class="fa fa-plus"></i>
 					{{"添加等级"|$.T}}
-				</a>							
+				</a>
 				<h3>{{"等级列表"|$.T}}</h3>
 			</div>
 			<div class="content">
-				<div class="table-responsive">
+				<div class="table-responsive" data-pattern="priority-columns">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
-							<th style="width:40px"><strong>ID</strong></th>
+							<th data-priority="2" style="width:40px"><strong>ID</strong></th>
 							<th style="width:80px"><strong>{{"状态"|$.T}}</strong></th>
 							<th style="width:90px"><strong>{{"等级名称"|$.T}}</strong></th>
-							<th style="width:120px"><strong>{{"等级组"|$.T}}</strong></th>
-							<th style="width:150px"><strong>{{"等级积分"|$.T}}</strong></th>
-							<th style="width:80px"><strong>{{"等级分值"|$.T}}</strong></th>
-							<th style="width:80px"><strong>{{"等级价格"|$.T}}</strong></th>
-							<th style="min-width:80px"><strong>{{"描述"|$.T}}</strong></th>
-							<th style="width:175px"><strong>{{"时间"|$.T}}</strong></th>
+							<th data-priority="1" style="width:120px"><strong>{{"等级组"|$.T}}</strong></th>
+							<th data-priority="2" style="width:150px"><strong>{{"等级积分"|$.T}}</strong></th>
+							<th data-priority="3" style="width:80px"><strong>{{"等级分值"|$.T}}</strong></th>
+							<th data-priority="4" style="width:80px"><strong>{{"等级价格"|$.T}}</strong></th>
+							<th data-priority="5" style="min-width:80px"><strong>{{"描述"|$.T}}</strong></th>
+							<th data-priority="6" style="width:175px"><strong>{{"时间"|$.T}}</strong></th>
 							<th style="width:110px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
@@ -71,17 +71,17 @@
 							</td>
 							<td class="text-center label-group">
 							<a class="label label-default" href="{{BackendURL}}/official/customer/level/add?copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
-							<a class="label label-success" href="{{BackendURL}}/official/customer/level/edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a> 
+							<a class="label label-success" href="{{BackendURL}}/official/customer/level/edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
 							<a class="label label-danger" href="{{BackendURL}}/official/customer/level/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
                         {{- end -}}
 					</tbody>
-				</table>		
+				</table>
 				</div>
 				{{$.Stored.pagination.Render}}
 			</div>
-		</div>				
+		</div>
 	</div>
 </div>
 {{/Block}}

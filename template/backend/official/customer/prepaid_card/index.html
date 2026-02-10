@@ -9,13 +9,13 @@
 				<div class="col-md-12">
 					<div class="block-flat no-padding">
 						<div class="header">
-							<div class="pull-right" style="margin-left:10px">
+							<div class="pull-right" style="margin-left:10px;max-width:200px">
 								<form class="form-horizontal" action="" id="search-form" method="GET">
 									<div class="input-group">
 										<span class="input-group-addon">{{"状态"|$.T}}</span>
 										<select name="status" class="form-control" id="status" onchange="$('#search-form').submit()">
 											<option value=""> - {{"不限"|$.T}} - </option>
-											{{$status := $.Form "status"}} 
+											{{$status := $.Form "status"}}
 											<option value="used" {{if eq $status `used`}} selected{{end}}>{{`已使用`|$.T}}</option>
 											<option value="unused" {{if eq $status `unused`}} selected{{end}}>{{`未使用`|$.T}}</option>
 										</select>
@@ -31,19 +31,19 @@
 							<h3>{{"充值卡列表"|$.T}}</h3>
 						</div>
 						<div class="content">
-							<div class="table-responsive">
+							<div class="table-responsive" data-pattern="priority-columns">
 							<table class="table no-border hover">
 								<thead class="no-border">
 									<tr>
-										<th style="width:80px"><strong>ID</strong></th>
+										<th data-priority="2" style="width:80px"><strong>ID</strong></th>
 										<th><strong>{{"卡号"|$.T}}</strong></th>
 										<th><strong>{{"面值"|$.T}}</strong></th>
-										<th><strong>{{"售价"|$.T}}</strong></th>
-										<th><strong>{{"有效期"|$.T}}</strong></th>
-										<th style="width:130px"><strong>{{"创建时间"|$.T}}</strong></th>
-										<th style="width:130px"><strong>{{"使用时间"|$.T}}</strong></th>
-										<th><strong>{{"使用者"|$.T}}</strong></th>
-										<th style="width:60px"><strong>{{"状态"|$.T}}</strong></th>
+										<th data-priority="1"><strong>{{"售价"|$.T}}</strong></th>
+										<th data-priority="3"><strong>{{"有效期"|$.T}}</strong></th>
+										<th data-priority="4" style="width:130px"><strong>{{"创建时间"|$.T}}</strong></th>
+										<th data-priority="5" style="width:130px"><strong>{{"使用时间"|$.T}}</strong></th>
+										<th data-priority="6"><strong>{{"使用者"|$.T}}</strong></th>
+										<th data-priority="1" style="width:60px"><strong>{{"状态"|$.T}}</strong></th>
 										<th style="width:80px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 									</tr>
 								</thead>
@@ -77,18 +77,18 @@
 										</td>
 										<td>{{$v.CustomerId}}</td>
 										<td>{{if eq $v.Disabled "Y"}}{{"禁用"|$.T}}{{else}}{{"启用"|$.T}}{{end}}</td>
-										<td class="text-center">
-										<a class="label label-success" href="{{BackendURL}}/official/customer/prepaid_card/edit?id={{$v.Id}}" data-toggle="tooltip" title="{{"修改"|$.T}}"><i class="fa fa-pencil"></i></a> 
+										<td class="text-center label-group">
+										<a class="label label-success" href="{{BackendURL}}/official/customer/prepaid_card/edit?id={{$v.Id}}" data-toggle="tooltip" title="{{"修改"|$.T}}"><i class="fa fa-pencil"></i></a>
 										<a class="label label-danger" href="{{BackendURL}}/official/customer/prepaid_card/delete?id={{$v.Id}}" onclick="return confirm('{{"真的要删除吗？"|$.T}}');" data-toggle="tooltip" title="{{"删除"|$.T}}"><i class="fa fa-times"></i></a>
 										</td>
 									</tr>
                                     {{end}}
 								</tbody>
-							</table>		
+							</table>
 							</div>
 							{{$.Stored.pagination.Render}}
 						</div>
-					</div>				
+					</div>
 				</div>
 			</div>
 {{/Block}}

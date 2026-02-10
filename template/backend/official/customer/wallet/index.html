@@ -20,27 +20,27 @@
 							<span class="input-group-addon">{{"资产类型"|$.T}}</span>
 							<select name="assetType" class="form-control" id="assetType" onchange="$('#search-form').submit()">
 								<option value="0"> - {{"不限"|$.T}} - </option>
-								{{$assetType := $.Stored.assetType}} 
+								{{$assetType := $.Stored.assetType}}
 								{{range $k, $v := $.Stored.assetTypes}}
 								<option value="{{$v.K}}" {{if eq $assetType $v.K}} selected{{end}}>{{$v.V}}</option>
 								{{end}}
 							</select>
 						</div>
 					</form>
-				</div>					
+				</div>
 				<h3>{{"客户资产列表"|$.T}}</h3>
 			</div>
 			<div class="content">
-				<div class="table-responsive">
+				<div class="table-responsive" data-pattern="priority-columns">
 				<table class="table no-border hover">
 					<thead class="no-border">
 						<tr>
 							<th><strong>{{"客户"|$.T}}</strong></th>
 							<th><strong>{{"资产类型"|$.T}}</strong></th>
 							<th class="text-right"><strong>{{"余额"|$.T}}</strong></th>
-							<th class="text-right"><strong>{{"冻结"|$.T}}</strong></th>
-							<th style="width:82px"><strong>{{"创建时间"|$.T}}</strong></th>
-							<th style="width:82px"><strong>{{"更新时间"|$.T}}</strong></th>
+							<th data-priority="1" class="text-right"><strong>{{"冻结"|$.T}}</strong></th>
+							<th data-priority="5" style="width:82px"><strong>{{"创建时间"|$.T}}</strong></th>
+							<th data-priority="6" style="width:82px"><strong>{{"更新时间"|$.T}}</strong></th>
 							<th style="width:80px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
@@ -53,18 +53,18 @@
 							<td class="text-right">{{NumberFormat $v.Freeze 4}}</td>
 							<td>{{if gt $v.Created 0}}{{(Date $v.Created).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</td>
 							<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</td>
-							<td class="text-center">
+							<td class="text-center label-group">
 							<a class="label label-warning" href="{{BackendURL}}/official/customer/wallet/flow?customerId={{$v.CustomerId}}&assetType={{$v.AssetType}}" title="{{`流水记录`|$.T}}" data-toggle="tooltip"><i class="fa fa-list"></i></a>
 							<a class="label label-success" href="{{BackendURL}}/official/customer/wallet/edit?customerId={{$v.CustomerId}}&assetType={{$v.AssetType}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
 							</td>
 						</tr>
                         {{end}}
 					</tbody>
-				</table>		
+				</table>
 				</div>
 				{{$.Stored.pagination.Render}}
 			</div>
-		</div>				
+		</div>
 	</div>
 </div>
 {{/Block}}
