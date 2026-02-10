@@ -7,49 +7,75 @@
 {{Block "main"}}
 <div class="row">
 	<div class="col-md-12">
+		<div class="block-flat block-filters-form">
+		<div class="content">
+		<form class="form-horizontal" action="" id="search-form" method="GET">
+		<div class="row row-md">
+		    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon">{{"在线状态"|$.T}}</span>
+				<select name="online" class="form-control" id="online" onchange="$('#search-form').submit()">
+					<option value=""> - {{"不限"|$.T}} - </option>
+					{{- $online := $.Form "online"}}
+					<option value="Y"{{if eq $online `Y`}} selected{{end}}>{{"在线"|$.T}}</option>
+					<option value="N"{{if eq $online `N`}} selected{{end}}>{{"离线"|$.T}}</option>
+				</select>
+			</div>
+		    </div>
+		    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon">{{"客户组"|$.T}}</span>
+				<select name="groupId" class="form-control" id="groupId" onchange="$('#search-form').submit()">{{$groupId := ($.Formx `groupId`).Uint}}
+					<option value=""> - {{"不限"|$.T}} - </option>
+					{{- range $k, $v := $.Stored.groupList -}}
+					<option value="{{$v.Id}}"{{if eq $groupId $v.Id}} selected{{end}}>{{$v.Name|$.T}}</option>
+					{{- end -}}
+				</select>
+			</div>
+		    </div>
+		    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon">{{"客户等级"|$.T}}</span>
+				<select name="levelId" class="form-control" id="levelId" onchange="$('#search-form').submit()">{{$levelId := ($.Formx `levelId`).Uint}}
+					<option value=""> - {{"不限"|$.T}} - </option>
+					{{- range $k, $v := $.Stored.levelList}}
+					<option value="{{$v.Id}}"{{if eq $levelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+					{{- end}}
+				</select>
+			</div>
+		    </div>
+		    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon">{{"代理等级"|$.T}}</span>
+				<select name="agentLevelId" class="form-control" id="agentLevelId" onchange="$('#search-form').submit()">{{$agentLevelId := ($.Formx `agentLevelId`).Uint}}
+					<option value=""> - {{"不限"|$.T}} - </option>
+					{{- range $k, $v := $.Stored.agentLevelList}}
+					<option value="{{$v.Id}}"{{if eq $agentLevelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+					{{- end}}
+				</select>
+			</div>
+		    </div>
+		    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon">{{"角色"|$.T}}</span>
+				<select name="roleId" class="form-control" id="roleId" onchange="$('#search-form').submit()">{{$roleId := ($.Formx `roleId`).Uint}}
+					<option value=""> - {{"不限"|$.T}} - </option>
+					{{- range $k, $v := $.Stored.roleList}}
+					<option value="{{$v.Id}}"{{if eq $roleId $v.Id}} selected{{end}}>{{$v.Name}}</option>
+					{{- end}}
+				</select>
+			</div>
+			</div>
+		</div>
+		</form>
+		</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
 		<div class="block-flat no-padding">
 			<div class="header">
-				<div class="pull-right" style="margin-left:10px">
-					<form class="form-horizontal" action="" id="search-form" method="GET">
-						<div class="input-group">
-							<span class="input-group-addon">{{"在线状态"|$.T}}</span>
-							<select name="online" class="form-control" id="online" onchange="$('#search-form').submit()">
-								<option value=""> - {{"不限"|$.T}} - </option>
-								{{- $online := $.Form "online"}}
-								<option value="Y"{{if eq $online `Y`}} selected{{end}}>{{"在线"|$.T}}</option>
-								<option value="N"{{if eq $online `N`}} selected{{end}}>{{"离线"|$.T}}</option>
-							</select>
-							<span class="input-group-addon">{{"客户组"|$.T}}</span>
-							<select name="groupId" class="form-control" id="groupId" onchange="$('#search-form').submit()">{{$groupId := ($.Formx `groupId`).Uint}}
-								<option value=""> - {{"不限"|$.T}} - </option>
-								{{- range $k, $v := $.Stored.groupList -}}
-								<option value="{{$v.Id}}"{{if eq $groupId $v.Id}} selected{{end}}>{{$v.Name|$.T}}</option>
-								{{- end -}}
-							</select>
-							<span class="input-group-addon">{{"客户等级"|$.T}}</span>
-							<select name="levelId" class="form-control" id="levelId" onchange="$('#search-form').submit()">{{$levelId := ($.Formx `levelId`).Uint}}
-								<option value=""> - {{"不限"|$.T}} - </option>
-								{{- range $k, $v := $.Stored.levelList}}
-								<option value="{{$v.Id}}"{{if eq $levelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
-								{{- end}}
-							</select>
-							<span class="input-group-addon">{{"代理等级"|$.T}}</span>
-							<select name="agentLevelId" class="form-control" id="agentLevelId" onchange="$('#search-form').submit()">{{$agentLevelId := ($.Formx `agentLevelId`).Uint}}
-								<option value=""> - {{"不限"|$.T}} - </option>
-								{{- range $k, $v := $.Stored.agentLevelList}}
-								<option value="{{$v.Id}}"{{if eq $agentLevelId $v.Id}} selected{{end}}>{{$v.Name}}</option>
-								{{- end}}
-							</select>
-							<span class="input-group-addon">{{"角色"|$.T}}</span>
-							<select name="roleId" class="form-control" id="roleId" onchange="$('#search-form').submit()">{{$roleId := ($.Formx `roleId`).Uint}}
-								<option value=""> - {{"不限"|$.T}} - </option>
-								{{- range $k, $v := $.Stored.roleList}}
-								<option value="{{$v.Id}}"{{if eq $roleId $v.Id}} selected{{end}}>{{$v.Name}}</option>
-								{{- end}}
-							</select>
-						</div>
-					</form>
-				</div>
 				<a href="{{BackendURL}}/official/customer/add" class="btn btn-success pull-right">
 					<i class="fa fa-plus"></i>
 					{{"添加客户"|$.T}}
