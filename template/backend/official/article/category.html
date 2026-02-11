@@ -97,6 +97,7 @@ function expandCategory(a){
 			var $r=$(r);
 			tr.after($r);
 			$r.each(function(){App.editableSortNumber(this,'/official/article/category_edit?op=setSort');});
+			$('.table-responsive[data-pattern="priority-columns"]').responsiveTable('update');
 		}
 	},'html');
 }

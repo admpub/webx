@@ -92,6 +92,7 @@ function expandCategory(a){
 			var $r=$(r);
 			tr.after($r);
 			$r.each(function(){App.editableSortNumber(this,'/manager/navigate/edit?op=setSort');});
+			$('.table-responsive[data-pattern="priority-columns"]').responsiveTable('update');
 		}
 	},'html');
 }
