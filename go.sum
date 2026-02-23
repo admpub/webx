@@ -154,8 +154,8 @@ github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5 h1:N9+M16t6Pa0zNjy2g
 github.com/admpub/marmot v0.0.0-20200702042226-2170d9ff59f5/go.mod h1:Aim7aOlr/P9OkX0ucuhrzMEUcKOJXErCMS3MDGTBGJc=
 github.com/admpub/mysql-schema-sync v0.2.6 h1:BaL7J2gWguEe9ADQkhp4olnkdBGeePwcCT+lnxxjoC0=
 github.com/admpub/mysql-schema-sync v0.2.6/go.mod h1:LmUAY60w9nQCiGBMjZEBah35kA0fvGZfh0PSwAqPZHE=
-github.com/admpub/nging/v5 v5.3.4-0.20260223031426-7615aba0febb h1:ANAdznAj/5Jza8gmpj9hVGwlNBg8A1UQn7AhLu5G438=
-github.com/admpub/nging/v5 v5.3.4-0.20260223031426-7615aba0febb/go.mod h1:cQHlDZUSvsGkNgBoIlljPAKXgwDTv0tq0eLulnk61sU=
+github.com/admpub/nging/v5 v5.3.4-0.20260223090318-1ea241818217 h1:0L54q/00ZD24vrHtJJBEnBcH9TZTWuGUHUyxlV77lwg=
+github.com/admpub/nging/v5 v5.3.4-0.20260223090318-1ea241818217/go.mod h1:3I8Dx5GNhIW5DJNKCv1bZbmoweU8/h9WdYrKdUqEtBk=
 github.com/admpub/null v8.0.5+incompatible h1:doltajgwv+ffEOFBvGL4f59E01+7xYbkS1cwKoz3XC8=
 github.com/admpub/null v8.0.5+incompatible/go.mod h1:DMV9RC+JZv6AhaX1E62ur1mS7gyGLYRh+r0s8MF7mHA=
 github.com/admpub/oauth2/v4 v4.0.3 h1:I+UiBoSWdpt4STGTIjmNCQUlrkI819WPLtdrf/vjBpM=
@@ -328,10 +328,10 @@ github.com/coscms/session-sqlstore v0.0.1 h1:L1ef74QILW4RXrAcG2Se6K+zakmnE7sE735
 github.com/coscms/session-sqlstore v0.0.1/go.mod h1:n1mHOa5RJRVCXjliFkVcgg8A+TEDY6BPqFkyi3qVbTc=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.13.3-0.20260223031051-9ca12d9f7540 h1:9tfV+MvcW5XuuyrRqnfoQMpS1JtA8XcMlRp2aKMoIlg=
-github.com/coscms/webcore v0.13.3-0.20260223031051-9ca12d9f7540/go.mod h1:WosRyt3+moGNCHSQ4QZCoSYPOhEKpq59LjxNbKuKuN8=
-github.com/coscms/webfront v0.0.0-20260223031456-6f5406fe43e7 h1:8EM8vhhCs65UqLkDxtf5KxkE6BskPPzxCyNUgWmez8c=
-github.com/coscms/webfront v0.0.0-20260223031456-6f5406fe43e7/go.mod h1:eki+RVvVSy0QL1ipWlaNqTB998xSaaSxI8X5TqMnXCM=
+github.com/coscms/webcore v0.13.3-0.20260223090104-1432814ac1e8 h1:MAsqnRlztkRyjfaS/Fj6eyvLF4Q3xvcL7uEKvFfnQog=
+github.com/coscms/webcore v0.13.3-0.20260223090104-1432814ac1e8/go.mod h1:WosRyt3+moGNCHSQ4QZCoSYPOhEKpq59LjxNbKuKuN8=
+github.com/coscms/webfront v0.0.0-20260223090340-385d80264c61 h1:CsebahqsOpceY3o0/VNcfGmH4jVr8C/tm1JplcCVDpc=
+github.com/coscms/webfront v0.0.0-20260223090340-385d80264c61/go.mod h1:/ljbi6VxrDQTtcqwpBRCjeiniJJBZT1IAddC2Ul/ayk=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
