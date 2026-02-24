@@ -34,7 +34,7 @@
             <span class="tx-gray-light d-inline-block nowrap">
                 <i class="fa fa-tags"></i>
                 {{- range $tagK,$tagV := $v.TagList}}
-                {{if gt $tagK 0}} / {{end -}}
+                {{- if gt $tagK 0 }} / {{ end -}}
                 <a href="{{FrontendURL}}/articles{{$.Ext}}?tag={{$tagV.Name}}" class="tx-gray-light hover-info">{{$tagV.Name}}</a>
                 {{- end -}}
             </span>
