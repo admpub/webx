@@ -58,7 +58,7 @@ require (
 	github.com/webx-top/echo v1.23.1
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
-	github.com/webx-top/pagination v0.3.2
+	github.com/webx-top/pagination v0.3.3
 	github.com/webx-top/validation v0.0.3 // indirect
 	golang.org/x/oauth2 v0.35.0 // indirect
 	golang.org/x/sync v0.19.0
