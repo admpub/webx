@@ -42,16 +42,16 @@
           </tr>
         </thead>
         <tbody id="tbody-showurls">
-          {{range $k, $v := $.Stored.list}}
+          {{- range $k, $v := $.Stored.list -}}
           <tr>
             <td class="d-flex">
-                {{$targetName := (index $.Stored.targets $v.TargetType).Title}}
+                {{- $targetName := (index $.Stored.targets $v.TargetType).Title -}}
                 {{- if $v.URL -}}
-                {{if $v.Extra.thumb}}
+                {{- if $v.Extra.thumb -}}
                 <a href="{{URLByName `user.favorite.go` $v.Id}}" target="_blank" class="mg-r-5">
                     <img src="{{$v.Extra.thumb|Default (AssetsXURL `/images/background/img442.jpg`)}}" onerror="this.onerror=null; this.src='{{AssetsXURL}}/images/background/img442.jpg';" class="wd-55 ht-55" alt="{{$v.Title}}">
                 </a>
-                {{end}}
+                {{- end -}}
                 <p>
                     <a href="{{URLByName `user.favorite.go` $v.Id}}" target="_blank" class="tx-inverse tx-size-14 tx-medium d-block">
                       {{- $v.OfficialCommonCollection.Title|Default $v.Title -}}
@@ -65,9 +65,9 @@
                     </small>
                 </p>
                 {{- else -}}
-                {{if $v.Extra.thumb}}
+                {{- if $v.Extra.thumb -}}
                 <img src="{{$v.Extra.thumb|Default (AssetsXURL `/images/background/img442.jpg`)}}" onerror="this.onerror=null; this.src='{{AssetsXURL}}/images/background/img442.jpg';" class="wd-55 ht-55" alt="{{$v.Title}}">
-                {{end}}
+                {{- end -}}
                 <p>
                     <span class="tx-inverse tx-size-14 tx-medium d-block">
                         {{- $v.Title -}}
@@ -90,7 +90,7 @@
               </div><!-- /.btn-group -->
             </td>
           </tr>
-          {{end}}
+          {{- end -}}
         </tbody>
       </table>
       </div><!-- table-responsive -->
