@@ -757,10 +757,11 @@ function bindCommentList(box,isReplyList,offsetY) {
  */
 function initCommentForm(formElem,offsetY){
     if(formElem==null) formElem='#comment-post-form';
-    if($(formElem).length<1) return;
-    if($(formElem).data('attached')) return;
-    $(formElem).data('attached',true);
-    $(formElem).find('[required]').on('keyup blur',function(){
+    var $form=$(formElem);
+    if($form.length<1) return;
+    if($form.data('attached')) return;
+    $form.data('attached',true);
+    $form.find('[required]').on('keyup blur',function(){
         var v=$.trim($(this).val());
         if(v==''){
             $(this).addClass('form-control-warning').parent().addClass('has-warning');
@@ -769,15 +770,17 @@ function initCommentForm(formElem,offsetY){
         }
     });
     var f=function(){
-        var invalidInput=$(formElem).find('.form-control-warning[required]');
+        var $form=$(formElem);
+        var invalidInput=$form.find('.form-control-warning[required]');
         if(invalidInput.length>0) {
             invalidInput.focus();
             showMsg(invalidInput.attr('placeholder'));
             return;
         }
-        var url=$(formElem).attr('action');
+
+        var url=$form.attr('action');
         var valid=true;
-        $(formElem).find('[required]').each(function(){
+        $form.find('[required]').each(function(){
             var v=$.trim($(this).val());
             if(v==''){
                 if(valid){
@@ -792,20 +795,21 @@ function initCommentForm(formElem,offsetY){
         var ajaxOptions={
             url: url,
             type: 'POST',
-            data: $(formElem).serializeArray(),
+            data: $form.serializeArray(),
             dataType: 'json',
             success: function(r){
-                onAjaxRespond($(formElem)[0],r,ajaxOptions,function(){
+                var $form=$(formElem);
+                onAjaxRespond($form[0],r,ajaxOptions,function(){
                     if($('.show-after-comment.mission-uncompleted').length>0){
                         window.setTimeout(function(){
                             window.location.reload();
                         },2000);
                         return;
                     }
-                    if(/^modal-/.test($(formElem).attr('id'))){
-                        $(formElem).parents('.modal').modal('hide');
+                    if(/^modal-/.test($form.attr('id'))){
+                        $form.parents('.modal').modal('hide');
                     }
-                    var replyIdE=$(formElem).find('#reply-id');
+                    var replyIdE=$form.find('#reply-id');
                     var replyId=replyIdE.data('root-id')||0;
                     if(replyId && $('#reply-list-box-'+replyId).length>0){
                         var replyBox = $('#reply-list-box-'+replyId);
@@ -813,8 +817,8 @@ function initCommentForm(formElem,offsetY){
                     }else{
                         commentList(1);
                     }
-                    $(formElem).find('[name=content]').val('');
-                    $(formElem).find('[name=code]').val('');
+                    $form.find('[name=content]').val('');
+                    $form.find('[name=code]').val('');
                 });
             },
             error: function(xhr){
@@ -823,11 +827,11 @@ function initCommentForm(formElem,offsetY){
         };
         $.ajax(ajaxOptions);
     };
-    $(formElem).on('submit', function(event){
+    $form.on('submit', function(event){
         event.preventDefault();
         f.apply(this,arguments);
     });
-    $(formElem).find('[data-form]:not(:submit)').on('click',f);
+    $form.find('[data-form]:not(:submit)').on('click',f);
 }
 function initPageAllCommentForm(offsetY){
     initCommentForm(null,offsetY);
