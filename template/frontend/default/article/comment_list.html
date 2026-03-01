@@ -37,7 +37,7 @@
             <span class="tx-gray-light tx-light">{{"回复"|$.T}}</span>
             <span class="tx-medium tx-gray-dark tx-size-sm">{{$v.Extra.repliedCustomerName}}</span>
             {{- if gt $v.ReplyFloorNumber 0 -}}
-            <span class="tx-gray-light tx-light">{{$.T "%d楼" $v.ReplyFloorNumber}}</span>
+            <span class="tx-gray-light tx-light"> {{$.T "%d楼" $v.ReplyFloorNumber}}</span>
             {{- end -}}
             :</div>
             {{- end}}
