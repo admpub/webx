@@ -133,7 +133,7 @@
 <script>
 $(function(){
 App.bindSwitch('input.switch-display','click','official/article/edit?sourceId={{$.Stored.sourceId}}&sourceTable={{$.Stored.sourceTable}}');
-App.bindSwitch('input.switch-closeComment','click','official/article/edit?sourceId={{$.Stored.sourceId}}&sourceTable={{$.Stored.sourceTable}}','close-comment');
+App.bindSwitch('input.switch-closeComment','click','official/article/edit?sourceId={{$.Stored.sourceId}}&sourceTable={{$.Stored.sourceTable}}');
 App.editor.selectPage('#selectSourceId',{
     data: '{{$.URL.Path}}?operation=selectSource',
     params: function(){
