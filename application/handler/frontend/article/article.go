@@ -5,7 +5,6 @@ import (
 	"github.com/webx-top/db/lib/factory/mysql"
 	"github.com/webx-top/echo"
 	stdCode "github.com/webx-top/echo/code"
-	"github.com/webx-top/echo/param"
 
 	"github.com/admpub/log"
 	"github.com/coscms/webcore/library/common"
@@ -13,40 +12,13 @@ import (
 	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/frontend"
 	"github.com/coscms/webfront/library/top"
-	"github.com/coscms/webfront/library/xkv"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelAuthor "github.com/coscms/webfront/model/author"
 	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 	modelArticle "github.com/coscms/webfront/model/official/article"
-	modelComment "github.com/coscms/webfront/model/official/comment"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
-
-func SetCommentData(c echo.Context, commentURLLayout string, targetType string, targetSubtype string, id uint64) func(disabledMsg error, needReview bool) {
-	flat := true
-	if sessdata.IsAdmin(c) {
-		flat = c.Formx(`flat`, `1`).Bool()
-	}
-	v, _ := xkv.GetValue(c, `ARTICLE_COMMENT_FLAT`, `1`, `文章评论是否扁平化显示`)
-	if len(v) > 0 {
-		flat = param.AsBool(v)
-	}
-	c.Set(`flat`, flat)
-	c.SetFunc(`commentList`, func() []*modelComment.CommentAndExtra {
-		c.Request().Form().Set(`_pjax`, `true`)
-		c.Request().Form().Set(`pageSize`, `10`)
-		commentList, _ := modelComment.QueryCommentList(c, id, ``, targetType, targetSubtype, flat, commentURLLayout, `Comment`)
-		//c.Request().Form().Del(`_pjax`)
-		return commentList
-	})
-
-	return func(disabledMsg error, needReview bool) {
-		// 是否允许评论
-		c.Set(`disabledCommentMessage`, disabledMsg)
-		c.Set(`needReviewComment`, needReview)
-	}
-}
 
 func setArticleCommentData(c echo.Context, commentURLLayout string, id uint64) func(disabledMsg error, needReview bool) {
 	return SetCommentData(c, commentURLLayout, `article`, ``, id)

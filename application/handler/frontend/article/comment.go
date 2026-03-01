@@ -1,18 +1,58 @@
 package article
 
 import (
+	"github.com/webx-top/db/lib/factory/pagination"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/param"
 
 	"github.com/coscms/webcore/library/captcha/captchabiz"
 	"github.com/coscms/webcore/library/httpserver"
 	"github.com/coscms/webcore/library/nerrors"
+	"github.com/coscms/webfront/library/xkv"
 	"github.com/coscms/webfront/middleware/sessdata"
 	modelComment "github.com/coscms/webfront/model/official/comment"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
 
-func ArticleCommentAdd(c echo.Context) (err error) {
+func articleCommentAdd(c echo.Context) error {
+	return CommentAdd(c, c.Formx(`type`, `article`).String(), c.Formx(`subtype`).String())
+}
+
+func articleCommentReplyList(c echo.Context) error {
+	return CommentReplyList(c, `/article/comment_reply_list`)
+}
+
+func articleCommentList(c echo.Context) error {
+	return CommentList(c, `/article/comment_list`)
+}
+
+func SetCommentData(c echo.Context, commentURLLayout string, targetType string, targetSubtype string, id uint64) func(disabledMsg error, needReview bool) {
+	flat := true
+	if sessdata.IsAdmin(c) {
+		flat = c.Formx(`flat`, `1`).Bool()
+	}
+	v, _ := xkv.GetValue(c, `ARTICLE_COMMENT_FLAT`, `1`, `文章评论是否扁平化显示`)
+	if len(v) > 0 {
+		flat = param.AsBool(v)
+	}
+	c.Set(`flat`, flat)
+	c.SetFunc(`commentList`, func() []*modelComment.CommentAndExtra {
+		c.Request().Form().Set(`_pjax`, `true`)
+		pagination.SetForceSize(c, 10)
+		commentList, _ := modelComment.QueryCommentList(c, id, ``, targetType, targetSubtype, flat, commentURLLayout, `Comment`)
+		//c.Request().Form().Del(`_pjax`)
+		return commentList
+	})
+
+	return func(disabledMsg error, needReview bool) {
+		// 是否允许评论
+		c.Set(`disabledCommentMessage`, disabledMsg)
+		c.Set(`needReviewComment`, needReview)
+	}
+}
+
+func CommentAdd(c echo.Context, commentType string, subType string) (err error) {
 	customer := sessdata.Customer(c)
 	data := captchabiz.VerifyCaptcha(c, httpserver.KindFrontend, `code`)
 	if nerrors.IsFailureCode(data.GetCode()) {
@@ -34,12 +74,10 @@ func ArticleCommentAdd(c echo.Context) (err error) {
 		}
 		customer = m.OfficialCustomer
 	}
-	typ := c.Formx(`type`, `article`).String()
-	tp, ok := modelComment.CommentAllowTypes[typ]
+	tp, ok := modelComment.CommentAllowTypes[commentType]
 	if !ok {
-		return c.NewError(code.InvalidParameter, `不支持评论目标: %v`, typ)
+		return c.NewError(code.InvalidParameter, `不支持评论目标: %v`, commentType)
 	}
-	subType := c.Formx(`subtype`).String()
 	id := c.Formx(`id`).Uint64()
 	sn := c.Formx(`sn`).String()
 	if len(sn) > 0 && tp.SN2ID != nil {
@@ -49,7 +87,7 @@ func ArticleCommentAdd(c echo.Context) (err error) {
 		}
 	}
 	cmtM := modelComment.NewComment(c)
-	cmtM.TargetType = typ
+	cmtM.TargetType = commentType
 	cmtM.TargetSubtype = subType
 	cmtM.TargetId = id
 	cmtM.SetCustomerID(customer.Id)
@@ -65,10 +103,10 @@ func ArticleCommentAdd(c echo.Context) (err error) {
 	return c.JSON(data)
 }
 
-func ArticleCommentReplyList(c echo.Context) error {
+func CommentReplyList(c echo.Context, templ string) error {
 	c.SetAuto(true)
 	commentID := c.Formx(`commentId`).Uint64()
-	c.Request().Form().Set(`pageSize`, `10`)
+	pagination.SetForceSize(c, 10)
 	listx, err := modelComment.QueryCommentReplyList(c, commentID, ``)
 	if err != nil {
 		return err
@@ -83,7 +121,7 @@ func ArticleCommentReplyList(c echo.Context) error {
 		data := c.Data()
 		htmlContent := c.Formx(`html`).Bool()
 		if htmlContent {
-			b, err := c.Fetch(`/article/comment_reply_list`, nil)
+			b, err := c.Fetch(templ, nil)
 			if err != nil {
 				return err
 			}
@@ -96,17 +134,17 @@ func ArticleCommentReplyList(c echo.Context) error {
 		}
 		return c.JSON(data)
 	}
-	return c.Render(`/article/comment_reply_list`, nil)
+	return c.Render(templ, nil)
 }
 
-func ArticleCommentList(c echo.Context) (err error) {
+func CommentList(c echo.Context, templ string) error {
 	c.SetAuto(true)
 	id := c.Formx(`id`).Uint64()
 	sn := c.Formx(`sn`).String()
 	typ := c.Formx(`type`, `article`).String()
 	flat := c.Formx(`flat`).Bool()
 	subType := c.Formx(`subtype`).String()
-	c.Request().Form().Set(`pageSize`, `10`)
+	pagination.SetForceSize(c, 10)
 	listx, err := modelComment.QueryCommentList(c, id, sn, typ, subType, flat, ``)
 	if err != nil {
 		return err
@@ -122,7 +160,7 @@ func ArticleCommentList(c echo.Context) (err error) {
 		data := c.Data()
 		htmlContent := c.Formx(`html`).Bool()
 		if htmlContent {
-			b, err := c.Fetch(`/article/comment_list`, nil)
+			b, err := c.Fetch(templ, nil)
 			if err != nil {
 				return err
 			}
@@ -135,5 +173,5 @@ func ArticleCommentList(c echo.Context) (err error) {
 		}
 		return c.JSON(data)
 	}
-	return c.Render(`/article/comment_list`, nil)
+	return c.Render(templ, nil)
 }
