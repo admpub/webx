@@ -789,31 +789,39 @@ function initCommentForm(formElem,offsetY){
             }
         });
         if(!valid) return;
-        $.post(url,$(formElem).serializeArray(),function(r){
-            renewCaptcha($(formElem),r);
-            showMsg(r.Info);
-            if(r.Code>0){
-                if($('.show-after-comment.mission-uncompleted').length>0){
-                    window.setTimeout(function(){
-                        window.location.reload();
-                    },2000);
-                    return;
-                }
-                if(/^modal-/.test($(formElem).attr('id'))){
-                    $(formElem).parents('.modal').modal('hide');
-                }
-                var replyIdE=$(formElem).find('#reply-id');
-                var replyId=replyIdE.data('root-id')||0;
-                if(replyId && $('#reply-list-box-'+replyId).length>0){
-                    var replyBox = $('#reply-list-box-'+replyId);
-                    commentList(1,replyBox[0],replyBox.data('url'),true,offsetY);
-                }else{
-                    commentList(1);
-                }
-                $(formElem).find('[name=content]').val('');
-                $(formElem).find('[name=code]').val('');
+        var ajaxOptions={
+            url: url,
+            type: 'POST',
+            data: $(formElem).serializeArray(),
+            dataType: 'json',
+            success: function(r){
+                onAjaxRespond($(formElem)[0],r,ajaxOptions,function(){
+                    if($('.show-after-comment.mission-uncompleted').length>0){
+                        window.setTimeout(function(){
+                            window.location.reload();
+                        },2000);
+                        return;
+                    }
+                    if(/^modal-/.test($(formElem).attr('id'))){
+                        $(formElem).parents('.modal').modal('hide');
+                    }
+                    var replyIdE=$(formElem).find('#reply-id');
+                    var replyId=replyIdE.data('root-id')||0;
+                    if(replyId && $('#reply-list-box-'+replyId).length>0){
+                        var replyBox = $('#reply-list-box-'+replyId);
+                        commentList(1,replyBox[0],replyBox.data('url'),true,offsetY);
+                    }else{
+                        commentList(1);
+                    }
+                    $(formElem).find('[name=content]').val('');
+                    $(formElem).find('[name=code]').val('');
+                });
+            },
+            error: function(xhr){
+                showMsg(App.t('网络错误'), 'error');
             }
-        },'json');
+        };
+        $.ajax(ajaxOptions);
     };
     $(formElem).on('submit', function(event){
         event.preventDefault();
