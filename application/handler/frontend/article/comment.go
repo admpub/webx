@@ -24,7 +24,7 @@ func articleCommentReplyList(c echo.Context) error {
 }
 
 func articleCommentList(c echo.Context) error {
-	return CommentList(c, `/article/comment_list`, c.Formx(`type`, `article`).String(), c.Formx(`subtype`).String())
+	return CommentList(c, c.Formx(`type`, `article`).String(), c.Formx(`subtype`).String(), `/article/comment_list`)
 }
 
 func SetCommentData(c echo.Context, commentURLLayout string, targetType string, targetSubtype string, id uint64) func(disabledMsg error, needReview bool) {
