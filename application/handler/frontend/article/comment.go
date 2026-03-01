@@ -16,7 +16,7 @@ import (
 )
 
 func articleCommentAdd(c echo.Context) error {
-	return CommentAdd(c, c.Formx(`type`, `article`).String(), c.Formx(`subtype`).String())
+	return CommentAdd(c, c.Formx(`type`, `article`).String(), c.Formx(`subtype`).String(), true)
 }
 
 func articleCommentReplyList(c echo.Context) error {
@@ -52,8 +52,11 @@ func SetCommentData(c echo.Context, commentURLLayout string, targetType string, 
 	}
 }
 
-func CommentAdd(c echo.Context, commentType string, subType string) (err error) {
+func CommentAdd(c echo.Context, commentType string, subType string, supportSignIn bool) (err error) {
 	customer := sessdata.Customer(c)
+	if !supportSignIn && customer == nil {
+		return nerrors.ErrUserNotLoggedIn
+	}
 	data := captchabiz.VerifyCaptcha(c, httpserver.KindFrontend, `code`)
 	if nerrors.IsFailureCode(data.GetCode()) {
 		return c.JSON(data)
@@ -63,7 +66,7 @@ func CommentAdd(c echo.Context, commentType string, subType string) (err error) 
 		return c.JSON(data.SetError(err))
 	}
 	data.SetData(cpt.MakeData(c, httpserver.KindFrontend, `code`))
-	if customer == nil {
+	if supportSignIn && customer == nil {
 		name := c.Form(`name`)
 		pass := c.Form(`password`)
 		typi := c.Form(`type`)
