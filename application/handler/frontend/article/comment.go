@@ -24,7 +24,7 @@ func articleCommentReplyList(c echo.Context) error {
 }
 
 func articleCommentList(c echo.Context) error {
-	return CommentList(c, `/article/comment_list`)
+	return CommentList(c, `/article/comment_list`, c.Formx(`type`, `article`).String(), c.Formx(`subtype`).String())
 }
 
 func SetCommentData(c echo.Context, commentURLLayout string, targetType string, targetSubtype string, id uint64) func(disabledMsg error, needReview bool) {
@@ -137,15 +137,13 @@ func CommentReplyList(c echo.Context, templ string) error {
 	return c.Render(templ, nil)
 }
 
-func CommentList(c echo.Context, templ string) error {
+func CommentList(c echo.Context, commentType string, subType string, templ string) error {
 	c.SetAuto(true)
 	id := c.Formx(`id`).Uint64()
 	sn := c.Formx(`sn`).String()
-	typ := c.Formx(`type`, `article`).String()
 	flat := c.Formx(`flat`).Bool()
-	subType := c.Formx(`subtype`).String()
 	pagination.SetForceSize(c, 10)
-	listx, err := modelComment.QueryCommentList(c, id, sn, typ, subType, flat, ``)
+	listx, err := modelComment.QueryCommentList(c, id, sn, commentType, subType, flat, ``)
 	if err != nil {
 		return err
 	}
