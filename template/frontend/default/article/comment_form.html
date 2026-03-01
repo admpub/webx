@@ -1,7 +1,7 @@
 {{Strip}}{{- $data := $.Stored.data -}}
 {{- $inModal := $.Get "comment_form.in_modal" -}}
 {{- $containerClass := $.Get "comment_form.container_class" -}}
-{{- $disabledCommentMessage := $.Stored.disabledCommentMessage -}}    
+{{- $disabledCommentMessage := $.Stored.disabledCommentMessage -}}
         <div class="card bd-0{{if not $inModal}} mg-t-20{{end}}{{if $containerClass}} {{$containerClass}}{{end}}">
           {{- if not $inModal -}}
           <div class="card-header pd-y-20 pd-x-0">
