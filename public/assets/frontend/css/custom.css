@@ -16,10 +16,20 @@
 }
 
 .btn > .fa{min-width:15px;text-align:center;}
+.input-group-addon:not(:first-child) .btn, 
+.input-group-btn:not(:first-child) .btn{
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.input-group-addon:not(:first-child):not(:last-child) .btn, 
+.input-group-btn:not(:first-child):not(:last-child) .btn{
+  border-radius: 0;
+}
 .input-group-btn{margin-bottom: 0;}
 .input-group-btn .file-preview-button{margin-top: 0;}
 .btn.no-padding{padding: 0 !important;}
 .btn.no-padding > img.scale {object-fit: scale-down;object-position: center;max-width: 100px;height: 38px;}
+.input-group-fileinput .input-group-btn > .btn{flex: none;}
 
 .pull-right {
   float:right !important
