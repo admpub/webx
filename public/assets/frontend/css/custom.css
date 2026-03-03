@@ -16,6 +16,10 @@
 }
 
 .btn > .fa{min-width:15px;text-align:center;}
+.input-group-btn{margin-bottom: 0;}
+.input-group-btn .file-preview-button{margin-top: 0;}
+.btn.no-padding{padding: 0 !important;}
+.btn.no-padding > img.scale {object-fit: scale-down;object-position: center;max-width: 100px;height: 38px;}
 
 .pull-right {
   float:right !important
