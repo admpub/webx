@@ -39,7 +39,7 @@
                   {{- if $v.TagList -}}
                   <span class="d-inline-block">
                   <i class="fa fa-tags"></i>
-                  {{- range $tagK,$tagV := $v.TagList}}
+                  {{ range $tagK,$tagV := $v.TagList }}
                   {{- if gt $tagK 0 }} / {{ end -}}
                   <span class="tx-info"><a href="{{FrontendURL}}/articlesBy/{{$.Stored.sourceTable}}/{{$.Stored.sourceId}}{{$.Ext}}?tag={{$tagV.Name}}">{{$tagV.Name}}</a></span>
                   {{- end -}}
