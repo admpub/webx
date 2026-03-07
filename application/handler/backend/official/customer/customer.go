@@ -47,9 +47,13 @@ func Index(ctx echo.Context) error {
 	levelId := ctx.Formx(`levelId`).Uint()
 	roleId := ctx.Formx(`roleId`).Uint()
 	isAgent := ctx.Formx(`isAgent`).Bool()
+	uid := ctx.Formx(`uid`).Uint()
 	online := ctx.Form(`online`)
 	m := modelCustomer.NewCustomer(ctx)
 	cond := &db.Compounds{}
+	if uid > 0 {
+		cond.AddKV(`uid`, uid)
+	}
 	if groupId > 0 {
 		cond.AddKV(`group_id`, groupId)
 	}
