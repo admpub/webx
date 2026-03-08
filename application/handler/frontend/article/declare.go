@@ -56,8 +56,19 @@ func ClickFlow(c echo.Context, typ string, targetType string, canCancel ...bool)
 		if info.ID > 0 {
 			targetID = info.ID
 		}
-		if info.AuthorID > 0 && customer.Id == info.AuthorID {
-			return c.NewError(code.Unsupported, `操作失败：您不能对自己发布的内容进行此项操作`).SetZone(`type`)
+		if info.IsAuthor != nil {
+			ok, err := info.IsAuthor(c, customer)
+			if err != nil {
+				data.SetError(err)
+				return c.JSON(data)
+			}
+			if ok {
+				return c.NewError(code.Unsupported, `操作失败：您不能对自己发布的内容进行此项操作`).SetZone(`type`)
+			}
+		} else if info.AuthorID > 0 {
+			if (len(info.AuthorType) == 0 || info.AuthorType == `customer`) && customer.Id == info.AuthorID {
+				return c.NewError(code.Unsupported, `操作失败：您不能对自己发布的内容进行此项操作`).SetZone(`type`)
+			}
 		}
 	}
 	clickFlowM := official.NewClickFlow(c)
