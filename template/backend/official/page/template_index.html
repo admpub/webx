@@ -36,7 +36,9 @@
 									{{- if $v.Embed -}}
 									<span class="label label-primary" style="position:absolute">{{`内置`|$.T}}</span>
 									{{- end -}}
-									<img class="image-zoom" data-mfp-src="{{if $v.PreviewImage}}{{BackendURL}}/official/page/template_index?op=preview&name={{$v.Name}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" src="{{if $v.PreviewImage}}{{BackendURL}}/official/page/template_index?op=preview&name={{$v.Name}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" onerror="this.src='{{AssetsURL}}/images/user_128.png';" style="width:100px;object-fit:cover;" />
+									<img class="image-zoom" data-mfp-src="{{if $v.PreviewImage}}{{BackendURL}}/official/page/template_index?op=preview&name={{$v.Name}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" 
+									src="{{if $v.PreviewImage}}{{BackendURL}}/official/page/template_index?op=preview&name={{$v.Name}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" 
+									onerror="this.src='{{AssetsURL}}/images/user_128.png';" style="width:100px;object-fit:cover;" />
 								</div>
 							</td>
 							<td>
@@ -71,7 +73,7 @@
 								{{- $project := $.Stored.project -}}
 								{{- $defaultTheme := $.Stored.defaultTheme -}}
 								<div class="radio radio-success no-margin-y">
-									<input id="radio-enabled-{{$v.Name}}" name="theme[enabled]" type="radio" value="{{$v.Name}}"
+									<input id="radio-enabled-{{$v.Name}}" class="radio-enabled" type="radio" value="{{$v.Name}}"
 									{{- if and $project (ne $project $v.Project) }} disabled="disabled"
 									{{- else if eq $v.Name $.Stored.current.Name }} checked="checked"
 									{{- else if eq $v.Name $defaultTheme }} checked="checked"
@@ -101,9 +103,15 @@
 <script>
 $(function(){
 $('#tbody-template-list .image-zoom').each(function(){App.editor.popup(this);});
-$('input[name="theme[enabled]"]').on('click',function(){
-	$.post(BACKEND_URL+'/official/page/template_enable',{name:$(this).val()},function(r){
-		if(r.Code!=1) return App.message({text:r.Info,type:'error'});
+var elem = 'input.radio-enabled';
+$(elem+':not(:disabled)').on('click',function(){
+	var that = $(this);
+	$.post(BACKEND_URL+'/official/page/template_enable',{name:that.val()},function(r){
+		if(r.Code!=1) {
+			that.prop('checked',false);
+			return App.message({text:r.Info,type:'error'});
+		}
+		that.closest('tr').siblings('tr').find(elem+':checked').prop('checked',false);
 	});
 })
 });
