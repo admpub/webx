@@ -3,9 +3,14 @@
 {{Block "breadcrumb"}}
 {{Super}}
 <li><a href="{{BackendURL}}/tool/area/index">{{$.Stored.title}}</a></li>
-{{range $k,$v := $.Stored.positions}}
+{{- range $k,$v := $.Stored.positions -}}
 <li><a href="{{BackendURL}}/tool/area/index?pid={{$v.Id}}">{{$v.Name}}</a></li>
-{{end}}
+{{- else -}}
+	{{- $countryAbbr := $.Form `countryAbbr` -}}
+	{{- if $countryAbbr -}}
+	<li>{{`国家`|$.T}}:{{$countryAbbr}}</li>
+	{{- end -}}
+{{- end -}}
 {{/Block}}
 {{Block "main"}}
 <div class="row">
