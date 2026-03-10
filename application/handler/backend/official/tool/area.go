@@ -11,6 +11,7 @@ import (
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webcore/library/nsql"
+	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 )
@@ -47,6 +48,28 @@ func AreaIndex(ctx echo.Context) error {
 	ctx.Set(`title`, ctx.T(`地区列表`))
 	ctx.Set(`positions`, positions)
 	return ctx.Render(`official/tool/area/index`, ret)
+}
+
+func setAreaForm(ctx echo.Context) {
+	countryM := dbschema.NewOfficialCommonAreaCountry(ctx)
+	_, err := countryM.ListByOffset(nil, func(r db.Result) db.Result {
+		return r.Select(`sort`, `id`)
+	}, 0, -1)
+	var countryList []*dbschema.OfficialCommonAreaCountry
+	if err == nil {
+		countryList = countryM.Objects()
+	}
+	if len(countryList) == 0 {
+		countryList = append(countryList, &dbschema.OfficialCommonAreaCountry{
+			Abbr:     `CN`,
+			Name:     `中国`,
+			Short:    `中国`,
+			Code:     `86`,
+			Sort:     1000,
+			Disabled: common.BoolN,
+		})
+	}
+	ctx.Set(`countryList`, countryList)
 }
 
 func AreaAdd(ctx echo.Context) error {
@@ -92,6 +115,7 @@ func AreaAdd(ctx echo.Context) error {
 	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
 	nameField.AddTag(`required`)
 
+	setAreaForm(ctx)
 	ctx.Set(`pids`, pids)
 	ctx.Set(`activeURL`, `/tool/area/index`)
 	ctx.Set(`title`, ctx.T(`添加地区`))
@@ -141,6 +165,7 @@ func AreaEdit(ctx echo.Context) error {
 	nameField := form.MultilingualField(config.FromFile().Language.Default, `name`, `name`)
 	nameField.AddTag(`required`)
 
+	setAreaForm(ctx)
 	ctx.Set(`pids`, pids)
 	ctx.Set(`activeURL`, `/tool/area/index`)
 	ctx.Set(`title`, ctx.T(`编辑地区`))
@@ -153,12 +178,7 @@ func AreaDelete(ctx echo.Context) error {
 		return ctx.NewError(code.InvalidParameter, `请选择要删除的项`).SetZone(`id`)
 	}
 	m := official.NewArea(ctx)
-	var err error
-	for _, _v := range id {
-		if err = m.Delete(nil, db.Cond{`id`: _v}); err != nil {
-			break
-		}
-	}
+	err := m.Delete(nil, db.Cond{`id`: db.In(id)})
 	if err == nil {
 		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
