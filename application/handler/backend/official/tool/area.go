@@ -11,7 +11,6 @@ import (
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webcore/library/formbuilder"
 	"github.com/coscms/webcore/library/nsql"
-	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/model/i18nm"
 	"github.com/coscms/webfront/model/official"
 )
@@ -51,24 +50,8 @@ func AreaIndex(ctx echo.Context) error {
 }
 
 func setAreaForm(ctx echo.Context) {
-	countryM := dbschema.NewOfficialCommonAreaCountry(ctx)
-	_, err := countryM.ListByOffset(nil, func(r db.Result) db.Result {
-		return r.OrderBy(`sort`, `id`)
-	}, 0, -1)
-	var countryList []*dbschema.OfficialCommonAreaCountry
-	if err == nil {
-		countryList = countryM.Objects()
-	}
-	if len(countryList) == 0 {
-		countryList = append(countryList, &dbschema.OfficialCommonAreaCountry{
-			Abbr:     `CN`,
-			Name:     `中国`,
-			Short:    `中国`,
-			Code:     `86`,
-			Sort:     1000,
-			Disabled: common.BoolN,
-		})
-	}
+	countryM := official.NewAreaCountry(ctx)
+	countryList, _ := countryM.ListMustAtLeastOne()
 	ctx.Set(`countryList`, countryList)
 }
 
