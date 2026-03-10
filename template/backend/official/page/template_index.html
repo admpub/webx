@@ -68,8 +68,15 @@
                                 {{`网址`|$.T}}: <a href="{{$v.Author.URL}}" target="_blank" rel="noopener noreferrer">{{$v.Author.URL}}</a>
                             </td>
 							<td>
+								{{- $project := $.Stored.project -}}
+								{{- $defaultTheme := $.Stored.defaultTheme -}}
 								<div class="radio radio-success no-margin-y">
-									<input id="radio-enabled-{{$v.Name}}" name="theme[enabled]" type="radio"{{if eq $v.Name $.Stored.current.Name}} checked="checked"{{end}} value="{{$v.Name}}" /><label for="radio-enabled-{{$v.Name}}">&nbsp;</label>
+									<input id="radio-enabled-{{$v.Name}}" name="theme[enabled]" type="radio" value="{{$v.Name}}"
+									{{- if and $project (ne $project $v.Project) }} disabled="disabled"
+									{{- else if eq $v.Name $.Stored.current.Name }} checked="checked"
+									{{- else if eq $v.Name $defaultTheme }} checked="checked"
+									{{- end }} />
+									<label for="radio-enabled-{{$v.Name}}">&nbsp;</label>
 								</div>
 							</td>
 							<td class="text-center label-group">

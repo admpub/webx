@@ -80,6 +80,10 @@ func TemplateEnable(ctx echo.Context) error {
 	if err != nil {
 		return ctx.JSON(data.SetError(err))
 	}
+	if len(httpserver.Frontend.Template.Project) > 0 && httpserver.Frontend.Template.Project != themeInfo.Project {
+		err = ctx.NewError(code.DataFormatIncorrect, `项目不匹配`).SetZone(`project`)
+		return ctx.JSON(data.SetError(err))
+	}
 	var cfg *ntemplate.ThemeInfo
 	cfg, err = httpserver.Frontend.Template.Storer().Get(ctx, name)
 	if err != nil {
@@ -163,6 +167,8 @@ func TemplateIndex(ctx echo.Context) error {
 	themeLsMu.Unlock()
 
 	ctx.Set(`listData`, list)
+	ctx.Set(`project`, httpserver.Frontend.Template.Project)
+	ctx.Set(`defaultTheme`, httpserver.Frontend.Template.DefaultTheme)
 	ctx.Set(`current`, httpserver.Frontend.Template.ThemeInfo(ctx))
 	return ctx.Render(`official/page/template_index`, nil)
 }
