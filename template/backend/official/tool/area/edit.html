@@ -19,18 +19,16 @@
           <input type="hidden" name="id" value="{{$data.Id}}">
           <div class="form-group">
             <label class="col-sm-2 control-label">{{`国家`|$.T}}</label>
-            <div class="col-sm-8">
+            <div class="col-sm-3">
               <select name="countryAbbr" class="form-control">
                 <option value="">- {{`请选择`|$.T}} -</option>
-                {{- range $.Stored.countryList -}}
-                <option value="{{.Abbr}}"{{if eq .Abbr $data.CountryAbbr}} selected="selected"{{end}}>{{.Name|$.T}}</option>
+                {{- range $index, $country := $.Stored.countryList -}}
+                <option value="{{$country.Abbr}}"{{if eq $country.Abbr $data.CountryAbbr}} selected="selected"{{end}}>{{$country.Name|$.T}}</option>
                 {{- end -}}
               </select>
             </div>
-          </div>
-          <div class="form-group">
             <label class="col-sm-2 control-label">{{`上级地区`|$.T}}</label>
-            <div class="col-sm-8">
+            <div class="col-sm-3">
               <select name="pids[]" class="form-control select-parent-id" id="select-parent-id" data-target="#pid" data-exclude="{{$data.Id}}"></select>
               <input type="hidden" id="pid" class="form-control" name="pid" value="{{$data.Pid}}" maxlength="100" />
             </div>

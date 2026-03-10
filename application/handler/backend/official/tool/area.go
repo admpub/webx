@@ -53,7 +53,7 @@ func AreaIndex(ctx echo.Context) error {
 func setAreaForm(ctx echo.Context) {
 	countryM := dbschema.NewOfficialCommonAreaCountry(ctx)
 	_, err := countryM.ListByOffset(nil, func(r db.Result) db.Result {
-		return r.Select(`sort`, `id`)
+		return r.OrderBy(`sort`, `id`)
 	}, 0, -1)
 	var countryList []*dbschema.OfficialCommonAreaCountry
 	if err == nil {
