@@ -32,7 +32,7 @@ $(function(){
       case 'video':
       case 'audio':
         callback = function(){
-          setHelperButtons.apply(this,cType)
+          setHelperButtons.call(this,cType)
         };
         break;
       default:
