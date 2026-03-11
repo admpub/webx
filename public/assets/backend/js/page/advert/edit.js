@@ -12,7 +12,7 @@ function setContainer(callback){
 function setHelperButtons(cType){
   if(this.next('.helper-buttons').length>0)this.next('.helper-buttons').remove();
   var uploadBtn='<input type="file" accept="'+cType+'/*" data-toggle="uploadPreviewer" data-upload-url="'+$(formE).data('upload-url')+'" />';
-  var browseBtn='<button type="button" class="btn btn-info" data-toggle="finder" data-file-type="'+cType+'"><i class="fa fa-folder"></i> '+App.t('浏览')+'</button>';
+  var browseBtn='<button type="button" class="btn btn-info" data-toggle="finder" data-file-type="'+cType+'" data-url-query="subdir=advert"><i class="fa fa-folder"></i> '+App.t('浏览')+'</button>';
   this.after('<div class="helper-buttons">'+uploadBtn+browseBtn+'</div>');
   var that=this;
   App.editor.fileInput(that.next('.helper-buttons'),null,function(fileURL){
