@@ -14,7 +14,7 @@
             <h3>{{if not $.Stored.isEdit}}{{"添加广告位"|$.T}}{{else}}{{"修改广告位"|$.T}}{{end}}</h3>
           </div>
           <div class="content">
-              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="" id="advertPositionForm">
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="" id="advertForm" data-upload-url="{{BackendUploadURL `advert`}}">
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"广告位名称"|$.T}}</label>
                 <div class="col-sm-3">
@@ -75,10 +75,12 @@
                   <div class="col-sm-8">
                     {{- $v := $data.Disabled | Default "N" -}}
                     <div class="radio radio-success radio-inline">
-                        <input type="radio" value="N" name="disabled" id="disabled-N"{{if eq $v `N`}} checked{{end}}> <label for="disabled-N">{{"显示"|$.T}}</label>
+                        <input type="radio" value="N" name="disabled" id="disabled-N"{{if eq $v `N`}} checked{{end}}> 
+                        <label for="disabled-N">{{"显示"|$.T}}</label>
                     </div>
                       <div class="radio radio-danger radio-inline">
-                        <input type="radio" value="Y" name="disabled" id="disabled-Y"{{if eq $v `Y`}} checked{{end}}> <label for="disabled-Y">{{"隐藏"|$.T}}</label>
+                        <input type="radio" value="Y" name="disabled" id="disabled-Y"{{if eq $v `Y`}} checked{{end}}> 
+                        <label for="disabled-Y">{{"隐藏"|$.T}}</label>
                       </div>
                   </div>
                 </div>
@@ -104,11 +106,7 @@
   {{- end -}}
 </ol>
 </div></script>
-<script>$(function(){
-  $('#content').parent().after($('#content-help-block-tpl').html());
-  $('#advertPositionForm').find('textarea[name$="[content]"]').each(function(){
-    if(this.id=='content') return;
-    $(this).parent().after($('#content-help-block-tpl').html());
-  });
-})</script>
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/page/advert/edit.js?t={{BuildTime}}"></script>
 {{/Block}}
