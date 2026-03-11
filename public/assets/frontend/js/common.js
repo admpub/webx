@@ -498,18 +498,23 @@ function postCaptchaDialogData(resp, ajaxOptions, vcode, idVal, captchaName, cap
 }
 // 登录
 function signInDialog(callback,r){
-    if($('#modal-sign-in').length>0) return $('#modal-sign-in').modal('show');
-    $.get('/sign_in',{modal:1,next:window.location.href},function(r){
+    var defaultModal='#modal-sign-in',signInModal=($('body').attr('signin-modal')||defaultModal),firstChar=signInModal.substring(0,1);
+    if(firstChar!='#'&&firstChar!='.') signInModal = '#'+signInModal;
+    if($(signInModal).length>0) return $(signInModal).modal('show');
+    var url='/sign_in';
+    if(typeof(FRONTEND_URL)!='undefined') url = FRONTEND_URL+url;
+    $.get(url,{modal:1,next:window.location.href},function(r){
         $('body').append(r);
         closeLoadingFunction(r);
+        var $modal=$(defaultModal);
         if(callback!=null && $.isFunction(callback)){
             $('#modal-sign-in-form').data('callback',function(){
-                $('#modal-sign-in').modal('hide');
+                $modal.modal('hide');
                 return callback.apply(this,arguments);
             });
         }
-        $('#modal-sign-in').modal('show');
-        $('#modal-sign-in').on('shown.bs.modal',function(){
+        $modal.modal('show');
+        $modal.on('shown.bs.modal',function(){
             $('#modal-sign-in-form').find('input[name="name"]').focus();
         });
     },'html').fail(function(){
