@@ -1,4 +1,4 @@
-{{Strip}}{{$tag := $.Data|Default `Advert`}}<strong>{{`在模板中的用法:`|$.T}}</strong><br />
+{{Strip}}{{$tag := $.Data|Default `$.Advert`}}<strong>{{`在模板中的用法:`|$.T}}</strong><br />
 <code>{{`{{`}}$ads := {{$tag}} `{{`广告位标识`|$.T}}`{{`}}`}}</code><br />
 <ol>
     <li><code>{{`{{`}}$ads.Rand.HTML{{`}}`}}</code></li>

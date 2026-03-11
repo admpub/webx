@@ -23,7 +23,11 @@ elements:
       helptext: ""
       template: ""
       valid: ""
-      attributes: []
+      attributes: 
+        - - maxlength
+          - 500
+        - - class
+          - resize-y
       choices: []
       elements: []
       format: ""
