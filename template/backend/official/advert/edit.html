@@ -14,7 +14,7 @@
             <h3>{{if not $.Stored.isEdit}}{{"添加广告"|$.T}}{{else}}{{"修改广告"|$.T}}{{end}}</h3>
           </div>
           <div class="content">
-              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="" id="advertForm">
+              <form class="form-horizontal group-border-dashed" data-parsley-validate novalidate method="POST" action="" id="advertForm" data-upload-url="{{BackendUploadURL `advert`}}">
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"广告名称"|$.T}}</label>
                 <div class="col-sm-3">
