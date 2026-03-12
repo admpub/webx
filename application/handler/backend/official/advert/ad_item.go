@@ -80,6 +80,7 @@ func Add(ctx echo.Context) error {
 		formbuilder.ConfigFile(`official/advert/edit`),
 		formbuilder.AllowedNames(
 			`name`, `positionId`, `contype`, `mode`, `content`, `url`, `start`, `end`, `sort`, `disabled`,
+			`title`, `description`,
 		),
 	)
 	form.OnPost(func() error {
@@ -154,6 +155,7 @@ func Edit(ctx echo.Context) error {
 		formbuilder.ConfigFile(`official/advert/edit`),
 		formbuilder.AllowedNames(
 			`name`, `positionId`, `contype`, `mode`, `content`, `url`, `start`, `end`, `sort`, `disabled`,
+			`title`, `description`,
 		),
 	)
 	form.OnPost(func() error {

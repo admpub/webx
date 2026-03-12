@@ -53,6 +53,7 @@ func PositionAdd(ctx echo.Context) error {
 		formbuilder.ConfigFile(`official/advert/position_edit`),
 		formbuilder.AllowedNames(
 			`ident`, `name`, `width`, `height`, `contype`, `content`, `url`, `disabled`,
+			`title`, `description`,
 		),
 	)
 	form.OnPost(func() error {
@@ -121,6 +122,7 @@ func PositionEdit(ctx echo.Context) error {
 		formbuilder.ConfigFile(`official/advert/position_edit`),
 		formbuilder.AllowedNames(
 			`ident`, `name`, `width`, `height`, `contype`, `content`, `url`, `disabled`,
+			`title`, `description`,
 		),
 	)
 	form.OnPost(func() error {

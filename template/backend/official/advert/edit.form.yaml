@@ -33,6 +33,46 @@ elements:
       format: ""
       languages: []
       data: {}
+    - id: "title"
+      type: text
+      name: title
+      label: 广告标题
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: 
+        - - maxlength
+          - 255
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: "description"
+      type: textarea
+      name: description
+      label: 广告描述
+      labelcols: 0
+      fieldcols: 0
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: 
+        - - maxlength
+          - 500
+        - - class
+          - resize-y
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
 languages: []
 data: {}
 trimnameprefix: ""
