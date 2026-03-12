@@ -8,6 +8,7 @@ import (
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/formbuilder"
+	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/model/i18nm"
 	modelAdvert "github.com/coscms/webfront/model/official/advert"
 )
@@ -63,6 +64,15 @@ func Add(ctx echo.Context) error {
 		} else {
 			m.Sort = 500
 			m.PositionId = ctx.Formx(`positionId`).Uint64()
+			if m.PositionId > 0 {
+				posM := dbschema.NewOfficialAdPosition(ctx)
+				if err := posM.Get(func(r db.Result) db.Result {
+					return r.Select(`contype`, `url`)
+				}, `id`, m.PositionId); err == nil {
+					m.Contype = posM.Contype
+					m.Url = posM.Url
+				}
+			}
 		}
 	}
 	form := formbuilder.New(ctx,
