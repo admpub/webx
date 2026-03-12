@@ -63,6 +63,7 @@ func PositionAdd(ctx echo.Context) error {
 		}
 		err = i18nm.SaveModelTranslations(ctx, m.OfficialAdPosition, m.Id,
 			i18nm.OptionContentType(`content`, m.Contype),
+			i18nm.OptionContentType(`description`, `text`),
 		)
 		if err != nil {
 			return err
@@ -132,6 +133,7 @@ func PositionEdit(ctx echo.Context) error {
 		}
 		err = i18nm.SaveModelTranslations(ctx, m.OfficialAdPosition, m.Id,
 			i18nm.OptionContentType(`content`, m.Contype),
+			i18nm.OptionContentType(`description`, `text`),
 		)
 		if err != nil {
 			return err

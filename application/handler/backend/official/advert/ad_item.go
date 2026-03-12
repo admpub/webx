@@ -90,6 +90,7 @@ func Add(ctx echo.Context) error {
 		}
 		err = i18nm.SaveModelTranslations(ctx, m.OfficialAdItem, m.Id,
 			i18nm.OptionContentType(`content`, m.Contype),
+			i18nm.OptionContentType(`description`, `text`),
 		)
 		if err != nil {
 			return err
@@ -165,6 +166,7 @@ func Edit(ctx echo.Context) error {
 		}
 		err = i18nm.SaveModelTranslations(ctx, m.OfficialAdItem, m.Id,
 			i18nm.OptionContentType(`content`, m.Contype),
+			i18nm.OptionContentType(`description`, `text`),
 		)
 		if err != nil {
 			return err
