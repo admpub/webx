@@ -4,7 +4,6 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
-	"github.com/webx-top/echo/formfilter"
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
@@ -48,14 +47,6 @@ func Index(ctx echo.Context) error {
 	return ctx.Render(`official/advert/index`, common.Err(ctx, err))
 }
 
-func formFilter() echo.FormDataFilter {
-	return formfilter.Build(
-		formfilter.StartDateToTimestamp(`Start`),
-		formfilter.EndDateToTimestamp(`End`),
-		formfilter.Exclude(`updated`, `created`),
-	)
-}
-
 func Add(ctx echo.Context) error {
 	m := modelAdvert.NewAdItem(ctx)
 	var err error
@@ -71,6 +62,7 @@ func Add(ctx echo.Context) error {
 			}
 		} else {
 			m.Sort = 500
+			m.PositionId = ctx.Formx(`positionId`).Uint64()
 		}
 	}
 	form := formbuilder.New(ctx,
