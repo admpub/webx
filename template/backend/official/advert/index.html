@@ -69,7 +69,8 @@
 							</td>
 							<td>
 								<div class="checkbox checkbox-success no-margin-y">
-									<input id="checkbox-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}"{{if eq $v.Disabled `N`}} checked="checked"{{end}} value="Y" />
+									<input id="checkbox-{{$k}}" class="styled switch-disabled" type="checkbox" data-id="{{$v.Id}}"
+									{{- if eq $v.Disabled `N` }} checked="checked"{{ end }} value="N" />
 									<label for="checkbox-{{$k}}">&nbsp;</label>
 								</div>
 							</td>
