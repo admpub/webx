@@ -559,7 +559,11 @@ func TemplateConfig(ctx echo.Context) error {
 	for k, v := range themeInfo.CustomConfig {
 		switch rv := v.(type) {
 		case []string:
+			echo.SetFormValues(ctx.Request().Form(), k, rv)
 		case []interface{}:
+			for idx, val := range rv {
+				echo.SetFormValue(ctx.Request().Form(), k, idx, val)
+			}
 		default:
 			ctx.Request().Form().Set(k, param.AsString(v))
 		}
