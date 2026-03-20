@@ -5,6 +5,7 @@ import (
 
 	"github.com/admpub/dateparse"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/dbschema"
 	"github.com/coscms/webfront/library/offlinepay"
 	xMW "github.com/coscms/webfront/middleware"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
@@ -20,6 +21,23 @@ type RequestRechargeOffline struct {
 	OfflinePayTransactionNo string  // 交易订单号（线上转账时有效）
 	OfflinePayTime          string  // 付款时间（可选）
 	OfflinePayOwner         string  `validate:"required"`
+}
+
+func (r RequestRechargeOffline) Apply(m *dbschema.OfficialCustomerOfflinePay) error {
+	m.PayAccount = r.OfflinePayAccount
+	m.PayAmount = r.OfflinePayAmount
+	m.PayMethod = r.OfflinePayMethod
+	m.PayBankBranch = r.OfflinePayBankBranch
+	m.PayOwner = r.OfflinePayOwner
+	m.PayTransactionNo = r.OfflinePayTransactionNo
+	payTime, err := r.PayTime()
+	if err != nil {
+		return err
+	}
+	if !payTime.IsZero() {
+		m.PayTime = uint(payTime.Unix())
+	}
+	return err
 }
 
 func (r RequestRechargeOffline) BeforeVadidate(ctx echo.Context) error {
@@ -43,31 +61,17 @@ func RechargeOffline(ctx echo.Context) error {
 	if err := ctx.MustBindAndValidate(requestData); err != nil {
 		return err
 	}
-	m := modelCustomer.NewWallet(ctx)
-	cardM := modelCustomer.NewPrepaidCard(ctx)
-	cardNumber := ctx.Formx(`cardNumber`).String()
-	cardPassword := ctx.Formx(`cardPassword`).String()
-	err := cardM.UseCard(customer.Id, cardNumber, cardPassword)
+	m := modelCustomer.NewOfflinePay(ctx)
+	m.CustomerId = customer.Id
+	m.TargetType = modelCustomer.OfflinePayTargetTypeRecharge
+	err := requestData.Apply(m.OfficialCustomerOfflinePay)
 	if err != nil {
-		ctx.Rollback()
 		return err
 	}
-	m.Flow.CustomerId = customer.Id
-	m.Flow.AssetType = modelCustomer.AssetTypeMoney
-	m.Flow.AmountType = modelCustomer.AmountTypeBalance
-	m.Flow.Amount = float64(cardM.Amount)
-	m.Flow.SourceType = `recharge`
-	m.Flow.SourceTable = `official_prepaid_card`
-	m.Flow.SourceId = cardM.Id
-	m.Flow.TradeNo = ``
-	m.Flow.Status = modelCustomer.FlowStatusConfirmed //状态(pending-待确认;confirmed-已确认;canceled-已取消)
-	m.Flow.Description = `使用充值卡充值`
-	err = m.AddRepeatableFlow()
+	_, err = m.Add()
 	if err != nil {
-		ctx.Rollback()
 		return err
 	}
-	ctx.Commit()
 	common.SendOk(ctx, ctx.T(`操作成功`))
 	next := ctx.Form(`next`)
 	if len(next) == 0 {
