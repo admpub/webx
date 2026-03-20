@@ -52,6 +52,9 @@ func (r *RequestRechargeOffline) BeforeVadidate(ctx echo.Context) error {
 		if len(r.OfflinePayBankBranch) > 0 {
 			r.OfflinePayBankBranch = ``
 		}
+		if len(r.OfflinePayTransactionNo) == 0 {
+			return ctx.NewError(code.InvalidParameter, `请输入转账交易订单号`).SetZone(`offlinePayTransactionNo`)
+		}
 	}
 	_, err := r.PayTime()
 	if err != nil {

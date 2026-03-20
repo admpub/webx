@@ -24,37 +24,37 @@
 <div class="row form-group">
     <label class="col-sm-3 col-form-label">{{`付款账号`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
     <div class="col-sm-8">
-        <input type="text" class="form-control" name="offlinePayAccount" value="{{$.Form `offlinePayAccount`}}" required>
+        <input type="text" class="form-control" name="offlinePayAccount" id="offlinePayAccount" value="{{$.Form `offlinePayAccount`}}" required>
     </div>
 </div>
 <div class="row form-group">
     <label class="col-sm-3 col-form-label">{{`付款金额`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
     <div class="col-sm-8">
-        <input type="number" class="form-control" name="offlinePayAmount" min="0.01" step="0.01" value="{{$.Form `offlinePayAmount`}}" required>
+        <input type="number" class="form-control" name="offlinePayAmount" id="offlinePayAmount" min="0.01" step="0.01" value="{{$.Form `offlinePayAmount`}}" required>
     </div>
 </div>
 <div class="row form-group">
     <label class="col-sm-3 col-form-label">{{`付款时间`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
     <div class="col-sm-8">
-        <input type="datetime-local" class="form-control" name="offlinePayTime" value="{{$.Form `offlinePayTime`}}" required>
+        <input type="datetime-local" class="form-control" name="offlinePayTime" id="offlinePayTime" value="{{$.Form `offlinePayTime`}}" required>
     </div>
 </div>
 <div class="row form-group method-type-bank">
     <label class="col-sm-3 col-form-label">{{`银行支行`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
     <div class="col-sm-8">
-        <input type="text" class="form-control" name="offlinePayBankBranch" value="{{$.Form `offlinePayBankBranch`}}">
+        <input type="text" class="form-control" name="offlinePayBankBranch" id="offlinePayBankBranch" value="{{$.Form `offlinePayBankBranch`}}">
     </div>
 </div>
 <div class="row form-group method-type-ebank">
     <label class="col-sm-3 col-form-label">{{`交易订单号`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
     <div class="col-sm-8">
-        <input type="text" class="form-control" name="offlinePayTransactionNo" value="{{$.Form `offlinePayTransactionNo`}}">
+        <input type="text" class="form-control" name="offlinePayTransactionNo" id="offlinePayTransactionNo" value="{{$.Form `offlinePayTransactionNo`}}">
     </div>
 </div>
 <div class="row form-group">
     <label class="col-sm-3 col-form-label">{{`开户人姓名`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
     <div class="col-sm-8">
-        <input type="text" class="form-control" name="offlinePayOwner" value="{{$.Form `offlinePayOwner`}}">
+        <input type="text" class="form-control" name="offlinePayOwner" id="offlinePayOwner" value="{{$.Form `offlinePayOwner`}}">
     </div>
 </div>
 
