@@ -121,8 +121,8 @@ func Edit(ctx echo.Context) error {
 		if err != nil {
 			goto END
 		}
-
-		_, err = m.Add()
+		m.Id = id
+		err = m.Edit(nil, `id`, id)
 		if err != nil {
 			goto END
 		}
