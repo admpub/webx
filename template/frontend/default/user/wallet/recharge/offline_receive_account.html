@@ -1,0 +1,39 @@
+{{Strip}}
+<div class="card card-form">
+    <div class="card-header">
+      <h6 class="card-title">{{"收款账户"|$.RawT|UpperCaseFirst|$.ExtT}}</h6>
+    </div><!-- card-header -->
+    <div class="card-body form-label-right">
+
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`收款方式`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <div class="form-control-plaintext">{{Config.contact.recvMoneyMethod}}</div>
+    </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`收款账号`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <div class="form-control-plaintext">{{Config.contact.recvMoneyAccount}}</div>
+    </div>
+</div>
+{{- if Config.contact.recvMoneyBranch -}}
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`银行支行`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <div class="form-control-plaintext">{{Config.contact.recvMoneyBranch}}</div>
+    </div>
+</div>
+{{- end -}}
+{{- if Config.contact.recvMoneyOwner -}}
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`开户人姓名`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <div class="form-control-plaintext">{{Config.contact.recvMoneyOwner}}</div>
+    </div>
+</div>
+{{- end -}}
+
+    </div><!-- card-body -->
+</div><!-- card -->
+{{/Strip}}

@@ -1,0 +1,49 @@
+{{Strip}}
+<form class="form form-label-right" method="post" action="{{FrontendURL}}/user/wallet/recharge/offline">
+<div class="card card-form">
+    <div class="card-header">
+      <h6 class="card-title">{{"付款账户"|$.RawT|UpperCaseFirst|$.ExtT}}</h6>
+    </div><!-- card-header -->
+    <div class="card-body">
+
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`付款方式`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <input type="text" class="form-control" name="offlinePayMethod" required>
+    </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`付款账号`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <input type="text" class="form-control" name="offlinePayAccount" required>
+    </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`付款金额`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <input type="number" class="form-control" name="offlinePayAmount" min="0.01" step="0.01" required>
+    </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`银行支行`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <input type="text" class="form-control" name="offlinePayBankBranch">
+    </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`交易订单号`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <input type="text" class="form-control" name="offlinePayTransactionNo">
+    </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`开户人姓名`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <input type="text" class="form-control" name="offlinePayOwner">
+    </div>
+</div>
+
+    </div><!-- card-body -->
+</div><!-- card -->
+</form>
+{{/Strip}}

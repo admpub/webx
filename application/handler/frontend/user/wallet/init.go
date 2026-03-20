@@ -12,6 +12,7 @@ func init() {
 		g.Route(`GET`, ``, Index).SetName(`user.wallet`)
 		g.Route(`GET,POST`, `/flow`, Flow).SetName(`user.wallet.flow`)
 		g.Route(`GET,POST`, `/recharge`, Recharge).SetName(`user.wallet.recharge`)
-		g.Route(`POST`, `/recharge/prepaid_card`, PrepaidCard).SetName(`user.wallet.prepaid_card`) //使用充值卡充值
+		g.Route(`POST`, `/recharge/prepaid_card`, PrepaidCard).SetName(`user.wallet.prepaid_card`)    //使用充值卡充值
+		g.Route(`POST`, `/recharge/offline`, RechargeOffline).SetName(`user.wallet.recharge_offline`) //使用线下转账充值
 	})
 }
