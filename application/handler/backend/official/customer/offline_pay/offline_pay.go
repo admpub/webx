@@ -44,7 +44,8 @@ func Index(ctx echo.Context) error {
 	ret := common.Err(ctx, err)
 	ctx.Set(`listData`, list)
 	ctx.Set(`targetTypes`, modelCustomer.OfflinePayTargetTypes.Slice())
-	ctx.Set(`statusList`, modelCustomer.OfflinePayStatuses.Slice())
+	statusList := modelCustomer.OfflinePayStatuses.Slice()
+	ctx.Set(`statusList`, statusList)
 	ctx.SetFunc(`targetTypeName`, modelCustomer.OfflinePayTargetTypes.Get)
 	ctx.SetFunc(`ownershipInfo`, func(targetType string, ownershipID uint64) modelCustomer.OwnershipInfo {
 		item := modelCustomer.OfflinePayTargetTypes.GetItem(targetType)
@@ -56,6 +57,7 @@ func Index(ctx echo.Context) error {
 	ctx.SetFunc(`statusName`, modelCustomer.OfflinePayStatuses.Get)
 	payMethods := offlinepay.GetMethods(nil)
 	ctx.Set(`payMethods`, offlinepay.GetMethods(nil))
+	ctx.Set(`statusSource`, echo.KVListToEditableSource(ctx, echo.KVList(statusList)))
 	ctx.SetFunc(`payMethodName`, func(v string) string {
 		for _, item := range payMethods {
 			if item.K == v {
@@ -66,17 +68,6 @@ func Index(ctx echo.Context) error {
 	})
 	ctx.Set(`title`, ctx.T(`线下转账列表`))
 	return ctx.Render(`official/customer/offline_pay/index`, ret)
-}
-
-func KVListToEditableSource(ctx echo.Context, kvList []*echo.KV) {
-	source := make([]echo.H, len(kvList))
-	for i, v := range kvList {
-		text := v.V
-		if len(text) == 0 {
-			text = `<` + ctx.T(`空`) + `>`
-		}
-		source[i] = echo.H{`value`: v.K, `text`: text}
-	}
 }
 
 func Add(ctx echo.Context) error {

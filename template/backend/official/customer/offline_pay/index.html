@@ -82,15 +82,15 @@
 								{{`户主名`|$.T}}: {{$v.PayOwner|Default `-`}}
 							</td>
 							<td>{{$v.PayAmount}}</td>
-							{{- if ne $v.Status `verified` }}
+							{{- if eq $v.Status `verified` }}
 							<td><span>{{call $.Func.statusName $v.Status}}</span></td>
 							{{- else -}}
 							<td class="editable" data-id="{{$v.Id}}"><span class="editable" data-value="{{$v.Status}}">{{call $.Func.statusName $v.Status}}</span></td>
 							{{- end -}}
 							<td>
 								{{`创建时间`|$.T}}: {{(Date $v.Created).Format "2006-01-02 15:04:05"}}<br />
-								{{`修改时间`|$.T}}: {{if gt $v.Updated}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}<br />
-								{{`付款时间`|$.T}}: {{if gt $v.PayTime}}{{(Date $v.PayTime).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}
+								{{`修改时间`|$.T}}: {{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}<br />
+								{{`付款时间`|$.T}}: {{if gt $v.PayTime 0}}{{(Date $v.PayTime).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}
 							</td>
 							<td class="text-center label-group">
 							<a class="label label-default" href="{{BackendURL}}/official/customer/offline_pay/add?copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip">
@@ -124,8 +124,15 @@
 $(function(){
   App.editor.editable('#offlinePayList td.editable',{
 	url:function(){return BACKEND_URL+'/official/customer/offline_pay/edit?id='+$(this).data('id');},
-	type:'select',source:{{$.Stored.statusList}},name:'status',title:App.t('修改状态')
-	}}
+	type:'select',source:{{$.Stored.statusSource}},name:'status',title:App.t('修改状态'),method:'GET',
+	params:function(params){
+		params.status=params.value;
+		delete params.name;
+		delete params.value;
+		delete params.pk;
+		return params;
+	}
+	})
 })
 </script>
 {{/Block}}
