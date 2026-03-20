@@ -9,6 +9,7 @@ import (
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/group_package"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/invitation"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/level"
+	_ "github.com/admpub/webx/application/handler/backend/official/customer/offline_pay"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/prepaidcard"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/role"
 	_ "github.com/admpub/webx/application/handler/backend/official/customer/wallet"

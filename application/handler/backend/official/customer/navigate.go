@@ -109,6 +109,30 @@ var LeftNavigate = &navigate.Item{
 			Name:    echo.T(`资产流水`),
 			Action:  `wallet/flow`,
 		},
+		//offline_pay
+		{
+			Display: true,
+			Name:    echo.T(`线下转账管理`),
+			Action:  `offline_pay/index`,
+		},
+		{
+			Display: false,
+			Name:    echo.T(`修改线下转账`),
+			Action:  `offline_pay/edit`,
+			Icon:    `pencil`,
+		},
+		{
+			Display: false,
+			Name:    echo.T(`添加线下转账`),
+			Action:  `offline_pay/add`,
+			Icon:    `plug`,
+		},
+		{
+			Display: false,
+			Name:    echo.T(`删除线下转账`),
+			Action:  `offline_pay/delete`,
+			Icon:    ``,
+		},
 		//group
 		{
 			Display: true,
