@@ -125,13 +125,7 @@ $(function(){
   App.editor.editable('#offlinePayList td.editable',{
 	url:function(){return BACKEND_URL+'/official/customer/offline_pay/edit?id='+$(this).data('id');},
 	type:'select',source:{{$.Stored.statusSource}},name:'status',title:App.t('修改状态'),method:'GET',
-	params:function(params){
-		params.status=params.value;
-		delete params.name;
-		delete params.value;
-		delete params.pk;
-		return params;
-	}
+	params:function(params){ params.status=params.value; delete params.name; delete params.value; delete params.pk; return params; }
 	})
 })
 </script>
