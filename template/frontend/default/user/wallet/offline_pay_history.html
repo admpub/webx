@@ -51,10 +51,11 @@
       <table class="table" style="table-layout:fixed">
         <thead>
           <tr>
-            <th style="width:80px">{{"时间"|$.T}}</th>
+            <th style="width:80px">{{"提交时间"|$.T}}</th>
             <th class="tx-right" style="width:100px">{{"金额"|$.T}}</th>
             <th style="width:100px">{{"目标类型"|$.T}}</th>
             <th style="width:100px">{{"付款方式"|$.T}}</th>
+            <th style="width:100px">{{"付款时间"|$.T}}</th>
             <th style="width:150px">{{"付款账号"|$.T}}</th>
             <th style="width:200px">{{"支行/交易号"|$.T}}</th>
             <th style="width:100px">{{"户主名"|$.T}}</th>
@@ -70,6 +71,7 @@
             <td class="tx-right">{{NumberFormat $v.PayAmount 2}}</td>
             <td>{{call $.Func.targetTypeName $v.TargetType}}</td>
             <td>{{call $.Func.payMethodName $v.PayMethod}}</td>
+            <td>{{if gt $v.PayTime 0}}{{(Date $v.PayTime).Format `2006-01-02 15:04`}}{{else}}-{{end}}</td>
             <td>{{$v.PayAccount}}</td>
             <td>
 							{{if $v.PayBankBranch}}{{`银行支行`|$.T}}: {{$v.PayBankBranch}}<br />{{end}}
