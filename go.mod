@@ -66,6 +66,7 @@ require (
 )
 
 require (
+	github.com/admpub/dateparse v0.0.0-20250903020633-d86d3f2a4cfd
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.3.0
@@ -87,7 +88,6 @@ require (
 	github.com/admpub/confl v0.2.4 // indirect
 	github.com/admpub/cove v0.0.0-20241224063114-4fdd53c948a6 // indirect
 	github.com/admpub/cron v0.1.1 // indirect
-	github.com/admpub/dateparse v0.0.0-20250903020633-d86d3f2a4cfd // indirect
 	github.com/admpub/dgoogauth v0.0.1 // indirect
 	github.com/admpub/email v2.4.1+incompatible // indirect
 	github.com/admpub/fasthttp v0.0.7 // indirect

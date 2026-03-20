@@ -1,7 +1,11 @@
 package wallet
 
 import (
+	"time"
+
+	"github.com/admpub/dateparse"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/library/offlinepay"
 	xMW "github.com/coscms/webfront/middleware"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/echo"
@@ -11,9 +15,24 @@ type RequestRechargeOffline struct {
 	OfflinePayMethod        string  `validate:"required"`
 	OfflinePayAccount       string  `validate:"required"`
 	OfflinePayAmount        float64 `validate:"required,min=0.01"`
-	OfflinePayBankBranch    string
-	OfflinePayTransactionNo string
-	OfflinePayOwner         string `validate:"required"`
+	OfflinePayBankBranch    string  // 银行支行（线下银行转账时有效）
+	OfflinePayTransactionNo string  // 交易订单号（线上转账时有效）
+	OfflinePayTime          string  // 付款时间（可选）
+	OfflinePayOwner         string  `validate:"required"`
+}
+
+func (r RequestRechargeOffline) BeforeVadidate(ctx echo.Context) error {
+	if offlinepay.GetMethod(r.OfflinePayMethod, nil) {
+
+	}
+	return nil
+}
+
+func (r RequestRechargeOffline) PayTime() (time.Time, error) {
+	if len(r.OfflinePayTime) == 0 {
+		return time.Time{}, nil
+	}
+	return dateparse.ParseAny(r.OfflinePayTime)
 }
 
 // RechargeOffline 使用线下转账充值
