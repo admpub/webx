@@ -145,7 +145,7 @@ func Edit(ctx echo.Context) error {
 			case modelCustomer.OfflinePayStatusInvalid:
 				err = m.SetInvalid()
 			case modelCustomer.OfflinePayStatusPending:
-				err = m.UpdateField(nil, `status`, status, `id`, m.Id)
+				err = m.SetPending()
 			default:
 				return ctx.NewError(code.InvalidParameter, ``).SetZone(`status`)
 			}
