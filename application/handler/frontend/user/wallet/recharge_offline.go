@@ -107,6 +107,19 @@ func RechargeOfflineHistory(ctx echo.Context) error {
 	m := modelCustomer.NewOfflinePay(ctx)
 	cond := db.NewCompounds()
 	cond.AddKV(`customer_id`, customer.Id)
+
+	if targetType := ctx.Form(`targetType`); len(targetType) > 0 {
+		cond.AddKV(`target_type`, targetType)
+	}
+
+	if targetID := ctx.Formx(`targetId`).Uint64(); targetID > 0 {
+		cond.AddKV(`target_id`, targetID)
+	}
+
+	if payMethod := ctx.Form(`payMethod`); len(payMethod) > 0 {
+		cond.AddKV(`pay_method`, payMethod)
+	}
+
 	pagination.SetDefaultSize(ctx, 20)
 	err := m.ListPage(cond, `-id`)
 	ctx.Set(`list`, m.Objects())

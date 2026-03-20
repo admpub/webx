@@ -21,24 +21,25 @@ type OfflinePayWithCustomer struct {
 }
 
 func Index(ctx echo.Context) error {
-	targetType := ctx.Form(`targetType`)
-	targetID := ctx.Formx(`targetId`).Uint64()
 	m := modelCustomer.NewOfflinePay(ctx)
 	cond := db.NewCompounds()
-	if len(targetType) > 0 {
-		cond.AddKV(`target_type`, targetType)
-	}
-	if targetID > 0 {
-		cond.AddKV(`target_id`, targetID)
-	}
 	customerID := ctx.Formx(`customerId`).Uint64()
 	if customerID > 0 {
 		cond.AddKV(`customer_id`, customerID)
 	}
-	payMethod := ctx.Form(`payMethod`)
-	if len(payMethod) > 0 {
+
+	if targetType := ctx.Form(`targetType`); len(targetType) > 0 {
+		cond.AddKV(`target_type`, targetType)
+	}
+
+	if targetID := ctx.Formx(`targetId`).Uint64(); targetID > 0 {
+		cond.AddKV(`target_id`, targetID)
+	}
+
+	if payMethod := ctx.Form(`payMethod`); len(payMethod) > 0 {
 		cond.AddKV(`pay_method`, payMethod)
 	}
+
 	list := []*OfflinePayWithCustomer{}
 	err := m.ListPageByOffsetAs(&list, cond, `-id`)
 	ret := common.Err(ctx, err)
