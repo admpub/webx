@@ -64,6 +64,7 @@ func Index(ctx echo.Context) error {
 		}
 		return ``
 	})
+	ctx.Set(`title`, ctx.T(`线下转账列表`))
 	return ctx.Render(`official/customer/offline_pay/index`, ret)
 }
 
