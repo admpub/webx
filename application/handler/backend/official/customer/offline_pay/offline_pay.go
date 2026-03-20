@@ -46,12 +46,12 @@ func Index(ctx echo.Context) error {
 	ctx.Set(`targetTypes`, modelCustomer.OfflinePayTargetTypes.Slice())
 	ctx.Set(`statusList`, modelCustomer.OfflinePayStatuses.Slice())
 	ctx.SetFunc(`targetTypeName`, modelCustomer.OfflinePayTargetTypes.Get)
-	ctx.SetFunc(`ownershipInfo`, func(targetType string) modelCustomer.OwnershipInfo {
+	ctx.SetFunc(`ownershipInfo`, func(targetType string, ownershipID uint64) modelCustomer.OwnershipInfo {
 		item := modelCustomer.OfflinePayTargetTypes.GetItem(targetType)
 		if item == nil || item.X == nil {
 			return modelCustomer.OwnershipInfo{}
 		}
-		return item.X.OwnershipInfo(ctx)
+		return item.X.OwnershipInfo(ctx, ownershipID)
 	})
 	ctx.SetFunc(`statusName`, modelCustomer.OfflinePayStatuses.Get)
 	payMethods := offlinepay.GetMethods(nil)

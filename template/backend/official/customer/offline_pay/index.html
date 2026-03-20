@@ -67,9 +67,9 @@
 							<td>
 								{{"目标类型"|$.T}}: {{call $.Func.targetTypeName $v.TargetType}}<br />
 								{{"目标ID"|$.T}}: {{$v.TargetId}}<br />
-								{{- $ownershipInfo := call $.Func.ownershipInfo $v.TargetType -}}
+								{{- $ownershipInfo := call $.Func.ownershipInfo $v.TargetType $v.OwnershipId -}}
 								{{$ownershipInfo.Name|Default ($.T "归属ID")}}: {{ if $ownershipInfo.URL -}}
-								<a href="http://" target="_blank" rel="noopener noreferrer">{{$v.OwnershipId}}</a> 
+								<a href="{{$ownershipInfo.URL}}" target="_blank" rel="noopener noreferrer">{{$v.OwnershipId}}</a> 
 								{{- else -}}
 								{{- $v.OwnershipId -}}
 								{{- end -}}
@@ -82,16 +82,21 @@
 								{{`户主名`|$.T}}: {{$v.PayOwner|Default `-`}}
 							</td>
 							<td>{{$v.PayAmount}}</td>
-							<td>{{call $.Func.statusName $v.Status}}</td>
+							<td class="editable"><span class="editable" data-value="{{$v.Status}}">{{call $.Func.statusName $v.Status}}</span></td>
 							<td>
 								{{`创建时间`|$.T}}: {{(Date $v.Created).Format "2006-01-02 15:04:05"}}<br />
 								{{`修改时间`|$.T}}: {{if gt $v.Updated}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}<br />
 								{{`付款时间`|$.T}}: {{if gt $v.PayTime}}{{(Date $v.PayTime).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}
 							</td>
 							<td class="text-center label-group">
+							<a class="label label-default" href="{{BackendURL}}/official/customer/offline_pay/add?copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip">
+								<i class="fa fa-copy"></i>
+							</a>
+							{{- if ne $v.Status `verified` }}
 							<a class="label label-success" href="{{BackendURL}}/official/customer/offline_pay/edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip">
 								<i class="fa fa-pencil"></i>
 							</a>
+							{{- end -}}
 							<a class="label label-danger" href="{{BackendURL}}/official/customer/offline_pay/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip">
 								<i class="fa fa-times"></i>
 							</a>
@@ -106,4 +111,14 @@
 		</div>
 	</div>
 </div>
+{{/Block}}
+
+{{Block "footer"}}
+<script src="{{AssetsURL}}/js/loader/loader.min.js?t={{BuildTime}}"></script>
+<script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
+<script>
+$(function(){
+  App.editor.editable('#customerId',{data: BACKEND_URL+'/official/customer/index'})
+})
+</script>
 {{/Block}}
