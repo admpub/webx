@@ -80,6 +80,9 @@ func RechargeOffline(ctx echo.Context) error {
 
 	m := modelCustomer.NewOfflinePay(ctx)
 	m.CustomerId = customer.Id
+	if err := m.CheckCustomerAdd(customer); err != nil {
+		return err
+	}
 	m.TargetType = modelCustomer.OfflinePayTargetTypeRecharge
 	err := requestData.Apply(m.OfficialCustomerOfflinePay)
 	if err != nil {
