@@ -68,6 +68,7 @@ func RechargeOffline(ctx echo.Context) error {
 	if err != nil {
 		return err
 	}
+	m.Status = modelCustomer.OfflinePayStatusPending
 	_, err = m.Add()
 	if err != nil {
 		return err
