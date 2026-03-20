@@ -12,29 +12,28 @@
 				<div class="pull-right" style="margin-left:10px">
 					<form class="form-horizontal" action="" id="search-form" method="GET">
 						<div class="input-group">
-							<span class="input-group-addon">{{"投诉类型"|$.T}}</span>
-							<select name="type" class="form-control" id="type" onchange="$('#search-form').submit()">
+							<span class="input-group-addon">{{"目标类型"|$.T}}</span>
+							<select name="targetType" class="form-control" id="targetType" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{$type := $.Stored.type}}
-								{{range $k, $v := $.Stored.types}}
-								<option value="{{$v.K}}" {{if eq $type $v.K}} selected{{end}}>{{$v.V}}</option>
-								{{end}}
+								{{- $targetType := $.Form `targetType` -}}
+								{{- range $k, $v := $.Stored.targetTypes -}}
+								<option value="{{$v.K}}" {{if eq $targetType $v.K}} selected{{end}}>{{$v.V}}</option>
+								{{- end -}}
 							</select>
-							<span class="input-group-addon">{{"投诉对象"|$.T}}</span>
-							<select name="target" class="form-control" id="target" onchange="$('#search-form').submit()">
+							<span class="input-group-addon">{{"付款方式"|$.T}}</span>
+							<select name="payMethod" class="form-control" id="payMethod" onchange="$('#search-form').submit()">
 								<option value=""> - {{"不限"|$.T}} - </option>
-								{{$target := $.Stored.target}}
-								{{range $k, $v := $.Stored.targets}}
-								<option value="{{$v.K}}" {{if eq $target $v.K}} selected{{end}}>{{$v.V}}</option>
-								{{end}}
+								{{- $payMethod := $.Form `payMethod` -}}
+								{{- range $k, $v := $.Stored.payMethods -}}
+								<option value="{{$v.K}}" {{if eq $payMethod $v.K}} selected{{end}}>{{$v.V}}</option>
+								{{- end -}}
 							</select>
 							<span class="input-group-addon">{{"状态"|$.T}}</span>
-							<select name="process" class="form-control" id="process" onchange="$('#search-form').submit()">
-								<option value=""> - {{"不限"|$.T}} - </option>
-								{{$process := $.Stored.process}}
-								{{range $k, $v := $.Stored.processes}}
-								<option value="{{$v.K}}" {{if eq $process $v.K}} selected{{end}}>{{$v.V}}</option>
-								{{end}}
+							<select name="status" class="form-control" id="status" onchange="$('#search-form').submit()">
+								<option value=""> - {{"不限"|$.T}} - </option>{{- $status := $.Form `status` -}}
+								{{- range $k, $v := $.Stored.statusList -}}
+								<option value="{{$v.K}}" {{if eq $status $v.K}} selected{{end}}>{{$v.V}}</option>
+								{{- end -}}
 							</select>
 						</div>
 					</form>
@@ -47,64 +46,54 @@
 					<thead class="no-border">
 						<tr>
 							<th data-priority="1" style="width:50px"><strong>ID</strong></th>
-							<th style="width:80px"><strong>{{"投诉人"|$.T}}</strong></th>
-							<th style="width:80px"><strong>{{"类型"|$.T}}</strong></th>
-							<th data-priority="1"><strong>{{"目标"|$.T}}</strong></th>
-							<th data-priority="1"><strong>{{"投诉内容"|$.T}}</strong></th>
+							<th style="width:80px"><strong>{{"客户"|$.T}}</strong></th>
+							<th style="width:80px"><strong>{{"目标类型"|$.T}}</strong></th>
+							<th data-priority="1"><strong>{{"付款信息"|$.T}}</strong></th>
+							<th data-priority="1"><strong>{{"金额"|$.T}}</strong></th>
 							<th data-priority="1" style="width:70px;"><strong>{{"处理状态"|$.T}}</strong></th>
-							<th data-priority="5"><strong>{{"处理结果"|$.T}}</strong></th>
-							<th data-priority="6" style="width:120px;"><strong>{{"创建时间"|$.T}}</strong></th>
+							<th data-priority="6" style="width:120px;"><strong>{{"时间"|$.T}}</strong></th>
 							<th style="width:100px;" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
 					<tbody class="no-border-y">
-                        {{range $k,$v := $.Stored.listData}}
+                        {{- range $k,$v := $.Stored.listData -}}
 						<tr>
 							<td>{{$v.Id}}</td>
 							<td>{{if $v.Customer}}{{$v.Customer.Name}}{{else}}-{{end}}</td>
-							<td>{{$v.TypeName}}</td>
 							<td>
-								{{- $targetURL := $v.URLFormat -}}
-								{{- if $v.TargetTypeName -}}
-									{{- if $targetURL -}}
-								<a href="{{$targetURL}}" class="label label-info" target="_blank">
-									{{- $v.TargetTypeName -}}
-									{{- if $v.TargetName -}}
-									《{{$v.TargetName}}》
-									{{- end -}}
-								</a>
-									{{- else -}}
-									<span class="label label-default">
-									{{- $v.TargetTypeName -}}
-									{{- if $v.TargetName -}}
-									《{{$v.TargetName}}》
-									{{- end -}}
-									</span>
-									{{end}}
+								{{"目标类型"|$.T}}: {{call $.Func.targetTypeName $v.TargetType}}<br />
+								{{"目标ID"|$.T}}: {{$v.TargetId}}<br />
+								{{- $ownershipInfo := call $.Func.ownershipInfo $v.TargetType -}}
+								{{$ownershipInfo.Name|Default ($.T "归属ID")}}: {{ if $ownershipInfo.URL -}}
+								<a href="http://" target="_blank" rel="noopener noreferrer">{{$v.OwnershipId}}</a> 
 								{{- else -}}
-									<span class="label label-default">
-									{{- $v.TargetType -}}
-									</span>
+								{{- $v.OwnershipId -}}
 								{{- end -}}
-
-								<span class="label label-danger">
-								{{- if gt $v.TargetId 0 -}}
-									{{$v.TargetId}}
-								{{- else -}}
-									{{$v.TargetIdent}}
-								{{- end -}}
-								</span>
 							</td>
-							<td>{{$v.Content}}</td>
-							<td>{{call $.Func.processName $v.Process}}</td>
-							<td>{{$v.Result}}</td>
-							<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
+							<td>
+								{{`付款方式`|$.T}}: {{call $.Func.payMethodName $v.PayMethod}}<br />
+								{{`付款账号`|$.T}}: {{$v.PayAccount}}<br />
+								{{if $v.PayBankBranch}}{{`银行支行`|$.T}}: {{$v.PayBankBranch}}<br />{{end}}
+								{{if $v.PayTransactionNo}}{{`交易号码`|$.T}}: {{$v.PayTransactionNo}}<br />{{end}}
+								{{`户主名`|$.T}}: {{$v.PayOwner|Default `-`}}
+							</td>
+							<td>{{$v.PayAmount}}</td>
+							<td>{{call $.Func.statusName $v.Status}}</td>
+							<td>
+								{{`创建时间`|$.T}}: {{(Date $v.Created).Format "2006-01-02 15:04:05"}}<br />
+								{{`修改时间`|$.T}}: {{if gt $v.Updated}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}<br />
+								{{`付款时间`|$.T}}: {{if gt $v.PayTime}}{{(Date $v.PayTime).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}
+							</td>
 							<td class="text-center label-group">
-							<a class="label label-success" href="{{BackendURL}}/official/customer/complaint/edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
-							<a class="label label-danger" href="{{BackendURL}}/official/customer/complaint/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+							<a class="label label-success" href="{{BackendURL}}/official/customer/offline_pay/edit?id={{$v.Id}}" title="{{`编辑`|$.T}}" data-toggle="tooltip">
+								<i class="fa fa-pencil"></i>
+							</a>
+							<a class="label label-danger" href="{{BackendURL}}/official/customer/offline_pay/delete?id={{$v.Id}}" onclick="return confirm('{{`真的要删除吗？`|$.T}}');" title="{{`删除`|$.T}}" data-toggle="tooltip">
+								<i class="fa fa-times"></i>
+							</a>
 							</td>
 						</tr>
-                        {{end}}
+                        {{- end -}}
 					</tbody>
 				</table>
 				</div>

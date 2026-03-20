@@ -9,8 +9,16 @@ import (
 
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webfront/dbschema"
+	"github.com/coscms/webfront/library/offlinepay"
+	"github.com/coscms/webfront/model/author"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 )
+
+type OfflinePayWithCustomer struct {
+	*dbschema.OfficialCustomerOfflinePay
+	Customer *author.Customer `db:"-,relation=id:customer_id|gtZero,columns=id&name&avatar" json:",omitempty"`
+}
 
 func Index(ctx echo.Context) error {
 	targetType := ctx.Form(`targetType`)
@@ -27,10 +35,35 @@ func Index(ctx echo.Context) error {
 	if customerID > 0 {
 		cond.AddKV(`customer_id`, customerID)
 	}
-	err := m.ListPageByOffset(cond, `-id`)
+	payMethod := ctx.Form(`payMethod`)
+	if len(payMethod) > 0 {
+		cond.AddKV(`pay_method`, payMethod)
+	}
+	list := []*OfflinePayWithCustomer{}
+	err := m.ListPageByOffsetAs(&list, cond, `-id`)
 	ret := common.Err(ctx, err)
-	list := m.Objects()
 	ctx.Set(`listData`, list)
+	ctx.Set(`targetTypes`, modelCustomer.OfflinePayTargetTypes.Slice())
+	ctx.Set(`statusList`, modelCustomer.OfflinePayStatuses.Slice())
+	ctx.SetFunc(`targetTypeName`, modelCustomer.OfflinePayTargetTypes.Get)
+	ctx.SetFunc(`ownershipInfo`, func(targetType string) modelCustomer.OwnershipInfo {
+		item := modelCustomer.OfflinePayTargetTypes.GetItem(targetType)
+		if item == nil || item.X == nil {
+			return modelCustomer.OwnershipInfo{}
+		}
+		return item.X.OwnershipInfo(ctx)
+	})
+	ctx.SetFunc(`statusName`, modelCustomer.OfflinePayStatuses.Get)
+	payMethods := offlinepay.GetMethods(nil)
+	ctx.Set(`payMethods`, offlinepay.GetMethods(nil))
+	ctx.SetFunc(`payMethodName`, func(v string) string {
+		for _, item := range payMethods {
+			if item.K == v {
+				return item.V
+			}
+		}
+		return ``
+	})
 	return ctx.Render(`official/customer/offline_pay/index`, ret)
 }
 
@@ -63,6 +96,9 @@ func Add(ctx echo.Context) error {
 END:
 	ctx.Set(`activeURL`, `/official/customer/offline_pay/index`)
 	ctx.Set(`title`, ctx.T(`添加线下转账`))
+	ctx.Set(`payMethods`, offlinepay.GetMethods(nil))
+	ctx.Set(`targetTypes`, modelCustomer.OfflinePayTargetTypes.Slice())
+	ctx.Set(`statusList`, modelCustomer.OfflinePayStatuses.Slice())
 	return ctx.Render(`official/customer/offline_pay/edit`, common.Err(ctx, err))
 }
 
@@ -122,6 +158,9 @@ func Edit(ctx echo.Context) error {
 END:
 	ctx.Set(`activeURL`, `/official/customer/offline_pay/index`)
 	ctx.Set(`title`, ctx.T(`编辑线下转账`))
+	ctx.Set(`payMethods`, offlinepay.GetMethods(nil))
+	ctx.Set(`targetTypes`, modelCustomer.OfflinePayTargetTypes.Slice())
+	ctx.Set(`statusList`, modelCustomer.OfflinePayStatuses.Slice())
 	return ctx.Render(`official/customer/offline_pay/edit`, common.Err(ctx, err))
 }
 

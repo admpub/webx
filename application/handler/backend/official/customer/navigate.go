@@ -112,7 +112,7 @@ var LeftNavigate = &navigate.Item{
 		//offline_pay
 		{
 			Display: true,
-			Name:    echo.T(`线下转账管理`),
+			Name:    echo.T(`线下转账`),
 			Action:  `offline_pay/index`,
 		},
 		{
