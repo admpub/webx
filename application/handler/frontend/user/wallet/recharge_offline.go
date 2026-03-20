@@ -78,7 +78,7 @@ func RechargeOffline(ctx echo.Context) error {
 	common.SendOk(ctx, ctx.T(`操作成功`))
 	next := ctx.Form(`next`)
 	if len(next) == 0 {
-		next = `/user/wallet`
+		next = `/user/wallet/offline_pay_history`
 	}
 	return ctx.Redirect(next)
 }
@@ -92,6 +92,28 @@ func RechargeOfflineHistory(ctx echo.Context) error {
 	pagination.SetDefaultSize(ctx, 20)
 	err := m.ListPage(cond, `-id`)
 	ctx.Set(`list`, m.Objects())
+	ctx.Set(`targetTypes`, modelCustomer.OfflinePayTargetTypes.Slice())
+	statusList := modelCustomer.OfflinePayStatuses.Slice()
+	ctx.Set(`statusList`, statusList)
+	ctx.SetFunc(`targetTypeName`, modelCustomer.OfflinePayTargetTypes.Get)
+	ctx.SetFunc(`ownershipInfo`, func(targetType string, ownershipID uint64) modelCustomer.OwnershipInfo {
+		item := modelCustomer.OfflinePayTargetTypes.GetItem(targetType)
+		if item == nil || item.X == nil {
+			return modelCustomer.OwnershipInfo{}
+		}
+		return item.X.OwnershipInfo(ctx, ownershipID)
+	})
+	ctx.SetFunc(`statusName`, modelCustomer.OfflinePayStatuses.Get)
+	payMethods := offlinepay.GetMethods(nil)
+	ctx.Set(`payMethods`, offlinepay.GetMethods(nil))
+	ctx.SetFunc(`payMethodName`, func(v string) string {
+		for _, item := range payMethods {
+			if item.K == v {
+				return item.V
+			}
+		}
+		return ``
+	})
 	ctx.Set(`activeURL`, `/user/wallet`)
 	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)
 	return ctx.Render(`user/wallet/offline_pay_history`, common.Err(ctx, err))
