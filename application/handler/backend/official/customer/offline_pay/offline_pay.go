@@ -40,6 +40,10 @@ func Index(ctx echo.Context) error {
 		cond.AddKV(`pay_method`, payMethod)
 	}
 
+	if status := ctx.Form(`status`); len(status) > 0 {
+		cond.AddKV(`status`, status)
+	}
+
 	list := []*OfflinePayWithCustomer{}
 	err := m.ListPageByOffsetAs(&list, cond, `-id`)
 	ret := common.Err(ctx, err)

@@ -120,6 +120,10 @@ func RechargeOfflineHistory(ctx echo.Context) error {
 		cond.AddKV(`pay_method`, payMethod)
 	}
 
+	if status := ctx.Form(`status`); len(status) > 0 {
+		cond.AddKV(`status`, status)
+	}
+
 	pagination.SetDefaultSize(ctx, 20)
 	err := m.ListPage(cond, `-id`)
 	ctx.Set(`list`, m.Objects())
