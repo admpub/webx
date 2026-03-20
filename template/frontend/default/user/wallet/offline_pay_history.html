@@ -16,20 +16,49 @@
   <div class="col-lg-12 mg-t-0">
     <div class="card card-table">
       <div class="card-header">
+				<div class="pull-right" style="margin-left:10px">
+					<form class="form form-horizontal" action="" id="search-form" method="GET">
+						<div class="input-group">
+							<span class="input-group-addon">{{"目标类型"|$.T}}</span>
+							<select name="targetType" class="form-control" id="targetType" onchange="$('#search-form').submit()">
+								<option value=""> - {{"不限"|$.T}} - </option>
+								{{- $targetType := $.Form `targetType` -}}
+								{{- range $k, $v := $.Stored.targetTypes -}}
+								<option value="{{$v.K}}" {{if eq $targetType $v.K}} selected{{end}}>{{$v.V}}</option>
+								{{- end -}}
+							</select>
+							<span class="input-group-addon">{{"付款方式"|$.T}}</span>
+							<select name="payMethod" class="form-control" id="payMethod" onchange="$('#search-form').submit()">
+								<option value=""> - {{"不限"|$.T}} - </option>
+								{{- $payMethod := $.Form `payMethod` -}}
+								{{- range $k, $v := $.Stored.payMethods -}}
+								<option value="{{$v.K}}" {{if eq $payMethod $v.K}} selected{{end}}>{{$v.V}}</option>
+								{{- end -}}
+							</select>
+							<span class="input-group-addon">{{"状态"|$.T}}</span>
+							<select name="status" class="form-control" id="status" onchange="$('#search-form').submit()">
+								<option value=""> - {{"不限"|$.T}} - </option>{{- $status := $.Form `status` -}}
+								{{- range $k, $v := $.Stored.statusList -}}
+								<option value="{{$v.K}}" {{if eq $status $v.K}} selected{{end}}>{{$v.V}}</option>
+								{{- end -}}
+							</select>
+						</div>
+					</form>
+				</div>
         <h6 class="card-title">{{"线下转账历史"|$.T}}</h6>
       </div><!-- card-header -->
       <div class="table-responsive">
-      <table class="table">
+      <table class="table" style="table-layout:fixed">
         <thead>
           <tr>
             <th style="width:80px">{{"时间"|$.T}}</th>
             <th class="tx-right" style="width:100px">{{"金额"|$.T}}</th>
             <th style="width:100px">{{"目标类型"|$.T}}</th>
             <th style="width:100px">{{"付款方式"|$.T}}</th>
-            <th style="min-width:100px">{{"付款账号"|$.T}}</th>
-            <th style="min-width:100px">{{"支行 / 交易号"|$.T}}</th>
+            <th style="width:150px">{{"付款账号"|$.T}}</th>
+            <th style="width:200px">{{"支行/交易号"|$.T}}</th>
             <th style="width:100px">{{"户主名"|$.T}}</th>
-            <th style="width:100px">{{"状态"|$.T}}</th>
+            <th style="width:80px">{{"状态"|$.T}}</th>
           </tr>
         </thead>
         <tbody>
