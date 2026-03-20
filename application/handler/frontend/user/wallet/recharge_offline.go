@@ -77,6 +77,7 @@ func RechargeOffline(ctx echo.Context) error {
 	if err := ctx.MustBindAndValidate(requestData); err != nil {
 		return err
 	}
+
 	m := modelCustomer.NewOfflinePay(ctx)
 	m.CustomerId = customer.Id
 	m.TargetType = modelCustomer.OfflinePayTargetTypeRecharge
