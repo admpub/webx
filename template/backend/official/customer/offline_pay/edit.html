@@ -80,7 +80,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{"付款时间"|$.T}}</label>
                 <div class="col-sm-3">
-                    <input type="date" class="form-control" name="payTime" value="{{$.Form `payTime`}}">
+                    <input type="datetime-local" class="form-control" name="payTime" value="{{$.Form `payTime`}}">
                 </div>
                 <label class="col-sm-2 control-label">{{`处理状态`|$.T}}</label>
                 <div class="col-sm-3">{{$v := $.Form `status` `pending`}}

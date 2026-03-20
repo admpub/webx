@@ -1,6 +1,7 @@
 package wallet
 
 import (
+	"strings"
 	"time"
 
 	"github.com/admpub/dateparse"
@@ -21,7 +22,7 @@ type RequestRechargeOffline struct {
 	OfflinePayAmount        float64 `validate:"required,min=0.01"`
 	OfflinePayBankBranch    string  // 银行支行（线下银行转账时有效）
 	OfflinePayTransactionNo string  // 交易订单号（线上转账时有效）
-	OfflinePayTime          string  // 付款时间（可选）
+	OfflinePayTime          string  `validate:"required"` // 付款时间（可选）
 	OfflinePayOwner         string  `validate:"required"`
 }
 
@@ -42,9 +43,19 @@ func (r RequestRechargeOffline) Apply(m *dbschema.OfficialCustomerOfflinePay) er
 	return err
 }
 
-func (r RequestRechargeOffline) BeforeVadidate(ctx echo.Context) error {
+func (r *RequestRechargeOffline) BeforeVadidate(ctx echo.Context) error {
 	if offlinepay.GetMethod(r.OfflinePayMethod, nil) == nil {
 		return ctx.NewError(code.InvalidParameter, `不支持的付款方式: %s`, r.OfflinePayMethod).SetZone(`offlinePayMethod`)
+	}
+	methodType := strings.SplitN(r.OfflinePayMethod, `.`, 2)[0]
+	if methodType != `bank` {
+		if len(r.OfflinePayBankBranch) > 0 {
+			r.OfflinePayBankBranch = ``
+		}
+	}
+	_, err := r.PayTime()
+	if err != nil {
+		return ctx.NewError(code.InvalidParameter, `解析付款时间“%s”失败: %v`, r.OfflinePayTime, err).SetZone(`offlinePayTime`)
 	}
 	return nil
 }

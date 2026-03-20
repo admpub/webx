@@ -23,9 +23,12 @@
         <thead>
           <tr>
             <th style="width:80px">{{"时间"|$.T}}</th>
-            <th style="min-width:100px">{{"类型"|$.T}}</th>
-            <th style="min-width:100px">{{"付款信息"|$.T}}</th>
-            <th class="tx-right" style="min-width:100px">{{"金额"|$.T}}</th>
+            <th class="tx-right" style="width:100px">{{"金额"|$.T}}</th>
+            <th style="width:100px">{{"目标类型"|$.T}}</th>
+            <th style="width:100px">{{"付款方式"|$.T}}</th>
+            <th style="min-width:100px">{{"付款账号"|$.T}}</th>
+            <th style="min-width:100px">{{"支行 / 交易号"|$.T}}</th>
+            <th style="width:100px">{{"户主名"|$.T}}</th>
             <th style="width:100px">{{"状态"|$.T}}</th>
           </tr>
         </thead>
@@ -35,20 +38,15 @@
             <td id="wallet-flow-{{$v.Id}}" title="{{(Date $v.Created).Format `2006-01-02 15:04:05`}}">
               {{- $.TimeAgo $v.Created `now` -}}
             </td>
+            <td class="tx-right">{{NumberFormat $v.PayAmount 2}}</td>
+            <td>{{call $.Func.targetTypeName $v.TargetType}}</td>
+            <td>{{call $.Func.payMethodName $v.PayMethod}}</td>
+            <td>{{$v.PayAccount}}</td>
             <td>
-								{{"目标类型"|$.T}}: {{call $.Func.targetTypeName $v.TargetType}}<br />
-								{{- if gt $v.TargetId 0 -}}{{"目标ID"|$.T}}: {{$v.TargetId}}<br />{{- end -}}
-								{{- $ownershipInfo := call $.Func.ownershipInfo $v.TargetType $v.OwnershipId -}}
-								{{$ownershipInfo.Name|Default ($.T "归属ID")}}: {{ $v.OwnershipId }}
+							{{if $v.PayBankBranch}}{{`银行支行`|$.T}}: {{$v.PayBankBranch}}<br />{{end}}
+							{{if $v.PayTransactionNo}}{{`交易订单号`|$.T}}: {{$v.PayTransactionNo}}{{end}}
             </td>
-            <td>
-								{{`付款方式`|$.T}}: {{call $.Func.payMethodName $v.PayMethod}}<br />
-								{{`付款账号`|$.T}}: {{$v.PayAccount}}<br />
-								{{if $v.PayBankBranch}}{{`银行支行`|$.T}}: {{$v.PayBankBranch}}<br />{{end}}
-								{{if $v.PayTransactionNo}}{{`交易号码`|$.T}}: {{$v.PayTransactionNo}}<br />{{end}}
-								{{`户主名`|$.T}}: {{$v.PayOwner|Default `-`}}
-            </td>
-            <td class="tx-right">{{$v.PayAmount}}</td>
+            <td>{{$v.PayOwner|Default `-`}}</td>
             <td>
               {{- if eq $v.Status "pending"}}
                 <span class="tx-size-11 d-block"><span class="square-8 bg-warning mg-r-5 rounded-circle"></span> {{"待核实"|$.T}}</span>
