@@ -7,6 +7,7 @@ import (
 
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webfront/library/offlinepay"
 	xMW "github.com/coscms/webfront/middleware"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	registryWallet "github.com/coscms/webfront/registry/wallet"
@@ -39,6 +40,7 @@ func Recharge(ctx echo.Context) error {
 	ctx.Set(`rechargeCfg`, rechargeCfg)
 	ctx.Set(`activeURL`, `/user/wallet`)
 	ctx.Set(`rechargePage`, registryWallet.RechargePage)
+	ctx.Set(`offlinePayMethods`, offlinepay.GetMethods(nil))
 	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)
 	return ctx.Render(`user/wallet/recharge`, common.Err(ctx, err))
 }

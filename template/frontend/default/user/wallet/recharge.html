@@ -80,7 +80,7 @@
                   <h6 class="card-title">{{"线下付款"|$.RawT|UpperCaseFirst|$.ExtT}}</h6>
                 </div><!-- card-header -->
                 <div class="card-body row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin:auto 0">
                         <div class="alert alert-danger">
                         {{Include "#default#user/wallet/recharge/offline_receive_account" $}}
                         </div><!-- /.alert -->
@@ -120,6 +120,7 @@
     </div>
 </script>
 {{Super}}
+<script src="{{AssetsXURL}}/js/page/user/recharge.js?t={{BuildTime}}"></script>
 {{- range $k,$v := $.Stored.rechargePage.Tmpl `foot` -}}
 {{$.Fetch $v $}}
 {{- end -}}

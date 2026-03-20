@@ -9,6 +9,7 @@ import (
 	xMW "github.com/coscms/webfront/middleware"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	"github.com/webx-top/echo"
+	"github.com/webx-top/echo/code"
 )
 
 type RequestRechargeOffline struct {
@@ -22,8 +23,8 @@ type RequestRechargeOffline struct {
 }
 
 func (r RequestRechargeOffline) BeforeVadidate(ctx echo.Context) error {
-	if offlinepay.GetMethod(r.OfflinePayMethod, nil) {
-
+	if offlinepay.GetMethod(r.OfflinePayMethod, nil) == nil {
+		return ctx.NewError(code.InvalidParameter, `不支持的付款方式: %s`, r.OfflinePayMethod).SetZone(`offlinePayMethod`)
 	}
 	return nil
 }
