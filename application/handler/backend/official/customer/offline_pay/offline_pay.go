@@ -68,6 +68,17 @@ func Index(ctx echo.Context) error {
 	return ctx.Render(`official/customer/offline_pay/index`, ret)
 }
 
+func KVListToEditableSource(ctx echo.Context, kvList []*echo.KV) {
+	source := make([]echo.H, len(kvList))
+	for i, v := range kvList {
+		text := v.V
+		if len(text) == 0 {
+			text = `<` + ctx.T(`空`) + `>`
+		}
+		source[i] = echo.H{`value`: v.K, `text`: text}
+	}
+}
+
 func Add(ctx echo.Context) error {
 	var err error
 	var id uint64

@@ -59,7 +59,7 @@
 							<th style="width:100px;" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
 					</thead>
-					<tbody class="no-border-y">
+					<tbody class="no-border-y" id="offlinePayList">
                         {{- range $k,$v := $.Stored.listData -}}
 						<tr>
 							<td>{{$v.Id}}</td>
@@ -82,7 +82,11 @@
 								{{`户主名`|$.T}}: {{$v.PayOwner|Default `-`}}
 							</td>
 							<td>{{$v.PayAmount}}</td>
-							<td class="editable"><span class="editable" data-value="{{$v.Status}}">{{call $.Func.statusName $v.Status}}</span></td>
+							{{- if ne $v.Status `verified` }}
+							<td><span>{{call $.Func.statusName $v.Status}}</span></td>
+							{{- else -}}
+							<td class="editable" data-id="{{$v.Id}}"><span class="editable" data-value="{{$v.Status}}">{{call $.Func.statusName $v.Status}}</span></td>
+							{{- end -}}
 							<td>
 								{{`创建时间`|$.T}}: {{(Date $v.Created).Format "2006-01-02 15:04:05"}}<br />
 								{{`修改时间`|$.T}}: {{if gt $v.Updated}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{else}}-{{end}}<br />
@@ -118,7 +122,10 @@
 <script src="{{AssetsURL}}/js/editor/editor.min.js?t={{BuildTime}}"></script>
 <script>
 $(function(){
-  App.editor.editable('#customerId',{data: BACKEND_URL+'/official/customer/index'})
+  App.editor.editable('#offlinePayList td.editable',{
+	url:function(){return BACKEND_URL+'/official/customer/offline_pay/edit?id='+$(this).data('id');},
+	type:'select',source:{{$.Stored.statusList}},name:'status',title:App.t('修改状态')
+	}}
 })
 </script>
 {{/Block}}
