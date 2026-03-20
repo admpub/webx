@@ -2,6 +2,10 @@
 <form class="form form-label-right" method="post" action="{{FrontendURL}}/user/wallet/recharge/offline" id="offlinePayForm">
 <div class="card card-form">
     <div class="card-header">
+        <a class="btn btn-inverse pull-right tx-white" href="{{FrontendURL}}/user/wallet/offline_pay_history">
+          <i class="fa fa-list"></i>
+          {{"历史记录"|$.T}}
+        </a>
       <h6 class="card-title">{{"付款账户"|$.RawT|UpperCaseFirst|$.ExtT}}</h6>
     </div><!-- card-header -->
     <div class="card-body">

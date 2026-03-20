@@ -9,6 +9,8 @@ import (
 	"github.com/coscms/webfront/library/offlinepay"
 	xMW "github.com/coscms/webfront/middleware"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
+	"github.com/webx-top/db"
+	"github.com/webx-top/db/lib/factory/pagination"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
 )
@@ -79,4 +81,18 @@ func RechargeOffline(ctx echo.Context) error {
 		next = `/user/wallet`
 	}
 	return ctx.Redirect(next)
+}
+
+// RechargeOfflineHistory 线下转账充值历史
+func RechargeOfflineHistory(ctx echo.Context) error {
+	customer := xMW.Customer(ctx)
+	m := modelCustomer.NewOfflinePay(ctx)
+	cond := db.NewCompounds()
+	cond.AddKV(`customer_id`, customer.Id)
+	pagination.SetDefaultSize(ctx, 20)
+	err := m.ListPage(cond, `-id`)
+	ctx.Set(`list`, m.Objects())
+	ctx.Set(`activeURL`, `/user/wallet`)
+	ctx.SetFunc(`assetTypeName`, modelCustomer.AssetTypes.Get)
+	return ctx.Render(`user/wallet/offline_pay_history`, common.Err(ctx, err))
 }
