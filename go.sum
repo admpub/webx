@@ -328,10 +328,10 @@ github.com/coscms/session-sqlstore v0.0.1 h1:L1ef74QILW4RXrAcG2Se6K+zakmnE7sE735
 github.com/coscms/session-sqlstore v0.0.1/go.mod h1:n1mHOa5RJRVCXjliFkVcgg8A+TEDY6BPqFkyi3qVbTc=
 github.com/coscms/sms v0.0.7 h1:FNYoCRsyGoKhNH+DFYjdYnjsFJjsPT1vStivGV6oReA=
 github.com/coscms/sms v0.0.7/go.mod h1:8Lgm1SgZ0AyLj1npgMlulgBHbWzjOgWO8kkYQHHwuQQ=
-github.com/coscms/webcore v0.13.3-0.20260323110524-daa522537e69 h1:fLvgutJQkYoZ8m1lTaepo3AQB/FUr3lCOow6EMP2J7I=
-github.com/coscms/webcore v0.13.3-0.20260323110524-daa522537e69/go.mod h1:+nGy1wawWdVu6KPGtAlN4C/IVUb3+GhfKVT89qOOvQg=
-github.com/coscms/webfront v0.0.0-20260323110825-70ecadb8ee2e h1:jF/e578s703oNhD5IeCiTV663U2ZKMyS+1MHEUR4jjE=
-github.com/coscms/webfront v0.0.0-20260323110825-70ecadb8ee2e/go.mod h1:5HwHTHcIVl8tNRO3wQ/AmbK4C9PFQ2SoVYT26edd+R8=
+github.com/coscms/webcore v0.13.3-0.20260323121148-fb55531ec463 h1:90Gi6D+EDoBrhmC0s8DPsM/1hQ1ib64BMLqBQTHU7aI=
+github.com/coscms/webcore v0.13.3-0.20260323121148-fb55531ec463/go.mod h1:KRn4raIX8TDYUI5hlhaNcMwc7KClaJNNfpvwJf2CFzQ=
+github.com/coscms/webfront v0.0.0-20260323121358-8c0287a064c4 h1:XHMd9bwAIxR2SIxfwO/o+0QMBoQeHegdchW/vk1L31w=
+github.com/coscms/webfront v0.0.0-20260323121358-8c0287a064c4/go.mod h1:eDnJq2t3wCI+SdrwAVYIbnkpjxSwiTFSOOcfVIMWygs=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
@@ -596,8 +596,8 @@ github.com/kisielk/errcheck v1.7.0/go.mod h1:1kLL+jV4e+CFfueBmI1dSK2ADDyQnlrnrY/
 github.com/kisielk/errcheck v1.10.0 h1:Lvs/YAHP24YKg08LA8oDw2z9fJVme090RAXd90S+rrw=
 github.com/kisielk/errcheck v1.10.0/go.mod h1:kQxWMMVZgIkDq7U8xtG/n2juOjbLgZtedi0D+/VL/i8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
-github.com/klauspost/compress v1.18.4 h1:RPhnKRAQ4Fh8zU2FY/6ZFDwTVTxgJ/EMydqSTzE9a2c=
-github.com/klauspost/compress v1.18.4/go.mod h1:R0h/fSBs8DE4ENlcrlib3PsXS61voFxhIs2DeRhCvJ4=
+github.com/klauspost/compress v1.18.5 h1:/h1gH5Ce+VWNLSWqPzOVn6XBO+vJbCNGvjoaGBFW2IE=
+github.com/klauspost/compress v1.18.5/go.mod h1:cwPg85FWrGar70rWktvGQj8/hthj3wpl0PGDogxkrSQ=
 github.com/klauspost/cpuid/v2 v2.0.1/go.mod h1:FInQzS24/EEf25PyTYn52gqo7WaD8xa0213Md/qVLRg=
 github.com/klauspost/cpuid/v2 v2.3.0 h1:S4CRMLnYUhGeDFDqkGriYKdfoFlDnMtqTiI/sFzhA9Y=
 github.com/klauspost/cpuid/v2 v2.3.0/go.mod h1:hqwkgyIinND0mEev00jJYCxPNVRVXFQeu1XKlok6oO0=

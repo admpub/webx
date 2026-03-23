@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260323103308-0bef48e784e8
-	github.com/coscms/webcore v0.13.3-0.20260323110524-daa522537e69
-	github.com/coscms/webfront v0.0.0-20260323110825-70ecadb8ee2e
+	github.com/coscms/webcore v0.13.3-0.20260323121148-fb55531ec463
+	github.com/coscms/webfront v0.0.0-20260323121358-8c0287a064c4
 )
 
 require (
@@ -239,7 +239,7 @@ require (
 	github.com/json-iterator/go v1.1.13-0.20220915233716-71ac16282d12 // indirect
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/kisielk/errcheck v1.10.0 // indirect
-	github.com/klauspost/compress v1.18.4 // indirect
+	github.com/klauspost/compress v1.18.5 // indirect
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
 	github.com/klauspost/crc32 v1.3.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
