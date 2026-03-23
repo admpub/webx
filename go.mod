@@ -12,8 +12,8 @@ go 1.26
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20260322044329-bd49ae7b9305
-	github.com/coscms/webcore v0.13.3-0.20260322090557-286cca378976
+	github.com/admpub/nging/v5 v5.3.4-0.20260323103308-0bef48e784e8
+	github.com/coscms/webcore v0.13.3-0.20260323103037-da4edfe3df04
 	github.com/coscms/webfront v0.0.0-20260322101230-fd82ac65240e
 )
 
@@ -52,7 +52,7 @@ require (
 	github.com/spf13/cobra v1.10.2 // indirect
 	github.com/stretchr/testify v1.11.1
 	github.com/swaggo/swag v1.16.6
-	github.com/webx-top/client v0.9.6
+	github.com/webx-top/client v0.9.7
 	github.com/webx-top/com v1.4.1
 	github.com/webx-top/db v1.30.8
 	github.com/webx-top/echo v1.23.5
