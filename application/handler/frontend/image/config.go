@@ -2,6 +2,7 @@ package image
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io"
 	"sync"
@@ -35,7 +36,7 @@ type config struct {
 	disableWatermark                                      bool
 }
 
-func (cfg *config) convertOtherFormatThumb(convert convert.Convert, data []byte) (buf *bytes.Buffer, err error) {
+func (cfg *config) convertOtherFormatThumb(ctx context.Context, convert convert.Convert, data []byte) (buf *bytes.Buffer, err error) {
 	var val interface{}
 	val, err, _ = sg.Do(`convert:`+cfg.thumbOtherFormatURL, func() (interface{}, error) {
 		buf, err := convert(io.NopCloser(bytes.NewReader(data)), cfg.quality)
@@ -45,7 +46,7 @@ func (cfg *config) convertOtherFormatThumb(convert convert.Convert, data []byte)
 		b := buf.Bytes()
 		cached.Store(cfg.thumbOtherFormatURL, b)
 		mapping.Store(cfg.mappingKey, cfg.thumbOtherFormatURL)
-		_, _, err = cfg.storer.Put(cfg.storer.URLToFile(cfg.thumbOtherFormatURL), buf, int64(len(b)))
+		_, _, err = cfg.storer.Put(ctx, cfg.storer.URLToFile(cfg.thumbOtherFormatURL), buf, int64(len(b)))
 		if err != nil {
 			return nil, fmt.Errorf(`%s: %w`, cfg.thumbOtherFormatURL, err)
 		}
@@ -57,10 +58,10 @@ func (cfg *config) convertOtherFormatThumb(convert convert.Convert, data []byte)
 	return
 }
 
-func (cfg *config) getFileReaderFromStorer(imageURL string) (buf *bytes.Buffer, err error) {
+func (cfg *config) getFileReaderFromStorer(ctx context.Context, imageURL string) (buf *bytes.Buffer, err error) {
 	var val interface{}
 	val, err, _ = sg.Do(`get:`+imageURL, func() (interface{}, error) {
-		fr, err := cfg.storer.Get(imageURL)
+		fr, err := cfg.storer.Get(ctx, imageURL)
 		if err != nil {
 			return nil, err
 		}
@@ -86,7 +87,7 @@ func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
 		if v, ok := cached.Load(cfg.thumbOtherFormatURL); ok {
 			return bytes.NewBuffer(v.([]byte)), nil
 		}
-		buf, err := cfg.getFileReaderFromStorer(cfg.thumbOtherFormatURL)
+		buf, err := cfg.getFileReaderFromStorer(ctx, cfg.thumbOtherFormatURL)
 		if err != nil {
 			if !cfg.storer.ErrIsNotExist(err) {
 				return nil, fmt.Errorf(`%s: %w`, cfg.thumbOtherFormatURL, err)
@@ -105,7 +106,7 @@ func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
 	if v, ok := cached.Load(cfg.thumbURL); ok {
 		thumbBytes = v.([]byte)
 	} else {
-		buf, err := cfg.getFileReaderFromStorer(cfg.thumbURL)
+		buf, err := cfg.getFileReaderFromStorer(ctx, cfg.thumbURL)
 		if err != nil {
 			if !cfg.storer.ErrIsNotExist(err) {
 				return nil, fmt.Errorf(`%s: %w`, cfg.thumbURL, err)
@@ -118,7 +119,7 @@ func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
 	if len(thumbBytes) > 0 {
 		if len(cfg.suffix) > 0 {
 			if convert, ok := convert.GetConverter(cfg.suffix); ok {
-				return cfg.convertOtherFormatThumb(convert, thumbBytes)
+				return cfg.convertOtherFormatThumb(ctx, convert, thumbBytes)
 			}
 		}
 		mapping.Store(cfg.mappingKey, cfg.thumbURL)
@@ -132,7 +133,7 @@ func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
 	if v, ok := cached.Load(cfg.image); ok {
 		imageBytes = v.([]byte)
 	} else {
-		buf, err := cfg.getFileReaderFromStorer(cfg.image)
+		buf, err := cfg.getFileReaderFromStorer(ctx, cfg.image)
 		if err != nil {
 			if !cfg.storer.ErrIsNotExist(err) {
 				return nil, fmt.Errorf(`%s: %w`, cfg.image, err)
@@ -145,7 +146,7 @@ func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
 	if len(imageBytes) > 0 {
 		if len(cfg.suffix) > 0 {
 			if convert, ok := convert.GetConverter(cfg.suffix); ok {
-				return cfg.convertOtherFormatThumb(convert, imageBytes)
+				return cfg.convertOtherFormatThumb(ctx, convert, imageBytes)
 			}
 		}
 	}
@@ -200,7 +201,7 @@ func GetFileReader(ctx echo.Context, cfg *config) (io.Reader, error) {
 					return nil, err
 				}
 			}
-			return cfg.convertOtherFormatThumb(convert, thumbBytes)
+			return cfg.convertOtherFormatThumb(ctx, convert, thumbBytes)
 		}
 	}
 	mapping.Store(cfg.mappingKey, cfg.thumbURL)
