@@ -6,7 +6,7 @@
           <i class="fa fa-list"></i>
           {{"历史记录"|$.T}}
         </a>
-      <h6 class="card-title">{{"付款账户"|$.RawT|UpperCaseFirst|$.ExtT}}</h6>
+      <h6 class="card-title">{{"转账信息"|$.RawT|UpperCaseFirst|$.ExtT}}</h6>
     </div><!-- card-header -->
     <div class="card-body">
 
@@ -69,7 +69,7 @@
 {{- $returnURL := $.Form `next` | Default (printf `%s%s` FrontendURL `/user/wallet`) -}}
     <div class="card-footer">
       <div class="row form-group">
-          <div class="col-sm-8 offset-sm-2">
+          <div class="col-sm-8 offset-sm-3">
               <input type="hidden" name="next" value="{{$.Form `next`}}">
               <button type="submit" class="btn btn-primary">{{`提交`|$.RawT|UpperCaseFirst|$.ExtT}}</button>
               <a href="{{$returnURL}}" class="btn btn-default tx-inverse">{{`返回`|$.RawT|UpperCaseFirst|$.ExtT}}</a>
