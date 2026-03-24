@@ -74,10 +74,18 @@
             <td>{{if gt $v.PayTime 0}}{{(Date $v.PayTime).Format `2006-01-02 15:04`}}{{else}}-{{end}}</td>
             <td>{{$v.PayAccount}}</td>
             <td>
-							{{if $v.PayBankBranch}}{{`银行支行`|$.T}}: {{$v.PayBankBranch}}<br />{{end}}
-							{{if $v.PayTransactionNo}}{{`交易订单号`|$.T}}: {{$v.PayTransactionNo}}{{end}}
+              {{- if $v.Postscript -}}
+              <a href="javascript:;" class="tx-warning pull-right" onclick="$(this).siblings('.alert').toggleClass('hidden')" title="{{`有附言`|$.T}}" data-toggle="tooltip"><i class="fa fa-comment-o"></i></a>
+              {{- end -}}
+							{{if $v.PayBankBranch}}<div>{{`银行支行`|$.T}}: {{$v.PayBankBranch}}</div>{{end}}
+							{{if $v.PayTransactionNo}}<div>{{`交易订单号`|$.T}}: {{$v.PayTransactionNo}}</div>{{end}}
+              {{- if $v.Postscript -}}
+              <div class="alert alert-warning hidden mg-0 pd-y-5 pd-x-10">{{$v.Postscript|Nl2br}}</div>
+              {{- end -}}
             </td>
-            <td>{{$v.PayOwner|Default `-`}}</td>
+            <td>
+              {{$v.PayOwner|Default `-`}}
+            </td>
             <td>
               {{- if eq $v.Status "pending"}}
                 <span class="tx-size-11 d-block"><span class="square-8 bg-warning mg-r-5 rounded-circle"></span> {{"待核实"|$.T}}</span>

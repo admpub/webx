@@ -37,6 +37,7 @@
     <label class="col-sm-3 col-form-label">{{`付款时间`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
     <div class="col-sm-8">
         <input type="datetime-local" class="form-control" name="offlinePayTime" id="offlinePayTime" value="{{$.Form `offlinePayTime`}}" required>
+        <div class="help-block">{{`输入大概的付款时间，以便于定位转账记录`|$.T}}</div>
     </div>
 </div>
 <div class="row form-group method-type-bank">
@@ -54,7 +55,13 @@
 <div class="row form-group">
     <label class="col-sm-3 col-form-label">{{`开户人姓名`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
     <div class="col-sm-8">
-        <input type="text" class="form-control" name="offlinePayOwner" id="offlinePayOwner" value="{{$.Form `offlinePayOwner`}}">
+        <input type="text" class="form-control" name="offlinePayOwner" id="offlinePayOwner" value="{{$.Form `offlinePayOwner`}}" required>
+    </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-3 col-form-label">{{`附言`|$.RawT|UpperCaseFirst|$.ExtT}}</label>
+    <div class="col-sm-8">
+        <textarea class="form-control resize-y" name="postscript" id="postscript" maxlength="1000">{{$.Form `postscript`}}</textarea>
     </div>
 </div>
 

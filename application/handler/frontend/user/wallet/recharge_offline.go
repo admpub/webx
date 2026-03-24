@@ -17,13 +17,14 @@ import (
 )
 
 type RequestRechargeOffline struct {
-	OfflinePayMethod        string  `validate:"required"`
-	OfflinePayAccount       string  `validate:"required"`
+	OfflinePayMethod        string  `validate:"required,max=30"`
+	OfflinePayAccount       string  `validate:"required,max=40"`
 	OfflinePayAmount        float64 `validate:"required,min=0.01"`
-	OfflinePayBankBranch    string  // 银行支行（线下银行转账时有效）
-	OfflinePayTransactionNo string  // 交易订单号（线上转账时有效）
-	OfflinePayTime          string  `validate:"required"` // 付款时间（可选）
-	OfflinePayOwner         string  `validate:"required"`
+	OfflinePayBankBranch    string  `validate:"omitempty,max=100"` // 银行支行（线下银行转账时有效）
+	OfflinePayTransactionNo string  `validate:"omitempty,max=40"`  // 交易订单号（线上转账时有效）
+	OfflinePayTime          string  `validate:"required,max=35"`   // 付款时间（可选）
+	OfflinePayOwner         string  `validate:"required,max=100"`
+	Postscript              string  `validate:"omitempty,max=1000"` // 附言
 }
 
 func (r RequestRechargeOffline) Apply(m *dbschema.OfficialCustomerOfflinePay) error {
@@ -33,6 +34,7 @@ func (r RequestRechargeOffline) Apply(m *dbschema.OfficialCustomerOfflinePay) er
 	m.PayBankBranch = r.OfflinePayBankBranch
 	m.PayOwner = r.OfflinePayOwner
 	m.PayTransactionNo = r.OfflinePayTransactionNo
+	m.Postscript = r.Postscript
 	payTime, err := r.PayTime()
 	if err != nil {
 		return err

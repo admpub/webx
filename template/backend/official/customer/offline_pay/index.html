@@ -53,7 +53,8 @@
 							<th style="width:80px"><strong>{{"客户"|$.T}}</strong></th>
 							<th style="width:80px"><strong>{{"目标类型"|$.T}}</strong></th>
 							<th data-priority="1"><strong>{{"付款信息"|$.T}}</strong></th>
-							<th data-priority="1"><strong>{{"金额"|$.T}}</strong></th>
+							<th data-priority="1" style="width:80px"><strong>{{"金额"|$.T}}</strong></th>
+							<th data-priority="1" style="min-width:100px"><strong>{{"附言"|$.T}}</strong></th>
 							<th data-priority="1" style="width:70px;"><strong>{{"处理状态"|$.T}}</strong></th>
 							<th data-priority="6" style="width:120px;"><strong>{{"时间"|$.T}}</strong></th>
 							<th style="width:100px;" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
@@ -82,6 +83,7 @@
 								{{`户主名`|$.T}}: {{$v.PayOwner|Default `-`}}
 							</td>
 							<td>{{$v.PayAmount}}</td>
+							<td>{{- if $v.Postscript }}<pre class="no-margin">{{$v.Postscript}}</pre>{{ else }}-{{ end -}}</td>
 							{{- if eq $v.Status `verified` }}
 							<td><span>{{call $.Func.statusName $v.Status}}</span></td>
 							{{- else -}}
