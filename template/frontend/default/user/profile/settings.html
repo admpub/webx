@@ -18,7 +18,7 @@
               <div class="col-sm-10">
                   <div class="avatar-upload">
                     {{- $avatar := $customer.Avatar -}}
-                    <img src="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="profile-avatar img-thumbnail" onerror="this.src='{{AssetsURL}}/images/user_128.png';" />
+                    <img src="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{else}}{{AssetsURL}}/images/user_128.png{{end}}" class="profile-avatar img-thumbnail" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/user_128.png';" />
                     <input id="fileupload" type="file" name="files[]" data-prefix="avatar" accept="image/*">
                     <input type="hidden" id="avatar-image" name="avatar-small" value="{{if $avatar}}{{AddSuffix $avatar `_200_200`}}{{end}}" />
                     <input type="hidden" id="avatar-image-original" name="avatar" value="{{$avatar}}" />
