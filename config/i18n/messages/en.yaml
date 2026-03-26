@@ -29,7 +29,7 @@
 0代表关闭投稿功能 : "0 representatives turn off the contribution function"
 0代表关闭私信功能 : "0 means turning off private message function"
 0代表关闭评论功能 : "0 means turn off the comment function"
-'2006年1月2日' : 'January 2, 2006'
+2006年1月2日 : "January 2, 2006"
 "<无>" : "<None>"
 API密钥 : "API Key"
 "API账号“%s”已经停用" : 'API account "%s" has been deactivated'
@@ -169,6 +169,7 @@ unionId不正确 : "unionId is incorrect"
 webhook时有效 : "Valid when webhook"
 "“%s”尚未配置等级，暂时无法购买" : '"%s" has not been configured with level and cannot be purchased temporarily'
 "【你有新消息】" : "[You have new news]"
+"【系统】" : "[System]"
 "一般以关键字“begin”开始，“end”结束" : "Start with the keyword “begin” and “end”"
 "一行一个。支持用“-”来指定范围或使用子网掩码，例如：" : 'One in a row. Support using "-" to specify a range or use a subnet mask, for example:'
 上一步 : "Previous"
