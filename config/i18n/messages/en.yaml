@@ -2017,7 +2017,10 @@ webhook时有效 : "Valid when webhook"
 "确定要删除此规则吗？" : "Are you sure you want to delete this rule?"
 "确定要删除用户“%v@%v”吗？" : "Are you sure you want to delete user “%v@%v”?"
 "确定要删除选中的这些消息码？" : "Are you sure you want to delete these selected message codes?"
-"确定要强制退出全部任务吗？n本操作将会彻底退出任务处理功能。nn可以通过点击“继续历史任务”按钮，重新开启" : 'Are you sure you want to force exit all tasks? n This operation will completely exit the task processing function. nn can be restarted by clicking the "Continue Historical Task" button'
+"确定要强制退出全部任务吗？\n本操作将会彻底退出任务处理功能。\n\n可以通过点击“继续历史任务”按钮，重新开启" : '''Are you sure you want to force exit all tasks?
+This operation will completely exit the task processing function.
+
+You can restart it by clicking the "Continue Historical Task" button'''
 "确定要清空所有的数据吗？" : "Are you sure you want to empty all the data?"
 "确定要清空数据“%v”中的数据吗？" : "Are you sure you want to empty the data in data'v'?"
 "确定要解除绑定%s?" : "Are you sure you want to unbind %s?"
