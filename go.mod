@@ -12,8 +12,8 @@ go 1.26
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20260326034638-de55d53e5db7
-	github.com/coscms/webcore v0.13.3-0.20260326035217-5d30dd9823f6
+	github.com/admpub/nging/v5 v5.3.4-0.20260326044054-dfdc860abc83
+	github.com/coscms/webcore v0.13.3-0.20260326043804-efcc5ecf8f03
 	github.com/coscms/webfront v0.0.0-20260325084153-00b5d1304220
 )
 
@@ -53,7 +53,7 @@ require (
 	github.com/stretchr/testify v1.11.1
 	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.7
-	github.com/webx-top/com v1.4.1
+	github.com/webx-top/com v1.4.2
 	github.com/webx-top/db v1.30.8
 	github.com/webx-top/echo v1.23.6
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
@@ -112,7 +112,7 @@ require (
 	github.com/admpub/gotwilio v0.0.1 // indirect
 	github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
-	github.com/admpub/i18n v0.5.4 // indirect
+	github.com/admpub/i18n v0.5.5 // indirect
 	github.com/admpub/identicon v1.0.2 // indirect
 	github.com/admpub/imaging v1.6.3 // indirect
 	github.com/admpub/ini v1.38.2 // indirect
