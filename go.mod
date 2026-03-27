@@ -14,7 +14,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260326111514-98b783d5fc95
 	github.com/coscms/webcore v0.13.3-0.20260326105731-86323c42d470
-	github.com/coscms/webfront v0.0.0-20260326122832-4febc536bb21
+	github.com/coscms/webfront v0.0.0-20260327052121-8bb837296ab1
 )
 
 require (
@@ -177,6 +177,7 @@ require (
 	github.com/coscms/session-redisstore v0.0.0-20260127080202-3c5732ae77b4 // indirect
 	github.com/coscms/session-sqlitestore v0.0.4 // indirect
 	github.com/coscms/session-sqlstore v0.0.1 // indirect
+	github.com/coscms/tree v0.1.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/davidbyttow/govips/v2 v2.17.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
