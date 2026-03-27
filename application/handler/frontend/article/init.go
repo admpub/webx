@@ -25,7 +25,7 @@ func init() {
 		g.Route(`POST`, `/article/comment_hate`, CommentHate).SetName(`article.comment.hate`)
 		g.Route(`POST`, `/article/pay/:id`, Pay).SetName(`article.pay`)
 		g.Route(`GET,POST`, `/article/redirect`, Redirect).SetName(`article.redirect`)
-		g.Route(`GET`, `/article/tags`, Tags).SetName(`article.tags`)
-		g.Route(`GET`, `/article`, Index).SetName(`article.index`)
+		g.Route(`GET`, `/article/tags`, Tags, hmw(`article.tags`)...).SetName(`article.tags`)
+		g.Route(`GET`, `/article`, Index, hmw(`article.index`)...).SetName(`article.index`)
 	})
 }
