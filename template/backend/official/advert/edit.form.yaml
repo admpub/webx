@@ -26,6 +26,7 @@ elements:
       attributes: 
         - - class
           - resize-y
+          - autosize
       choices: []
       elements: []
       format: ""
@@ -66,6 +67,7 @@ elements:
           - 500
         - - class
           - resize-y
+          - autosize
       choices: []
       elements: []
       format: ""

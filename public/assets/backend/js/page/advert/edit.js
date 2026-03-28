@@ -47,5 +47,6 @@ $(function(){
     }
     if(callback) setContainer(callback);
   }).trigger('change');
+  $('textarea.autosize').autosize();
 });
 })();
