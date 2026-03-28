@@ -71,7 +71,7 @@ func navigateEdiableType(ctx echo.Context, m *dbschema.OfficialCommonNavigate) b
 func NavigateAdd(ctx echo.Context) error {
 	var err error
 	m := official.NewNavigate(ctx)
-	t := ctx.Form(`type`, `default`)
+	switchType := ctx.Form(`type`)
 	parentID := ctx.Formx(`parentId`).Uint()
 	if parentID > 0 {
 		err = m.Get(nil, db.Cond{`id`: parentID})
@@ -87,8 +87,8 @@ func NavigateAdd(ctx echo.Context) error {
 			if err == nil {
 				m.Id = 0
 				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonNavigate, uint64(id))
-				if len(t) > 0 {
-					m.Type = t
+				if len(switchType) > 0 {
+					m.Type = switchType
 				}
 			} else {
 				m.Sort = 5000
@@ -101,7 +101,10 @@ func NavigateAdd(ctx echo.Context) error {
 		}
 	}
 	if len(m.Type) == 0 {
-		m.Type = t
+		m.Type = switchType
+		if len(m.Type) == 0 {
+			m.Type = `default`
+		}
 	}
 	form := formbuilder.New(ctx,
 		m.OfficialCommonNavigate,
