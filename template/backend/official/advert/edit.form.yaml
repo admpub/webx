@@ -25,8 +25,7 @@ elements:
       valid: ""
       attributes: 
         - - class
-          - resize-y
-          - autosize
+          - "resize-y autosize"
       choices: []
       elements: []
       format: ""
@@ -66,8 +65,7 @@ elements:
         - - maxlength
           - 500
         - - class
-          - resize-y
-          - autosize
+          - "resize-y autosize"
       choices: []
       elements: []
       format: ""
