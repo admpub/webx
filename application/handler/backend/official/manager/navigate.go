@@ -87,6 +87,9 @@ func NavigateAdd(ctx echo.Context) error {
 			if err == nil {
 				m.Id = 0
 				i18nm.SetModelTranslationsToForm(ctx, m.OfficialCommonNavigate, uint64(id))
+				if len(t) > 0 {
+					m.Type = t
+				}
 			} else {
 				m.Sort = 5000
 			}
