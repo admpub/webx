@@ -23,10 +23,13 @@
                 <div class="col-sm-8">
                   {{- $type := $data.Type -}}
                   {{- $id := $.Form "id" -}}
+                  {{- $copyId := $.Form "copyId" -}}
                   {{- if $.Stored.editableType -}}
                   {{- range $k, $v := $.Stored.typeList -}}
                   <div class="radio radio-primary radio-inline">
-                    <input type="radio" value="{{$v.K}}" id="type-{{$v.K}}" name="type"{{if eq $v.K $type}} checked="checked"{{end}} onclick="window.location.href='?type={{$v.K}}&id={{$id}}'"><label for="type-{{$v.K}}">{{$v.V}}</label> 
+                    <input type="radio" value="{{$v.K}}" id="type-{{$v.K}}" name="type"
+                    {{- if eq $v.K $type }} checked="checked"{{ end }} onclick="window.location.href='?type={{$v.K}}&id={{$id}}{{if $copyId}}&copyId={{$copyId}}{{end}}'">
+                    <label for="type-{{$v.K}}">{{$v.V}}</label>
                   </div>
                   {{- end -}}
                   {{- else -}}
