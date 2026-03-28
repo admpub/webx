@@ -23,7 +23,9 @@ elements:
       helptext: ""
       template: ""
       valid: ""
-      attributes: []
+      attributes: 
+        - - class
+          - resize-y
       choices: []
       elements: []
       format: ""

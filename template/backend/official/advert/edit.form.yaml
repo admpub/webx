@@ -24,8 +24,6 @@ elements:
       template: ""
       valid: ""
       attributes: 
-        - - maxlength
-          - 500
         - - class
           - resize-y
       choices: []
