@@ -207,6 +207,7 @@ func SignIn(c echo.Context) error {
 				return c.JSON(data)
 			}
 		} else {
+			data.SetData(nil)
 			maxAge := httpserverutils.RememberSession(c)
 			err = m.SignIn(name, pass, typi, modelCustomer.GenerateOptionsFromHeader(c, maxAge)...)
 			if err != nil {
