@@ -804,12 +804,13 @@
             $('label[for=' + id + ']').addClass('required');
 						return;
           }
-					var parent = $(this).parent('.input-group');
+          var $this = $(this);
+					parent = $this.parent('.input-group');
 					if(parent.length>0){
 						parent.addClass('required');
-						return;
+            $this = parent;
 					}
-					parent = $(this).parent('div[class*="col-"]');
+					parent = $this.parent('div[class*="col-"]');
 					if (parent.length>0) {
             if(parent.prev('.control-label').length>0){
               parent.prev('.control-label').addClass('required');
@@ -820,7 +821,7 @@
               return;
             }
 					}
-          var row = $(this).closest('.form-group');
+          var row = $this.closest('.form-group');
           if (row.length<1) return;
           var lbl = row.children('.control-label:not(.required),.col-form-label:not(.required)');
           if (lbl.length<1) return;
