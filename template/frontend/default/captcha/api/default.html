@@ -5,12 +5,11 @@
 {{- $.Set `turnstileCSSLoaded` `1` -}}
 <style type="text/css">
 .turnstile-captcha-container{position:relative;width:100%}
-.captcha-loading,
+.turnstile-captcha-container .captcha-loading,
 .turnstile-captcha-container .cf-turnstile{text-align:center;}
 .turnstile-captcha-container .turnstile-captcha{position:relative;z-index:2;margin-top:-38px;min-height:25px}
 .text-left>.turnstile-captcha-container{width:auto}
 .text-left>.turnstile-captcha-container .captcha-loading,
-.text-left>.form-control-plaintext .captcha-loading,
 .text-left>.turnstile-captcha-container .cf-turnstile{text-align:left !important}
 .text-middle>.turnstile-captcha-container .turnstile-captcha{margin-top:-50px}
 .text-middle3>.turnstile-captcha-container .turnstile-captcha{margin-top:-30px}
@@ -51,6 +50,13 @@ if(document.readyState=='complete'){
 }
 </script>
 {{- else -}}
+{{- if not ($.Get `recaptchaCSSLoaded`) -}}
+{{- $.Set `recaptchaCSSLoaded` `1` -}}
+<style type="text/css">
+.captcha-loading{text-align:center;}
+.text-left>.form-control-plaintext .captcha-loading{text-align:left !important}
+</style>
+{{- end -}}
 <div class="form-control-plaintext form-control-static">
 <div class="captcha-loading wd-100p" id="recaptcha-{{$.Data.captchaID}}-loading" data-success-tips="{{`验证加载成功`|$.T}}"><i class="fa fa-spinner fa-spin"></i> {{`验证加载中，请稍候...`}}</div>
 <input type="hidden" name="captchaId" value="{{$.Data.captchaID}}" />
