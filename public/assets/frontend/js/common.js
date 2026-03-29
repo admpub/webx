@@ -1324,12 +1324,13 @@ function backLastPage(index) {
 function setNavActive(){
     var act = $('#navbarMain .active');
     if(act.length<1)return;
+    var $navbar = $('#navbarMain');
     while(true){
         var className = act.attr('class');
         if(act.hasClass('dropdown-item')){
-            act = act.closest('.dropdown-menu').prev('a:not(.active)');
+            act = act.closest('.dropdown-menu', $navbar[0]).prev('a:not(.active)');
         }else{
-            act = act.closest('ul').prev('a:not(.active)');
+            act = act.closest('ul', $navbar[0]).prev('a:not(.active)');
         }
         if(act.length<1) return;
         if(act.hasClass('nav-link')) return act.addClass('active');

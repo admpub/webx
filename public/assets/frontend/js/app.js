@@ -798,6 +798,7 @@
 		},
     showRequriedInputStar:function () {
       $('form:not([required-redstar])').each(function(){
+        var form = this;
         $(this).find('[required]').each(function(){
           var id = $(this).attr('id');
           if($('label[for=' + id + ']').length > 0){
@@ -821,7 +822,7 @@
               return;
             }
 					}
-          var row = $this.closest('.form-group');
+          var row = $this.closest('.form-group', form);
           if (row.length<1) return;
           var lbl = row.children('.control-label:not(.required),.col-form-label:not(.required)');
           if (lbl.length<1) return;
