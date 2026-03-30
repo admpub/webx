@@ -29,9 +29,15 @@
 							<th data-priority="6" style="width:40px"><strong>{{"ID"|$.T}}</strong></th>
 							<th style="width:80px"><strong>{{"状态"|$.T}}</strong></th>
 							<th><strong>{{"名称"|$.T}}</strong></th>
-							<th data-priority="1"><strong>{{"简称"|$.T}}</strong></th>
-							<th data-priority="1"><strong>{{"缩写"|$.T}}</strong></th>
-							<th data-priority="5"><strong>{{"编码"|$.T}}</strong></th>
+							<th data-priority="1"><strong>{{"母语国名"|$.T}}</strong></th>
+							<th data-priority="2" style="width:40px"><strong>{{"Emoji"|$.T}}</strong></th>
+							<th data-priority="3" style="width:40px"><strong>{{"货币代码"|$.T}}</strong></th>
+							<th data-priority="3" style="width:40px"><strong>{{"货币符号"|$.T}}</strong></th>
+							<th data-priority="4" data-priority="1"><strong>{{"简称"|$.T}}</strong></th>
+							<th data-priority="1" style="width:60px"><strong>{{"国家代码"|$.T}}</strong></th>
+							<th data-priority="5" style="width:60px"><strong>{{"国际区号"|$.T}}</strong></th>
+							<th data-priority="5" style="width:60px"><strong>{{"经度"|$.T}}</strong></th>
+							<th data-priority="5" style="width:60px"><strong>{{"纬度"|$.T}}</strong></th>
 							<th data-priority="6" style="width:100px"><strong>{{"序号"|$.T}}</strong></th>
 							<th style="width:140px" class="text-center"><strong>{{"操作"|$.T}}</strong></th>
 						</tr>
@@ -50,9 +56,15 @@
 								</div>
 							</td>
 							<td>{{$v.Name}}</td>
+							<td>{{$v.Native}}</td>
+							<td>{{$v.Emoji}}</td>
+							<td>{{$v.Currency}}</td>
+							<td>{{$v.CurrencySymbol}}</td>
 							<td>{{$v.Short}}</td>
 							<td>{{$v.Abbr}}</td>
 							<td>{{$v.Code}}</td>
+							<td>{{$v.Lng}}</td>
+							<td>{{$v.Lat}}</td>
 							<td>{{$v.Sort}}</td>
 							<td class="text-center label-group">
 							<a class="label label-primary" href="{{BackendURL}}/tool/area/index?countryAbbr={{$v.Abbr}}" title="{{`地区列表`|$.T}}" data-toggle="tooltip"><i class="fa fa-list"></i></a>

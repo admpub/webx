@@ -1,6 +1,7 @@
 package tool
 
 import (
+	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
@@ -21,6 +22,12 @@ func AreaIndex(ctx echo.Context) error {
 	pid := ctx.Formx(`pid`).Uint()
 	cond.AddKV(`pid`, pid)
 	countryAbbr := ctx.Form(`countryAbbr`)
+	if len(countryAbbr) == 0 {
+		query := ctx.Form(`q`)
+		if len(query) == 2 && com.StrIsAlpha(query) {
+			countryAbbr = query
+		}
+	}
 	if len(countryAbbr) > 0 {
 		cond.Add(db.Cond{`country_abbr`: countryAbbr})
 	}
@@ -75,7 +82,7 @@ func AreaAdd(ctx echo.Context) error {
 		m.OfficialCommonArea,
 		formbuilder.ConfigFile(`official/tool/area/edit`),
 		formbuilder.AllowedNames(
-			`countryAbbr`, `name`, `short`, `merged`, `pid`, `pinyin`, `code`, `zip`, `lng`, `lat`,
+			`countryAbbr`, `name`, `short`, `merged`, `pid`, `pinyin`, `code`, `zip`, `lng`, `lat`, `native`,
 		),
 	)
 	form.OnPost(func() error {
@@ -125,7 +132,7 @@ func AreaEdit(ctx echo.Context) error {
 		m.OfficialCommonArea,
 		formbuilder.ConfigFile(`official/tool/area/edit`),
 		formbuilder.AllowedNames(
-			`countryAbbr`, `name`, `short`, `merged`, `pid`, `pinyin`, `code`, `zip`, `lng`, `lat`,
+			`countryAbbr`, `name`, `short`, `merged`, `pid`, `pinyin`, `code`, `zip`, `lng`, `lat`, `native`,
 		),
 	)
 	form.OnPost(func() error {

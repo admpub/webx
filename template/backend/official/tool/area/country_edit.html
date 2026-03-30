@@ -19,13 +19,39 @@
                     <input type="hidden" name="id" value="{{$data.Id}}">
                     {{- $.Stored.forms.Render -}}
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">{{`国家缩写`|$.T}}</label>
+                        <label class="col-sm-2 control-label">{{`国家代码`|$.T}}</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="abbr" value="{{$data.Abbr}}" maxlength="2" placeholder="{{`例如: CN`|$.T}}" />
+                            <input type="text" class="form-control" name="abbr" value="{{$data.Abbr}}" maxlength="2" placeholder="{{`例如: `|$.T}}CN" />
+                            <div class="help-block">{{`ISO 3166-1 两位字母代码。`|$.T}}{{`例如: `|$.T}}CN</div>
                         </div>
-                        <label class="col-sm-2 control-label">{{`国家编码`|$.T}}</label>
+                        <label class="col-sm-2 control-label">{{`国际区号`|$.T}}</label>
                         <div class="col-sm-3">
-                            <input type="number" class="form-control" name="code" value="{{$data.Code}}" placeholder="{{`例如: 86`|$.T}}" />
+                            <input type="number" class="form-control" name="code" value="{{$data.Code}}" placeholder="{{`例如: `|$.T}}86" />
+                            <div class="help-block">{{`例如: `|$.T}}86</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{`母语国名`|$.T}}</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="native" value="{{$data.Native}}" placeholder="" />
+                            <div class="help-block">{{`当地语言国家名`|$.T}}</div>
+                        </div>
+                        <label class="col-sm-2 control-label">{{`Emoji`|$.T}}</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="emoji" value="{{$data.Emoji}}" placeholder="{{`例如: `|$.T}}🇨🇳" />
+                            <div class="help-block">{{`国旗Emoji。`|$.T}}{{`例如: `|$.T}}🇨🇳</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{`货币代码`|$.T}}</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="currency" value="{{$data.Currency}}" maxlength="3" placeholder="{{`例如: `|$.T}}CNY" />
+                            <div class="help-block">{{`ISO 4217 货币代码。`|$.T}}{{`例如: `|$.T}}CNY</div>
+                        </div>
+                        <label class="col-sm-2 control-label">{{`货币符号`|$.T}}</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="currencySymbol" value="{{$data.CurrencySymbol}}" placeholder="{{`例如: `|$.T}}¥" />
+                            <div class="help-block">{{`例如: `|$.T}}¥</div>
                         </div>
                     </div>
                     <div class="form-group">

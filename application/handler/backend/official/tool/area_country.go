@@ -59,6 +59,7 @@ func AreaCountryAdd(ctx echo.Context) error {
 		formbuilder.ConfigFile(`official/tool/area/country_edit`),
 		formbuilder.AllowedNames(
 			`short`, `name`, `abbr`, `code`, `lng`, `lat`, `disabled`, `sort`,
+			`currency_symbol`, `currency`, `emoji`, `native`,
 		),
 	)
 	form.OnPost(func() error {
@@ -122,6 +123,7 @@ func AreaCountryEdit(ctx echo.Context) error {
 		formbuilder.ConfigFile(`official/tool/area/country_edit`),
 		formbuilder.AllowedNames(
 			`short`, `name`, `abbr`, `code`, `disabled`, `lng`, `lat`, `sort`,
+			`currency_symbol`, `currency`, `emoji`, `native`,
 		),
 	)
 	form.OnPost(func() error {
