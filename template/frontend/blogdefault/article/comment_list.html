@@ -1,5 +1,4 @@
- <!-- Comments -->
- <div id="comment-list-container" data-replace-state="1">
+ {{Strip}}
     {{- $commentList := call $.Func.commentList -}}
     {{- range $k, $v := $commentList -}}
     <div class="comment-card">
@@ -55,4 +54,4 @@
     {{- ($.Stored.pagination.SetNum 1).Render `#blogdefault#pagination` -}}
     {{- end -}}
 {{- end -}}
-</div><!-- /#comment-list-container -->
+{{/Strip}}

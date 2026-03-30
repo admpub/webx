@@ -146,7 +146,11 @@
                             {{- if and (eq $data.CloseComment "N") (ne Config.base.comment "close") -}}
                             <div class="post-comments">
                                <h3 class="heading-secondary">{{`评论`|$.T}} (<span class="comment-count-num">{{$data.Comments}}</span>)</h3>
+                                <div id="comment-list-container" data-replace-state="1" data-url="
+                                {{- URLByName `article.detailWithOp` (MakeMap `id` $data.Id `op` `comments`) -}}
+                                {{- if $.Stored.flat }}?flat=true{{ end }}">
                                 {{Include "article/comment_list"}}
+                                </div><!-- /#comment-list-container -->
                                 {{Include "article/comment_form"}}
                             </div>
                             {{Include "article/comment_form_modal"}}

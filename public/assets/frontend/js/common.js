@@ -751,8 +751,9 @@ function bindCommentList(box,isReplyList,offsetY) {
     });
     box.find('.pagination a[data-pjax="true"]').on('click',function(e){
         e.preventDefault();
-        if(replaceState) App.replaceState(null,'',$(this).attr('href'));
-        loadCommentList(box,$(this).attr('href'),null,isReplyList,offsetY);
+        var href=$(this).attr('href');
+        if(replaceState && href) App.replaceState(null,'',href.replace(/_pjax=[^&]+[&]?/,''));
+        loadCommentList(box,href,null,isReplyList,offsetY);
         $('html, body').animate({scrollTop: isNaN(offsetY)?box.offset().top:box.offset().top-offsetY}, 0);
     });
 }

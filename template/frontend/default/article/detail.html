@@ -153,8 +153,11 @@
             <a href="javascript:;" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-comment-form">{{"添加评论"|$.T}}</a>
             <h4 class="tx-inverse tx-bold tx-spacing-neg-2 mg-b-0">{{$.T "评论"}} (<span class="comment-count-num">{{$data.Comments}}</span>)</h4>
           </div><!-- card-header -->
-          <!-- <div id="comment-list-container" data-url="{{URLByName `article.comment.list`}}?id={{$data.Id}}&flat=true"></div> -->
-          <div id="comment-list-container" data-replace-state="1">{{Include "#default#article/comment_list"}}</div>
+          <div id="comment-list-container" data-replace-state="1" data-url="
+          {{- URLByName `article.detailWithOp` (MakeMap `id` $data.Id `op` `comments`) -}}
+          {{- if $.Stored.flat }}?flat=true{{ end }}">
+            {{Include "#default#article/comment_list"}}
+          </div>
         </div><!-- card -->
         {{Include "#default#article/comment_form_modal"}}
         {{- $.Set "comment_form.container_class" `pd-x-10` -}}
