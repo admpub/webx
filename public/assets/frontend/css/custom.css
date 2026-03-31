@@ -767,7 +767,11 @@ nav.friend-links a.nav-link>.img-label>.title {
 .step-label {
   color: gray
 }
-
+.steps>.swiper-slide{
+  width: auto;
+  min-width: 20%;
+  float: left;
+}
 .steps>.active .step-circle {
   background-color: #1695f5
 }
