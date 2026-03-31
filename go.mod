@@ -1,6 +1,6 @@
 module github.com/admpub/webx
 
-go 1.26
+go 1.26.1
 
 // replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
@@ -12,8 +12,8 @@ go 1.26
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20260329050218-8dbf1201f7e1
-	github.com/coscms/webcore v0.13.3-0.20260330072920-a2ee0fa0453a
+	github.com/admpub/nging/v5 v5.3.4-0.20260331093223-85e55b37ac08
+	github.com/coscms/webcore v0.13.3-0.20260331091546-1756adbc06a1
 	github.com/coscms/webfront v0.0.0-20260330113503-29ab721ed52f
 )
 
@@ -52,7 +52,7 @@ require (
 	github.com/spf13/cobra v1.10.2 // indirect
 	github.com/stretchr/testify v1.11.1
 	github.com/swaggo/swag v1.16.6
-	github.com/webx-top/client v0.9.7
+	github.com/webx-top/client v0.9.10
 	github.com/webx-top/com v1.5.0
 	github.com/webx-top/db v1.30.8
 	github.com/webx-top/echo v1.23.8
@@ -171,7 +171,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/coscms/captcha v0.2.3 // indirect
-	github.com/coscms/go-imgparse v0.0.1 // indirect
+	github.com/coscms/go-imgparse v0.0.3 // indirect
 	github.com/coscms/session-boltstore v0.0.0-20260203210304-79c433bb1621 // indirect
 	github.com/coscms/session-mysqlstore v0.0.0-20260127080438-1856d3685966 // indirect
 	github.com/coscms/session-redisstore v0.0.0-20260127080202-3c5732ae77b4 // indirect
