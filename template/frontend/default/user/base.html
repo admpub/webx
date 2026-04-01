@@ -2,8 +2,9 @@
 {{Block "title"}}{{"用户中心"|$.RawT|UpperCaseFirst|$.ExtT}} - {{Super}}{{/Block}}
 {{Block "head"}}{{/Block}}
 {{Block "headEnd"}}
+<link rel="stylesheet" href="{{AssetsURL}}/js/responsive-table/css/rwd-table.min.css?t={{BuildTime}}" />
 {{- if $.ThemeInfo.IsColorName `dark` -}}
-<link href="{{AssetsXURL}}/css/usercenter-dark.min.css?t={{BuildTime}}" rel="stylesheet" />
+<link rel="stylesheet" href="{{AssetsXURL}}/css/usercenter-dark.min.css?t={{BuildTime}}" />
 {{- end -}}
 {{/Block}}
 {{Block "bodyAttr"}}class="dashboard-1 bg-gray-lightest tx-size-14"{{/Block}}
@@ -13,5 +14,6 @@
 {{Include "#default#user/profile/partial_left"}}
 {{/Block}}
 {{Block "footer"}}
+<script src="{{AssetsURL}}/js/responsive-table/js/rwd-table.min.js?t={{BuildTime}}"></script>
 <script src="{{AssetsXURL}}/js/page/user.min.js?t={{BuildTime}}"></script>
 {{/Block}}
