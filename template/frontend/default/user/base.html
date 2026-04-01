@@ -15,5 +15,8 @@
 {{/Block}}
 {{Block "footer"}}
 <script src="{{AssetsURL}}/js/responsive-table/js/rwd-table.min.js?t={{BuildTime}}"></script>
+<script>
+$.fn.responsiveTable.Constructor.DEFAULTS.i18n={focus:App.t('Focus'),display:App.t('Display'),displayAll:App.t('Display all')};
+</script>
 <script src="{{AssetsXURL}}/js/page/user.min.js?t={{BuildTime}}"></script>
 {{/Block}}
