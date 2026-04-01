@@ -393,7 +393,14 @@
 @media (max-width: 580px) {
   .form-horizontal .control-label,
   .form-label-right .col-form-label {
-    text-align: left
+    text-align: left;
+    padding-bottom: 0;
+  }
+  .form-label-right .col-form-label + * .form-control-plaintext,
+  .form-label-right .col-form-label + * .form-control-static,
+  .form-horizontal .control-label + * .form-control-plaintext,
+  .form-horizontal .control-label + * .form-control-static{
+    padding-top: 0;
   }
 }
 
@@ -411,7 +418,15 @@
   .form-label-right .col-md-10.col-form-label,
   .form-label-right .col-md-11.col-form-label,
   .form-label-right .col-md-12.col-form-label {
-    text-align: left
+    text-align: left;
+    padding-bottom: 0;
+  }
+
+  .form-label-right .col-form-label + * .form-control-plaintext,
+  .form-label-right .col-form-label + * .form-control-static,
+  .form-horizontal .control-label + * .form-control-plaintext,
+  .form-horizontal .control-label + * .form-control-static{
+    padding-top: 0;
   }
 }
 
