@@ -19,6 +19,10 @@ func AreaCountryIndex(ctx echo.Context) error {
 	m := official.NewAreaCountry(ctx)
 	cond := db.NewCompounds()
 	nsql.SelectPageCond(ctx, cond, `id`, `name%,abbr%`)
+	disabled := ctx.Form(`disabled`)
+	if len(disabled) > 0 {
+		cond.AddKV(`disabled`, disabled)
+	}
 	err := m.ListPage(cond, `sort`, `id`)
 	if err != nil {
 		return err
