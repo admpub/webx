@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260331093223-85e55b37ac08
-	github.com/coscms/webcore v0.13.3-0.20260402081622-e1b67afd0682
+	github.com/coscms/webcore v0.13.3-0.20260404010128-ee81492bb9b2
 	github.com/coscms/webfront v0.0.0-20260330113503-29ab721ed52f
 )
 
@@ -141,13 +141,13 @@ require (
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/admpub/xencoding v0.0.3 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.107 // indirect
-	github.com/andybalholm/brotli v1.2.0 // indirect
+	github.com/andybalholm/brotli v1.2.1 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.41.5 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.8 // indirect
-	github.com/aws/aws-sdk-go-v2/config v1.32.13 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.13 // indirect
+	github.com/aws/aws-sdk-go-v2/config v1.32.14 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.14 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.21 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager v0.1.11 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager v0.1.14 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.21 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.21 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.6 // indirect
@@ -156,12 +156,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.13 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.21 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.21 // indirect
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.97.3 // indirect
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.98.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/signin v1.0.9 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.30.14 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.18 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.30.15 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.19 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.10 // indirect
-	github.com/aws/smithy-go v1.24.2 // indirect
+	github.com/aws/smithy-go v1.24.3 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/boombuler/barcode v1.1.0 // indirect
@@ -207,7 +207,7 @@ require (
 	github.com/go-openapi/swag/yamlutils v0.25.5 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.30.1 // indirect
+	github.com/go-playground/validator/v10 v10.30.2 // indirect
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/go-sql-driver/mysql v1.9.3 // indirect
 	github.com/goccy/go-json v0.10.6 // indirect
@@ -231,7 +231,7 @@ require (
 	github.com/h2non/go-is-svg v0.0.0-20160927212452-35e8c4b0612c // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
-	github.com/hashicorp/go-version v1.8.0 // indirect
+	github.com/hashicorp/go-version v1.9.0 // indirect
 	github.com/hibiken/asynq v0.26.0 // indirect
 	github.com/hirochachacha/go-smb2 v1.1.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
@@ -245,20 +245,20 @@ require (
 	github.com/klauspost/crc32 v1.3.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/libdns/libdns v1.1.1 // indirect
-	github.com/lufia/plan9stats v0.0.0-20260324052639-156f7da3f749 // indirect
+	github.com/lufia/plan9stats v0.0.0-20260330125221-c963978e514e // indirect
 	github.com/markbates/going v1.0.3 // indirect
 	github.com/martinlindhe/base36 v1.1.1 // indirect
 	github.com/maruel/rs v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/mattn/go-runewidth v0.0.21 // indirect
-	github.com/mattn/go-sqlite3 v1.14.37 // indirect
+	github.com/mattn/go-runewidth v0.0.22 // indirect
+	github.com/mattn/go-sqlite3 v1.14.40 // indirect
 	github.com/mholt/acmez/v3 v3.1.6 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
 	github.com/miekg/dns v1.1.72 // indirect
 	github.com/minio/crc64nvme v1.1.1 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/minio-go/v7 v7.0.99 // indirect
+	github.com/minio/minio-go/v7 v7.0.100 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
@@ -286,7 +286,7 @@ require (
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/segmentio/fasthash v1.0.3 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
-	github.com/shirou/gopsutil/v4 v4.26.2 // indirect
+	github.com/shirou/gopsutil/v4 v4.26.3 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/spf13/cast v1.10.0 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
@@ -341,6 +341,6 @@ require (
 	modernc.org/libc v1.70.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.47.0 // indirect
+	modernc.org/sqlite v1.48.1 // indirect
 	rsc.io/qr v0.2.0 // indirect
 )
