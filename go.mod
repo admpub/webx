@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260331093223-85e55b37ac08
-	github.com/coscms/webcore v0.13.3-0.20260404014637-c7815b845eeb
-	github.com/coscms/webfront v0.0.0-20260404015501-2a905822f58f
+	github.com/coscms/webcore v0.13.3-0.20260407032935-6f8f2a85384d
+	github.com/coscms/webfront v0.0.0-20260407033442-b2d843def04c
 )
 
 require (
@@ -53,9 +53,9 @@ require (
 	github.com/stretchr/testify v1.11.1
 	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.10
-	github.com/webx-top/com v1.5.0
+	github.com/webx-top/com v1.5.1
 	github.com/webx-top/db v1.30.8
-	github.com/webx-top/echo v1.23.9
+	github.com/webx-top/echo v1.24.0
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.3
@@ -252,7 +252,7 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.22 // indirect
-	github.com/mattn/go-sqlite3 v1.14.40 // indirect
+	github.com/mattn/go-sqlite3 v1.14.41 // indirect
 	github.com/mholt/acmez/v3 v3.1.6 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
 	github.com/miekg/dns v1.1.72 // indirect
