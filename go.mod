@@ -12,8 +12,8 @@ go 1.26.1
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20260331093223-85e55b37ac08
-	github.com/coscms/webcore v0.13.3-0.20260407115009-2b78ef411029
+	github.com/admpub/nging/v5 v5.3.4-0.20260407125406-617411032f1a
+	github.com/coscms/webcore v0.13.3-0.20260407120228-c47254cc50d4
 	github.com/coscms/webfront v0.0.0-20260407033442-b2d843def04c
 )
 
@@ -184,7 +184,7 @@ require (
 	github.com/dsoprea/go-logging v0.0.0-20200710184922-b02d349568dd // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/ebitengine/purego v0.10.0 // indirect
-	github.com/fatih/color v1.18.0 // indirect
+	github.com/fatih/color v1.19.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/fcjr/aia-transport-go v1.3.0 // indirect
 	github.com/francoispqt/gojay v1.2.13 // indirect
