@@ -1,4 +1,15 @@
-$(function(){
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['jquery','app'], factory);
+  } else if (typeof exports === 'object') {
+    // Node/CommonJS style for Browserify
+    module.exports = factory;
+  } else {
+    // Browser globals
+    factory(jQuery,App);
+  }
+}(function ($,App) {
     $('#declare-like').on('click',function(){
         var id=$(this).data('article-id'),me=$(this);
         $.post(BASE_URL+'/article/like',{id:id},function(r){
@@ -69,4 +80,4 @@ $(function(){
             },2000);
         },'json');
     });
-});
+}));
