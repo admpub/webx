@@ -14,13 +14,13 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260408064342-da7b2ea6a386
 	github.com/coscms/webcore v0.13.3-0.20260407120228-c47254cc50d4
-	github.com/coscms/webfront v0.0.0-20260407033442-b2d843def04c
+	github.com/coscms/webfront v0.0.0-20260408135258-9e42d748347c
 )
 
 require (
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/admpub/bindata/v3 v3.2.1
-	github.com/admpub/cache v0.8.2
+	github.com/admpub/cache v0.9.0
 	github.com/admpub/color v1.8.1 // indirect
 	github.com/admpub/copier v0.1.1 // indirect
 	github.com/admpub/decimal v1.3.2 // indirect
@@ -39,7 +39,7 @@ require (
 	github.com/admpub/once v0.0.2 // indirect
 	github.com/admpub/pinyin-golang v1.0.1 // indirect
 	github.com/admpub/pp v0.0.7
-	github.com/admpub/redsync/v4 v4.0.3 // indirect
+	github.com/admpub/redsync/v4 v4.0.4 // indirect
 	github.com/admpub/resty/v2 v2.7.3 // indirect
 	github.com/admpub/sensitive v0.0.1 // indirect
 	github.com/admpub/useragent v0.0.2 // indirect
@@ -54,15 +54,14 @@ require (
 	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.10
 	github.com/webx-top/com v1.5.1
-	github.com/webx-top/db v1.30.8
-	github.com/webx-top/echo v1.24.1
+	github.com/webx-top/db v1.30.11
+	github.com/webx-top/echo v1.24.2
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
 	github.com/webx-top/pagination v0.3.3
 	github.com/webx-top/validation v0.0.3 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sync v0.20.0
-	gopkg.in/redis.v5 v5.2.9 // indirect
 )
 
 require (
@@ -250,8 +249,8 @@ require (
 	github.com/martinlindhe/base36 v1.1.1 // indirect
 	github.com/maruel/rs v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
-	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/mattn/go-runewidth v0.0.22 // indirect
+	github.com/mattn/go-isatty v0.0.21 // indirect
+	github.com/mattn/go-runewidth v0.0.23 // indirect
 	github.com/mattn/go-sqlite3 v1.14.41 // indirect
 	github.com/mholt/acmez/v3 v3.1.6 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
@@ -292,8 +291,8 @@ require (
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/studio-b12/gowebdav v0.12.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
-	github.com/tdewolff/minify/v2 v2.24.10 // indirect
-	github.com/tdewolff/parse/v2 v2.8.10 // indirect
+	github.com/tdewolff/minify/v2 v2.24.12 // indirect
+	github.com/tdewolff/parse/v2 v2.8.11 // indirect
 	github.com/tetratelabs/wazero v1.11.0 // indirect
 	github.com/tidwall/btree v1.8.1 // indirect
 	github.com/tidwall/buntdb v1.3.2 // indirect
@@ -330,7 +329,7 @@ require (
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
 	golang.org/x/mod v0.34.0 // indirect
 	golang.org/x/net v0.52.0 // indirect
-	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/sys v0.43.0 // indirect
 	golang.org/x/text v0.35.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
 	golang.org/x/tools v0.43.0 // indirect
