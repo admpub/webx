@@ -1,6 +1,6 @@
 //go:build __misc__
 
-package webx
+package main
 
 import (
 	_ "github.com/admpub/nging/v5/public"
