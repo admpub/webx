@@ -1,10 +1,6 @@
 package page
 
 import (
-	"os"
-
-	"github.com/coscms/webcore/library/httpserver"
-	"github.com/coscms/webcore/library/ntemplate"
 	"github.com/coscms/webcore/registry/route"
 	"github.com/webx-top/echo"
 )
@@ -37,16 +33,5 @@ func init() {
 		g.Route(`GET,POST`, `/template_edit`, TemplateEdit)
 		g.Route(`GET,POST`, `/template_enable`, TemplateEnable)
 		g.Route(`GET,POST`, `/template_config`, TemplateConfig)
-	})
-
-	httpserver.Frontend.Template.SetThemeInfoInitor(func(ctx echo.Context) (*ntemplate.ThemeInfo, error) {
-		theme := ctx.Internal().String(`theme`, httpserver.Frontend.Template.DefaultTheme)
-		info, err := getTemplateInfo(theme)
-		if err != nil {
-			if err == echo.ErrNotFound {
-				err = os.ErrNotExist
-			}
-		}
-		return info, err
 	})
 }

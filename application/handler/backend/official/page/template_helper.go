@@ -4,6 +4,7 @@ import (
 	"io"
 	"io/fs"
 	"net/http"
+	"os"
 	"path"
 	"path/filepath"
 	"strings"
@@ -25,6 +26,16 @@ func init() {
 	echo.OnCallback(EventNameFrontendTemplateEdited, func(e events.Event) error {
 		httpserver.Frontend.Template.ClearCache()
 		return echo.FireByName(`webx.renderer.cache.clear`)
+	})
+	httpserver.Frontend.Template.SetThemeInfoInitor(func(ctx echo.Context) (*ntemplate.ThemeInfo, error) {
+		theme := ctx.Internal().String(`theme`, httpserver.Frontend.Template.DefaultTheme)
+		info, err := getTemplateInfo(theme)
+		if err != nil {
+			if err == echo.ErrNotFound {
+				err = os.ErrNotExist
+			}
+		}
+		return info, err
 	})
 }
 
