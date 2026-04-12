@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260408064342-da7b2ea6a386
-	github.com/coscms/webcore v0.13.3-0.20260412072710-b22866ff6089
-	github.com/coscms/webfront v0.0.0-20260408135258-9e42d748347c
+	github.com/coscms/webcore v0.13.3-0.20260412080436-5ea42e53dc3d
+	github.com/coscms/webfront v0.0.0-20260412080557-cd5f89c3b968
 )
 
 require (
