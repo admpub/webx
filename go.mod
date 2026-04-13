@@ -14,7 +14,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.4-0.20260408064342-da7b2ea6a386
 	github.com/coscms/webcore v0.13.3-0.20260412114050-5a6498a17cb9
-	github.com/coscms/webfront v0.0.0-20260412114145-d410923b238e
+	github.com/coscms/webfront v0.0.0-20260413081244-21e2ee3adb29
 )
 
 require (
@@ -25,7 +25,7 @@ require (
 	github.com/admpub/copier v0.1.1 // indirect
 	github.com/admpub/decimal v1.3.2 // indirect
 	github.com/admpub/errors v0.8.2
-	github.com/admpub/fasttemplate v0.0.2 // indirect
+	github.com/admpub/fasttemplate v0.0.3 // indirect
 	github.com/admpub/go-download/v2 v2.2.0 // indirect
 	github.com/admpub/go-hashids v2.0.1+incompatible // indirect
 	github.com/admpub/go-shortid v0.0.0-20140827050853-24d054c393fe // indirect
@@ -99,6 +99,7 @@ require (
 	github.com/admpub/go-figure v0.1.0 // indirect
 	github.com/admpub/go-isatty v0.0.11 // indirect
 	github.com/admpub/go-lock v1.3.0 // indirect
+	github.com/admpub/go-ollama v0.0.0-20260413043901-9877e7baaacd // indirect
 	github.com/admpub/go-password v0.1.3 // indirect
 	github.com/admpub/go-pretty/v6 v6.0.4 // indirect
 	github.com/admpub/go-ps v0.0.1 // indirect
@@ -136,7 +137,7 @@ require (
 	github.com/admpub/sse v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
 	github.com/admpub/timeago v1.3.0 // indirect
-	github.com/admpub/translate v0.0.0-20251210091442-a87b3fc63eda // indirect
+	github.com/admpub/translate v0.0.0-20260413081133-08d837444849 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/admpub/xencoding v0.0.3 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.107 // indirect
