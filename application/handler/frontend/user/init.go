@@ -58,7 +58,7 @@ func init() {
 			return
 		}
 		if !config.FromFile().Extend.Bool(`disableAutoResetClientCount`) {
-			go xnotice.ResetClientCount()
+			xnotice.ResetClientCount()
 		}
 	})
 }

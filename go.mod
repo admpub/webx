@@ -12,8 +12,8 @@ go 1.26.1
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20260408064342-da7b2ea6a386
-	github.com/coscms/webcore v0.13.3-0.20260412114050-5a6498a17cb9
+	github.com/admpub/nging/v5 v5.3.4-0.20260413093107-a8b57ed78a1c
+	github.com/coscms/webcore v0.13.3-0.20260413092949-86f175e51e1a
 	github.com/coscms/webfront v0.0.0-20260413081244-21e2ee3adb29
 )
 
@@ -69,7 +69,7 @@ require (
 	github.com/admpub/events v1.3.6
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.3.0
-	github.com/nging-plugins/dbmanager v1.9.4
+	github.com/nging-plugins/dbmanager v1.9.5
 	github.com/silenceper/wechat/v2 v2.1.12
 )
 
@@ -147,7 +147,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.32.14 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.19.14 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.21 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager v0.1.14 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager v0.1.15 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.21 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.21 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.6 // indirect
@@ -156,7 +156,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.13 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.21 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.21 // indirect
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.98.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.99.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/signin v1.0.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.30.15 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.19 // indirect
@@ -252,7 +252,7 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.21 // indirect
 	github.com/mattn/go-runewidth v0.0.23 // indirect
-	github.com/mattn/go-sqlite3 v1.14.41 // indirect
+	github.com/mattn/go-sqlite3 v1.14.42 // indirect
 	github.com/mholt/acmez/v3 v3.1.6 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
 	github.com/miekg/dns v1.1.72 // indirect
