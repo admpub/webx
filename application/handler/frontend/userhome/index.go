@@ -19,12 +19,14 @@ func Index(ctx echo.Context) error {
 	operate := ctx.Param(`operate`)
 	cond := db.NewCompounds()
 	name := uidParam.String()
-	if strings.HasPrefix(name, `@`) { // @username
-		name = strings.TrimPrefix(name, `@`)
+	if after, found := strings.CutPrefix(name, `@`); found { // @username
+		name = after
 		if len(name) == 0 {
 			return ctx.NewError(code.InvalidParameter, `非法参数`)
 		}
 		cond.AddKV(`name`, name)
+	} else if name == `admin` {
+		cond.AddKV(`uid`, 1)
 	} else {
 		customerID := uidParam.Uint64()
 		if customerID < 1 {
