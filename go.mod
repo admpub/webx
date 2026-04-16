@@ -12,8 +12,8 @@ go 1.26.1
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.4-0.20260415122927-04b6feac5127
-	github.com/coscms/webcore v0.13.3-0.20260416053520-42870dc8463e
+	github.com/admpub/nging/v5 v5.3.4-0.20260416072354-6802b4d9ec91
+	github.com/coscms/webcore v0.13.3-0.20260416072210-74a1a7226657
 	github.com/coscms/webfront v0.0.0-20260416053807-fb5402de38b6
 )
 
@@ -261,7 +261,7 @@ require (
 	github.com/minio/minio-go/v7 v7.0.100 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
-	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/modern-go/reflect2 v1.0.3-0.20250322232337-35a7c28c31ee // indirect
 	github.com/muesli/smartcrop v0.3.0 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v1.0.0 // indirect
