@@ -32,6 +32,7 @@ func translationIndex(ctx echo.Context) error {
 	ctx.Set(`listData`, list)
 	ctx.Set(`langs`, config.FromFile().Language.AllList)
 	ctx.Set(`langDefault`, config.FromFile().Language.Default)
+	ctx.Set(`table`, table)
 	ctx.Set(`title`, ctx.T(`本地化翻译`))
 	ctx.SetFunc(`tableTitles`, func() []*echo.KVx[[]string, any] {
 		return i18nm.TableTitles.Slice()

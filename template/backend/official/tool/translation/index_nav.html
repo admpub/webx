@@ -8,7 +8,7 @@
                 <h2 class="page-title">{{`表`|$.T}}</h2>
             </div>
             <ul class="nav nav-list treeview collapse text-xs-90">
-                {{- $table := $.Query `table` -}}
+                {{- $table := $.Stored.table -}}
                 {{- range $k,$v := call $.Func.tableTitles -}}
                 <li {{- if eq $table $v.K }} class="active"{{ end }}>
                     <a href="{{BackendURL}}/tool/translation/index?table={{$v.K}}">{{$v.V|$.T}}</a>
