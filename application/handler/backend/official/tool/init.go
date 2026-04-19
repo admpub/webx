@@ -32,6 +32,10 @@ func init() {
 
 		// 中文分词
 		g.Route(`GET,POST`, `/segment`, Segment)
+
+		translation := g.Group(`/translation`)
+		translation.Route(`GET,POST`, `/index`, translationIndex)
+		translation.Route(`GET,POST`, `/edit`, translationEdit)
 	})
 
 	(*navigate.TopNavigate)[1].Children.Add(

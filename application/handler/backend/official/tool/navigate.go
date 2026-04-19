@@ -96,4 +96,17 @@ var TopNavigate = navigate.List{
 		Action:  `sensitive/delete`,
 		Icon:    `remove`,
 	},
+
+	&navigate.Item{
+		Display:   true,
+		Name:      echo.T(`本地化翻译`),
+		PermTitle: echo.T(`本地化翻译[列表]`),
+		Action:    `translation/index`,
+	},
+	&navigate.Item{
+		Display: false,
+		Name:    echo.T(`修改本地化翻译`),
+		Action:  `translation/edit`,
+		Icon:    `pencil`,
+	},
 }
