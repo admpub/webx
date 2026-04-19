@@ -94,8 +94,6 @@ func translationIndex(ctx echo.Context) error {
 				return `textarea`
 			}
 			fallthrough
-		case `char`:
-			fallthrough
 		default:
 			return `text`
 		}
