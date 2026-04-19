@@ -1,12 +1,6 @@
 <div class="page-aside xs-width app tree">
     <div class="fixed nano nscroller">
         <div class="content">
-            <div class="header header-md">
-                <button class="navbar-toggle" data-target=".treeview" data-toggle="collapse" type="button">
-                    <span class="fa fa-chevron-down"></span>
-                </button>
-                <h2 class="page-title">{{`表`|$.T}}</h2>
-            </div>
             <ul class="nav nav-list treeview collapse text-xs-90">
                 {{- $table := $.Stored.table -}}
                 {{- range $k,$v := call $.Func.tableTitles -}}
