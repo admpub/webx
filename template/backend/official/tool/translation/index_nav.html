@@ -11,7 +11,7 @@
                 {{- $table := $.Stored.table -}}
                 {{- range $k,$v := call $.Func.tableTitles -}}
                 <li {{- if eq $table $v.K }} class="active"{{ end }}>
-                    <a href="{{BackendURL}}/tool/translation/index?table={{$v.K}}">{{$v.V|$.T}}</a>
+                    <a href="{{BackendURL}}/tool/translation/index?table={{$v.K}}" title="{{if $v.V}}{{$v.V|$.T}}: {{end}}{{$v.K}}">{{$v.V|$.T}}</a>
                 </li>
                 {{- end -}}
             </ul>
