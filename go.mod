@@ -2,7 +2,7 @@ module github.com/admpub/webx
 
 go 1.26.1
 
-// replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
+replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
 // replace github.com/coscms/webcore => ../../coscms/webcore
 
@@ -12,7 +12,7 @@ go 1.26.1
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 21a0712395560aa9fd8b56b87599f472cc492129
+	github.com/admpub/nging/v5 v5.3.5-0.20260419111555-21a071239556
 	github.com/coscms/webcore v0.13.3-0.20260417091904-badde1beca48
 	github.com/coscms/webfront v0.0.0-20260419082233-0e178e5b1a5d
 )
