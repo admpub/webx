@@ -4,6 +4,7 @@ import (
 	"github.com/webx-top/echo"
 
 	_ "github.com/coscms/webcore"
+	"github.com/coscms/webcore/cmd/bootconfig"
 	"github.com/coscms/webcore/registry/navigate"
 	"github.com/coscms/webcore/registry/route"
 )
@@ -42,4 +43,6 @@ func init() {
 		-1,
 		TopNavigate...,
 	)
+
+	bootconfig.OnWebStart(-1, registerTranslationResourceTableEditURL)
 }

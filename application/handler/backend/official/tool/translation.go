@@ -5,10 +5,16 @@ import (
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
 	"github.com/coscms/webfront/model/i18nm"
+	_ "github.com/coscms/webfront/model/i18nm/listener"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/param"
 )
+
+func registerTranslationResourceTableEditURL() {
+
+}
 
 func translationIndex(ctx echo.Context) error {
 	var err error
@@ -27,7 +33,12 @@ func translationIndex(ctx echo.Context) error {
 	var list []echo.H
 	if len(table) > 0 {
 		common.SetPagingDefaultSize(ctx, 10)
-		list, err = i18nm.ListByResource(ctx, table)
+		options := i18nm.ListQuery{
+			Table: table,
+			RowID: ctx.Queryx(`id`).Uint64(),
+			Lang:  ctx.Query(`lang`),
+		}
+		list, err = i18nm.ListByResource(ctx, options)
 	}
 	ctx.Set(`listData`, list)
 	ctx.Set(`langs`, config.FromFile().Language.AllList)
@@ -37,12 +48,38 @@ func translationIndex(ctx echo.Context) error {
 	ctx.SetFunc(`tableTitles`, func() []*echo.KVx[[]string, any] {
 		return i18nm.TableTitles.Slice()
 	})
+	ctx.SetFunc(`editURL`, func(id any) string {
+		item := i18nm.TableTitles.GetItem(table)
+		if item != nil {
+			url := item.H.String(`editURL`)
+			if len(url) > 0 {
+				return url + param.AsString(id)
+			}
+		}
+		return ``
+	})
 	ctx.SetFunc(`tableFields`, func() []string {
 		item := i18nm.TableTitles.GetItem(table)
 		if item != nil {
 			return item.X
 		}
 		return nil
+	})
+	ctx.SetFunc(`inputType`, func(field string) string {
+		fieldInfo, ok := dbschema.DBI.Fields.Find(table, field)
+		if !ok {
+			return `text`
+		}
+		switch fieldInfo.DataType {
+		case `text`, `longtext`, `mediumtext`:
+			return `textarea`
+		case `bigint`, `int`, `tinyint`, `smallint`, `mediumint`, `float`, `double`, `decimal`:
+			return `number`
+		case `varchar`, `char`:
+			fallthrough
+		default:
+			return `text`
+		}
 	})
 	langs := config.FromFile().Language.KVList()
 	ctx.SetFunc(`langTitle`, func(lang string) string {
@@ -67,7 +104,7 @@ func translationEdit(ctx echo.Context) error {
 	if !i18nm.TableTitles.Has(table) {
 		return ctx.NewError(code.Unsupported, `不支持的表名`).SetZone(`table`)
 	}
-	column := ctx.Form(`column`)
+	column := ctx.FormAny(`column`, `name`)
 	if len(column) == 0 {
 		return ctx.NewError(code.InvalidParameter, `缺少列名`).SetZone(`column`)
 	}
@@ -78,7 +115,7 @@ func translationEdit(ctx echo.Context) error {
 	if !fieldInfo.Multilingual {
 		return ctx.NewError(code.Unsupported, `该列不支持多语言`).SetZone(`column`)
 	}
-	rowID := ctx.Formx(`rowID`).Uint64()
+	rowID := ctx.FormAnyx(`rowID`, `pk`).Uint64()
 	if rowID == 0 {
 		return ctx.NewError(code.InvalidParameter, `缺少行ID`).SetZone(`rowID`)
 	}
@@ -89,12 +126,16 @@ func translationEdit(ctx echo.Context) error {
 	if !com.InSlice(lang, config.FromFile().Language.AllList) {
 		return ctx.NewError(code.Unsupported, `不支持的语言`).SetZone(`lang`)
 	}
-	text := ctx.Form(`text`)
-	err := i18nm.UpdateColumnTranslation(ctx, table, column, rowID, lang, text)
+	text := ctx.FormAny(`text`, `value`)
+	affected, err := i18nm.UpdateColumnTranslation(ctx, table, column, rowID, lang, text)
 	if err != nil {
 		return err
 	}
 	data := ctx.Data()
-	data.SetInfo(ctx.T(`修改成功`))
+	if affected == 0 {
+		data.SetInfo(ctx.T(`没有修改任何数据`))
+	} else {
+		data.SetInfo(ctx.T(`修改成功`))
+	}
 	return ctx.JSON(data)
 }
