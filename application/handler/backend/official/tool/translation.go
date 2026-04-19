@@ -26,12 +26,34 @@ func translationIndex(ctx echo.Context) error {
 	}
 	var list []echo.H
 	if len(table) > 0 {
+		common.SetPagingDefaultSize(ctx, 10)
 		list, err = i18nm.ListByResource(ctx, table)
 	}
 	ctx.Set(`listData`, list)
+	ctx.Set(`langs`, config.FromFile().Language.AllList)
+	ctx.Set(`langDefault`, config.FromFile().Language.Default)
 	ctx.Set(`title`, ctx.T(`本地化翻译`))
 	ctx.SetFunc(`tableTitles`, func() []*echo.KVx[[]string, any] {
 		return i18nm.TableTitles.Slice()
+	})
+	ctx.SetFunc(`tableFields`, func() []string {
+		item := i18nm.TableTitles.GetItem(table)
+		if item != nil {
+			return item.X
+		}
+		return nil
+	})
+	langs := config.FromFile().Language.KVList()
+	ctx.SetFunc(`langTitle`, func(lang string) string {
+		if len(lang) == 0 {
+			lang = config.FromFile().Language.Default
+		}
+		for _, item := range langs {
+			if item.K == lang {
+				return item.V
+			}
+		}
+		return lang
 	})
 	return ctx.Render(`official/tool/translation/index`, common.Err(ctx, err))
 }
