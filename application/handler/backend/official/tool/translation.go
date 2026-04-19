@@ -24,6 +24,9 @@ func registerTranslationResourceTableEditURL() {
 	i18nm.RegisterTableTitle(`official_customer_group_package`, ``, nil, `/official/customer/group_package/edit?id=`)
 	i18nm.RegisterTableTitle(`official_ad_position`, ``, nil, `/official/advert/position_edit?id=`)
 	i18nm.RegisterTableTitle(`official_ad_item`, ``, nil, `/official/advert/edit?id=`)
+	i18nm.RegisterTableTitle(`official_common_area`, ``, nil, `/tool/area/edit?id=`)
+	i18nm.RegisterTableTitle(`official_common_area_country`, ``, nil, `/tool/area/country_edit?id=`)
+	i18nm.RegisterTableTitle(`official_common_area_group`, ``, nil, `/tool/area/group_edit?id=`)
 }
 
 func translationIndex(ctx echo.Context) error {

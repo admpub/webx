@@ -2,7 +2,7 @@ module github.com/admpub/webx
 
 go 1.26.1
 
-replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
+// replace github.com/admpub/nging/v5 => ../../../github.com/admpub/nging
 
 // replace github.com/coscms/webcore => ../../coscms/webcore
 
