@@ -13,7 +13,17 @@ import (
 )
 
 func registerTranslationResourceTableEditURL() {
-
+	i18nm.RegisterTableTitle(`official_common_article`, echo.T(`文章`), nil, `/official/article/edit?id=`)
+	i18nm.RegisterTableTitle(`official_common_category`, echo.T(`分类`), nil, `/official/article/category_edit?id=`)
+	i18nm.RegisterTableTitle(`official_common_group`, ``, nil, `/official/customer/group/edit?id=`)
+	i18nm.RegisterTableTitle(`official_common_tags`, ``, nil, `/official/tags/edit?id=`)
+	i18nm.RegisterTableTitle(`official_common_navigate`, ``, nil, `/manager/navigate/edit?id=`)
+	i18nm.RegisterTableTitle(`official_common_route_page`, ``, nil, `/manager/frontend/route_page_edit?id=`)
+	i18nm.RegisterTableTitle(`official_customer_role`, ``, nil, `/official/customer/role/edit?id=`)
+	i18nm.RegisterTableTitle(`official_customer_level`, ``, nil, `/official/customer/level/edit?id=`)
+	i18nm.RegisterTableTitle(`official_customer_group_package`, ``, nil, `/official/customer/group_package/edit?id=`)
+	i18nm.RegisterTableTitle(`official_ad_position`, ``, nil, `/official/advert/position_edit?id=`)
+	i18nm.RegisterTableTitle(`official_ad_item`, ``, nil, `/official/advert/edit?id=`)
 }
 
 func translationIndex(ctx echo.Context) error {

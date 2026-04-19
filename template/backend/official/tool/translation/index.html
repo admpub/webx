@@ -59,7 +59,7 @@
 							<td class="text-center label-group">
 								{{- $editURL := call $.Func.editURL $v.id -}}
 								{{- if $editURL -}}
-								<a class="label label-success" href="{{$editURL}}" title="{{`编辑`|$.T}}" data-toggle="tooltip">
+								<a class="label label-success" href="{{BackendURL}}{{$editURL}}" title="{{`编辑`|$.T}}" data-toggle="tooltip">
 									<i class="fa fa-pencil"></i>
 								</a>
 								{{- end -}}

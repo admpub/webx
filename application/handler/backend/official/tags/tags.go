@@ -75,14 +75,18 @@ func Add(ctx echo.Context) error {
 
 func Edit(ctx echo.Context) error {
 	var err error
+	id := ctx.Formx(`id`).Uint64()
 	name := ctx.Form(`name`)
 	group := ctx.Form(`group`)
 	m := official.NewTags(ctx)
-	cond := db.And(
-		db.Cond{`name`: name},
-		db.Cond{`group`: group},
-	)
-	err = m.Get(nil, cond)
+	cond := db.NewCompounds()
+	if id > 0 {
+		cond.AddKV(`id`, id)
+	} else {
+		cond.AddKV(`name`, name)
+		cond.AddKV(`group`, group)
+	}
+	err = m.Get(nil, cond.And())
 	if err != nil {
 		return err
 	}
@@ -92,7 +96,7 @@ func Edit(ctx echo.Context) error {
 			if len(display) > 0 {
 				m.Display = display
 				data := ctx.Data()
-				err = m.UpdateField(nil, `display`, display, cond)
+				err = m.UpdateField(nil, `display`, display, cond.And())
 				if err != nil {
 					data.SetError(err)
 					return ctx.JSON(data)

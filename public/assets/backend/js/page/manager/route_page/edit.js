@@ -28,7 +28,7 @@ App.editor.codemirror('#pageVars', {
     mode:  "application/javascript"
 },'json');
 function initCodeMirror(elem){
-    App.editor.codemirror(elem, { lineNumbers: true, theme: 'ambiance', mode:  type2mime(checkedPageType.val()) });
+    App.editor.codemirror(elem, { lineNumbers: true, theme: 'ambiance', mode: type2mime(checkedPageType.val()) });
 }
 function setAllEditor(cb){
     $('#routePageEditForm').find('textarea[name$="[pageContent]"]').each(function(){
@@ -36,8 +36,13 @@ function setAllEditor(cb){
         cb('#'+this.id);
     })
     cb('#pageContent');
+    var i = setInterval(function(){
+        if($('#pageContent').data('codemirror')){
+            clearInterval(i);
+            $('#pageContent').data('codemirror').refresh();
+        }
+    },200);
 }
-setAllEditor(initCodeMirror);
 $('#routePageEditForm input[name=pageType]').on('click',function(){
     var v=$(this).val(),$form=$('#routePageEditForm');
     $form.find('.pageType-hide-'+v).hide();
@@ -54,4 +59,5 @@ $('#routePageEditForm').find('.langset > .nav-tabs > li').on('click',function(){
     setTimeout(function(){editor.refresh();},200);
 })
 checkedPageType.trigger('click');
+setAllEditor(initCodeMirror);
 });
