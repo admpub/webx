@@ -87,7 +87,7 @@ func translationIndex(ctx echo.Context) error {
 		switch fieldInfo.DataType {
 		case `text`, `longtext`, `mediumtext`:
 			return `textarea`
-		case `bigint`, `int`, `tinyint`, `smallint`, `mediumint`, `float`, `double`, `decimal`:
+		case `bigint`, `int`, `tinyint`, `smallint`, `mediumint`:
 			return `number`
 		case `varchar`:
 			if fieldInfo.Length > 255 || field == `summary` || field == `description` {
