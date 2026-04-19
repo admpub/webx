@@ -89,7 +89,12 @@ func translationIndex(ctx echo.Context) error {
 			return `textarea`
 		case `bigint`, `int`, `tinyint`, `smallint`, `mediumint`, `float`, `double`, `decimal`:
 			return `number`
-		case `varchar`, `char`:
+		case `varchar`:
+			if fieldInfo.Length > 255 || field == `summary` || field == `description` {
+				return `textarea`
+			}
+			fallthrough
+		case `char`:
 			fallthrough
 		default:
 			return `text`
