@@ -90,7 +90,7 @@ func translationIndex(ctx echo.Context) error {
 		case `bigint`, `int`, `tinyint`, `smallint`, `mediumint`:
 			return `number`
 		case `varchar`:
-			if fieldInfo.Length > 255 || field == `summary` || field == `description` {
+			if fieldInfo.MaxSize > 255 || field == `summary` || field == `description` {
 				return `textarea`
 			}
 			fallthrough
