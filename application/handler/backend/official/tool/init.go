@@ -37,6 +37,7 @@ func init() {
 		translation := g.Group(`/translation`)
 		translation.Route(`GET,POST`, `/index`, translationIndex)
 		translation.Route(`GET,POST`, `/edit`, translationEdit)
+		translation.Route(`GET,POST`, `/translate`, translationTranslate)
 	})
 
 	(*navigate.TopNavigate)[1].Children.Add(

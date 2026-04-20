@@ -1,14 +1,21 @@
 package tool
 
 import (
+	"context"
+
 	"github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/background"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/nerrors"
+	"github.com/coscms/webcore/library/notice"
 	"github.com/coscms/webfront/model/i18nm"
 	_ "github.com/coscms/webfront/model/i18nm/listener"
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/code"
+	"github.com/webx-top/echo/defaults"
 	"github.com/webx-top/echo/param"
 )
 
@@ -155,4 +162,40 @@ func translationEdit(ctx echo.Context) error {
 		data.SetInfo(ctx.T(`修改成功`))
 	}
 	return ctx.JSON(data)
+}
+
+func translationTranslate(ctx echo.Context) error {
+	table := ctx.Form(`table`)
+	if len(table) == 0 {
+		return ctx.NewError(code.InvalidParameter, `缺少表名`).SetZone(`table`)
+	}
+	if !i18nm.TableTitles.Has(table) {
+		return ctx.NewError(code.Unsupported, `不支持的表名`).SetZone(`table`)
+	}
+	bg := background.New(context.Background(), nil)
+	bgKey := table
+	group, err := background.Register(ctx, `translation`, bgKey, bg)
+	if err != nil {
+		return err
+	}
+	user := backend.User(ctx)
+	if user == nil {
+		return nerrors.ErrUserNotLoggedIn
+	}
+	noticer := notice.NewP(ctx, `translation`, user.Username, bg.Context(), func(c *notice.Config) {
+		c.SetID(table)
+	}).AutoComplete(true)
+	go func() {
+		defer group.Cancel(bgKey)
+		ctx := bg.Context()
+		eCtx := defaults.NewMockContextWith(ctx)
+		options := i18nm.ListQuery{
+			Table: table,
+		}
+		err := i18nm.Batch(eCtx, options, noticer)
+		if err != nil {
+			noticer.Failure(err.Error())
+		}
+	}()
+	return ctx.JSON(ctx.Data().SetInfo(echo.T(`开始翻译`)))
 }
