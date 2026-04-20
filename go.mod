@@ -54,7 +54,7 @@ require (
 	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.10
 	github.com/webx-top/com v1.5.1
-	github.com/webx-top/db v1.30.12
+	github.com/webx-top/db v1.30.13
 	github.com/webx-top/echo v1.24.4
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2

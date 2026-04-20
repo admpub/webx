@@ -105,6 +105,25 @@ App.editor.editable('fieldset>div', {
 		return params;
 	},
 });
+function queryProcess(){
+	var wrapper = $('#translation-restables');
+	if(wrapper.length == 0) return;
+	$.get(BACKEND_URL + '/tool/translation/index', {op: 'queryProcess'}, function(r){
+		if(r.Code!=1||!r.Data) return;
+		for(var table in r.Data){
+			var process = r.Data[table];
+			var $this = wrapper.children('li[data-restable="'+table+'"]');
+			if($this.length == 0) continue;
+			var badge = $this.find('.badge');
+			if(badge.length == 0){
+				badge = $('<span class="badge badge-danger" style="position:absolute;top:7px;right:3px"></span>').appendTo($this);
+			}
+			badge.text((process.finished/process.total * 100).toFixed(2) + '%');
+		}
+	}, 'json');
+	setTimeout(queryProcess, 5000);
+}
+queryProcess();
 });
 </script>
 {{/Block}}

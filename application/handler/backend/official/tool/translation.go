@@ -37,6 +37,9 @@ func registerTranslationResourceTableEditURL() {
 }
 
 func translationIndex(ctx echo.Context) error {
+	if op := ctx.Form(`op`); len(op) > 0 {
+		return translationAjaxHandlers.Call(ctx, op)
+	}
 	var err error
 	table := ctx.Query(`table`)
 	if len(table) == 0 {
@@ -164,6 +167,30 @@ func translationEdit(ctx echo.Context) error {
 	return ctx.JSON(data)
 }
 
+var translationAjaxHandlers = echo.HandlerFuncs{
+	`queryProcess`: translationQueryProcess,
+}
+
+func translationQueryProcess(ctx echo.Context) error {
+	bg, ok := background.Backgrounds.Load(`translation`)
+	if !ok {
+		return ctx.NewError(code.DataNotFound, `没有找到翻译任务`)
+	}
+	group := bg.(*background.Group)
+	mp := group.Map()
+	result := echo.H{}
+	for k, v := range mp {
+		result[k] = echo.H{
+			`started`:  v.Started,
+			`finished`: v.Finish(),
+			`total`:    v.Total(),
+		}
+	}
+	data := ctx.Data()
+	data.SetData(result)
+	return ctx.JSON(data)
+}
+
 func translationTranslate(ctx echo.Context) error {
 	table := ctx.Form(`table`)
 	if len(table) == 0 {
@@ -171,25 +198,6 @@ func translationTranslate(ctx echo.Context) error {
 	}
 	if !i18nm.TableTitles.Has(table) {
 		return ctx.NewError(code.Unsupported, `不支持的表名`).SetZone(`table`)
-	}
-	if ctx.Form(`op`) == `queryProcess` {
-		bg, ok := background.Backgrounds.Load(`translation`)
-		if !ok {
-			return ctx.NewError(code.DataNotFound, `没有找到翻译任务`)
-		}
-		group := bg.(*background.Group)
-		mp := group.Map()
-		result := echo.H{}
-		for k, v := range mp {
-			result[k] = echo.H{
-				`started`:  v.Started,
-				`finished`: v.Finish(),
-				`total`:    v.Total(),
-			}
-		}
-		data := ctx.Data()
-		data.SetInfo(result)
-		return ctx.JSON(data)
 	}
 	data := ctx.Data()
 	bg := background.New(context.Background(), nil)

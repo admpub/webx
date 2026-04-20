@@ -6,14 +6,14 @@
         <div class="content">
         	<div class="app-nav md-line-height no-margin-top">
 				<p class="title">{{`资源`|$.T}}</p>
-            <ul class="nav nav-pills nav-stacked">
-                {{- $table := $.Stored.table -}}
-                {{- range $k,$v := call $.Func.tableTitles -}}
-                <li class="primary-active {{- if eq $table $v.K }} active{{ end }}">
-                    <a href="{{BackendURL}}/tool/translation/index?table={{$v.K}}" title="{{if $v.V}}{{$v.V|$.T}}: {{end}}{{$v.K}}">{{$v.V|$.T}}</a>
-                </li>
-                {{- end -}}
-            </ul>
+                <ul class="nav nav-pills nav-stacked" id="translation-restables">
+                    {{- $table := $.Stored.table -}}
+                    {{- range $k,$v := call $.Func.tableTitles -}}
+                    <li class="primary-active {{- if eq $table $v.K }} active{{ end }}" data-restable="{{$v.K}}">
+                        <a href="{{BackendURL}}/tool/translation/index?table={{$v.K}}" title="{{if $v.V}}{{$v.V|$.T}}: {{end}}{{$v.K}}">{{$v.V|$.T}}</a>
+                    </li>
+                    {{- end -}}
+                </ul>
             </div>
         </div>
     </div>
