@@ -172,11 +172,22 @@ func translationTranslate(ctx echo.Context) error {
 	if !i18nm.TableTitles.Has(table) {
 		return ctx.NewError(code.Unsupported, `不支持的表名`).SetZone(`table`)
 	}
+	data := ctx.Data()
 	bg := background.New(context.Background(), nil)
 	bgKey := table
 	group, err := background.Register(ctx, `translation`, bgKey, bg)
 	if err != nil {
-		return err
+		mp := group.Map()
+		result := echo.H{}
+		for k, v := range mp {
+			result[k] = echo.H{
+				`started`:  mp[k].Started,
+				`finished`: v.Finish(),
+				`total`:    v.Total(),
+			}
+		}
+		data.SetError(err)
+		return ctx.JSON(data)
 	}
 	user := backend.User(ctx)
 	if user == nil {
@@ -197,5 +208,6 @@ func translationTranslate(ctx echo.Context) error {
 			noticer.Failure(err.Error())
 		}
 	}()
-	return ctx.JSON(ctx.Data().SetInfo(echo.T(`开始翻译`)))
+	data.SetInfo(echo.T(`开始翻译`))
+	return ctx.JSON(data)
 }
