@@ -14,7 +14,7 @@
 	<div class="col-md-12">
 		<div class="block-flat no-padding">
 			<div class="header">
-				<a data-ajax-url="{{BackendURL}}/tool/translation/translate" data-ajax-accept="json" class="btn btn-warning pull-right">
+				<a data-ajax-url="{{BackendURL}}/tool/translation/translate?table={{$.Stored.table}}" data-ajax-accept="json" class="btn btn-warning pull-right">
 					<i class="fa fa-table"></i>
 					{{"开始翻译"|$.T}}
 				</a>
