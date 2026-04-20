@@ -56,7 +56,7 @@ func translationIndex(ctx echo.Context) error {
 		options := i18nm.ListQuery{
 			Table: table,
 			RowID: ctx.Queryx(`id`).Uint64(),
-			Lang:  ctx.Query(`lang`),
+			Lang:  ctx.Query(`tlang`),
 		}
 		list, err = i18nm.ListByResource(ctx, options)
 	}
@@ -143,7 +143,7 @@ func translationEdit(ctx echo.Context) error {
 	if rowID == 0 {
 		return ctx.NewError(code.InvalidParameter, `缺少行ID`).SetZone(`rowID`)
 	}
-	lang := ctx.Form(`lang`)
+	lang := ctx.Form(`tlang`)
 	if len(lang) == 0 {
 		return ctx.NewError(code.InvalidParameter, `缺少语言`).SetZone(`lang`)
 	}
@@ -215,12 +215,16 @@ func translationTranslate(ctx echo.Context) error {
 	noticer := bg.NewNP(ctx, user.Username, func(c *notice.Config) {
 		c.SetID(table)
 	})
+	id := ctx.Formx(`id`).Uint64()
+	lang := ctx.Form(`tlang`)
 	go func() {
 		defer group.Cancel(bgKey)
 		ctx := bg.Context()
 		eCtx := defaults.NewMockContextWith(ctx)
 		options := i18nm.ListQuery{
 			Table: table,
+			RowID: id,
+			Lang:  lang,
 		}
 		err := i18nm.Batch(eCtx, options, noticer)
 		if err != nil {
