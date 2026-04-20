@@ -1,5 +1,8 @@
 {{Extend "layout"}}
 {{Block "title"}}{{$.Stored.title}}: {{$.Stored.tableTitle}}{{/Block}}
+{{Block "head"}}
+<style>.tr-text{max-height:200px;overflow-x:hidden;overflow-y:auto;}</style>
+{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
 <li><a href="{{BackendURL}}/tool/translation/index">{{$.Stored.title}}</a></li>
@@ -45,7 +48,7 @@
 								<fieldset class="fieldset">
 									<legend>{{- call $.Func.langTitle `` -}}</legend>
 									<div>
-										<div class="wrap-only editable" data-pk="{{$v.id}}" data-lang="" data-name="{{$field}}" data-type="{{$inputType}}" data-value="{{index $v $field}}">{{index $v $field}}</div>
+										<div class="wrap-only editable tr-text" data-pk="{{$v.id}}" data-lang="" data-name="{{$field}}" data-type="{{$inputType}}" data-value="{{index $v $field}}">{{index $v $field}}</div>
 									</div>
 								</fieldset>
 								{{- range $lidx,$lang := $.Stored.langs -}}
@@ -57,7 +60,7 @@
 								<fieldset class="fieldset">
 									<legend>{{- call $.Func.langTitle $lang -}}</legend>
 									<div>
-										<div class="wrap-only editable" data-pk="{{$v.id}}" data-lang="{{$lang}}" data-name="{{$field}}" data-type="{{$inputType}}" data-value="{{if $translation}}{{index $translation $field}}{{end}}">{{if $translation}}{{index $translation $field}}{{end}}</div>
+										<div class="wrap-only editable tr-text" data-pk="{{$v.id}}" data-lang="{{$lang}}" data-name="{{$field}}" data-type="{{$inputType}}" data-value="{{if $translation}}{{index $translation $field}}{{end}}">{{if $translation}}{{index $translation $field}}{{end}}</div>
 									</div>
 								</fieldset>
 								{{- end -}}
