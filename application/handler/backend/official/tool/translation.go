@@ -217,7 +217,7 @@ func translationTranslate(ctx echo.Context) error {
 	})
 	id := ctx.Formx(`id`).Uint64()
 	lang := ctx.Form(`tlang`)
-	go func() {
+	runTask := func() {
 		defer group.Cancel(bgKey)
 		ctx := bg.Context()
 		eCtx := defaults.NewMockContextWith(ctx)
@@ -230,7 +230,10 @@ func translationTranslate(ctx echo.Context) error {
 		if err != nil {
 			noticer.Failure(err.Error())
 		}
-	}()
-	data.SetInfo(echo.T(`开始翻译`))
+	}
+	// go runTask()
+	// data.SetInfo(echo.T(`开始翻译`))
+	runTask()
+	data.SetInfo(echo.T(`翻译完成`))
 	return ctx.JSON(data)
 }
