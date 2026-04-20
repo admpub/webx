@@ -212,9 +212,9 @@ func translationTranslate(ctx echo.Context) error {
 	if user == nil {
 		return nerrors.ErrUserNotLoggedIn
 	}
-	noticer := notice.NewP(ctx, `translation`, user.Username, bg.Context(), func(c *notice.Config) {
+	noticer := bg.NewNP(ctx, user.Username, func(c *notice.Config) {
 		c.SetID(table)
-	}).AutoComplete(true)
+	})
 	go func() {
 		defer group.Cancel(bgKey)
 		ctx := bg.Context()

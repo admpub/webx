@@ -682,8 +682,8 @@ github.com/neelance/astrewrite v0.0.0-20160511093645-99348263ae86/go.mod h1:kHJE
 github.com/neelance/sourcemap v0.0.0-20151028013722-8c68805598ab/go.mod h1:Qr6/a/Q4r9LP1IltGz7tA7iOK1WonHEYhu1HRBA7ZiM=
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 h1:zYyBkD/k9seD2A7fsi6Oo2LfFZAehjjQMERAvZLEDnQ=
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646/go.mod h1:jpp1/29i3P1S/RLdc7JQKbRpFeM1dOBd8T9ki5s+AY8=
-github.com/nging-plugins/dbmanager v1.9.5 h1:ARkYmIQIJIt1C2Qp1HoWAGZ08ihAO5JpgZIKnGEE1/U=
-github.com/nging-plugins/dbmanager v1.9.5/go.mod h1:RfHUpL13B+Wb4YOawxZtcE9ra+pvfH2PyGzryTnOs5s=
+github.com/nging-plugins/dbmanager v1.9.6 h1:sS8D7o8T8z10XJDa2OMMA/JZzUOAcjZBs3GgI6PMwBQ=
+github.com/nging-plugins/dbmanager v1.9.6/go.mod h1:8UnOF4R3/hf0F4ixilnASAE1ZAxNchTcwhpnVXuc5mc=
 github.com/nging-plugins/dlmanager v1.9.0 h1:tb7p6l/hqOgXb3oNymAp+adsE6Udj6MTWkmTG44w4fA=
 github.com/nging-plugins/dlmanager v1.9.0/go.mod h1:WOJPUIb7ooblWlwr2ZDAGXABvDwLiFy44+Bq/5tvOcI=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
