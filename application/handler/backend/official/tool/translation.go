@@ -181,7 +181,7 @@ func translationTranslate(ctx echo.Context) error {
 		result := echo.H{}
 		for k, v := range mp {
 			result[k] = echo.H{
-				`started`:  mp[k].Started,
+				`started`:  v.Started,
 				`finished`: v.Finish(),
 				`total`:    v.Total(),
 			}
