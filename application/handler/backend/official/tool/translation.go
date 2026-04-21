@@ -204,15 +204,6 @@ func translationTranslate(ctx echo.Context) error {
 	bgKey := table
 	group, err := background.Register(ctx, `translation`, bgKey, bg)
 	if err != nil {
-		mp := group.Map()
-		result := echo.H{}
-		for k, v := range mp {
-			result[k] = echo.H{
-				`started`:  v.Started,
-				`finished`: v.Finish(),
-				`total`:    v.Total(),
-			}
-		}
 		data.SetError(err)
 		return ctx.JSON(data)
 	}

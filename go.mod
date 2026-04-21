@@ -14,7 +14,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.5-0.20260420112110-7d66ec8f35a4
 	github.com/coscms/webcore v0.13.3-0.20260420102939-d17acf306250
-	github.com/coscms/webfront v0.0.0-20260420090406-bef8aafc532f
+	github.com/coscms/webfront v0.0.0-20260421040041-acdd9b3aa737
 )
 
 require (
@@ -54,7 +54,7 @@ require (
 	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.10
 	github.com/webx-top/com v1.5.1
-	github.com/webx-top/db v1.30.13
+	github.com/webx-top/db v1.30.14
 	github.com/webx-top/echo v1.24.4
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.2
@@ -137,7 +137,7 @@ require (
 	github.com/admpub/sse v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
 	github.com/admpub/timeago v1.3.0 // indirect
-	github.com/admpub/translate v0.0.0-20260417055243-3d070c58f670 // indirect
+	github.com/admpub/translate v0.0.0-20260421035803-709e7bb94665 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/admpub/xencoding v0.0.3 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.107 // indirect
