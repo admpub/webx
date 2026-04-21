@@ -137,7 +137,7 @@ require (
 	github.com/admpub/sse v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
 	github.com/admpub/timeago v1.3.0 // indirect
-	github.com/admpub/translate v0.0.0-20260421035803-709e7bb94665 // indirect
+	github.com/admpub/translate v0.0.0-20260421065234-dde996480d21 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/admpub/xencoding v0.0.3 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.107 // indirect
