@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.5-0.20260420112110-7d66ec8f35a4
-	github.com/coscms/webcore v0.13.3-0.20260420102939-d17acf306250
-	github.com/coscms/webfront v0.0.0-20260421065748-b09b6ef72472
+	github.com/coscms/webcore v0.13.3-0.20260422071321-0a0d1f947eaa
+	github.com/coscms/webfront v0.0.0-20260422071615-3cdb626cd265
 )
 
 require (
@@ -101,7 +101,7 @@ require (
 	github.com/admpub/go-lock v1.3.0 // indirect
 	github.com/admpub/go-ollama v0.0.0-20260413043901-9877e7baaacd // indirect
 	github.com/admpub/go-password v0.1.3 // indirect
-	github.com/admpub/go-pretty/v6 v6.0.4 // indirect
+	github.com/admpub/go-pretty/v6 v6.0.5 // indirect
 	github.com/admpub/go-ps v0.0.1 // indirect
 	github.com/admpub/go-reuseport v0.5.0 // indirect
 	github.com/admpub/go-utility v0.0.1 // indirect
@@ -216,7 +216,7 @@ require (
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/golang/snappy v1.0.0 // indirect
-	github.com/gomarkdown/markdown v0.0.0-20260412113850-134a5b2cce7f // indirect
+	github.com/gomarkdown/markdown v0.0.0-20260417124207-7d523f7318df // indirect
 	github.com/gomodule/redigo v1.9.3 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -292,7 +292,7 @@ require (
 	github.com/studio-b12/gowebdav v0.12.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
 	github.com/tdewolff/minify/v2 v2.24.12 // indirect
-	github.com/tdewolff/parse/v2 v2.8.11 // indirect
+	github.com/tdewolff/parse/v2 v2.8.12 // indirect
 	github.com/tetratelabs/wazero v1.11.0 // indirect
 	github.com/tidwall/btree v1.8.1 // indirect
 	github.com/tidwall/buntdb v1.3.2 // indirect
