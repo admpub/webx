@@ -14,6 +14,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/defaults"
+	"github.com/webx-top/echo/param"
 	"github.com/webx-top/echo/subdomains"
 
 	dbschemaNging "github.com/coscms/webcore/dbschema"
@@ -27,6 +28,7 @@ import (
 	xcache "github.com/coscms/webfront/library/cache"
 	cfgIPFilter "github.com/coscms/webfront/library/ipfilter"
 	cfgUnderAttack "github.com/coscms/webfront/library/underattack"
+	"github.com/coscms/webfront/model/i18nm"
 	modelApi "github.com/coscms/webfront/model/official/api"
 	modelCustomer "github.com/coscms/webfront/model/official/customer"
 	modelDBMgr "github.com/nging-plugins/dbmanager/application/model"
@@ -587,6 +589,16 @@ var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
 			Sort:        3000,
 			Disabled:    `N`,
 		},
+		`translate`: {
+			Key:         `translate`,
+			Label:       `翻译接口`,
+			Description: `翻译接口`,
+			Value:       `{"providers":[],"on":false,"allowForceTranslate":false}`,
+			Group:       `thirdparty`,
+			Type:        `json`,
+			Sort:        3000,
+			Disabled:    `N`,
+		},
 	},
 	`sms`: {
 		`aliyun`: {
@@ -865,6 +877,14 @@ func init() {
 		r[`ValueObject`] = jsonData
 		return nil
 	})
+	settings.RegisterDecoder(`thirdparty.translate`, func(v *dbschemaNging.NgingConfig, r echo.H) error {
+		jsonData := &i18nm.Config{}
+		if len(v.Value) > 0 {
+			com.JSONDecode(com.Str2bytes(v.Value), jsonData)
+		}
+		r[`ValueObject`] = jsonData
+		return nil
+	})
 	license.OnSetLicense(func(data *lib.LicenseData) {
 		if !config.IsInstalled() {
 			return
@@ -976,6 +996,21 @@ func init() {
 		default:
 			return nil, errors.New(`The decoder is unsupported: ` + v.Key)
 		}
+	})
+	settings.RegisterEncoder(`thirdparty.translate`, func(v *dbschemaNging.NgingConfig, r echo.H) ([]byte, error) {
+		prov := i18nm.ProviderConfig{
+			Provider: r.String(`provider`),
+			Config:   map[string]string{},
+		}
+		pcfg := r.GetStore(`config`)
+		for k, v := range pcfg {
+			prov.Config[k] = param.AsString(v)
+		}
+		cfg := &i18nm.Config{}
+		cfg.Providers = append(cfg.Providers, prov)
+		cfg.AllowForceTranslate = r.Bool(`allowForceTranslate`)
+		cfg.On = r.Bool(`on`)
+		return com.JSONEncode(cfg)
 	})
 	settings.RegisterEncoder(`base.siteURL`, func(v *dbschemaNging.NgingConfig, formDataMap echo.H) ([]byte, error) {
 		//写入数据库的时候

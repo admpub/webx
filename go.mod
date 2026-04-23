@@ -13,8 +13,8 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.5-0.20260420112110-7d66ec8f35a4
-	github.com/coscms/webcore v0.13.3-0.20260422071321-0a0d1f947eaa
-	github.com/coscms/webfront v0.0.0-20260422071615-3cdb626cd265
+	github.com/coscms/webcore v0.13.3-0.20260423054121-a33a47fe69ba
+	github.com/coscms/webfront v0.0.0-20260423055625-76018f408aa8
 )
 
 require (
@@ -137,7 +137,7 @@ require (
 	github.com/admpub/sse v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
 	github.com/admpub/timeago v1.3.0 // indirect
-	github.com/admpub/translate v0.0.0-20260421065234-dde996480d21 // indirect
+	github.com/admpub/translate v0.0.0-20260423045729-679cb7e637ab // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/admpub/xencoding v0.0.3 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.107 // indirect
@@ -147,7 +147,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.32.16 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.19.15 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.22 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager v0.1.17 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager v0.1.18 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.22 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.22 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.23 // indirect
@@ -155,7 +155,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.14 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.22 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.22 // indirect
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.99.1 // indirect
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.100.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/signin v1.0.10 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.30.16 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.20 // indirect
@@ -164,7 +164,7 @@ require (
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/boombuler/barcode v1.1.0 // indirect
-	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf // indirect
+	github.com/bradfitz/gomemcache v0.0.0-20260422231931-4d751bb6e37c // indirect
 	github.com/caddyserver/certmagic v0.25.2 // indirect
 	github.com/caddyserver/zerossl v0.1.5 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
