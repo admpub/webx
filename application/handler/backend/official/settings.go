@@ -804,10 +804,11 @@ func init() {
 		Tmpl:  []string{`official/settings/contact`},
 	}))
 	settings.Register((&settings.SettingForm{
-		Short: `第三方接口`,
-		Label: `第三方接口设置`,
-		Group: `thirdparty`,
-		Tmpl:  []string{`official/settings/thirdparty`},
+		Short:    `第三方接口`,
+		Label:    `第三方接口设置`,
+		Group:    `thirdparty`,
+		Tmpl:     []string{`official/settings/thirdparty`},
+		FootTmpl: []string{`official/settings/thirdparty_footer`},
 	}).AddHookGet(func(ctx echo.Context) error {
 		m := modelApi.NewAccount(ctx)
 		m.ListByOffset(nil, nil, 0, -1, db.Cond{`disabled`: `N`})

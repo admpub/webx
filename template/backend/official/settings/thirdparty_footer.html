@@ -1,0 +1,11 @@
+<script src="{{AssetsURL}}/js/template.js?t={{BuildTime}}"></script>
+<script>
+$(function(){
+$('select[name="thirdparty[translate][value][provider]"]').on('change',function(){
+    var v=$(this).val(),formElements=$(this).children(':selected').data('form');
+    var b=$('#thirdparty-translate-provider-config'),formData=b.data('config');
+    console.dir(formElements,formData)
+    b.html(template('tpl-thirdparty-translate-provider-forms', {formElements:formElements,formData:formData}));
+}).trigger('change');
+})
+</script>

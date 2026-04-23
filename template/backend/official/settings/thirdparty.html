@@ -55,13 +55,13 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"接口网址"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input class="form-control" name="thirdparty[ip2region][value][apiURL]" value="{{$ipCfg.apiURL}}">
+                    <input type="url" class="form-control" name="thirdparty[ip2region][value][apiURL]" value="{{$ipCfg.apiURL}}">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"API Key"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input class="form-control" name="thirdparty[ip2region][value][apiKey]" value="{{$ipCfg.apiKey}}">
+                    <input type="text" class="form-control" name="thirdparty[ip2region][value][apiKey]" value="{{$ipCfg.apiKey}}">
                 </div>
             </div>
             <div class="form-group">
@@ -69,9 +69,9 @@
                 <div class="col-sm-10">
                     <span class="input-group">
                         <span class="input-group-addon">{{`用户名`|$.T}}</span>
-                        <input class="form-control" name="thirdparty[ip2region][value][apiBasicAuth][username]" value="{{$ipCfg.apiBasicAuth.username}}">
+                        <input type="text" class="form-control" name="thirdparty[ip2region][value][apiBasicAuth][username]" value="{{$ipCfg.apiBasicAuth.username}}">
                         <span class="input-group-addon">{{`密码`|$.T}}</span>
-                        <input class="form-control" name="thirdparty[ip2region][value][apiBasicAuth][password]" value="{{$ipCfg.apiBasicAuth.password}}">
+                        <input type="password" class="form-control" name="thirdparty[ip2region][value][apiBasicAuth][password]" value="{{$ipCfg.apiBasicAuth.password}}">
                     </span>
                 </div>
             </div>
@@ -87,14 +87,14 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"IPv4数据文件"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input class="form-control" name="thirdparty[ip2region][value][ipv4Dict]" value="{{$ipCfg.ipv4Dict}}">
+                    <input type="text" class="form-control" name="thirdparty[ip2region][value][ipv4Dict]" value="{{$ipCfg.ipv4Dict}}">
                     <div class="help-block">{{`IPv4数据文件的扩展名为.xdb`|$.T}}</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"IPv6数据文件"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input class="form-control" name="thirdparty[ip2region][value][ipv6Dict]" value="{{$ipCfg.ipv6Dict}}">
+                    <input type="text" class="form-control" name="thirdparty[ip2region][value][ipv6Dict]" value="{{$ipCfg.ipv6Dict}}">
                     <div class="help-block">{{`IPv6数据文件的扩展名为.xdb`|$.T}}</div>
                 </div>
             </div>
@@ -120,13 +120,13 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"接口网址"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input class="form-control" name="thirdparty[segment][value][apiURL]" value="{{$sgCfg.apiURL}}">
+                    <input type="url" class="form-control" name="thirdparty[segment][value][apiURL]" value="{{$sgCfg.apiURL}}">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"API Key"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input class="form-control" name="thirdparty[segment][value][apiKey]" value="{{$sgCfg.apiKey}}">
+                    <input type="text" class="form-control" name="thirdparty[segment][value][apiKey]" value="{{$sgCfg.apiKey}}">
                 </div>
             </div>
         </div>
@@ -163,23 +163,36 @@
                 <div class="help-block">{{`用于控制是否在已经存在译文的时候仍然翻译`|$.T}}</div>
             </div>
         </div>
+        {{- range $pk, $pv := $trCfg.providers -}}
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"接口"|$.T}}</label>
                 <div class="col-sm-10">
-                    {{- $provider := $trCfg.provider | Default `` -}}
+                    {{- $provider := $pv.provider | Default `` -}}
                     <select class="form-control" name="thirdparty[translate][value][provider]">
                         {{- range $k, $v := $.Stored.translationProviders -}}
-                        <option value="{{$v.Name}}"{{if eq $provider $v.Name}} selected{{end}} data-form="{{$v.FormElements}}">{{$v.Title|$.T}}</option>
+                        <option value="{{$v.Name}}"{{if eq $provider $v.Name}} selected{{end}} data-form="{{$v.FormElements|JSONEncode}}">{{$v.Title|$.T}}</option>
                         {{- end -}}
                     </select>
                 </div>
             </div>
+            <div id="thirdparty-translate-provider-config" data-config="{{$pv.config|JSONEncode}}"></div>
+            {{- break -}}
+        {{- else -}}
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{"API Key"|$.T}}</label>
+                <label class="col-sm-2 control-label">{{"接口"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input class="form-control" name="thirdparty[translate][value][config][aa]" value="{{$sgCfg.apiKey}}">
+                    <select class="form-control" name="thirdparty[translate][value][provider]">
+                        {{- range $k, $v := $.Stored.translationProviders -}}
+                        <option value="{{$v.Name}}" data-form="{{$v.FormElements|JSONEncode}}">{{$v.Title|$.T}}</option>
+                        {{- end -}}
+                    </select>
                 </div>
             </div>
+            <div id="thirdparty-translate-provider-config" data-config="{}"></div>
+        {{- end -}}
       </div><!-- fieldset -->
     </div>
 </div>
+<script type="text/html" id="tpl-thirdparty-translate-provider-forms">
+{{Include "official/settings/thirdparty_translate_provider_forms" $}}
+</script>

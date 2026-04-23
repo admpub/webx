@@ -1,0 +1,16 @@
+{{Strip}}
+{{TemplateTag `each formElements element index`}}
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{TemplateTag `element.label`}}</label>
+    <div class="col-sm-10">
+        <input type="{{TemplateTag `element.type`}}" class="form-control" 
+        name="thirdparty[translate][value][config][{{TemplateTag `element.name`}}]" 
+        value="{{TemplateTag `formData[element.name]`}}"
+        {{- TemplateTag `each element.attributes attr index` }} {{TemplateTag `attr[0]`}}{{TemplateTag `if attr.length>1`}}="{{TemplateTag `attr[1]`}}"{{TemplateTag `/if`}}{{ TemplateTag `/each` }}>
+        {{TemplateTag `if element.helpText`}}
+        <div class="help-block">{{TemplateTag `element.helpText`}}</div>
+        {{TemplateTag `/if`}}
+    </div>
+</div>
+{{TemplateTag `/each`}}
+{{/Strip}}
