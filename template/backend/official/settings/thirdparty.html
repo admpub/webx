@@ -1,3 +1,4 @@
+{{Strip}}
 {{- $config := $.Stored.thirdparty -}}
 <div class="form-group">
     <label class="col-sm-2 control-label">{{"收银台"|$.T}}</label>
@@ -38,30 +39,30 @@
     <label class="col-sm-2 control-label">{{"IP定位"|$.T}}</label>
     {{- $ipCfg := $config.ip2region.ValueObject -}}
     <div class="col-sm-10">
-        {{- $mode := $ipCfg.mode|Default `` -}}
+        {{- $mode := $ipCfg.Mode|Default `` -}}
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="thirdparty[ip2region][value][mode]" value="local"{{if eq $mode `local` ``}} checked{{end}} id="thirdparty-ip2region-mode-local" onclick="$('#thirdparty-ip2region-api-settings:not(.hide)').addClass('hide')">
+            <input type="radio" name="thirdparty[ip2region][value][mode]" value="local"{{if eq $mode `local` ``}} checked{{end}} id="thirdparty-ip2region-mode-local">
             <label for="thirdparty-ip2region-mode-local">{{"本地模式"|$.T}}</label>
         </span>
         <span class="radio radio-info radio-inline">
-            <input type="radio" name="thirdparty[ip2region][value][mode]" value="local-memory"{{if eq $mode `local-memory`}} checked{{end}} id="thirdparty-ip2region-mode-local-memory" onclick="$('#thirdparty-ip2region-api-settings:not(.hide)').addClass('hide')">
+            <input type="radio" name="thirdparty[ip2region][value][mode]" value="local-memory"{{if eq $mode `local-memory`}} checked{{end}} id="thirdparty-ip2region-mode-local-memory">
             <label for="thirdparty-ip2region-mode-local-memory">{{"本地内存模式"|$.T}}</label>
         </span>
         <span class="radio radio-success radio-inline">
-            <input type="radio" name="thirdparty[ip2region][value][mode]" value="api"{{if eq $mode `api`}} checked{{end}} id="thirdparty-ip2region-mode-api" onclick="$('#thirdparty-ip2region-api-settings').removeClass('hide');">
+            <input type="radio" name="thirdparty[ip2region][value][mode]" value="api"{{if eq $mode `api`}} checked{{end}} id="thirdparty-ip2region-mode-api">
             <label for="thirdparty-ip2region-mode-api">{{"远程接口"|$.T}}</label>
         </span>
         <div class="fieldset bg-fc{{if ne $mode `api`}} hide{{end}}" id="thirdparty-ip2region-api-settings">
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"接口网址"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input type="url" class="form-control" name="thirdparty[ip2region][value][apiURL]" value="{{$ipCfg.apiURL}}">
+                    <input type="url" class="form-control" name="thirdparty[ip2region][value][apiURL]" value="{{$ipCfg.ApiURL}}" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"API Key"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="thirdparty[ip2region][value][apiKey]" value="{{$ipCfg.apiKey}}">
+                    <input type="text" class="form-control" name="thirdparty[ip2region][value][apiKey]" value="{{$ipCfg.ApiKey}}">
                 </div>
             </div>
             <div class="form-group">
@@ -69,16 +70,20 @@
                 <div class="col-sm-10">
                     <span class="input-group">
                         <span class="input-group-addon">{{`用户名`|$.T}}</span>
-                        <input type="text" class="form-control" name="thirdparty[ip2region][value][apiBasicAuth][username]" value="{{$ipCfg.apiBasicAuth.username}}">
+                        <input type="text" class="form-control" name="thirdparty[ip2region][value][apiBasicAuth][username]" value="{{$ipCfg.ApiBasicAuth.Username}}">
                         <span class="input-group-addon">{{`密码`|$.T}}</span>
-                        <input type="password" class="form-control" name="thirdparty[ip2region][value][apiBasicAuth][password]" value="{{$ipCfg.apiBasicAuth.password}}">
+                        <input type="password" class="form-control" name="thirdparty[ip2region][value][apiBasicAuth][password]" value="{{$ipCfg.ApiBasicAuth.Password}}">
                     </span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"API Headers"|$.T}}</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" name="thirdparty[ip2region][value][apiHeaders]">{{$ipCfg.apiHeaders}}</textarea>
+                    <textarea class="form-control" name="thirdparty[ip2region][value][apiHeaders]">
+{{- range $k,$v := $ipCfg.ApiHeaders -}}
+{{ $k }}={{ $v }}
+{{ end -}}
+                    </textarea>
                     <div class="help-block">{{`API请求头键值对。键和值之间用等号“=”分隔开。如有多个键值对，则每行一个`|$.T}}</div>
                 </div>
             </div>
@@ -87,15 +92,15 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"IPv4数据文件"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="thirdparty[ip2region][value][ipv4Dict]" value="{{$ipCfg.ipv4Dict}}">
-                    <div class="help-block">{{`IPv4数据文件的扩展名为.xdb`|$.T}}</div>
+                    <input type="text" class="form-control" name="thirdparty[ip2region][value][ipv4Dict]" value="{{$ipCfg.IPv4Dict}}">
+                    <div class="help-block">{{`IPv4数据文件的扩展名为.xdb。`|$.T}}{{`若不指定则使用默认文件`|$.T}}</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"IPv6数据文件"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="thirdparty[ip2region][value][ipv6Dict]" value="{{$ipCfg.ipv6Dict}}">
-                    <div class="help-block">{{`IPv6数据文件的扩展名为.xdb`|$.T}}</div>
+                    <input type="text" class="form-control" name="thirdparty[ip2region][value][ipv6Dict]" value="{{$ipCfg.IPv6Dict}}">
+                    <div class="help-block">{{`IPv6数据文件的扩展名为.xdb。`|$.T}}{{`若不指定则使用默认文件`|$.T}}</div>
                 </div>
             </div>
         </div>
@@ -107,26 +112,26 @@
     <label class="col-sm-2 control-label">{{"中文分词"|$.T}}</label>
     {{- $sgCfg := $config.segment.ValueObject -}}
     <div class="col-sm-10">
-        {{- $engine := $sgCfg.engine|Default `` -}}
+        {{- $engine := $sgCfg.Engine|Default `` -}}
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="thirdparty[segment][value][engine]" value="sego"{{if eq $engine `sego` ``}} checked{{end}} id="thirdparty-segment-engine-sego" onclick="$('#thirdparty-segment-settings:not(.hide)').addClass('hide')">
+            <input type="radio" name="thirdparty[segment][value][engine]" value="sego"{{if eq $engine `sego` ``}} checked{{end}} id="thirdparty-segment-engine-sego">
             <label for="thirdparty-segment-engine-sego">{{"本地模式"|$.T}}</label>
         </span>
         <span class="radio radio-success radio-inline">
-            <input type="radio" name="thirdparty[segment][value][engine]" value="api"{{if eq $engine `api`}} checked{{end}} id="thirdparty-segment-engine-api" onclick="$('#thirdparty-segment-settings').removeClass('hide')">
+            <input type="radio" name="thirdparty[segment][value][engine]" value="api"{{if eq $engine `api`}} checked{{end}} id="thirdparty-segment-engine-api">
             <label for="thirdparty-segment-engine-api">{{"远程接口"|$.T}}</label>
         </span>
         <div class="fieldset bg-fc{{if ne $engine `api`}} hide{{end}}" id="thirdparty-segment-settings">
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"接口网址"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input type="url" class="form-control" name="thirdparty[segment][value][apiURL]" value="{{$sgCfg.apiURL}}">
+                    <input type="url" class="form-control" name="thirdparty[segment][value][apiURL]" value="{{$sgCfg.ApiURL}}" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"API Key"|$.T}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="thirdparty[segment][value][apiKey]" value="{{$sgCfg.apiKey}}">
+                    <input type="text" class="form-control" name="thirdparty[segment][value][apiKey]" value="{{$sgCfg.ApiKey}}" required>
                 </div>
             </div>
         </div>
@@ -138,19 +143,19 @@
     <label class="col-sm-2 control-label">{{"翻译"|$.T}}</label>
     {{- $trCfg := $config.translate.ValueObject -}}
     <div class="col-sm-10">
-        {{- $on := $trCfg.on -}}
+        {{- $on := $trCfg.On -}}
         <span class="radio radio-success radio-inline">
-            <input type="radio" name="thirdparty[translate][value][on]" value="1"{{if $on}} checked{{end}} id="thirdparty-translate-on-1" onclick="$('#thirdparty-translate-settings').removeClass('hide')">
+            <input type="radio" name="thirdparty[translate][value][on]" value="1"{{if $on}} checked{{end}} id="thirdparty-translate-on-1">
             <label for="thirdparty-translate-on-1">{{"启用"|$.T}}</label>
         </span>
         <span class="radio radio-danger radio-inline">
-            <input type="radio" name="thirdparty[translate][value][on]" value="0"{{if not $on}} checked{{end}} id="thirdparty-translate-on-0" onclick="$('#thirdparty-translate-settings:not(.hide)').addClass('hide')">
+            <input type="radio" name="thirdparty[translate][value][on]" value="0"{{if not $on}} checked{{end}} id="thirdparty-translate-on-0">
             <label for="thirdparty-translate-on-0">{{"禁用"|$.T}}</label>
         </span>
       <div class="fieldset bg-fc{{if ne $engine `api`}} hide{{end}}" id="thirdparty-translate-settings">
         <div class="form-group">
             <label class="col-sm-2 control-label">{{"总是翻译"|$.T}}</label>
-            {{- $allowForceTranslate := $trCfg.allowForceTranslate -}}
+            {{- $allowForceTranslate := $trCfg.AllowForceTranslate -}}
             <div class="col-sm-10">
                 <span class="radio radio-primary radio-inline">
                     <input type="radio" name="thirdparty[translate][value][allowForceTranslate]" value="1"{{if $allowForceTranslate}} checked{{end}} id="thirdparty-translate-allowForceTranslate-1">
@@ -163,11 +168,11 @@
                 <div class="help-block">{{`用于控制是否在已经存在译文的时候仍然翻译`|$.T}}</div>
             </div>
         </div>
-        {{- range $pk, $pv := $trCfg.providers -}}
+        {{- range $pk, $pv := $trCfg.Providers -}}
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{"接口"|$.T}}</label>
                 <div class="col-sm-10">
-                    {{- $provider := $pv.provider | Default `` -}}
+                    {{- $provider := $pv.Provider | Default `` -}}
                     <select class="form-control" name="thirdparty[translate][value][provider]">
                         {{- range $k, $v := $.Stored.translationProviders -}}
                         <option value="{{$v.Name}}"{{if eq $provider $v.Name}} selected{{end}} data-form="{{$v.FormElements|JSONEncode}}">{{$v.Title|$.T}}</option>
@@ -175,7 +180,7 @@
                     </select>
                 </div>
             </div>
-            <div id="thirdparty-translate-provider-config" data-config="{{$pv.config|JSONEncode}}"></div>
+            <div id="thirdparty-translate-provider-config" data-config="{{$pv.Config|JSONEncode}}"></div>
             {{- break -}}
         {{- else -}}
             <div class="form-group">
@@ -196,3 +201,4 @@
 <script type="text/html" id="tpl-thirdparty-translate-provider-forms">
 {{Include "official/settings/thirdparty_translate_provider_forms" $}}
 </script>
+{{/Strip}}

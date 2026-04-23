@@ -1,12 +1,18 @@
 {{Strip}}
 {{TemplateTag `each formElements element index`}}
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{TemplateTag `element.label`}}</label>
+    <label class="col-sm-2 control-label
+    {{- TemplateTag `each element.attributes attr index` -}}
+        {{- TemplateTag `if attr[0]==required`|ToHTMLAttr }} required {{- TemplateTag `/if` -}}
+    {{- TemplateTag `/each` -}}">{{TemplateTag `element.label`}}</label>
     <div class="col-sm-10">
         <input type="{{TemplateTag `element.type`}}" class="form-control" 
         name="thirdparty[translate][value][config][{{TemplateTag `element.name`}}]" 
         value="{{TemplateTag `formData[element.name]`}}"
-        {{- TemplateTag `each element.attributes attr index` }} {{TemplateTag `attr[0]`}}{{TemplateTag `if attr.length>1`}}="{{TemplateTag `attr[1]`}}"{{TemplateTag `/if`}}{{ TemplateTag `/each` }}>
+        {{- TemplateTag `each element.attributes attr index` | ToHTMLAttr }} {{ TemplateTag `attr[0]` | ToHTMLAttr -}}
+            {{- TemplateTag `if attr.length>1` | ToHTMLAttr }}="{{TemplateTag `attr[1]`}}"
+            {{- TemplateTag `/if` | ToHTMLAttr -}}
+        {{- TemplateTag `/each` | ToHTMLAttr -}}>
         {{TemplateTag `if element.helpText`}}
         <div class="help-block">{{TemplateTag `element.helpText`}}</div>
         {{TemplateTag `/if`}}
