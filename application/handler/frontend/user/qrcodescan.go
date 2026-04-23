@@ -107,7 +107,7 @@ func qrcodeSignIn(ctx echo.Context, encrypted string) error {
 	session.ID = signInData.SessionID
 
 	// set session values
-	ipInfo, _ := ip2region.IPInfo(signInData.IPAddress)
+	ipInfo, _ := ip2region.IPInfo(ctx, signInData.IPAddress)
 	ip2region.ClearZero(&ipInfo)
 	sEnv := &sessionguard.Environment{
 		UserAgent: signInData.UserAgent,

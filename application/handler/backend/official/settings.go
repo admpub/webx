@@ -20,6 +20,7 @@ import (
 	dbschemaNging "github.com/coscms/webcore/dbschema"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/ip2region"
 	"github.com/coscms/webcore/library/license"
 	"github.com/coscms/webcore/registry/settings"
 	"github.com/coscms/webcore/registry/upload"
@@ -27,6 +28,7 @@ import (
 	xOAuth "github.com/admpub/webx/application/handler/frontend/oauth"
 	xcache "github.com/coscms/webfront/library/cache"
 	cfgIPFilter "github.com/coscms/webfront/library/ipfilter"
+	"github.com/coscms/webfront/library/search/segment"
 	cfgUnderAttack "github.com/coscms/webfront/library/underattack"
 	"github.com/coscms/webfront/model/i18nm"
 	modelApi "github.com/coscms/webfront/model/official/api"
@@ -599,6 +601,26 @@ var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
 			Sort:        3000,
 			Disabled:    `N`,
 		},
+		`segment`: {
+			Key:         `segment`,
+			Label:       `中文分词`,
+			Description: `中文分词,支持的引擎有: sego / api`,
+			Value:       `{"engine":"sego","apiURL":"","apiKey":""}`,
+			Group:       `thirdparty`,
+			Type:        `json`,
+			Sort:        3000,
+			Disabled:    `N`,
+		},
+		`ip2region`: {
+			Key:         `ip2region`,
+			Label:       `IP定位`,
+			Description: `IP定位,支持的模式有: local / local-memory / api`,
+			Value:       `{"mode":"local","apiURL":"","apiKey":"","apiBasicAuth":{"username":"","password":""},"apiHeaders":{},"ipv4Dict":"","ipv6Dict":""}`,
+			Group:       `thirdparty`,
+			Type:        `json`,
+			Sort:        3000,
+			Disabled:    `N`,
+		},
 	},
 	`sms`: {
 		`aliyun`: {
@@ -885,6 +907,22 @@ func init() {
 		r[`ValueObject`] = jsonData
 		return nil
 	})
+	settings.RegisterDecoder(`thirdparty.segment`, func(v *dbschemaNging.NgingConfig, r echo.H) error {
+		jsonData := &segment.Config{}
+		if len(v.Value) > 0 {
+			com.JSONDecode(com.Str2bytes(v.Value), jsonData)
+		}
+		r[`ValueObject`] = jsonData
+		return nil
+	})
+	settings.RegisterDecoder(`thirdparty.ip2region`, func(v *dbschemaNging.NgingConfig, r echo.H) error {
+		jsonData := &ip2region.IP2RegionConfig{}
+		if len(v.Value) > 0 {
+			com.JSONDecode(com.Str2bytes(v.Value), jsonData)
+		}
+		r[`ValueObject`] = jsonData
+		return nil
+	})
 	license.OnSetLicense(func(data *lib.LicenseData) {
 		if !config.IsInstalled() {
 			return
@@ -998,18 +1036,34 @@ func init() {
 		}
 	})
 	settings.RegisterEncoder(`thirdparty.translate`, func(v *dbschemaNging.NgingConfig, r echo.H) ([]byte, error) {
-		prov := i18nm.ProviderConfig{
-			Provider: r.String(`provider`),
-			Config:   map[string]string{},
-		}
-		pcfg := r.GetStore(`config`)
-		for k, v := range pcfg {
-			prov.Config[k] = param.AsString(v)
-		}
 		cfg := &i18nm.Config{}
-		cfg.Providers = append(cfg.Providers, prov)
-		cfg.AllowForceTranslate = r.Bool(`allowForceTranslate`)
-		cfg.On = r.Bool(`on`)
+		cfg.FromStore(r)
+		return com.JSONEncode(cfg)
+	})
+	settings.RegisterEncoder(`thirdparty.segment`, func(v *dbschemaNging.NgingConfig, r echo.H) ([]byte, error) {
+		cfg := &segment.Config{
+			Engine: r.String(`engine`),
+			ApiURL: r.String(`apiURL`),
+			ApiKey: r.String(`apiKey`),
+		}
+		return com.JSONEncode(cfg)
+	})
+	settings.RegisterEncoder(`thirdparty.ip2region`, func(v *dbschemaNging.NgingConfig, r echo.H) ([]byte, error) {
+		cfg := &ip2region.IP2RegionConfig{
+			Mode:   r.String(`mode`),
+			ApiURL: r.String(`apiURL`),
+			ApiKey: r.String(`apiKey`),
+			ApiBasicAuth: &ip2region.APIBasicAuth{
+				Username: r.String(`username`),
+				Password: r.String(`password`),
+			},
+			ApiHeaders: map[string]string{},
+			IPv4Dict:   r.String(`ipv4Dict`),
+			IPv6Dict:   r.String(`ipv6Dict`),
+		}
+		for k, v := range r.GetStore(`apiHeaders`) {
+			cfg.ApiHeaders[k] = param.AsString(v)
+		}
 		return com.JSONEncode(cfg)
 	})
 	settings.RegisterEncoder(`base.siteURL`, func(v *dbschemaNging.NgingConfig, formDataMap echo.H) ([]byte, error) {
