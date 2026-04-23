@@ -8,6 +8,7 @@ import (
 	"github.com/admpub/cache"
 	"github.com/admpub/license_gen/lib"
 	"github.com/admpub/log"
+	"github.com/admpub/translate"
 	"github.com/coscms/sms/providers/aliyun"
 	"github.com/coscms/sms/providers/twilio"
 	"github.com/webx-top/com"
@@ -811,6 +812,7 @@ func init() {
 		m := modelApi.NewAccount(ctx)
 		m.ListByOffset(nil, nil, 0, -1, db.Cond{`disabled`: `N`})
 		ctx.Set(`apiAccounts`, m.Objects())
+		ctx.Set(`translationProviders`, translate.ListAll())
 		return nil
 	}))
 	settings.Register((&settings.SettingForm{
