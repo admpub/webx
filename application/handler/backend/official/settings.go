@@ -14,7 +14,6 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 	"github.com/webx-top/echo/defaults"
-	"github.com/webx-top/echo/param"
 	"github.com/webx-top/echo/subdomains"
 
 	dbschemaNging "github.com/coscms/webcore/dbschema"
@@ -1057,12 +1056,9 @@ func init() {
 				Username: r.String(`username`),
 				Password: r.String(`password`),
 			},
-			ApiHeaders: map[string]string{},
+			ApiHeaders: com.SplitKVRows(r.String(`apiHeaders`)),
 			IPv4Dict:   r.String(`ipv4Dict`),
 			IPv6Dict:   r.String(`ipv6Dict`),
-		}
-		for k, v := range r.GetStore(`apiHeaders`) {
-			cfg.ApiHeaders[k] = param.AsString(v)
 		}
 		return com.JSONEncode(cfg)
 	})
