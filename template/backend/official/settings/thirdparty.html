@@ -40,8 +40,12 @@
     {{- $ipCfg := $config.ip2region.ValueObject -}}
     <div class="col-sm-10">
         {{- $mode := $ipCfg.Mode|Default `` -}}
+        <span class="radio radio-default radio-inline">
+            <input type="radio" name="thirdparty[ip2region][value][mode]" value=""{{if eq $mode ``}} checked{{end}} id="thirdparty-ip2region-mode-default">
+            <label for="thirdparty-ip2region-mode-default">{{"默认模式"|$.T}}</label>
+        </span>
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="thirdparty[ip2region][value][mode]" value="local"{{if eq $mode `local` ``}} checked{{end}} id="thirdparty-ip2region-mode-local">
+            <input type="radio" name="thirdparty[ip2region][value][mode]" value="local"{{if eq $mode `local`}} checked{{end}} id="thirdparty-ip2region-mode-local">
             <label for="thirdparty-ip2region-mode-local">{{"本地模式"|$.T}}</label>
         </span>
         <span class="radio radio-info radio-inline">
@@ -113,8 +117,12 @@
     {{- $sgCfg := $config.segment.ValueObject -}}
     <div class="col-sm-10">
         {{- $engine := $sgCfg.Engine|Default `` -}}
+        <span class="radio radio-default radio-inline">
+            <input type="radio" name="thirdparty[segment][value][engine]" value=""{{if eq $engine ``}} checked{{end}} id="thirdparty-segment-engine-default">
+            <label for="thirdparty-segment-engine-default">{{"默认模式"|$.T}}</label>
+        </span>
         <span class="radio radio-primary radio-inline">
-            <input type="radio" name="thirdparty[segment][value][engine]" value="sego"{{if eq $engine `sego` ``}} checked{{end}} id="thirdparty-segment-engine-sego">
+            <input type="radio" name="thirdparty[segment][value][engine]" value="sego"{{if eq $engine `sego`}} checked{{end}} id="thirdparty-segment-engine-sego">
             <label for="thirdparty-segment-engine-sego">{{"本地模式"|$.T}}</label>
         </span>
         <span class="radio radio-success radio-inline">
@@ -152,7 +160,7 @@
             <input type="radio" name="thirdparty[translate][value][on]" value="0"{{if not $on}} checked{{end}} id="thirdparty-translate-on-0">
             <label for="thirdparty-translate-on-0">{{"禁用"|$.T}}</label>
         </span>
-      <div class="fieldset bg-fc{{if ne $engine `api`}} hide{{end}}" id="thirdparty-translate-settings">
+      <div class="fieldset bg-fc{{if not $on}} hide{{end}}" id="thirdparty-translate-settings">
         <div class="form-group">
             <label class="col-sm-2 control-label">{{"总是翻译"|$.T}}</label>
             {{- $allowForceTranslate := $trCfg.AllowForceTranslate -}}
