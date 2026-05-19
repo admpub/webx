@@ -313,7 +313,7 @@ require (
 	github.com/webx-top/poolx v0.0.0-20210912044716-5cfa2d58e380 // indirect
 	github.com/webx-top/restyclient v0.0.6 // indirect
 	github.com/webx-top/tagfast v0.0.1 // indirect
-	github.com/webx-top/validator v0.3.2 // indirect
+	github.com/webx-top/validator v0.3.3 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	github.com/zeebo/blake3 v0.2.4 // indirect
 	github.com/zeebo/xxh3 v1.1.0 // indirect
