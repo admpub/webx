@@ -14,7 +14,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.5-0.20260423064642-fc0eb6f72f0b
 	github.com/coscms/webcore v0.13.3-0.20260519083651-b56a7e52ec52
-	github.com/coscms/webfront v0.0.0-20260522065001-6dba0a5543ec
+	github.com/coscms/webfront v0.0.0-20260522081144-246fb81655ca
 )
 
 require (
@@ -171,13 +171,13 @@ require (
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/coscms/captcha v0.2.3 // indirect
 	github.com/coscms/go-imgparse v0.0.3 // indirect
-	github.com/coscms/sdk v0.0.0-20260522062359-3ad53e4c8af4 // indirect
+	github.com/coscms/sdk v0.0.0-20260522081019-8a284a6d90ff // indirect
 	github.com/coscms/session-boltstore v0.0.0-20260203210304-79c433bb1621 // indirect
 	github.com/coscms/session-mysqlstore v0.0.0-20260127080438-1856d3685966 // indirect
 	github.com/coscms/session-redisstore v0.0.0-20260127080202-3c5732ae77b4 // indirect
 	github.com/coscms/session-sqlitestore v0.0.4 // indirect
 	github.com/coscms/session-sqlstore v0.0.1 // indirect
-	github.com/coscms/stdauth v0.0.0-20260522033127-12dbfa6748ec // indirect
+	github.com/coscms/stdauth v0.0.0-20260522075812-24b2e07d17b4 // indirect
 	github.com/coscms/tree v0.1.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/davidbyttow/govips/v2 v2.17.0 // indirect
