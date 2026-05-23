@@ -14,7 +14,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.5-0.20260423064642-fc0eb6f72f0b
 	github.com/coscms/webcore v0.13.3-0.20260519083651-b56a7e52ec52
-	github.com/coscms/webfront v0.0.0-20260522081144-246fb81655ca
+	github.com/coscms/webfront v0.0.0-20260523044215-5bac8ba55d2c
 )
 
 require (
@@ -71,7 +71,7 @@ require (
 	github.com/admpub/sessions v0.3.0
 	github.com/admpub/translate v0.0.0-20260423085846-bc812cd98a3e
 	github.com/nging-plugins/dbmanager v1.9.6
-	github.com/silenceper/wechat/v2 v2.1.12
+	github.com/silenceper/wechat/v2 v2.1.13
 )
 
 require (
@@ -171,7 +171,7 @@ require (
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/coscms/captcha v0.2.3 // indirect
 	github.com/coscms/go-imgparse v0.0.3 // indirect
-	github.com/coscms/sdk v0.0.0-20260522081019-8a284a6d90ff // indirect
+	github.com/coscms/sdk v0.0.1 // indirect
 	github.com/coscms/session-boltstore v0.0.0-20260203210304-79c433bb1621 // indirect
 	github.com/coscms/session-mysqlstore v0.0.0-20260127080438-1856d3685966 // indirect
 	github.com/coscms/session-redisstore v0.0.0-20260127080202-3c5732ae77b4 // indirect
@@ -271,8 +271,8 @@ require (
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
-	github.com/phuslu/iploc v1.0.20260501 // indirect
-	github.com/phuslu/lru v1.0.18 // indirect
+	github.com/phuslu/iploc v1.0.20260515 // indirect
+	github.com/phuslu/lru v1.0.19 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
@@ -293,7 +293,7 @@ require (
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/studio-b12/gowebdav v0.12.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
-	github.com/tdewolff/minify/v2 v2.24.12 // indirect
+	github.com/tdewolff/minify/v2 v2.24.13 // indirect
 	github.com/tdewolff/parse/v2 v2.8.12 // indirect
 	github.com/tetratelabs/wazero v1.11.0 // indirect
 	github.com/tidwall/btree v1.8.1 // indirect
@@ -328,7 +328,7 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/crypto v0.52.0 // indirect
 	golang.org/x/exp v0.0.0-20260508232706-74f9aab9d74a // indirect
-	golang.org/x/image v0.40.0 // indirect
+	golang.org/x/image v0.41.0 // indirect
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
 	golang.org/x/mod v0.36.0 // indirect
 	golang.org/x/net v0.55.0 // indirect
