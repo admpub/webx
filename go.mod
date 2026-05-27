@@ -14,7 +14,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 require (
 	github.com/admpub/nging/v5 v5.3.5-0.20260423064642-fc0eb6f72f0b
 	github.com/coscms/webcore v0.13.3-0.20260527065851-fc6e6ae2622d
-	github.com/coscms/webfront v0.0.0-20260523044215-5bac8ba55d2c
+	github.com/coscms/webfront v0.0.0-20260527101758-1798382b8d53
 )
 
 require (
@@ -171,7 +171,7 @@ require (
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/coscms/captcha v0.2.3 // indirect
 	github.com/coscms/go-imgparse v0.0.3 // indirect
-	github.com/coscms/sdk v0.0.1 // indirect
+	github.com/coscms/sdk v0.0.3 // indirect
 	github.com/coscms/session-boltstore v0.0.0-20260203210304-79c433bb1621 // indirect
 	github.com/coscms/session-mysqlstore v0.0.0-20260127080438-1856d3685966 // indirect
 	github.com/coscms/session-redisstore v0.0.0-20260127080202-3c5732ae77b4 // indirect
