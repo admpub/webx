@@ -171,7 +171,7 @@ require (
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/coscms/captcha v0.2.3 // indirect
 	github.com/coscms/go-imgparse v0.0.3 // indirect
-	github.com/coscms/sdk v0.0.3 // indirect
+	github.com/coscms/sdk v0.0.4 // indirect
 	github.com/coscms/session-boltstore v0.0.0-20260203210304-79c433bb1621 // indirect
 	github.com/coscms/session-mysqlstore v0.0.0-20260127080438-1856d3685966 // indirect
 	github.com/coscms/session-redisstore v0.0.0-20260127080202-3c5732ae77b4 // indirect
