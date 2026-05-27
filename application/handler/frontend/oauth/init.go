@@ -14,8 +14,8 @@ import (
 func init() {
 	xMW.Use(func(h echo.Handler) echo.Handler {
 		return echo.HandlerFunc(func(c echo.Context) error {
-			c.SetFunc(`OAuthAccounts`, func() []*apiutils.OauthProvider {
-				list, _ := apiutils.OauthProviders(c)
+			c.SetFunc(`OAuthAccounts`, func() []*apiutils.OAuthProvider {
+				list, _ := apiutils.OAuthProviders(c)
 				return list
 			})
 			return h.Handle(c)

@@ -22,11 +22,11 @@ func bindingOAuth(ctx echo.Context, customer *modelCustomer.Customer) error {
 	}
 	siteURL := xcommon.SiteURL(ctx)
 	nextURL := com.URLEncode(siteURL + `/user/profile/binding?type=oauth`)
-	providers, err := apiutils.OauthProviders(ctx)
+	providers, err := apiutils.OAuthProviders(ctx)
 	if err != nil {
 		return err
 	}
-	item := apiutils.GetOauthProvider(providers, provider)
+	item := apiutils.GetOAuthProvider(providers, provider)
 	if item == nil {
 		return ctx.NewError(code.Unsupported, `不支持绑定: %v`, provider)
 	}
@@ -81,7 +81,7 @@ func bindingOAuthGet(ctx echo.Context, m *modelCustomer.Customer) error {
 		}
 		bindedOAuthAccounts[row.Type] = append(bindedOAuthAccounts[row.Type], row)
 	}
-	providers, err := apiutils.OauthProviders(ctx)
+	providers, err := apiutils.OAuthProviders(ctx)
 	if err != nil {
 		return err
 	}
