@@ -14,7 +14,16 @@
 .wrap {
   display: block;
 }
-
+a.active-link{
+  background-color: #2a92fa;
+  color: #eee;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: normal;
+}
+a.active-link:hover{
+  color: #eee;
+}
 .btn > .fa{min-width:15px;text-align:center;}
 .input-group-addon:not(:first-child) .btn, 
 .input-group-btn:not(:first-child) .btn{
