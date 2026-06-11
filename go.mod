@@ -13,7 +13,7 @@ exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
 	github.com/admpub/nging/v5 v5.3.5-0.20260423064642-fc0eb6f72f0b
-	github.com/coscms/webcore v0.13.3-0.20260610144538-7d3c2927883c
+	github.com/coscms/webcore v0.13.3-0.20260611023332-5c60d45ff913
 	github.com/coscms/webfront v0.0.0-20260609051754-0729168d12e1
 )
 
@@ -53,8 +53,8 @@ require (
 	github.com/stretchr/testify v1.11.1
 	github.com/swaggo/swag v1.16.6
 	github.com/webx-top/client v0.9.10
-	github.com/webx-top/com v1.5.2
-	github.com/webx-top/db v1.30.16
+	github.com/webx-top/com v1.5.3
+	github.com/webx-top/db v1.30.17
 	github.com/webx-top/echo v1.24.6
 	github.com/webx-top/echo-prometheus v1.1.3 // indirect
 	github.com/webx-top/image v0.1.4
@@ -329,7 +329,7 @@ require (
 	golang.org/x/image v0.42.0 // indirect
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
 	golang.org/x/mod v0.37.0 // indirect
-	golang.org/x/net v0.55.0 // indirect
+	golang.org/x/net v0.56.0 // indirect
 	golang.org/x/sys v0.46.0 // indirect
 	golang.org/x/text v0.38.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
