@@ -559,6 +559,16 @@ var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
 			Sort:        2004,
 			Disabled:    `Y`,
 		},
+		`coscms`: {
+			Key:         `coscms`,
+			Label:       `COSCMS登录`,
+			Description: ``,
+			Value:       ``,
+			Group:       `oauth`,
+			Type:        `json`,
+			Sort:        2005,
+			Disabled:    `Y`,
+		},
 	},
 	`thirdparty`: { // 第三方接口控制
 		`payment`: {

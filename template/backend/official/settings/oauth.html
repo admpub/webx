@@ -216,3 +216,46 @@
         </div><!-- fieldset -->
     </div><!-- col-sm-8 -->
 </div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{"COSCMS登录"|$.T}}</label>
+    <div class="col-sm-10">{{$disabled := $config.coscms.Disabled| Default `Y`}}
+        <div class="radio radio-success radio-inline">
+            <input type="radio" value="N" name="oauth[coscms][disabled]" id="oauth-coscms-disabled-N"{{if eq $disabled `N`}} checked{{end}} onclick="$('#oauth-settings-coscms').removeClass('hidden');"> 
+            <label for="oauth-coscms-disabled-N">{{"启用"|$.T}}</label>
+        </div>
+        <div class="radio radio-danger radio-inline">
+            <input type="radio" value="Y" name="oauth[coscms][disabled]" id="oauth-coscms-disabled-Y"{{if eq $disabled `Y`}} checked{{end}} onclick="$('#oauth-settings-coscms:not(.hidden)').addClass('hidden');"> 
+            <label for="oauth-coscms-disabled-Y">{{"禁用"|$.T}}</label>
+        </div>
+        <div class="fieldset bg-fc{{if eq $disabled `Y`}} hidden{{end}}" id="oauth-settings-coscms">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">App ID</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="oauth[coscms][value][key]" value="{{$config.coscms.ValueObject.Key}}">
+                </div>
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Secret Key</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="oauth[coscms][value][secret]" value="{{$config.coscms.ValueObject.Secret}}">
+                </div>
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{"图标类名"|$.T}}</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="oauth[coscms][value][extra][iconClass]" value="{{$config.coscms.ValueObject.Extra.iconClass}}">
+                    <div class="help-block">{{"例如: "|$.T}}<code>fa fa-user</code></div>
+                </div>
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{"登录标题"|$.T}}</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="oauth[coscms][value][extra][title]" value="{{$config.coscms.ValueObject.Extra.title}}">
+                    <div class="help-block">{{"例如: COSCMS登录"|$.T}}</div>
+                </div>
+            </div><!-- form-group -->
+        </div><!-- fieldset -->
+    </div><!-- col-sm-8 -->
+</div>
