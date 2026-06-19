@@ -168,6 +168,8 @@
   display: inline-block;
 }
 
+.btn-icon img{width:100%;height:100%}
+
 .btn-secondary {
   border-color: #D8DCE3;
 }
