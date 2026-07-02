@@ -1,3 +1,13 @@
+.line-clamp {
+  max-height:70px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  box-orient:vertical;
+  line-clamp:3;
+}
 /*! ########## 4.1 Background ########## */
 .bg-transparent,
 .bg-transparent-hover:hover {
