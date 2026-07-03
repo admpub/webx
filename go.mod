@@ -12,7 +12,7 @@ go 1.26.2
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 5070c987018ac0569efe1d2b4b74e24325f21d64
+	github.com/admpub/nging/v5 v5.3.6-0.20260703053430-5070c987018a
 	github.com/coscms/webcore v0.13.3-0.20260619041415-5f0e39d1148a
 	github.com/coscms/webfront v0.0.0-20260618100459-4e9e00e97fb9
 )
@@ -70,12 +70,14 @@ require (
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.3.0
 	github.com/admpub/translate v0.0.0-20260423085846-bc812cd98a3e
-	github.com/nging-plugins/dbmanager v1.9.6
+	github.com/nging-plugins/dbmanager v1.9.7
 	github.com/silenceper/wechat/v2 v2.1.13
 )
 
 require (
 	filippo.io/edwards25519 v1.2.0 // indirect
+	github.com/ClickHouse/ch-go v0.71.0 // indirect
+	github.com/ClickHouse/clickhouse-go/v2 v2.45.0 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/abh/errorutil v1.0.0 // indirect
 	github.com/admpub/9t v0.0.1 // indirect
@@ -194,6 +196,8 @@ require (
 	github.com/geoffgarside/ber v1.2.0 // indirect
 	github.com/glebarez/go-sqlite v1.22.0 // indirect
 	github.com/go-errors/errors v1.5.1 // indirect
+	github.com/go-faster/city v1.0.1 // indirect
+	github.com/go-faster/errors v0.7.1 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/go-openapi/jsonpointer v0.22.5 // indirect
 	github.com/go-openapi/jsonreference v0.21.5 // indirect
@@ -244,6 +248,7 @@ require (
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
 	github.com/klauspost/crc32 v1.3.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
+	github.com/lib/pq v1.12.3 // indirect
 	github.com/libdns/libdns v1.1.1 // indirect
 	github.com/lufia/plan9stats v0.0.0-20260330125221-c963978e514e // indirect
 	github.com/markbates/going v1.0.3 // indirect
@@ -268,10 +273,12 @@ require (
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
 	github.com/nging-plugins/dlmanager v1.9.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
+	github.com/paulmach/orb v0.12.0 // indirect
 	github.com/pcpl2/go-webp v0.0.1 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
 	github.com/phuslu/iploc v1.0.20260615 // indirect
 	github.com/phuslu/lru v1.0.20 // indirect
+	github.com/pierrec/lz4/v4 v4.1.25 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
@@ -284,9 +291,11 @@ require (
 	github.com/russross/blackfriday v1.6.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
+	github.com/segmentio/asm v1.2.1 // indirect
 	github.com/segmentio/fasthash v1.0.3 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/shirou/gopsutil/v4 v4.26.5 // indirect
+	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/spf13/cast v1.10.0 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
@@ -319,6 +328,8 @@ require (
 	github.com/zeebo/blake3 v0.2.4 // indirect
 	github.com/zeebo/xxh3 v1.1.0 // indirect
 	go.etcd.io/bbolt v1.4.3 // indirect
+	go.opentelemetry.io/otel v1.44.0 // indirect
+	go.opentelemetry.io/otel/trace v1.44.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
