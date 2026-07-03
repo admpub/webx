@@ -2,8 +2,8 @@
 {{- if and $sourceInfo $sourceInfo.X -}}
 <div class="container-wrapper pd-b-20 pd-t-20 bg-transparent">
   <div class="container">
-    <div class="row pd-y-10 rainbow-bar rounded-3">
-    <div class="col-12 d-flex justify-content-between">
+    <div class="pd-10 rainbow-bar rounded-3">
+    <div class="d-flex justify-content-between">
       <div>
           {{- $detailURL := $sourceInfo.H.detailURL -}}
           <a href="{{$detailURL}}"><img src="{{$sourceInfo.H.coverURL|Default (AssetsXURL `/images/83.jpg`)}}" alt="{{$sourceInfo.V}}" class="img-fluid rounded-3" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';" style="max-width:100px"></a>
@@ -14,13 +14,13 @@
         </h3>
         <p class="mg-b-0 tx-size-14 line-clamp">{{Substr $sourceInfo.H.summary `...` 120}}</p>
       </div>
-      <div>
+      <div class="hidden-xs-down">
         <a href="{{$detailURL}}" class="btn btn-success bd-0 tx-size-13 tx-spacing-2 pd-y-15 mg-t-60">
           {{`产品详情`|$.T}}
         </a>
       </div>
     </div><!-- d-flex -->
-    </div>
+    </div><!-- rainbow-bar -->
   </div><!-- container -->
 </div><!-- container-wrapper -->
 {{- end -}}

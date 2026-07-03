@@ -11,22 +11,22 @@
     {{Include "#default#article/partial_list_top"}}
 
     <div class="container pd-b-40">
-    {{$end := Sub (len $.Stored.articles) 1}}
-    {{range $k, $v := $.Stored.articles}}
-    {{if Eq (Math "mod" $k 4) 0}}
-      {{if gt $k 0}}</div><!-- card-deck -->{{end}}
+    {{- $end := Sub (len $.Stored.articles) 1 -}}
+    {{- range $k, $v := $.Stored.articles -}}
+    {{- if Eq (Math "mod" $k 4) 0 -}}
+      {{- if gt $k 0 }}</div><!-- card-deck -->{{ end -}}
       <div class="card-deck{{if ge $k 4}} mg-t-20{{end}}">
-    {{end}}
+    {{- end -}}
         <div class="card bd-0 rounded-0{{if not $v.Image}} card-inverse bg-indigo{{end}}">
             <!-- bg-indigo/bg-info -->
-          {{if $v.Image}}
+          {{- if $v.Image -}}
           <a href="{{URLByName `article.detail` $v.Id}}">
             <figure class="effect-shine">
               <img class="img-fluid wd-100p rounded-3 shadow" src="{{$v.Image}}" alt="{{$v.Title}}" onerror="this.onerror=null;this.src='{{AssetsXURL}}/images/83.jpg';">
               <figcaption></figcaption>
             </figure>
           </a>
-          {{end}}
+          {{- end -}}
           <div class="card-block pd-20 tx-center bd-x bd-color-gray-lighter">
             <div class="d-flex justify-content-center align-items-center{{if $v.Image}} tx-gray-light{{end}} tx-size-12">
               <span class="d-inline-block tx-info">Health</span>
@@ -34,9 +34,9 @@
               <span class="d-inline-block">{{(Date $v.Created).Format ($.RawT "2006年1月2日")}}</span>
             </div><!-- d-flex -->
             <h6 class="lh-5 mg-t-10 mg-b-0"><a href="{{URLByName `article.detail` $v.Id}}" class="{{if not $v.Image}}tx-white{{else}}tx-inverse{{end}}">{{$v.Title}}</a></h6>
-            {{if not $v.Image}}
+            {{- if not $v.Image -}}
             <p class="tx-size-xs mg-b-30">{{$v.Summary}}</p>
-            {{end}}
+            {{- end -}}
           </div><!-- card-block -->
           <div class="card-footer bd bd-t-0 bd-color-gray-lighter rounded-bottom-0 tx-size-base d-flex justify-content-center align-items-center">
             <a href="javascript:;" class="{{if not $v.Image}}tx-white{{else}}tx-gray-light{{end}} hover-info d-inline-block mg-r-20">
@@ -56,8 +56,8 @@
             <a href="javascript:;" class="{{if not $v.Image}}tx-white{{else}}tx-gray-light{{end}} hover-danger d-inline-block"><i class="fa fa-pinterest"></i></a> -->
           </div><!-- card-footer -->
         </div><!-- card -->
-      {{if eq $k $end}}</div><!-- card-deck -->{{end}}
-    {{end}}
+      {{- if eq $k $end }}</div><!-- card-deck -->{{ end -}}
+    {{- end -}}
 
       <nav class="mg-t-60 d-flex justify-content-center">
         {{$.Stored.pagination.Render "#default#pagination_circle"}}

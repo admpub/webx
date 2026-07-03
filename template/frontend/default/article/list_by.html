@@ -11,19 +11,17 @@
 
     <div class="container pd-b-40">{{- $sourceInfo := $.Stored.sourceInfo -}}
       {{- if and $sourceInfo $sourceInfo.X -}}
-      <div class="row mg-b-20">
-        <div class="tx-bold">
-          <a href="{{$sourceInfo.H.detailURL}}">{{$sourceInfo.V}}</a>
-          {{Include "#default#article/list_cardhead"}}
-        </div>
+      <div class="mg-b-20 tx-bold">
+        <a href="{{$sourceInfo.H.detailURL}}">{{$sourceInfo.V}}</a>
+        {{Include "#default#article/list_cardhead"}}
       </div>
       {{- end -}}
-      <div class="row">
+      <div>
         {{- $end := Sub (len $.Stored.articles) 1 -}}
         {{- range $k, $v := $.Stored.articles -}}
         {{- $mod := Eq (Math "mod" $k 2) 0 -}}
         {{- if $mod -}}
-          {{if gt $k 0}}</div><!-- card-deck -->{{end}}
+          {{- if gt $k 0 }}</div><!-- card-deck -->{{ end -}}
           <div class="card-deck{{if ge $k 2}} mg-t-20{{end}} wd-100p">
         {{- end -}}
           <div class="card pd-15">
