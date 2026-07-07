@@ -10,8 +10,8 @@
           </div><!-- col-8 -->
           <div class="col-lg-5 mg-t-40 mg-lg-t-0">
             <span class="d-block tx-inverse tx-size-28 tx-spacing-neg-2 tx-bold mg-b-20">
-                <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="ht-50" alt="{{Config.base.siteName}}">
-                <span class="nowrap">{{Config.base.siteName}}</span>
+                <img src="{{Config.base.siteLogo|Default (AssetsURL `/images/logo.png`)}}" onerror="this.onerror=null;this.src='{{AssetsURL}}/images/logo.png';" class="ht-50" alt="{{$.SiteName}}">
+                <span class="nowrap">{{$.SiteName}}</span>
             </span>
             <div>
               <h4 class="tx-size-sm-36 tx-size-md-44 tx-size-lg-56 tx-inverse tx-bold tx-spacing-neg-2 mg-b-15">{{`Website Under Maintenance`|$.T}}</h4>
@@ -22,7 +22,7 @@
                 {{`This website is currently undergoing maintenance. We apologize for any inconvenience and appreciate your patience.`|$.T}}
                 {{- end -}}
               </h6>
-              <p class="tx-size-xs">&copy; {{Now.Format "2006"}} <a href="{{Config.base.siteURL}}" class="tx-gray hover-warning">{{Config.base.siteName}}</a>. All Rights Reserved.</p>
+              <p class="tx-size-xs">&copy; {{Now.Format "2006"}} <a href="{{Config.base.siteURL}}" class="tx-gray hover-warning">{{$.SiteName}}</a>. All Rights Reserved.</p>
             </div>
           </div><!-- col-4 -->
         </div><!-- row -->

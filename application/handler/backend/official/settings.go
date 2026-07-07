@@ -29,6 +29,7 @@ import (
 	xcache "github.com/coscms/webfront/library/cache"
 	cfgIPFilter "github.com/coscms/webfront/library/ipfilter"
 	"github.com/coscms/webfront/library/search/segment"
+	frontSettingsLib "github.com/coscms/webfront/library/settings"
 	cfgUnderAttack "github.com/coscms/webfront/library/underattack"
 	"github.com/coscms/webfront/model/i18nm"
 	modelApi "github.com/coscms/webfront/model/official/api"
@@ -350,6 +351,16 @@ var configDefaults = map[string]map[string]*dbschemaNging.NgingConfig{
 			Group:       `base`,
 			Type:        `text`,
 			Sort:        30,
+			Disabled:    `N`,
+		},
+		`multilingual`: {
+			Key:         `multilingual`,
+			Label:       `多语言设置`,
+			Description: ``,
+			Value:       `{}`, // SettingsMultilinguals
+			Group:       `base`,
+			Type:        `text`,
+			Sort:        0,
 			Disabled:    `N`,
 		},
 	},
@@ -773,7 +784,11 @@ func init() {
 			storerEngines = append(storerEngines, name)
 		}
 		ctx.Set(`storerEngines`, storerEngines)
-		return nil
+
+		return onRequestGet(ctx)
+	}), settings.OptAddHookPost(func(ctx echo.Context) error {
+
+		return onRequestPost(ctx)
 	}))
 	settings.Register((&settings.SettingForm{
 		Short: `缓存配置`,
@@ -861,6 +876,14 @@ func init() {
 	})
 	settings.RegisterDecoder(`base.recharge`, func(v *dbschemaNging.NgingConfig, r echo.H) error {
 		jsonData := modelCustomer.NewWalletSettings()
+		if len(v.Value) > 0 {
+			com.JSONDecode(com.Str2bytes(v.Value), jsonData)
+		}
+		r[`ValueObject`] = jsonData
+		return nil
+	})
+	settings.RegisterDecoder(`base.multilingual`, func(v *dbschemaNging.NgingConfig, r echo.H) error {
+		jsonData := &frontSettingsLib.SettingsMultilinguals{}
 		if len(v.Value) > 0 {
 			com.JSONDecode(com.Str2bytes(v.Value), jsonData)
 		}

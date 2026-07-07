@@ -12,9 +12,9 @@ go 1.26.2
 exclude github.com/gomodule/redigo v2.0.0+incompatible
 
 require (
-	github.com/admpub/nging/v5 v5.3.6-0.20260703053430-5070c987018a
-	github.com/coscms/webcore v0.13.3-0.20260619041415-5f0e39d1148a
-	github.com/coscms/webfront v0.0.0-20260618100459-4e9e00e97fb9
+	github.com/admpub/nging/v5 v5.3.6-0.20260707062444-0196665284da
+	github.com/coscms/webcore v0.13.3-0.20260707062202-facb846ee65a
+	github.com/coscms/webfront v0.0.0-20260707091100-3cf98a3bac53
 )
 
 require (
@@ -43,7 +43,7 @@ require (
 	github.com/admpub/resty/v2 v2.7.3 // indirect
 	github.com/admpub/sensitive v0.0.1 // indirect
 	github.com/admpub/useragent v0.0.2 // indirect
-	github.com/coscms/forms v1.16.12
+	github.com/coscms/forms v1.16.13
 	github.com/coscms/oauth2s v0.5.0
 	github.com/coscms/sms v0.0.7
 	github.com/gosimple/slug v1.15.0 // indirect
@@ -70,7 +70,7 @@ require (
 	github.com/admpub/goth v0.0.4
 	github.com/admpub/sessions v0.3.0
 	github.com/admpub/translate v0.0.0-20260423085846-bc812cd98a3e
-	github.com/nging-plugins/dbmanager v1.9.7
+	github.com/nging-plugins/dbmanager v1.9.8
 	github.com/silenceper/wechat/v2 v2.1.13
 )
 

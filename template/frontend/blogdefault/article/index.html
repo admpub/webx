@@ -1,6 +1,6 @@
 {{Strip}}{{Extend "#blogdefault#base"}}
-{{Block "keywords"}}{{Config.base.siteName}}{{/Block}}
-{{Block "description"}}{{Config.base.siteName}}{{/Block}}
+{{Block "keywords"}}{{$.SiteName}}{{/Block}}
+{{Block "description"}}{{$.SiteName}}{{/Block}}
 {{Block "body"}}
         {{Include "#blogdefault#article/index/hero"}}
         {{Include "#blogdefault#article/index/featured"}}

@@ -1,0 +1,106 @@
+id: Forms
+theme: bootstrap3
+template: "allfields"
+method: POST
+action: ""
+attributes:
+    - - class
+      - form-horizontal
+    - - role
+      - form
+withbuttons: false
+buttons: []
+btnstemplate: ""
+elements:
+    - id: ""
+      type: text
+      name: siteName
+      label: 网站名称
+      labelcols: 2
+      fieldcols: 4
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: []
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: ""
+      type: text
+      name: siteSlogan
+      label: 网站口号
+      labelcols: 2
+      fieldcols: 4
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: []
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: ""
+      type: text
+      name: siteMetaKeywords
+      label: 关键词
+      labelcols: 2
+      fieldcols: 10
+      labelclasses: []
+      value: ""
+      helptext: "多个关键词之间用半角逗号“,”分隔"
+      template: ""
+      valid: ""
+      attributes: []
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: ""
+      type: textarea
+      name: siteMetaDescription
+      label: 简介
+      labelcols: 2
+      fieldcols: 10
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: []
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+    - id: ""
+      type: textarea
+      name: siteAnnouncement
+      label: 站点公告
+      labelcols: 2
+      fieldcols: 10
+      labelclasses: []
+      value: ""
+      helptext: ""
+      template: ""
+      valid: ""
+      attributes: 
+        - - rows
+          - 5
+        - - class
+          - html-editor
+      choices: []
+      elements: []
+      format: ""
+      languages: []
+      data: {}
+languages: []
+data: {}
+trimnameprefix: ""

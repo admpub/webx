@@ -43,11 +43,11 @@
                     <div class="bottom-content">
                         <div class="bottom-left">
                             <div>
-                                &copy; {{Now.Format "2006"}}. All rights By <a href="{{Config.base.siteURL|Default (FrontendURL `/`)}}">{{Config.base.siteName}}</a>.
+                                &copy; {{Now.Format "2006"}}. All rights By <a href="{{Config.base.siteURL|Default (FrontendURL `/`)}}">{{$.SiteName}}</a>.
 {{- if Config.base.statCode -}}<span style="display:none">{{Config.base.statCode|ToHTML}}</span>{{- end -}}
-{{- if Config.base.siteSlogan -}}
+{{- if $.SiteSlogan -}}
 <br />
-{{- Config.base.siteSlogan -}}
+{{- $.SiteSlogan -}}
 {{- end -}}
                             </div>
                         </div>

@@ -25,8 +25,8 @@
                             {{- end -}}
                         </a>
                         {{- else -}}
-                        <a title="{{Config.base.siteName}}" href="{{Config.base.siteURL|Default `/`}}" class="nav-link">
-                            {{- Config.base.siteName -}}
+                        <a title="{{$.SiteName}}" href="{{Config.base.siteURL|Default `/`}}" class="nav-link">
+                            {{- $.SiteName -}}
                         </a>
                         {{- end -}}
                     </nav>

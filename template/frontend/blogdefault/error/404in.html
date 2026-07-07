@@ -1,7 +1,7 @@
 {{Strip}}{{Extend "#blogdefault#base"}}
 {{Block "title"}}Not Found{{/Block}}
-{{Block "keywords"}}{{Config.base.siteName}}{{/Block}}
-{{Block "description"}}{{Config.base.siteName}}{{/Block}}
+{{Block "keywords"}}{{$.SiteName}}{{/Block}}
+{{Block "description"}}{{$.SiteName}}{{/Block}}
 {{Block "body"}}
         <!-- ============= NOT FOUND ============= -->
         <div class="not-found-wrapper section-padding" style="background-image: url('{{AssetsXURL}}/blogdefault/img/404.png')">
