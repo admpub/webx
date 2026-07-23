@@ -1,3 +1,4 @@
+{{Strip}}
 <ul class="sub-menu">{{$v := $.Get `mobileHeaderNavChildren`}}
 {{- range $key,$sub := $v.FetchChildren -}}
 {{- $surl := $sub.URL -}}
@@ -10,3 +11,4 @@
     </li>
 {{- end -}}
 </ul>
+{{Strip}}

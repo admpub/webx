@@ -1,3 +1,4 @@
+{{Strip}}
 {{- $themeInfo := call $.Func.ThemeInfo -}}
 {{- $articleIds := $themeInfo.CustomConfig.String `indexSliderItems` -}}
 {{- if $articleIds -}}
@@ -7,7 +8,6 @@
 {{- $relationList := call $.Func.queryList `image_original <>=` 3 0 -}}
 {{- $.Set `heroList` $relationList -}}
 {{- end -}}
-<!-- ============= HERO ============= -->
         <section class="hero-wrapper">
             <div class="hero-slider-wrapper">
                 {{- range $k, $v := $.Get `heroList` -}}
@@ -57,3 +57,4 @@
                 {{- end -}}
             </div>
         </section>
+{{/Strip}}

@@ -1,4 +1,6 @@
-<ul class="submenu">{{$v := $.Get `headerNavChildren`}}
+{{Strip}}
+<ul class="submenu">
+    {{- $v := $.Get `headerNavChildren` -}}
 {{- range $key,$sub := $v.FetchChildren -}}
 {{- $surl := $sub.URL -}}
     <li class="submenu-item {{- if $sub.HasChildren}} submenu-wrapper{{- end -}}">
@@ -17,3 +19,4 @@
     </li>
 {{- end -}}
 </ul>
+{{/Strip}}

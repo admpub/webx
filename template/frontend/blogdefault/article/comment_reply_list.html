@@ -1,3 +1,4 @@
+{{Strip}}
 {{- $commentList := call $.Func.commentList -}}
 {{- range $k, $v := $commentList -}}
 <div class="comment-card reply">
@@ -45,3 +46,4 @@
     {{- ($.Stored.pagination.SetNum 1).Render `#blogdefault#pagination` -}}
     {{- end -}}
 {{- end -}}
+{{/Strip}}

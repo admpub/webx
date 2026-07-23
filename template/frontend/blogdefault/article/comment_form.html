@@ -1,4 +1,5 @@
-<!-- Comments box -->{{- $data := $.Stored.data -}}
+{{Strip}}
+{{- $data := $.Stored.data -}}
 {{- $inModal := $.Get "comment_form.in_modal" -}}
 {{- $disabledCommentMessage := $.Stored.disabledCommentMessage -}}    
 <div class="comment-box">
@@ -58,3 +59,4 @@
   </form>
   {{- end -}}
 </div>
+{{/Strip}}
