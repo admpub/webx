@@ -2446,7 +2446,7 @@ p {
 }
 
 .widget-category .cat-thumb {
-  width: 80px;
+  width: 80px;min-width: 80px;
   height: 70px;
   border-radius: 10px;
   margin-right: 15px;
@@ -3928,10 +3928,9 @@ ul.c-bredcrumb li,
 }
 
 .discussed-post-wrapper .sidebar-widget .widget-category .cat-thumb {
-  width: 80px;
+  width: 80px;min-width: 80px;
   height: 80px;
   margin-right: 20px;
-  object-fit: cover;
 }
 
 /* ====================================================
