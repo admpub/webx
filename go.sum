@@ -122,8 +122,8 @@ github.com/admpub/gohls-server v0.3.10 h1:LiJXsLyxa29Tidtb2Ae2Bosmw4URrDCqusMxQt
 github.com/admpub/gohls-server v0.3.10/go.mod h1:00UPfRFpqXt5eAgMSng/4HaRnXjNqqnmBtQfOnqK0no=
 github.com/admpub/gohttp v0.0.0-20190322032039-b55c707b8f1e h1:PRSuHQW/9klTd5kzSWa9tjjq0bVlxUdBSNhouK1A91c=
 github.com/admpub/gohttp v0.0.0-20190322032039-b55c707b8f1e/go.mod h1:w2vchjU6ELhbHMoRJLPd+28TPksj8gf3dke0mRiLtDs=
-github.com/admpub/goth v0.0.4 h1:eOSvkOwrj6Z/Q25OdUHWwn9mF5/6Y0oWQkdApnwD8uM=
-github.com/admpub/goth v0.0.4/go.mod h1:xx12SdWA3k6CpCY0KrfnS0DHPckui0Zz0/FtGi09y4U=
+github.com/admpub/goth v0.0.5 h1:YioxUhvVlZYl8ETn//9ATeF+/5J+jd5gTVigx4rp17s=
+github.com/admpub/goth v0.0.5/go.mod h1:O0e+CAzSk/TdWImlFfh3DODJcc0FtcSSyiNajRVQBPo=
 github.com/admpub/gotwilio v0.0.1 h1:owUFDf7kX7kFPo5aHVoINYdsWbb2OU+D93hp9aocZLk=
 github.com/admpub/gotwilio v0.0.1/go.mod h1:GYG6FEJmWJzKjc85SEEJgpSQlcXukhytYXwWHNyKZv8=
 github.com/admpub/httpscerts v0.0.0-20180907121630-a2990e2af45c h1:tmqtGUQDycCYRZedeZyn+097k4x3MHkVTIqJAvHGStM=

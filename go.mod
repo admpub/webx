@@ -67,7 +67,7 @@ require (
 require (
 	github.com/admpub/dateparse v0.0.0-20250903020633-d86d3f2a4cfd
 	github.com/admpub/events v1.3.6
-	github.com/admpub/goth v0.0.4
+	github.com/admpub/goth v0.0.5
 	github.com/admpub/sessions v0.3.0
 	github.com/admpub/translate v0.0.0-20260423085846-bc812cd98a3e
 	github.com/nging-plugins/dbmanager v1.9.10
