@@ -1,13 +1,14 @@
 # Release Notes
 
-## [v0.5.18] — 2026-08-25
+## [v0.5.19] — 2026-08-25
 
-### Added
-- 新增英文 README 文档（README.en-US.md）
+### Changed
+- 构建工具更新：goreleaser 改用 `GITHUB_TOKEN`
+- 构建配置：新增 `config/i18n` 打包到发行版
 
 ---
 
-## [v0.5.17] — 2025-11-28
+## [v0.5.18] — 2026-08-25
 
 ### Added
 - 新增后台线下支付管理功能（`/official/customer/offline_pay`）
@@ -17,29 +18,42 @@
 - 新增多语言设置（`settings_multilingual.go`）
 - 新增 OAuth2 登录支持（COSCMS、GitHub）
 - 新增 `ip2region_v6.xdb` IPv6 地理数据库
+- 新增英文 README 文档（README.en-US.md）
 
 ### Changed
 - 评论系统重构（`article/comment.go`）
 - 前台路由页面重构（`manager/frontend_route_page.go`）
 - 客户分组包管理重构（`group_package/group_package.go`）
 - 客户角色管理重构（`customer/role/role.go`）
+- 客户等级管理重构（`customer/level/level.go`）
 - 广告管理重构（`advert/ad_item.go`, `advert/ad_position.go`）
 - 页面模板管理重构（`page/template.go`, `page/navigate.go`）
 - 标签管理重构（`tags/tags.go`）
+- 地区管理重构（`tool/area.go`, `tool/area_group.go`）
 - 前台文章多语言支持（`i18nm.GetModelsTranslations`）
 - 图片配置优化（`image/config.go`）
 - 用户登录逻辑重构（`index/customer.go`）
 - 攻击防护模板优化（`under_attack.html`）
-- 大量前端模板重构（100+ 文件）
+- 大量前端模板重构（167 文件）
 - 导航系统全面更新
-- 依赖大幅升级（go 1.26.2、webcore v0.13.x、webfront 更新）
+- 依赖升级（go 1.25.3→1.26.2、webcore v0.13.x、webfront 更新）
+
+---
+
+## [v0.5.17] — 2025-11-28
+
+### Changed
+- 文章/分类/标签/导航 handler 重构（迁移至 `formbuilder`）
+- 前台文章用户管理重构（`article/user/manage.go`）
+- 前端模板优化（52 文件）
+- 依赖更新
 
 ---
 
 ## [v0.5.16] — 2025-08-21
 
 ### Changed
-- 大量前端模板重构（100+ 文件）
+- 大量前端模板重构（188 文件）
 - 导航系统全面更新
 - 前端 CSS/JS 资产更新
 - 依赖升级
