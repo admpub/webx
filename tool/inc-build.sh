@@ -18,6 +18,7 @@ mkdir ${RELEASEDIR}/config
 #cp -R ../config/config.yaml ${RELEASEDIR}/config/config.yaml
 cp -R ../config/config.yaml.sample ${RELEASEDIR}/config/config.yaml.sample
 cp -R ../config/insert.* ${RELEASEDIR}/config/
+cp -R ../config/i18n ${RELEASEDIR}/config/
 # cp -R ../config/preupgrade.* ${RELEASEDIR}/config/
 cp -R ../config/ua.txt ${RELEASEDIR}/config/ua.txt
 
