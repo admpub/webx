@@ -219,6 +219,7 @@ func translationTranslate(ctx echo.Context) error {
 	forceTranslate := ctx.Formx(`force`).Bool()
 	autoTranslate := ctx.Formx(`auto`).Bool()
 	restart := ctx.Formx(`restart`).Bool()
+	restartID := ctx.Formx(`restartId`).Uint64()
 	runTask := func() {
 		defer group.Cancel(bgKey)
 		ctx := bg.Context()
@@ -235,6 +236,8 @@ func translationTranslate(ctx echo.Context) error {
 		var err error
 		if restart {
 			err = i18nm.Batch(eCtx, options, noticer, 0)
+		} else if restartID > 0 {
+			err = i18nm.Batch(eCtx, options, noticer, restartID)
 		} else {
 			err = i18nm.Batch(eCtx, options, noticer)
 		}
