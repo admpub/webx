@@ -18,11 +18,17 @@
 	<div class="col-md-12">
 		<div class="block-flat no-padding">
 			<div class="header">
-				<a data-ajax-url="{{BackendURL}}/tool/translation/translate?table={{$.Stored.table}}" 
+				<a data-ajax-url="{{BackendURL}}/tool/translation/translate?table={{$.Stored.table}}&force=1&restart=1" 
 				data-ajax-confirm="{{$.T `确定要全部重新翻译[%s]吗？` $tableTitle}}" 
 				data-ajax-accept="json" data-ajax-reload="1" class="btn btn-warning pull-right">
 					<i class="fa fa-language"></i>
 					{{"全部重新翻译"|$.T}}
+				</a>
+				<a data-ajax-url="{{BackendURL}}/tool/translation/translate?table={{$.Stored.table}}&auto=1&restart=1" 
+				data-ajax-confirm="{{$.T `确定要完善[%s]全部空白译文吗？` $tableTitle}}" 
+				data-ajax-accept="json" data-ajax-reload="1" class="btn btn-success pull-right">
+					<i class="fa fa-language"></i>
+					{{"完善全部空白译文"|$.T}}
 				</a>
 				<h3>{{$tableTitle}}</h3>
 			</div>
@@ -75,9 +81,15 @@
 								</a><br />
 								{{- end -}}
 								<a class="label label-warning" 
-									data-ajax-url="{{BackendURL}}/tool/translation/translate?table={{$.Stored.table}}&id={{$v.id}}" 
+									data-ajax-url="{{BackendURL}}/tool/translation/translate?table={{$.Stored.table}}&id={{$v.id}}&force=1" 
 									data-ajax-confirm="{{$.T `确定要重新翻译吗？`}}" 
 									data-ajax-accept="json" data-ajax-reload="1" title="{{`重新翻译`|$.T}}" data-toggle="tooltip">
+									<i class="fa fa-language"></i>
+								</a><br />
+								<a class="label label-success" 
+									data-ajax-url="{{BackendURL}}/tool/translation/translate?table={{$.Stored.table}}&id={{$v.id}}&auto=1" 
+									data-ajax-confirm="{{$.T `确定要完善空白译文吗？`}}" 
+									data-ajax-accept="json" data-ajax-reload="1" title="{{`完善空白译文`|$.T}}" data-toggle="tooltip">
 									<i class="fa fa-language"></i>
 								</a>
 							</td>

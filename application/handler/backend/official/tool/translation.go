@@ -216,18 +216,28 @@ func translationTranslate(ctx echo.Context) error {
 	})
 	id := ctx.Formx(`id`).Uint64()
 	lang := ctx.Form(`tlang`)
+	forceTranslate := ctx.Formx(`force`).Bool()
+	autoTranslate := ctx.Formx(`auto`).Bool()
+	restart := ctx.Formx(`restart`).Bool()
 	runTask := func() {
 		defer group.Cancel(bgKey)
 		ctx := bg.Context()
 		eCtx := defaults.NewMockContextWith(ctx)
 		options := i18nm.TranslateConfig{
+			ForceTranslate: &forceTranslate,
+			AutoTranslate:  &autoTranslate,
 			ListQuery: i18nm.ListQuery{
 				Table: table,
 				RowID: id,
 				Lang:  lang,
 			},
 		}
-		err := i18nm.Batch(eCtx, options, noticer)
+		var err error
+		if restart {
+			err = i18nm.Batch(eCtx, options, noticer, 0)
+		} else {
+			err = i18nm.Batch(eCtx, options, noticer)
+		}
 		if err != nil {
 			noticer.Failure(err.Error())
 		}
