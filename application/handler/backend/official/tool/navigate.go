@@ -109,4 +109,10 @@ var TopNavigate = navigate.List{
 		Action:  `translation/edit`,
 		Icon:    `pencil`,
 	},
+	&navigate.Item{
+		Display:   true,
+		Name:      echo.T(`翻译本地化文本`),
+		PermTitle: echo.T(`本地化翻译[自动翻译]`),
+		Action:    `translation/translate`,
+	},
 }
