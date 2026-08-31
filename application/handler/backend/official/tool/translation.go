@@ -220,10 +220,12 @@ func translationTranslate(ctx echo.Context) error {
 		defer group.Cancel(bgKey)
 		ctx := bg.Context()
 		eCtx := defaults.NewMockContextWith(ctx)
-		options := i18nm.ListQuery{
-			Table: table,
-			RowID: id,
-			Lang:  lang,
+		options := i18nm.TranslateConfig{
+			ListQuery: i18nm.ListQuery{
+				Table: table,
+				RowID: id,
+				Lang:  lang,
+			},
 		}
 		err := i18nm.Batch(eCtx, options, noticer)
 		if err != nil {
