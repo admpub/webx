@@ -90,7 +90,7 @@ func init() {
 			Footer: ``,
 		}).SetContentGenerator(middleware.SkipCurrentURLPermCheck(middleware.AuthCheck(echo.HandlerFunc(func(ctx echo.Context) error {
 			if ctx.IsPost() {
-				if err := sessdata.CheckPerm(ctx, `/user/message/send`); err != nil {
+				if err := sessdata.CheckPerm(ctx, `user/message/send`); err != nil {
 					return err
 				}
 				m := Homeowner(ctx)
