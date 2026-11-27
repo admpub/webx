@@ -31,7 +31,7 @@ require (
 	github.com/coscms/oauth2s v0.5.1
 	github.com/coscms/sms v0.0.7
 	github.com/coscms/webcore v0.13.3-0.20261126033525-9c2f5043bacd
-	github.com/coscms/webfront v0.0.0-20261126043433-ee9e2e61f160
+	github.com/coscms/webfront v0.0.0-20261127050252-b91a3e2dcaa3
 	github.com/nging-plugins/dbmanager v1.9.11
 	github.com/silenceper/wechat/v2 v2.1.14
 	github.com/stretchr/testify v1.12.1
