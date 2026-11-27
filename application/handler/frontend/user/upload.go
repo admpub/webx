@@ -67,7 +67,7 @@ func Upload(ctx echo.Context) error {
 		m := modelCustomer.NewCustomer(ctx)
 		cfg := m.GetUploadConfig(customer)
 		verify = append(verify, func(result *uploadClient.Result) error {
-			if !cfg.CanUploadSVG {
+			if cfg == nil || !cfg.CanUploadSVG {
 				extension := path.Ext(result.FileName)
 				if strings.EqualFold(extension, `.svg`) {
 					return ctx.NewError(code.NonPrivileged, `您没有上传SVG图片的权限`)
@@ -76,7 +76,7 @@ func Upload(ctx echo.Context) error {
 			return nil
 		})
 		if ctx.Form(`subdir`) == `avatar` {
-			if !cfg.CanUploadAvatar {
+			if cfg == nil || !cfg.CanUploadAvatar {
 				return ctx.NewError(code.NonPrivileged, `您没有上传头像的权限`)
 			}
 		} else {

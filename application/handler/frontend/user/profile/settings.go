@@ -47,7 +47,7 @@ func Settings(ctx echo.Context) error {
 		}
 		m.Gender = ctx.Formx(`gender`).String()
 		m.Description = ctx.Formx(`description`).String()
-		if upCfg.CanUploadAvatar && len(ctx.FormValues(`avatar`)) > 0 {
+		if upCfg != nil && upCfg.CanUploadAvatar && len(ctx.FormValues(`avatar`)) > 0 {
 			m.Avatar = ctx.Formx(`avatar`).String()
 		}
 		err = m.Edit(nil, cond)
@@ -61,6 +61,6 @@ END:
 	ret := common.Err(ctx, err)
 	ctx.Set(`activeURL`, `/user/profile`)
 	ctx.Set(`title`, ctx.T(`账号设置`))
-	ctx.Set(`canUploadAvatar`, upCfg.CanUploadAvatar)
+	ctx.Set(`canUploadAvatar`, upCfg != nil && upCfg.CanUploadAvatar)
 	return ctx.Render(`user/profile/settings`, ret)
 }
